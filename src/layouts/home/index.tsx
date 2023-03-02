@@ -4,9 +4,9 @@ import React from "react";
 
 const HomeLayout = ({ children }: HomeLayoutProps) => {
   return (
-    <div className="w-full min-h-screen bg-[#f5f5f5]">
+    <div className="w-full min-h-screen bg-[#f5f5f5] flex">
       <Sidebar />
-      <div>
+      <div className="grow" >
         <Navbar />
       </div>
       {children}
