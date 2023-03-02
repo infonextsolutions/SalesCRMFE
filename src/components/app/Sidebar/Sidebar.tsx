@@ -1,3 +1,4 @@
+import { getBasicIcon } from "@/utils/Icons";
 import React from "react";
 
 const Logo = ({ clickHandler }: any) => {
@@ -39,10 +40,10 @@ const Sidebar = () => {
       }`}
     >
       <Logo clickHandler={sideClick} />
-      <SideItem img={"./Images/sidebar/Dashboard.svg"} title={"Dashboard"} />
-      <SideItem img={"./Images/sidebar/Sales.svg"} title={"Sales"} />
-      <SideItem img={"./Images/sidebar/Coaching.svg"} title={"Coaching"} />
-      <SideItem img={"./Images/sidebar/Calling.svg"} title={"Calling"} />
+      <SideItem img={getBasicIcon("Grid")} title={"Dashboard"} />
+      <SideItem img={getBasicIcon("Sort")} title={"Sales"} />
+      <SideItem img={getBasicIcon("Phone")} title={"Coaching"} />
+      <SideItem img={getBasicIcon("Tasks")} title={"Calling"} />
     </div>
   );
 };
