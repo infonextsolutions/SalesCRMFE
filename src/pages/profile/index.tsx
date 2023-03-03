@@ -1,5 +1,5 @@
-import Navigation from "@/components/app/Navigation";
 import React from "react";
+import Navigation from "@/components/app/Navigation";
 
 //Manya will make this page
 
