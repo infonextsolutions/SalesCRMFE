@@ -11,5 +11,5 @@ const Kanban=({list}:KanbasProps)=>{
 export default Kanban;
 
 interface KanbasProps{
-    list:{}[];
+    list:any[];
 }
