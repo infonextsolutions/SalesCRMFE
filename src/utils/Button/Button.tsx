@@ -4,19 +4,33 @@ import { getBasicIcon } from "../AssetsHelper";
 
 const ButtonDropDown = ({ width, text, icon, light }: ButtonProps) => {
   const [clicked, setclicked] = React.useState(false);
+  const [mouseOver,setMouseOver] = React.useState(false);
+
+  React.useEffect(()=>{
+    const onPointerDown=()=>{
+      if(!mouseOver){
+        setclicked(false);
+      }
+    }
+    document.addEventListener("pointerdown",onPointerDown,false);
+    return()=>{
+      document.removeEventListener("pointerdown",onPointerDown,false);
+    }
+  })
 
   return (
     <div
       className={`${
         icon ? "pl-[32px]" : ""
       } h-[40px] ${light?"bg-white":"bg-renal-blue"} rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px] relative p-[10px]`}
-      //   onMouseOver={()=>{
-      //     setHover(true);
-      //   }}
-      //   onMouseOut={()=>{
-      //     setHover(false);
-      //   }}
+        onMouseOver={()=>{
+          setMouseOver(true);
+        }}
+        onMouseOut={()=>{
+          setMouseOver(false);
+        }}
       onClick={() => {
+        if(mouseOver)
         setclicked(true);
       }}
     >
@@ -36,7 +50,7 @@ const ButtonDropDown = ({ width, text, icon, light }: ButtonProps) => {
       </p>
       <div className="absolute right-2  w-[24px]">
         <div
-          className={`w-[100%] p-[3px] rounded-md ${clicked && "bg-[#263fca]"}`}
+          className={`w-[100%] p-[3px] rounded-md ${clicked && (light?"bg-[#eeeeee]":"bg-[#263fca]")}`}
         >
           <img
             src={getBasicIcon("Arrow-Down 2")}
