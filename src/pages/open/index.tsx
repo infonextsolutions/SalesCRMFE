@@ -1,7 +1,9 @@
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/Container";
-import Table from "@/components/View/Table";
+import Kanban from "@/components/View/Kanban";
 import React from "react";
+
+// Apurv will work here for kanban view
 
 const dummyItem={};
 
@@ -26,7 +28,7 @@ const Dummy = [
   { id: 18, type: "Dead",data:dummyItem },
 ];
 
-export default function Home() {
+export default function Open() {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
@@ -50,7 +52,7 @@ export default function Home() {
         ]}
       />
       <LeadsContainer>
-        <Table list={Dummy} />
+        <Kanban list={Dummy} />
       </LeadsContainer>
     </div>
   );
