@@ -26,6 +26,8 @@
 }
 /* custom-svg-color */
 
+
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -132,4 +134,12 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.checkbox::before {
+  background-color: #00AEEF !important;
+}
+
+.hide-scrollbar::-webkit-scrollbar{
+  display: none !important;
 }
