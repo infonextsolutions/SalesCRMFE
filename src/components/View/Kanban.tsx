@@ -27,7 +27,7 @@ const Kanban=({list}:KanbasProps)=>{
         return obj.type === "Dead"
       })
     return(
-        <div className="pl-[20px] mt-[10px] flex gap-[35px]">
+        <div className="px-[20px] mt-[10px] flex gap-[30px]">
             {enq.length && (
                 <>
                     <div className="w-[250px] ">
@@ -57,12 +57,12 @@ const Kanban=({list}:KanbasProps)=>{
                         {enq.map((item, i) => {
                             return (
                             <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px]" key={i}>
-                                <div className="block-heading text-black text-[11px] leading-4 mb-[10px]">
+                                <div className="block-heading text-black text-[10px] leading-4 mb-[10px]">
                                     <p className="text-bold">Lead XYZ-Info | {item.data.companyName} | {item.data.companyAddress}</p>
                                     <p className="text-black/50">{item.data.poc} | {item.data.pocJob}</p>
                                     <p className="text-black/50">{item.data.names}</p>
                                 </div>
-                                <div className="block-details text-black text-[11px] mb-[15px]">
+                                <div className="block-details text-black text-[9px] mb-[15px]">
                                     <div className="flex justify-between">
                                         <p className="text-black/[.65]">Last Activity:</p>
                                         <p className="text-black/[.35]">{item.data.lastActivity}</p>
@@ -78,35 +78,35 @@ const Kanban=({list}:KanbasProps)=>{
                                 </div>
                                 <div className="quick-actions text-[9px] px-[9px] py-[5px] bg-slate-200 rounded-[12px] flex items-center justify-between">
                                     <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
-                                    <div className="icons flex gap-[4px] opacity-70">
+                                    <div className="icons flex gap-[3px] opacity-70">
                                     <img
                                         src={getBasicIcon("Phone")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Mail")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Calendar")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Tasks")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Chat")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     </div>
                                 </div>
-                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[4px] w-fit">
+                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[3px]">
                                     <img
                                         src={getBasicIcon("Phone")}
                                         className={`w-[14px]`}
@@ -180,12 +180,12 @@ const Kanban=({list}:KanbasProps)=>{
                         {interact.map((item, i) => {
                             return (
                             <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px]" key={i}>
-                                <div className="block-heading text-black text-[11px] leading-4 mb-[10px]">
+                                <div className="block-heading text-black text-[10px] leading-4 mb-[10px]">
                                     <p className="text-bold">Lead XYZ-Info | {item.data.companyName} | {item.data.companyAddress}</p>
                                     <p className="text-black/50">{item.data.poc} | {item.data.pocJob}</p>
                                     <p className="text-black/50">{item.data.names}</p>
                                 </div>
-                                <div className="block-details text-black text-[11px] mb-[15px]">
+                                <div className="block-details text-black text-[9px] mb-[15px]">
                                     <div className="flex justify-between">
                                         <p className="text-black/[.65]">Last Activity:</p>
                                         <p className="text-black/[.35]">{item.data.lastActivity}</p>
@@ -201,35 +201,35 @@ const Kanban=({list}:KanbasProps)=>{
                                 </div>
                                 <div className="quick-actions text-[9px] px-[9px] py-[5px] bg-slate-200 rounded-[12px] flex items-center justify-between">
                                     <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
-                                    <div className="icons flex gap-[4px] opacity-70">
+                                    <div className="icons flex gap-[3px] opacity-70">
                                     <img
                                         src={getBasicIcon("Phone")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Mail")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Calendar")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Tasks")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Chat")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     </div>
                                 </div>
-                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[4px] w-fit">
+                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[3px]">
                                     <img
                                         src={getBasicIcon("Phone")}
                                         className={`w-[14px]`}
@@ -303,12 +303,12 @@ const Kanban=({list}:KanbasProps)=>{
                         {proposal.map((item, i) => {
                             return (
                             <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px]" key={i}>
-                                <div className="block-heading text-black text-[11px] leading-4 mb-[10px]">
+                                <div className="block-heading text-black text-[10px] leading-4 mb-[10px]">
                                     <p className="text-bold">Lead XYZ-Info | {item.data.companyName} | {item.data.companyAddress}</p>
                                     <p className="text-black/50">{item.data.poc} | {item.data.pocJob}</p>
                                     <p className="text-black/50">{item.data.names}</p>
                                 </div>
-                                <div className="block-details text-black text-[11px] mb-[15px]">
+                                <div className="block-details text-black text-[9px] mb-[15px]">
                                     <div className="flex justify-between">
                                         <p className="text-black/[.65]">Last Activity:</p>
                                         <p className="text-black/[.35]">{item.data.lastActivity}</p>
@@ -324,35 +324,35 @@ const Kanban=({list}:KanbasProps)=>{
                                 </div>
                                 <div className="quick-actions text-[9px] px-[9px] py-[5px] bg-slate-200 rounded-[12px] flex items-center justify-between">
                                     <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
-                                    <div className="icons flex gap-[4px] opacity-70">
+                                    <div className="icons flex gap-[3px] opacity-70">
                                     <img
                                         src={getBasicIcon("Phone")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Mail")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Calendar")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Tasks")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Chat")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     </div>
                                 </div>
-                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[4px] w-fit">
+                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[3px]">
                                     <img
                                         src={getBasicIcon("Phone")}
                                         className={`w-[14px]`}
@@ -426,12 +426,12 @@ const Kanban=({list}:KanbasProps)=>{
                         {win.map((item, i) => {
                             return (
                             <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px]" key={i}>
-                                <div className="block-heading text-black text-[11px] leading-4 mb-[10px]">
+                                <div className="block-heading text-black text-[10px] leading-4 mb-[10px]">
                                     <p className="text-bold">Lead XYZ-Info | {item.data.companyName} | {item.data.companyAddress}</p>
                                     <p className="text-black/50">{item.data.poc} | {item.data.pocJob}</p>
                                     <p className="text-black/50">{item.data.names}</p>
                                 </div>
-                                <div className="block-details text-black text-[11px] mb-[15px]">
+                                <div className="block-details text-black text-[9px] mb-[15px]">
                                     <div className="flex justify-between">
                                         <p className="text-black/[.65]">Last Activity:</p>
                                         <p className="text-black/[.35]">{item.data.lastActivity}</p>
@@ -447,35 +447,35 @@ const Kanban=({list}:KanbasProps)=>{
                                 </div>
                                 <div className="quick-actions text-[9px] px-[9px] py-[5px] bg-slate-200 rounded-[12px] flex items-center justify-between">
                                     <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
-                                    <div className="icons flex gap-[4px] opacity-70">
+                                    <div className="icons flex gap-[3px] opacity-70">
                                     <img
                                         src={getBasicIcon("Phone")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Mail")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Calendar")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Tasks")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Chat")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     </div>
                                 </div>
-                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[4px] w-fit">
+                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[3px]">
                                     <img
                                         src={getBasicIcon("Phone")}
                                         className={`w-[14px]`}
@@ -549,12 +549,12 @@ const Kanban=({list}:KanbasProps)=>{
                         {lost.map((item, i) => {
                             return (
                             <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px]" key={i}>
-                                <div className="block-heading text-black text-[11px] leading-4 mb-[10px]">
+                                <div className="block-heading text-black text-[10px] leading-4 mb-[10px]">
                                     <p className="text-bold">Lead XYZ-Info | {item.data.companyName} | {item.data.companyAddress}</p>
                                     <p className="text-black/50">{item.data.poc} | {item.data.pocJob}</p>
                                     <p className="text-black/50">{item.data.names}</p>
                                 </div>
-                                <div className="block-details text-black text-[11px] mb-[15px]">
+                                <div className="block-details text-black text-[9px] mb-[15px]">
                                     <div className="flex justify-between">
                                         <p className="text-black/[.65]">Last Activity:</p>
                                         <p className="text-black/[.35]">{item.data.lastActivity}</p>
@@ -570,35 +570,35 @@ const Kanban=({list}:KanbasProps)=>{
                                 </div>
                                 <div className="quick-actions text-[9px] px-[9px] py-[5px] bg-slate-200 rounded-[12px] flex items-center justify-between">
                                     <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
-                                    <div className="icons flex gap-[4px] opacity-70">
+                                    <div className="icons flex gap-[3px] opacity-70">
                                     <img
                                         src={getBasicIcon("Phone")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Mail")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Calendar")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Tasks")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Chat")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     </div>
                                 </div>
-                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[4px] w-fit">
+                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[3px]">
                                     <img
                                         src={getBasicIcon("Phone")}
                                         className={`w-[14px]`}
@@ -672,12 +672,12 @@ const Kanban=({list}:KanbasProps)=>{
                         {dead.map((item, i) => {
                             return (
                             <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px]" key={i}>
-                                <div className="block-heading text-black text-[11px] leading-4 mb-[10px]">
+                                <div className="block-heading text-black text-[10px] leading-4 mb-[10px]">
                                     <p className="text-bold">Lead XYZ-Info | {item.data.companyName} | {item.data.companyAddress}</p>
                                     <p className="text-black/50">{item.data.poc} | {item.data.pocJob}</p>
                                     <p className="text-black/50">{item.data.names}</p>
                                 </div>
-                                <div className="block-details text-black text-[11px] mb-[15px]">
+                                <div className="block-details text-black text-[9px] mb-[15px]">
                                     <div className="flex justify-between">
                                         <p className="text-black/[.65]">Last Activity:</p>
                                         <p className="text-black/[.35]">{item.data.lastActivity}</p>
@@ -693,35 +693,35 @@ const Kanban=({list}:KanbasProps)=>{
                                 </div>
                                 <div className="quick-actions text-[9px] px-[9px] py-[5px] bg-slate-200 rounded-[12px] flex items-center justify-between">
                                     <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
-                                    <div className="icons flex gap-[4px] opacity-70">
+                                    <div className="icons flex gap-[3px] opacity-70">
                                     <img
                                         src={getBasicIcon("Phone")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Mail")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Calendar")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Tasks")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     <img
                                         src={getBasicIcon("Chat")}
-                                        className={`w-[15px]`}
+                                        className={`w-[14px]`}
                                         alt=""
                                     />
                                     </div>
                                 </div>
-                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[4px] w-fit">
+                                <div className="px-[10px] py-[5px] text-[10px] text-black rounded-[12px] border border-black flex mt-[10px] opacity-60 gap-[3px]">
                                     <img
                                         src={getBasicIcon("Phone")}
                                         className={`w-[14px]`}
