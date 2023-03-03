@@ -4,13 +4,11 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <div className="w-[100%] min-h-[90vh] " >
+    <div className="w-[100%] min-h-[90vh] pl-[40px]" >
       {/* <Navigation  /> */}
-      <Navigation>
-    
-      </Navigation>
+      <Navigation buttons={[{text:"View",dropdown:false,id:0}]} />
       <LeadsContainer>
-
+        
       </LeadsContainer>
     </div>
   )

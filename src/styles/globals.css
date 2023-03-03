@@ -16,6 +16,12 @@
 
 /* --- google fonts ---*/
 
+/* custom-svg-color */
+.svg-white{
+	filter:invert(100%) sepia(100%) saturate(5%) hue-rotate(333deg) brightness(102%) contrast(106%) !important;
+}
+/* custom-svg-color */
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
