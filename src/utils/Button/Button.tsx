@@ -2,7 +2,7 @@ import { colors } from "@/constants/colors";
 import React from "react";
 import { getBasicIcon } from "../AssetsHelper";
 
-const ButtonDropDown = ({ width, text, icon, light }: ButtonProps) => {
+const ButtonDropDown = ({ width, text,pl, icon,border, light,height }: ButtonProps) => {
   const [clicked, setclicked] = React.useState(false);
   const [mouseOver,setMouseOver] = React.useState(false);
 
@@ -20,15 +20,16 @@ const ButtonDropDown = ({ width, text, icon, light }: ButtonProps) => {
 
   return (
     <div
-      className={`${
+      className={`${(
         icon ? "pl-[32px]" : ""
-      } h-[40px] ${light?"bg-white":"bg-renal-blue"} rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px] relative p-[10px]`}
+      )}   h-[${height?height:40}px] ${border?"border-[1px] border-[#ccc]":""} ${light?"bg-white":"bg-renal-blue"} rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px] relative p-[10px]`}
         onMouseOver={()=>{
           setMouseOver(true);
         }}
         onMouseOut={()=>{
           setMouseOver(false);
         }}
+
       onClick={() => {
         if(mouseOver)
         setclicked(true);
@@ -72,4 +73,7 @@ export interface ButtonProps {
   text: String;
   id: Number;
   light: Boolean;
+  height?:Number;
+  border?:Boolean;
+  pl?:Number
 }
