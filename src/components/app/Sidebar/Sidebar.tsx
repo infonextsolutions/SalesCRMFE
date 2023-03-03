@@ -1,11 +1,11 @@
-import { getBasicIcon } from "@/utils/Icons";
+import useUI from "@/hooks/useUI";
+import { getBasicIcon } from "@/utils/AssetsHelper";
 import React from "react";
 
-const Logo = ({ clickHandler }: any) => {
+const Logo = () => {
   return (
     <div
       className="cursor-pointer w-[200px] bg-white flex items-center"
-      onClick={clickHandler}
     >
       <img src="./Images/Logo/Compact.svg" alt="" className="w-[35px]" />
       <p className="tracking-wide text-[#3F434A] ml-[10px] font-bold text-[16px] poppins">
@@ -27,19 +27,16 @@ const SideItem = ({img,title}:any) => {
 };
 
 const Sidebar = () => {
-  const [sidebar, setSidebar] = React.useState(false);
 
-  const sideClick = () => {
-    setSidebar(!sidebar);
-  };
+  const {menuOpen} = useUI();
 
   return (
     <div
       className={`overflow-x-hidden  ease-in duration-200 h-screen bg-white px-[10px] pt-[13px] border-r-[1px] border-[#eaebec] ${
-        sidebar ? "w-[220px]" : "w-[55px]"
+        menuOpen ? "w-[220px]" : "w-[55px]"
       }`}
     >
-      <Logo clickHandler={sideClick} />
+      <Logo  />
       <SideItem img={getBasicIcon("Grid")} title={"Dashboard"} />
       <SideItem img={getBasicIcon("Sort")} title={"Sales"} />
       <SideItem img={getBasicIcon("Phone")} title={"Coaching"} />

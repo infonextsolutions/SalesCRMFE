@@ -8,8 +8,8 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
       <Sidebar />
       <div className="grow" >
         <Navbar />
-      </div>
       {children}
+      </div>
     </div>
   );
 };
