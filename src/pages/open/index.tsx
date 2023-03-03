@@ -5,7 +5,16 @@ import React from "react";
 
 // Apurv will work here for kanban view
 
-const dummyItem={};
+const dummyItem={
+  companyName:"ABC Corp",
+  companyAddress:"Noida,UP",
+  poc:"Shraddha P.",
+  pocJob:"Sales Manager",
+  names:["Anil L.","Paul G.","Rekha"],
+  lastActivity:"Email sent on 23 Jan 2023",
+  dealSize:"11000",
+  product:"Product A",
+};
 
 const Dummy = [
   { id: 1, type: "enquiry",data:dummyItem },
