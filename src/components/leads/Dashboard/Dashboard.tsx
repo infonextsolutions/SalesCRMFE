@@ -26,9 +26,12 @@ const DashItem = ({ width, text, left }: any) => {
 
 const Dashboard = () => {
   return (
+    <div className="flex" >
+
     <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px] ">
       <DashBox width={30} />
-      <DashItem width={150} left={10} text={"COMPANY NAME"} />
+      <DashItem width={150} left={10} text={"ABC Group"} />
+      <DashItem width={150} left={10} text={"Shraddha .P"} />
       <DashItem width={150} left={10} text={"CLIENT POC"} />
       <DashItem width={150} left={10} text={"CLIENT POC"} />
       <DashItem width={150} left={10} text={"CLIENT POC"} />
@@ -46,7 +49,7 @@ const Dashboard = () => {
       <DashItem width={150} left={10} text={"CLIENT POC"} />
       <DashItem width={150} left={10} text={"CLIENT POC"} />
       <DashItem width={150} left={10} text={"CLIENT POC"} />
-      <DashItem width={150} left={10} text={"CLIENT POC"} />
+    </div>
     </div>
   );
 };
