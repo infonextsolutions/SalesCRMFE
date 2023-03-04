@@ -18,6 +18,8 @@ const Profile = () => {
         ]}
       />
       {/* write your code here for profile page manya! */}
+      <h1>hello
+      </h1>
     </div>
   );
 };
