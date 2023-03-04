@@ -26,10 +26,13 @@ const HeaderItem = ({ width, text, left }: any) => {
 
 const Header = () => {
   return (
+    <div className="flex" >
+
     <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
       <HeaderCheckBox width={30} />
       <HeaderItem width={150} left={10} text={"COMPANY NAME"} />
       <HeaderItem width={150} left={10} text={"CLIENT POC"} />
+      <HeaderItem width={150} left={10} text={"Quick Actions"} />
       <HeaderItem width={150} left={10} text={"CLIENT POC"} />
       <HeaderItem width={150} left={10} text={"CLIENT POC"} />
       <HeaderItem width={150} left={10} text={"CLIENT POC"} />
@@ -39,7 +42,7 @@ const Header = () => {
       <HeaderItem width={150} left={10} text={"CLIENT POC"} />
       <HeaderItem width={150} left={10} text={"CLIENT POC"} />
       <HeaderItem width={150} left={10} text={"CLIENT POC"} />
-      <HeaderItem width={150} left={10} text={"CLIENT POC"} />
+    </div>
     </div>
   );
 };
