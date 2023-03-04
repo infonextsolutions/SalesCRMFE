@@ -29,10 +29,9 @@ const SideItem = ({img,title}:any) => {
 const Sidebar = () => {
 
   const {menuOpen} = useUI();
-
   return (
     <div
-      className={`overflow-x-hidden  ease-in duration-200 h-screen bg-white px-[10px] pt-[13px] border-r-[1px] border-[#eaebec] ${
+      className={`overflow-x-hidden h-screen  ease-in duration-200 bg-white px-[10px] pt-[13px] border-r-[1px] border-[#eaebec] ${
         menuOpen ? "w-[220px]" : "w-[55px]"
       }`}
     >
