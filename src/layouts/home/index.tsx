@@ -16,9 +16,9 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
   })
 
   return (
-    <div className="w-full min-h-screen bg-[#f5f5f5] flex">
+    <div className="w-full min-h-screen bg-[#f5f5f5] flex" id="Home" >
       <Sidebar />
-      <div className="overflow-auto "
+      <div className="overflow-auto h-screen"
         // style={width?{
         //   width:`${width}px !important`
         // }:{}}

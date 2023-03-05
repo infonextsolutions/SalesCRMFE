@@ -24,6 +24,14 @@
   filter: invert(16%) sepia(2%) grayscale(1) saturate(4980%) hue-rotate(180deg) brightness(114%) contrast(75%) !important;
   /* filter: grey; */
 }
+.svg-blue{
+filter: invert(21%) sepia(92%) saturate(4187%) hue-rotate(233deg) brightness(96%) contrast(95%) !important;
+}
+
+.svg-light{
+
+}
+
 /* custom-svg-color */
 
 
@@ -143,3 +151,4 @@ a {
 .hide-scrollbar::-webkit-scrollbar{
   display: none !important;
 }
+
