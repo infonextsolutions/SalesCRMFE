@@ -28,8 +28,12 @@
 filter: invert(21%) sepia(92%) saturate(4187%) hue-rotate(233deg) brightness(96%) contrast(95%) !important;
 }
 
-.svg-light{
+.svg-not-selected{
+  filter: invert(63%) sepia(16%) saturate(139%) hue-rotate(178deg) brightness(94%) contrast(91%) !important;
+}
 
+.svg-selected{
+  filter: invert(25%) sepia(14%) saturate(370%) hue-rotate(179deg) brightness(89%) contrast(87%) !important;
 }
 
 /* custom-svg-color */
