@@ -1,5 +1,5 @@
 import Navbar from "@/components/app/Navbar/Navbar";
-import Sidebar from "@/components/app/Sidebar/Sidebar";
+import Sidebar from "@/components/app/Sidebar/index";
 import React from "react";
 
 const HomeLayout = ({ children }: HomeLayoutProps) => {
@@ -8,7 +8,6 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
 
   React.useEffect(()=>{
     const resize=()=>{
-      console.log(window.innerWidth)
       setWidth(window.innerWidth);
     }
     resize();
@@ -16,14 +15,14 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
   })
 
   return (
-    <div className="w-full min-h-screen bg-[#f5f5f5] flex">
+    <div className="w-full min-h-screen bg-[#f5f5f5] flex" id="Home" >
       <Sidebar />
-      <div className="overflow-auto "
+      <div className="overflow-auto h-screen"
         // style={width?{
         //   width:`${width}px !important`
         // }:{}}
         style={{
-          width:((width!==null)?(width-55):1)
+          width:((width!==null)?(width-55):"100%")
         }}
       >
         <Navbar />

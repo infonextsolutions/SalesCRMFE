@@ -24,6 +24,18 @@
   filter: invert(16%) sepia(2%) grayscale(1) saturate(4980%) hue-rotate(180deg) brightness(114%) contrast(75%) !important;
   /* filter: grey; */
 }
+.svg-blue{
+filter: invert(21%) sepia(92%) saturate(4187%) hue-rotate(233deg) brightness(96%) contrast(95%) !important;
+}
+
+.svg-not-selected{
+  filter: invert(63%) sepia(16%) saturate(139%) hue-rotate(178deg) brightness(94%) contrast(91%) !important;
+}
+
+.svg-selected{
+  filter: invert(25%) sepia(14%) saturate(370%) hue-rotate(179deg) brightness(89%) contrast(87%) !important;
+}
+
 /* custom-svg-color */
 
 
@@ -143,3 +155,4 @@ a {
 .hide-scrollbar::-webkit-scrollbar{
   display: none !important;
 }
+
