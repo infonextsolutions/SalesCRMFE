@@ -38,9 +38,22 @@ const Table = ({ result, totalRecords }: TableProps) => {
             id={1}
             light={true}
             dropdown={true}
-            list={[]}
+            list={[
+              { title: 10 },
+              { title: 11 },
+              { title: 12 },
+              { title: 13},
+              { title: 14},
+              { title: 15 },
+              { title: 16 },
+              { title: 17},
+              { title: 18 },
+              { title: 19 },
+              { title: 20 },
+            ]}
             border={true}
             height={40}
+            dropDirection={true}
             tight={true}
           />
           <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
