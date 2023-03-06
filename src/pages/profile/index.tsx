@@ -18,7 +18,11 @@ const Profile = () => {
           },
         ]}
       />
-      <ProfilePage/>
+      <div className="w-[100%] flex  ">
+        <div className="w-[280px] min-h-[70vh] bg-white rounded-xl p-[20px]">
+          <ProfilePage />
+        </div>
+      </div>
       {/* write your code here for profile page manya! */}
     </div>
   );

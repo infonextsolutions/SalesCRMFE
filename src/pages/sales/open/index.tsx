@@ -5,7 +5,7 @@ import axios from "axios";
 import React from "react";
 import DUMMY from "@/shared/dummy";
 import KanbanContainer from "@/components/View/Kanban";
-import { useRouter } from "next/router";
+
 const dummyItem={
   companyName:"ABC Corp",
   companyAddress:"Noida, UP",
@@ -44,7 +44,7 @@ const Dummy = [
   { id: 18, type: "Dead",data:dummyItem },
 ];
 
-export default function Home() {
+export default function Open() {
   const [view, setView] = React.useState(false);
 
   const viewButtinClick = (prev: Number, current: Number) => {
@@ -55,12 +55,6 @@ export default function Home() {
       setView(false);
     }
   };
-
-  const router = useRouter();
-
-  React.useEffect(()=>{
-    router.push("/sales/open")
-  })
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">

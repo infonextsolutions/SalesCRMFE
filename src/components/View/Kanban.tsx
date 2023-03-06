@@ -1,6 +1,7 @@
 import React from "react";
 import { getBasicIcon } from "../../utils/AssetsHelper";
 import Button, { ButtonProps } from "@/utils/Button/Button";
+
 const Kanban=({list}:KanbasProps)=>{
     // console.log(list);
     const leads = ["enquiry","interaction","proposal","win","Lost","Dead"];
