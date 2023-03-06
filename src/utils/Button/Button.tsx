@@ -12,11 +12,13 @@ const ButtonDropDown = ({
   tight,
   list,
   dropdown,
+  click,
+  value,
+  dropDirection
 }: ButtonProps) => {
   const [clicked, setclicked] = React.useState(false);
   const [mouseOver, setMouseOver] = React.useState(false);
-  console.log(clicked,list,dropdown)
-
+  const [curr,setCurr] = React.useState<Number | undefined>(value);
   React.useEffect(() => {
     const onPointerDown = () => {
       if (!mouseOver) {
@@ -28,6 +30,13 @@ const ButtonDropDown = ({
       document.removeEventListener("pointerdown", onPointerDown, false);
     };
   });
+
+  const onClick=(prev:Number,current:Number)=>{
+    if(click){
+      click(prev,current);
+    }
+    setCurr(current);
+  }
 
   return (
     <div
@@ -50,7 +59,7 @@ const ButtonDropDown = ({
         height: height ? `${height}px` : "40px",
       }}
     >
-      {dropdown? list.length !== 0 ?( clicked && <DropDown list={list} />):<></>:<></>}
+      {dropdown? list.length !== 0 ?( clicked && <DropDown value={curr} onClick={onClick}  direction={dropDirection} list={list} />):<></>:<></>}
       {icon && (
         <div className="absolute left-3  w-[28px]">
           <div className={`w-[100%] p-[3px] rounded-md }`}>
@@ -104,4 +113,7 @@ export interface ButtonProps {
   pl?: Number;
   tight?: Boolean;
   list?: [] | any;
+  dropDirection?:Boolean
+  click?:(prev:Number,current:Number)=>void | undefined;
+  value?:Number;
 }

@@ -12,7 +12,7 @@ const Navigation = ({ buttons }: NavigationProps) => {
         <div className="w-[50%] flex justify-end ">
           {buttons.map((item, i) => {
             return (
-              <Button dropdown={item.dropdown} list={item.list} icon={item.icon} text={item.text} id={item.id} key={i} light={item.light} />
+              <Button dropdown={item.dropdown} click={item.click} value={item.value} list={item.list} icon={item.icon} text={item.text} id={item.id} key={i} light={item.light} />
             );
           })}
         </div>

@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <div className="cursor-pointer w-[200px] bg-white flex items-center  ">
       <img
-        src="./Images/Logo/Compact.svg"
+        src="/Images/Logo/Compact.svg"
         alt=""
         className="w-[55px] px-[10px] "
       />
