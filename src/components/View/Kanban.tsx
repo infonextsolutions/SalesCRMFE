@@ -12,11 +12,10 @@ const Kanban=({list}:KanbasProps)=>{
                 var res = list.filter(obj => {
                 return obj.type === col
                 })
-                
                 if(res.length)
                 return(
                     <div className="flex gap-[20px]">
-                        <div className="w-[270px] shrink-0">
+                        <div className="w-[270px] shrink-0 ">
                                 <div className="leadName flex mb-[10px]">
                                     <div className="w-[76%] bg-renal-blue h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
                                         <div className="enq-header text-[13px] flex gap-[8px] items-center">

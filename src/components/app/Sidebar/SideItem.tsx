@@ -1,17 +1,28 @@
 import React from "react";
 import { useAppDispatch } from "@/store/store";
-import { selectMenuClick } from "@/store/UI";
+import { useRouter } from "next/router";
 
-const SideItem = ({ img, title, open, id, selected }: any) => {
-  const check = id === selected.i;
-
-  const dispatch = useAppDispatch();
+const SideItem = ({ img, title, open, id,list,route }: any) => {
+  const {pathname,push} = useRouter();
+  let currentRoute:any;
+  if(list.length!==0){
+    for(let i =0;i<list.length;i++){
+      const curr = `/${route}/${list[i].route}`
+      if(curr===pathname){
+        currentRoute = curr;
+        break;
+      }
+    }
+  }else{
+    currentRoute = `/${route}`;
+  }
+  const check = pathname===currentRoute;
 
   return (
     <div
       className="cursor-pointer flex items-center mt-[12px] h-[40px] relative "
       onClick={() => {
-        dispatch(selectMenuClick({ i: id }));
+        push(currentRoute);
       }}
     >
       {check && (
