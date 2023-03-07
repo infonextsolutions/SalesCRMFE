@@ -42,7 +42,7 @@ const Kanban=({list}:KanbasProps)=>{
                                 </div>
                                 {res.map((item, i) => {
                                     return (
-                                    <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px]" key={i}>
+                                    <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] shadow-lg shadow-slate-400" key={i}>
                                         <div className="block-heading text-black text-[11px] leading-4 mb-[23px]">
                                             <p>Lead Id-{item.data.id}</p>
                                             <p className="text-bold">Lead XYZ-Info | {item.data.companyName} | {item.data.companyAddress}</p>
