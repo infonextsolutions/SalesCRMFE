@@ -10,7 +10,7 @@ const LeadProfileContainer = () => {
   }
 
   return (
-    <div className="w-[80%] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
+    <div className="w-[50%] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
         <Navigator
             callback = {CallBack}
             current={0}

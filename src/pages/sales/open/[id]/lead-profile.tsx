@@ -31,7 +31,6 @@ const Profile = () => {
         <div className="w-[280px] min-h-[70vh] bg-white rounded-xl p-[20px]">
           <ProfilePage />
         </div>
-        <LeadProfileContainer/>
       </div>
       {/* write your code here for profile page manya! */}
     </div>

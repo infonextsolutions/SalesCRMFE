@@ -1,7 +1,8 @@
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/Container";
 import Kanban from "@/components/View/Kanban";
-import Table from "@/components/View/Table";
+import CallsTable from "@/components/View/Tables/Calls";
+import Table from "@/components/View/Tables/Leads";
 import DUMMY from "@/shared/dummy";
 import React from "react";
 
@@ -107,7 +108,7 @@ const Calls = () => {
       />
       <LeadsContainer>
         {!view ? (
-          <Table result={DUMMY.result} totalRecords={DUMMY.totalRecords} />
+          <CallsTable result={DUMMY.result} totalRecords={DUMMY.totalRecords} />
         ) : (
           <Kanban list={Dummy} />
         )}

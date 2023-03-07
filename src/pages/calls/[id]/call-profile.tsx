@@ -5,7 +5,7 @@ import LeadProfileContainer from "@/components/Profile/ProfilePage/LeadProfileCo
 
 //Manya will make this page
 
-const Profile = () => {
+const CallProfile = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
@@ -27,9 +27,9 @@ const Profile = () => {
           },
         ]}
       />
-      <div className="w-[100%] flex gap-[25px] ">
-        <div className="w-[280px] min-h-[70vh] bg-white rounded-xl p-[20px]">
-          <ProfilePage />
+      <div className="w-[100%] flex gap-[25px] mb-[100px] ">
+        <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
+
         </div>
         <LeadProfileContainer/>
       </div>
@@ -38,4 +38,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default CallProfile;

@@ -1,22 +1,21 @@
-import Lead from "@/types/Leads";
+import React from "react";
+import Call from "@/types/Calls";
+import Header from "@/components/calls/Header/Header";
+import CallContainer from "@/components/calls/Call/Call";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
-import React from "react";
-import LeadContainer from "../leads/Lead/Lead";
-import Header from "../leads/Header/Header";
 
-const Table = ({ result, totalRecords }: TableProps) => {
-  // console.log(AllLeads);
+const CallsTable = ({ result, totalRecords }: TableProps) => {
   const totalLeads = totalRecords;
   const Leads = result;
-  
+
   return (
     <>
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
         <Header />
-        {Leads.map((item: Lead) => {
+        {Leads.map((item: Call) => {
           return (
-            <LeadContainer
+            <CallContainer
               key={item._id}
               id={item._id}
               company={item.companyId}
@@ -41,11 +40,11 @@ const Table = ({ result, totalRecords }: TableProps) => {
               { title: 10 },
               { title: 11 },
               { title: 12 },
-              { title: 13},
-              { title: 14},
+              { title: 13 },
+              { title: 14 },
               { title: 15 },
               { title: 16 },
-              { title: 17},
+              { title: 17 },
               { title: 18 },
               { title: 19 },
               { title: 20 },
@@ -76,9 +75,9 @@ const Table = ({ result, totalRecords }: TableProps) => {
   );
 };
 
-export default Table;
+export default CallsTable;
 
 interface TableProps {
-  result: Lead[] | any;
+  result: Call[] | any;
   totalRecords: Number;
 }
