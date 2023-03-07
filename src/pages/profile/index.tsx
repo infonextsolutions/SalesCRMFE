@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage";
-
+import axios from "axios";
 //Manya will make this page
 
 const Profile = () => {
@@ -20,9 +20,9 @@ const Profile = () => {
       />
       <ProfilePage/>
       {/* write your code here for profile page manya! */}
-      <h1>hello
-      </h1>
-    </div>
+      
+      </div>
+      
   );
 };
 

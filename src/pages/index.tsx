@@ -1,9 +1,9 @@
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/Container";
 import Table from "@/components/View/Table";
-import axios from "axios";
 import React from "react";
 import DUMMY from "@/shared/dummy";
+import axios from "axios";
 
 export default function Home() {
   return (
