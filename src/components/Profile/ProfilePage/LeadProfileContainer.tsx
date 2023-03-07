@@ -10,7 +10,7 @@ const LeadProfileContainer = () => {
   }
 
   return (
-    <div className="bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
+    <div className="w-[80%] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
         <Navigator
             callback = {CallBack}
             current={0}
@@ -33,7 +33,7 @@ const LeadProfileContainer = () => {
             }
             ]}
         />
-        <div className='flex justify-between'>
+        <div className='flex justify-between pl-[30px] '>
             <div className='text-black text-[14px] leading-[21px] mt-[25px] tracking-wide '>
                 {activeTitle===0 && (
                     <div className=''>

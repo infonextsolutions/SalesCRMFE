@@ -9,8 +9,7 @@ const Table = ({ result, totalRecords }: TableProps) => {
   // console.log(AllLeads);
   const totalLeads = totalRecords;
   const Leads = result;
-  console.log(totalLeads);
-  console.log(Leads);
+  
   return (
     <>
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">

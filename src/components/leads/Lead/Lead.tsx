@@ -1,5 +1,6 @@
 import Lead, { CompanyId, CustomerId } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import { useRouter } from "next/router";
 import React from "react";
 
 const LeadBox = ({ width }: any) => {
@@ -13,11 +14,14 @@ const LeadBox = ({ width }: any) => {
   );
 };
 
-const LeadItem = ({ width, text, left, align, textLeft, link }: any) => {
+const LeadItem = ({ width, text, left, align, textLeft, link,click,route }: any) => {
+  const {push}=useRouter();
+
   return (
     <div
       className={`flex items-center  h-[20px] shrink-0`}
       style={{ width: width, marginLeft: left }}
+      
     >
       {link ? (
         <a
@@ -31,10 +35,15 @@ const LeadItem = ({ width, text, left, align, textLeft, link }: any) => {
         </a>
       ) : (
         <p
-          className="text-[#8A9099] text-[13px]  tracking-wide "
+          className="text-[#8A9099] text-[13px] tracking-wide cursor-pointer"
           style={{
             textAlign: align && "center",
             marginLeft: textLeft && `${textLeft}px`,
+          }}
+          onClick={()=>{
+            if(click){
+              push(route);
+            }
           }}
         >
           {text ? text : "-"}
@@ -51,11 +60,20 @@ const LeadItemMultiple = ({
   left,
   bold,
   align,
+  click,
+  route
 }: any) => {
+
+  const {push}=useRouter();
   return (
     <div
-      className={`flex justify-between flex-col h-[34px] shrink-0`}
+      className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
       style={{ width: width, marginLeft: left }}
+      onClick={()=>{
+        if(click){
+          push(route);
+        }
+      }}
     >
       <p
         className={`text-[12px] tracking-wide font-medium ${
@@ -123,6 +141,7 @@ const LeadContainer = ({
   custom,
   LeadData,
 }: LeadProps) => {
+  const {pathname} = useRouter();
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
@@ -133,14 +152,16 @@ const LeadContainer = ({
           upperText={company.company_name}
           bottomText={company.company_location}
           bold={true}
+          click={true}
+          route={`${pathname}/${id}/lead-profile`}
         />
-        <LeadItem width={110} left={10} text={customer.name} />
+        <LeadItem width={150} left={10}  text={custom} click={true} route={`${pathname}/${id}/company-profile`} />
+        <LeadItem width={110} left={10} text={customer.name} click={true} route={`${pathname}/${id}/client-poc-profile`}  />
         <QuickActions width={120} />
         <LeadItem width={150} left={20} text={customer.email} />
         <LeadItem width={150} left={30} text={customer.contact} />
         <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
         <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
-        <LeadItem width={150} left={10} text={custom} />
         <LeadItem width={150} left={10} textLeft={20} text={"Product A"} />
         <LeadItem width={150} left={10} text={LeadData.activity_history} />
         <LeadItemMultiple

@@ -27,7 +27,7 @@ const Profile = () => {
           },
         ]}
       />
-      <div className="w-[100%] flex gap-[25px] ">
+      <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[280px] min-h-[70vh] bg-white rounded-xl p-[20px]">
           <ProfilePage />
         </div>
