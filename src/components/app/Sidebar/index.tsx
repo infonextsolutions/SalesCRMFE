@@ -5,7 +5,7 @@ import SideItem from "./SideItem";
 import Logo from "./SidebarLogo";
 
 const Sidebar = () => {
-  const { menuOpen, menuOptions, menuSelected } = useUI();
+  const { menuOpen, menuOptions} = useUI();
 
   return (
     <div
@@ -23,7 +23,7 @@ const Sidebar = () => {
             id={i}
             key={i}
             open={menuOpen}
-            selected={menuSelected}
+            route={item.route}
           />
         );
       })}

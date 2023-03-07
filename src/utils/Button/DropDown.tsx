@@ -13,6 +13,7 @@ const DropDown = ({ list, direction,value,onClick }: any) => {
       `}
     >
       {list.map((item: any, i: any) => {
+        const [mouseOver,setMouseOver] = React.useState(false);
 
         return (
           <div
@@ -20,17 +21,23 @@ const DropDown = ({ list, direction,value,onClick }: any) => {
             onClick={()=>{
               onClick(value,i);
             }}
+            onMouseOver={()=>{
+              setMouseOver(true);
+            }}
+            onMouseLeave={()=>{
+              setMouseOver(false);
+            }}
             key={i}
           >
             {item.Icon && (
               <img
                 src={getBasicIcon(item.Icon)}
                 alt=""
-                className={`mt-[2px] h-[17px] svg-not-selected  hover:svg-selected `}
+                className={`mt-[2px] h-[17px] ${mouseOver?"svg-selected":"svg-not-selected"}`}
               />
             )}
             <p
-              className={`text-[#595f69] text-[13px] whitespace-nowrap tracking-wider pl-[10px] pr-[10px] font-medium  hover:text-black`}
+              className={` text-[13px] whitespace-nowrap tracking-wider pl-[10px] pr-[10px] font-medium ${mouseOver?"text-black":"text-[#595f69]"}`}
             >
               {item.title}
             </p>
