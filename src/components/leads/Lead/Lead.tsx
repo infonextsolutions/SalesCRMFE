@@ -134,13 +134,13 @@ const LeadContainer = ({
           bottomText={company.company_location}
           bold={true}
         />
+        <LeadItem width={150} left={10} text={custom} />
         <LeadItem width={110} left={10} text={customer.name} />
         <QuickActions width={120} />
         <LeadItem width={150} left={20} text={customer.email} />
         <LeadItem width={150} left={30} text={customer.contact} />
         <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
         <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
-        <LeadItem width={150} left={10} text={custom} />
         <LeadItem width={150} left={10} textLeft={20} text={"Product A"} />
         <LeadItem width={150} left={10} text={LeadData.activity_history} />
         <LeadItemMultiple
