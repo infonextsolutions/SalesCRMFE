@@ -9,11 +9,7 @@ const Profile = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-<<<<<<< HEAD
       title="Profile"
-=======
-        title={""}
->>>>>>> 746d19d28f7a645fbdfe8a2672f67b3601c1b293
         buttons={[
           {
             text: "Take Action",

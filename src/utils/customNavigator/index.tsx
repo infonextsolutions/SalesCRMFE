@@ -10,15 +10,15 @@ const Navigator=({list,current,callback}:NavigatorProps)=>{
 
     return(
         <>
-        <div className='w-[1000px] flex justify-between items-center text-black border-b-2' >
+        <div className='w-[100%] flex justify-between items-center text-black border-b-2 px-[30px] pt-[20px]' >
             {list.map((item:any,i:any)=>{
                 return (
                     <div 
-                    className={`pb-[10px] cursor-pointer text-[14px] leading-[21px] font-medium text-[#595F69] text-bold  ${item.id===activeTitle ? 'text-[#304FFD] border-b border-b-[#304FFD]': ''}`}
+                    className={`pb-[10px] cursor-pointer text-[14px] leading-[21px] font-medium text-[#595F69] text-bold border-b-[2px] ${item.id===activeTitle ? 'border-b-[#304FFD]': 'border-b-[#fff]'}`}
                     key={i}
                     onClick={() => handleOnClick(item.id)}
                     >
-                    <p>{item.title}</p>
+                    <p className={`text-[13px] tracking-wide ${item.id===activeTitle?"text-[#304FFD]":"text-[#000]"}`} >{item.title}</p>
                     </div>
                 )
                 
