@@ -21,7 +21,6 @@ const Navigator=({list,current,callback}:NavigatorProps)=>{
                     <p className={`text-[13px] tracking-wide ${item.id===activeTitle?"text-[#304FFD]":"text-[#000]"}`} >{item.title}</p>
                     </div>
                 )
-                
             })
 
             }
