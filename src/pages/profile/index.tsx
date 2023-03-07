@@ -1,6 +1,8 @@
 import React from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage";
+import Navigator from "@/utils/customNavigator";
+import LeadProfileContainer from "@/components/Profile/ProfilePage/LeadProfileContainer";
 
 //Manya will make this page
 
@@ -19,10 +21,11 @@ const Profile = () => {
           },
         ]}
       />
-      <div className="w-[100%] flex  ">
+      <div className="w-[100%] flex gap-[25px] ">
         <div className="w-[280px] min-h-[70vh] bg-white rounded-xl p-[20px]">
           <ProfilePage />
         </div>
+        <LeadProfileContainer/>
       </div>
       {/* write your code here for profile page manya! */}
     </div>
