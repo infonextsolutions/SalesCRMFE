@@ -12,11 +12,10 @@ const Kanban=({list}:KanbasProps)=>{
                 var res = list.filter(obj => {
                 return obj.type === col
                 })
-                
                 if(res.length)
                 return(
                     <div className="flex gap-[20px]">
-                        <div className="w-[270px] shrink-0">
+                        <div className="w-[270px] shrink-0 ">
                                 <div className="leadName flex mb-[10px]">
                                     <div className="w-[76%] bg-renal-blue h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
                                         <div className="enq-header text-[13px] flex gap-[8px] items-center">
@@ -42,7 +41,7 @@ const Kanban=({list}:KanbasProps)=>{
                                 </div>
                                 {res.map((item, i) => {
                                     return (
-                                    <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px]" key={i}>
+                                    <div className="border border-slate-600 p-[15px] rounded-xl mb-[20px] " key={i}>
                                         <div className="block-heading text-black text-[11px] leading-4 mb-[23px]">
                                             <p>Lead Id-{item.data.id}</p>
                                             <p className="text-bold">Lead XYZ-Info | {item.data.companyName} | {item.data.companyAddress}</p>

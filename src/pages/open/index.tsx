@@ -49,6 +49,7 @@ export default function Open() {
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
       <Navigation
+      title={"Sales-Manage>Leads"}
         buttons={[
           { text: "View", dropdown: false, id: 0, light: false },
           {
