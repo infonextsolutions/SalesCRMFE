@@ -16,15 +16,15 @@ const ProfilePage = () => {
               src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
               alt=""
             />
-            <div className="ml-3">
-              <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900">
-                Leslie Alexander
+            <div className="ml-4">
+              <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900 font-medium">
+                LEAD-info
               </h2>
               <a
                 href="#0"
                 className="block text-sm text-[12px] text-black hover:text-indigo-500"
               >
-                @Leslie Alexander
+                Lead-id123456
               </a>
             </div>
             <div className="h-[100%] ml-auto " >
@@ -36,43 +36,6 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-        {/* <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div> */}
-        <div className="py-2"></div>
-        <h3 className="text-sm font-medium mt-5 ml-6">INFO</h3>
-        <ul className="mt-2 mb-10 ml-4">
-          <li className="px-2 mt-4">
-            <strong className="font-medium mr-1 text-black ">Phone</strong>
-            <a href="tel:+821023456789" className="block">
-              +82 10 2345 6789
-            </a>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium mr-1 text-black">E-mail</strong>
-            <a href="mailto:" className="block">
-              aspiringfe@helloworld.com
-            </a>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Location</strong>
-            <span className="block">Seoul, South Korea</span>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Social Media</strong>
-            <div className="flex">
-              <img
-                src={getBasicIcon("Instagram")}
-                className={`w-[20px] svg-grey mr-2`}
-                alt=""
-              />
-              <img
-                src={getBasicIcon("Twitter")}
-                className={`w-[20px] svg-grey`}
-                alt=""
-              />
-            </div>
-          </li>
-        </ul>
-        <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
         <div className="py-1"></div>
         <h3 className="text-sm font-medium mt-5 ml-6">COMPANY INFO</h3>
         <ul className="mt-2 mb-10 ml-4">
@@ -118,94 +81,95 @@ const ProfilePage = () => {
         </ul>
         <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
         <div className="py-1"></div>
-        <div className="flex items-center justify-between mt-2 ml-6">
-          <h3 className="text-sm font-medium">OTHER CONTACTS</h3>
-          <img
-            src={getBasicIcon("Plus")}
-            className="w-5 h-5 ml-2 mr-2"
-            alt=""
-          />
-        </div>
-        <div className="py-3"></div>
-        <ul
-          role="list"
-          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-        >
-          <li>
-            <div className="flex items-center gap-x-3 mr-3">
-              <img
-                className="h-12 w-16 rounded-full ml-5"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
-              <div>
-                <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                  LeslieAlexander
-                </h4>
-                <a
-                  href="#0"
-                  className="block text-sm font-small hover:text-indigo-500"
-                >
-                  Co-Founder
-                </a>
-              </div>
-            </div>
+        <h3 className="text-sm font-medium mt-5 ml-6">LEAD INFO</h3>
+        <ul className="mt-2 mb-10 ml-4">
+          <li className="px-2 mt-4">
+            <strong className="font-medium mr-1">Lead Stage</strong>
+            <a href="name" className="block">
+              XYZ
+            </a>
           </li>
-        </ul>
-        <div className="py-2"></div>
-        <ul
-          role="list"
-          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-        >
-          <li>
-            <div className="flex items-center gap-x-3 mr-3">
-              <img
-                className="h-12 w-16 rounded-full ml-5"
-                src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              ></img>
-              <div>
-                <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                  Reginacooper
-                </h4>
-                <a
-                  href="#0"
-                  className="block text-sm font-small hover:text-indigo-500"
-                >
-                  Project Lead
-                </a>
-              </div>
-            </div>
+          <li className="px-2 mt-4">
+            <strong className="font-medium mr-1">Lead Source</strong>
+            <a href="address:" className="block">
+              nothing
+            </a>
           </li>
-        </ul>
-        <div className="py-2"></div>
-        <ul
-          role="list"
-          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-        >
-          <li>
-            <div className="flex items-center gap-x-3 mr-3">
-              <img
-                className="h-12 w-16 rounded-full ml-5"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
-              <div>
-                <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                  Judith
-                </h4>
-                <a
-                  href="#0"
-                  className="block text-sm font-small hover:text-indigo-500"
-                >
-                  HR
-                </a>
-              </div>
-            </div>
+          <li className="px-2 mt-4">
+            <strong className="font-medium mr-1">Lead Owner(primary)</strong>
+            <span className="block">
+              <a href="Leadowner">Aarti.S</a>
+            </span>
           </li>
-        </ul>
-        <div className="mx-auto w-[90%] border-b border-gray-300 my-6"></div>
+          <li className="px-2 mt-4">
+            <strong className="font-medium mr-1">Lead Owner(secondary)</strong>
+            <a href="leadowner" className="block">
+              Raghav V.
+            </a>
+          </li>
+          <li className="px-2 mt-4">
+            <strong className="font-medium mr-1">Lead Created By</strong>
+            <a href="leadowner" className="block">
+              -
+            </a>
+          </li>
+          <li className="px-2 mt-4">
+            <strong className="font-medium mr-1">Lead Updated on</strong>
+            <a href="leadowner" className="block">
+              26 January 2023 4:55 PM 
+            </a>
+          </li>
+          <li className="px-2 mt-4">
+            <strong className="font-medium mr-1">Activity History</strong>
+          </li>
+          <div
+      className={`flex h-[20px] items-center justify-between mt-[5px] px-2 shrink-0`}
+      style={{ width: 'width', marginLeft: 'left' }}
+    >
+    <div className='flex'>
+      <img
+        src={getBasicIcon("Phone")}
+        alt=""
+        className="mr-[4px] cursor-pointer"
+      />
+      <p>5</p>
       </div>
+      <div className='flex'>
+      <img
+        src={getBasicIcon("Mail")}
+        alt=""
+        className="mr-[4px] cursor-pointer"
+      />
+      <p>4</p>
+      </div>
+      <div className='flex'>
+      <img
+        src={getBasicIcon("Calendar")}
+        alt=""
+        className="mr-[4px] cursor-pointer"
+      />
+      <p>2</p>
+      </div>
+      <div className='flex'>
+      <img
+        src={getBasicIcon("Tasks")}
+        alt=""
+        className="mr-[4px] cursor-pointer"
+      />
+      <p>3</p>
+      </div>
+      <div className='flex'>
+      <img
+        src={getBasicIcon("Chat")}
+        alt=""
+        className="mr-[4px] cursor-pointer"
+      />
+      <p>4</p>
+      </div>
+    </div>
+        </ul>
+        <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
+        </div>
     </div>
   );
 };
