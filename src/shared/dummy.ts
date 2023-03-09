@@ -364,4 +364,19 @@ export default  {
     },
   ],
   totalRecords: 8,
+  calls:[
+    {
+      id:0,
+      data:{
+        lastActivity:"Email sent on 25 January 2023 4:55 PM",
+        inquiryType:"Demo Requested",
+        productType:"Product A",
+        dealSize:"Rs.11000",
+        budget:"Rs.8000",
+        winProb:"60%",
+        nextAction:"Requested Demo Meeting",
+        interestedProductType:"Product A as on 23 January 2023",
+      },
+    }
+  ]
 }

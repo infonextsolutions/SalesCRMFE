@@ -2,6 +2,7 @@ import React from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
 import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
+import dummy from "@/shared/dummy";
 
 //Manya will make this page
 
@@ -32,7 +33,7 @@ const CallProfile = () => {
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
 
         </div>
-        <LeadProfileContainer titles={titles} current={0}/>
+        <LeadProfileContainer titles={titles} current={0} data={dummy.calls}/>
       </div>
       {/* write your code here for profile page manya! */}
     </div>

@@ -2,7 +2,7 @@ import { getBasicIcon } from '@/utils/AssetsHelper';
 import Navigator from '@/utils/customNavigator'
 import React, { useState } from 'react'
 
-const LeadProfileContainer = ({titles,current}:LeadProfileContainerProps) => {
+const LeadProfileContainer = ({titles,current,data}:LeadProfileContainerProps) => {
     const [activeTitle, setActiveTitle] = useState(0);
   function CallBack (childData:any){
         setActiveTitle(childData); 
@@ -21,7 +21,7 @@ const LeadProfileContainer = ({titles,current}:LeadProfileContainerProps) => {
                 {activeTitle===0 && (
                     <div className=''>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Last Activity</p>
-                        <p className='text-[#595F69]'>Email sent on 25 January 2023 4:55 PM</p>
+                        <p className='text-[#595F69]'>{data.lastActivity}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Inquiry type</p>
                         <p className='text-[#595F69]'>Demo Requested</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Product/Service Type</p>
@@ -57,4 +57,5 @@ export default LeadProfileContainer
 interface LeadProfileContainerProps{
     titles:any[] | any;
     current:Number;
+    [key: string]:any;
 }
