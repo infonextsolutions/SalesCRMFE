@@ -2,36 +2,19 @@ import { getBasicIcon } from '@/utils/AssetsHelper';
 import Navigator from '@/utils/customNavigator'
 import React, { useState } from 'react'
 
-const LeadProfileContainer = () => {
+const LeadProfileContainer = ({titles,current}:LeadProfileContainerProps) => {
     const [activeTitle, setActiveTitle] = useState(0);
   function CallBack (childData:any){
         setActiveTitle(childData); 
-        console.log(childData);
+        // console.log(childData);
   }
-
+  const list = titles.map((title:any,i:any)=>({id:i,title:title}));
   return (
     <div className="w-[50%] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
         <Navigator
             callback = {CallBack}
-            current={0}
-            list={[
-            {
-                id:0,
-                title:"DEAL INFO"
-            },
-            {
-                id:1,
-                title:"ACTIVITY HISTORY"
-            },
-            {
-                id:2,
-                title:"ATTACHMENTS"
-            },
-            {
-                id:3,
-                title:"COACHING"
-            }
-            ]}
+            current={current}
+            list={list}
         />
         <div className='flex justify-between pl-[30px] '>
             <div className='text-black text-[14px] leading-[21px] mt-[25px] tracking-wide '>
@@ -70,3 +53,8 @@ const LeadProfileContainer = () => {
 }
 
 export default LeadProfileContainer
+
+interface LeadProfileContainerProps{
+    titles:any[] | any;
+    current:Number;
+}
