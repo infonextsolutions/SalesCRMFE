@@ -364,7 +364,7 @@ export default  {
     },
   ],
   totalRecords: 8,
-  callsInfo:[
+  leadInfo:[
     {
       id:0,
       data:{
