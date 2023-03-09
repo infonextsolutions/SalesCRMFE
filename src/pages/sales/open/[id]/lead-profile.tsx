@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "@/components/app/Navigation";
-import ProfilePage from "@/components/Profile/ProfilePage";
-import LeadProfileContainer from "@/components/Profile/ProfilePage/LeadProfileContainer";
+import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
+import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
 
 //Manya will make this page
 
