@@ -364,7 +364,7 @@ export default  {
     },
   ],
   totalRecords: 8,
-  calls:[
+  callsInfo:[
     {
       id:0,
       data:{
@@ -377,6 +377,29 @@ export default  {
         nextAction:"Requested Demo Meeting",
         interestedProductType:"Product A as on 23 January 2023",
       },
+    }
+  ],
+  audioCallDetails:[
+    {
+      id:0,
+      data:{
+        callId:"XYZ",
+        leadID:"12XXXX",
+        leadInfo:"Lead XYZ Info",
+        companyName:"ABC Corp.",
+        clientPOC:"Shraddha P.",
+        pocJob:"Sales Manager",
+        product:"PRODUCT A",
+        dealSize:"Rs.11000",
+        leadStage:"Enquiry",
+        callOwner:"John C.",
+        talkRatio:"26%",
+        longestMonologue:"03:53",
+        fillerWords:7,
+        interactivity:7,
+        nextSteps:2,
+        engagingQuestions:3,
+      }
     }
   ]
 }

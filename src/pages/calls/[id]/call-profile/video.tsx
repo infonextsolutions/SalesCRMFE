@@ -1,12 +1,13 @@
 import React from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
-import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
+import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
+import dummy from "@/shared/dummy";
 
 //Manya will make this page
 
 const VideoProfile = () => {
-  const titles = ["CALL INFO","COMMENTS","NOTES","COACHING"];
+  const titles = ["LEAD INFO","ACTIVITY HISTORY","NOTES"];
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
@@ -29,7 +30,12 @@ const VideoProfile = () => {
         ]}
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-        <LeadProfileContainer titles={titles} current={0}/>
+        <div className="bg-white rounded-xl px-[12px] pt-[18px] w-[100%]">
+          <div className="h-[440px] bg-[#EDEDED] flex justify-center items-center text-[#000000]">
+            <p className="text-[40px] leading-[60px] font-medium">LIVE VIDEO MEETING</p>
+          </div>
+          <AudioProfileContainer titles={titles} check={false} current={0} info={dummy.audioCallDetails}/>
+        </div>
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
 
         </div>

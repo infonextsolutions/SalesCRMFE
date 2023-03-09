@@ -1,12 +1,13 @@
 import React from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
-import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
+import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
+import dummy from "@/shared/dummy";
 
 //Manya will make this page
 
 const AudioProfile = () => {
-  const titles = ["CALL INFO","COMMENTS","NOTES","COACHING"];
+  const titles = ["LEAD INFO","ACTIVITY HISTORY","NOTES"];
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
@@ -29,7 +30,7 @@ const AudioProfile = () => {
         ]}
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-        <LeadProfileContainer titles={titles} current={0}/>
+        <AudioProfileContainer titles={titles} check={false} current={0} info={dummy.audioCallDetails}/>
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
 
         </div>
