@@ -6,6 +6,7 @@ import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
 //Manya will make this page
 
 const CallProfile = () => {
+  const titles = ["CALL INFO","COMMENTS","NOTES","COACHING"];
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
@@ -31,7 +32,7 @@ const CallProfile = () => {
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
 
         </div>
-        <LeadProfileContainer/>
+        <LeadProfileContainer titles={titles} current={0}/>
       </div>
       {/* write your code here for profile page manya! */}
     </div>
