@@ -2,11 +2,10 @@ import { getBasicIcon } from '@/utils/AssetsHelper';
 import Navigator from '@/utils/customNavigator'
 import React, { useState } from 'react'
 
-const LeadProfileContainer = ({titles,current}:LeadProfileContainerProps) => {
+const LeadProfileContainer = ({titles,current,info}:LeadProfileContainerProps) => {
     const [activeTitle, setActiveTitle] = useState(0);
   function CallBack (childData:any){
         setActiveTitle(childData); 
-        // console.log(childData);
   }
   const list = titles.map((title:any,i:any)=>({id:i,title:title}));
   return (
@@ -20,22 +19,21 @@ const LeadProfileContainer = ({titles,current}:LeadProfileContainerProps) => {
             <div className='text-black text-[14px] leading-[21px] mt-[25px] tracking-wide '>
                 {activeTitle===0 && (
                     <div className=''>
-                        <p className='mt-[20px] text-[#3F434A] font-medium'>Last Activity</p>
-                        <p className='text-[#595F69]'>Email sent on 25 January 2023 4:55 PM</p>
+                        <p className='text-[#595F69]'>{info[activeTitle].data.lastActivity}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Inquiry type</p>
-                        <p className='text-[#595F69]'>Demo Requested</p>
+                        <p className='text-[#595F69]'>{info[activeTitle].data.inquiryType}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Product/Service Type</p>
-                        <p className='text-[#595F69]'>Product A</p>
+                        <p className='text-[#595F69]'>{info[activeTitle].data.productType}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Potential Deal Size</p>
-                        <p className='text-[#595F69]'>Rs.11000</p>
+                        <p className='text-[#595F69]'>{info[activeTitle].data.dealSize}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Existing Budget</p>
-                        <p className='text-[#595F69]'>Rs.8000</p>
+                        <p className='text-[#595F69]'>{info[activeTitle].data.budget}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Win Probability</p>
-                        <p className='text-[#595F69]'>60%</p>
+                        <p className='text-[#595F69]'>{info[activeTitle].data.winProb}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Next Action</p>
-                        <p className='text-[#595F69]'>Requested Demo Meeting</p>
+                        <p className='text-[#595F69]'>{info[activeTitle].data.nextAction}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Interested Product/Service Type</p>
-                        <p className='text-[#595F69]'>Product A as on 23 January 2023</p>
+                        <p className='text-[#595F69]'>{info[activeTitle].data.interestedProductType}</p>
                     </div>
                 )
                 }
@@ -57,4 +55,5 @@ export default LeadProfileContainer
 interface LeadProfileContainerProps{
     titles:any[] | any;
     current:Number;
+    [key: string]:any;
 }
