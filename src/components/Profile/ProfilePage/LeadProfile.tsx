@@ -4,47 +4,50 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 const ProfilePage = () => {
   return (
     <div>
-      <div className="w-[25%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
-        <div className="w-[100%] h-[48px] flex items-center px-[8px]"></div>
-        <img
-          src={getBasicIcon("Edit")}
-          className={`w-[20px] svg-grey ml-auto mr-6`}
-          alt="Edit"
-        />
+      <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
+        {/* <div className="w-[100%] h-[48px] flex items-center px-[8px]"></div> */}
+
         <div className="flex -space-x-2 overflow-hidden">
-          <div className="relative inline-flex items-start mr-10"></div>
-          <div className="flex items-center justify-between"></div>
-          <div className="flex items-center">
+          {/* <div className="relative inline-flex items-start mr-10"></div> */}
+          {/* <div className="flex items-center justify-between"></div> */}
+          <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
             <img
-              className="inline-block h-20 w-15 rounded-full ring-2 ring-white"
+              className="inline-block w-[50px] rounded-full ring-2 ring-white"
               src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
               alt=""
             />
             <div className="ml-3">
-              <h2 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+              <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900">
                 Leslie Alexander
               </h2>
               <a
                 href="#0"
-                className="block text-sm font-small hover:text-indigo-500"
+                className="block text-sm text-[12px] text-black hover:text-indigo-500"
               >
                 @Leslie Alexander
               </a>
             </div>
+            <div className="h-[100%] ml-auto " >
+              <img
+                src={getBasicIcon("Edit")}
+                className={`w-[20px] svg-grey ml-auto svg-not-selected mt-[9px]`}
+                alt="Edit"
+              />
+            </div>
           </div>
         </div>
-        <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
+        {/* <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div> */}
         <div className="py-2"></div>
         <h3 className="text-sm font-medium mt-5 ml-6">INFO</h3>
         <ul className="mt-2 mb-10 ml-4">
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Phone</strong>
+            <strong className="font-medium mr-1 text-black ">Phone</strong>
             <a href="tel:+821023456789" className="block">
               +82 10 2345 6789
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">E-mail</strong>
+            <strong className="font-medium mr-1 text-black">E-mail</strong>
             <a href="mailto:" className="block">
               aspiringfe@helloworld.com
             </a>
