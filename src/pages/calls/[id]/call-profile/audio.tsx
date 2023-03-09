@@ -1,12 +1,16 @@
-import Navigation from "@/components/app/Navigation";
-import ProfilePage from "@/components/Profile/ProfilePage/ClientPocProfile";
 import React from "react";
+import Navigation from "@/components/app/Navigation";
+import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
+import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
 
-const ClientProfile = () => {
+//Manya will make this page
+
+const AudioProfile = () => {
+  const titles = ["CALL INFO","COMMENTS","NOTES","COACHING"];
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Profile"
+      title="Profile"
         buttons={[
           {
             text: "Take Action",
@@ -25,8 +29,9 @@ const ClientProfile = () => {
         ]}
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-        <div className="w-[280px] min-h-[70vh] bg-white rounded-xl p-[20px]">
-          <ProfilePage />
+        <LeadProfileContainer titles={titles} current={0}/>
+        <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
+
         </div>
       </div>
       {/* write your code here for profile page manya! */}
@@ -34,4 +39,4 @@ const ClientProfile = () => {
   );
 };
 
-export default ClientProfile;
+export default AudioProfile;

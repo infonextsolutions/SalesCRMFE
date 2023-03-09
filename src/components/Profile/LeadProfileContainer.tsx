@@ -10,7 +10,7 @@ const LeadProfileContainer = ({titles,current,data}:LeadProfileContainerProps) =
   }
   const list = titles.map((title:any,i:any)=>({id:i,title:title}));
   return (
-    <div className="w-[50%] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
+    <div className="w-[100%] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
         <Navigator
             callback = {CallBack}
             current={current}
