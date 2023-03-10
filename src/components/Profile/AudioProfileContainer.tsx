@@ -2,7 +2,7 @@ import { getBasicIcon } from '@/utils/AssetsHelper';
 import Navigator from '@/utils/customNavigator'
 import React, { useState } from 'react'
 
-const AudioProfileContainer = ({titles,current,info,check}:AudioProfileContainerProps) => {
+const AudioProfileContainer = ({titles,current,info,check,width}:AudioProfileContainerProps) => {
     const [activeTitle, setActiveTitle] = useState(0);
   function CallBack (childData:any){
         setActiveTitle(childData); 
@@ -11,7 +11,7 @@ const AudioProfileContainer = ({titles,current,info,check}:AudioProfileContainer
 //   console.log(activeTitle);
   console.log(info);
   return (
-    <div className="w-[100%] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
+    <div className={`w-[${width?width:"100%"}]  bg-white rounded-xl p-[25px] px-[35px] pt-[30px]`}>
         <Navigator
             callback = {CallBack}
             current={current}

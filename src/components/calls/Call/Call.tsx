@@ -148,9 +148,12 @@ const CallContainer = ({
         <CallBox width={30} />
         <CallItem width={130} left={20}  text={"345345354335"}
         click={true}
-        route={`${pathname}/${id}/call-profile`}
+        route={`${pathname}/${id}/audio-call`}
         />
-        <CallItem width={130} left={20}  text={"Discussion on PX features"}  />
+        <CallItem width={130} left={20}  text={"Discussion on PX features"}
+          click={true}
+          route={`${pathname}/${id}/video-call`}
+        />
         <CallItem width={150} left={10}  text={"345345354335"}  />
         <CallItem width={120} left={10}  text={custom}  />
         <CallItemMultiple
