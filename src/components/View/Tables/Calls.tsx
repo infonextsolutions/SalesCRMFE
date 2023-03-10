@@ -23,7 +23,7 @@ const CallsTable = ({ result, totalRecords }: TableProps) => {
               leadStage={item.leadStage}
               leadStatus={item.leadStatus}
               custom={item.customer_name}
-              LeadData={item}
+              CallData={item}
             />
           );
         })}

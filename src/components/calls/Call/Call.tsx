@@ -1,9 +1,9 @@
-import Lead, { CompanyId, CustomerId } from "@/types/Leads";
+import Call, { CompanyId, CustomerId } from "@/types/Calls";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import { useRouter } from "next/router";
 import React from "react";
 
-const LeadBox = ({ width }: any) => {
+const CallBox = ({ width }: any) => {
   return (
     <div
       className={`flex items-center justify-center h-[20px] shrink-0 `}
@@ -14,7 +14,7 @@ const LeadBox = ({ width }: any) => {
   );
 };
 
-const LeadItem = ({ width, text, left, align, textLeft, link,click,route }: any) => {
+const CallItem = ({ width, text, left, align, textLeft, link,click,route }: any) => {
   const {push}=useRouter();
 
   return (
@@ -53,7 +53,7 @@ const LeadItem = ({ width, text, left, align, textLeft, link,click,route }: any)
   );
 };
 
-const LeadItemMultiple = ({
+const CallItemMultiple = ({
   width,
   upperText,
   bottomText,
@@ -132,92 +132,56 @@ const QuickActions = ({ width, left }: any) => {
   );
 };
 
-const LeadContainer = ({
+const CallContainer = ({
   id,
   company,
   customer,
   leadStage,
   leadStatus,
   custom,
-  LeadData,
-}: LeadProps) => {
+  CallData,
+}: CallProps) => {
   const {pathname} = useRouter();
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
-        <LeadBox width={30} />
-        <LeadItemMultiple
+        <CallBox width={30} />
+        <CallItem width={130} left={20}  text={"345345354335"}
+        click={true}
+        route={`${pathname}/${id}/call-profile`}
+        />
+        <CallItem width={130} left={20}  text={"Discussion on PX features"}  />
+        <CallItem width={150} left={10}  text={"345345354335"}  />
+        <CallItem width={120} left={10}  text={custom}  />
+        <CallItemMultiple
+          width={120}
+          left={20}
+          upperText={"Shraddha P."}
+          bottomText={"Sales Manager"}
+          bold={true}
+        />
+        <CallItem width={100} left={20} text={"John C"}  />
+        <CallItemMultiple
           width={130}
           left={20}
-          upperText={company.company_name}
-          bottomText={company.company_location}
-          bold={true}
-          click={true}
-          route={`${pathname}/${id}/call-profile`}
-        />
-        <LeadItem width={150} left={10}  text={custom}  />
-        <LeadItem width={110} left={10} text={customer.name}  />
-        <QuickActions width={120} />
-        <LeadItem width={150} left={20} text={customer.email} />
-        <LeadItem width={150} left={30} text={customer.contact} />
-        <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
-        <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
-        <LeadItem width={150} left={10} textLeft={20} text={"Product A"} />
-        <LeadItem width={150} left={10} text={LeadData.activity_history} />
-        <LeadItemMultiple
-          width={130}
-          left={10}
-          upperText={"Email Sent"}
-          bottomText={LeadData.last_activity}
-        />
-        <LeadItem
-          width={130}
-          left={10}
-          textLeft={5}
-          text={LeadData.potential_deal_size}
-        />
-        <LeadItem
-          width={150}
-          textLeft={20}
-          left={10}
-          text={LeadData.win_probability}
-        />
-        <LeadItem width={150} left={10} text={LeadData.inquiry} />
-        <LeadItem
-          width={150}
-          left={10}
-          textLeft={15}
-          text={LeadData.existing_budget}
-        />
-        <LeadItem width={150} left={10} text={"Anil L, Paul G, Rekha"} />
-        <LeadItemMultiple
-          width={150}
-          left={10}
           upperText={"Send Email"}
           bottomText={"on 23 Jan 2023"}
         />
-        <LeadItem width={150} textLeft={20} left={10} text={"-"} />
-        <LeadItem width={150} left={10} text={LeadData.close_date} />
-        <LeadItem
-          link={true}
-          width={150}
-          left={10}
-          textLeft={20}
-          text={company.company_website_url}
-        />
+        <CallItem width={130} left={10}  text={"30 min."}  />
+        <CallItem width={110} left={10}  text={"80"}  />
       </div>
     </div>
   );
 };
 
-export default LeadContainer;
+export default CallContainer;
 
-interface LeadProps {
+interface CallProps {
   company: CompanyId;
   customer: CustomerId;
   id: String;
   leadStage: String;
   leadStatus: String;
   custom: String;
-  LeadData: Lead;
+  CallData: Call;
 }

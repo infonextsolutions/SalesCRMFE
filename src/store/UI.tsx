@@ -9,11 +9,11 @@ const menuOptions=[
   },
   {
     title: "Sales",
-    route:"sales/open",
+    route:"sales",
     list: [
-      // { title: "Open",route:"open" },
-      // { title: "Closed",route:"closed" },
-      // { title: "Estimates and Insights",route:"estimates-and-insights" },
+      { title: "Open",route:"open" },
+      { title: "Closed",route:"closed" },
+      { title: "Estimates and Insights",route:"estimates-and-insights" },
     ],
     icon: "Sort",
   },

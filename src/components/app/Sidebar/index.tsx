@@ -10,7 +10,7 @@ const Sidebar = () => {
   return (
     <div
       className={`overflow-x-hidden h-screen  ease-in duration-200 bg-white pt-[13px] border-r-[1px] border-[#eaebec] ${
-        menuOpen ? "w-[220px]" : "w-[55px]"
+        menuOpen ? "w-[300px]" : "w-[55px]"
       }`}
     >
       <Logo />
