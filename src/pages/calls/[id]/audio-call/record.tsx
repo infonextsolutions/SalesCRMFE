@@ -3,6 +3,7 @@ import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
 import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
 import dummy from "@/shared/dummy";
+import Script from "@/components/activeCalls/Script/index.";
 
 //Manya will make this page
 
@@ -32,7 +33,7 @@ const AudioProfile = () => {
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <AudioProfileContainer width={"50%"} titles={titles} check={false} current={0} info={dummy.audioCallDetails}/>
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
-
+            <Script/>
         </div>
       </div>
       {/* write your code here for profile page manya! */}
