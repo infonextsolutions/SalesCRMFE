@@ -19,6 +19,7 @@ const LeadProfileContainer = ({titles,current,info}:LeadProfileContainerProps) =
             <div className='text-black text-[14px] leading-[21px] mt-[25px] tracking-wide '>
                 {activeTitle===0 && (
                     <div className=''>
+                        <p className='mt-[20px] text-[#3F434A] font-medium'>Last Activity</p>
                         <p className='text-[#595F69]'>{info[activeTitle].data.lastActivity}</p>
                         <p className='mt-[20px] text-[#3F434A] font-medium'>Inquiry type</p>
                         <p className='text-[#595F69]'>{info[activeTitle].data.inquiryType}</p>

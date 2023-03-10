@@ -2,6 +2,7 @@ import React from "react";
 import { getBasicIcon } from "../AssetsHelper";
 
 const DropDown = ({ list, direction,value,onClick }: any) => {
+  const [mouseOver,setMouseOver] = React.useState(false);
   return (
     <div
       className={`px-[8px] pt-[10px] pb-[3px] flex flex-col min-h-[30px] rounded-[10px] bg-white absolute drop-shadow-2xl z-10 right-0 ${
@@ -13,7 +14,7 @@ const DropDown = ({ list, direction,value,onClick }: any) => {
       `}
     >
       {list.map((item: any, i: any) => {
-        const [mouseOver,setMouseOver] = React.useState(false);
+        
 
         return (
           <div
