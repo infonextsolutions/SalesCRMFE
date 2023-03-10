@@ -33,7 +33,7 @@ const CallProfile = () => {
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
 
         </div>
-        <AudioProfileContainer titles={titles} check={true} current={0} info={dummy.audioCallDetails}/>
+        <AudioProfileContainer width={"50%"} titles={titles} check={true} current={0} info={dummy.audioCallDetails}/>
       </div>
       {/* write your code here for profile page manya! */}
     </div>

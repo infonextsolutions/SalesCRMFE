@@ -2,14 +2,14 @@ import { getBasicIcon } from '@/utils/AssetsHelper';
 import Navigator from '@/utils/customNavigator'
 import React, { useState } from 'react'
 
-const LeadProfileContainer = ({titles,current,info}:LeadProfileContainerProps) => {
+const LeadProfileContainer = ({titles,current,info,width}:LeadProfileContainerProps) => {
     const [activeTitle, setActiveTitle] = useState(0);
   function CallBack (childData:any){
         setActiveTitle(childData); 
   }
   const list = titles.map((title:any,i:any)=>({id:i,title:title}));
   return (
-    <div className="w-[100%] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]">
+    <div className={`w-[${width?width:"100%"}] bg-white rounded-xl p-[25px] px-[35px] pt-[30px]`}>
         <Navigator
             callback = {CallBack}
             current={current}
