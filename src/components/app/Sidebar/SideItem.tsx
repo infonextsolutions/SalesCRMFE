@@ -1,35 +1,41 @@
 import React from "react";
-import { useAppDispatch } from "@/store/store";
 import { useRouter } from "next/router";
+import { RightArrow } from "@/utils/AssetsHelper";
 
-const SideItem = ({ img, title, open, id,list,route }: any) => {
-  const {pathname,push} = useRouter();
-  let currentRoute:any;
-  if(list.length!==0){
-    for(let i =0;i<list.length;i++){
-      const curr = `/${route}/${list[i].route}`
-      if(curr===pathname){
+const SideItem = ({ img, title, open, id, list, route }: any) => {
+  const { pathname, push } = useRouter();
+  let currentRoute: any;
+  let Curr = 0;
+  if (list.length !== 0) {
+    for (let i = 0; i < list.length; i++) {
+      const curr = `/${route}/${list[i].route}`;
+      if (curr === pathname) {
         currentRoute = curr;
+        Curr = i;
         break;
       }
     }
-  }else{
+
+    if (!currentRoute) {
+      currentRoute = `/${route}/${list[0].route}`;
+    }
+  } else {
     currentRoute = `/${route}`;
   }
-  const check = pathname===currentRoute;
+  const check = pathname === currentRoute;
+  console.log(check, currentRoute);
 
+  const [dropdown, setDropdown] = React.useState(false);
   return (
     <div
-      className="cursor-pointer flex items-center mt-[12px] h-[40px] relative "
-      onClick={() => {
-        push(currentRoute);
-      }}
+      className={`overflow-hidden duration-300 cursor-pointer flex-col flex  mt-[12px] h-[40px] relative `}
+      style={{ height: dropdown ? `${50 * (list.length + 1)}px` : `40px` }}
     >
       {check && (
         <>
           <div
             className={`absolute left-[7.5px] bg-[#e8e9eb] duration-300 z-10 ease-out  ${
-              !open ? "w-[40px] h-[40px] rounded-xl" : "w-[100%] h-[100%]"
+              !open ? "w-[40px] h-[40px] rounded-xl" : "w-[100%] h-[40px]"
             }`}
           />
           <div
@@ -43,18 +49,82 @@ const SideItem = ({ img, title, open, id,list,route }: any) => {
           />
         </>
       )}
-      <div className={`flex items-center z-40 `}>
+      <div className={`flex items-center h-[40px] shrink-0 z-40`}>
         <img
           src={img}
           alt=""
           className={`w-[30px] p-[6px] ml-[12px] mr-[12px] ${
             check ? "svg-selected" : "svg-not-selected"
           }`}
+          onClick={() => {
+            push(currentRoute);
+          }}
         />
-        <p className="tracking-wider text-[#3F434A] ml-[10px] font-medium text-[14px] poppins">
+        <p
+          className="tracking-wider text-[#3F434A] ml-[0px] font-medium text-[14px] poppins"
+          onClick={() => {
+            console.log(currentRoute);
+            push(currentRoute);
+          }}
+        >
           {title}
         </p>
+        {(list.length !== 0 )&& (
+          <>
+            <div
+              onClick={() => {
+                console.log("dropdown");
+                setDropdown(!dropdown);
+              }}
+              className="absolute left-[210px] z-0  w-[24px] flex items-center justify-center h-[24px] "
+            >
+              <div
+                className={`w-[16px] ${
+                  !dropdown ? "" : "rotate-90"
+                } duration-300 `}
+              >
+                <RightArrow renal={false} />
+              </div>
+            </div>
+          </>
+        )}
       </div>
+      {dropdown && (
+        <div className="w-[100%] min-h-[40px] left-[5px] ">
+          {list.map((item: any, i: any) => {
+            const curr1 =
+              `/${route}/${list[i].route}` === `/${route}/${list[Curr].route}`;
+            return (
+              <>
+                <div
+                  className={`${
+                    curr1 && "bg-[#e8e9eb]"
+                  } flex items-center z-40 h-[40px] p-[5px] box-content`}
+                >
+                  <img
+                    src={"/Images/dots/Dot.svg"}
+                    alt=""
+                    className={`w-[20px] p-[6px] ml-[12px] mr-[18px] ${
+                      curr1 ? "svg-selected" : "svg-not-selected"
+                    }`}
+                    onClick={() => {
+                      push(`/${route}/${list[i].route}`);
+                    }}
+                  />
+                  <p
+                    className="tracking-wider text-[#3F434A] font-medium text-[14px] poppins whitespace-nowrap"
+                    onClick={() => {
+                      push(`/${route}/${list[i].route}`);
+                    }}
+                  >
+                    {item.title}
+                  </p>
+                </div>
+              </>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
