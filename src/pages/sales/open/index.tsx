@@ -3,7 +3,6 @@ import LeadsContainer from "@/components/leads/Container";
 import Table from "@/components/View/Tables/Leads";
 import axios from "axios";
 import React from "react";
-import DUMMY from "@/shared/dummy";
 import KanbanContainer from "@/components/View/Kanban";
 
 const dummyItem={
@@ -44,7 +43,7 @@ const Dummy = [
   { id: 18, type: "Dead",data:dummyItem },
 ];
 
-export default function Open() {
+export default function Open({data}:any) {
   const [view, setView] = React.useState(false);
 
   const viewButtinClick = (prev: Number, current: Number) => {
@@ -108,7 +107,7 @@ export default function Open() {
       />
       <LeadsContainer>
         {!view ? (
-          <Table result={DUMMY.result} totalRecords={DUMMY.totalRecords} />
+          <Table result={data.result} totalRecords={data.totalRecords} />
         ) : (
           <KanbanContainer list={Dummy} />
         )}
@@ -126,7 +125,7 @@ export async function getServerSideProps({ query, ...params }: any) {
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component
-      data: {},
+      data: response.data || {},
     }, // will be passed to the page component as props
   };
 }
