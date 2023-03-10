@@ -36,6 +36,12 @@ filter: invert(21%) sepia(92%) saturate(4187%) hue-rotate(233deg) brightness(96%
   filter: invert(25%) sepia(14%) saturate(370%) hue-rotate(179deg) brightness(89%) contrast(87%) !important;
 }
 
+.svg-ellipse-5{
+  filter: invert(24%) sepia(99%) saturate(2637%) hue-rotate(228deg) brightness(96%) contrast(108%) !important;
+}
+.svg-ellipse-6{
+  filter: invert(89%) sepia(30%) saturate(7001%) hue-rotate(320deg) brightness(104%) contrast(102%) !important ;}
+
 /* custom-svg-color */
 
 
