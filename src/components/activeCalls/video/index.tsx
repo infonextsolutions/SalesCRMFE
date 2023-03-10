@@ -1,5 +1,41 @@
 import React from "react";
-import Transcript from "./Transcript";
+import Tracker from "../conversation-tracker";
+import Transcript from "../Transcript/Transcript";
+
+const list = [
+  {
+    duration: 40,
+    at: 20,
+  },
+  {
+    duration: 60,
+    at: 80,
+  },
+  {
+    duration: 30,
+    at: 160,
+  },
+  {
+    duration: 40,
+    at: 210,
+  },
+  {
+    duration: 40,
+    at: 280,
+  },
+  {
+    duration: 40,
+    at: 320,
+  },
+  {
+    duration: 40,
+    at: 400,
+  },
+  {
+    duration: 40,
+    at: 500,
+  },
+];
 
 const Video = () => {
   return (
@@ -12,7 +48,7 @@ const Video = () => {
         </div>
         <img src="/video.svg" className="w-full rounded-2xl" alt="" />
       </div>
-      <div className="w-full mt-[30px] px-[38px] ">
+      <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
         <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
           call data
         </h1>
@@ -33,6 +69,10 @@ const Video = () => {
           <p className="text-[#FF965D] text-[14px]">Participant 2:Shraddha</p>
         </div>
       </div>
+      <Tracker title={"John"} list={list} color={"#304FFD"} />
+      <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
+      <Tracker title={"Topics"} list={list} color={"#0090FF"}/>
+      
       <Transcript />
     </>
   );
