@@ -14,7 +14,7 @@ const Navigator=({list,current,callback}:NavigatorProps)=>{
             {list.map((item:any,i:any)=>{
                 return (
                     <div 
-                    className={`pb-[10px] cursor-pointer text-[14px] leading-[21px] font-medium text-[#595F69] text-bold border-b-[2px] ${item.id===activeTitle ? 'border-b-[#304FFD]': 'border-b-[#fff]'}`}
+                    className={`pb-[20px] px-[5px] cursor-pointer text-[14px] leading-[21px] font-medium text-[#595F69] text-bold border-b-[2px] ${item.id===activeTitle ? 'border-b-[#304FFD]': 'border-b-[#fff]'}`}
                     key={i}
                     onClick={() => handleOnClick(item.id)}
                     >
