@@ -49,7 +49,7 @@ const AudioProfileContainer = ({titles,current,info,check,width}:AudioProfileCon
                                 <p className='mt-[4px] text-[#3F434A] text-[14px] leading-[21px]'>{info[activeTitle].data.leadStage}</p>
                             </div>
                         </div>
-                        <div className='border-b mt-[20px] w-[800px] h-[1px] px-[30px]'></div>
+                        <div className='border-b mt-[20px] w-[600px] h-[1px] px-[30px]'></div>
                         <div className='pl-[30px]'>
                             <div className='mt-[25px]'>
                                 <p className='text-[#3F434A] text-[15px] font-medium leading-[22px]'>CALL PARTICIPANTS</p>
@@ -62,7 +62,7 @@ const AudioProfileContainer = ({titles,current,info,check,width}:AudioProfileCon
                                 <p className='text-[#8A9099] text-[12px] leading-[18px]'>{info[activeTitle].data.callOwner}</p>
                             </div>
                         </div>
-                        <div className='border-b mt-[20px] w-[800px] h-[1px] px-[30px]'></div>
+                        <div className='border-b mt-[20px] w-[600px] h-[1px] px-[30px]'></div>
                         {check&&(
                             <>
                             <div className='pl-[30px]'>
@@ -92,7 +92,7 @@ const AudioProfileContainer = ({titles,current,info,check,width}:AudioProfileCon
                                         <p className='text-[#8A9099] text-[12px] leading-[18px]'>{info[activeTitle].data.engagingQuestions}</p>
                                     </div>
                                 </div>
-                            <div className='border-b mt-[20px] w-[800px] h-[1px] px-[30px]'></div>
+                            <div className='border-b mt-[20px] w-[600px] h-[1px] px-[30px]'></div>
                             </>
                         )
 
