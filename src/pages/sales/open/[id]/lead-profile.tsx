@@ -2,12 +2,13 @@ import React from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
 import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
+import dummy from "@/shared/dummy";
 
 //Manya will make this page
 
 const Profile = () => {
 
-  const titles = ["CALL INFO","COMMENTS","NOTES","COACHING"];
+  const titles = ["DEAL INFO","ACTIVITY HISTORY","ATTACHMENTS","COACHING"];
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
@@ -34,7 +35,7 @@ const Profile = () => {
         <div className="w-[280px] min-h-[70vh] bg-white rounded-xl p-[20px]">
           <ProfilePage />
         </div>
-        <LeadProfileContainer titles={titles} current={0}/>
+        <LeadProfileContainer titles={titles} current={0} info={dummy.leadInfo}/>
       </div>
       {/* write your code here for profile page manya! */}
     </div>
