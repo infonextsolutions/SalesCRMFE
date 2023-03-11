@@ -5,7 +5,7 @@ const CompanyProfile=()=>{
 
     return(
         <div>
-         <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
+        <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
         {/* <div className="w-[100%] h-[48px] flex items-center px-[8px]"></div> */}
 
         <div className="flex -space-x-2 overflow-hidden">
@@ -13,6 +13,11 @@ const CompanyProfile=()=>{
           {/* <div className="flex items-center justify-between"></div> */}
           <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
             <div className="ml-auto">
+            <img
+              className="inline-block w-[60px] rounded-full ring-2 ring-white"
+              src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              alt=""
+            />
               <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900 font-medium">
                 ABC Corp
               </h2>
@@ -37,31 +42,31 @@ const CompanyProfile=()=>{
         <h3 className="text-sm font-medium text-black mt-5 ml-2">COMPANY INFO</h3>
         <ul className="mt-2 mb-10 ml-auto">
           <li className="px-2 mt-4">
-            <strong className="font-medium text-gray-400 mr-1">Company Name</strong>
+            <strong className="font-medium text-black mr-1">Company Name</strong>
             <a href="name" className="block">
               XYZ
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-gray-400 mr-1">Company Address</strong>
+            <strong className="font-medium text-black mr-1">Company Address</strong>
             <a href="address:" className="block">
               nothing
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-gray-400 mr-1">Website Link</strong>
+            <strong className="font-medium text-black mr-1">Website Link</strong>
             <span className="block">
               <a href="https://www.example.com">www.example.com</a>
             </span>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-gray-400 mr-1">Industry Type</strong>
+            <strong className="font-medium text-black mr-1">Industry Type</strong>
             <a href="industry:" className="block">
               IT Solutions
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-gray-400 mr-1">Social Media</strong>
+            <strong className="font-medium text-black mr-1">Social Media</strong>
             <div className="flex">
               <img
                 src={getBasicIcon("Facebook")}
