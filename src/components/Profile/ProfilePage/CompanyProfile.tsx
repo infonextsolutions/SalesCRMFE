@@ -34,34 +34,34 @@ const CompanyProfile=()=>{
         </div>
         {/* <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div> */}
         <div className="py-1"></div>
-        <h3 className="text-sm font-medium mt-5 ml-6">COMPANY INFO</h3>
-        <ul className="mt-2 mb-10 ml-4">
+        <h3 className="text-sm font-medium text-black mt-5 ml-2">COMPANY INFO</h3>
+        <ul className="mt-2 mb-10 ml-auto">
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Company Name</strong>
+            <strong className="font-medium text-gray-400 mr-1">Company Name</strong>
             <a href="name" className="block">
               XYZ
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Comapny Address</strong>
+            <strong className="font-medium text-gray-400 mr-1">Company Address</strong>
             <a href="address:" className="block">
               nothing
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Website Link</strong>
+            <strong className="font-medium text-gray-400 mr-1">Website Link</strong>
             <span className="block">
               <a href="https://www.example.com">www.example.com</a>
             </span>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Industry Type</strong>
+            <strong className="font-medium text-gray-400 mr-1">Industry Type</strong>
             <a href="industry:" className="block">
               IT Solutions
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Social Media</strong>
+            <strong className="font-medium text-gray-400 mr-1">Social Media</strong>
             <div className="flex">
               <img
                 src={getBasicIcon("Facebook")}
@@ -78,7 +78,7 @@ const CompanyProfile=()=>{
         </ul>
         <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
         <div className="py-1"></div>
-        <div className="flex items-center justify-between mt-2 ml-6">
+        <div className="flex items-center justify-between mt-2 ml-4">
           <h3 className="text-sm font-medium">ALL CONTACTS</h3>
         </div>
         <div className="py-3"></div>
@@ -89,7 +89,7 @@ const CompanyProfile=()=>{
           <li>
             <div className="flex items-center gap-x-3 mr-3">
               <img
-                className="h-12 w-16 rounded-full ml-5"
+                className="h-12 w-16 rounded-full ml-2"
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
               />
@@ -115,7 +115,7 @@ const CompanyProfile=()=>{
           <li>
             <div className="flex items-center gap-x-3 mr-3">
               <img
-                className="h-12 w-16 rounded-full ml-5"
+                className="h-12 w-16 rounded-full ml-2"
                 src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
               ></img>
@@ -141,7 +141,7 @@ const CompanyProfile=()=>{
           <li>
             <div className="flex items-center gap-x-3 mr-3">
               <img
-                className="h-12 w-16 rounded-full ml-5"
+                className="h-12 w-16 rounded-full ml-2"
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
               />
