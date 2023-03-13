@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import Tracker from "../conversation-tracker";
 import Transcript from "../Transcript/Transcript";
@@ -53,7 +54,7 @@ const Audio = () => {
           call data
         </h1>
         <div className="w-full flex items-center">
-          <img
+          <Image
             src="/Images/dots/Dot.svg"
             className="h-[18px] svg-ellipse-5 mr-[25px]"
             alt=""
@@ -61,7 +62,7 @@ const Audio = () => {
           <p className="text-[#304FFD] text-[14px]">Participant 1:John</p>
         </div>
         <div className="w-full flex items-center mt-[6px]">
-          <img
+          <Image
             src="/Images/dots/Dot.svg"
             className="h-[18px] svg-ellipse-6 mr-[25px]"
             alt=""

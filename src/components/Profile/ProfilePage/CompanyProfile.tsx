@@ -1,5 +1,6 @@
 import React from 'react'; 
 import { getBasicIcon } from '@/utils/AssetsHelper';
+import Image from 'next/image';
 
 const CompanyProfile=()=>{
 
@@ -24,9 +25,14 @@ const CompanyProfile=()=>{
               </a>
             </div>
             <div className="h-[100%] ml-auto " >
-              <img
+              <Image
                 src={getBasicIcon("Edit")}
                 className={`w-[20px] svg-grey ml-auto svg-not-selected mt-[9px]`}
+                width={20}
+                height={20}
+                style={{
+                  objectFit:"contain"
+                }}
                 alt="Edit"
               />
             </div>
@@ -63,15 +69,25 @@ const CompanyProfile=()=>{
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1">Social Media</strong>
             <div className="flex">
-              <img
+              <Image
                 src={getBasicIcon("Facebook")}
                 className={`w-[20px] svg-grey mr-2`}
                 alt=""
+                width={20}
+                height={20}
+                style={{
+                  objectFit:"contain"
+                }}
               />
-              <img
+              <Image
                 src={getBasicIcon("Twitter")}
                 className={`w-[20px] svg-grey`}
                 alt=""
+                width={20}
+                height={20}
+                style={{
+                  objectFit:"contain"
+                }}
               />
             </div>
           </li>
@@ -88,11 +104,16 @@ const CompanyProfile=()=>{
         >
           <li>
             <div className="flex items-center gap-x-3 mr-3">
-              <img
+              {/* <Image
                 className="h-12 w-16 rounded-full ml-5"
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
-              />
+                width={64}
+                height={48}
+                style={{
+                  objectFit:"contain"
+                }}
+              /> */}
               <div>
                 <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                   LeslieAlexander
@@ -114,11 +135,16 @@ const CompanyProfile=()=>{
         >
           <li>
             <div className="flex items-center gap-x-3 mr-3">
-              <img
+              {/* <Image
                 className="h-12 w-16 rounded-full ml-5"
                 src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
-              ></img>
+                width={64}
+                height={48}
+                style={{
+                  objectFit:"contain"
+                }}
+              ></Image> */}
               <div>
                 <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                   Reginacooper
@@ -140,11 +166,16 @@ const CompanyProfile=()=>{
         >
           <li>
             <div className="flex items-center gap-x-3 mr-3">
-              <img
+              {/* <Image
                 className="h-12 w-16 rounded-full ml-5"
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
-              />
+                width={64}
+                height={48}
+                style={{
+                  objectFit:"contain"
+                }}
+              /> */}
               <div>
                 <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                   Judith
