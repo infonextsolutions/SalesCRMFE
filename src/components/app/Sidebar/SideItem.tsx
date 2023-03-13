@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { RightArrow } from "@/utils/AssetsHelper";
+import Image from "next/image";
 
 const SideItem = ({ img, title, open, id, list, route }: any) => {
   const { pathname, push } = useRouter();
@@ -50,7 +51,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
         </>
       )}
       <div className={`flex items-center h-[40px] shrink-0 z-40`}>
-        <img
+        <Image
           src={img}
           alt=""
           className={`w-[30px] p-[6px] ml-[12px] mr-[12px] ${
@@ -58,6 +59,11 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           }`}
           onClick={() => {
             push(currentRoute);
+          }}
+          width={30}
+          height={30}
+          style={{
+            objectFit:"contain"
           }}
         />
         <p
@@ -101,12 +107,14 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
                     curr1 && "bg-[#e8e9eb]"
                   } flex items-center z-40 h-[40px] p-[5px] box-content`}
                 >
-                  <img
+                  <Image
                     src={"/Images/dots/Dot.svg"}
                     alt=""
                     className={`w-[20px] p-[6px] ml-[12px] mr-[18px] ${
                       curr1 ? "svg-selected" : "svg-not-selected"
                     }`}
+                    width={20}
+                    height={20}
                     onClick={() => {
                       push(`/${route}/${list[i].route}`);
                     }}

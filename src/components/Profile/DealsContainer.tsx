@@ -1,6 +1,7 @@
 import { getBasicIcon } from '@/utils/AssetsHelper';
 import React from 'react';
 import Navigator from '@/utils/customNavigator';
+import Image from 'next/image';
 
 const Deals=()=>{
 
@@ -38,49 +39,84 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
-                  <img
+                  <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
                     alt="Phone"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Attachment")}
                     className={`w-[17px] opacity-80`}
                     alt="Attachment"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">2</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Chat")}
                     className={`w-[17px] opacity-80`}
                     alt="Chat"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Mail")}
                     className={`w-[17px] opacity-80`}
                     alt="Mail"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Calendar")}
                     className={`w-[17px] opacity-80`}
                     alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Tasks")}
                     className={`w-[17px] opacity-80`}
                     alt="Tasks"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
                   
                 </div>
                 <div>
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -99,49 +135,84 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
-                  <img
+                  <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
                     alt="Phone"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Attachment")}
                     className={`w-[17px] opacity-80`}
                     alt="Attachment"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">2</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Chat")}
                     className={`w-[17px] opacity-80`}
                     alt="Chat"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Mail")}
                     className={`w-[17px] opacity-80`}
                     alt="Mail"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Calendar")}
                     className={`w-[17px] opacity-80`}
                     alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Tasks")}
                     className={`w-[17px] opacity-80`}
                     alt="Tasks"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
                   
                 </div>
                 <div>
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -160,49 +231,84 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
-                  <img
+                  <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
                     alt="Phone"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Attachment")}
                     className={`w-[17px] opacity-80`}
                     alt="Attachment"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">2</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Chat")}
                     className={`w-[17px] opacity-80`}
                     alt="Chat"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Mail")}
                     className={`w-[17px] opacity-80`}
                     alt="Mail"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Calendar")}
                     className={`w-[17px] opacity-80`}
                     alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Tasks")}
                     className={`w-[17px] opacity-80`}
                     alt="Tasks"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
                   
                 </div>
                 <div>
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -221,49 +327,84 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
-                  <img
+                  <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
                     alt="Phone"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Attachment")}
                     className={`w-[17px] opacity-80`}
                     alt="Attachment"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">2</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Chat")}
                     className={`w-[17px] opacity-80`}
                     alt="Chat"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Mail")}
                     className={`w-[17px] opacity-80`}
                     alt="Mail"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Calendar")}
                     className={`w-[17px] opacity-80`}
                     alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Tasks")}
                     className={`w-[17px] opacity-80`}
                     alt="Tasks"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
                   
                 </div>
                 <div>
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -294,49 +435,84 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
-                  <img
+                  <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
                     alt="Phone"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Attachment")}
                     className={`w-[17px] opacity-80`}
                     alt="Attachment"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">2</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Chat")}
                     className={`w-[17px] opacity-80`}
                     alt="Chat"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Mail")}
                     className={`w-[17px] opacity-80`}
                     alt="Mail"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Calendar")}
                     className={`w-[17px] opacity-80`}
                     alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Tasks")}
                     className={`w-[17px] opacity-80`}
                     alt="Tasks"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
                   
                 </div>
                 <div>
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -355,49 +531,84 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
-                  <img
+                  <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
                     alt="Phone"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Attachment")}
                     className={`w-[17px] opacity-80`}
                     alt="Attachment"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">2</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Chat")}
                     className={`w-[17px] opacity-80`}
                     alt="Chat"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Mail")}
                     className={`w-[17px] opacity-80`}
                     alt="Mail"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Calendar")}
                     className={`w-[17px] opacity-80`}
                     alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Tasks")}
                     className={`w-[17px] opacity-80`}
                     alt="Tasks"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
                   
                 </div>
                 <div>
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -416,49 +627,84 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
-                  <img
+                  <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
                     alt="Phone"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Attachment")}
                     className={`w-[17px] opacity-80`}
                     alt="Attachment"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">2</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Chat")}
                     className={`w-[17px] opacity-80`}
                     alt="Chat"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Mail")}
                     className={`w-[17px] opacity-80`}
                     alt="Mail"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Calendar")}
                     className={`w-[17px] opacity-80`}
                     alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Tasks")}
                     className={`w-[17px] opacity-80`}
                     alt="Tasks"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
                   
                 </div>
                 <div>
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -477,49 +723,84 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
-                  <img
+                  <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
                     alt="Phone"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Attachment")}
                     className={`w-[17px] opacity-80`}
                     alt="Attachment"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">2</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Chat")}
                     className={`w-[17px] opacity-80`}
                     alt="Chat"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Mail")}
                     className={`w-[17px] opacity-80`}
                     alt="Mail"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Calendar")}
                     className={`w-[17px] opacity-80`}
                     alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
-                  <img
+                  <Image
                     src={getBasicIcon("Tasks")}
                     className={`w-[17px] opacity-80`}
                     alt="Tasks"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                   <p className="text-[9px]">5</p>
                   
                 </div>
                 <div>
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -545,10 +826,15 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="w-[44%] flex justify-end">
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -564,10 +850,15 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="w-[44%] flex justify-end">
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
               </div>
@@ -583,10 +874,15 @@ const Deals=()=>{
                   <p>23 Jan 2023</p>
                 </div>
                 <div className="w-[44%] flex justify-end">
-                <img
+                <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
                     alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
                   />
                 </div>
                 </div>
