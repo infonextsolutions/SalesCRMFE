@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import {
   getBasicIcon,
@@ -17,7 +18,7 @@ const SmallButton = ({
   leftIcon,
   RightDblIcon,
   RightIcon,
-  click
+  click,
 }: ButtonProps) => {
   const Theme =
     theme === 1
@@ -31,11 +32,21 @@ const SmallButton = ({
     <div
       className={`h-[40px] w-[40px] ${Theme} rounded-xl ml-[${
         left ? left : 0
-      }px] mr-[${right ? right : 0}px] flex items-center justify-center cursor-pointer`}
+      }px] mr-[${
+        right ? right : 0
+      }px] flex items-center justify-center cursor-pointer`}
       onClick={click}
     >
-      {icon && <img src={getBasicIcon(icon)} alt="" />}
-      {text && <p className={`${theme===1?"":"text-[#3F434A]"}`} >{text}</p>}
+      {icon && <Image src={getBasicIcon(icon)} alt="" 
+        width={18}
+        height={16}
+        style={{
+          objectFit: "contain",
+        }}
+      />}
+      {text && (
+        <p className={`${theme === 1 ? "" : "text-[#3F434A]"}`}>{text}</p>
+      )}
       {leftDblIcon && <LeftDoubleArrow />}
       {leftIcon && <LeftArrow />}
       {RightDblIcon && <RightArrow renal={true} />}
@@ -60,5 +71,5 @@ interface ButtonProps {
   leftDblIcon?: Boolean;
   RightIcon?: Boolean;
   RightDblIcon?: Boolean;
-  click?:()=>{}
+  click?: () => {};
 }

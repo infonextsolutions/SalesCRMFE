@@ -97,40 +97,40 @@ const CallItemMultiple = ({
   );
 };
 
-const QuickActions = ({ width, left }: any) => {
-  return (
-    <div
-      className={`flex  h-[18px] item-center shrink-0`}
-      style={{ width: width, marginLeft: left }}
-    >
-      <img
-        src={getBasicIcon("Phone")}
-        alt=""
-        className="mr-[4px] cursor-pointer"
-      />
-      <img
-        src={getBasicIcon("Mail")}
-        alt=""
-        className="mr-[4px] cursor-pointer"
-      />
-      <img
-        src={getBasicIcon("Calendar")}
-        alt=""
-        className="mr-[4px] cursor-pointer"
-      />
-      <img
-        src={getBasicIcon("Tasks")}
-        alt=""
-        className="mr-[4px] cursor-pointer"
-      />
-      <img
-        src={getBasicIcon("Chat")}
-        alt=""
-        className="mr-[4px] cursor-pointer"
-      />
-    </div>
-  );
-};
+// const QuickActions = ({ width, left }: any) => {
+//   return (
+//     <div
+//       className={`flex  h-[18px] item-center shrink-0`}
+//       style={{ width: width, marginLeft: left }}
+//     >
+//       <img
+//         src={getBasicIcon("Phone")}
+//         alt=""
+//         className="mr-[4px] cursor-pointer"
+//       />
+//       <img
+//         src={getBasicIcon("Mail")}
+//         alt=""
+//         className="mr-[4px] cursor-pointer"
+//       />
+//       <img
+//         src={getBasicIcon("Calendar")}
+//         alt=""
+//         className="mr-[4px] cursor-pointer"
+//       />
+//       <img
+//         src={getBasicIcon("Tasks")}
+//         alt=""
+//         className="mr-[4px] cursor-pointer"
+//       />
+//       <img
+//         src={getBasicIcon("Chat")}
+//         alt=""
+//         className="mr-[4px] cursor-pointer"
+//       />
+//     </div>
+//   );
+// };
 
 const CallContainer = ({
   id,

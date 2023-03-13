@@ -1,4 +1,4 @@
-export default  {
+const dummy= {
   result: [
     {
       _id: "6401bf5364a3505cad2ebe7b",
@@ -403,3 +403,5 @@ export default  {
     }
   ]
 }
+
+export default dummy;
