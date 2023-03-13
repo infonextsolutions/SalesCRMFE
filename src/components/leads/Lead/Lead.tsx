@@ -1,5 +1,6 @@
 import Lead, { CompanyId, CustomerId } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -103,30 +104,55 @@ const QuickActions = ({ width, left }: any) => {
       className={`flex  h-[18px] item-center shrink-0`}
       style={{ width: width, marginLeft: left }}
     >
-      <img
+      <Image
         src={getBasicIcon("Phone")}
         alt=""
         className="mr-[4px] cursor-pointer"
+        width={25}
+        height={25}
+        style={{
+          objectFit:"contain"
+        }}
       />
-      <img
+      <Image
         src={getBasicIcon("Mail")}
         alt=""
+        width={25}
+        height={25}
+        style={{
+          objectFit:"contain"
+        }}
         className="mr-[4px] cursor-pointer"
       />
-      <img
+      <Image
         src={getBasicIcon("Calendar")}
         alt=""
         className="mr-[4px] cursor-pointer"
+        width={25}
+        height={25}
+        style={{
+          objectFit:"contain"
+        }}
       />
-      <img
+      <Image
         src={getBasicIcon("Tasks")}
         alt=""
         className="mr-[4px] cursor-pointer"
+        width={25}
+        height={25}
+        style={{
+          objectFit:"contain"
+        }}
       />
-      <img
+      <Image
         src={getBasicIcon("Chat")}
         alt=""
         className="mr-[4px] cursor-pointer"
+        width={25}
+        height={25}
+        style={{
+          objectFit:"contain"
+        }}
       />
     </div>
   );
