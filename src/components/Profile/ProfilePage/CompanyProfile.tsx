@@ -14,7 +14,7 @@ const CompanyProfile=()=>{
           {/* <div className="flex items-center justify-between"></div> */}
           <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
             <div className="ml-auto">
-            <img
+            <Image
               className="inline-block w-[60px] rounded-full ring-2 ring-white"
               src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
