@@ -22,8 +22,8 @@ const ClientPocProfile = () => {
                 objectFit: "contain",
               }}
             /> */}
-            <div className="ml-3">
-              <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900">
+            <div className="ml-3 text-bold">
+              <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-bold">
                 Leslie Alexander
               </h2>
               <a
@@ -49,7 +49,7 @@ const ClientPocProfile = () => {
         </div>
         {/* <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div> */}
         <div className="py-2"></div>
-        <h3 className="text-sm font-medium mt-5 ml-6">INFO</h3>
+        <h3 className="text-sm font-medium text-black mt-5 ml-6">INFO</h3>
         <ul className="mt-2 mb-10 ml-4">
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1 text-black ">Phone</strong>
@@ -64,11 +64,11 @@ const ClientPocProfile = () => {
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Location</strong>
+            <strong className="font-medium text-black mr-1">Location</strong>
             <span className="block">Seoul, South Korea</span>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Social Media</strong>
+            <strong className="font-medium text-black mr-1">Social Media</strong>
             <div className="flex">
               <Image
                 src={getBasicIcon("Instagram")}
@@ -95,34 +95,34 @@ const ClientPocProfile = () => {
         </ul>
         <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
         <div className="py-1"></div>
-        <h3 className="text-sm font-medium mt-5 ml-6">COMPANY INFO</h3>
+        <h3 className="text-sm font-medium mt-5 text-black ml-6">COMPANY INFO</h3>
         <ul className="mt-2 mb-10 ml-4">
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Company Name</strong>
+            <strong className="font-medium text-black mr-1">Company Name</strong>
             <a href="name" className="block">
               XYZ
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Comapny Address</strong>
+            <strong className="font-medium text-black  mr-1">Comapny Address</strong>
             <a href="address:" className="block">
               nothing
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Website Link</strong>
+            <strong className="font-medium text-black mr-1">Website Link</strong>
             <span className="block">
               <a href="https://www.example.com">www.example.com</a>
             </span>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Industry Type</strong>
+            <strong className="font-medium text-black mr-1">Industry Type</strong>
             <a href="industry:" className="block">
               IT Solutions
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1">Social Media</strong>
+            <strong className="font-medium text-black mr-1">Social Media</strong>
             <div className="flex">
               <Image
                 src={getBasicIcon("Facebook")}
@@ -150,7 +150,7 @@ const ClientPocProfile = () => {
         <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
         <div className="py-1"></div>
         <div className="flex items-center justify-between mt-2 ml-6">
-          <h3 className="text-sm font-medium">OTHER CONTACTS</h3>
+          <h3 className="text-sm text-black font-medium">OTHER CONTACTS</h3>
           <Image
             src={getBasicIcon("Plus")}
             className="w-5 h-5 ml-2 mr-2"

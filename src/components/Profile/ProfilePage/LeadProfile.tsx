@@ -47,34 +47,34 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className="py-1"></div>
-      <h3 className="text-sm font-medium mt-5 ml-2">COMPANY INFO</h3>
+      <h3 className="text-sm font-medium mt-5 ml-2 text-black">COMPANY INFO</h3>
       <ul className="mt-2 mb-10 ml-[1px]">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Company Name</strong>
+          <strong className="font-medium mr-1 text-black">Company Name</strong>
           <a href="name" className="block">
             XYZ
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Company Address</strong>
+          <strong className="font-medium mr-1 text-black">Company Address</strong>
           <a href="address:" className="block">
             nothing
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Website Link</strong>
+          <strong className="font-medium mr-1 text-black">Website Link</strong>
           <span className="block">
             <a href="https://www.example.com">www.example.com</a>
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Industry Type</strong>
+          <strong className="font-medium mr-1 text-black">Industry Type</strong>
           <a href="industry:" className="block">
             IT Solutions
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Social Media</strong>
+          <strong className="font-medium mr-1 text-black">Social Media</strong>
           <div className="flex">
             <Image
               src={getBasicIcon("Facebook")}
@@ -101,46 +101,46 @@ const ProfilePage = () => {
       </ul>
       <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
       <div className="py-1"></div>
-      <h3 className="text-sm font-medium mt-5 ml-3">LEAD INFO</h3>
+      <h3 className="text-sm font-medium mt-5 ml-3 text-black">LEAD INFO</h3>
       <ul className="mt-2 mb-10 ml-1">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Lead Stage</strong>
+          <strong className="font-medium mr-1 text-black">Lead Stage</strong>
           <a href="name" className="block">
             XYZ
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Lead Source</strong>
+          <strong className="font-medium mr-1 text-black">Lead Source</strong>
           <a href="address:" className="block">
             nothing
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Lead Owner(primary)</strong>
+          <strong className="font-medium mr-1 text-black">Lead Owner(primary)</strong>
           <span className="block">
             <a href="Leadowner">Aarti.S</a>
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Lead Owner(secondary)</strong>
+          <strong className="font-medium mr-1 text-black">Lead Owner(secondary)</strong>
           <a href="leadowner" className="block">
             Raghav V.
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Lead Created By</strong>
+          <strong className="font-medium mr-1 text-black">Lead Created By</strong>
           <a href="leadowner" className="block">
             -
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Lead Updated on</strong>
+          <strong className="font-medium mr-1 text-black">Lead Updated on</strong>
           <a href="leadowner" className="block">
             26 January 2023 4:55 PM
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Activity History</strong>
+          <strong className="font-medium mr-1 text-black">Activity History</strong>
         </li>
         <div
           className={`flex h-[20px] items-center justify-between mt-[5px] px-2 shrink-0`}
@@ -215,15 +215,15 @@ const ProfilePage = () => {
       </ul>
       <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
       <div className="py-1"></div>
-      <h3 className="text-sm font-medium mt-5 ml-3">PRIMARY CLIENT POC</h3>
+      <h3 className="text-sm font-medium mt-5 ml-3 text-black">PRIMARY CLIENT POC</h3>
       <div className="flex items-center w-[100%] pb-[30px] pt-[20px] ">
         {/* <Image
-          className="inline-block w-[50px] rounded-full ring-2 ring-white"
+          className="inline-block w-[55px] rounded-full ring-2 ring-white"
           src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
           alt=""
         /> */}
         <div className="ml-3">
-          <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900">
+          <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900 font-medium">
             Sharddha P
           </h2>
           <a
@@ -234,10 +234,10 @@ const ProfilePage = () => {
           </a>
         </div>
       </div>
-      <h3 className="text-sm font-medium mt-1 ml-2">INFO</h3>
+      <h3 className="text-sm font-medium mt-1 ml-2 text-black">INFO</h3>
       <ul className="mt-2 mb-10 ml-auto">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black ">GENDER</strong>
+          <strong className="font-medium mr-1 text-black">GENDER</strong>
           <a href="tel:+821023456789" className="block">
             Female
           </a>
@@ -249,11 +249,11 @@ const ProfilePage = () => {
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Location</strong>
+          <strong className="font-medium mr-1 text-black">Location</strong>
           <span className="block">Seoul, South Korea</span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1">Social Media</strong>
+          <strong className="font-medium mr-1 text-black">Social Media</strong>
           <div className="flex">
             <Image
               src={getBasicIcon("Instagram")}
@@ -281,7 +281,7 @@ const ProfilePage = () => {
       <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
       <div className="py-1"></div>
       <div className="flex items-center justify-between mt-2 ml-3">
-        <h3 className="text-sm font-medium">OTHER CONTACTS</h3>
+        <h3 className="text-sm font-medium text-black">OTHER CONTACTS</h3>
         <Image
           src={getBasicIcon("Plus")}
           className="w-5 h-5 ml-2 mr-2"
