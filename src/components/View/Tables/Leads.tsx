@@ -7,16 +7,18 @@ import Header from "../../leads/Header/Header";
 import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import { getBasicIcon, LeftArrow, LeftDoubleArrow, RightArrow } from "@/utils/AssetsHelper";
-const LeadsTable = ({ totalRecords:any }: TableProps) => {
-  // console.log(AllLeads);
-  const [pageCount,setpageCount]:any = useState([]);
+const LeadsTable = ({ totalRecords }: TableProps) => {
+  // console.log(totalRecords);
+  const totalLeads = totalRecords;
+  const [pageCount,setpageCount]:any = useState(0);
   const [pageNumber,setpageNumber] :any = useState(0);
   const [limit,setLimit] :any = useState(10);
   // setpageCount(totalRecords);
   const [items,setItems]:any = useState([]);
   
   useEffect(()=>{
-
+    if(pageNumber>=pageCount&&pageCount!=0) setpageNumber(pageCount-1);
+    // console.log(`pageNumber is ${pageNumber}`);
     const getItems = async () =>{
       const res = await fetch(
         `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${pageNumber}`
@@ -25,11 +27,17 @@ const LeadsTable = ({ totalRecords:any }: TableProps) => {
       // console.log(data);
       
       setItems(data);
-      setpageCount(Math.ceil(items.totalRecords/limit));
+      // console.log(data);
+      // console.log(`total records is ${items.totalRecords} and limit is ${limit}`);
+      var count = Math.ceil(Number(totalRecords)/limit);
+      // console.log(`count is ${count}`);
+      setpageCount(count); 
+      // if(pageCount==0) setpageCount(7);
+      // console.log(`page count is ${pageCount}`);
     }
 
     getItems();
-  },[limit])
+  },[limit,pageNumber])
 
   // console.log(items.result);
   const fetchItems = async (current:any) =>{
@@ -140,7 +148,7 @@ const LeadsTable = ({ totalRecords:any }: TableProps) => {
               }}
             />}
           breakLabel={'...'}
-          pageCount={pageCount}
+          pageCount={pageCount==0?7:pageCount}
           marginPagesDisplayed={2}
           pageRangeDisplayed={0}
           onPageChange={handlePageClick}   
