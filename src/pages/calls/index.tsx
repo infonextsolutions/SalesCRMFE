@@ -5,7 +5,7 @@ import CallsTable from "@/components/View/Tables/Calls";
 import Table from "@/components/View/Tables/Leads";
 import DUMMY from "@/shared/dummy";
 import React from "react";
-
+import axios from "axios";
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -115,6 +115,19 @@ const Calls = () => {
       </LeadsContainer>
     </div>
   );
-};
+}
+export async function getServerSideProps({ query, ...params }: any) {
+  console.log(params.limit, params.page);
+  const response = await axios.get(
+    "https://testsalescrm.nextsolutions.in/api/recordings/find-all"
+  );
+  console.log(response.data,"only check this!");
+  return {
+    props: {
+      // TODO: Can do better error handling here by passing another property error in the component
+      data: response.data || {},
+    }, // will be passed to the page component as props
+  };
+}
 
-export default Calls;
+
