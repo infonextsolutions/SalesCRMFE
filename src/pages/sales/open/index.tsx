@@ -107,7 +107,7 @@ export default function Open({data}:any) {
       />
       <LeadsContainer>
         {!view ? (
-          <Table result={data.result} totalRecords={data.totalRecords} />
+          <Table totalRecords={data.totalRecords} />
         ) : (
           <KanbanContainer list={Dummy} />
         )}
