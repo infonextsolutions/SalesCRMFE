@@ -7,31 +7,36 @@ import Header from "../../leads/Header/Header";
 import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import { getBasicIcon, LeftArrow, LeftDoubleArrow, RightArrow } from "@/utils/AssetsHelper";
+import axios from "axios";
 const LeadsTable = ({ totalRecords }: TableProps) => {
   // console.log(totalRecords);
-  const totalLeads = totalRecords;
   const [pageCount,setpageCount]:any = useState(0);
   const [pageNumber,setpageNumber] :any = useState(0);
   const [limit,setLimit] :any = useState(10);
-  // setpageCount(totalRecords);
   const [items,setItems]:any = useState([]);
   
   useEffect(()=>{
-    if(pageNumber>=pageCount&&pageCount!=0) setpageNumber(pageCount-1);
-    // console.log(`pageNumber is ${pageNumber}`);
+    const count = Math.ceil(Number(totalRecords)/limit);
+      // console.log(`count is ${count}`);
+      setpageCount(count);
+    // console.log(count);
+    // console.log(`pageNumber is ${pageNumber} and pageCount is ${pageCount}`);
+    if(pageNumber>=count&&pageCount!=0) setpageNumber(0);
+    // console.log(`pageNumber is ${pageNumber} and pageCount is ${pageCount}`);
     const getItems = async () =>{
-      const res = await fetch(
+      // const res = await fetch(
+      //   `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${pageNumber}`
+      // );
+      const res = await axios.get(
         `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${pageNumber}`
       );
-      const data = await res.json();
+      // const data = await res.json();
       // console.log(data);
       
-      setItems(data);
+      setItems(res.data.result);
       // console.log(data);
       // console.log(`total records is ${items.totalRecords} and limit is ${limit}`);
-      var count = Math.ceil(Number(totalRecords)/limit);
-      // console.log(`count is ${count}`);
-      setpageCount(count); 
+       
       // if(pageCount==0) setpageCount(7);
       // console.log(`page count is ${pageCount}`);
     }
@@ -41,11 +46,15 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
 
   // console.log(items.result);
   const fetchItems = async (current:any) =>{
-    const res = await fetch(
+    // const res = await fetch(
+    //   `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
+    // );
+    const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
     );
-    const data = await res.json();
-    return data;
+    // console.log(res.data,"only check this!");
+    // const data = await res.json();
+    return res.data.result;
   }
 
   const handleChange = (e:any) =>{
@@ -71,7 +80,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     setItems(allItems);
 
   }
-  const Leads = items.result;
+  const Leads = items;
   // console.log(Leads);
   return (
     <>
@@ -101,7 +110,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
           <option value="13">13</option>
           </select>
           <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-            {`Showing 1-${limit} of ${items.totalRecords}`}
+            {`Showing 1-${limit} of ${totalRecords}`}
           </p>
         </div>
         <div className="flex justify-center my-[45px] ">
@@ -153,7 +162,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
           pageRangeDisplayed={0}
           onPageChange={handlePageClick}   
           containerClassName={'text-black flex justify-center gap-[8px]'}  
-          pageClassName={'px-[15px] py-[8px] text-[15px] text-[#3F434A]'}
+          pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
           pageLinkClassName={``}
           previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber===0?'bg-[#f5f5f5]':'bg-[#e8ebfd]'}`}
           previousLinkClassName={`flex justify-center ${pageNumber!=0?'text-[#304FFD]':'cursor-auto'}`}
@@ -161,22 +170,23 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
           nextLinkClassName={`flex justify-center ${pageNumber===pageCount-1?'cursor-auto':''}`}
           breakClassName={''}
           breakLinkClassName={''}
-          activeClassName={'bg-renal-blue text-[#fff] rounded-[10px]'}
+          forcePage={pageNumber}
+          activeClassName={`bg-renal-blue text-[#fff] rounded-[10px]`}
           />
           <div 
-          className={`flex justify-center ml-[8px] h-[40px] w-[40px] cursor-pointer rounded-[10px] ${pageNumber===0?'bg-[#f5f5f5]':'bg-[#e8ebfd]'}`}
+          className={`flex justify-center ml-[8px] h-[40px] w-[40px] cursor-pointer rounded-[10px] ${pageNumber===pageCount-1?'bg-[#f5f5f5]':'bg-[#e8ebfd]'}`}
           onClick={setLastPage}
           >
             <Image
               src={getBasicIcon("Arrow-Right 2")}
-              className={`${pageNumber!=0?"svg-blue":''} translate-x-[6px]`}
+              className={`${pageNumber!=pageCount-1?"svg-blue":''} translate-x-[6px]`}
               alt=""
               width={18}
               height={18}
             />
             <Image
               src={getBasicIcon("Arrow-Right 2")}
-              className={`${pageNumber!=0?"svg-blue":''} translate-x-[-6px]`}
+              className={`${pageNumber!=pageCount-1?"svg-blue":''} translate-x-[-6px]`}
               alt=""
               width={18}
               height={18}
