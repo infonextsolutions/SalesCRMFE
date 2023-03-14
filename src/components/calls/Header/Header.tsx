@@ -37,7 +37,7 @@ const Header = () => {
         <HeaderItem width={130} left={20} text={"CALL ID"} />
         <HeaderItem width={130} left={20} text={"CALL title"} />
         <HeaderItem width={150} left={10} text={"lead id"} />
-        <HeaderItem width={120} left={10} text={"custom name"} />
+        <HeaderItem width={120} left={10} text={"Customer name"} />
         <HeaderItem width={120} left={20}  text={"participants"}  />
         <HeaderItem width={100} left={20} text={"call owner"} />
         <HeaderItem width={130} left={20} text={"call date-time"} />

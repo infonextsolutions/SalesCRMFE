@@ -179,9 +179,9 @@ const LeadContainer = ({
           bottomText={company.company_location}
           bold={true}
           click={true}
-          route={`${pathname}/${id}/lead-profile`}
+          route={`${pathname}/${id}/company-profile`}
         />
-        <LeadItem width={150} left={10}  text={custom} click={true} route={`${pathname}/${id}/company-profile`} />
+        <LeadItem width={150} left={10}  text={custom} click={true} route={`${pathname}/${id}/lead-profile`} />
         <LeadItem width={110} left={10} text={customer.name} click={true} route={`${pathname}/${id}/client-poc-profile`}  />
         <QuickActions width={120} />
         <LeadItem width={150} left={20} text={customer.email} />
