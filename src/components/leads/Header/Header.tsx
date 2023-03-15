@@ -35,7 +35,7 @@ const Header = () => {
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
         <HeaderCheckBox width={30} />
         <HeaderItem width={130} left={20} text={"COMPANY NAME"} />
-        <HeaderItem width={150} left={10} text={"custom name"} />
+        <HeaderItem width={150} left={10} text={"Customer name"} />
         <HeaderItem width={110} left={10} text={"CLIENT POC"} />
         <HeaderItem width={120}  text={"Quick Actions"}  />
         <HeaderItem width={150} left={20} text={"EMAIL"} />

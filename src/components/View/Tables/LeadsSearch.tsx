@@ -13,8 +13,7 @@ import {
   RightArrow,
 } from "@/utils/AssetsHelper";
 import axios from "axios";
-const LeadsTable = ({ totalRecords }: TableProps) => {
-  // console.log(totalRecords);
+const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -22,44 +21,53 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
 
   useEffect(() => {
     const count = Math.ceil(Number(totalRecords) / limit);
-    // console.log(`count is ${count}`);
     setpageCount(count);
-    // console.log(count);
-    // console.log(`pageNumber is ${pageNumber} and pageCount is ${pageCount}`);
     if (pageNumber >= count && pageCount != 0) setpageNumber(0);
-    // console.log(`pageNumber is ${pageNumber} and pageCount is ${pageCount}`);
     const getItems = async () => {
-      // const res = await fetch(
-      //   `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${pageNumber}`
-      // );
       const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${pageNumber}`
+        `https://testsalescrm.nextsolutions.in/api/leads/find-all`
       );
-      // const data = await res.json();
-      // console.log(data);
+      console.log(res, "only check here");
+      const data = res.data.result;
 
-      setItems(res.data.result);
-      // console.log(data);
-      // console.log(`total records is ${items.totalRecords} and limit is ${limit}`);
+      const filtered = data.filter(
+        (e: Lead) =>
+          e.companyId.company_name.includes(search) ||
+          e.customerId.contact.includes(search) ||
+          e.potential_deal_size.includes(search) ||
+          e.leadStatus.includes(search) ||
+          e.leadStage.includes(search) ||
+          e.customerId.email.includes(search) ||
+          e.companyId.company_website_url.includes(search)
+      );
 
-      // if(pageCount==0) setpageCount(7);
-      // console.log(`page count is ${pageCount}`);
+      console.log(filtered);
+      console.log(data, search);
+      setpageCount(filtered.length / limit);
+      setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
     };
 
     getItems();
-  }, [limit, pageNumber]);
+  }, [limit, pageNumber, search]);
 
-  // console.log(items.result);
   const fetchItems = async (current: any) => {
-    // const res = await fetch(
-    //   `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
-    // );
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
     );
-    // console.log(res.data,"only check this!");
-    // const data = await res.json();
-    return res.data.result;
+    const data = res.data.result;
+    const filtered = data
+      .filter(
+        (e: Lead) =>
+          e.companyId.company_name.includes(search) ||
+          e.customerId.contact.includes(search) ||
+          e.potential_deal_size.includes(search) ||
+          e.leadStatus.includes(search) ||
+          e.leadStage.includes(search) ||
+          e.customerId.email.includes(search) ||
+          e.companyId.company_website_url.includes(search)
+      )
+      .slice(current * limit, current * limit + limit);
+    return filtered;
   };
 
   const handleChange = (e: any) => {
@@ -79,7 +87,6 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     setItems(allItems);
   };
   const handlePageClick = async (data: any) => {
-    // console.log(data.selected);
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
@@ -87,7 +94,6 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     setItems(allItems);
   };
   const Leads = items;
-  // console.log(Leads);
   return (
     <>
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
@@ -284,5 +290,5 @@ interface TableProps {
   totalRecords: Number;
   [key: string]: any;
   icon?: String;
-  search?:String;
+  search: String | any;
 }

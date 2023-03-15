@@ -44,7 +44,7 @@ const Dummy = [
   { id: 18, type: "Dead",data:dummyItem },
 ];
 
-export default function Home() {
+export default function Home({data}:any) {
   const [view, setView] = React.useState(false);
 
   const viewButtinClick = (prev: Number, current: Number) => {
@@ -112,13 +112,7 @@ export default function Home() {
           },
         ]}
       />
-      <LeadsContainer>
-        {!view ? (
-          <Table result={DUMMY.result} totalRecords={DUMMY.totalRecords} />
-        ) : (
-          <KanbanContainer list={Dummy} />
-        )}
-      </LeadsContainer>
+      <LeadsContainer view={view} records={data.totalRecords} list={Dummy}  />
     </div>
   );
 }
@@ -132,7 +126,7 @@ export async function getServerSideProps({ query, ...params }: any) {
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component
-      data: {},
+      data: response.data || {},
     }, // will be passed to the page component as props
   };
 }
