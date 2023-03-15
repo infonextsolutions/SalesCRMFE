@@ -1,11 +1,12 @@
 import Navigation from "@/components/app/Navigation";
-import LeadsContainer from "@/components/leads/Container";
+import CallsContainer from "@/components/calls/Container/Container";
 import Kanban from "@/components/View/Kanban";
 import CallsTable from "@/components/View/Tables/Calls";
 import Table from "@/components/View/Tables/Leads";
 import DUMMY from "@/shared/dummy";
 import React from "react";
 import axios from "axios";
+import dummy from "@/shared/dummy";
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -106,13 +107,7 @@ const Calls = () => {
           },
         ]}
       />
-      <LeadsContainer>
-        {!view ? (
-          <CallsTable result={DUMMY.result} totalRecords={DUMMY.totalRecords} />
-        ) : (
-          <Kanban list={Dummy} />
-        )}
-      </LeadsContainer>
+      <CallsContainer dummy1={DUMMY} dummy2={dummy} view={view} />
     </div>
   );
 }
