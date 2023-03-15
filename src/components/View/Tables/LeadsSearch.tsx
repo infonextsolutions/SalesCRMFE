@@ -41,6 +41,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           e.companyId.company_website_url.includes(search)
       );
 
+      // const filtered = data;
       console.log(filtered);
       console.log(data, search);
       setpageCount(filtered.length / limit);

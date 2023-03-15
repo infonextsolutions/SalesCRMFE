@@ -4,6 +4,7 @@ import ButtonDropDown from "@/utils/Button/Button";
 import React, { useState } from "react";
 import Search from "../Search/Search";
 import KanbanContainer from "@/components/View/Kanban";
+import { useSelector } from "react-redux";
 
 const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   const [search, setSearch] = useState("");
@@ -13,14 +14,17 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     setSearch(val);
   };
 
+  const state = useSelector((state:any)=>state.auth)
+
   return (
     <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] overflow-hidden mb-[40px]">
       <div className="w-[100%] h-[58px] flex items-center  px-[8px]">
         <Search change={onChange} />
+        {state.admin&&
         <ButtonDropDown
-          light={true}
-          text={"Actions"}
-          border={true}
+        light={true}
+        text={"Actions"}
+        border={true}
           id={1}
           dropdown={true}
           list={[
@@ -30,7 +34,8 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
             { title: "Delete Lead", Icon: "CSV" },
             { title: "Active/InActive Lead", Icon: "CSV" },
           ]}
-        />
+          />
+        }
       </div>
       {!view ? (
         <LeadsTable totalRecords={records} search={search} />

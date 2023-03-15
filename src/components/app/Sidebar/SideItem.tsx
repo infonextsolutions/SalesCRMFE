@@ -50,7 +50,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           />
         </>
       )}
-      <div className={`flex items-center h-[40px] shrink-0 z-40`}>
+      <div className={`flex items-center h-[40px] shrink-0 z-30`}>
         <Image
           src={img}
           alt=""

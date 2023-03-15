@@ -2,7 +2,9 @@ import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/Container";
 import Table from "@/components/View/Tables/Leads";
 import axios from "axios";
+import { useRouter } from "next/router";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const dummyItem={
   companyName:"ABC Corp",
@@ -53,6 +55,13 @@ export default function Open({data}:any) {
       setView(false);
     }
   };
+  const state = useSelector((state:any)=>state.auth)
+  const router = useRouter();
+  React.useEffect(()=>{
+      if(!state.isLoggedIn){
+        router.replace("/login");
+      }
+  })
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
