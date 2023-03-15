@@ -3,7 +3,6 @@ import LeadsContainer from "@/components/leads/Container";
 import Table from "@/components/View/Tables/Leads";
 import axios from "axios";
 import React from "react";
-import KanbanContainer from "@/components/View/Kanban";
 
 const dummyItem={
   companyName:"ABC Corp",
@@ -105,13 +104,8 @@ export default function Open({data}:any) {
           },
         ]}
       />
-      <LeadsContainer>
-        {!view ? (
-          <Table totalRecords={data.totalRecords} />
-        ) : (
-          <KanbanContainer list={Dummy} />
-        )}
-      </LeadsContainer>
+      <LeadsContainer view={view} records={data.totalRecords} list={Dummy}  />
+      
     </div>
   );
 }
