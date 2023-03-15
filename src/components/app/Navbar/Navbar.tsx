@@ -36,7 +36,7 @@ const Navbar = () => {
           height={40}
         />
         <Image
-          src={getBasicIcon("Bell + Notification")}
+          src={getBasicIcon("Bell-Notification")}
           className="pt-[7px] pb-[7px] cursor-pointer "
           alt=""
           // fill={true}

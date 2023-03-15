@@ -47,7 +47,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     };
 
     getItems();
-  }, [limit, pageNumber]);
+  }, [limit, pageNumber,pageCount,totalRecords]);
 
   // console.log(items.result);
   const fetchItems = async (current: any) => {
