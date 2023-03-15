@@ -2,9 +2,17 @@ import React from "react";
 import { getBasicIcon } from "../../utils/AssetsHelper";
 import Button, { ButtonProps } from "@/utils/Button/Button";
 import Image from "next/image";
+import axios from "axios";
 
 const Kanban = ({ list }: KanbasProps) => {
   // console.log(list);
+  const fetchItems = async () =>{
+    const res = await axios.get(
+      `https://testsalescrm.nextsolutions.in/api/leads/find-all`
+    );
+    console.log(res.data,"only check this!");
+  }
+  fetchItems();
   const leads = ["enquiry", "interaction", "proposal", "win", "Lost", "Dead"];
   const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WIN", "LOST", "DEAD"];
   return (
