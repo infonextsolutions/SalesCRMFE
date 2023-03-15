@@ -29,13 +29,21 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       );
       console.log(res, "only check here");
       const data = res.data.result;
-    
-  const filtered = data
-        .filter((e: Lead) => e.companyId.company_name.includes(search))
-        
+
+      const filtered = data.filter(
+        (e: Lead) =>
+          e.companyId.company_name.includes(search) ||
+          e.customerId.contact.includes(search) ||
+          e.potential_deal_size.includes(search) ||
+          e.leadStatus.includes(search) ||
+          e.leadStage.includes(search) ||
+          e.customerId.email.includes(search) ||
+          e.companyId.company_website_url.includes(search)
+      );
+
       console.log(filtered);
       console.log(data, search);
-      setpageCount(filtered.length/limit)
+      setpageCount(filtered.length / limit);
       setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
     };
 
@@ -48,7 +56,16 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     );
     const data = res.data.result;
     const filtered = data
-      .filter((e: Lead) => e.companyId.company_name.includes(search))
+      .filter(
+        (e: Lead) =>
+          e.companyId.company_name.includes(search) ||
+          e.customerId.contact.includes(search) ||
+          e.potential_deal_size.includes(search) ||
+          e.leadStatus.includes(search) ||
+          e.leadStage.includes(search) ||
+          e.customerId.email.includes(search) ||
+          e.companyId.company_website_url.includes(search)
+      )
       .slice(current * limit, current * limit + limit);
     return filtered;
   };
