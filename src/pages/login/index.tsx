@@ -20,7 +20,7 @@ const Login = () => {
       dispatch(setLoggedInStatus(true));
       router.push("/sales/open");
     }else if(user==="User@gmail.com" && pass==="1234"){
-      dispatch(setUser1({_id:1,User:user,admin:true}));
+      dispatch(setUser1({_id:1,User:user,admin:false}));
       dispatch(setLoggedInStatus(true));
       router.push("/sales/open");
     }
