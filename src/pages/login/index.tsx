@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { getBasicIcon } from "@/utils/AssetsHelper";
-import { Main } from "next/document";
+
 
 const Login=()=>{
 
