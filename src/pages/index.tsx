@@ -59,7 +59,7 @@ export default function Home({data}:any) {
   const router = useRouter();
 
   React.useEffect(()=>{
-    router.push("/sales/open")
+    router.push("/login");
   })
 
   return (

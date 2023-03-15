@@ -3,6 +3,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const LeadBox = ({ width }: any) => {
   return (
@@ -168,6 +169,8 @@ const LeadContainer = ({
   LeadData,
 }: LeadProps) => {
   const {pathname} = useRouter();
+  const state = useSelector((state:any)=>state.auth);
+  console.log(state.admin);
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
@@ -181,7 +184,7 @@ const LeadContainer = ({
           click={true}
           route={`${pathname}/${id}/company-profile`}
         />
-        <LeadItem width={150} left={10}  text={custom} click={true} route={`${pathname}/${id}/lead-profile`} />
+        <LeadItem width={150} left={10}  text={custom} click={state.admin} route={`${pathname}/${id}/lead-profile`} />
         <LeadItem width={110} left={10} text={customer.name} click={true} route={`${pathname}/${id}/client-poc-profile`}  />
         <QuickActions width={120} />
         <LeadItem width={150} left={20} text={customer.email} />
