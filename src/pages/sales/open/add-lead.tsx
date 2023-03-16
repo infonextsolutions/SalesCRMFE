@@ -16,48 +16,48 @@ export default function Open({data}:any) {
   return (
     <div className="w-[100%] min-h-[90vh] px-[40px]">
         <Navigation
-        title={"Sales-Manage>Leads"}
+        title={"Sales-Manage>Add-Lead"}
         buttons={[
-          {
-            text: "View",
-            dropdown: true,
-            id: 0,
-            light: false,
-            list: [
-              {
-                title: "Table View",
-                Icon: "List 2",
-              },
-              {
-                title: "Kanban View",
-                Icon: "Grid",
-              },
-            ],
-          },
-          {
-            text: "Add Lead",
-            dropdown: true,
-            id: 1,
-            icon: "Plus",
-            light: false,
-            list: [
-              { title: "Using Form", Icon: "Text" },
-              { title: "Import Leads", Icon: "Download" },
-            ],
-          },
-          {
-            text: "Export",
-            dropdown: true,
-            id: 1,
-            icon: "Download",
-            light: true,
-            list: [
-              { title: "Print", Icon: "Printer" },
-              { title: "Excel", Icon: "Excel" },
-              { title: "PDF", Icon: "PDF" },
-              { title: "CSV", Icon: "CSV" },
-            ],
-          },
+          // {
+          //   text: "View",
+          //   dropdown: true,
+          //   id: 0,
+          //   light: false,
+          //   list: [
+          //     {
+          //       title: "Table View",
+          //       Icon: "List 2",
+          //     },
+          //     {
+          //       title: "Kanban View",
+          //       Icon: "Grid",
+          //     },
+          //   ],
+          // },
+          // {
+          //   text: "Add Lead",
+          //   dropdown: true,
+          //   id: 1,
+          //   icon: "Plus",
+          //   light: false,
+          //   list: [
+          //     { title: "Using Form", Icon: "Text" },
+          //     { title: "Import Leads", Icon: "Download" },
+          //   ],
+          // },
+          // {
+          //   text: "Export",
+          //   dropdown: true,
+          //   id: 1,
+          //   icon: "Download",
+          //   light: true,
+          //   list: [
+          //     { title: "Print", Icon: "Printer" },
+          //     { title: "Excel", Icon: "Excel" },
+          //     { title: "PDF", Icon: "PDF" },
+          //     { title: "CSV", Icon: "CSV" },
+          //   ],
+          // },
         ]}
         />
         <div className="bg-white rounded-[8px]">

@@ -170,7 +170,7 @@ const LeadContainer = ({
 }: LeadProps) => {
   const {pathname} = useRouter();
   const state = useSelector((state:any)=>state.auth);
-  console.log(state.admin);
+  // console.log(state.admin);
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
