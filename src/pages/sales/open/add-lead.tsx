@@ -6,11 +6,16 @@ import React from "react";
 import KanbanContainer from "@/components/View/Kanban";
 import { Router, useRouter } from "next/router";
 
-export default function Open({ data }: any) {
+
+export default function Open({data}:any) {
+    const router=useRouter();
+    const handleSubmit = (e:any) =>{
+        
+        router.replace("/sales/open");
+    }
   return (
-    <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-      {/* <Navigation  /> */}
-      <Navigation
+    <div className="w-[100%] min-h-[90vh] px-[40px]">
+        <Navigation
         title={"Sales-Manage>Leads"}
         buttons={[
           {
@@ -54,61 +59,37 @@ export default function Open({ data }: any) {
             ],
           },
         ]}
-      />
-      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="contactName"
-            >
-              Contact Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="contactName"
-              type="text"
-              placeholder="Contact Name"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="contactNumber"
-            >
-              Contact Number
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="contactNumber"
-              type="text"
-              placeholder="Contact Number"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="Email"
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+        />
+        <div className="bg-white rounded-[8px]">
+            <p className="text-black text-[35px] py-[25px] px-8 font-medium">Add Lead</p>
+            <form className="shadow-md rounded px-8 pt-4 pb-8 mb-4">
+                <div className="mb-4">
+                <label className="block text-gray-600 text-[17px] mb-2 font-medium" htmlFor="name">
+                    Contact Name
+                </label>
+                <input className="border border-1 border-[#3f3a4b] rounded-[5px] w-full py-2 px-3 text-[#3f3a4b] bg-white leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Contact Name"/>
+                </div>
+                <div className="mb-4">
+                <label className="block text-gray-600 text-[17px] mb-2 font-medium" htmlFor="contact">
+                    Contact Number
+                </label>
+                <input className="border border-[#3f3a4b] rounded-[5px] w-full py-2 px-3 text-[#3f3a4b] bg-white leading-tight focus:outline-none focus:shadow-outline" id="contact" type="text" placeholder="Contact Number"/>
+                </div>
+                <div className="mb-4">
+                <label className="block text-gray-600 text-[17px] mb-2 font-medium" htmlFor="email">
+                    Email
+                </label>
+                <input className="border border-[#3f3a4b] rounded-[5px] w-full py-2 px-3 text-[#3f3a4b] bg-white leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email"/>
+                </div>
+                <div className="flex items-center justify-between mt-6">
+                <button className="bg-purple-600 hover:bg-purple-700 text-white text-[16px] font-semibold py-2 px-5 rounded-[5px] focus:outline-none focus:shadow-outline" type="button" onClick={()=>router.push("/sales/open")}>
+                    Submit
+                </button>
+            </div>
+            </form>
+        </div>
+        
+      
     </div>
   );
 }
