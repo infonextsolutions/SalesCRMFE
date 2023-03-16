@@ -32,13 +32,13 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
       const filtered = data.filter(
         (e: Lead) =>
-          e.companyId.company_name.includes(search) ||
-          e.customerId.contact.includes(search) ||
-          e.potential_deal_size.includes(search) ||
-          e.leadStatus.includes(search) ||
-          e.leadStage.includes(search) ||
-          e.customerId.email.includes(search) ||
-          e.companyId.company_website_url.includes(search)
+          e.companyId?.company_name.includes(search) ||
+          e.customerId?.contact?.includes(search) ||
+          e.potential_deal_size?.includes(search) ||
+          e.leadStatus?.includes(search) ||
+          e.leadStage?.includes(search) ||
+          e.customerId?.email?.includes(search) ||
+          e.companyId?.company_website_url?.includes(search)
       );
 
       // const filtered = data;
@@ -59,13 +59,13 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     const filtered = data
       .filter(
         (e: Lead) =>
-          e.companyId.company_name.includes(search) ||
-          e.customerId.contact.includes(search) ||
-          e.potential_deal_size.includes(search) ||
-          e.leadStatus.includes(search) ||
-          e.leadStage.includes(search) ||
-          e.customerId.email.includes(search) ||
-          e.companyId.company_website_url.includes(search)
+          e.companyId?.company_name.includes(search) ||
+          e.customerId?.contact?.includes(search) ||
+          e.potential_deal_size?.includes(search) ||
+          e.leadStatus?.includes(search) ||
+          e.leadStage?.includes(search) ||
+          e.customerId?.email?.includes(search) ||
+          e.companyId?.company_website_url?.includes(search)
       )
       .slice(current * limit, current * limit + limit);
     return filtered;

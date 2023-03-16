@@ -114,7 +114,6 @@ export default function Open({data}:any) {
         ]}
       />
       <LeadsContainer view={view} records={data.totalRecords} list={Dummy}  />
-      
     </div>
   );
 }
