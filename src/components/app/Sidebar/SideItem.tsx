@@ -24,13 +24,13 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
     currentRoute = `/${route}`;
   }
   const check = pathname === currentRoute;
-  console.log(check, currentRoute);
+  // console.log(check, currentRoute);
 
   const [dropdown, setDropdown] = React.useState(false);
   return (
     <div
       className={`overflow-hidden duration-300 cursor-pointer flex-col flex  mt-[12px] h-[40px] relative `}
-      style={{ height: dropdown ? `${50 * (list.length + 1)}px` : `40px` }}
+      style={{ height: (dropdown&&open) ? `${50 * (list.length + 1)}px` : `40px` }}
     >
       {check && (
         <>
@@ -69,7 +69,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
         <p
           className="tracking-wider text-[#3F434A] ml-[0px] font-medium text-[14px] poppins"
           onClick={() => {
-            console.log(currentRoute);
+            // console.log(currentRoute);
             push(currentRoute);
           }}
         >
@@ -79,7 +79,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           <>
             <div
               onClick={() => {
-                console.log("dropdown");
+                // console.log("dropdown");
                 setDropdown(!dropdown);
               }}
               className="absolute left-[210px] z-0  w-[24px] flex items-center justify-center h-[24px] "
@@ -95,7 +95,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           </>
         )}
       </div>
-      {dropdown && (
+      {dropdown && open && (
         <div className="w-[100%] min-h-[40px] left-[5px] ">
           {list.map((item: any, i: any) => {
             const curr1 =

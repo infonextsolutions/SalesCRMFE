@@ -3,6 +3,7 @@ import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import { useAppDispatch } from "@/store/store";
 import { triggerMenu } from "@/store/UI";
 import Image from "next/image";
+import ButtonDropDown from "@/utils/Button/Button";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -59,7 +60,8 @@ const Navbar = () => {
             height={40}
           />
           <p className="text-black  cursor-pointer">Jane C.</p>
-          <Image
+          <ButtonDropDown dropdown={true} list={[{title:"Logout"}]} text={""} id={0} light={true} />
+          {/* <Image
             src={getBasicIcon("Arrow Down 1")}
             className="cursor-pointer"
             alt=""
@@ -69,7 +71,7 @@ const Navbar = () => {
             }}
             width={15}
             height={20}
-          />
+          /> */}
         </div>
       </div>
     </div>
