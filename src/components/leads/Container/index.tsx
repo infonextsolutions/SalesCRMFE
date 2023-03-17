@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   const [search, setSearch] = useState("");
-  console.log(search, "check it mf");
+  // console.log(search, "check it mf");
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
