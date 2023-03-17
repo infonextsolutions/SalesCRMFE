@@ -7,36 +7,42 @@ import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useRouter } from "next/router";
 
 const Login = () => {
-  const [user,setUser] = useState("");
-  const [pass,setPass] = useState("");
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const submit=(e:any)=>{
-    console.log(user,pass)
+  const submit = (e: any) => {
+    console.log(user, pass)
     e.preventDefault();
-    if(user==="Admin@gmail.com" && pass==="1234"){
-      dispatch(setUser1({_id:1,User:user,admin:true}));
+    if (user === "Admin@gmail.com" && pass === "1234") {
+      dispatch(setUser1({ _id: 1, User: user, admin: true }));
       dispatch(setLoggedInStatus(true));
       router.push("/sales/open");
-    }else if(user==="User@gmail.com" && pass==="1234"){
-      dispatch(setUser1({_id:1,User:user,admin:false}));
+    } else if (user === "User@gmail.com" && pass === "1234") {
+      dispatch(setUser1({ _id: 1, User: user, admin: false }));
       dispatch(setLoggedInStatus(true));
       router.push("/sales/open");
     }
   }
 
-  const state = useSelector((state:any)=>state.auth)
-  React.useEffect(()=>{
-      if(state.isLoggedIn){
-        router.replace("/sales/open");
-      }
+  const state = useSelector((state: any) => state.auth)
+  React.useEffect(() => {
+    if (state.isLoggedIn) {
+      router.replace("/sales/open");
+    }
   })
-  const pressShow = (e:any)=>{
+  const pressShow = (e: any) => {
     e.preventDefault();
     setShowPassword(!showPassword);
-    }
+  }
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const handlePasswordChange = (e: any) => {
+    setPassword(e.target.value);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-blue-500 fixed w-[100%] h-[100%] z-1000000 top-0 left-0 ">
@@ -59,14 +65,14 @@ const Login = () => {
               <input
                 type="text"
                 id="username"
-                onChange={(e)=>{
+                onChange={(e) => {
                   setUser(e.target.value)
                 }}
                 className="border  text-base px-2 py-2 bg-white rounded-[6px] text-black focus:outline-none focus:ring-0 focus:border-gray-600"
                 placeholder="Enter Username"
               />
             </div>
-            <div className="py-1 my-[20px]">
+            <div className="py-1 my-[20px] relative">
               <div className="flex flex-col">
                 <label
                   htmlFor="password"
@@ -74,19 +80,23 @@ const Login = () => {
                 >
                   Password
                 </label>
-                <button
-                onClick={e => pressShow(e)}
-                className="absolute right-1 bottom-1 focus:text-gray-500 text-sm font-semibold">{showPassword ? 'Hide' : 'show'}</button>
-                <button className="absolute right-1 bottom-1 focus:text-gray-500 text-sm font-semibold" form="toggle">Hide</button>
-                <input
-                onChange={(e)=>{
-                  setPass(e.target.value)
-                }}
-                  type="showPassword ? text : password"
-                  id="password"
-                  className="border  text-base px-2 py-2 bg-white rounded-[6px] text-black focus:outline-none focus:ring-0 focus:border-gray-600"
-                  placeholder="Enter Password"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    className="border  text-base px-2 py-2 bg-white rounded-[6px] text-black focus:inline-none focus:ring-0 focus:border-gray-600"
+                    placeholder="Enter Password"
+                    value="Password"
+                    onChange={handlePasswordChange}
+                  />
+                  <button
+                    className="focus:text-gray-500 text-sm font-semibold"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                  
+                  </div>
                 <div className="py-1">
                   <div className="flex justify-between w-64 mb-5">
                     <a href="#" className="text-xs">
@@ -126,3 +136,7 @@ const Login = () => {
 };
 
 export default Login;
+
+function setPassword(value: any) {
+  throw new Error("Function not implemented.");
+}
