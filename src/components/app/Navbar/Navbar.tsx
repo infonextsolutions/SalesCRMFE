@@ -59,7 +59,10 @@ const Navbar = () => {
             width={30}
             height={40}
           />
+          <div className="shrink-0">
           <p className="text-black  cursor-pointer">Jane C.</p>
+          </div>
+          
           <ButtonDropDown dropdown={true} list={[{title:"Logout"}]} text={""} id={0} light={true} />
           {/* <Image
             src={getBasicIcon("Arrow Down 1")}
