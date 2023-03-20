@@ -93,11 +93,12 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
         <Header />
         {Leads != null &&
-          Leads.map((item: Lead) => {
+          Leads.map((item: Lead,ind:Number) => {
             return (
               <LeadContainer
                 key={item._id}
                 id={item._id}
+                index={ind}
                 company={item.companyId}
                 customer={item.customerId}
                 leadStage={item.leadStage}

@@ -198,8 +198,6 @@ const LeadContainer = ({
           click={true}
           route={`${pathname}/${id}/company-profile`}
         />
-        
-        
         <LeadItem width={110} left={10} text={customer.name} click={true} route={`${pathname}/${id}/client-poc-profile`}  />
         <LeadItem width={150} left={20} text={customer.email} />
         <LeadItem width={130} left={20} text={customer.contact} />
