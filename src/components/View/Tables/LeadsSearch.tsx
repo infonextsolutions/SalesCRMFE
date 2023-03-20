@@ -115,16 +115,18 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setItems(allItems);
   };
   const Leads = items;
-  console.log(`limit is ${limit}`);
+  // console.log(Leads);
+  // console.log(`limit is ${limit}`);
   return (
     <>
-      <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
+      <div className="mt-[0px] w-[100%] h-[540px] overflow-x-auto hide-scrollbar">
         <Header />
         {Leads != null &&
-          Leads.map((item: Lead) => {
+          Leads.map((item: Lead,ind:any) => {
             return (
               <LeadContainer
                 key={item._id}
+                index={ind}
                 id={item._id}
                 company={item.companyId}
                 customer={item.customerId}

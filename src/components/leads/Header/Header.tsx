@@ -34,26 +34,28 @@ const Header = () => {
     <div className="flex">
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
         <HeaderCheckBox width={30} />
+        <HeaderItem width={120} left={20} text={"LEAD ID"} />
+        <HeaderItem width={150} left={0} text={"Customer name"} />
         <HeaderItem width={130} left={20} text={"COMPANY NAME"} />
-        <HeaderItem width={150} left={10} text={"Customer name"} />
         <HeaderItem width={110} left={10} text={"CLIENT POC"} />
-        <HeaderItem width={120}  text={"Quick Actions"}  />
         <HeaderItem width={150} left={20} text={"EMAIL"} />
-        <HeaderItem width={150} left={30} text={"PHONE"} />
-        <HeaderItem width={120} left={10} text={"lead stage"} />
+        <HeaderItem width={130} left={20} text={"PHONE"} />
+        <HeaderItem width={120}  text={"Quick Actions"}  />
+        <HeaderItem width={150} left={20} text={"more contacts"} />
+        <HeaderItem width={120} left={5} text={"lead stage"} />
         <HeaderItem width={120} left={10} text={"lead status"} />
+        <HeaderItem width={120} left={20} text={"owner"} />
+        <HeaderItem width={150} left={10} text={"lead inquiry"} />
         <HeaderItem width={150} left={10} text={"product/service"} />
         <HeaderItem width={150} left={10} text={"activity history"} />
-        <HeaderItem width={130} left={10} text={"last actitity"} />
-        <HeaderItem width={130} left={10} text={"deal size"} />
-        <HeaderItem width={150} left={10} text={"win probability"} />
-        <HeaderItem width={150} left={10} text={"lead inquiry"} />
-        <HeaderItem width={150} left={10} text={"existing budget"} />
-        <HeaderItem width={150} left={10} text={"more contacts"} />
+        <HeaderItem width={130} left={10} text={"last activity"} />
         <HeaderItem width={150} left={10} text={"next action/date"} />
-        <HeaderItem width={150} left={10} text={"close date"} />
-        <HeaderItem width={150} left={10} text={"notes"} />
+        <HeaderItem width={150} left={10} text={"win probability"} />
+        <HeaderItem width={140} left={20} text={"deal size"} />
+        <HeaderItem width={150} left={10} text={"existing budget"} />
         <HeaderItem width={150} left={10} text={"lead source"} />
+        {/* <HeaderItem width={150} left={10} text={"close date"} /> */}
+        <HeaderItem width={150} left={20} text={"notes"} />
       </div>
     </div>
   );

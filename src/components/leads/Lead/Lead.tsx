@@ -160,6 +160,7 @@ const QuickActions = ({ width, left }: any) => {
 };
 
 const LeadContainer = ({
+  index,
   id,
   company,
   customer,
@@ -169,12 +170,25 @@ const LeadContainer = ({
   LeadData,
 }: LeadProps) => {
   const {pathname} = useRouter();
+  // console.log(index);
   const state = useSelector((state:any)=>state.auth);
   // console.log(state.admin);
+  var ht=(Number(index)*50)+255;
   return (
     <div className="flex">
-      <div className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
+      <div className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
+      {/* <div className="fixed flex items-center left-[1390px] h-[50px] cursor-pointer">
+        <Image
+            src={getBasicIcon("More")}
+            className="rotate-90"
+            alt=""
+            width={20}
+            height={20}
+          />
+      </div> */}
         <LeadBox width={30} />
+        <LeadItem width={120} left={10} textLeft={10} text={"12XXXX"} />
+        <LeadItem width={150} left={10}  text={custom} click={state.admin} route={`${pathname}/${id}/lead-profile`} />
         <LeadItemMultiple
           width={130}
           left={20}
@@ -184,14 +198,18 @@ const LeadContainer = ({
           click={true}
           route={`${pathname}/${id}/company-profile`}
         />
-        <LeadItem width={150} left={10}  text={custom} click={state.admin} route={`${pathname}/${id}/lead-profile`} />
+        
+        
         <LeadItem width={110} left={10} text={customer.name} click={true} route={`${pathname}/${id}/client-poc-profile`}  />
-        <QuickActions width={120} />
         <LeadItem width={150} left={20} text={customer.email} />
-        <LeadItem width={150} left={30} text={customer.contact} />
+        <LeadItem width={130} left={20} text={customer.contact} />
+        <QuickActions width={120} />
+        <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
         <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
         <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
-        <LeadItem width={150} left={10} textLeft={20} text={"Product A"} />
+        <LeadItem width={150} left={10} textLeft={10} text={"John C."} />
+        <LeadItem width={150} left={10} text={LeadData.inquiry} />
+        <LeadItem width={150} left={10} textLeft={10} text={"Product A"} />
         <LeadItem width={150} left={10} text={LeadData.activity_history} />
         <LeadItemMultiple
           width={130}
@@ -199,11 +217,11 @@ const LeadContainer = ({
           upperText={"Email Sent"}
           bottomText={LeadData.last_activity}
         />
-        <LeadItem
-          width={130}
+        <LeadItemMultiple
+          width={150}
           left={10}
-          textLeft={5}
-          text={LeadData.potential_deal_size}
+          upperText={"Send Email"}
+          bottomText={"on 23 Jan 2023"}
         />
         <LeadItem
           width={150}
@@ -211,30 +229,29 @@ const LeadContainer = ({
           left={10}
           text={LeadData.win_probability}
         />
-        <LeadItem width={150} left={10} text={LeadData.inquiry} />
+        <LeadItem
+          width={140}
+          left={10}
+          text={LeadData.potential_deal_size}
+        />
         <LeadItem
           width={150}
           left={10}
           textLeft={15}
           text={LeadData.existing_budget}
         />
-        <LeadItem width={150} left={10} text={"Anil L, Paul G, Rekha"} />
-        <LeadItemMultiple
-          width={150}
-          left={10}
-          upperText={"Send Email"}
-          bottomText={"on 23 Jan 2023"}
-        />
-        <LeadItem width={150} textLeft={20} left={10} text={"-"} />
-        <LeadItem width={150} left={10} text={LeadData.close_date} />
         <LeadItem
           link={true}
           width={150}
           left={10}
-          textLeft={20}
           text={company.company_website_url}
         />
+        {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
+        {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
+        <LeadItem width={150} left={10} text={"Read Notes"} />
+        
       </div>
+      
     </div>
   );
 };
@@ -249,4 +266,5 @@ interface LeadProps {
   leadStatus: String;
   custom: String;
   LeadData: Lead;
+  index:Number;
 }
