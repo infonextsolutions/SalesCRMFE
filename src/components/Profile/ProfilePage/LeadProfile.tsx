@@ -51,25 +51,25 @@ const ProfilePage = () => {
       <ul className="mt-2 mb-10 ml-[1px]">
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Company Name</strong>
-          <a href="name" className="block">
+          <a href="name" className="block text-gray-300">
             XYZ
           </a>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Company Address</strong>
-          <a href="address:" className="block">
+          <a href="address:" className="block text-gray-300">
             nothing
           </a>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Website Link</strong>
-          <span className="block">
+          <span className="block text-gray-300">
             <a href="https://www.example.com">www.example.com</a>
           </span>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Industry Type</strong>
-          <a href="industry:" className="block">
+          <a href="industry:" className="block text-gray-300">
             IT Solutions
           </a>
         </li>
@@ -105,37 +105,37 @@ const ProfilePage = () => {
       <ul className="mt-2 mb-10 ml-1">
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Stage</strong>
-          <a href="name" className="block">
+          <a href="name" className="block text-gray-300">
             XYZ
           </a>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Source</strong>
-          <a href="address:" className="block">
+          <a href="address:" className="block text-gray-300">
             nothing
           </a>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Owner(primary)</strong>
-          <span className="block">
+          <span className="block text-gray-300">
             <a href="Leadowner">Aarti.S</a>
           </span>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Owner(secondary)</strong>
-          <a href="leadowner" className="block">
+          <a href="leadowner" className="block text-gray-300">
             Raghav V.
           </a>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Created By</strong>
-          <a href="leadowner" className="block">
+          <a href="leadowner" className="block text-gray-300">
             -
           </a>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Updated on</strong>
-          <a href="leadowner" className="block">
+          <a href="leadowner" className="block text-gray-300">
             26 January 2023 4:55 PM
           </a>
         </li>
@@ -228,7 +228,7 @@ const ProfilePage = () => {
           </h2>
           <a
             href="#0"
-            className="block text-sm text-[12px] text-black hover:text-indigo-500"
+            className="block text-medium text-[14px] text-black hover:text-indigo-500"
           >
             salesmanager
           </a>
@@ -316,7 +316,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small hover:text-indigo-500"
+                className="block text-sm font-small text-gray-300 hover:text-indigo-500"
               >
                 Co-Founder
               </a>
@@ -342,7 +342,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small hover:text-indigo-500"
+                className="block text-sm font-small text-gray-300 hover:text-indigo-500"
               >
                 Project Lead
               </a>
@@ -368,7 +368,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small hover:text-indigo-500"
+                className="block text-sm font-small text-gray-300 hover:text-indigo-500"
               >
                 HR
               </a>

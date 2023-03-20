@@ -78,10 +78,8 @@ const Login = () => {
                 onClick={e => pressShow(e)}
                 className="absolute right-1 bottom-1 focus:text-gray-500 text-sm font-semibold">{showPassword ? 'Hide' : 'show'}</button>
                 <button className="absolute right-1 bottom-1 focus:text-gray-500 text-sm font-semibold" form="toggle">Hide</button>
-                <input
-                onChange={(e)=>{
-                  setPass(e.target.value)
-                }}
+               
+             <input
                   type="showPassword ? text : password"
                   id="password"
                   className="border  text-base px-2 py-2 bg-white rounded-[6px] text-black focus:outline-none focus:ring-0 focus:border-gray-600"

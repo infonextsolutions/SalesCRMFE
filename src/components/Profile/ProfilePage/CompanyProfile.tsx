@@ -24,7 +24,7 @@ const CompanyProfile=()=>{
               </h2>
               <a
                 href="#0"
-                className="block text-sm text-[12px] text-black hover:text-indigo-500"
+                className="block text-sm text-[14px] text-gray-100 font-weight-400 hover:text-indigo-500"
               >
                 Noida,UP
               </a>
@@ -49,7 +49,7 @@ const CompanyProfile=()=>{
         <ul className="mt-2 mb-10 ml-auto">
           <li className="px-2 mt-4">
             <strong className="font-medium text-black mr-1">Company Name</strong>
-            <a href="name" className="block">
+            <a href="#" className="block text-gray hover:text-gray-300">
               XYZ
             </a>
           </li>
