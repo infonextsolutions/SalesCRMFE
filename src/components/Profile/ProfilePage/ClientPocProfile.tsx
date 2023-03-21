@@ -23,12 +23,12 @@ const ClientPocProfile = () => {
               }}
             /> */}
             <div className="ml-3 text-bold">
-              <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-bold">
+              <h2 className="text-base text-[14px] font-semibold whitespace-nowrap leading-7 tracking-tight text-black">
                 Leslie Alexander
               </h2>
               <a
                 href="#0"
-                className="block text-sm text-[12px] text-black hover:text-indigo-500"
+                className="block text-sm text-[12px] text-gray-500 hover:text-indigo-500"
               >
                 @Leslie Alexander
               </a>
@@ -52,23 +52,23 @@ const ClientPocProfile = () => {
         <h3 className="text-sm font-medium text-black mt-5 ml-6">INFO</h3>
         <ul className="mt-2 mb-10 ml-4">
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1 text-black ">Phone</strong>
-            <a href="tel:+821023456789" className="block">
-              +82 10 2345 6789
+            <strong className="font-medium mr-1 text-gray-500 ">GENDER</strong>
+            <a href="female" className="block text-black-400">
+              Female
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1 text-black">E-mail</strong>
-            <a href="mailto:" className="block">
+            <strong className="font-medium mr-1 text-gray-500">E-mail</strong>
+            <a href="mailto:" className="block text-black-400">
               aspiringfe@helloworld.com
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-black mr-1">Location</strong>
-            <span className="block">Seoul, South Korea</span>
+            <strong className="font-medium text-gray-500 mr-1">Location</strong>
+            <span className="block text-black-400">Seoul, South Korea</span>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-black mr-1">Social Media</strong>
+            <strong className="font-medium text-gray-500 mr-1">Social Media</strong>
             <div className="flex">
               <Image
                 src={getBasicIcon("Instagram")}
@@ -98,31 +98,31 @@ const ClientPocProfile = () => {
         <h3 className="text-sm font-medium mt-5 text-black ml-6">COMPANY INFO</h3>
         <ul className="mt-2 mb-10 ml-4">
           <li className="px-2 mt-4">
-            <strong className="font-medium text-black mr-1">Company Name</strong>
-            <a href="name" className="block">
+            <strong className="font-medium text-gray-500 mr-1">Company Name</strong>
+            <a href="name" className="block text-black-400">
               XYZ
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-black  mr-1">Comapny Address</strong>
-            <a href="address:" className="block">
+            <strong className="font-medium text-gray-500 mr-1">Company Address</strong>
+            <a href="address:" className="block text-black-400">
               nothing
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-black mr-1">Website Link</strong>
-            <span className="block">
+            <strong className="font-medium text-gray-500 mr-1">Website Link</strong>
+            <span className="block text-black-400">
               <a href="https://www.example.com">www.example.com</a>
             </span>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-black mr-1">Industry Type</strong>
-            <a href="industry:" className="block">
+            <strong className="font-medium text-gray-500 mr-1">Industry Type</strong>
+            <a href="industry:" className="block text-black-400 ">
               IT Solutions
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-black mr-1">Social Media</strong>
+            <strong className="font-medium text-gray-500 mr-1">Social Media</strong>
             <div className="flex">
               <Image
                 src={getBasicIcon("Facebook")}
@@ -180,12 +180,12 @@ const ClientPocProfile = () => {
                 }}
               /> */}
               <div>
-                <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                <h4 className="text-base  leading-7 tracking-tight text-black">
                   LeslieAlexander
                 </h4>
                 <a
                   href="#0"
-                  className="block text-sm font-small hover:text-indigo-500"
+                  className="block text-sm font-small text-gray-500 hover:text-indigo-500"
                 >
                   Co-Founder
                 </a>
@@ -211,12 +211,12 @@ const ClientPocProfile = () => {
                 }}
               ></Image> */}
               <div>
-                <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                <h4 className="text-base leading-7 tracking-tight text-black">
                   Reginacooper
                 </h4>
                 <a
                   href="#0"
-                  className="block text-sm font-small hover:text-indigo-500"
+                  className="block text-sm font-small text-gray-500 hover:text-indigo-500"
                 >
                   Project Lead
                 </a>
@@ -242,12 +242,12 @@ const ClientPocProfile = () => {
                 }}
               /> */}
               <div>
-                <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                <h4 className="text-base  leading-7 tracking-tight text-black">
                   Judith
                 </h4>
                 <a
                   href="#0"
-                  className="block text-sm font-small hover:text-indigo-500"
+                  className="block text-sm font-small text-gray-500 hover:text-indigo-500"
                 >
                   HR
                 </a>
