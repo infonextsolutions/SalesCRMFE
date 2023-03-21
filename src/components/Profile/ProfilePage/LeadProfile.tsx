@@ -27,7 +27,7 @@ const ProfilePage = () => {
             </h2>
             <a
               href="#0"
-              className="block text-sm text-[12px] text-black hover:text-indigo-500"
+              className="block text-sm text-[12px] text-gray-600 hover:text-indigo-500"
             >
               Lead-id123456
             </a>
@@ -50,31 +50,31 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-5 ml-2 text-black">COMPANY INFO</h3>
       <ul className="mt-2 mb-10 ml-[1px]">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Company Name</strong>
-          <a href="name" className="block text-gray-300">
-            XYZ
+          <strong className="font-medium mr-1 text-gray-500">Company Name</strong>
+          <a href="name" className="block text-black-400">
+            ABC Corp
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Company Address</strong>
-          <a href="address:" className="block text-gray-300">
+          <strong className="font-medium mr-1 text-gray-500">Company Address</strong>
+          <a href="address:" className="block text-black-400">
             nothing
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Website Link</strong>
-          <span className="block text-gray-300">
+          <strong className="font-medium mr-1 text-gray-500">Website Link</strong>
+          <span className="block text-black-400">
             <a href="https://www.example.com">www.example.com</a>
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Industry Type</strong>
-          <a href="industry:" className="block text-gray-300">
+          <strong className="font-medium mr-1 text-gray-500">Industry Type</strong>
+          <a href="industry:" className="block text-black-400">
             IT Solutions
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Social Media</strong>
+          <strong className="font-medium mr-1 text-gray-500">Social Media</strong>
           <div className="flex">
             <Image
               src={getBasicIcon("Facebook")}
@@ -104,43 +104,43 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-5 ml-3 text-black">LEAD INFO</h3>
       <ul className="mt-2 mb-10 ml-1">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Stage</strong>
-          <a href="name" className="block text-gray-300">
+          <strong className="font-medium mr-1 text-black-400">Lead Stage</strong>
+          <a href="name" className="block text-black-400">
             XYZ
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Source</strong>
-          <a href="address:" className="block text-gray-300">
+          <strong className="font-medium mr-1 text-black-400">Lead Source</strong>
+          <a href="address:" className="block text-black-400">
             nothing
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Owner(primary)</strong>
-          <span className="block text-gray-300">
+          <strong className="font-medium mr-1 text-black-400">Lead Owner(primary)</strong>
+          <span className="block text-black-400">
             <a href="Leadowner">Aarti.S</a>
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Owner(secondary)</strong>
-          <a href="leadowner" className="block text-gray-300">
+          <strong className="font-medium mr-1 text-black-400">Lead Owner(secondary)</strong>
+          <a href="leadowner" className="block text-black-400">
             Raghav V.
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Created By</strong>
-          <a href="leadowner" className="block text-gray-300">
+          <strong className="font-medium mr-1 text-black-400">Lead Created By</strong>
+          <a href="leadowner" className="block text-black-400">
             -
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Updated on</strong>
-          <a href="leadowner" className="block text-gray-300">
+          <strong className="font-medium mr-1 text-black-400">Lead Updated on</strong>
+          <a href="leadowner" className="block text-black-400">
             26 January 2023 4:55 PM
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Activity History</strong>
+          <strong className="font-medium mr-1 text-black-400">Activity History</strong>
         </li>
         <div
           className={`flex h-[20px] items-center justify-between mt-[5px] px-2 shrink-0`}
@@ -228,7 +228,7 @@ const ProfilePage = () => {
           </h2>
           <a
             href="#0"
-            className="block text-medium text-[14px] text-black hover:text-indigo-500"
+            className="block text-medium text-[14px] text-gray-500 hover:text-indigo-500"
           >
             salesmanager
           </a>
@@ -237,23 +237,23 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-1 ml-2 text-black">INFO</h3>
       <ul className="mt-2 mb-10 ml-auto">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">GENDER</strong>
-          <a href="tel:+821023456789" className="block">
+          <strong className="font-medium mr-1 text-gray-500">GENDER</strong>
+          <a href="tel:+821023456789" className="block text-black-400">
             Female
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">E-mail</strong>
-          <a href="mailto:" className="block">
+          <strong className="font-medium mr-1 text-gray-500">E-mail</strong>
+          <a href="mailto:" className="block text-black-400">
             aspiringfe@helloworld.com
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Location</strong>
-          <span className="block">Seoul, South Korea</span>
+          <strong className="font-medium mr-1 text-gray-500">Location</strong>
+          <span className="block text-black-400">Seoul, South Korea</span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Social Media</strong>
+          <strong className="font-medium mr-1 text-gray-500">Social Media</strong>
           <div className="flex">
             <Image
               src={getBasicIcon("Instagram")}
@@ -316,7 +316,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small text-gray-300 hover:text-indigo-500"
+                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
               >
                 Co-Founder
               </a>
@@ -342,7 +342,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small text-gray-300 hover:text-indigo-500"
+                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
               >
                 Project Lead
               </a>
@@ -368,7 +368,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small text-gray-300 hover:text-indigo-500"
+                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
               >
                 HR
               </a>
