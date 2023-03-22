@@ -69,7 +69,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
     getItems();
     setLoading(false);
-  }, [limit, pageNumber, search]);
+  }, [limit, pageNumber, search,totalRecords,getallItems,pageCount]);
 
   const fetchItems = async (current: any) => {
     const res = await axios.get(
