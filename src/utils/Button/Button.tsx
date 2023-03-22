@@ -20,12 +20,12 @@ const ButtonDropDown = ({
   const [clicked, setclicked] = React.useState(false);
   const [mouseOver, setMouseOver] = React.useState(false);
   const [curr, setCurr] = React.useState<Number | undefined>(value);
+  const onPointerDown = () => {
+    if (!mouseOver) {
+      setclicked(false);
+    }
+  };
   React.useEffect(() => {
-    const onPointerDown = () => {
-      if (!mouseOver) {
-        setclicked(false);
-      }
-    };
     document.addEventListener("pointerdown", onPointerDown, false);
     return () => {
       document.removeEventListener("pointerdown", onPointerDown, false);
@@ -33,8 +33,14 @@ const ButtonDropDown = ({
   });
 
   const onClick = (prev: Number, current: Number) => {
+    setTimeout(()=>{
+      setclicked(false);
+    },100)
+    document.removeEventListener("pointerdown", onPointerDown, false);
     if (click) {
-      click(prev, current);
+      setTimeout(()=>{
+        click(prev, current);
+      },200)
     }
     setCurr(current);
   };
@@ -46,7 +52,7 @@ const ButtonDropDown = ({
         border ? "border-[1px] border-[#ccc]" : ""
       } ${
         light ? "bg-white" : "bg-renal-blue"
-      } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px] relative p-[10px] relative`}
+      } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px]  p-[10px] relative`}
       onMouseOver={() => {
         setMouseOver(true);
       }}
@@ -66,6 +72,9 @@ const ButtonDropDown = ({
             <DropDown
               value={curr}
               onClick={onClick}
+              close={()=>{
+                setclicked(false);
+              }}
               direction={dropDirection}
               list={list}
             />
@@ -95,7 +104,7 @@ const ButtonDropDown = ({
       {text.length&&<p
         className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
           tight ? "pl-[4px] pr-[4px]" : "pl-[20px] pr-[10px]"
-        } ${light ? "text-[#3F434A]" : "text-[#fff ]"} `}
+        } ${light ? "text-[#3F434A]" : "text-[#ffffff]"} `}
       >
         {text}
       </p>}
