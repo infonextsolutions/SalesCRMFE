@@ -49,25 +49,25 @@ const CompanyProfile=()=>{
         <ul className="mt-2 mb-10 ml-auto">
           <li className="px-2 mt-4">
             <strong className="font-medium text-gray-500 mr-1">Company Name</strong>
-            <a href="#" className="block text-black-400 ">
+            <a href="#" className="block text-black ">
               ABC Corp
             </a>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-gray-500 mr-1">Company Address</strong>
-            <a href="address:" className="block text-black-400">
+            <a href="address:" className="block text-black">
               nothing
             </a>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium  text-gray-500 mr-1">Website Link</strong>
-            <span className="block text-black-400">
+            <span className="block text-black">
               <a href="https://www.example.com">www.example.com</a>
             </span>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-gray-500 mr-1">Industry Type</strong>
-            <a href="industry:" className="block text-black-400">
+            <a href="industry:" className="block text-black">
               IT Solutions
             </a>
           </li>
