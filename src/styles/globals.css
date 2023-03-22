@@ -6,10 +6,10 @@
 
 /* Poppins */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 /* font-family: 'Poppins', sans-serif; */
-.poppins{
-  font-family: 'Poppins', sans-serif !important;
+.poppins {
+  font-family: "Poppins", sans-serif !important;
 }
 
 /* Poppins */
@@ -17,41 +17,47 @@
 /* --- google fonts ---*/
 
 /* custom-svg-color */
-.svg-white{
-	filter:invert(100%) sepia(100%) saturate(5%) hue-rotate(333deg) brightness(102%) contrast(106%) !important;
+.svg-white {
+  filter: invert(100%) sepia(100%) saturate(5%) hue-rotate(333deg)
+    brightness(102%) contrast(106%) !important;
 }
-.svg-dark{
-  filter: invert(16%) sepia(2%) grayscale(1) saturate(4980%) hue-rotate(180deg) brightness(114%) contrast(75%) !important;
+.svg-dark {
+  filter: invert(16%) sepia(2%) grayscale(1) saturate(4980%) hue-rotate(180deg)
+    brightness(114%) contrast(75%) !important;
   /* filter: grey; */
 }
-.svg-blue{
-filter: invert(21%) sepia(92%) saturate(4187%) hue-rotate(233deg) brightness(96%) contrast(95%) !important;
+.svg-blue {
+  filter: invert(21%) sepia(92%) saturate(4187%) hue-rotate(233deg)
+    brightness(96%) contrast(95%) !important;
 }
 
-.svg-not-selected{
-  filter: invert(63%) sepia(16%) saturate(139%) hue-rotate(178deg) brightness(94%) contrast(91%) !important;
+.svg-not-selected {
+  filter: invert(63%) sepia(16%) saturate(139%) hue-rotate(178deg)
+    brightness(94%) contrast(91%) !important;
 }
 
-.svg-selected{
-  filter: invert(25%) sepia(14%) saturate(370%) hue-rotate(179deg) brightness(89%) contrast(87%) !important;
+.svg-selected {
+  filter: invert(25%) sepia(14%) saturate(370%) hue-rotate(179deg)
+    brightness(89%) contrast(87%) !important;
 }
 
-.svg-ellipse-5{
-  filter: invert(24%) sepia(99%) saturate(2637%) hue-rotate(228deg) brightness(96%) contrast(108%) !important;
+.svg-ellipse-5 {
+  filter: invert(24%) sepia(99%) saturate(2637%) hue-rotate(228deg)
+    brightness(96%) contrast(108%) !important;
 }
-.svg-ellipse-6{
-  filter: invert(89%) sepia(30%) saturate(7001%) hue-rotate(320deg) brightness(104%) contrast(102%) !important ;}
+.svg-ellipse-6 {
+  filter: invert(89%) sepia(30%) saturate(7001%) hue-rotate(320deg)
+    brightness(104%) contrast(102%) !important ;
+}
 
 /* custom-svg-color */
-
-
 
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -155,10 +161,27 @@ a {
 }
 
 .checkbox::before {
-  background-color: #00AEEF !important;
+  background-color: #00aeef !important;
 }
 
-.hide-scrollbar::-webkit-scrollbar{
+.hide-scrollbar::-webkit-scrollbar {
   display: none !important;
 }
 
+.custom-scroll::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  width: 2px;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #f5f5f5;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #ccc;
+  width: 2px;
+}
