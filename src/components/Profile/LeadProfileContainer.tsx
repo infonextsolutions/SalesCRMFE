@@ -2,6 +2,8 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import React, { useState } from "react";
+import ActivityHistory from "./ProfileDetails/Lead/activity";
+import Attachements from "./ProfileDetails/Lead/attachements";
 
 const LeadProfileContainer = ({
   titles,
@@ -14,6 +16,7 @@ const LeadProfileContainer = ({
     setActiveTitle(childData);
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
+
   return (
     <div
       className={`w-[${
@@ -71,6 +74,8 @@ const LeadProfileContainer = ({
               </p>
             </div>
           )}
+          {activeTitle === 1 && <ActivityHistory />}
+          {activeTitle === 2 && <Attachements />}
         </div>
         <div>
           <Image
@@ -80,7 +85,7 @@ const LeadProfileContainer = ({
             width={16}
             height={16}
             style={{
-                objectFit:"contain"
+              objectFit: "contain",
             }}
           />
         </div>
