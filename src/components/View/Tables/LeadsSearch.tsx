@@ -1,7 +1,7 @@
 import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import LeadContainer from "../../leads/Lead/Lead";
 import Header from "../../leads/Header/Header";
 import ReactPaginate from "react-paginate";
@@ -13,6 +13,7 @@ import {
   RightArrow,
 } from "@/utils/AssetsHelper";
 import axios from "axios";
+import Spinner from "@/components/loader/spinner";
 const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
@@ -27,7 +28,9 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     const data = res.data.result;
     return data;
   };
+  const [loading, setLoading] = React.useState(false);
   useEffect(() => {
+    setLoading(true);
     const count = Math.ceil(Number(totalRecords) / limit);
     setpageCount(count);
     if (pageNumber >= count && pageCount != 0) setpageNumber(0);
@@ -37,9 +40,8 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       );
       // console.log(res, "only check here");
       const data = res.data.result;
-      
-      if(search.length)
-      {
+
+      if (search.length) {
         setpageNumber(0);
         const allItems = await getallItems(pageNumber);
         setItems(allItems);
@@ -66,25 +68,24 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     };
 
     getItems();
-  }, [limit, pageNumber, search]);
+    setLoading(false);
+  }, [limit, pageNumber, search,totalRecords,getallItems,pageCount]);
 
-  
   const fetchItems = async (current: any) => {
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
-    const filtered = data
-      .filter(
-        (e: Lead) =>
-          e.companyId?.company_name.includes(search) ||
-          e.customerId?.contact?.includes(search) ||
-          e.potential_deal_size?.includes(search) ||
-          e.leadStatus?.includes(search) ||
-          e.leadStage?.includes(search) ||
-          e.customerId?.email?.includes(search) ||
-          e.companyId?.company_website_url?.includes(search)
-      );
+    const filtered = data.filter(
+      (e: Lead) =>
+        e.companyId?.company_name.includes(search) ||
+        e.customerId?.contact?.includes(search) ||
+        e.potential_deal_size?.includes(search) ||
+        e.leadStatus?.includes(search) ||
+        e.leadStage?.includes(search) ||
+        e.customerId?.email?.includes(search) ||
+        e.companyId?.company_website_url?.includes(search)
+    );
     settotalLeads(filtered.length);
     return filtered;
   };
@@ -94,35 +95,44 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   };
 
   const setFirstPage = async () => {
+    setLoading(true);
     setpageNumber(0);
     const allItems = await fetchItems(pageNumber);
     // console.log(allItems);
     setItems(allItems);
+    setLoading(false);
   };
   const setLastPage = async () => {
+    setLoading(true);
     console.log(`pagecount check is ${pageCount}`);
     setpageNumber(pageCount - 1);
     console.log(`pageNumber is ${pageNumber}`);
     const allItems = await fetchItems(pageNumber);
     // console.log(allItems);
     setItems(allItems);
+    setLoading(false);
   };
   const handlePageClick = async (data: any) => {
+    setLoading(true);
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
     console.log(allItems);
     setItems(allItems);
+    setLoading(false);
   };
   const Leads = items;
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
   return (
     <>
-      <div className="mt-[0px] w-[100%] h-[540px] overflow-x-auto hide-scrollbar">
+      <div className="mt-[0px] w-[100%] h-[560px] overflow-auto custom-scroll pb-[10px]">
         <Header />
-        {Leads != null &&
-          Leads.map((item: Lead,ind:any) => {
+        {loading ? (
+          <Spinner />
+        ) : (
+          Leads != null &&
+          Leads.map((item: Lead, ind: any) => {
             return (
               <LeadContainer
                 key={item._id}
@@ -136,130 +146,143 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
                 LeadData={item}
               />
             );
-          })}
+          })
+        )}
       </div>
-      {pageCount&&<div className="mx-[80px] flex justify-between">
-        <div className="flex items-center">
-          <select
-            onChange={handleChange}
-            name="limit"
-            id="limit"
-            className="bg-[#fff] border border-[#8A9099] rounded-[10px] text-black p-[5px] px-[8px]"
-          >
-            <option value="10" selected>
-              10
-            </option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-          </select>
-          <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-            {`Showing ${totalLeads===0?0:pageNumber*limit+1}-${(pageNumber+1)*limit>totalLeads?totalLeads:(pageNumber+1)*limit} of ${totalLeads}`}
-          </p>
-        </div>
-        <div className="flex justify-center my-[45px] ">
-          <div
-            className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${
-              pageNumber === 0 ? "bg-[#f5f5f5] opacity-30 cursor-auto" : "bg-[#e8ebfd] cursor-pointer"
-            }`}
-            onClick={setFirstPage}
-          >
-            <Image
-              src={getBasicIcon("Arrow-Right 2")}
-              className={`${
-                pageNumber != 0 ? "svg-blue" : ""
-              } rotate-180 translate-x-[6px]`}
-              alt=""
-              width={18}
-              height={18}
-            />
-            <Image
-              src={getBasicIcon("Arrow-Right 2")}
-              className={`${
-                pageNumber != 0 ? "svg-blue" : ""
-              } rotate-180 translate-x-[-6px]`}
-              alt=""
-              width={18}
-              height={18}
-            />
+      {pageCount && (
+        <div className="mx-[80px] flex justify-between">
+          <div className="flex items-center">
+            <select
+              onChange={handleChange}
+              name="limit"
+              id="limit"
+              className="bg-[#fff] border border-[#8A9099] rounded-[10px] text-black p-[5px] px-[8px]"
+            >
+              <option value="10" selected>
+                10
+              </option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+            </select>
+            <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
+              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${
+                (pageNumber + 1) * limit > totalLeads
+                  ? totalLeads
+                  : (pageNumber + 1) * limit
+              } of ${totalLeads}`}
+            </p>
           </div>
-          <ReactPaginate
-            previousLabel={
+          <div className="flex justify-center my-[45px] ">
+            <div
+              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${
+                pageNumber === 0
+                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
+                  : "bg-[#e8ebfd] cursor-pointer"
+              }`}
+              onClick={setFirstPage}
+            >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != 0 ? "svg-blue" : ""} rotate-180`}
+                className={`${
+                  pageNumber != 0 ? "svg-blue" : ""
+                } rotate-180 translate-x-[6px]`}
                 alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
+                width={18}
+                height={18}
               />
-            }
-            nextLabel={
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""}`}
+                className={`${
+                  pageNumber != 0 ? "svg-blue" : ""
+                } rotate-180 translate-x-[-6px]`}
                 alt=""
-                width={16}
-                height={16}
-                style={{
-                  objectFit: "contain",
-                }}
+                width={18}
+                height={18}
               />
-            }
-            breakLabel={"..."}
-            pageCount={pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={0}
-            onPageChange={handlePageClick}
-            containerClassName={"text-black flex justify-center gap-[8px]"}
-            pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
-            pageLinkClassName={``}
-            previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-              pageNumber === 0 ? "bg-[#f5f5f5] opacity-30" : "bg-[#e8ebfd]"
-            }`}
-            previousLinkClassName={`flex justify-center ${
-              pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
-            }`}
-            nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-              pageNumber === pageCount - 1 ? "bg-[#f5f5f5] opacity-30" : "bg-[#e8ebfd]"
-            }`}
-            nextLinkClassName={`flex justify-center ${
-              pageNumber === pageCount - 1 ? "cursor-auto" : ""
-            }`}
-            breakClassName={""}
-            breakLinkClassName={""}
-            forcePage={pageNumber}
-            activeClassName={`bg-renal-blue text-[#fff] rounded-[10px]`}
-          />
-          <div
-            className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${
-              pageNumber === pageCount - 1 ? "bg-[#f5f5f5] opacity-30 cursor-auto" : "bg-[#e8ebfd] cursor-pointer"
-            }`}
-            onClick={setLastPage}
-          >
-            <Image
-              src={getBasicIcon("Arrow-Right 2")}
-              className={`${
-                pageNumber != pageCount - 1 ? "svg-blue" : ""
-              } translate-x-[6px]`}
-              alt=""
-              width={18}
-              height={18}
+            </div>
+            <ReactPaginate
+              previousLabel={
+                <Image
+                  src={getBasicIcon("Arrow-Right 2")}
+                  className={`${pageNumber != 0 ? "svg-blue" : ""} rotate-180`}
+                  alt=""
+                  width={20}
+                  height={20}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              }
+              nextLabel={
+                <Image
+                  src={getBasicIcon("Arrow-Right 2")}
+                  className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""}`}
+                  alt=""
+                  width={16}
+                  height={16}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              }
+              breakLabel={"..."}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={0}
+              onPageChange={handlePageClick}
+              containerClassName={"text-black flex justify-center gap-[8px]"}
+              pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
+              pageLinkClassName={``}
+              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
+                pageNumber === 0 ? "bg-[#f5f5f5] opacity-30" : "bg-[#e8ebfd]"
+              }`}
+              previousLinkClassName={`flex justify-center ${
+                pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
+              }`}
+              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
+                pageNumber === pageCount - 1
+                  ? "bg-[#f5f5f5] opacity-30"
+                  : "bg-[#e8ebfd]"
+              }`}
+              nextLinkClassName={`flex justify-center ${
+                pageNumber === pageCount - 1 ? "cursor-auto" : ""
+              }`}
+              breakClassName={""}
+              breakLinkClassName={""}
+              forcePage={pageNumber}
+              activeClassName={`bg-renal-blue text-[#fff] rounded-[10px]`}
             />
-            <Image
-              src={getBasicIcon("Arrow-Right 2")}
-              className={`${
-                pageNumber != pageCount - 1 ? "svg-blue" : ""
-              } translate-x-[-6px]`}
-              alt=""
-              width={18}
-              height={18}
-            />
+            <div
+              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${
+                pageNumber === pageCount - 1
+                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
+                  : "bg-[#e8ebfd] cursor-pointer"
+              }`}
+              onClick={setLastPage}
+            >
+              <Image
+                src={getBasicIcon("Arrow-Right 2")}
+                className={`${
+                  pageNumber != pageCount - 1 ? "svg-blue" : ""
+                } translate-x-[6px]`}
+                alt=""
+                width={18}
+                height={18}
+              />
+              <Image
+                src={getBasicIcon("Arrow-Right 2")}
+                className={`${
+                  pageNumber != pageCount - 1 ? "svg-blue" : ""
+                } translate-x-[-6px]`}
+                alt=""
+                width={18}
+                height={18}
+              />
+            </div>
           </div>
         </div>
-      </div>}
+      )}
 
       {/* <div className="flex h-[80px] items-center justify-between ">
         <div className="flex items-center">

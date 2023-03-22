@@ -170,10 +170,8 @@ const LeadContainer = ({
   LeadData,
 }: LeadProps) => {
   const {pathname} = useRouter();
-  // console.log(index);
   const state = useSelector((state:any)=>state.auth);
-  // console.log(state.admin);
-  var ht=(Number(index)*50)+255;
+  // var ht=(Number(index)*50)+255;
   return (
     <div className="flex">
       <div className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
