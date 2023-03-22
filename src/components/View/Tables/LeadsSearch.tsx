@@ -126,7 +126,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   // console.log(`limit is ${limit}`);
   return (
     <>
-      <div className="mt-[0px] w-[100%] h-[540px] overflow-x-auto hide-scrollbar">
+      <div className="mt-[0px] w-[100%] h-[560px] overflow-auto custom-scroll pb-[10px]">
         <Header />
         {loading ? (
           <Spinner />
