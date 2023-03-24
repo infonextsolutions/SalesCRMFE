@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { getBasicIcon } from '@/utils/AssetsHelper';
+import { getBasicIcon, getRoundedAvatar } from '@/utils/AssetsHelper';
 import Image from 'next/image';
 
 const CompanyProfile=()=>{
@@ -14,11 +14,16 @@ const CompanyProfile=()=>{
           {/* <div className="flex items-center justify-between"></div> */}
           <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
             <div className="ml-auto">
-             {/*<Image
-              className="inline-block w-[60px] rounded-full ring-2 ring-white"
-              src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            <Image
+              className="h-12 w-16 rounded-full ml-2"
+              src={getRoundedAvatar(1, 30)}
               alt=""
-            /> */}
+              width={64}
+              height={48}
+              style={{
+                objectFit:"contain"
+              }}
+            /> 
               <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900 font-medium">
                 ABC Corp
               </h2>
@@ -109,16 +114,16 @@ const CompanyProfile=()=>{
         >
           <li>
             <div className="flex items-center gap-x-3 mr-3">
-              {/* <Image
-                className="h-12 w-16 rounded-full ml-5"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-                width={64}
-                height={48}
-                style={{
-                  objectFit:"contain"
-                }}
-              /> */}
+            <Image
+              className="h-12 w-16 rounded-full ml-2"
+              src={getRoundedAvatar(2, 30)}
+              alt=""
+              width={64}
+              height={48}
+              style={{
+                objectFit:"contain"
+              }}
+            /> 
               <div>
                 <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                   LeslieAlexander
@@ -140,16 +145,16 @@ const CompanyProfile=()=>{
         >
           <li>
             <div className="flex items-center gap-x-3 mr-3">
-              {/* <Image
-                className="h-12 w-16 rounded-full ml-5"
-                src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-                width={64}
-                height={48}
-                style={{
-                  objectFit:"contain"
-                }}
-              ></Image> */}
+            <Image
+              className="h-12 w-16 rounded-full ml-2"
+              src={getRoundedAvatar(5, 30)}
+              alt=""
+              width={64}
+              height={48}
+              style={{
+                objectFit:"contain"
+              }}
+            /> 
               <div>
                 <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                   Reginacooper
@@ -171,16 +176,16 @@ const CompanyProfile=()=>{
         >
           <li>
             <div className="flex items-center gap-x-3 mr-3">
-              {/* <Image
-                className="h-12 w-16 rounded-full ml-5"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-                width={64}
-                height={48}
-                style={{
-                  objectFit:"contain"
-                }}
-              /> */}
+            <Image
+              className="h-12 w-16 rounded-full ml-2"
+              src={getRoundedAvatar(6, 30)}
+              alt=""
+              width={64}
+              height={48}
+              style={{
+                objectFit:"contain"
+              }}
+            /> 
               <div>
                 <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
                   Judith
