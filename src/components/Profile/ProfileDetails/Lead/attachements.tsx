@@ -4,7 +4,7 @@ const Attachements=()=>{
 
     return(
         <>
-        Manya will work here
+        <h2 className='text-black text-2xl font-medium'>Activity History</h2>
         </>
     )
 }

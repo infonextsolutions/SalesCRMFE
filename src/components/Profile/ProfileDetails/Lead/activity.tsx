@@ -1,12 +1,186 @@
+import { getBasicIcon } from '@/utils/AssetsHelper';
 import React from 'react';
+import Navigator from '@/utils/customNavigator';
+import Image from 'next/image';
 
-const ActivityHistory=()=>{
+const Activityhistory=()=>{
 
     return(
         <>
-        Manya will work here
+          <div className="bg-[#ffffff] my-[50px]">
+            <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">Activity History</h5>
+            <div className="mt-[40px] pl-[20px] pr-[19px] flex text-black text-[14px] leading-[25px] items-center">
+              <p className="ml-[20px]">Date and Time</p>
+              <p className="ml-[40px]">Activity Type</p>
+              <p className="ml-[70px]">Partcipants</p>
+              <p className="ml-[80px]">Outcome</p>
+              <p className="ml-[115px]">Title and Description</p>
+            </div>
+            <div className="mt-[10px] mx-[20px] flex flex-col gap-y-2.5">
+              <div className="text-[14px] pl-[20px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+                <div className="w-[140px]">
+                  <p className="text-[#3F434A]">23 January</p>
+                  <p className="text-[#3F434A]">3:15 Pm</p>
+                </div>
+                <div className="w-[150px]">
+                <Image
+                    src={getBasicIcon("phone")}
+                    className={`w-[17px] opacity-80`}
+                    alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
+                  />
+                </div>
+                <div className="w-[160px]">
+                  <p>Shraddha P.</p>
+                  <p className="text-[#3F434A] font-semibold text-xs">John C</p>
+                </div>
+                <div className="w-[180px]">
+                  <p>Interested</p>
+                </div>
+                <div className="flex justify-between w-64 mb-5">
+                 <p className="text-[#3F434A] font-semibold text-xs">Call About Product a Demo</p>
+                </div>
+                <div>
+                <Image
+                    src={getBasicIcon("More")}
+                    className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
+                    alt=""
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="text-[14px] pl-[20px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+                <div className="w-[140px]">
+                  <p className="text-[#3F434A]">23 January</p>
+                  <p className="text-[#3F434A]">3:15 Pm</p>
+                </div>
+                <div className="w-[150px]">
+                <Image
+                    src={getBasicIcon("mail")}
+                    className={`w-[17px] opacity-80`}
+                    alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
+                  />
+                </div>
+                <div className="w-[160px]">
+                <p>Shraddha P.</p>
+                <p className="text-[#3F434A] font-semibold text-xs">John C</p>
+                </div>
+                <div className="w-[180px]">
+                  <p>Not Interested</p>
+                </div>
+                <div className="flex justify-between  w-64 mb-5">
+                <p className="text-[#3F434A] font-semibold text-xs">Call About Product a Demo</p> 
+                </div>
+                <div>
+                <Image
+                    src={getBasicIcon("More")}
+                    className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
+                    alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="text-[14px] pl-[20px] py-[8px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+                <div className="w-[140px]">
+                  <p className="text-[#3F434A]">23 January</p>
+                  <p className="text-[#3F434A]">3:15 Pm</p>
+                </div>
+                <div className="w-[150px]">
+                <Image
+                    src={getBasicIcon("phone")}
+                    className={`w-[17px] opacity-80`}
+                    alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
+                  />
+                </div>
+                <div className="w-[160px]">
+                <p>Shraddha P.</p>
+                <p className="text-[#3F434A] font-semibold text-xs">John C</p>
+                </div>
+                <div className="w-[180px]">
+                  <p>Interested</p>
+                </div>
+                <div className="flex justify-between  w-64 mb-5">
+                <p className="text-[#3F434A] font-semibold text-xs">Call About Product a Demo</p> 
+                </div>
+                <div>
+                <Image
+                    src={getBasicIcon("More")}
+                    className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
+                    alt=""
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="text-[14px] pl-[20px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+                <div className="w-[140px]">
+                  <p className="text-[#3F434A]">23 January</p>
+                  <p className="text-[#3F434A]">3:15 Pm</p>
+                </div>
+                <div className="w-[150px]">
+                <Image
+                    src={getBasicIcon("mail")}
+                    className={`w-[17px] opacity-80`}
+                    alt="Calendar"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit:"contain"
+                    }}
+                  />
+                </div>
+                <div className="w-[160px]">
+                <p>Shraddha P.</p>
+                <p className="text-[#3F434A] font-semibold text-xs">John C</p>
+                </div>
+                <div className="w-[180px]">
+                  <p>Interested</p>
+                </div>
+                <div className="flex justify-between  w-64 mb-5">
+                <p className="text-[#3F434A] font-semibold text-xs">Call About Product a Demo</p> 
+                </div>
+                <div>
+                <Image
+                    src={getBasicIcon("More")}
+                    className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
+                    alt=""
+                    width={19}
+                    height={19}
+                    style={{
+                      objectFit:"contain"
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </>
     )
 }
 
-export default ActivityHistory;
+export default Activityhistory;
