@@ -10,14 +10,20 @@ import * as Yup from "yup";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string().email("Invalid email").required("Required"),
-  pass: Yup.string()
-    .required("No password provided.")
+  pass: Yup.string().required("No password provided."),
 });
 
 const Login = () => {
   const [show, setShow] = useState("password");
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const setLocalData = (id:any,Name:any,role:any) => {
+    localStorage.setItem("user-id",id);
+    localStorage.setItem("user-name",Name);
+    localStorage.setItem("user-role",role);
+    localStorage.setItem("logged","loggedIn");
+  };
 
   const submit = ({ user, pass }: any) => {
     console.log(user, pass);
@@ -26,11 +32,13 @@ const Login = () => {
     if (user === "Admin@gmail.com" && pass === "Password@123!") {
       dispatch(setUser1({ _id: 1, User: user, Role: "admin" }));
       dispatch(setLoggedInStatus(true));
+      setLocalData(1,user,"admin")
       router.push("/sales/open");
     } else if (user === "Sales@gmail.com" && pass === "Password@123!") {
       console.log("isExecuting");
       dispatch(setUser1({ _id: 1, User: user, Role: "sales-repo" }));
       dispatch(setLoggedInStatus(true));
+      setLocalData(1,user,"sales-repo")
       router.push("/sales/open");
     } else if (
       user === "Satvinder.s@westoryboard.com" &&
@@ -38,10 +46,12 @@ const Login = () => {
     ) {
       dispatch(setUser1({ _id: 1, User: user, Role: "admin" }));
       dispatch(setLoggedInStatus(true));
+      setLocalData(1,user,"admin")
       router.push("/sales/open");
     } else if (user === "Manager@gmail.com" && pass === "Password@123!") {
       dispatch(setUser1({ _id: 1, User: user, Role: "manager" }));
       dispatch(setLoggedInStatus(true));
+      setLocalData(1,user,"manager")
       router.push("/sales/open");
     }
   };
