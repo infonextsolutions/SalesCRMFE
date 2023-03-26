@@ -8,8 +8,10 @@ import { logout, setLoggedInStatus } from "@/store/auth";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
+
   const dispatch = useAppDispatch();
-  const state=useSelector((state:any)=>state.auth);
+  const state = useSelector((state: any) => state.auth);
+
   return (
     <div className="w-full h-[60px] border-b-[1px] border-[#eaebec]  bg-white flex items-center justify-between">
       <Image
@@ -61,16 +63,19 @@ const Navbar = () => {
             width={30}
             height={40}
           />
-          <div className="shrink-0 ml-[20px]"  >
-            <p className="text-black  cursor-pointer">{state.user.name.split('@')[0]}</p>
+          <div className="shrink-0 ml-[20px]">
+            <p className="text-black  cursor-pointer">
+              {state.user.name.split("@")[0]}
+            </p>
             {/* <p className="text-black  cursor-pointer">Jane C.</p> */}
           </div>
           <ButtonDropDown
             dropdown={true}
             list={[{ title: "Logout" }]}
-            click={()=>{
+            click={() => {
               dispatch(logout());
               dispatch(setLoggedInStatus(false));
+              localStorage.clear();
             }}
             text={""}
             id={0}

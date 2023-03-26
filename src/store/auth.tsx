@@ -9,7 +9,7 @@ const authSlice = createSlice({
       role: "",
     },
     _id: "",
-    rights: [],
+    rights: [],  
   },
   reducers: {
     setUser1: (state, action) => {
