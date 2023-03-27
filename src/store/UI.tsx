@@ -1,41 +1,48 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const menuOptions=[
+const menuOptions = [
   {
     title: "Dashboard",
-    route:"dashboard",
+    route: "dashboard",
     icon: "Grid",
     list: [],
   },
   {
     title: "Sales",
-    route:"sales",
+    route: "sales",
     list: [
-      { title: "Open",route:"open" },
-      { title: "Closed",route:"closed" },
-      { title: "Estimates and Insights",route:"estimates-and-insights" },
+      { title: "Open", route: "open" },
+      { title: "Closed", route: "closed" },
+      { title: "Estimates and Insights", route: "estimates-and-insights" },
     ],
     icon: "Sort",
   },
   {
     title: "Calling",
-    route:"calls",
-    list:[],
+    route: "calls",
+    list: [
+      { title: "Recorded Calls", route: "recorded-calls" },
+      { title: "Call Library", route: "call-library" },
+      { title: "Active Calls", route: "active-calls" },
+    ],
     icon: "Phone",
   },
   {
-    title: "Coaching",
-    route:"coaching",
-    list:[],
+    title: "Team",
+    route: "Team",
+    list: [
+      { title: "Team Performence", route: "team-performence" },
+      { title: "Coaching", route: "coaching" },
+    ],
     icon: "Tasks",
   },
-]
+];
 
 const UISlice = createSlice({
   name: "UI",
   initialState: {
     menuOpen: false,
-    menuOptions:menuOptions
+    menuOptions: menuOptions,
   },
   reducers: {
     openMenu: (state) => {
@@ -46,7 +53,7 @@ const UISlice = createSlice({
     },
     triggerMenu: (state) => {
       state.menuOpen = !state.menuOpen;
-    }
+    },
   },
 });
 

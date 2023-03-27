@@ -30,7 +30,9 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
   return (
     <div
       className={`overflow-hidden duration-300 cursor-pointer flex-col flex  mt-[12px] h-[40px] relative `}
-      style={{ height: (dropdown&&open) ? `${50 * (list.length + 1)}px` : `40px` }}
+      style={{
+        height: dropdown && open ? `${50 * (list.length + 1)}px` : `40px`,
+      }}
     >
       {check && (
         <>
@@ -63,7 +65,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           width={30}
           height={30}
           style={{
-            objectFit:"contain"
+            objectFit: "contain",
           }}
         />
         <p
@@ -75,7 +77,7 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
         >
           {title}
         </p>
-        {(list.length !== 0 )&& (
+        {list.length !== 0 && (
           <>
             <div
               onClick={() => {
@@ -98,8 +100,11 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
       {dropdown && open && (
         <div className="w-[100%] min-h-[40px] left-[5px] ">
           {list.map((item: any, i: any) => {
-            const curr1 =
-              `/${route}/${list[i].route}` === `/${route}/${list[Curr].route}`;
+            // const curr1 =
+            //   `/${route}/${list[i].route}` === `/${route}/${list[Curr].route}`;
+            console.log(item,"please check here!")
+            console.log(route);
+            const curr1 = `/${route}/${item.route}`=== pathname;
             return (
               <>
                 <div
