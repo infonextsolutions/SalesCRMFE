@@ -185,3 +185,21 @@ a {
   background-color: #ccc;
   width: 2px;
 }
+
+.custom-scroll-black::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #ccc;
+  width: 2px;
+}
+
+.custom-scroll-black::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #585858;
+}
+
+.custom-scroll-black::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #585858;
+  width: 2px;
+}

@@ -4,7 +4,6 @@ import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/Container";
 import Backdrop from "@/components/View/Backdrop";
 import ImportLead from "@/components/View/import-lead/Index";
-import Table from "@/components/View/Tables/Leads";
 import AddLeadForm from "@/components/View/add-lead/addLead";
 
 const dummyItem = {
@@ -85,12 +84,12 @@ const SalesOpen = ({ data }: any) => {
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
       {imports && (
-        <Backdrop>
+        <Backdrop cancel={cancelImports}>
           <ImportLead />
         </Backdrop>
       )}
       {form && (
-        <Backdrop>
+        <Backdrop cancel={cancelForms}>
           <AddLeadForm />
         </Backdrop>
       )}

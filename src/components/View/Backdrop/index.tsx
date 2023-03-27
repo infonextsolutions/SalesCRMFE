@@ -1,14 +1,61 @@
-import React from "react";
+import gsap from "gsap";
+import React, { useRef, useState } from "react";
+const Backdrop = ({ children, cancel }: any) => {
+  const [open, setOpen] = useState(false);
 
-const Backdrop = ({ children }: any) => {
+  React.useEffect(() => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 500);
+  });
 
+  const container: any = useRef();
+  const backdrop: any = useRef();
+
+  React.useEffect(() => {
+    gsap.to(container.current, {
+      transform: open ? "translateX(0px)" : "translateX(10000px)",
+      duration: 0.5,
+    });
+    gsap.to(backdrop.current, {
+      opacity: open ? 0.3 : 0,
+      duration: 0.5,
+    });
+  }, [open]);
   return (
     <>
-      <div className="fixed top-0 left-0 w-[100%] h-[100%] z-100  bg-black opacity-[0.3]"
+      <div
+        className="fixed top-0 left-0 w-[100%] h-[100%] z-100 overflow-hidden "
         style={{
-          zIndex:1000
+          zIndex: 1000,
         }}
-      >{children}</div>
+      >
+        <div
+          className="w-[100%] h-[100vh] absolute top-0 left-0 bg-black z-10"
+          style={{
+            zIndex: 100,
+            opacity: 0,
+          }}
+          onClick={() => {
+            setOpen(false);
+            setTimeout(() => {
+              cancel();
+            }, 500);
+          }}
+          ref={backdrop}
+        ></div>
+        <div
+          ref={container}
+          className={`w-[600px] h-[100vh] top-0 right-0 absolute z-100 bg-[#fff] `}
+          style={{
+            zIndex: 1000,
+            transform: "translateX(10000px)",
+          }}
+        >
+          {" "}
+          {children}
+        </div>
+      </div>
     </>
   );
 };
