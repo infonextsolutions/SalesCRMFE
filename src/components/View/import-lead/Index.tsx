@@ -1,11 +1,7 @@
 import React from "react";
 
-const ImportLead=()=>{
+const ImportLead = () => {
+  return <></>;
+};
 
-    return(
-        <>
-        </>
-    )
-}
-
-export default ImportLead
+export default ImportLead;
