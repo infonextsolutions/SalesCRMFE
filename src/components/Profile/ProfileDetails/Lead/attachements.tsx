@@ -7,7 +7,7 @@ const Attachements=()=>{
     return(
         <>
         <div className="bg-[#ffffff] my-[50px]">
-        <h2 className="text-black text-2xl font-medium">Attachments</h2>
+        <h2 className="text-[#3F434A] text-2xl font-medium">Attachments</h2>
         <div className="py-7 text-gray text-small">
         <p className="text-[#3F434A] font-semibold">Demo Product A documents for customer</p>
         <div className="mt-[10px] ml-auto mr-[20px] mx-[10px] flex flex-col gap-y-2.5">
