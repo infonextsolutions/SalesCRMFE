@@ -12,7 +12,7 @@ const ProfilePage = () => {
         {/* <div className="flex items-center justify-between"></div> */}
         <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
           <Image
-            className="inline-block w-[60px] rounded-full ring-2 ring-white"
+            className="inline-block w-[50px] rounded-full ring-2 ring-white"
             src={getRoundedAvatar(5, 30)}
             alt=""
             width={60}
@@ -21,18 +21,18 @@ const ProfilePage = () => {
               objectFit: "contain",
             }}
           /> 
-          <div className="ml-4">
-            <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900 font-medium">
-              LEAD-info
+          <div className="ml-3">
+            <h2 className="text-base text-[16px] whitespace-nowrap leading-7 tracking-wide text-gray-900 font-medium">
+              LEAD-XYZ info
             </h2>
             <a
               href="#0"
-              className="block text-sm text-[12px] text-gray-600 hover:text-indigo-500"
+              className="block ml-3 py-2 text-xs text-[14px] text-gray-600 hover:text-indigo-500"
             >
-              Lead-id123456
+              LEAD-ID123456
             </a>
           </div>
-          <div className="h-[100%] ml-auto ">
+          <div className="h-[120%] ml-auto ">
             <Image
               src={getBasicIcon("Edit")}
               className={`w-[20px] svg-grey ml-auto svg-not-selected mt-[9px]`}
@@ -99,7 +99,7 @@ const ProfilePage = () => {
           </div>
         </li>
       </ul>
-      <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
+      <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
       <div className="py-1"></div>
       <h3 className="text-sm font-medium mt-5 ml-3 text-black">LEAD INFO</h3>
       <ul className="mt-2 mb-10 ml-1">
@@ -150,8 +150,8 @@ const ProfilePage = () => {
             <Image
               src={getBasicIcon("Phone")}
               alt=""
-              className="mr-[4px] cursor-pointer"
-              width={30}
+              className="mr-[3px] cursor-pointer"
+              width={20}
               height={30}
               style={{
                 objectFit: "contain",
@@ -163,8 +163,8 @@ const ProfilePage = () => {
             <Image
               src={getBasicIcon("Mail")}
               alt=""
-              className="mr-[4px] cursor-pointer"
-              width={30}
+              className="mr-[3px] cursor-pointer"
+              width={20}
               height={30}
               style={{
                 objectFit: "contain",
@@ -176,8 +176,8 @@ const ProfilePage = () => {
             <Image
               src={getBasicIcon("Calendar")}
               alt=""
-              className="mr-[4px] cursor-pointer"
-              width={30}
+              className="mr-[3px] cursor-pointer"
+              width={20}
               height={30}
               style={{
                 objectFit: "contain",
@@ -189,8 +189,8 @@ const ProfilePage = () => {
             <Image
               src={getBasicIcon("Tasks")}
               alt=""
-              className="mr-[4px] cursor-pointer"
-              width={30}
+              className="mr-[3px] cursor-pointer"
+              width={20}
               height={30}
               style={{
                 objectFit: "contain",
@@ -202,23 +202,23 @@ const ProfilePage = () => {
             <Image
               src={getBasicIcon("Chat")}
               alt=""
-              width={30}
+              width={20}
               height={30}
               style={{
                 objectFit: "contain",
               }}
-              className="mr-[4px] cursor-pointer"
+              className="mr-[3px] cursor-pointer"
             />
             <p>4</p>
           </div>
         </div>
       </ul>
-      <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
+      <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
       <div className="py-1"></div>
-      <h3 className="text-sm font-medium mt-5 ml-3 text-black">PRIMARY CLIENT POC</h3>
+      <h3 className="text-sm font-medium mt-5 ml-2 text-black">PRIMARY CLIENT POC</h3>
       <div className="flex items-center w-[100%] pb-[30px] pt-[20px] ">
       <Image
-              className="h-12 w-16 rounded-full ml-2"
+              className="h-12 w-10 rounded-full ml-1"
               src={getRoundedAvatar(2, 30)}
               alt=""
               width={64}
@@ -227,15 +227,15 @@ const ProfilePage = () => {
                 objectFit:"contain"
               }}
             /> 
-        <div className="ml-2">
-          <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-tight text-gray-900 font-medium">
+        <div className="ml-3">
+          <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-wide text-gray-900 font-normal">
             Sharddha P
           </h2>
           <a
             href="#0"
-            className="block text-medium text-[14px] text-gray-500 hover:text-indigo-500"
+            className="block text-xs text-[14px] text-gray-500 tracking-wide hover:text-indigo-500"
           >
-            salesmanager
+            Sales Manager
           </a>
         </div>
       </div>
@@ -283,7 +283,7 @@ const ProfilePage = () => {
           </div>
         </li>
       </ul>
-      <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
+      <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
       <div className="py-1"></div>
       <div className="flex items-center justify-between mt-2 ml-3">
         <h3 className="text-sm font-medium text-black">OTHER CONTACTS</h3>
@@ -306,7 +306,7 @@ const ProfilePage = () => {
         <li>
           <div className="flex items-center gap-x-3 mr-3">
             <Image
-              className="h-12 w-16 rounded-full ml-2"
+              className="h-12 w-10 rounded-full ml-2"
               src={getRoundedAvatar(6, 30)}
               alt=""
               width={64}
@@ -316,12 +316,12 @@ const ProfilePage = () => {
               }}
             /> 
             <div>
-              <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+              <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
                 LeslieAlexander
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                className="block text-xs font-small text-gray-500 hover:text-indigo-500"
               >
                 Co-Founder
               </a>
@@ -337,7 +337,7 @@ const ProfilePage = () => {
         <li>
           <div className="flex items-center gap-x-3 mr-3">
           <Image
-              className="h-12 w-16 rounded-full ml-2"
+              className="h-12 w-10 rounded-full ml-2"
               src={getRoundedAvatar(4, 30)}
               alt=""
               width={64}
@@ -347,12 +347,12 @@ const ProfilePage = () => {
               }}
             />  
             <div>
-              <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+              <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
                 Reginacooper
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                className="block text-xs font-small text-gray-500 hover:text-indigo-500"
               >
                 Project Lead
               </a>
@@ -368,7 +368,7 @@ const ProfilePage = () => {
         <li>
           <div className="flex items-center gap-x-3 mr-3">
           <Image
-              className="h-12 w-16 rounded-full ml-2"
+              className="h-12 w-10 rounded-full ml-2"
               src={getRoundedAvatar(3, 30)}
               alt=""
               width={64}
@@ -378,12 +378,12 @@ const ProfilePage = () => {
               }}
             /> 
             <div>
-              <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+              <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
                 Judith
               </h4>
               <a
                 href="#0"
-                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                className="block text-xs font-small text-gray-500 hover:text-indigo-500"
               >
                 HR
               </a>
