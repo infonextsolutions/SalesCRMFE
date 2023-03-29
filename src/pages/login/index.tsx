@@ -7,6 +7,7 @@ import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useRouter } from "next/router";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string().email("Invalid email").required("Required"),
@@ -24,6 +25,35 @@ const Login = () => {
     localStorage.setItem("user-role",role);
     localStorage.setItem("logged","loggedIn");
   };
+
+  const [logged] = useLocalStorage("logged", "loading");
+  const [id] = useLocalStorage("user-id", "not-loaded");
+  const [name] = useLocalStorage("user-name", "not-loaded");
+  const [role] = useLocalStorage("user-role", "not-loaded");
+
+  React.useEffect(() => {
+    if (!state.isLoggedIn) {
+      if (logged === "loading" || logged === "loggedIn") {
+        if (id === null || name === null || role === null) {
+          router.replace("/login");
+        }
+        if (id && name && role) {
+          if (
+            id !== "not-loaded" &&
+            name !== "not-loaded" &&
+            role !== "not-loaded"
+          ) {
+            console.log(id, name, role, "only check her");
+            dispatch(setUser1({ _id: id, User: name, Role: role }));
+            dispatch(setLoggedInStatus(true));
+            router.replace("/sales/open");
+          }
+        }
+      } else if (logged === null) {
+        router.replace("/login");
+      }
+    }
+  }, [id, name, role, logged]);
 
   const submit = ({ user, pass }: any) => {
     console.log(user, pass);

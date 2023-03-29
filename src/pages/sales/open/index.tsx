@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
+import { ExotelKey, ExotelToken } from "@/utils/urlHelper";
 
 const SalesOpen = React.lazy(() => import("@/views/sales/open"));
 
@@ -18,6 +19,21 @@ export default function Open({ data }: any) {
   const [id] = useLocalStorage("user-id", "not-loaded");
   const [name] = useLocalStorage("user-name", "not-loaded");
   const [role] = useLocalStorage("user-role", "not-loaded");
+
+  React.useEffect(() => {
+    const doACall = async () => {
+      // const res = axios.post(
+      //   `https://${ExotelKey}:${ExotelToken}@api.exotel.com/v3/accounts/westoryboard1/calls`,
+      //   {
+      //     from: {
+      //       contact_uri: "+9199XXXXXXX",
+      //       state_management: "true",
+      //     },
+      //   }
+      // );
+    };
+    doACall();
+  }, []);
 
   React.useEffect(() => {
     if (!state.isLoggedIn) {
@@ -42,13 +58,13 @@ export default function Open({ data }: any) {
     }
   }, [id, name, role, logged]);
 
-  React.useEffect(()=>{
-    if(!state.isLoggedIn){
-      if(logged===null){
+  React.useEffect(() => {
+    if (!state.isLoggedIn) {
+      if (logged === null) {
         router.replace("/login");
       }
     }
-  },[state.isLoggedIn,logged])
+  }, [state.isLoggedIn, logged]);
   console.log(id, name, role, logged);
 
   return (

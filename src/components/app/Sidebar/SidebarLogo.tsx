@@ -16,7 +16,7 @@ const Logo = () => {
         height={40}
       />
       <p className="tracking-wide text-[#3F434A] ml-[10px] font-bold text-[16px] poppins">
-        Product X
+        No.1 Agent
       </p>
     </div>
   );
