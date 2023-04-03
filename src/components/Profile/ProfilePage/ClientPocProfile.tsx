@@ -22,18 +22,19 @@ const ClientPocProfile = () => {
                 objectFit: "contain",
               }}
             /> 
-            <div className="ml-3 text-bold">
-              <h2 className="text-base text-[14px] font-semibold whitespace-nowrap leading-7 tracking-tight text-black">
-                Leslie Alexander
+            <div className="ml-3 items-center text-medium">
+              <h2 className="text-base text-[18px] font-normal whitespace-nowrap leading-7 tracking-wide text-black">
+                Shraddha P
               </h2>
+              
               <a
                 href="#0"
-                className="block text-sm text-[12px] text-gray-500 hover:text-indigo-500"
+                className="block ml-1 text-sm text-[12px] text-gray-500 hover:text-indigo-500"
               >
-                @Leslie Alexander
+                Sales Manager
               </a>
             </div>
-            <div className="h-[100%] ml-auto ">
+            <div className="h-[120%] ml-auto ">
               <Image
                 src={getBasicIcon("Edit")}
                 className={`w-[20px] svg-grey ml-auto svg-not-selected mt-[9px]`}
@@ -49,8 +50,8 @@ const ClientPocProfile = () => {
         </div>
         {/* <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div> */}
         <div className="py-2"></div>
-        <h3 className="text-sm font-medium text-black mt-5 ml-6">INFO</h3>
-        <ul className="mt-2 mb-10 ml-4">
+        <h3 className="text-sm font-medium text-black mt-5 ml-4">INFO</h3>
+        <ul className="mt-2 mb-10 ml-2">
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1 text-gray-500 ">GENDER</strong>
             <a href="female" className="block text-black">
@@ -93,10 +94,10 @@ const ClientPocProfile = () => {
             </div>
           </li>
         </ul>
-        <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
+        <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
         <div className="py-1"></div>
-        <h3 className="text-sm font-medium mt-5 text-black ml-6">COMPANY INFO</h3>
-        <ul className="mt-2 mb-10 ml-4">
+        <h3 className="text-sm font-medium mt-5 text-black ml-4">COMPANY INFO</h3>
+        <ul className="mt-2 mb-10 ml-2">
           <li className="px-2 mt-4">
             <strong className="font-medium text-gray-500 mr-1">Company Name</strong>
             <a href="name" className="block text-black">
@@ -147,9 +148,9 @@ const ClientPocProfile = () => {
             </div>
           </li>
         </ul>
-        <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div>
+        <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
         <div className="py-1"></div>
-        <div className="flex items-center justify-between mt-2 ml-6">
+        <div className="flex items-center justify-between mt-2 ml-4">
           <h3 className="text-sm text-black font-medium">OTHER CONTACTS</h3>
           <Image
             src={getBasicIcon("Plus")}
@@ -170,22 +171,22 @@ const ClientPocProfile = () => {
           <li>
             <div className="flex items-center gap-x-3 mr-3">
                <Image
-                className="h-12 w-16 rounded-full ml-5"
+                className="h-12 w-10 rounded-full ml-3"
                 src={getRoundedAvatar(3, 30)}
                 alt=""
-                width={64}
+                width={44}
                 height={48}
                 style={{
                   objectFit: "contain",
                 }}
               /> 
               <div>
-                <h4 className="text-base  leading-7 tracking-tight text-black">
+                <h4 className="text-base  text-[12px] leading-7 tracking-wide text-black">
                   LeslieAlexander
                 </h4>
                 <a
                   href="#0"
-                  className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                  className="block text-xs font-small text-gray-500 hover:text-indigo-500"
                 >
                   Co-Founder
                 </a>
@@ -201,7 +202,7 @@ const ClientPocProfile = () => {
           <li>
             <div className="flex items-center gap-x-3 mr-3">
               <Image
-                className="h-12 w-16 rounded-full ml-5"
+                className="h-12 w-10 rounded-full ml-3"
                 src={getRoundedAvatar(4, 30)}
                 alt=""
                 width={64}
@@ -211,12 +212,12 @@ const ClientPocProfile = () => {
                 }}
                 />
               <div>
-                <h4 className="text-base leading-7 tracking-tight text-black">
+                <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
                   Reginacooper
                 </h4>
                 <a
                   href="#0"
-                  className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                  className="block text-xs font-small text-gray-500 hover:text-indigo-500"
                 >
                   Project Lead
                 </a>
@@ -232,7 +233,7 @@ const ClientPocProfile = () => {
           <li>
             <div className="flex items-center gap-x-3 mr-3">
               <Image
-                className="h-12 w-16 rounded-full ml-5"
+                className="h-12 w-10 rounded-full ml-3"
                 src={getRoundedAvatar(5, 30)}
                 alt=""
                 width={64}
@@ -242,12 +243,12 @@ const ClientPocProfile = () => {
                 }}
               /> 
               <div>
-                <h4 className="text-base  leading-7 tracking-tight text-black">
+                <h4 className="text-base   text-[12px] leading-7 tracking-wide text-black">
                   Judith
                 </h4>
                 <a
                   href="#0"
-                  className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                  className="block text-xs font-small text-gray-500 hover:text-indigo-500"
                 >
                   HR
                 </a>
