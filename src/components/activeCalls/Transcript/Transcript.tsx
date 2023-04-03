@@ -7,7 +7,7 @@ const Search = () => {
     <div className="w-full px-[38px] mt-[30px] ">
       <div className="w-[100%] h-[40px] border-[#ccc] border-[1px] rounded-[12px]  flex items-center">
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
-          <Image className="w-[100%]" src={getBasicIcon("Search")} alt="" />
+          <Image className="w-[100%]" src={getBasicIcon("Search")} width={16} height={16} alt="" />
         </div>
         <div className="grow h-[32px] ">
           <input
@@ -17,7 +17,7 @@ const Search = () => {
           />
         </div>
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
-          <Image className="w-[100%]" src={getBasicIcon("Filter")} alt="" />
+          <Image className="w-[100%]" src={getBasicIcon("Filter")} width={16} height={16} alt="" />
         </div>
       </div>
     </div>

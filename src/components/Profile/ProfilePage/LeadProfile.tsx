@@ -20,7 +20,7 @@ const ProfilePage = () => {
             style={{
               objectFit: "contain",
             }}
-          /> 
+          />
           <div className="ml-3">
             <h2 className="text-base text-[16px] whitespace-nowrap leading-7 tracking-wide text-gray-900 font-medium">
               LEAD-XYZ info
@@ -50,31 +50,41 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-5 ml-2 text-black">COMPANY INFO</h3>
       <ul className="mt-2 mb-10 ml-[1px]">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">Company Name</strong>
+          <strong className="font-medium mr-1 text-gray-500">
+            Company Name
+          </strong>
           <a href="name" className="block text-black">
             ABC Corp
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">Company Address</strong>
+          <strong className="font-medium mr-1 text-gray-500">
+            Company Address
+          </strong>
           <a href="address:" className="block text-black">
             nothing
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">Website Link</strong>
+          <strong className="font-medium mr-1 text-gray-500">
+            Website Link
+          </strong>
           <span className="block text-black">
             <a href="https://www.example.com">www.example.com</a>
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">Industry Type</strong>
+          <strong className="font-medium mr-1 text-gray-500">
+            Industry Type
+          </strong>
           <a href="industry:" className="block text-black">
             IT Solutions
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">Social Media</strong>
+          <strong className="font-medium mr-1 text-gray-500">
+            Social Media
+          </strong>
           <div className="flex">
             <Image
               src={getBasicIcon("Facebook")}
@@ -116,31 +126,41 @@ const ProfilePage = () => {
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Owner(primary)</strong>
+          <strong className="font-medium mr-1 text-black">
+            Lead Owner(primary)
+          </strong>
           <span className="block text-gray">
             <a href="Leadowner">Aarti.S</a>
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Owner(secondary)</strong>
+          <strong className="font-medium mr-1 text-black">
+            Lead Owner(secondary)
+          </strong>
           <a href="leadowner" className="block text-gray">
             Raghav V.
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Created By</strong>
+          <strong className="font-medium mr-1 text-black">
+            Lead Created By
+          </strong>
           <a href="leadowner" className="block text-gray">
             -
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Lead Updated on</strong>
+          <strong className="font-medium mr-1 text-black">
+            Lead Updated on
+          </strong>
           <a href="leadowner" className="block text-gray">
             26 January 2023 4:55 PM
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-black">Activity History</strong>
+          <strong className="font-medium mr-1 text-black">
+            Activity History
+          </strong>
         </li>
         <div
           className={`flex h-[20px] items-center justify-between mt-[5px] px-2 shrink-0`}
@@ -215,18 +235,20 @@ const ProfilePage = () => {
       </ul>
       <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
       <div className="py-1"></div>
-      <h3 className="text-sm font-medium mt-5 ml-2 text-black">PRIMARY CLIENT POC</h3>
+      <h3 className="text-sm font-medium mt-5 ml-2 text-black">
+        PRIMARY CLIENT POC
+      </h3>
       <div className="flex items-center w-[100%] pb-[30px] pt-[20px] ">
-      <Image
-              className="h-12 w-10 rounded-full ml-1"
-              src={getRoundedAvatar(2, 30)}
-              alt=""
-              width={64}
-              height={48}
-              style={{
-                objectFit:"contain"
-              }}
-            /> 
+        <Image
+          className="h-12 w-10 rounded-full ml-1"
+          src={getRoundedAvatar(2, 30)}
+          alt=""
+          width={64}
+          height={48}
+          style={{
+            objectFit: "contain",
+          }}
+        />
         <div className="ml-3">
           <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-wide text-gray-900 font-normal">
             Sharddha P
@@ -258,7 +280,9 @@ const ProfilePage = () => {
           <span className="block text-black">Seoul, South Korea</span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">Social Media</strong>
+          <strong className="font-medium mr-1 text-gray-500">
+            Social Media
+          </strong>
           <div className="flex">
             <Image
               src={getBasicIcon("Instagram")}
@@ -312,9 +336,9 @@ const ProfilePage = () => {
               width={64}
               height={48}
               style={{
-                objectFit:"contain"
+                objectFit: "contain",
               }}
-            /> 
+            />
             <div>
               <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
                 LeslieAlexander
@@ -336,16 +360,16 @@ const ProfilePage = () => {
       >
         <li>
           <div className="flex items-center gap-x-3 mr-3">
-          <Image
+            <Image
               className="h-12 w-10 rounded-full ml-2"
               src={getRoundedAvatar(4, 30)}
               alt=""
               width={64}
               height={48}
               style={{
-                objectFit:"contain"
+                objectFit: "contain",
               }}
-            />  
+            />
             <div>
               <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
                 Reginacooper
@@ -367,16 +391,16 @@ const ProfilePage = () => {
       >
         <li>
           <div className="flex items-center gap-x-3 mr-3">
-          <Image
+            <Image
               className="h-12 w-10 rounded-full ml-2"
               src={getRoundedAvatar(3, 30)}
               alt=""
               width={64}
               height={48}
               style={{
-                objectFit:"contain"
+                objectFit: "contain",
               }}
-            /> 
+            />
             <div>
               <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
                 Judith

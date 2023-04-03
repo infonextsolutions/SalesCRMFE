@@ -102,9 +102,9 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           {list.map((item: any, i: any) => {
             // const curr1 =
             //   `/${route}/${list[i].route}` === `/${route}/${list[Curr].route}`;
-            console.log(item,"please check here!")
+            console.log(item, "please check here!");
             console.log(route);
-            const curr1 = `/${route}/${item.route}`=== pathname;
+            const curr1 = `/${route}/${item.route}` === pathname;
             return (
               <>
                 <div
