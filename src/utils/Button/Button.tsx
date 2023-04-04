@@ -33,14 +33,14 @@ const ButtonDropDown = ({
   });
 
   const onClick = (prev: Number, current: Number) => {
-    setTimeout(()=>{
+    setTimeout(() => {
       setclicked(false);
-    },100)
+    }, 100);
     document.removeEventListener("pointerdown", onPointerDown, false);
     if (click) {
-      setTimeout(()=>{
+      setTimeout(() => {
         click(prev, current);
-      },200)
+      }, 200);
     }
     setCurr(current);
   };
@@ -72,7 +72,7 @@ const ButtonDropDown = ({
             <DropDown
               value={curr}
               onClick={onClick}
-              close={()=>{
+              close={() => {
                 setclicked(false);
               }}
               direction={dropDirection}
@@ -101,13 +101,15 @@ const ButtonDropDown = ({
           </div>
         </div>
       )}
-      {text.length&&<p
-        className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
-          tight ? "pl-[4px] pr-[4px]" : "pl-[20px] pr-[10px]"
-        } ${light ? "text-[#3F434A]" : "text-[#ffffff]"} `}
-      >
-        {text}
-      </p>}
+      {text.length && (
+        <p
+          className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
+            tight ? "pl-[4px] pr-[4px]" : "pl-[20px] pr-[10px]"
+          } ${light ? "text-[#3F434A]" : "text-[#ffffff]"} `}
+        >
+          {text}
+        </p>
+      )}
       <div
         className={`absolute ${
           tight ? "right-3 w-[16px]" : "right-2 w-[24px]"

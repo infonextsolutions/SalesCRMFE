@@ -58,6 +58,8 @@ const Audio = () => {
             src="/Images/dots/Dot.svg"
             className="h-[18px] svg-ellipse-5 mr-[25px]"
             alt=""
+            width={10}
+            height={10}
           />
           <p className="text-[#304FFD] text-[14px]">Participant 1:John</p>
         </div>
@@ -66,14 +68,15 @@ const Audio = () => {
             src="/Images/dots/Dot.svg"
             className="h-[18px] svg-ellipse-6 mr-[25px]"
             alt=""
+            width={10}
+            height={10}
           />
           <p className="text-[#FF965D] text-[14px]">Participant 2:Shraddha</p>
         </div>
       </div>
       <Tracker title={"John"} list={list} color={"#304FFD"} />
       <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
-      <Tracker title={"Topics"} list={list} color={"#0090FF"}/>
-      
+      <Tracker title={"Topics"} list={list} color={"#0090FF"} />
       <Transcript />
     </>
   );

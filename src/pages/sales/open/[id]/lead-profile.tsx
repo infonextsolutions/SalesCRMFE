@@ -7,13 +7,12 @@ import dummy from "@/shared/dummy";
 //Manya will make this page
 
 const Profile = () => {
-
-  const titles = ["DEAL INFO","ACTIVITY HISTORY","ATTACHMENTS","COACHING"];
+  const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS", "COACHING"];
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-      title="Profile"
+        title="Profile"
         buttons={[
           {
             text: "Take Action",
@@ -35,7 +34,11 @@ const Profile = () => {
         <div className="w-[400px] min-h-[70vh] bg-white rounded-xl p-[20px]">
           <ProfilePage />
         </div>
-        <LeadProfileContainer titles={titles}  current={0} info={dummy.leadInfo}/>
+        <LeadProfileContainer
+          titles={titles}
+          current={0}
+          info={dummy.leadInfo}
+        />
       </div>
       {/* write your code here for profile page manya! */}
     </div>

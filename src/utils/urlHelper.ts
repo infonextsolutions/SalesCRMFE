@@ -1,0 +1,2 @@
+export const ExotelKey="49ba59e32462a321229df8c6f1057ae71996abef23cfeb48";
+export const ExotelToken="bde2a8e823e0501c2eeb609ff390d29b56635aef7e9f1272";

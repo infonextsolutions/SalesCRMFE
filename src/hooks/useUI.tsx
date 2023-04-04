@@ -1,7 +1,7 @@
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 function useUI() {
-  const ui = useSelector((state:any) => state.ui);
+  const ui = useSelector((state: any) => state.ui);
   return ui;
 }
 
