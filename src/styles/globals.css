@@ -50,6 +50,16 @@
     brightness(104%) contrast(102%) !important ;
 }
 
+.svg-excel {
+  filter: invert(65%) sepia(14%) saturate(1619%) hue-rotate(84deg)
+    brightness(100%) contrast(94%);
+}
+
+.svg-csv {
+  filter: invert(84%) sepia(35%) saturate(710%) hue-rotate(29deg)
+    brightness(97%) contrast(92%);
+}
+
 /* custom-svg-color */
 
 :root {

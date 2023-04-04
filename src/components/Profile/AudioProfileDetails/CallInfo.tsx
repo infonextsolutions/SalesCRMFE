@@ -1,7 +1,6 @@
 import React from "react";
 
 const CallInfo = ({ check, info }: any) => {
-    
   const activeTitle = 0;
 
   return (
