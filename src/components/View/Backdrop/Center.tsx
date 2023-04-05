@@ -1,6 +1,6 @@
 import gsap, { Power4 } from "gsap";
 import React, { useRef, useState } from "react";
-import { Tween } from "react-gsap";
+
 const Backdrop = ({ children, bool }: any) => {
   const [open, setOpen] = useState(false);
 
@@ -18,6 +18,18 @@ const Backdrop = ({ children, bool }: any) => {
       transform: open ? "inset(0px 0px 100% 1px)" : "inset(0px 0px 0% 1px)",
       duration: 1.5,
     });
+
+    // from={{
+    //     clipPath: "inset(0px 0px 100% 1px)",
+    //   }}
+    //   to={{
+    //     clipPath: !open
+    //       ? "inset(0px 0px 100% 1px)"
+    //       : "inset(0px 0px 0% 1px)",
+    //   }}
+    //   duration={1.7}
+    //   ease={Power4.easeInOut}
+
     gsap.to(backdrop.current, {
       opacity: open ? 0.3 : 0,
       duration: 0.5,
@@ -57,22 +69,9 @@ const Backdrop = ({ children, bool }: any) => {
             zIndex: 1000,
           }}
         >
-          <Tween
-            from={{
-              clipPath: "inset(0px 0px 100% 1px)",
-            }}
-            to={{
-              clipPath: !open
-                ? "inset(0px 0px 100% 1px)"
-                : "inset(0px 0px 0% 1px)",
-            }}
-            duration={1.7}
-            ease={Power4.easeInOut}
-          >
-            <div className={`w-[600px] h-[90vh] bg-[#fff] rounded-3xl `}>
-              {children}
-            </div>
-          </Tween>
+          <div className={`w-[600px] h-[90vh] bg-[#fff] rounded-3xl `}>
+            {children}
+          </div>
         </div>
       </div>
     </>
