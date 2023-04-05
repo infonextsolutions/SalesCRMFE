@@ -1,3 +1,5 @@
+import Backdrop from "@/components/View/Backdrop/Center";
+import Notes from "@/components/View/Notes";
 import Lead, { CompanyId, CustomerId } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
@@ -16,14 +18,23 @@ const LeadBox = ({ width }: any) => {
   );
 };
 
-const LeadItem = ({ width, text, left, align, textLeft, link,click,route }: any) => {
-  const {push}=useRouter();
+const LeadItem = ({
+  width,
+  text,
+  left,
+  align,
+  textLeft,
+  link,
+  click,
+  route,
+  onClick,
+}: any) => {
+  const { push } = useRouter();
 
   return (
     <div
       className={`flex items-center  h-[20px] shrink-0`}
       style={{ width: width, marginLeft: left }}
-      
     >
       {link ? (
         <a
@@ -42,9 +53,12 @@ const LeadItem = ({ width, text, left, align, textLeft, link,click,route }: any)
             textAlign: align && "center",
             marginLeft: textLeft && `${textLeft}px`,
           }}
-          onClick={()=>{
-            if(click){
+          onClick={() => {
+            if (click) {
               push(route);
+            }
+            if (onClick) {
+              onClick();
             }
           }}
         >
@@ -63,16 +77,15 @@ const LeadItemMultiple = ({
   bold,
   align,
   click,
-  route
+  route,
 }: any) => {
-
-  const {push}=useRouter();
+  const { push } = useRouter();
   return (
     <div
       className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
       style={{ width: width, marginLeft: left }}
-      onClick={()=>{
-        if(click){
+      onClick={() => {
+        if (click) {
           push(route);
         }
       }}
@@ -112,7 +125,7 @@ const QuickActions = ({ width, left }: any) => {
         width={25}
         height={25}
         style={{
-          objectFit:"contain"
+          objectFit: "contain",
         }}
       />
       <Image
@@ -121,7 +134,7 @@ const QuickActions = ({ width, left }: any) => {
         width={25}
         height={25}
         style={{
-          objectFit:"contain"
+          objectFit: "contain",
         }}
         className="mr-[4px] cursor-pointer"
       />
@@ -132,7 +145,7 @@ const QuickActions = ({ width, left }: any) => {
         width={25}
         height={25}
         style={{
-          objectFit:"contain"
+          objectFit: "contain",
         }}
       />
       <Image
@@ -142,7 +155,7 @@ const QuickActions = ({ width, left }: any) => {
         width={25}
         height={25}
         style={{
-          objectFit:"contain"
+          objectFit: "contain",
         }}
       />
       <Image
@@ -152,7 +165,7 @@ const QuickActions = ({ width, left }: any) => {
         width={25}
         height={25}
         style={{
-          objectFit:"contain"
+          objectFit: "contain",
         }}
       />
     </div>
@@ -169,13 +182,48 @@ const LeadContainer = ({
   custom,
   LeadData,
 }: LeadProps) => {
-  const {pathname} = useRouter();
-  const state = useSelector((state:any)=>state.auth);
+  const { pathname } = useRouter();
+  const state = useSelector((state: any) => state.auth);
+
+  const [notes, setNotes] = React.useState(false);
+  const [imports, setImports] = React.useState(false);
+  const [bool, setBool] = React.useState(true);
+
+  const showNotes = () => {
+    setNotes(true);
+  };
+
+  const showImports = () => {
+    setImports(true);
+  };
+  const cancelImports = () => {
+    setBool(false);
+    setTimeout(() => {
+      setImports(false);
+      setBool(true);
+    }, 500);
+  };
+  const cancelNotes = () => {
+    setBool(false);
+    setTimeout(() => {
+      setNotes(false);
+      setBool(true);
+    }, 1500);
+  };
+  const AddLead = (e: any, e1: any) => {
+    console.log(e, e1);
+    if (e1 === 0) {
+      showNotes();
+    } else if (e1 === 1) {
+      showImports();
+    }
+  };
+
   // var ht=(Number(index)*50)+255;
   return (
     <div className="flex">
       <div className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
-      {/* <div className="fixed flex items-center left-[1390px] h-[50px] cursor-pointer">
+        {/* <div className="fixed flex items-center left-[1390px] h-[50px] cursor-pointer">
         <Image
             src={getBasicIcon("More")}
             className="rotate-90"
@@ -184,9 +232,20 @@ const LeadContainer = ({
             height={20}
           />
       </div> */}
+        {notes && (
+          <Backdrop bool={bool}>
+            <Notes cancel={cancelNotes} />
+          </Backdrop>
+        )}
         <LeadBox width={30} />
         <LeadItem width={120} left={10} textLeft={10} text={"12XXXX"} />
-        <LeadItem width={150} left={10}  text={custom} click={state.admin} route={`${pathname}/${id}/lead-profile`} />
+        <LeadItem
+          width={150}
+          left={10}
+          text={custom}
+          click={state.admin}
+          route={`${pathname}/${id}/lead-profile`}
+        />
         <LeadItemMultiple
           width={130}
           left={20}
@@ -196,7 +255,13 @@ const LeadContainer = ({
           click={true}
           route={`${pathname}/${id}/company-profile`}
         />
-        <LeadItem width={110} left={10} text={customer.name} click={true} route={`${pathname}/${id}/client-poc-profile`}  />
+        <LeadItem
+          width={110}
+          left={10}
+          text={customer.name}
+          click={true}
+          route={`${pathname}/${id}/client-poc-profile`}
+        />
         <LeadItem width={150} left={20} text={customer.email} />
         <LeadItem width={130} left={20} text={customer.contact} />
         <QuickActions width={120} />
@@ -225,11 +290,7 @@ const LeadContainer = ({
           left={10}
           text={LeadData.win_probability}
         />
-        <LeadItem
-          width={140}
-          left={10}
-          text={LeadData.potential_deal_size}
-        />
+        <LeadItem width={140} left={10} text={LeadData.potential_deal_size} />
         <LeadItem
           width={150}
           left={10}
@@ -244,10 +305,15 @@ const LeadContainer = ({
         />
         {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
         {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
-        <LeadItem width={150} left={10} text={"Read Notes"} />
-        
+        <LeadItem
+          width={150}
+          left={10}
+          text={"Read Notes"}
+          onClick={() => {
+            AddLead(1, 0);
+          }}
+        />
       </div>
-      
     </div>
   );
 };
@@ -262,5 +328,5 @@ interface LeadProps {
   leadStatus: String;
   custom: String;
   LeadData: Lead;
-  index:Number;
+  index: Number;
 }

@@ -59,6 +59,8 @@ const SalesOpen = ({ data }: any) => {
 
   const [form, setForm] = useState(false);
   const [imports, setImports] = useState(false);
+  const [bool, setBool] = useState(true);
+
   const showForm = () => {
     setForm(true);
   };
@@ -66,10 +68,18 @@ const SalesOpen = ({ data }: any) => {
     setImports(true);
   };
   const cancelImports = () => {
-    setImports(false);
+    setBool(false);
+    setTimeout(() => {
+      setImports(false);
+      setBool(true);
+    }, 500);
   };
   const cancelForms = () => {
-    setForm(false);
+    setBool(false);
+    setTimeout(() => {
+      setForm(false);
+      setBool(true);
+    }, 500);
   };
   const AddLead = (e: any, e1: any) => {
     console.log(e, e1);
@@ -84,13 +94,13 @@ const SalesOpen = ({ data }: any) => {
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
       {imports && (
-        <Backdrop cancel={cancelImports}>
-          <ImportLead />
+        <Backdrop bool={bool}>
+          <ImportLead cancel={cancelImports} />
         </Backdrop>
       )}
       {form && (
-        <Backdrop cancel={cancelForms}>
-          <AddLeadForm />
+        <Backdrop bool={bool}>
+          <AddLeadForm cancel={cancelForms} />
         </Backdrop>
       )}
       <Navigation
