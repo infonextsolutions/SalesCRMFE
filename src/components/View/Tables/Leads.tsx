@@ -47,7 +47,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     };
 
     getItems();
-  }, [limit, pageNumber,pageCount,totalRecords]);
+  }, [limit, pageNumber, pageCount, totalRecords]);
 
   // console.log(items.result);
   const fetchItems = async (current: any) => {
@@ -72,12 +72,14 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     console.log(allItems);
     setItems(allItems);
   };
+
   const setLastPage = async () => {
     setpageNumber(pageCount - 1);
     const allItems = await fetchItems(pageNumber);
     console.log(allItems);
     setItems(allItems);
   };
+
   const handlePageClick = async (data: any) => {
     // console.log(data.selected);
     let current = data.selected;
@@ -86,14 +88,16 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     console.log(allItems);
     setItems(allItems);
   };
+
   const Leads = items;
   // console.log(Leads);
+
   return (
     <>
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
         <Header />
         {Leads != null &&
-          Leads.map((item: Lead,ind:Number) => {
+          Leads.map((item: Lead, ind: Number) => {
             return (
               <LeadContainer
                 key={item._id}
@@ -285,5 +289,5 @@ interface TableProps {
   totalRecords: Number;
   [key: string]: any;
   icon?: String;
-  search?:String;
+  search?: String;
 }
