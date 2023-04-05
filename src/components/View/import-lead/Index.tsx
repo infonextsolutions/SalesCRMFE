@@ -435,9 +435,9 @@ const Step3 = ({ next, cancel }: any) => {
             </Row>
             <div className="w-[100%] border-b-[1px] border-[#000]"></div>
             <div className="h-[248px] overflow-y-auto custom-scroll-black">
-              {arr.map((item: any) => {
+              {arr.map((item: any,i) => {
                 return (
-                  <Row>
+                  <Row key={i} >
                     <Col width={"100px"} title={item.id} bold={false} />
                     <Col
                       width={"180px"}
