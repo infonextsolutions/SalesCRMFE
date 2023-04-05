@@ -60,6 +60,11 @@
     brightness(97%) contrast(92%);
 }
 
+.svg-red {
+  filter: invert(30%) sepia(100%) saturate(6091%) hue-rotate(353deg)
+    brightness(92%) contrast(124%);
+}
+
 /* custom-svg-color */
 
 :root {
