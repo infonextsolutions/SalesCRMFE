@@ -19,7 +19,7 @@ const BigSpinner = () => {
         router.replace("/login");
       }
     }
-  }, [id, name, role, logged]);
+  }, [id, name, role, logged,router]);
 
   return (
     <div
