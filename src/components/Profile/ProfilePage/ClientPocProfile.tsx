@@ -6,11 +6,10 @@ const ClientPocProfile = () => {
   return (
     <div>
       <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
-        {/* <div className="w-[100%] h-[48px] flex items-center px-[8px]"></div> */}
+     
 
         <div className="flex -space-x-2 overflow-hidden">
-          {/* <div className="relative inline-flex items-start mr-10"></div> */}
-          {/* <div className="flex items-center justify-between"></div> */}
+  
           <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
            <Image
               className="inline-block w-[50px] rounded-full ring-2 ring-white"
@@ -48,7 +47,7 @@ const ClientPocProfile = () => {
             </div>
           </div>
         </div>
-        {/* <div className="mx-auto w-[90%] border-b border-gray-300 my-3"></div> */}
+     
         <div className="py-2"></div>
         <h3 className="text-sm font-medium text-black mt-5 ml-4">INFO</h3>
         <ul className="mt-2 mb-10 ml-2">

@@ -9,7 +9,7 @@ const Activityhistory = () => {
     <div className="bg-[#ffffff] my-[50px]">
     <h2 className="text-[#3F434A] text-2xl font-medium">Activity History</h2>
      <div className="flex text-[14px] mt-[30px] text-[#8A9099] leading-[21px] items-center">
-     <p className="ml-[2px]">Date and Time</p>
+     <p className="ml-[10px]">Date and Time</p>
      <p className="ml-[40px]">Activity Type</p>
      <p className="ml-[65px]">Partcipants</p>
           <p className="ml-[80px]">Outcome</p>
