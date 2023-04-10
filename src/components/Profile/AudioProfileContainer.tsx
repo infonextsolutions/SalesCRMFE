@@ -30,7 +30,7 @@ const AudioProfileContainer = ({
         <div className="text-black text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && <CallInfo check={check} info={info} />}
           {activeTitle === 1 && <Comments />}
-          {activeTitle === 1 && <Notes />}
+          {activeTitle === 2 && <Notes />}
         </div>
         <div className="absolute top-[16px] right-0">
           <Image
