@@ -6,13 +6,9 @@ const CompanyProfile = () => {
 
   return (
 
-    <div>
-
-      {/* <div className="w-[100%] h-[48px] flex items-center px-[8px]"></div> */}
-
-      <div className="flex -space-x-2 overflow-hidden">
-        {/* <div className="relative inline-flex items-start mr-10"></div> */}
-        {/* <div className="flex items-center justify-between"></div> */}
+    <div> 
+     <div className="flex -space-x-2 overflow-hidden">
+      
         <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
           <Image
             className="inline-block w-[60px] rounded-full ring-2 ring-white"
@@ -24,7 +20,7 @@ const CompanyProfile = () => {
               objectFit: "contain",
             }}
           />
-         <div className="ml-3 text-bold">
+         <div className="ml-2 text-bold">
               <h2 className="text-base text-[12px] font-semibold whitespace-nowrap leading-7 tracking-tight text-black">
                 ABC Corp.
               </h2>
@@ -38,7 +34,7 @@ const CompanyProfile = () => {
             <div className="h-[130%] ml-2 ">
               <Image
                 src={getBasicIcon("Edit")}
-                className={`w-[50px] svg-grey svg-not-selected mt-[5px]`}
+                className={`w-[20px] align-center svg-grey svg-not-selected mt-[5px]`}
                 alt="Edit"
                 width={20}
                 height={20}

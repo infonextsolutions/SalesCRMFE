@@ -5,11 +5,10 @@ import Image from "next/image";
 const ProfilePage = () => {
   return (
     <div>
-      {/*<div className="w-[100%] h-[48px] flex items-center px-[8px]"></div> */}
+      
 
       <div className="flex -space-x-2 overflow-hidden">
-        {/* <div className="relative inline-flex items-start mr-10"></div> */}
-        {/* <div className="flex items-center justify-between"></div> */}
+      
         <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
           <Image
             className="inline-block w-[50px] rounded-full ring-2 ring-white"

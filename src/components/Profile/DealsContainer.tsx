@@ -19,7 +19,7 @@ const Deals=()=>{
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
               <p>Lead Id</p>
               <p className="ml-[92px]">Product Service</p>
-              <p className="ml-[82px]">Lead Stage</p>
+              <p className="ml-[72px]">Lead Stage</p>
               <p className="ml-[91px]">Last Activity</p>
               <p className="ml-[174px]">Activity History</p>
             </div>
@@ -415,7 +415,7 @@ const Deals=()=>{
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
               <p>Lead Id</p>
               <p className="ml-[92px]">Product Service</p>
-              <p className="ml-[82px]">Lead Stage</p>
+              <p className="ml-[72px]">Lead Stage</p>
               <p className="ml-[91px]">Last Activity</p>
               <p className="ml-[174px]">Activity History</p>
             </div>
@@ -809,7 +809,7 @@ const Deals=()=>{
           <div className="bg-[#ffffff] my-[50px] mt-[80px]">
             <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">Internet History</h5>
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
-              <p>Product Service</p>
+              <p className="ml-[2px]">Product Service</p>
               <p className="ml-[92px]">Lead Id</p>
               <p className="ml-[91px]">Last Activity</p>
             </div>
