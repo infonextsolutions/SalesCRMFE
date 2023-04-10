@@ -196,6 +196,7 @@ const LeadContainer = ({
   const showImports = () => {
     setImports(true);
   };
+  
   const cancelImports = () => {
     setBool(false);
     setTimeout(() => {
@@ -212,7 +213,6 @@ const LeadContainer = ({
     }, 1700);
   };
 
-  console.log(bool);
   const AddLead = (e: any, e1: any) => {
     console.log(e, e1);
     if (e1 === 0) {
@@ -222,8 +222,6 @@ const LeadContainer = ({
     }
   };
 
-  // var ht=(Number(index)*50)+255;
-  
   return (
     <div className="flex">
       <div className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
