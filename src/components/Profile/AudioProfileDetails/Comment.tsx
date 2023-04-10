@@ -6,12 +6,12 @@ import React from "react";
 const Comments = () => {
   return (
     
-    <><div className="mt-[10px] ml-[20px] w-[85%] h-[120px] border-[#ccc] border-[1px] rounded-[20px] flex ">
+    <><div className="mt-[10px] ml-[20px] w-[84%] h-[120px] border-[#ccc] border-[1px] rounded-[20px] flex ">
     <p className="mt-[10px] mb-[25px] ml-[6px] text-gray-400">write a comment here</p>
   </div>
     <div className="py-2">
-    <button className="bg-renal-blue rounded-xl items-center justify-center pl-[10px] mr-[50px] ml-[320px] pr-[10px] p-[7px]">
-    <p className="whitespace-nowrap font-large text-[15px] pl-[10px] pr-[10px] text-[#ffffff] ">comment</p>
+    <button className="bg-renal-blue rounded-xl items-center justify-center pl-[8px] mr-[50px] ml-[320px] pr-[8px] p-[7px]">
+    <p className="whitespace-nowrap font-large text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">comment</p>
     </button>
     <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
     <div className="py-1"></div>

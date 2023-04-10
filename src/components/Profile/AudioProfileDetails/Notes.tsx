@@ -34,14 +34,14 @@ const Notes = () => {
     </div>
   </div>
   <div className="py-2"></div>
-  <div className="mt-[10px] ml-[20px] w-[85%] h-[210px] border-black border-[1px] rounded-[20px] ">
+  <div className="mt-[10px] ml-[20px] w-[85%] h-[200px] border-black border-[1px] rounded-[20px] ">
   <p className="mt-[10px] mb-[20px] ml-[14px] text-gray-600">12 June 2020</p>
   <p className=" ml-[14px] text-[18px] font-medium text-black-400">The title of a note</p>
   <div className="py-1"></div>
   <p className=" ml-[14px] text-[14px] font-small text-gray-500">lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod faucibus tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed id nisi id turpis sagittis tincidunt...</p>
   </div>
   <div className="py-2"></div>
-  <div className="mt-[10px] ml-[20px] w-[85%] h-[210px] border-black border-[1px] rounded-[20px] ">
+  <div className="mt-[10px] ml-[20px] w-[85%] h-[200px] border-black border-[1px] rounded-[20px] ">
   <p className="mt-[10px] mb-[20px] ml-[14px] text-gray-600">12 June 2020</p>
   <p className=" ml-[14px] text-[18px] font-medium text-black-400">The title of a note</p>
   <div className="py-1"></div>
