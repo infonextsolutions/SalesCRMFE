@@ -11,8 +11,8 @@ const Activityhistory = () => {
      <div className="flex text-[14px] mt-[30px] text-[#8A9099] leading-[21px] items-center">
      <p className="ml-[10px]">Date and Time</p>
      <p className="ml-[40px]">Activity Type</p>
-     <p className="ml-[65px]">Partcipants</p>
-          <p className="ml-[80px]">Outcome</p>
+     <p className="ml-[55px]">Partcipants</p>
+          <p className="ml-[75px]">Outcome</p>
           <p className="ml-[115px]">Title and Description</p>
           </div>
           <div className="mt-[10px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5">
@@ -40,15 +40,18 @@ const Activityhistory = () => {
             <div className="w-[180px]">
               <p>Interested</p>
             </div>
-            <div className="flex justify-between w-64 mb-5">
+            <div className=" justify-between w-64">
               <p className="text-[#3F434A] font-semibold text-xs">
                 Call About Product a Demo
+              </p>
+              <p className="text-[#8A9099]  font-medium text-xs">
+                Product A Feature Discussion Implement
               </p>
             </div>
             <div>
               <Image
                 src={getBasicIcon("More")}
-                className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
+                className={`w-[19px]  rotate-90 cursor-pointer opacity-80`}
                 alt=""
                 width={17}
                 height={17}
@@ -80,11 +83,15 @@ const Activityhistory = () => {
               <p className="text-[#3F434A] font-semibold text-xs">John C</p>
             </div>
             <div className="w-[180px]">
-              <p>Not Interested</p>
+              <p className="items-center">Not</p>
+              <p>Interested</p>
             </div>
-            <div className="flex justify-between  w-64 mb-5">
+            <div className=" justify-between  w-64 ">
               <p className="text-[#3F434A] font-semibold text-xs">
                 Call About Product a Demo
+              </p>
+              <p className="text-[#8A9099]  font-medium text-xs">
+                Product A Feature Discussion Implement
               </p>
             </div>
             <div>
@@ -124,9 +131,12 @@ const Activityhistory = () => {
             <div className="w-[180px]">
               <p>Interested</p>
             </div>
-            <div className="flex justify-between  w-64 mb-5">
+            <div className=" justify-between  w-64 ">
               <p className="text-[#3F434A] font-semibold text-xs">
                 Call About Product a Demo
+              </p>
+              <p className="text-[#8A9099]  font-medium text-xs">
+                Product A Feature Discussion Implement
               </p>
             </div>
             <div>
@@ -166,9 +176,12 @@ const Activityhistory = () => {
             <div className="w-[180px]">
               <p>Interested</p>
             </div>
-            <div className="flex justify-between  w-64 mb-5">
+            <div className="justify-between  w-64">
               <p className="text-[#3F434A] font-semibold text-xs">
                 Call About Product a Demo
+              </p>
+              <p className="text-[#8A9099]  font-medium text-xs">
+                Product A Feature Discussion Implement
               </p>
             </div>
             <div>
