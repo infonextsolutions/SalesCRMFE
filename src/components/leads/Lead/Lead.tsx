@@ -196,6 +196,7 @@ const LeadContainer = ({
   const showImports = () => {
     setImports(true);
   };
+  
   const cancelImports = () => {
     setBool(false);
     setTimeout(() => {
@@ -203,13 +204,15 @@ const LeadContainer = ({
       setBool(true);
     }, 500);
   };
+
   const cancelNotes = () => {
     setBool(false);
     setTimeout(() => {
       setNotes(false);
       setBool(true);
-    }, 1500);
+    }, 1700);
   };
+
   const AddLead = (e: any, e1: any) => {
     console.log(e, e1);
     if (e1 === 0) {
@@ -219,19 +222,20 @@ const LeadContainer = ({
     }
   };
 
-  // var ht=(Number(index)*50)+255;
   return (
     <div className="flex">
       <div className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
-        {/* <div className="fixed flex items-center left-[1390px] h-[50px] cursor-pointer">
-        <Image
-            src={getBasicIcon("More")}
-            className="rotate-90"
-            alt=""
-            width={20}
-            height={20}
-          />
-      </div> */}
+        {/*
+        <div className="fixed flex items-center left-[1390px] h-[50px] cursor-pointer">
+          <Image
+              src={getBasicIcon("More")}
+              className="rotate-90"
+              alt=""
+              width={20}
+              height={20}
+            />
+        </div> 
+        */}
         {notes && (
           <Backdrop bool={bool}>
             <Notes cancel={cancelNotes} />

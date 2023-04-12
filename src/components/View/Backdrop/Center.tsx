@@ -1,22 +1,42 @@
 import gsap, { Power4 } from "gsap";
 import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const Backdrop = ({ children, bool }: any) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      setOpen(true);
-    }, 500);
-  });
-
-  const container: any = useRef();
   const backdrop: any = useRef();
 
   React.useEffect(() => {
-    gsap.to(container.current, {
-      transform: open ? "inset(0px 0px 100% 1px)" : "inset(0px 0px 0% 1px)",
-      duration: 1.5,
+    // if (open) {
+    //   gsap.fromTo(
+    //     container.current,
+    //     {
+    //       clipPath: "inset(0px 0px 100% 1px)",
+    //     },
+    //     {
+    //       clipPath: "inset(0px 0px 0% 1px)",
+    //       duration: 1.7,
+    //       ease: Power4.easeInOut,
+    //     }
+    //   );
+    // } else {
+    //   gsap.fromTo(
+    //     container.current,
+    //     {
+    //       clipPath: "inset(0px 0px 0% 1px)",
+    //     },
+    //     {
+    //       clipPath: "inset(0px 0px 100% 1px)",
+    //       duration: 1.7,
+    //       ease: Power4.easeInOut,
+    //     }
+    //   );
+    // }
+
+    gsap.to(backdrop.current, {
+      opacity: open ? 0.3 : 0,
+      duration: 0.5,
     });
 
     // from={{
@@ -29,12 +49,9 @@ const Backdrop = ({ children, bool }: any) => {
     //   }}
     //   duration={1.7}
     //   ease={Power4.easeInOut}
-
-    gsap.to(backdrop.current, {
-      opacity: open ? 0.3 : 0,
-      duration: 0.5,
-    });
   }, [open]);
+
+  console.log(open, "please check here!");
 
   const close = () => {
     setOpen(false);
@@ -69,13 +86,31 @@ const Backdrop = ({ children, bool }: any) => {
             zIndex: 1000,
           }}
         >
-          <div className={`w-[600px] h-[90vh] bg-[#fff] rounded-3xl `}>
+          <motion.div
+            className={`w-[600px] h-[90vh] bg-[#fff] rounded-3xl `}
+            initial={{
+              clipPath: "inset(0px 0px 100% 1px)",
+            }}
+            animate={
+              open
+                ? {
+                    clipPath: "inset(0px 0px 0% 1px)",
+                  }
+                : {
+                    clipPath: "inset(0px 0px 100% 1px)",
+                  }
+            }
+            transition={{
+              duration: 1,
+              delay: 0.5,
+            }}
+          >
             {children}
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
   );
 };
 
-export default Backdrop;
+export default React.memo(Backdrop);
