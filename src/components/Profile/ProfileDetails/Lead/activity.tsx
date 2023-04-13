@@ -11,20 +11,20 @@ const Activityhistory = () => {
      <div className="flex text-[14px] mt-[30px] text-[#8A9099] leading-[21px] items-center">
      <p className="ml-[10px]">Date and Time</p>
      <p className="ml-[40px]">Activity Type</p>
-     <p className="ml-[65px]">Partcipants</p>
-          <p className="ml-[80px]">Outcome</p>
-          <p className="ml-[115px]">Title and Description</p>
+     <p className="ml-[50px]">Partcipants</p>
+          <p className="ml-[65px]">Outcome</p>
+          <p className="ml-[105px]">Title and Description</p>
           </div>
           <div className="mt-[10px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5">
-          <div className="text-[14px] pl-[20px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+          <div className="text-[14px] pl-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
             <div className="w-[140px]">
               <p className="text-[#3F434A]">23 January</p>
               <p className="text-[#3F434A]">3:15 Pm</p>
             </div>
-            <div className="w-[125px]">
+            <div className="w-[130px]">
               <Image
                 src={getBasicIcon("phone")}
-                className={`w-[17px] opacity-80`}
+                className={`w-[17px] svg-blue opacity-80`}
                 alt="Calendar"
                 width={17}
                 height={17}
@@ -33,22 +33,25 @@ const Activityhistory = () => {
                 }}
               />
             </div>
-            <div className="w-[150px]">
+            <div className="w-[140px] ">
               <p>Shraddha P.</p>
               <p className="text-[#3F434A] font-semibold text-xs">John C</p>
             </div>
-            <div className="w-[180px]">
+            <div className="w-[170px]">
               <p>Interested</p>
             </div>
-            <div className="flex justify-between w-64 mb-5">
+            <div className=" w-[180px] mr-[55px]">
               <p className="text-[#3F434A] font-semibold text-xs">
                 Call About Product a Demo
+              </p>
+              <p className="text-[#8A9099] font-medium text-xs">
+                Product A Feature Discussion 
               </p>
             </div>
             <div>
               <Image
                 src={getBasicIcon("More")}
-                className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
+                className={`w-[19px]  rotate-90 cursor-pointer opacity-80`}
                 alt=""
                 width={17}
                 height={17}
@@ -58,15 +61,15 @@ const Activityhistory = () => {
               />
             </div>
           </div>
-          <div className="text-[14px] pl-[20px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+          <div className="text-[14px] pl-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
             <div className="w-[140px]">
               <p className="text-[#3F434A]">23 January</p>
               <p className="text-[#3F434A]">3:15 Pm</p>
             </div>
-            <div className="w-[125px]">
+            <div className="w-[130px]">
               <Image
                 src={getBasicIcon("mail")}
-                className={`w-[17px] opacity-80`}
+                className={`w-[17px] svg-blue opacity-80`}
                 alt="Calendar"
                 width={17}
                 height={17}
@@ -75,16 +78,20 @@ const Activityhistory = () => {
                 }}
               />
             </div>
-            <div className="w-[150px]">
+            <div className="w-[140px]">
               <p>Shraddha P.</p>
               <p className="text-[#3F434A] font-semibold text-xs">John C</p>
             </div>
-            <div className="w-[180px]">
-              <p>Not Interested</p>
+            <div className="w-[170px]">
+              <p className="items-center">Not</p>
+              <p>Interested</p>
             </div>
-            <div className="flex justify-between  w-64 mb-5">
+            <div className=" w-[180px] mr-[55px]">
               <p className="text-[#3F434A] font-semibold text-xs">
                 Call About Product a Demo
+              </p>
+              <p className="text-[#8A9099]  font-medium text-xs">
+                Product A Feature Discussion
               </p>
             </div>
             <div>
@@ -100,15 +107,15 @@ const Activityhistory = () => {
               />
             </div>
           </div>
-          <div className="text-[14px] pl-[20px] py-[8px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+          <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
             <div className="w-[140px]">
               <p className="text-[#3F434A]">23 January</p>
               <p className="text-[#3F434A]">3:15 Pm</p>
             </div>
-            <div className="w-[125px]">
+            <div className="w-[130px]">
               <Image
                 src={getBasicIcon("phone")}
-                className={`w-[17px] opacity-80`}
+                className={`w-[17px] svg-blue opacity-80`}
                 alt="Calendar"
                 width={17}
                 height={17}
@@ -117,16 +124,19 @@ const Activityhistory = () => {
                 }}
               />
             </div>
-            <div className="w-[150px]">
+            <div className="w-[140px]">
               <p>Shraddha P.</p>
               <p className="text-[#3F434A] font-semibold text-xs">John C</p>
             </div>
-            <div className="w-[180px]">
+            <div className="w-[170px]">
               <p>Interested</p>
             </div>
-            <div className="flex justify-between  w-64 mb-5">
+            <div className=" w-[180px] mr-[55px]">
               <p className="text-[#3F434A] font-semibold text-xs">
                 Call About Product a Demo
+              </p>
+              <p className="text-[#8A9099]  font-medium text-xs">
+                Product A Feature Discussion
               </p>
             </div>
             <div>
@@ -142,15 +152,15 @@ const Activityhistory = () => {
               />
             </div>
           </div>
-          <div className="text-[14px] pl-[20px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+          <div className="text-[14px] pl-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
             <div className="w-[140px]">
               <p className="text-[#3F434A]">23 January</p>
               <p className="text-[#3F434A]">3:15 Pm</p>
             </div>
-            <div className="w-[125px]">
+            <div className="w-[130px]">
               <Image
                 src={getBasicIcon("mail")}
-                className={`w-[17px] opacity-80`}
+                className={`w-[17px] svg-blue opacity-80`}
                 alt="Calendar"
                 width={17}
                 height={17}
@@ -159,16 +169,19 @@ const Activityhistory = () => {
                 }}
               />
             </div>
-            <div className="w-[150px]">
+            <div className="w-[140px]">
               <p>Shraddha P.</p>
               <p className="text-[#3F434A] font-semibold text-xs">John C</p>
             </div>
-            <div className="w-[180px]">
+            <div className="w-[170px]">
               <p>Interested</p>
             </div>
-            <div className="flex justify-between  w-64 mb-5">
+            <div className="w-[180px] mr-[55px]">
               <p className="text-[#3F434A] font-semibold text-xs">
                 Call About Product a Demo
+              </p>
+              <p className="text-[#8A9099]  font-medium text-xs">
+                Product A Feature Discussion
               </p>
             </div>
             <div>
