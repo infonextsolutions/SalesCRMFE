@@ -14,31 +14,31 @@ const Deals=()=>{
               current={0}
               list={[{id:0,title:"Deals"}]}
           />
-          <div className="bg-[#ffffff] my-[50px]">
+          <div className="bg-[#ffffff] my-[40px]">
             <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">Open Deals</h5>
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
               <p>Lead Id</p>
-              <p className="ml-[92px]">Product Service</p>
-              <p className="ml-[72px]">Lead Stage</p>
-              <p className="ml-[91px]">Last Activity</p>
-              <p className="ml-[174px]">Activity History</p>
+              <p className="ml-[45px]">Product Service</p>
+              <p className="ml-[35px]">Lead Stage</p>
+              <p className="ml-[32px]">Last Activity</p>
+              <p className="ml-[90px]">Activity History</p>
             </div>
             <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[140px]">
+                <div className="w-[110px]">
                   <p className="text-[#3F434A]">12XX34</p>
                 </div>
-                <div className="w-[174px]">
+                <div className="w-[128px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[160px]">
+                <div className="w-[95px]">
                   <p>Won</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[140px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
+                <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
                   <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
@@ -121,20 +121,20 @@ const Deals=()=>{
                 </div>
               </div>
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[140px]">
+                <div className="w-[110px]">
                   <p className="text-[#3F434A]">12XX34</p>
                 </div>
-                <div className="w-[174px]">
+                <div className="w-[128px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[160px]">
+                <div className="w-[95px]">
                   <p>Won</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[140px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
+                <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
                   <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
@@ -217,20 +217,20 @@ const Deals=()=>{
                 </div>
               </div>
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[140px]">
+                <div className="w-[110px]">
                   <p className="text-[#3F434A]">12XX34</p>
                 </div>
-                <div className="w-[174px]">
+                <div className="w-[128px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[160px]">
+                <div className="w-[95px]">
                   <p>Won</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[140px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
+                <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
                   <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
@@ -313,20 +313,20 @@ const Deals=()=>{
                 </div>
               </div>
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[140px]">
+                <div className="w-[110px]">
                   <p className="text-[#3F434A]">12XX34</p>
                 </div>
-                <div className="w-[174px]">
+                <div className="w-[128px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[160px]">
+                <div className="w-[95px]">
                   <p>Won</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[140px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
+                <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
                   <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
@@ -414,27 +414,27 @@ const Deals=()=>{
             <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">Close Deals</h5>
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
               <p>Lead Id</p>
-              <p className="ml-[92px]">Product Service</p>
-              <p className="ml-[72px]">Lead Stage</p>
-              <p className="ml-[91px]">Last Activity</p>
-              <p className="ml-[174px]">Activity History</p>
+              <p className="ml-[45px]">Product Service</p>
+              <p className="ml-[35px]">Lead Stage</p>
+              <p className="ml-[32px]">Last Activity</p>
+              <p className="ml-[90px]">Activity History</p>
             </div>
             <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[140px]">
+                <div className="w-[110px]">
                   <p className="text-[#3F434A]">12XX34</p>
                 </div>
-                <div className="w-[174px]">
+                <div className="w-[128px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[160px]">
+                <div className="w-[95px]">
                   <p>Won</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[140px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
+                <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
                   <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
@@ -517,20 +517,20 @@ const Deals=()=>{
                 </div>
               </div>
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[140px]">
+                <div className="w-[110px]">
                   <p className="text-[#3F434A]">12XX34</p>
                 </div>
-                <div className="w-[174px]">
+                <div className="w-[128px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[160px]">
+                <div className="w-[95px]">
                   <p>Won</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[140px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
+                <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
                   <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
@@ -613,20 +613,20 @@ const Deals=()=>{
                 </div>
               </div>
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[140px]">
+                <div className="w-[110px]">
                   <p className="text-[#3F434A]">12XX34</p>
                 </div>
-                <div className="w-[174px]">
+                <div className="w-[128px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[160px]">
+                <div className="w-[95px]">
                   <p>Won</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[140px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
+                <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
                   <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
@@ -709,20 +709,20 @@ const Deals=()=>{
                 </div>
               </div>
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[140px]">
+                <div className="w-[110px]">
                   <p className="text-[#3F434A]">12XX34</p>
                 </div>
-                <div className="w-[174px]">
+                <div className="w-[128px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[160px]">
+                <div className="w-[95px]">
                   <p>Won</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[140px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="flex items-start gap-[5px] w-[250px] text-[#3F434A]">
+                <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
                   <Image
                     src={getBasicIcon("Phone")}
                     className={`w-[17px] opacity-80`}
@@ -809,23 +809,23 @@ const Deals=()=>{
           <div className="bg-[#ffffff] my-[50px] mt-[80px]">
             <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">Internet History</h5>
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
-              <p className="ml-[2px]">Product Service</p>
-              <p className="ml-[92px]">Lead Id</p>
-              <p className="ml-[91px]">Last Activity</p>
+              <p className="ml-[1px]">Product Service</p>
+              <p className="ml-[52px]">Lead Id</p>
+              <p className="ml-[95px]">Last Activity</p>
             </div>
             <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[190px]">
+                <div className="w-[145px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[137px]">
+                <div className="w-[147px]">
                   <p>12XX34</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[90px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="w-[44%] flex justify-end">
+                <div className="w-[45%] flex justify-end">
                 <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
@@ -839,17 +839,17 @@ const Deals=()=>{
                 </div>
               </div>
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[190px]">
+                <div className="w-[145px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[137px]">
+                <div className="w-[147px]">
                   <p>12XX34</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[90px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="w-[44%] flex justify-end">
+                <div className="w-[45%] flex justify-end">
                 <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
@@ -863,17 +863,17 @@ const Deals=()=>{
                 </div>
               </div>
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-                <div className="w-[190px]">
+                <div className="w-[145px]">
                   <p>Product A</p>
                 </div>
-                <div className="w-[137px]">
+                <div className="w-[147px]">
                   <p>12XX34</p>
                 </div>
-                <div className="w-[180px]">
+                <div className="w-[90px]">
                   <p>Email Sent</p>
                   <p>23 Jan 2023</p>
                 </div>
-                <div className="w-[44%] flex justify-end">
+                <div className="w-[45%] flex justify-end">
                 <Image
                     src={getBasicIcon("More")}
                     className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
