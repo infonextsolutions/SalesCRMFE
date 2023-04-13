@@ -69,7 +69,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
     getItems();
     setLoading(false);
-  }, [limit, pageNumber]);
+  }, [limit, pageNumber, search]);
 
   const fetchItems = async (current: any) => {
     const res = await axios.get(
@@ -86,6 +86,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
         e.customerId?.email?.includes(search) ||
         e.companyId?.company_website_url?.includes(search)
     );
+    console.log(filtered);
     settotalLeads(filtered.length);
     return filtered;
   };
@@ -102,6 +103,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setItems(allItems);
     setLoading(false);
   };
+
   const setLastPage = async () => {
     setLoading(true);
     console.log(`pagecount check is ${pageCount}`);

@@ -104,7 +104,7 @@ const SalesOpen = ({ data }: any) => {
         </Backdrop>
       )}
       <Navigation
-        title={"Sales>Open>Manage Leads"}
+        title={"Sales>Close>Manage Leads"}
         buttons={[
           {
             text: "View",

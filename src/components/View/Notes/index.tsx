@@ -23,34 +23,28 @@ const AddText = ({ top, title, width }: any) => {
 
 const Notes = ({ cancel }: any) => {
   return (
-    <div className="w-[100%] h-[100vh] py-[30px] pl-[50px] pr-[20px] ">
-      <h1 className="text-[#3f434a] text-[31px] font-medium mb-[40px] tracking-[1px]">
+    <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
+      <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
         Add Note
       </h1>
-      <div className="custom-scroll-black w-[100%] h-[70vh] overflow-y-auto">
-        <div className="pr-[50px]">
+      <div className="custom-scroll-black w-[100%] pb-[60px] overflow-y-auto ">
+        <div>
           <AddText top={"10px"} title="Note Title" />
           <AddText top={"10px"} title="Description" />
-          <AddText top={"10px"} title="Lead Id" />
-          <AddText top={"10px"} title="Date" />
-          <div className="w-[100%] mt-[130px] flex ">
-            <SimpleButton
-              theme={1}
-              text={"Save"}
-              left={0}
-              right={0}
-              click={() => {}}
-            />
-            <SimpleButton
-              theme={2}
-              text={"Cancel"}
-              left={20}
-              right={0}
-              click={() => {
-                cancel();
-              }}
-            />
-          </div>
+        </div>
+        <div className="absolute right-[160px] bottom-[40px] mt-[130px] flex ">
+          <SimpleButton
+            theme={2}
+            text={"Cancel"}
+            left={20}
+            right={0}
+            click={() => {
+              cancel();
+            }}
+          />
+        </div>
+        <div className="absolute right-[40px] bottom-[40px] mt-[130px] flex ">
+          <SimpleButton theme={1} text={"Create"} left={20} right={0} />
         </div>
       </div>
     </div>

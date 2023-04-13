@@ -16,14 +16,15 @@ const SignupSchema = Yup.object().shape({
 
 const Login = () => {
   const [show, setShow] = useState("password");
+  const [invalid, setInvalid] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const setLocalData = (id:any,Name:any,role:any) => {
-    localStorage.setItem("user-id",id);
-    localStorage.setItem("user-name",Name);
-    localStorage.setItem("user-role",role);
-    localStorage.setItem("logged","loggedIn");
+  const setLocalData = (id: any, Name: any, role: any) => {
+    localStorage.setItem("user-id", id);
+    localStorage.setItem("user-name", Name);
+    localStorage.setItem("user-role", role);
+    localStorage.setItem("logged", "loggedIn");
   };
 
   const [logged] = useLocalStorage("logged", "loading");
@@ -56,19 +57,20 @@ const Login = () => {
   }, [id, name, role, logged]);
 
   const submit = ({ user, pass }: any) => {
+    setInvalid(false);
     console.log(user, pass);
     // console.log(user, pass);
     // e.preventDefault();
     if (user === "Admin@gmail.com" && pass === "Password@123!") {
       dispatch(setUser1({ _id: 1, User: user, Role: "admin" }));
       dispatch(setLoggedInStatus(true));
-      setLocalData(1,user,"admin")
+      setLocalData(1, user, "admin");
       router.push("/sales/open");
     } else if (user === "Sales@gmail.com" && pass === "Password@123!") {
       console.log("isExecuting");
       dispatch(setUser1({ _id: 1, User: user, Role: "sales-repo" }));
       dispatch(setLoggedInStatus(true));
-      setLocalData(1,user,"sales-repo")
+      setLocalData(1, user, "sales-repo");
       router.push("/sales/open");
     } else if (
       user === "Satvinder.s@westoryboard.com" &&
@@ -76,13 +78,15 @@ const Login = () => {
     ) {
       dispatch(setUser1({ _id: 1, User: user, Role: "admin" }));
       dispatch(setLoggedInStatus(true));
-      setLocalData(1,user,"admin")
+      setLocalData(1, user, "admin");
       router.push("/sales/open");
     } else if (user === "Manager@gmail.com" && pass === "Password@123!") {
       dispatch(setUser1({ _id: 1, User: user, Role: "manager" }));
       dispatch(setLoggedInStatus(true));
-      setLocalData(1,user,"manager")
+      setLocalData(1, user, "manager");
       router.push("/sales/open");
+    } else {
+      setInvalid(true);
     }
   };
 
@@ -200,6 +204,11 @@ const Login = () => {
                         </p>
                       )}
                     </div>
+                    {invalid && (
+                      <p className="block text-[#ff0000]  text-start mt-[-15px] mb-[-9px] mb-2 font-medium tracking-wide">
+                        *Invalid Credentials
+                      </p>
+                    )}
                     <button
                       onClick={(e) => {
                         e.preventDefault();
