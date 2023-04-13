@@ -1,18 +1,21 @@
-import React from "react";
 import Navigation from "@/components/app/Navigation";
-import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
-import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
-import dummy from "@/shared/dummy";
+import Deals from "@/components/Profile/DealsContainer";
+import ProfilePage from "@/components/Profile/ProfilePage/ClientPocProfile";
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Navigator from "@/utils/customNavigator";
+import React, { useState } from "react";
 
-//Manya will make this page
-
-const Profile = () => {
-  const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS", "COACHING"];
-
+const ClientProfile = () => {
+  const [activeTitle, setActiveTitle] = useState(0);
+  function CallBack (childData:any){
+        setActiveTitle(childData); 
+  }
+  const titles = ["Deals"];
+  const list = titles.map((title:any,i:any)=>({id:i,title:title}));
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Manage Leads > ABC Corp."
+        title="Profile"
         buttons={[
           {
             text: "Take Action",
@@ -34,15 +37,13 @@ const Profile = () => {
         <div className="w-[400px] min-h-[70vh] bg-white rounded-xl p-[20px]">
           <ProfilePage />
         </div>
-        <LeadProfileContainer
-          titles={titles}
-          current={0}
-          info={dummy.leadInfo}
-        />
+        <div className="bg-white rounded-xl w-[100%] px-[25px]">
+            <Deals/>
+        </div>
       </div>
       {/* write your code here for profile page manya! */}
     </div>
   );
 };
 
-export default Profile;
+export default ClientProfile;

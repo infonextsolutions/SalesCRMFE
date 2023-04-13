@@ -81,13 +81,13 @@ const Backdrop = ({ children, bool }: any) => {
           ref={backdrop}
         ></div>
         <div
-          className="w-[100%] h-[100vh] top-0 z-100 absolute flex justify-center py-[5vh] overflow-hidden"
+          className="w-[100%] h-[100vh] top-0 z-100 absolute flex justify-center py-[100px] overflow-hidden"
           style={{
             zIndex: 1000,
           }}
         >
           <motion.div
-            className={`w-[600px] h-[90vh] bg-[#fff] rounded-3xl `}
+            className={`w-[600px] h-[100%] bg-[#fff] rounded-3xl relative`}
             initial={{
               clipPath: "inset(0px 0px 100% 1px)",
             }}
@@ -101,7 +101,7 @@ const Backdrop = ({ children, bool }: any) => {
                   }
             }
             transition={{
-              duration: 1,
+              duration: 0.5,
               delay: 0.5,
             }}
           >

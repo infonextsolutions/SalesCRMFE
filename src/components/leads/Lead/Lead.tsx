@@ -112,7 +112,7 @@ const LeadItemMultiple = ({
   );
 };
 
-const QuickActions = ({ width, left }: any) => {
+const QuickActions = ({ width, left,notes }: any) => {
   return (
     <div
       className={`flex  h-[18px] item-center shrink-0`}
@@ -154,6 +154,9 @@ const QuickActions = ({ width, left }: any) => {
         className="mr-[4px] cursor-pointer"
         width={25}
         height={25}
+        onClick={()=>{
+          notes();
+        }}
         style={{
           objectFit: "contain",
         }}
@@ -196,7 +199,7 @@ const LeadContainer = ({
   const showImports = () => {
     setImports(true);
   };
-  
+
   const cancelImports = () => {
     setBool(false);
     setTimeout(() => {
@@ -247,7 +250,7 @@ const LeadContainer = ({
           width={150}
           left={10}
           text={custom}
-          click={state.admin}
+          click={true}
           route={`${pathname}/${id}/lead-profile`}
         />
         <LeadItemMultiple
@@ -268,7 +271,12 @@ const LeadContainer = ({
         />
         <LeadItem width={150} left={20} text={customer.email} />
         <LeadItem width={130} left={20} text={customer.contact} />
-        <QuickActions width={120} />
+        <QuickActions
+          width={120}
+          notes={() => {
+            AddLead(1, 0);
+          }}
+        />
         <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
         <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
         <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
@@ -309,14 +317,7 @@ const LeadContainer = ({
         />
         {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
         {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
-        <LeadItem
-          width={150}
-          left={10}
-          text={"Read Notes"}
-          onClick={() => {
-            AddLead(1, 0);
-          }}
-        />
+        <LeadItem width={150} left={10} text={"Read Notes"} />
       </div>
     </div>
   );

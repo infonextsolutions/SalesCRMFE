@@ -13,7 +13,9 @@ const AudioProfileContainer = ({
   check,
   width,
 }: AudioProfileContainerProps) => {
+
   const [activeTitle, setActiveTitle] = useState(0);
+
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
