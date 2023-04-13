@@ -31,7 +31,7 @@ const CompanyProfile = () => {
                 Noida,UP
               </a>
             </div>
-            <div className="h-[130%] ml-2 ">
+            <div className="h-[130%] ml-14 ">
               <Image
                 src={getBasicIcon("Edit")}
                 className={`w-[20px] align-center svg-grey svg-not-selected mt-[5px]`}
