@@ -1,4 +1,5 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 import React, { useState } from "react";
 
 const AddText = ({ top, title, width, list }: any) => {
@@ -19,7 +20,7 @@ const AddText = ({ top, title, width, list }: any) => {
         >
           {list.map((item: any, i: any) => {
             return (
-              <option value={item.value} selected={item.selected}>
+              <option value={item.value} key={i} selected={item.selected}>
                 {item.title}
               </option>
             );
@@ -42,38 +43,42 @@ const LastActivity = ({}) => {
         LastActivity
       </p>
       <div className="w-[100%] flex justify-between">
-        <div className="w-[45%] relative py-[7px] px-[10px] border-[1px] flex items-center justify-center  rounded-xl border-[#ccc]">
-          <img src={getBasicIcon("Calendar")} className="mr-[10px]" alt="" />
+        <div className="w-[48%] relative py-[7px] px-[10px] border-[1px] flex items-center justify-center  rounded-xl border-[#ccc]">
+          <Image src={getBasicIcon("Calendar")} width={20} height={20} alt="" />
           <input
             type="date"
-            className="bg-[#fff] outline-none font-medium text-[#000] cursor-pointer"
+            className="bg-[#fff] pl-[3px] outline-none font-medium text-[#000] cursor-pointer"
             name=""
             id=""
           />
-          <img
+          <Image
             src={getBasicIcon("Arrow-Down 2")}
             className="absolute right-[10px] pointer-events-none cursor-pointer w-[15px] top-[13px]"
             alt=""
             style={{
               userSelect: "none",
             }}
+            width={15}
+            height={15}
           />
         </div>
-        <div className="w-[45%] relative py-[7px] font-medium px-[10px] border-[1px] cursor-pointer flex items-center justify-center  rounded-xl border-[#ccc]">
-          <img src={getBasicIcon("Calendar")} className="mr-[10px]" alt="" />
+        <div className="w-[48%] relative py-[7px] px-[10px] border-[1px] flex items-center justify-center  rounded-xl border-[#ccc]">
+          <Image src={getBasicIcon("Calendar")} width={20} height={20} alt="" />
           <input
             type="date"
-            className="bg-[#fff] outline-none font-medium text-[#000] cursor-pointer"
+            className="bg-[#fff] pl-[3px] outline-none font-medium text-[#000] cursor-pointer"
             name=""
             id=""
           />
-          <img
+          <Image
             src={getBasicIcon("Arrow-Down 2")}
             className="absolute right-[10px] pointer-events-none cursor-pointer w-[15px] top-[13px]"
             alt=""
             style={{
               userSelect: "none",
             }}
+            width={15}
+            height={15}
           />
         </div>
       </div>
