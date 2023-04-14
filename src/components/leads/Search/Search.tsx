@@ -1,18 +1,24 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Button from "@/utils/Button/Button";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import Filter from "./Filter";
 
-const Search = ({change}:any) => {
+const Search = ({ change }: any) => {
+  const [show, setShow] = useState(false);
+
   return (
-    <div className="w-[60%] h-[40px] border-[#ccc] border-[1px] rounded-[12px]  flex items-center">
+    <div className="w-[60%] h-[40px] relative border-[#ccc] border-[1px] rounded-[12px]  flex items-center">
       <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
-        <Image className="w-[100%]" src={getBasicIcon("Search")} alt=""
+        <Image
+          className="w-[100%]"
+          src={getBasicIcon("Search")}
+          alt=""
           // fill={true}
           width={30}
           height={30}
           style={{
-            objectFit:"contain"
+            objectFit: "contain",
           }}
         />
       </div>
@@ -24,16 +30,28 @@ const Search = ({change}:any) => {
           placeholder="Search contact..."
         />
       </div>
-      <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
-        <Image className="w-[100%]" src={getBasicIcon("Filter")} alt=""
+      <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer " onClick={()=>{
+        setShow(true);
+      }}>
+        <Image
+          className="w-[100%]"
+          src={getBasicIcon("Filter")}
+          alt=""
           // fill={true}
           width={30}
           height={30}
           style={{
-            objectFit:"contain"
+            objectFit: "contain",
           }}
         />
       </div>
+      {show && (
+        <Filter
+          cancel={() => {
+            setShow(false);
+          }}
+        />
+      )}
     </div>
   );
 };
