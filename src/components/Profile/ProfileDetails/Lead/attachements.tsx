@@ -10,7 +10,7 @@ const Attachements = () => {
           <h2 className="text-[#3F434A] text-2xl font-medium">Attachments</h2>
           <button className="ml-[380px] flex bg-renal-blue pl-[6px] rounded-xl pr-[6px] p-[8px]">
             <Image
-              src={getBasicIcon("UPLOAD")}
+              src={getBasicIcon("Upload")}
               className={`w-[18px] svg-white`}
               alt=""
               width={20}
@@ -29,7 +29,7 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
               <Image
-                src={getBasicIcon("PDF")}
+                src={getBasicIcon("Pdf")}
                 className={`w-[55px] svg-gray`}
                 alt=""
                 width={20}
@@ -75,7 +75,7 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
             <Image
-                src={getBasicIcon("pdf")}
+                src={getBasicIcon("Pdf")}
                 className={`w-[55px] svg-grey`}
                 alt=""
                 width={20}
@@ -90,7 +90,7 @@ const Attachements = () => {
               </div>
               <div className="w-[190px] flex items-center">
                 <Image
-                  src={getBasicIcon("download")}
+                  src={getBasicIcon("Download")}
                   className={`w-[22px] ml-[125px]`}
                   alt="Download"
                   width={17}
@@ -101,7 +101,7 @@ const Attachements = () => {
                 />
               </div>
               <Image
-                src={getBasicIcon("delete")}
+                src={getBasicIcon("Delete")}
                 className={`w-[22px] mr-[7px]`}
                 alt="delete"
                 width={17}
@@ -121,7 +121,7 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
             <Image
-                src={getBasicIcon("pdf")}
+                src={getBasicIcon("Pdf")}
                 className={`w-[55px] svg-"fill-#F26868"`}
                 alt=""
                 width={20}
@@ -136,7 +136,7 @@ const Attachements = () => {
               </div>
               <div className="w-[190px] flex items-center">
                 <Image
-                  src={getBasicIcon("download")}
+                  src={getBasicIcon("Download")}
                   className={`w-[22px] ml-[125px]`}
                   alt="Download"
                   width={17}
@@ -147,7 +147,7 @@ const Attachements = () => {
                 />
               </div>
               <Image
-                src={getBasicIcon("delete")}
+                src={getBasicIcon("Delete")}
                 className={`w-[22px] mr-[7px]`}
                 alt="delete"
                 width={17}
@@ -167,7 +167,7 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
             <Image
-                src={getBasicIcon("PDF")}
+                src={getBasicIcon("Pdf")}
                 className={`w-[55px] svg-grey`}
                 alt=""
                 width={20}
@@ -182,7 +182,7 @@ const Attachements = () => {
               </div>
               <div className="w-[190px] flex items-center">
                 <Image
-                  src={getBasicIcon("download")}
+                  src={getBasicIcon("Download")}
                   className={`w-[22px] ml-[125px]`}
                   alt="Download"
                   width={17}
@@ -193,7 +193,7 @@ const Attachements = () => {
                 />
               </div>
               <Image
-                src={getBasicIcon("delete")}
+                src={getBasicIcon("Delete")}
                 className={`w-[22px] mr-[7px]`}
                 alt="delete"
                 width={17}

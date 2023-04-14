@@ -414,7 +414,7 @@ const ProfilePage = () => {
           </div>
         </li>
       </ul>
-      <div className="mx-auto w-[90%] border-b border-gray-300 my-6"></div>
+      <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
     </div>
   );
 };
