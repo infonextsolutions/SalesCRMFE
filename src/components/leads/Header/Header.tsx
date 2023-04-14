@@ -1,12 +1,18 @@
 import React from "react";
 
-const HeaderCheckBox = ({ width }: any) => {
+const HeaderCheckBox = ({ width, click }: any) => {
   return (
     <div
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" className="checkbox" />
+      <input
+        onChange={() => {
+          click();
+        }}
+        type="checkbox"
+        className="checkbox"
+      />
     </div>
   );
 };
@@ -29,18 +35,23 @@ const HeaderItem = ({ width, text, left, align }: any) => {
   );
 };
 
-const Header = () => {
+const Header = ({ selectAll }: any) => {
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
-        <HeaderCheckBox width={30} />
+        <HeaderCheckBox
+          width={30}
+          click={() => {
+            selectAll();
+          }}
+        />
         <HeaderItem width={120} left={20} text={"LEAD ID"} />
         <HeaderItem width={150} left={0} text={"Lead name"} />
         <HeaderItem width={130} left={20} text={"COMPANY NAME"} />
         <HeaderItem width={110} left={10} text={"CLIENT POC"} />
         <HeaderItem width={150} left={20} text={"EMAIL"} />
         <HeaderItem width={130} left={20} text={"PHONE"} />
-        <HeaderItem width={120}  text={"Quick Actions"}  />
+        <HeaderItem width={120} text={"Quick Actions"} />
         <HeaderItem width={150} left={20} text={"more contacts"} />
         <HeaderItem width={120} left={5} text={"lead stage"} />
         <HeaderItem width={120} left={10} text={"lead status"} />
