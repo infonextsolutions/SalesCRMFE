@@ -10,7 +10,7 @@ const Attachements = () => {
           <h2 className="text-[#3F434A] text-2xl font-medium">Attachments</h2>
           <button className="ml-[380px] flex bg-renal-blue pl-[6px] rounded-xl pr-[6px] p-[8px]">
             <Image
-              src={getBasicIcon("Upload")}
+               src="/Images/Logo/Upload.svg"
               className={`w-[18px] svg-white`}
               alt=""
               width={20}
@@ -29,14 +29,15 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
               <Image
-                src={getBasicIcon("Pdf")}
-                className={`w-[55px] svg-gray`}
+                src="/Images/Logo/PDF 1.svg"
                 alt=""
-                width={20}
-                height={30}
+                className="w-[55px] px-[10px] "
+                // fill={true}
                 style={{
-                  objectFit: "contain",
+                  // objectFit:"contain"
                 }}
+                width={55}
+                height={40}
               />
               <div className="w-[170px] ml-2 mt-3">
                 <p className="text-[#3F434A] ">Wireframe UI kit.pdf</p>
@@ -44,7 +45,7 @@ const Attachements = () => {
               </div>
               <div className="w-[190px] flex items-center">
                 <Image
-                  src={getBasicIcon("Download")}
+                  src="/Images/Logo/Download.svg"
                   className={`w-[22px] ml-[125px]`}
                   alt="Download"
                   width={17}
@@ -55,7 +56,7 @@ const Attachements = () => {
                 />
               </div>
               <Image
-                src={getBasicIcon("Delete")}
+                src="/Images/Logo/Delete.svg"
                 className={`w-[22px] mr-[7px]`}
                 alt="delete"
                 width={17}
@@ -75,14 +76,15 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
             <Image
-                src={getBasicIcon("Pdf")}
-                className={`w-[55px] svg-grey`}
+                src="/Images/Logo/ZIP 1.svg"
                 alt=""
-                width={20}
-                height={20}
+                className="w-[55px] px-[10px] "
+                // fill={true}
                 style={{
-                  objectFit: "contain",
+                  // objectFit:"contain"
                 }}
+                width={55}
+                height={40}
               />
               <div className="w-[170px] ml-2 mt-3">
                 <p className="text-[#3F434A]">Wireframe UI kit.zip</p>
@@ -90,7 +92,7 @@ const Attachements = () => {
               </div>
               <div className="w-[190px] flex items-center">
                 <Image
-                  src={getBasicIcon("Download")}
+                  src="/Images/Logo/Download.svg"
                   className={`w-[22px] ml-[125px]`}
                   alt="Download"
                   width={17}
@@ -101,7 +103,7 @@ const Attachements = () => {
                 />
               </div>
               <Image
-                src={getBasicIcon("Delete")}
+                src="/Images/Logo/Delete.svg"
                 className={`w-[22px] mr-[7px]`}
                 alt="delete"
                 width={17}
@@ -121,14 +123,15 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
             <Image
-                src={getBasicIcon("Pdf")}
-                className={`w-[55px] svg-"fill-#F26868"`}
+                src="/Images/Logo/DOC 1.svg"
                 alt=""
-                width={20}
-                height={20}
+                className="w-[55px] px-[10px] "
+                // fill={true}
                 style={{
-                  objectFit: "contain",
+                  // objectFit:"contain"
                 }}
+                width={55}
+                height={40}
               />
               <div className="w-[170px] ml-2 mt-3">
                 <p className="text-[#3F434A]">Wireframe UI kit.doc</p>
@@ -136,7 +139,7 @@ const Attachements = () => {
               </div>
               <div className="w-[190px] flex items-center">
                 <Image
-                  src={getBasicIcon("Download")}
+                  src="/Images/Logo/Download.svg"
                   className={`w-[22px] ml-[125px]`}
                   alt="Download"
                   width={17}
@@ -147,7 +150,7 @@ const Attachements = () => {
                 />
               </div>
               <Image
-                src={getBasicIcon("Delete")}
+                src="/Images/Logo/Delete.svg"
                 className={`w-[22px] mr-[7px]`}
                 alt="delete"
                 width={17}
@@ -167,22 +170,23 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
             <Image
-                src={getBasicIcon("Pdf")}
-                className={`w-[55px] svg-grey`}
+                src="/Images/Logo/XLS 1.svg"
                 alt=""
-                width={20}
-                height={30}
+                className="w-[55px] px-[10px] "
+                // fill={true}
                 style={{
-                  objectFit: "contain",
+                  // objectFit:"contain"
                 }}
+                width={55}
+                height={40}
               />
               <div className="w-[170px] mt-3 ml-2">
-                <p className="text-[#3F434A]">Wireframe UI kit.jpg</p>
+                <p className="text-[#3F434A]">Wireframe UI kit.xls</p>
                 <p className="text-xs mb-3">5.6 MB</p>
               </div>
               <div className="w-[190px] flex items-center">
                 <Image
-                  src={getBasicIcon("Download")}
+                  src="/Images/Logo/Download.svg"
                   className={`w-[22px] ml-[125px]`}
                   alt="Download"
                   width={17}
@@ -193,7 +197,7 @@ const Attachements = () => {
                 />
               </div>
               <Image
-                src={getBasicIcon("Delete")}
+                src="/Images/Logo/Delete.svg"
                 className={`w-[22px] mr-[7px]`}
                 alt="delete"
                 width={17}

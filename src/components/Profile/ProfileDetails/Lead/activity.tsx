@@ -10,9 +10,9 @@ const Activityhistory = () => {
       <h2 className="text-[#3F434A] text-2xl font-medium">Activity History</h2>
       <div className="flex text-[14px] mt-[30px] text-[#8A9099] leading-[21px] items-center">
         <p>Date and Time</p>
-        <p className="ml-[40px]">Activity Type</p>
+        <p className="ml-[35px]">Activity Type</p>
         <p className="ml-[35px]">Partcipants</p>
-        <p className="ml-[45px]">Outcome</p>
+        <p className="ml-[65px]">Outcome</p>
         <p className="ml-[80px]">Title and Description</p>
       </div>
       <div className="mt-[10px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5">
@@ -24,7 +24,7 @@ const Activityhistory = () => {
           <div className="w-[110px]">
             <Image
               src={getBasicIcon("Phone")}
-              className={`w-[17px] svg-blue opacity-80`}
+              className={`w-[17px] svg-red sopacity-80`}
               alt="Calendar"
               width={17}
               height={17}
@@ -33,7 +33,7 @@ const Activityhistory = () => {
               }}
             />
           </div>
-          <div className="w-[115px] ">
+          <div className="w-[135px] ">
             <p>Shraddha P.</p>
             <p className="text-[#8A9099]  font-semibold text-xs">John C</p>
           </div>
@@ -78,7 +78,7 @@ const Activityhistory = () => {
               }}
             />
           </div>
-          <div className="w-[115px]">
+          <div className="w-[135px]">
             <p>Shraddha P.</p>
             <p className="text-[#8A9099]  font-semibold text-xs">John C</p>
           </div>
@@ -112,10 +112,10 @@ const Activityhistory = () => {
             <p className="text-[#3F434A]">23 January</p>
             <p className="text-[#3F434A]">3:15 Pm</p>
           </div>
-          <div className="w-[115px]">
+          <div className="w-[110px]">
             <Image
               src={getBasicIcon("Phone")}
-              className={`w-[17px] svg-blue opacity-80`}
+              className={`w-[17px] svg-red opacity-80`}
               alt="Calendar"
               width={17}
               height={17}
@@ -124,7 +124,7 @@ const Activityhistory = () => {
               }}
             />
           </div>
-          <div className="w-[115px]">
+          <div className="w-[135px]">
             <p>Shraddha P.</p>
             <p className="text-[#8A9099] font-semibold text-xs">John C</p>
           </div>
@@ -169,7 +169,7 @@ const Activityhistory = () => {
               }}
             />
           </div>
-          <div className="w-[115px]">
+          <div className="w-[135px]">
             <p>Shraddha P.</p>
             <p className="text-[#8A9099]  font-semibold text-xs">John C</p>
           </div>
