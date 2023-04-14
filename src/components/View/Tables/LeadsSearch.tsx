@@ -126,10 +126,16 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const Leads = items;
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
+  const [selectAll, setSelectAll] = useState(false);
+
   return (
     <>
       <div className="mt-[0px] w-[100%] h-[560px] overflow-auto custom-scroll pb-[10px]">
-        <Header />
+        <Header
+          selectAll={() => {
+            setSelectAll(!selectAll);
+          }}
+        />
         {loading ? (
           <Spinner />
         ) : (
@@ -137,6 +143,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           Leads.map((item: Lead, ind: any) => {
             return (
               <LeadContainer
+                selectAll={selectAll}
                 key={item._id}
                 index={ind}
                 id={item._id}

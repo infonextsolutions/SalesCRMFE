@@ -4,16 +4,30 @@ import Lead, { CompanyId, CustomerId } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-const LeadBox = ({ width }: any) => {
+const LeadBox = ({ width, bool }: any) => {
+  const [check, setCheck] = useState(false);
+  React.useEffect(() => {
+    if (check) {
+      if (bool) {
+        ref.current.checked = true;
+        console.log("init");
+      } else {
+        ref.current.checked = false;
+        console.log("init");
+      }
+    }
+    setCheck(true);
+  }, [bool]);
+  const ref: any = useRef();
   return (
     <div
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" className="checkbox" />
+      <input type="checkbox" ref={ref} className="checkbox" />
     </div>
   );
 };
@@ -112,7 +126,7 @@ const LeadItemMultiple = ({
   );
 };
 
-const QuickActions = ({ width, left,notes }: any) => {
+const QuickActions = ({ width, left, notes }: any) => {
   return (
     <div
       className={`flex  h-[18px] item-center shrink-0`}
@@ -154,7 +168,7 @@ const QuickActions = ({ width, left,notes }: any) => {
         className="mr-[4px] cursor-pointer"
         width={25}
         height={25}
-        onClick={()=>{
+        onClick={() => {
           notes();
         }}
         style={{
@@ -184,6 +198,7 @@ const LeadContainer = ({
   leadStatus,
   custom,
   LeadData,
+  selectAll,
 }: LeadProps) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
@@ -244,7 +259,7 @@ const LeadContainer = ({
             <Notes cancel={cancelNotes} />
           </Backdrop>
         )}
-        <LeadBox width={30} />
+        <LeadBox width={30} bool={selectAll} />
         <LeadItem width={120} left={10} textLeft={10} text={"12XXXX"} />
         <LeadItem
           width={150}
@@ -334,4 +349,5 @@ interface LeadProps {
   custom: String;
   LeadData: Lead;
   index: Number;
+  selectAll: any;
 }

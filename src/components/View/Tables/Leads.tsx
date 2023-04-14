@@ -100,6 +100,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
           Leads.map((item: Lead, ind: Number) => {
             return (
               <LeadContainer
+              selectAll={false}
                 key={item._id}
                 id={item._id}
                 index={ind}
