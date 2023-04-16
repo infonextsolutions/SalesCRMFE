@@ -29,7 +29,7 @@ const menuOptions = [
   },
   {
     title: "Team",
-    route: "Team",
+    route: "team",
     list: [
       { title: "Team Performence", route: "team-performence" },
       { title: "Coaching", route: "coaching" },

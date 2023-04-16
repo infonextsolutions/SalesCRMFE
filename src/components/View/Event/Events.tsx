@@ -18,10 +18,6 @@ const DropItems = ({ title, list, top }: any) => {
         id="countries"
         className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
       >
-        <option selected>Choose Owner</option>
-        <option value="US">United States</option>
-        <option value="CA">Canada</option>
-        <option value="FR">France</option>
         {list.map((item: any, i: any) => {
           return (
             <option key={i} value={item.value} selected={item.selected}>
@@ -174,7 +170,7 @@ const Time = () => {
             const check = selected === i;
             console.log(selected, i, check);
             return (
-              <div className="w-[100%] relative cursor-pointer" key={i} >
+              <div className="w-[100%] relative cursor-pointer" key={i}>
                 {check && (
                   <Image
                     src={getBasicIcon("Check")}
@@ -260,6 +256,25 @@ const DateContainer = () => {
   );
 };
 
+const AllDay = () => {
+  return (
+    <div className="w-[100%] flex items-center h-[40px] mt-[30px]">
+      <div className={`flex items-center mr-[70px]  h-[20px] shrink-0 `}>
+        <input type="checkbox" className="checkbox mr-[8px]" />
+        <p className="text-[14px] font-medium tracking-wide text-[#000]">
+          All Day
+        </p>
+      </div>
+      <div className={`flex items-center  h-[20px] shrink-0 `}>
+        <input type="checkbox" className="checkbox mr-[8px]" />
+        <p className="text-[14px] font-medium tracking-wide text-[#000]">
+          Repeat
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const Events = ({ cancel }: any) => {
   return (
     <div className="hide-scrollbar w-[100%]  px-[40px] py-[30px] h-[100%] overflow-y-auto relative ">
@@ -307,6 +322,7 @@ const Events = ({ cancel }: any) => {
       <AddText title={"Title"} top={20} />
       <AddTextArea title={"Description"} top={20} />
       <DateContainer />
+      <AllDay />
       <DropItems
         title={"Outcome"}
         top={20}
