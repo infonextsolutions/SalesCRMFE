@@ -2,7 +2,7 @@
 import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import React, { useState, Suspense } from "react";
-import Search from "../Search/Search";
+import Search from "../../../team/Search/Search";
 // import KanbanContainer from "@/components/View/Kanban";
 import { useSelector } from "react-redux";
 import Spinner from "@/components/loader/spinner";
