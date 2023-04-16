@@ -44,7 +44,6 @@ const Login = () => {
             name !== "not-loaded" &&
             role !== "not-loaded"
           ) {
-            console.log(id, name, role, "only check her");
             dispatch(setUser1({ _id: id, User: name, Role: role }));
             dispatch(setLoggedInStatus(true));
             router.replace("/sales/open");
@@ -58,7 +57,6 @@ const Login = () => {
 
   const submit = ({ user, pass }: any) => {
     setInvalid(false);
-    console.log(user, pass);
     // console.log(user, pass);
     // e.preventDefault();
     if (user === "Admin@gmail.com" && pass === "Password@123!") {
@@ -67,7 +65,6 @@ const Login = () => {
       setLocalData(1, user, "admin");
       router.push("/sales/open");
     } else if (user === "Sales@gmail.com" && pass === "Password@123!") {
-      console.log("isExecuting");
       dispatch(setUser1({ _id: 1, User: user, Role: "sales-repo" }));
       dispatch(setLoggedInStatus(true));
       setLocalData(1, user, "sales-repo");

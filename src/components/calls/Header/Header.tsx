@@ -11,7 +11,7 @@ const HeaderCheckBox = ({ width }: any) => {
   );
 };
 
-const HeaderItem = ({ width, text, left, align }: any) => {
+const HeaderItem = ({ width, text, left, align, bold, color }: any) => {
   return (
     <div
       className={`flex items-center  h-[20px] shrink-0`}
@@ -21,6 +21,8 @@ const HeaderItem = ({ width, text, left, align }: any) => {
         className="text-[#8A9099] uppercase text-[12px] font-medium tracking-wider w-[100%]"
         style={{
           textAlign: align && "center",
+          fontWeight: bold ? bold : 500,
+          color: color ? color : "#8A9099",
         }}
       >
         {text}
@@ -38,11 +40,13 @@ const Header = () => {
         <HeaderItem width={130} left={20} text={"CALL title"} />
         <HeaderItem width={150} left={10} text={"lead id"} />
         <HeaderItem width={120} left={10} text={"Customer name"} />
-        <HeaderItem width={120} left={20}  text={"participants"}  />
+        <HeaderItem width={120} left={20} text={"participants"} />
         <HeaderItem width={100} left={20} text={"call owner"} />
         <HeaderItem width={130} left={20} text={"call date-time"} />
         <HeaderItem width={120} left={10} text={"call duration"} />
         <HeaderItem width={120} left={10} text={"call score"} />
+        <HeaderItem width={120} left={10} text={"call comments"} />
+        <HeaderItem width={120} left={10} text={"call highlights"} />
       </div>
     </div>
   );

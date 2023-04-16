@@ -2,7 +2,7 @@ import gsap, { Power4 } from "gsap";
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const Backdrop = ({ children, bool }: any) => {
+const Backdrop = ({ children, bool, pad }: any) => {
   const [open, setOpen] = useState(true);
 
   const backdrop: any = useRef();
@@ -51,8 +51,6 @@ const Backdrop = ({ children, bool }: any) => {
     //   ease={Power4.easeInOut}
   }, [open]);
 
-  console.log(open, "please check here!");
-
   const close = () => {
     setOpen(false);
   };
@@ -81,9 +79,10 @@ const Backdrop = ({ children, bool }: any) => {
           ref={backdrop}
         ></div>
         <div
-          className="w-[100%] h-[100vh] top-0 z-100 absolute flex justify-center py-[100px] overflow-hidden"
+          className="w-[100%] h-[100vh] top-0 z-100 absolute flex justify-center  overflow-hidden"
           style={{
             zIndex: 1000,
+            padding: pad ? pad : "100px 0",
           }}
         >
           <motion.div

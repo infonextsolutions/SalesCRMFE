@@ -13,7 +13,6 @@ const Tracker = ({ color, title, list }: any) => {
     onChange();
   }, []);
 
-  console.log(width);
   return (
     <div className="w-full px-[38px] my-[24px]">
       <h1

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
-import LeadsContainer from "@/components/leads/Container";
+import LeadsContainer from "@/components/leads/close/Container";
 import Backdrop from "@/components/View/Backdrop";
 import ImportLead from "@/components/View/import-lead/Index";
 import AddLeadForm from "@/components/View/add-lead/addLead";
@@ -82,7 +82,6 @@ const SalesOpen = ({ data }: any) => {
     }, 500);
   };
   const AddLead = (e: any, e1: any) => {
-    console.log(e, e1);
     if (e1 === 0) {
       showForm();
     } else if (e1 === 1) {

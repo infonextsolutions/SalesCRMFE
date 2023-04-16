@@ -69,14 +69,12 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
   const setFirstPage = async () => {
     setpageNumber(0);
     const allItems = await fetchItems(pageNumber);
-    console.log(allItems);
     setItems(allItems);
   };
 
   const setLastPage = async () => {
     setpageNumber(pageCount - 1);
     const allItems = await fetchItems(pageNumber);
-    console.log(allItems);
     setItems(allItems);
   };
 
@@ -85,7 +83,6 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
-    console.log(allItems);
     setItems(allItems);
   };
 
@@ -100,7 +97,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
           Leads.map((item: Lead, ind: Number) => {
             return (
               <LeadContainer
-              selectAll={false}
+                selectAll={false}
                 key={item._id}
                 id={item._id}
                 index={ind}
