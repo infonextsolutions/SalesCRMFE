@@ -174,7 +174,7 @@ const Time = () => {
             const check = selected === i;
             console.log(selected, i, check);
             return (
-              <div className="w-[100%] relative cursor-pointer">
+              <div className="w-[100%] relative cursor-pointer" key={i} >
                 {check && (
                   <Image
                     src={getBasicIcon("Check")}
