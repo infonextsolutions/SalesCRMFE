@@ -1,5 +1,6 @@
 import Call, { CompanyId, CustomerId } from "@/types/Calls";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -34,7 +35,7 @@ const CallItem = ({
       className={`flex items-center  h-[20px] shrink-0`}
       style={{ width: width, marginLeft: left }}
     >
-      {img && <img src={img} className="w-[20px] mr-[5px] ml-[10px]" />}
+      {img && <Image src={img} alt="" width={20} height={20} className="w-[20px] mr-[5px] ml-[10px]" />}
       {link ? (
         <a
           className="text-[#8A9099] text-[13px]  tracking-wide "
