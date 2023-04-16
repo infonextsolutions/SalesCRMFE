@@ -11,7 +11,6 @@ export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/leads/delete-by-id"
   );
-  console.log(response.data);
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component

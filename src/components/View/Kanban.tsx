@@ -10,7 +10,6 @@ const Kanban = ({ list }: KanbasProps) => {
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all`
     );
-    console.log(res.data,"only check this!");
   }
   fetchItems();
   const leads = ["enquiry", "interaction", "proposal", "win", "Lost", "Dead"];

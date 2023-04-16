@@ -2,8 +2,8 @@ import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState } from "react";
-import LeadContainer from "../../leads/Lead/Lead";
-import Header from "../../leads/Header/Header";
+import LeadContainer from "@/components/leads/open/Lead/Lead";
+import Header from "@/components/leads/open/Header/Header";
 import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import {
@@ -69,14 +69,12 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
   const setFirstPage = async () => {
     setpageNumber(0);
     const allItems = await fetchItems(pageNumber);
-    console.log(allItems);
     setItems(allItems);
   };
 
   const setLastPage = async () => {
     setpageNumber(pageCount - 1);
     const allItems = await fetchItems(pageNumber);
-    console.log(allItems);
     setItems(allItems);
   };
 
@@ -85,7 +83,6 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
-    console.log(allItems);
     setItems(allItems);
   };
 
@@ -100,7 +97,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
           Leads.map((item: Lead, ind: Number) => {
             return (
               <LeadContainer
-              selectAll={false}
+                selectAll={false}
                 key={item._id}
                 id={item._id}
                 index={ind}
@@ -110,6 +107,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
                 leadStatus={item.leadStatus}
                 custom={item.customer_name}
                 LeadData={item}
+                last={ind === Leads.length - 1}
               />
             );
           })}

@@ -1,5 +1,5 @@
 import Navigation from "@/components/app/Navigation";
-import LeadsContainer from "@/components/leads/Container";
+import LeadsContainer from "@/components/leads/open/Container";
 import Table from "@/components/View/Tables/Leads";
 import axios from "axios";
 import React from "react";
@@ -118,11 +118,9 @@ export default function Home({data}:any) {
 }
 
 export async function getServerSideProps({ query, ...params }: any) {
-  console.log(params.limit, params.page);
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/leads/find-all"
   );
-  console.log(response.data);
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component

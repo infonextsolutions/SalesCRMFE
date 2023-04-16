@@ -61,35 +61,6 @@ const Calls = () => {
         title={"Calls>Recorded Calls"}
         buttons={[
           {
-            text: "View",
-            dropdown: true,
-            id: 0,
-            click: viewButtinClick,
-            light: false,
-            list: [
-              {
-                title: "Table View",
-                Icon: "List 2",
-              },
-              {
-                title: "Kanban View",
-                Icon: "Grid",
-              },
-            ],
-            value: 0,
-          },
-          {
-            text: "Add Lead",
-            dropdown: true,
-            id: 1,
-            icon: "Plus",
-            light: false,
-            list: [
-              { title: "Using Form", Icon: "Text" },
-              { title: "Import Leads", Icon: "Download" },
-            ],
-          },
-          {
             text: "Export",
             dropdown: true,
             id: 1,
@@ -109,11 +80,9 @@ const Calls = () => {
   );
 };
 export async function getServerSideProps({ query, ...params }: any) {
-  console.log(params.limit, params.page);
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/recordings/find-all"
   );
-  console.log(response.data, "only check this!");
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component

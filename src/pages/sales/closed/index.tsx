@@ -46,7 +46,6 @@ export default function Open({ data }: any) {
             name !== "not-loaded" &&
             role !== "not-loaded"
           ) {
-            console.log(id, name, role, "only check her");
             dispatch(setUser1({ _id: id, User: name, Role: role }));
             dispatch(setLoggedInStatus(true));
           }
@@ -64,7 +63,6 @@ export default function Open({ data }: any) {
       }
     }
   }, [state.isLoggedIn, logged]);
-  console.log(id, name, role, logged);
 
   return (
     <>
@@ -82,11 +80,9 @@ export default function Open({ data }: any) {
 }
 
 export async function getServerSideProps({ query, ...params }: any) {
-  console.log(params.limit, params.page);
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/leads/find-all"
   );
-  console.log(response.data, "only check this!");
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component

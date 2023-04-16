@@ -6,6 +6,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import ActivityHistory from "../../genUtils/Activity";
+import Events from "@/components/View/Event/Events";
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -13,10 +15,8 @@ const LeadBox = ({ width, bool }: any) => {
     if (check) {
       if (bool) {
         ref.current.checked = true;
-        console.log("init");
       } else {
         ref.current.checked = false;
-        console.log("init");
       }
     }
     setCheck(true);
@@ -42,6 +42,8 @@ const LeadItem = ({
   click,
   route,
   onClick,
+  color,
+  weight,
 }: any) => {
   const { push } = useRouter();
 
@@ -52,20 +54,23 @@ const LeadItem = ({
     >
       {link ? (
         <a
-          className="text-[#8A9099] text-[13px]  tracking-wide "
+          className=" text-[13px]  tracking-wide "
           style={{
             textAlign: align && "center",
             marginLeft: textLeft && `${textLeft}px`,
+            color: color ? color : "#8A9099",
           }}
         >
           {text ? text : "-"}
         </a>
       ) : (
         <p
-          className="text-[#8A9099] text-[13px] tracking-wide cursor-pointer"
+          className="text-[13px] tracking-wide cursor-pointer"
           style={{
             textAlign: align && "center",
             marginLeft: textLeft && `${textLeft}px`,
+            color: color ? color : "#8A9099",
+            fontWeight: weight ? weight : 500,
           }}
           onClick={() => {
             if (click) {
@@ -126,7 +131,7 @@ const LeadItemMultiple = ({
   );
 };
 
-const QuickActions = ({ width, left, notes }: any) => {
+const QuickActions = ({ width, left, notes, events }: any) => {
   return (
     <div
       className={`flex  h-[18px] item-center shrink-0`}
@@ -158,6 +163,9 @@ const QuickActions = ({ width, left, notes }: any) => {
         className="mr-[4px] cursor-pointer"
         width={25}
         height={25}
+        onClick={() => {
+          events();
+        }}
         style={{
           objectFit: "contain",
         }}
@@ -199,26 +207,27 @@ const LeadContainer = ({
   custom,
   LeadData,
   selectAll,
+  last,
 }: LeadProps) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
 
   const [notes, setNotes] = React.useState(false);
-  const [imports, setImports] = React.useState(false);
+  const [events, setEvents] = React.useState(false);
   const [bool, setBool] = React.useState(true);
 
   const showNotes = () => {
     setNotes(true);
   };
 
-  const showImports = () => {
-    setImports(true);
+  const showEvents = () => {
+    setEvents(true);
   };
 
-  const cancelImports = () => {
+  const cancelEvents = () => {
     setBool(false);
     setTimeout(() => {
-      setImports(false);
+      setEvents(false);
       setBool(true);
     }, 500);
   };
@@ -232,13 +241,14 @@ const LeadContainer = ({
   };
 
   const AddLead = (e: any, e1: any) => {
-    console.log(e, e1);
     if (e1 === 0) {
       showNotes();
     } else if (e1 === 1) {
-      showImports();
+      showEvents();
     }
   };
+
+  console.log(LeadData);
 
   return (
     <div className="flex">
@@ -259,11 +269,26 @@ const LeadContainer = ({
             <Notes cancel={cancelNotes} />
           </Backdrop>
         )}
+        {events && (
+          <Backdrop bool={bool} pad={"50px 0"}>
+            <Events cancel={cancelEvents} />
+          </Backdrop>
+        )}
         <LeadBox width={30} bool={selectAll} />
-        <LeadItem width={120} left={10} textLeft={10} text={"12XXXX"} />
+        <LeadItem
+          width={120}
+          left={20}
+          textLeft={0}
+          weight={500}
+          color={"#000"}
+          text={"12XXXX"}
+          click={true}
+          route={`${pathname}/${id}/lead-profile`}
+        />
         <LeadItem
           width={150}
-          left={10}
+          left={0}
+          color={"#000"}
           text={custom}
           click={true}
           route={`${pathname}/${id}/lead-profile`}
@@ -291,17 +316,20 @@ const LeadContainer = ({
           notes={() => {
             AddLead(1, 0);
           }}
+          events={() => {
+            AddLead(1, 1);
+          }}
         />
         <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
         <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
         <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
-        <LeadItem width={150} left={10} textLeft={10} text={"John C."} />
+        <LeadItem width={130} left={10} textLeft={10} text={"John C."} />
         <LeadItem width={150} left={10} text={LeadData.inquiry} />
         <LeadItem width={150} left={10} textLeft={10} text={"Product A"} />
-        <LeadItem width={150} left={10} text={LeadData.activity_history} />
+        <ActivityHistory width={180} left={0} last={last} />
         <LeadItemMultiple
           width={130}
-          left={10}
+          left={20}
           upperText={"Email Sent"}
           bottomText={LeadData.last_activity}
         />
@@ -317,7 +345,7 @@ const LeadContainer = ({
           left={10}
           text={LeadData.win_probability}
         />
-        <LeadItem width={140} left={10} text={LeadData.potential_deal_size} />
+        <LeadItem width={140} left={20} text={LeadData.potential_deal_size} />
         <LeadItem
           width={150}
           left={10}
@@ -350,4 +378,5 @@ interface LeadProps {
   LeadData: Lead;
   index: Number;
   selectAll: any;
+  last: any;
 }

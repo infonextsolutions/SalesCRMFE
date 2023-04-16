@@ -2,8 +2,8 @@ import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState, Suspense } from "react";
-import LeadContainer from "../../leads/Lead/Lead";
-import Header from "../../leads/Header/Header";
+import LeadContainer from "@/components/leads/open/Lead/Lead";
+import Header from "@/components/leads/open/Header/Header";
 import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import {
@@ -63,7 +63,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       // console.log(data, search);
       const count = Math.ceil(Number(filtered.length) / limit);
       setpageCount(count);
-      console.log(`pagecount is is ${pageCount}`);
       setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
     };
 
@@ -86,7 +85,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
         e.customerId?.email?.includes(search) ||
         e.companyId?.company_website_url?.includes(search)
     );
-    console.log(filtered);
     settotalLeads(filtered.length);
     return filtered;
   };
@@ -106,9 +104,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const setLastPage = async () => {
     setLoading(true);
-    console.log(`pagecount check is ${pageCount}`);
     setpageNumber(pageCount - 1);
-    console.log(`pageNumber is ${pageNumber}`);
     const allItems = await fetchItems(pageNumber);
     // console.log(allItems);
     setItems(allItems);
@@ -119,7 +115,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
-    console.log(allItems);
     setItems(allItems);
     setLoading(false);
   };
@@ -130,7 +125,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   return (
     <>
-      <div className="mt-[0px] w-[100%] h-[560px] overflow-auto custom-scroll pb-[10px]">
+      <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
         <Header
           selectAll={() => {
             setSelectAll(!selectAll);
@@ -153,6 +148,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
                 leadStatus={item.leadStatus}
                 custom={item.customer_name}
                 LeadData={item}
+                last={(Leads.length-1)===ind}
               />
             );
           })

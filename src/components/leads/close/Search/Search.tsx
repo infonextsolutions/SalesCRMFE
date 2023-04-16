@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Filter from "./Filter";
 
-const Search = ({ change }: any) => {
+const Search = ({ change,view }: any) => {
   const [show, setShow] = useState(false);
 
   return (

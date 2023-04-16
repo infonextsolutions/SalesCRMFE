@@ -5,7 +5,6 @@ export function useLocalStorage(key: any, fallbackValue: any) {
 
   useEffect(() => {
     const stored = localStorage.getItem(key);
-    console.log(stored)
     if (stored) {
       setValue(stored);
     } else {
