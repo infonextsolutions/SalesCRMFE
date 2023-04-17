@@ -13,7 +13,7 @@ const CallsTable = ({ result, totalRecords }: TableProps) => {
     <>
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
         <Header />
-        {Leads.map((item: Call) => {
+        {Leads.map((item: Call, i: any) => {
           return (
             <CallContainer
               key={item._id}
@@ -24,6 +24,7 @@ const CallsTable = ({ result, totalRecords }: TableProps) => {
               leadStatus={item.leadStatus}
               custom={item.customer_name}
               CallData={item}
+              last={Leads.length - 1 === i}
             />
           );
         })}

@@ -302,6 +302,35 @@ const ExpandableRow = ({
   );
 };
 
+const ParticipantsHover = ({ last, bounding }: any) => {
+  return (
+    <div
+      className="bg-[#E8E9EB] max-w-[240px] flex flex-col items-center pb-[40px] rounded-[15px] fixed py-[13px] px-[15px]  right-[10px] drop-shadow-sm"
+      style={{
+        zIndex: 10000000000000,
+        // top: !last ? "30px" : "",
+        // right: "10px",
+        // bottom: last ? "30px" : "",
+        top: last ? bounding.top - 50 : bounding.top + 30,
+        left: bounding.left + 120,
+      }}
+    >
+      <p className="text-[#000] w-[100%] text-[15px] font-medium">
+        Call Participants
+      </p>
+      <p className="text-renal-blue mt-[19px] text-[13px] ml-[2px]  w-[100%] font-medium">
+        Shraddha P. (Sales Manager)
+      </p>
+      <p className="text-[#000]  text-[13px] ml-[2px]  w-[100%] font-medium">
+        John C. (Sales Rep)
+      </p>
+      <p className="text-[#000] text-[13px] ml-[2px] w-[100%] font-medium">
+        Aarti P. (Sales Rep)
+      </p>
+    </div>
+  );
+};
+
 const CallContainer = ({
   id,
   company,
@@ -310,8 +339,9 @@ const CallContainer = ({
   leadStatus,
   custom,
   CallData,
+  last,
 }: CallProps) => {
-  const { pathname } = useRouter();
+  const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
   const [w, setW] = useState(0);
@@ -323,6 +353,11 @@ const CallContainer = ({
     }
   });
   console.log(CallData, "Call-data");
+
+  const [hover, setHover] = useState(false);
+  const [bounding, setBounding] = useState({ top: 0, left: 0 });
+  console.log(hover);
+  const ref: any = useRef();
   return (
     <>
       <div className="flex">
@@ -361,13 +396,28 @@ const CallContainer = ({
             color={"#000"}
           />
           <CallItem width={120} left={10} text={custom} color={"#000"} />
-          <CallItemMultiple
-            width={200}
-            left={20}
-            upperText={"Shraddha P."}
-            bottomText={"Sales Manager"}
-            bold={true}
-          />
+          <div
+            className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
+            style={{ width: 200, marginLeft: 20 }}
+            ref={ref}
+            onMouseOver={() => {
+              const box = ref.current.getBoundingClientRect();
+              setBounding({ left: box.x, top: box.y });
+              setHover(true);
+            }}
+            onMouseLeave={() => {
+              setHover(false);
+            }}
+          >
+            <p
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
+                true ? "text-[#3F434A]" : "text-[#8A9099]"
+              }`}
+            >
+              <span className="text-renal-blue ">Shraddha P.,</span> John C.,
+              Aarti P.
+            </p>
+          </div>
           <CallItem width={100} left={20} text={"John C"} />
           <CallItemMultiple
             width={130}
@@ -420,6 +470,7 @@ const CallContainer = ({
           engagingQuestions={3}
         />
       </div>
+      {hover && <ParticipantsHover bounding={bounding} last={last} />}
     </>
   );
 };
@@ -434,4 +485,5 @@ interface CallProps {
   leadStatus: String;
   custom: String;
   CallData: Call;
+  last: any;
 }
