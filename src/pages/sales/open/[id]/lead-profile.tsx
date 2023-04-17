@@ -23,7 +23,7 @@ const Profile = () => {
             list: [
               { title: "Call", Icon: "Phone" },
               { title: "Email", Icon: "Mail" },
-              { title: "Meeting", Icon: "Calendar" },
+              { title: "Event", Icon: "Calendar" },
               { title: "Task", Icon: "Tasks" },
               { title: "Message", Icon: "Chat" },
             ],
