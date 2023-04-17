@@ -390,6 +390,16 @@ const LeadContainer = ({
 
   return (
     <>
+      {notes && (
+        <Backdrop bool={bool}>
+          <Notes cancel={cancelNotes} />
+        </Backdrop>
+      )}
+      {events && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <Events cancel={cancelEvents} />
+        </Backdrop>
+      )}
       <div
         className="flex relative h-[50px]"
         style={{
@@ -411,16 +421,7 @@ const LeadContainer = ({
             />
         </div> 
         */}
-          {notes && (
-            <Backdrop bool={bool}>
-              <Notes cancel={cancelNotes} />
-            </Backdrop>
-          )}
-          {events && (
-            <Backdrop bool={bool} pad={"50px 0"}>
-              <Events cancel={cancelEvents} />
-            </Backdrop>
-          )}
+
           <LeadBox width={30} bool={selectAll} />
           <ExpandingIcon
             change={(e: any) => {

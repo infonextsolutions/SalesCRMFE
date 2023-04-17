@@ -65,8 +65,9 @@
     brightness(92%) contrast(124%);
 }
 
-.svg-renal-blue{
-  filter: invert(31%) sepia(90%) saturate(5632%) hue-rotate(232deg) brightness(102%) contrast(104%);
+.svg-renal-blue {
+  filter: invert(31%) sepia(90%) saturate(5632%) hue-rotate(232deg)
+    brightness(102%) contrast(104%);
 }
 
 /* custom-svg-color */
