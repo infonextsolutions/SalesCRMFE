@@ -56,6 +56,9 @@ const DropDown = ({ list, direction, value, onClick, close }: any) => {
       overflow-y-auto
       hide-scrollbar
       `}
+      style={{
+        zIndex:100000000000
+      }}
     >
       {list.map((item: any, i: any) => {
         return (

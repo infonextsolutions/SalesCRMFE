@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const Backdrop = ({ children, bool, pad, width }: any) => {
-  const [open, setOpen] = useState(true); 
+  const [open, setOpen] = useState(true);
 
   const backdrop: any = useRef();
 
