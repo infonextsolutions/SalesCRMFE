@@ -253,9 +253,17 @@ const CallPlayer = () => {
   );
 };
 
-const ExpandableRow = ({ CallDesc, callMatrics, engagingQuestions,height }: any) => {
+const ExpandableRow = ({
+  CallDesc,
+  callMatrics,
+  engagingQuestions,
+  height,
+}: any) => {
   return (
-    <div className="w-[100%] h-[100%] flex px-[110px] py-[10px] duration-300" style={{height:height}} >
+    <div
+      className="w-[100%] h-[100%] flex px-[110px] py-[10px] duration-300"
+      style={{ height: height }}
+    >
       <div className="w-[300px]">
         <p className="text-[16px] text-[#000] font-medium">Call Description</p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
@@ -354,7 +362,7 @@ const CallContainer = ({
           />
           <CallItem width={120} left={10} text={custom} color={"#000"} />
           <CallItemMultiple
-            width={120}
+            width={200}
             left={20}
             upperText={"Shraddha P."}
             bottomText={"Sales Manager"}

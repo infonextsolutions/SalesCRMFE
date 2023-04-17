@@ -14,36 +14,42 @@ const MidPath = () => {
 
 const ActivityHistory = ({ width, left, last }: any) => {
   const [hover, setHover] = useState(false);
+  const [bounding, setBounding] = useState({ top: 0, left: 0 });
   console.log(hover);
   const ref: any = useRef();
-  console.log(ref.current.getBoundingClientRect());
   return (
-    <div
-      className={`flex items-center justify-between h-[20px] relative shrink-0 cursor-pointer`}
-      style={{ width: width, marginLeft: left }}
-      ref={ref}
-      onMouseOver={() => {
-        setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-    >
-      <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
-      <MidPath />
-      <Image src={getBasicIcon("Calendar")} alt="" width={15} height={15} />
-      <MidPath />
-      <Image src={getBasicIcon("Mail")} alt="" width={15} height={15} />
-      <MidPath />
-      <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
-      {true && (
+    <>
+      <div
+        className={`flex items-center justify-between h-[20px] relative shrink-0 cursor-pointer`}
+        style={{ width: width, marginLeft: left }}
+        ref={ref}
+        onMouseOver={() => {
+          const box = ref.current.getBoundingClientRect();
+          setBounding({ left: box.x, top: box.y });
+          setHover(true);
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+      >
+        <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
+        <MidPath />
+        <Image src={getBasicIcon("Calendar")} alt="" width={15} height={15} />
+        <MidPath />
+        <Image src={getBasicIcon("Mail")} alt="" width={15} height={15} />
+        <MidPath />
+        <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
+      </div>
+      {hover && (
         <div
-          className="bg-[#E8E9EB] min-w-[180px] flex flex-col items-center rounded-[15px] absolute py-[8px] px-[15px]  right-[10px] drop-shadow-sm"
+          className="bg-[#E8E9EB] max-w-[180px] flex flex-col items-center rounded-[15px] fixed py-[8px] px-[15px]  right-[10px] drop-shadow-sm"
           style={{
             zIndex: 10000000000000,
-            top: !last ? "30px" : "",
-            right: "10px",
-            bottom: last ? "30px" : "",
+            // top: !last ? "30px" : "",
+            // right: "10px",
+            // bottom: last ? "30px" : "",
+            top: last ? bounding.top - 50 : bounding.top + 10,
+            left: bounding.left,
           }}
         >
           <p className="text-[#B656EB] w-[100%] text-[13px] font-medium">
@@ -54,7 +60,7 @@ const ActivityHistory = ({ width, left, last }: any) => {
           </p>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
