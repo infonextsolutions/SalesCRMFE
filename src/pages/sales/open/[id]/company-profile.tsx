@@ -7,7 +7,7 @@ const CompanyProfile = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Profile"
+        title="Manage Leads>ABC Corp."
         buttons={[
           {
             text: "Take Action",

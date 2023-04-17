@@ -15,7 +15,7 @@ const ClientProfile = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Profile"
+        title="Manage Leads>Shraddha P. "
         buttons={[
           {
             text: "Take Action",
