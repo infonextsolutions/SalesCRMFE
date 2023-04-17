@@ -86,7 +86,7 @@ const ProfilePage = () => {
           </strong>
           <div className="flex">
             <Image
-              src={getBasicIcon("Facebook")}
+              src={getBasicIcon("Twitter")}
               className={`w-[20px] svg-grey mr-2`}
               alt=""
               width={20}
@@ -96,7 +96,7 @@ const ProfilePage = () => {
               }}
             />
             <Image
-              src={getBasicIcon("Twitter")}
+              src="/Images/Icons/Basic/Linked.svg"
               className={`w-[20px] svg-grey`}
               alt=""
               width={20}
@@ -115,18 +115,24 @@ const ProfilePage = () => {
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Stage</strong>
           <a href="name" className="block text-gray">
-            XYZ
+            Enquiry
+          </a>
+        </li>
+        <li className="px-2 mt-4">
+          <strong className="font-medium mr-1 text-black">Lead Status</strong>
+          <a href="name" className="block text-gray">
+            Contacted
           </a>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Source</strong>
           <a href="address:" className="block text-gray">
-            nothing
+            Website
           </a>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
-            Lead Owner(primary)
+            Lead Owner(Primary)
           </strong>
           <span className="block text-gray">
             <a href="Leadowner">Aarti.S</a>
@@ -134,10 +140,11 @@ const ProfilePage = () => {
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
-            Lead Owner(secondary)
+            Lead Owner(Secondary)
           </strong>
           <a href="leadowner" className="block text-gray">
             Raghav V.
+            Ajay P.
           </a>
         </li>
         <li className="px-2 mt-4">
@@ -180,7 +187,7 @@ const ProfilePage = () => {
           </div>
           <div className="flex">
             <Image
-              src={getBasicIcon("Mail")}
+              src={getBasicIcon("Attachment")}
               alt=""
               className="mr-[3px] cursor-pointer"
               width={20}
@@ -193,7 +200,7 @@ const ProfilePage = () => {
           </div>
           <div className="flex">
             <Image
-              src={getBasicIcon("Calendar")}
+              src={getBasicIcon("Chat")}
               alt=""
               className="mr-[3px] cursor-pointer"
               width={20}
@@ -206,7 +213,7 @@ const ProfilePage = () => {
           </div>
           <div className="flex">
             <Image
-              src={getBasicIcon("Tasks")}
+              src={getBasicIcon("Mail")}
               alt=""
               className="mr-[3px] cursor-pointer"
               width={20}
@@ -219,7 +226,20 @@ const ProfilePage = () => {
           </div>
           <div className="flex">
             <Image
-              src={getBasicIcon("Chat")}
+              src={getBasicIcon("Calendar")}
+              alt=""
+              width={20}
+              height={30}
+              style={{
+                objectFit: "contain",
+              }}
+              className="mr-[3px] cursor-pointer"
+            />
+            <p>4</p>
+          </div>
+          <div className="flex">
+            <Image
+              src={getBasicIcon("Tasks")}
               alt=""
               width={20}
               height={30}
@@ -284,7 +304,7 @@ const ProfilePage = () => {
           </strong>
           <div className="flex">
             <Image
-              src={getBasicIcon("Instagram")}
+              src={getBasicIcon("Twitter")}
               className={`w-[20px] svg-grey mr-2`}
               alt=""
               width={20}
@@ -294,7 +314,7 @@ const ProfilePage = () => {
               }}
             />
             <Image
-              src={getBasicIcon("Twitter")}
+              src="/Images/Icons/Basic/Linked.svg"
               className={`w-[20px] svg-grey`}
               alt=""
               width={20}

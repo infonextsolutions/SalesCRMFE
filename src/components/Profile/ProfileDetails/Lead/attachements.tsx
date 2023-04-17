@@ -8,7 +8,7 @@ const Attachements = () => {
       <div className="bg-[#ffffff] my-[30px]">
         <div className="flex">
           <h2 className="text-[#3F434A] text-2xl font-medium">Attachments</h2>
-          <button className="ml-[380px] flex bg-renal-blue pl-[6px] rounded-xl pr-[6px] p-[8px]">
+          <button className="ml-[400px] flex bg-renal-blue pl-[6px] rounded-xl pr-[6px] p-[8px]">
             <Image
                src="/Images/Logo/Upload.svg"
               className={`w-[18px] svg-white`}
@@ -170,7 +170,7 @@ const Attachements = () => {
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
             <Image
-                src="/Images/Logo/XLS 1.svg"
+                src="/Images/Logo/JPG 2.svg"
                 alt=""
                 className="w-[55px] px-[10px] "
                 // fill={true}
@@ -181,7 +181,7 @@ const Attachements = () => {
                 height={40}
               />
               <div className="w-[170px] mt-3 ml-2">
-                <p className="text-[#3F434A]">Wireframe UI kit.xls</p>
+                <p className="text-[#3F434A]">Wireframe UI kit.jpg</p>
                 <p className="text-xs mb-3">5.6 MB</p>
               </div>
               <div className="w-[190px] flex items-center">
