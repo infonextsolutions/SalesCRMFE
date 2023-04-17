@@ -390,16 +390,6 @@ const LeadContainer = ({
 
   return (
     <>
-      {notes && (
-        <Backdrop bool={bool}>
-          <Notes cancel={cancelNotes} />
-        </Backdrop>
-      )}
-      {events && (
-        <Backdrop bool={bool} pad={"50px 0"}>
-          <Events cancel={cancelEvents} />
-        </Backdrop>
-      )}
       <div
         className="flex relative h-[50px]"
         style={{
@@ -593,6 +583,16 @@ const LeadContainer = ({
             | 23 Jan 2023 | 4:00 PM | 30 Min |
           </p>
         </div>
+      )}
+      {notes && (
+        <Backdrop bool={bool}>
+          <Notes cancel={cancelNotes} />
+        </Backdrop>
+      )}
+      {events && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <Events cancel={cancelEvents} />
+        </Backdrop>
       )}
     </>
   );
