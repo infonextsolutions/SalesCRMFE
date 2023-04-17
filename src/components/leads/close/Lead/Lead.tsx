@@ -406,16 +406,7 @@ const LeadContainer = ({
             />
         </div> 
         */}
-          {notes && (
-            <Backdrop bool={bool}>
-              <Notes cancel={cancelNotes} />
-            </Backdrop>
-          )}
-          {events && (
-            <Backdrop bool={bool} pad={"50px 0"}>
-              <Events cancel={cancelEvents} />
-            </Backdrop>
-          )}
+          
           <LeadBox width={30} bool={selectAll} />
           <ExpandingIcon
             change={(e: any) => {
@@ -585,6 +576,16 @@ const LeadContainer = ({
           </p>
         </div>
       )}
+      {notes && (
+            <Backdrop bool={bool}>
+              <Notes cancel={cancelNotes} />
+            </Backdrop>
+          )}
+          {events && (
+            <Backdrop bool={bool} pad={"50px 0"}>
+              <Events cancel={cancelEvents} />
+            </Backdrop>
+          )}
     </>
   );
 };
