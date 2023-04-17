@@ -7,11 +7,11 @@ const CompanyProfile = () => {
   return (
 
     <div> 
-     <div className="flex -space-x-2 overflow-hidden">
+     <div className="flex">
       
-        <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
+        <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px]">
           <Image
-            className="inline-block w-[60px] rounded-full ring-2 ring-white"
+            className="inline-block w-[55px] rounded-full ring-2 ring-white"
             src={getRoundedAvatar(2, 40)}
             alt=""
             width={60}
@@ -20,18 +20,18 @@ const CompanyProfile = () => {
               objectFit: "contain",
             }}
           />
-         <div className="ml-2 text-bold">
-              <h2 className="text-base text-[12px] font-semibold whitespace-nowrap leading-7 tracking-tight text-black">
+         <div className="ml-3 text-bold">
+              <h2 className="text-base text-[12px] font-semibold whitespace-nowrap leading-7 tracking-wider text-black">
                 ABC Corp.
               </h2>
               <a
                 href="#0"
-                className="block text-sm text-[12px] item-center text-gray-500 hover:text-indigo-500"
+                className="block ml-2 text-sm text-[12px] item-center text-gray-500 hover:text-indigo-500"
               >
                 Noida,UP
               </a>
             </div>
-            <div className="h-[130%] ml-14 ">
+            <div className="h-[95%] ml-12 ">
               <Image
                 src={getBasicIcon("Edit")}
                 className={`w-[20px] align-center svg-grey svg-not-selected mt-[5px]`}
@@ -77,17 +77,17 @@ const CompanyProfile = () => {
           <strong className="font-medium text-gray-500 mr-1">Social Media</strong>
           <div className="flex">
             <Image
-              src={getBasicIcon("Facebook")}
-              className={`w-[20px] svg-grey mr-2`}
+              src={getBasicIcon("Twitter")}
+              className={`w-[20px] mr-2 svg-grey fill-gray`}
               alt=""
               width={20}
               height={20}
               style={{
-                objectFit: "contain"
+                objectFit: "contain",
               }}
-            />
+              />
             <Image
-              src={getBasicIcon("Twitter")}
+              src="/Images/Icons/Basic/Linked.svg"
               className={`w-[20px] svg-grey`}
               alt=""
               width={20}
@@ -198,6 +198,9 @@ const CompanyProfile = () => {
         </li>
       </ul>
       <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
+      <h3 className="text-black-500 text-medium font-semibold text-base">Company Description</h3>
+      <p className="text-base text-gray-500 text-sm text-[12px]">ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 
+      10+ existing clients and also works with individual people.</p>
     </div>
 
   );
