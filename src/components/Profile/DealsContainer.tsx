@@ -19,8 +19,8 @@ const Deals=()=>{
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
               <p>Lead Id</p>
               <p className="ml-[32px]">Product Service</p>
-              <p className="ml-[23px]">Lead Stage</p>
-              <p className="ml-[34px]">Last Activity</p>
+              <p className="ml-[30px]">Lead Stage</p>
+              <p className="ml-[45px]">Last Activity</p>
               <p className="ml-[90px]">Activity History</p>
             </div>
             <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
@@ -415,8 +415,8 @@ const Deals=()=>{
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
               <p>Lead Id</p>
               <p className="ml-[32px]">Product Service</p>
-              <p className="ml-[23px]">Lead Stage</p>
-              <p className="ml-[34px]">Last Activity</p>
+              <p className="ml-[30px]">Lead Stage</p>
+              <p className="ml-[45px]">Last Activity</p>
               <p className="ml-[90px]">Activity History</p>
             </div>
             <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">

@@ -71,7 +71,7 @@ const ClientPocProfile = () => {
             <strong className="font-medium text-gray-500 mr-1">Social Media</strong>
             <div className="flex">
               <Image
-                src={getBasicIcon("Instagram")}
+                src={getBasicIcon("Twitter")}
                 className={`w-[20px] svg-grey mr-2`}
                 alt=""
                 width={20}
@@ -81,7 +81,7 @@ const ClientPocProfile = () => {
                 }}
               />
               <Image
-                src={getBasicIcon("Twitter")}
+                src="/Images/Icons/Basic/Linked.svg"
                 className={`w-[20px] svg-grey`}
                 alt=""
                 width={20}
@@ -100,13 +100,13 @@ const ClientPocProfile = () => {
           <li className="px-2 mt-4">
             <strong className="font-medium text-gray-500 mr-1">Company Name</strong>
             <a href="name" className="block text-black">
-              XYZ
+              ABC Corp.
             </a>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-gray-500 mr-1">Company Address</strong>
             <a href="address:" className="block text-black">
-              nothing
+              Website
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -125,7 +125,7 @@ const ClientPocProfile = () => {
             <strong className="font-medium text-gray-500 mr-1">Social Media</strong>
             <div className="flex">
               <Image
-                src={getBasicIcon("Facebook")}
+                src={getBasicIcon("Twitter")}
                 className={`w-[20px] svg-grey mr-2`}
                 alt=""
                 width={20}
@@ -135,7 +135,7 @@ const ClientPocProfile = () => {
                 }}
               />
               <Image
-                src={getBasicIcon("Twitter")}
+                src="/Images/Icons/Basic/Linked.svg"
                 className={`w-[20px] svg-grey`}
                 alt=""
                 width={20}

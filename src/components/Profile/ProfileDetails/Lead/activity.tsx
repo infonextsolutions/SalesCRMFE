@@ -35,13 +35,13 @@ const Activityhistory = () => {
           </div>
           <div className="w-[135px] ">
             <p>Shraddha P.</p>
-            <p className="text-[#8A9099]  font-semibold text-xs">John C</p>
+            <p className="text-gray-500  font-semibold text-xs">John C</p>
           </div>
           <div className="w-[140px]">
             <p>Interested</p>
           </div>
           <div className=" w-[190px] ">
-            <p className="text-[#8A9099]  font-semibold text-xs">
+            <p className="text-gray-500  font-semibold text-xs">
               Call About Product a Demo
             </p>
             <p className="text-[#8A9099] font-small text-xs">
@@ -80,14 +80,14 @@ const Activityhistory = () => {
           </div>
           <div className="w-[135px]">
             <p>Shraddha P.</p>
-            <p className="text-[#8A9099]  font-semibold text-xs">John C</p>
+            <p className="text-gray-500  font-semibold text-xs">John C</p>
           </div>
           <div className="w-[140px]">
             <p className="items-center ml-4">Not</p>
             <p>Interested</p>
           </div>
           <div className=" w-[190px] ">
-            <p className="text-[#8A9099]   font-semibold text-xs">
+            <p className="text-gray-500   font-semibold text-xs">
               Call About Product a Demo
             </p>
             <p className="text-[#8A9099]  font-small text-xs">
@@ -126,13 +126,13 @@ const Activityhistory = () => {
           </div>
           <div className="w-[135px]">
             <p>Shraddha P.</p>
-            <p className="text-[#8A9099] font-semibold text-xs">John C</p>
+            <p className="text-gray-500 font-semibold text-xs">John C</p>
           </div>
           <div className="w-[140px]">
             <p>Interested</p>
           </div>
           <div className=" w-[190px] ">
-            <p className="text-[#8A9099] font-semibold text-xs">
+            <p className="text-gray-500 font-semibold text-xs">
               Call About Product a Demo
             </p>
             <p className="text-[#8A9099]  font-small text-xs">
@@ -171,13 +171,13 @@ const Activityhistory = () => {
           </div>
           <div className="w-[135px]">
             <p>Shraddha P.</p>
-            <p className="text-[#8A9099]  font-semibold text-xs">John C</p>
+            <p className="text-gray-500  font-semibold text-xs">John C</p>
           </div>
           <div className="w-[140px]">
             <p>Interested</p>
           </div>
           <div className=" w-[190px]">
-            <p className="text-[#8A9099]  font-semibold text-xs">
+            <p className="text-gray-500  font-semibold text-xs">
               Call About Product a Demo
             </p>
             <p className="text-[#8A9099]  font-small text-xs">
