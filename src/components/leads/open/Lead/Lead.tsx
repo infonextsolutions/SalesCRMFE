@@ -197,6 +197,119 @@ const QuickActions = ({ width, left, notes, events }: any) => {
   );
 };
 
+const ExpandingIcon = ({ change }: any) => {
+  const [show, setShow] = useState(false);
+
+  return (
+    <div className="w-[50px] flex items-center justify-center cursor-pointer">
+      {!show ? (
+        <Image
+          onClick={() => {
+            change(!show);
+            setShow(!show);
+          }}
+          src={"/plus-circle.svg"}
+          alt=""
+          width={15}
+          height={15}
+        />
+      ) : (
+        <Image
+          onClick={() => {
+            change(!show);
+            setShow(!show);
+          }}
+          src={"/minus-circle.svg"}
+          alt=""
+          width={15}
+          height={15}
+        />
+      )}
+    </div>
+  );
+};
+
+const ExpandableRow = ({
+  leadDesc,
+  companyDesc,
+  companyWebsite,
+  LeadOwners,
+  otherContacts,
+}: any) => {
+  return (
+    <div className="w-[100%] h-[100%] flex px-[110px] py-[10px] ">
+      <div className="w-[300px]">
+        <p className="text-[16px] text-[#000] font-medium">Lead Description</p>
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
+          {leadDesc}
+        </p>
+      </div>
+      <div className="w-[350px] ml-[30px]">
+        <p className="text-[16px] text-[#000] font-medium">
+          Company Description
+        </p>
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
+          {companyDesc}
+        </p>
+      </div>
+      <div className="flex flex-col ml-[30px]">
+        <div className="w-[100%]">
+          <p className="text-[16px] text-[#000] font-medium">Company Website</p>
+          <p className="text-[#8A9099] font-medium mt-[0px] text-[14px] tracking-wide">
+            {companyWebsite}
+          </p>
+        </div>
+        <div className="w-[100%] mt-[10px]">
+          <p className="text-[16px] text-[#000] font-medium">Social Media</p>
+          <div className="flex mt-[2px]">
+            <Image
+              src={getBasicIcon("Twitter")}
+              className="mr-[8px] cursor-pointer"
+              height={20}
+              width={20}
+              alt=""
+            />
+            <Image
+              src={getBasicIcon("Linked")}
+              className=" cursor-pointer"
+              height={20}
+              width={20}
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div className="w-[100px] ml-[50px]">
+        <p className="text-[16px] text-[#000] font-medium">Lead Owners</p>
+        {LeadOwners.map((item: any, i: any) => {
+          return (
+            <p
+              key={i}
+              className="text-[#8A9099] font-medium mt-[2px] text-[14px] tracking-wide"
+            >
+              {item}
+            </p>
+          );
+        })}
+      </div>
+      <div className="w-[280px] ml-[50px]">
+        <p className="text-[16px] text-[#000] font-medium">Other Contacts</p>
+        {otherContacts.map((item: any, i: any) => {
+          return (
+            <p
+              key={i}
+              className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
+            >
+              <span className="text-[#000] text-[15px]"> {item.name}</span>,
+              {item.position}
+            </p>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 const LeadContainer = ({
   index,
   id,
@@ -215,6 +328,7 @@ const LeadContainer = ({
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);
   const [bool, setBool] = React.useState(true);
+  const [detailShow, setDetailShow] = useState(false);
 
   const showNotes = () => {
     setNotes(true);
@@ -250,10 +364,29 @@ const LeadContainer = ({
 
   console.log(LeadData);
 
+  const [w, setW] = useState(0);
+  const wRef: any = useRef();
+
+  React.useEffect(() => {
+    if (wRef.current) {
+      setW(wRef.current.offsetWidth);
+    }
+  });
+  console.log(w);
+
   return (
-    <div className="flex">
-      <div className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] ">
-        {/*
+    <>
+      <div
+        className="flex relative h-[50px]"
+        style={{
+          zIndex: 1000,
+        }}
+      >
+        <div
+          className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
+          ref={wRef}
+        >
+          {/*
         <div className="fixed flex items-center left-[1390px] h-[50px] cursor-pointer">
           <Image
               src={getBasicIcon("More")}
@@ -264,105 +397,137 @@ const LeadContainer = ({
             />
         </div> 
         */}
-        {notes && (
-          <Backdrop bool={bool}>
-            <Notes cancel={cancelNotes} />
-          </Backdrop>
-        )}
-        {events && (
-          <Backdrop bool={bool} pad={"50px 0"}>
-            <Events cancel={cancelEvents} />
-          </Backdrop>
-        )}
-        <LeadBox width={30} bool={selectAll} />
-        <LeadItem
-          width={120}
-          left={20}
-          textLeft={0}
-          weight={500}
-          color={"#000"}
-          text={"12XXXX"}
-          click={true}
-          route={`${pathname}/${id}/lead-profile`}
-        />
-        <LeadItem
-          width={150}
-          left={0}
-          color={"#000"}
-          text={custom}
-          click={true}
-          route={`${pathname}/${id}/lead-profile`}
-        />
-        <LeadItemMultiple
-          width={130}
-          left={20}
-          upperText={company.company_name}
-          bottomText={company.company_location}
-          bold={true}
-          click={true}
-          route={`${pathname}/${id}/company-profile`}
-        />
-        <LeadItem
-          width={110}
-          left={10}
-          text={customer.name}
-          click={true}
-          route={`${pathname}/${id}/client-poc-profile`}
-        />
-        <LeadItem width={150} left={20} text={customer.email} />
-        <LeadItem width={130} left={20} text={customer.contact} />
-        <QuickActions
-          width={120}
-          notes={() => {
-            AddLead(1, 0);
-          }}
-          events={() => {
-            AddLead(1, 1);
-          }}
-        />
-        <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
-        <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
-        <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
-        <LeadItem width={130} left={10} textLeft={10} text={"John C."} />
-        <LeadItem width={150} left={10} text={LeadData.inquiry} />
-        <LeadItem width={150} left={10} textLeft={10} text={"Product A"} />
-        <ActivityHistory width={180} left={0} last={last} />
-        <LeadItemMultiple
-          width={130}
-          left={20}
-          upperText={"Email Sent"}
-          bottomText={LeadData.last_activity}
-        />
-        <LeadItemMultiple
-          width={150}
-          left={10}
-          upperText={"Send Email"}
-          bottomText={"on 23 Jan 2023"}
-        />
-        <LeadItem
-          width={150}
-          textLeft={20}
-          left={10}
-          text={LeadData.win_probability}
-        />
-        <LeadItem width={140} left={20} text={LeadData.potential_deal_size} />
-        <LeadItem
-          width={150}
-          left={10}
-          textLeft={15}
-          text={LeadData.existing_budget}
-        />
-        <LeadItem
-          link={true}
-          width={150}
-          left={10}
-          text={company.company_website_url}
-        />
-        {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
-        {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
-        <LeadItem width={150} left={10} text={"Read Notes"} />
+          {notes && (
+            <Backdrop bool={bool}>
+              <Notes cancel={cancelNotes} />
+            </Backdrop>
+          )}
+          {events && (
+            <Backdrop bool={bool} pad={"50px 0"}>
+              <Events cancel={cancelEvents} />
+            </Backdrop>
+          )}
+          <LeadBox width={30} bool={selectAll} />
+          <ExpandingIcon
+            change={(e: any) => {
+              setDetailShow(e);
+            }}
+          />
+          <LeadItem
+            width={120}
+            left={20}
+            textLeft={0}
+            weight={500}
+            color={"#000"}
+            text={"12XXXX"}
+            click={true}
+            route={`${pathname}/${id}/lead-profile`}
+          />
+          <LeadItem
+            width={150}
+            left={0}
+            color={"#000"}
+            text={custom}
+            click={true}
+            route={`${pathname}/${id}/lead-profile`}
+          />
+          <LeadItemMultiple
+            width={130}
+            left={20}
+            upperText={company.company_name}
+            bottomText={company.company_location}
+            bold={true}
+            click={true}
+            route={`${pathname}/${id}/company-profile`}
+          />
+          <LeadItem
+            width={110}
+            left={10}
+            text={customer.name}
+            click={true}
+            route={`${pathname}/${id}/client-poc-profile`}
+          />
+          <LeadItem width={150} left={20} text={customer.email} />
+          <LeadItem width={130} left={20} text={customer.contact} />
+          <QuickActions
+            width={120}
+            notes={() => {
+              AddLead(1, 0);
+            }}
+            events={() => {
+              AddLead(1, 1);
+            }}
+          />
+          <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
+          <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
+          <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
+          <LeadItem width={130} left={10} textLeft={10} text={"John C."} />
+          <LeadItem width={150} left={10} text={LeadData.inquiry} />
+          <LeadItem width={150} left={10} textLeft={10} text={"Product A"} />
+          <ActivityHistory width={180} left={0} last={last} />
+          <LeadItemMultiple
+            width={130}
+            left={20}
+            upperText={"Email Sent"}
+            bottomText={LeadData.last_activity}
+          />
+          <LeadItemMultiple
+            width={150}
+            left={10}
+            upperText={"Send Email"}
+            bottomText={"on 23 Jan 2023"}
+          />
+          <LeadItem
+            width={150}
+            textLeft={20}
+            left={10}
+            text={LeadData.win_probability}
+          />
+          <LeadItem width={140} left={20} text={LeadData.potential_deal_size} />
+          <LeadItem
+            width={150}
+            left={10}
+            textLeft={15}
+            text={LeadData.existing_budget}
+          />
+          <LeadItem
+            link={true}
+            width={150}
+            left={10}
+            text={company.company_website_url}
+          />
+          {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
+          {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
+          <LeadItem width={150} left={10} text={"Read Notes"} />
+        </div>
       </div>
-    </div>
+      <div
+        className="duration-300 bg-[#f7f7f7]"
+        style={{
+          width: w,
+          height: detailShow ? 150 : 0,
+          clipPath: detailShow
+            ? "inset(0px 0px 0 1px)"
+            : "inset(0px 0px 150px 1px)",
+        }}
+      >
+        <ExpandableRow
+          leadDesc={
+            "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
+          }
+          companyDesc={
+            "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
+          }
+          companyWebsite={"www.abccorp.in"}
+          LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
+          otherContacts={[
+            { name: "Regina Cooper", position: "Project Manager" },
+            { name: "Suman A.", position: "Sales Manager" },
+            { name: "Judith Black", position: "Creative Director" },
+          ]}
+        />
+      </div>
+    </>
   );
 };
 

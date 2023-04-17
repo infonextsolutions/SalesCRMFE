@@ -1,6 +1,6 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const MidPath = () => {
   return (
@@ -15,10 +15,13 @@ const MidPath = () => {
 const ActivityHistory = ({ width, left, last }: any) => {
   const [hover, setHover] = useState(false);
   console.log(hover);
+  const ref: any = useRef();
+  console.log(ref.current.getBoundingClientRect());
   return (
     <div
       className={`flex items-center justify-between h-[20px] relative shrink-0 cursor-pointer`}
       style={{ width: width, marginLeft: left }}
+      ref={ref}
       onMouseOver={() => {
         setHover(true);
       }}
@@ -33,7 +36,7 @@ const ActivityHistory = ({ width, left, last }: any) => {
       <Image src={getBasicIcon("Mail")} alt="" width={15} height={15} />
       <MidPath />
       <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
-      {hover && (
+      {true && (
         <div
           className="bg-[#E8E9EB] min-w-[180px] flex flex-col items-center rounded-[15px] absolute py-[8px] px-[15px]  right-[10px] drop-shadow-sm"
           style={{
