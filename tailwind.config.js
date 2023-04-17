@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {colors:{
       'renal-blue':"#304ffd",
-      "norm":"#8A9099"
+      "norm":"#8A9099",
+      "text-norm":"#3F434A"
     }},
   },
   plugins: [],

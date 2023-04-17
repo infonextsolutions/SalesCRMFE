@@ -2,8 +2,8 @@ import gsap, { Power4 } from "gsap";
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const Backdrop = ({ children, bool, pad }: any) => {
-  const [open, setOpen] = useState(true);
+const Backdrop = ({ children, bool, pad, width }: any) => {
+  const [open, setOpen] = useState(true); 
 
   const backdrop: any = useRef();
 
@@ -86,7 +86,10 @@ const Backdrop = ({ children, bool, pad }: any) => {
           }}
         >
           <motion.div
-            className={`w-[600px] h-[100%] bg-[#fff] rounded-3xl relative`}
+            className={`h-[100%] bg-[#fff] rounded-3xl relative`}
+            style={{
+              width: width ? width : "600px",
+            }}
             initial={{
               clipPath: "inset(0px 0px 100% 1px)",
             }}
