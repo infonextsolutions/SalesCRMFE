@@ -1,4 +1,5 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import DualRange from "@/utils/dualRange";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -86,7 +87,7 @@ const LastActivity = ({}) => {
   );
 };
 
-const Filter = ({ cancel }: any) => {
+const Filter = ({ cancel, left, top }: any) => {
   const [hover, setHover] = useState(false);
   React.useEffect(() => {
     const onpointerdown = () => {
@@ -102,9 +103,11 @@ const Filter = ({ cancel }: any) => {
 
   return (
     <div
-      className="w-[400px] rounded-lg shadow-2xl min-h-[400px] bg-[#fff] py-[10px] px-[20px] absolute top-[60px] right-[0]"
+      className="w-[400px] rounded-lg shadow-2xl min-h-[400px] bg-[#fff] py-[10px] px-[20px] absolute"
       style={{
-        zIndex: 10000,
+        zIndex: 99999999999,
+        top: top,
+        left: left,
       }}
       onMouseOver={() => {
         setHover(true);
@@ -261,8 +264,8 @@ const Filter = ({ cancel }: any) => {
           },
         ]}
       />
-      <p>Trackball</p>
-      <p>Trackball</p>
+      <DualRange title={"Deal Size"} />
+      <DualRange title={"Existing"} />
     </div>
   );
 };
