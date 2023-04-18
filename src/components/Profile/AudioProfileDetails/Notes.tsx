@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Notes = () => {
   return (<> <div className="bg-gray-100 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-4">
-    <div className="flex ml-2 items-center ">
+    <div className="flex ml-[10px]">
       <Image
         src={getBasicIcon("Filter")}
         className={`w-[40px] ml-[280px] pl-[4px] pr-[4px] p-[6px] bg-white rounded-xl svg-grey`}

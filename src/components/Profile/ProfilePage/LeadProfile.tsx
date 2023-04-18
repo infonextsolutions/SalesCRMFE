@@ -46,40 +46,32 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-5 ml-2 text-black">COMPANY INFO</h3>
       <ul className="mt-2 mb-10 ml-[1px]">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">
-            Company Name
+          <strong className="font-medium text-sm mr-1 text-gray-500">
+            COMPANY NAME
           </strong>
           <a href="name" className="block text-black">
             ABC Corp
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">
-            Company Address
-          </strong>
-          <a href="address:" className="block text-black">
-            nothing
-          </a>
-        </li>
-        <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">
-            Website Link
+          <strong className="font-medium text-sm mr-1 text-gray-500">
+            WEBSITE LINK
           </strong>
           <span className="block text-black">
             <a href="https://www.example.com">www.example.com</a>
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">
-            Industry Type
+          <strong className="font-medium text-sm mr-1 text-gray-500">
+            INDUSTRY TYPE
           </strong>
           <a href="industry:" className="block text-black">
             IT Solutions
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">
-            Social Media
+          <strong className="font-medium text-sm mr-1 text-gray-500">
+            SOCIAL MEDIA
           </strong>
           <div className="flex">
             <Image
@@ -280,24 +272,24 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-1 ml-2 text-black">INFO</h3>
       <ul className="mt-2 mb-10 ml-auto">
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">GENDER</strong>
+          <strong className="font-medium text-sm mr-1 text-gray-500">GENDER</strong>
           <a href="tel:+821023456789" className="block text-black">
             Female
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">E-mail</strong>
+          <strong className="font-medium text-sm mr-1 text-gray-500">PHONE</strong>
+          <span className="block text-black">9786XXXXXX</span>
+        </li>
+        <li className="px-2 mt-4">
+          <strong className="font-medium text-sm mr-1 text-gray-500">E-MAIL</strong>
           <a href="mailto:" className="block text-black">
             aspiringfe@helloworld.com
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">Location</strong>
-          <span className="block text-black">Seoul, South Korea</span>
-        </li>
-        <li className="px-2 mt-4">
-          <strong className="font-medium mr-1 text-gray-500">
-            Social Media
+          <strong className="font-medium text-sm mr-1 text-gray-500">
+            SOCIAL MEDIA
           </strong>
           <div className="flex">
             <Image
