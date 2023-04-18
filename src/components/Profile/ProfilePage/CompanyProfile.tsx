@@ -50,31 +50,32 @@ const CompanyProfile = () => {
       <h3 className="text-sm font-medium text-black mt-5 ml-2">COMPANY INFO</h3>
       <ul className="mt-2 mb-10 ml-auto">
         <li className="px-2 mt-4">
-          <strong className="font-medium text-gray-500 mr-2">Company Name</strong>
+          <strong className="font-medium text-sm text-gray-500 mr-2">COMPANY NAME</strong>
           <p className="block text-black ">
             ABC Corp
           </p>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-gray-500 ml-auto">Company Address</strong>
-          <a href="address:" className="block text-black">
-            nothing
-          </a>
+          <strong className="font-medium text-sm text-gray-500 ml-auto"> COMPANY ADDRESS</strong>
+          <p className="block text-black">
+            12th Block tower A,</p>
+            <p className="block text-black">Noida,UP-11XXXX
+            </p>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium  text-gray-500 mr-1">Website Link</strong>
+          <strong className="font-medium text-sm text-gray-500 mr-1">WEBSITE LINK</strong>
           <span className="block text-black">
             <a href="https://www.example.com">www.example.com</a>
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-gray-500 mr-1">Industry Type</strong>
+          <strong className="font-medium text-sm text-gray-500 mr-1">INDUSTRY TYPE</strong>
           <a href="industry:" className="block text-black">
             IT Solutions
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-gray-500 mr-1">Social Media</strong>
+          <strong className="font-medium text-sm text-gray-500 mr-1">SOCIAL MEDIA</strong>
           <div className="flex">
             <Image
               src={getBasicIcon("Twitter")}
