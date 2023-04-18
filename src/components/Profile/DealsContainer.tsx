@@ -17,11 +17,11 @@ const Deals=()=>{
           <div className="bg-[#ffffff] my-[40px] overflow-hidden">
             <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">Open Deals</h5>
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
-              <p>Lead Id</p>
-              <p className="ml-[32px]">Product Service</p>
-              <p className="ml-[30px]">Lead Stage</p>
-              <p className="ml-[45px]">Last Activity</p>
-              <p className="ml-[90px]">Activity History</p>
+              <p className="w-[12%]">Lead Id</p>
+              <p className="w-[18%]">Product Service</p>
+              <p className="w-[17%]">Lead Stage</p>
+              <p className="w-[25%]">Last Activity</p>
+              <p >Activity History</p>
             </div>
             <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
@@ -413,11 +413,11 @@ const Deals=()=>{
           <div className="bg-[#ffffff] my-[50px] mt-[80px]">
             <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">Close Deals</h5>
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
-              <p>Lead Id</p>
-              <p className="ml-[32px]">Product Service</p>
-              <p className="ml-[30px]">Lead Stage</p>
-              <p className="ml-[45px]">Last Activity</p>
-              <p className="ml-[90px]">Activity History</p>
+              <p className="w-[12%]">Lead Id</p>
+              <p className="w-[18%]">Product Service</p>
+              <p className="w-[17%]">Lead Stage</p>
+              <p className="w-[25%]">Last Activity</p>
+              <p >Activity History</p>
             </div>
             <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
@@ -809,9 +809,9 @@ const Deals=()=>{
           <div className="bg-[#ffffff] my-[50px] mt-[80px]">
             <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">Interest History</h5>
             <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
-              <p>Product Service</p>
-              <p className="ml-[45px]">Lead Id</p>
-              <p className="ml-[89px]">Last Activity</p>
+              <p className="w-[22%]">Product Service</p>
+              <p className="w-[22%]">Lead Id</p>
+              <p >Last Activity</p>
             </div>
             <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
               <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
