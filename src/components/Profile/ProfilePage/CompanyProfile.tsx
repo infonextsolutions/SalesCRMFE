@@ -51,9 +51,9 @@ const CompanyProfile = () => {
       <ul className="mt-2 mb-10 ml-auto">
         <li className="px-2 mt-4">
           <strong className="font-medium text-gray-500 mr-2">Company Name</strong>
-          <a href="#" className="block text-black ">
+          <p className="block text-black ">
             ABC Corp
-          </a>
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium text-gray-500 ml-auto">Company Address</strong>
@@ -198,7 +198,7 @@ const CompanyProfile = () => {
         </li>
       </ul>
       <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
-      <h3 className="text-black-500 text-medium font-semibold text-base">Company Description</h3>
+      <h3 className="text-black text-medium font-semibold text-base">Company Description</h3>
       <p className="text-base text-gray-500 text-sm text-[12px]">ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 
       10+ existing clients and also works with individual people.</p>
     </div>

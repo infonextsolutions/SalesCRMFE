@@ -24,12 +24,9 @@ const ProfilePage = () => {
             <h2 className="text-base text-[16px] whitespace-nowrap leading-7 tracking-wide text-gray-900 font-medium">
               LEAD-XYZ info
             </h2>
-            <a
-              href="#0"
-              className="block ml-3 py-2 text-xs text-[14px] text-gray-600 hover:text-indigo-500"
-            >
+            <p className="block ml-3 py-2 text-xs text-[14px] text-gray-600 hover:text-indigo-500">
               LEAD-ID123456
-            </a>
+            </p>
           </div>
           <div className="h-[120%] ml-auto ">
             <Image
@@ -114,54 +111,54 @@ const ProfilePage = () => {
       <ul className="mt-2 mb-10 ml-1">
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Stage</strong>
-          <a href="name" className="block text-gray">
+          <p className="block text-gray">
             Enquiry
-          </a>
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Status</strong>
-          <a href="name" className="block text-gray">
+          <p className="block text-gray">
             Contacted
-          </a>
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Source</strong>
-          <a href="address:" className="block text-gray">
+          <p className="block text-gray">
             Website
-          </a>
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Owner(Primary)
           </strong>
           <span className="block text-gray">
-            <a href="Leadowner">Aarti.S</a>
+            <p>Aarti.S</p>
           </span>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Owner(Secondary)
           </strong>
-          <a href="leadowner" className="block text-gray">
+          <p className="block text-gray">
             Raghav V.
             Ajay P.
-          </a>
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Created By
           </strong>
-          <a href="leadowner" className="block text-gray">
+          <p className="block text-gray">
             -
-          </a>
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Updated on
           </strong>
-          <a href="leadowner" className="block text-gray">
+          <p className="block text-gray">
             26 January 2023 4:55 PM
-          </a>
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
@@ -169,60 +166,60 @@ const ProfilePage = () => {
           </strong>
         </li>
         <div
-          className={`flex h-[20px] items-center justify-between mt-[5px] px-2 shrink-0`}
+          className={`flex h-[20px] items-center justify-between mt-[5px] px-1 shrink-0`}
           style={{ width: "width", marginLeft: "left" }}
         >
           <div className="flex">
             <Image
               src={getBasicIcon("Phone")}
               alt=""
-              className="mr-[3px] cursor-pointer"
+              className="mr-[3px] svg-grey cursor-pointer"
               width={20}
               height={30}
               style={{
                 objectFit: "contain",
               }}
             />
-            <p>5</p>
+            <p className="text-black">5</p>
           </div>
           <div className="flex">
             <Image
               src={getBasicIcon("Attachment")}
               alt=""
-              className="mr-[3px] cursor-pointer"
+              className="mr-[3px] svg-grey cursor-pointer"
               width={20}
               height={30}
               style={{
                 objectFit: "contain",
               }}
             />
-            <p>4</p>
+            <p className="text-black">4</p>
           </div>
           <div className="flex">
             <Image
               src={getBasicIcon("Chat")}
               alt=""
-              className="mr-[3px] cursor-pointer"
+              className="mr-[3px] svg-grey cursor-pointer"
               width={20}
               height={30}
               style={{
                 objectFit: "contain",
               }}
             />
-            <p>2</p>
+            <p className="text-black">2</p>
           </div>
           <div className="flex">
             <Image
               src={getBasicIcon("Mail")}
               alt=""
-              className="mr-[3px] cursor-pointer"
+              className="mr-[3px] svg-grey cursor-pointer"
               width={20}
               height={30}
               style={{
                 objectFit: "contain",
               }}
             />
-            <p>3</p>
+            <p className="text-black">3</p>
           </div>
           <div className="flex">
             <Image
@@ -233,9 +230,9 @@ const ProfilePage = () => {
               style={{
                 objectFit: "contain",
               }}
-              className="mr-[3px] cursor-pointer"
+              className="mr-[3px] svg-grey cursor-pointer"
             />
-            <p>4</p>
+            <p className="text-black">4</p>
           </div>
           <div className="flex">
             <Image
@@ -246,9 +243,9 @@ const ProfilePage = () => {
               style={{
                 objectFit: "contain",
               }}
-              className="mr-[3px] cursor-pointer"
+              className="mr-[3px] svg-grey cursor-pointer"
             />
-            <p>4</p>
+            <p className="text-black">4</p>
           </div>
         </div>
       </ul>

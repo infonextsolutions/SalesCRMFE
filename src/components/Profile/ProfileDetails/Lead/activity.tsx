@@ -9,11 +9,11 @@ const Activityhistory = () => {
     <div className="bg-[#ffffff] my-[50px]">
       <h2 className="text-[#3F434A] text-2xl font-medium">Activity History</h2>
       <div className="flex text-[14px] mt-[30px] text-[#8A9099] leading-[21px] items-center">
-        <p>Date and Time</p>
-        <p className="ml-[35px]">Activity Type</p>
-        <p className="ml-[35px]">Partcipants</p>
-        <p className="ml-[65px]">Outcome</p>
-        <p className="ml-[80px]">Title and Description</p>
+        <p className="text-black">Date and Time</p>
+        <p className="ml-[35px] text-black">Activity Type</p>
+        <p className="ml-[35px] text-black">Partcipants</p>
+        <p className="ml-[65px] text-black">Outcome</p>
+        <p className="ml-[80px] text-black">Title and Description</p>
       </div>
       <div className="mt-[10px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5">
         <div className="text-[14px] pl-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">

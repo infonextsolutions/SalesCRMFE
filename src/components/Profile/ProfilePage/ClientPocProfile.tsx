@@ -21,9 +21,9 @@ const ClientPocProfile = () => {
                 objectFit: "contain",
               }}
             /> 
-            <div className="ml-3 items-center text-medium">
-              <h2 className="text-base text-[18px] font-normal whitespace-nowrap leading-7 tracking-wide text-black">
-                Shraddha P
+            <div className="ml-3 items-center ">
+              <h2 className="text-base text-xl font-small whitespace-nowrap leading-7 tracking-wide text-black">
+                Shraddha P.
               </h2>
               
               <a
@@ -58,14 +58,14 @@ const ClientPocProfile = () => {
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium mr-1 text-gray-500">E-mail</strong>
-            <a href="mailto:" className="block text-black">
-              aspiringfe@helloworld.com
-            </a>
+            <strong className="font-medium mr-1 text-gray-500">Phone</strong>
+            <p className="block text-black">
+              9786XXXXXX
+            </p>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-gray-500 mr-1">Location</strong>
-            <span className="block text-black">Seoul, South Korea</span>
+            <strong className="font-medium text-gray-500 mr-1">Email</strong>
+            <a href="mailto:" className="block text-black">aspiringfe@helloworld.com</a>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-gray-500 mr-1">Social Media</strong>
