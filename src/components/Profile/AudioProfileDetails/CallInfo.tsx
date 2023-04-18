@@ -1,3 +1,5 @@
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 import React from "react";
 
 const CallInfo = ({ check, info }: any) => {
@@ -5,6 +7,15 @@ const CallInfo = ({ check, info }: any) => {
 
   return (
     <div>
+      <div className="absolute top-[16px] right-0">
+        <Image
+          src={getBasicIcon("Edit")}
+          className={`w-[16px] h-[16px] cursor-pointer mt-[35px] mr-[30px]`}
+          alt=""
+          width={16}
+          height={16}
+        />
+      </div>
       <div className="pl-[30px]">
         <p className="mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Call Id- {info[activeTitle].data.callId}

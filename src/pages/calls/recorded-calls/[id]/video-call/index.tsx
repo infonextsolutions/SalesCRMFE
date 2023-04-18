@@ -75,7 +75,7 @@ const CallProfile = () => {
           },
         ]}
       />
-      <DetailedNavigator/>
+      <DetailedNavigator />
 
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl ">

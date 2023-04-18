@@ -10,7 +10,8 @@ const Search = ({ change, view }: any) => {
   const [bounding, setBounding] = useState({ left: 0, top: 0 });
   return (
     <>
-      <div className="w-[60%] h-[40px] relative border-[#ccc] border-[1px] rounded-[12px]  flex items-center"
+      <div
+        className="w-[60%] h-[40px] relative border-[#ccc] border-[1px] rounded-[12px]  flex items-center"
         ref={ref}
       >
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
