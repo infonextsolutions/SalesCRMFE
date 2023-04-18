@@ -1,4 +1,5 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import DualRange from "@/utils/dualRange";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 
@@ -160,6 +161,7 @@ const FullCall = ({ cancel }: any) => {
               </div>
             </div>
           </div>
+          <DualRange title="Call Length:30:00" from="00:00" to="30:00" />
           <Tracker title={"John"} list={list} color={"#304FFD"} />
           <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
         </div>

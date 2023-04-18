@@ -36,7 +36,7 @@ const DualRange = ({ width, top, title }: any) => {
       <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
         {title}
       </p>
-      <div className="w-[100%]  h-[4px] mt-[18px] flex bg-[#fff] relative rounded-[3px]">
+      <div className="w-[100%]  h-[4px] mt-[12px] flex bg-[#fff] relative rounded-[3px]">
         <div className="h-[100%] w-[100%] bg-renal-blue rounded-l-[3px] relative">
           <RangeHolder align={true} />
           <RangeHolder />

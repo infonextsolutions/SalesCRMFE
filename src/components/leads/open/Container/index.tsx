@@ -23,7 +23,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   const state = useSelector((state: any) => state.auth);
 
   return (
-    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] overflow-hidden mb-[40px]">
+    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] relative mb-[40px]">
       <div className="w-[100%] h-[58px] flex items-center  px-[8px] ">
         <Search change={onChange} view={view} />
         <ButtonDropDown
