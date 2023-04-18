@@ -34,15 +34,7 @@ const AudioProfileContainer = ({
           {activeTitle === 1 && <Comments />}
           {activeTitle === 2 && <Notes />}
         </div>
-        <div className="absolute top-[16px] right-0">
-          <Image
-            src={getBasicIcon("Edit")}
-            className={`w-[16px] h-[16px] cursor-pointer mt-[35px] mr-[30px]`}
-            alt=""
-            width={16}
-            height={16}
-          />
-        </div>
+       
       </div>
     </div>
   );
