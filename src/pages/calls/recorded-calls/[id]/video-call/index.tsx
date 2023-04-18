@@ -7,6 +7,7 @@ import Video from "@/components/activeCalls/video";
 import Backdrop from "@/components/View/Backdrop/Center";
 import FullCall from "@/components/View/full-call";
 import CallSnippet from "@/components/View/call-snippet";
+import DetailedNavigator from "@/components/View/DetailedNavigator";
 
 //Manya will make this page
 
@@ -74,6 +75,8 @@ const CallProfile = () => {
           },
         ]}
       />
+      <DetailedNavigator/>
+
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl ">
           <Video />
