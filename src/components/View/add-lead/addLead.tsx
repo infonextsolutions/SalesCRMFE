@@ -23,7 +23,12 @@ const AddText = ({ top, title, width }: any) => {
 
 const AddLead = ({ cancel }: any) => {
   return (
-    <div className="custom-scroll-black w-[100%] h-[100vh] py-[30px] px-[50px] overflow-y-auto">
+    <div
+      className="custom-scroll-black w-[100%] h-[100vh] py-[30px] px-[50px] overflow-y-auto"
+      style={{
+        zIndex: 100000000000000,
+      }}
+    >
       <h1 className="text-[#3f434a] text-[31px] font-medium mb-[40px] tracking-[1px]">
         Add Lead
       </h1>
