@@ -2,7 +2,7 @@
 import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import React, { useState, Suspense } from "react";
-import Search from "../Search/Search";
+import Search from "../../genUtils/Search";
 // import KanbanContainer from "@/components/View/Kanban";
 import { useSelector } from "react-redux";
 import Spinner from "@/components/loader/spinner";
@@ -23,7 +23,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   const state = useSelector((state: any) => state.auth);
 
   return (
-    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] overflow-hidden mb-[40px]">
+    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px]  mb-[40px] relative">
       <div className="w-[100%] h-[58px] flex items-center  px-[8px] ">
         <Search change={onChange} view={view} />
         <ButtonDropDown
