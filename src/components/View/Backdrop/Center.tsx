@@ -86,7 +86,7 @@ const Backdrop = ({ children, bool, pad, width }: any) => {
           }}
         >
           <motion.div
-            className={`h-[100%] bg-[#fff] rounded-3xl relative`}
+            className={`h-[100%] bg-[#fff] rounded-3xl relative py-[10px] `}
             style={{
               width: width ? width : "600px",
             }}

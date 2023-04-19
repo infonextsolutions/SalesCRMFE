@@ -8,6 +8,7 @@ import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ActivityHistory from "../../genUtils/Activity";
 import Events from "@/components/View/Event/Events";
+import Notes1 from "@/components/View/NotesSalesView";
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -336,11 +337,15 @@ const LeadContainer = ({
 
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);
+  const [notes1, setNotes1] = React.useState(false);
   const [bool, setBool] = React.useState(true);
   const [detailShow, setDetailShow] = useState(false);
 
   const showNotes = () => {
     setNotes(true);
+  };
+  const showNotes1 = () => {
+    setNotes1(true);
   };
 
   const showEvents = () => {
@@ -362,12 +367,21 @@ const LeadContainer = ({
       setBool(true);
     }, 1700);
   };
+  const cancelNotes1 = () => {
+    setBool(false);
+    setTimeout(() => {
+      setNotes1(false);
+      setBool(true);
+    }, 1700);
+  };
 
   const AddLead = (e: any, e1: any) => {
     if (e1 === 0) {
       showNotes();
     } else if (e1 === 1) {
       showEvents();
+    } else if (e1 === 2) {
+      showNotes1();
     }
   };
 
@@ -532,7 +546,14 @@ const LeadContainer = ({
           />
           {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
           {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
-          <LeadItem width={150} left={10} text={"Read Notes"} />
+          <LeadItem
+            width={150}
+            left={10}
+            text={"Read Notes"}
+            onClick={() => {
+              AddLead(1, 2);
+            }}
+          />
         </div>
       </div>
       <div
@@ -592,6 +613,11 @@ const LeadContainer = ({
       {events && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <Events cancel={cancelEvents} />
+        </Backdrop>
+      )}
+      {notes1 && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <Notes1 cancel={cancelNotes1} />
         </Backdrop>
       )}
     </>
