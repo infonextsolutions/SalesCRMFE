@@ -5,10 +5,7 @@ import Image from "next/image";
 const ProfilePage = () => {
   return (
     <div>
-      
-
       <div className="flex -space-x-2 overflow-hidden">
-      
         <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
           <Image
             className="inline-block w-[50px] rounded-full ring-2 ring-white"
@@ -21,10 +18,10 @@ const ProfilePage = () => {
             }}
           />
           <div className="ml-3">
-            <h2 className="text-base text-[16px] whitespace-nowrap leading-7 tracking-wide text-gray-900 font-medium">
+            <h2 className="text-base text-[16px] whitespace-nowrap leading-7 tracking-wide text-[#000] -900 font-medium">
               LEAD-XYZ info
             </h2>
-            <p className="block ml-3 py-2 text-xs text-[14px] text-gray-600 hover:text-indigo-500">
+            <p className="block ml-3 py-2 text-xs text-[14px] text-[#000] -600 hover:text-indigo-500">
               LEAD-ID123456
             </p>
           </div>
@@ -46,7 +43,7 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-5 ml-2 text-black">COMPANY INFO</h3>
       <ul className="mt-2 mb-10 ml-[1px]">
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-gray-500">
+          <strong className="font-medium text-sm mr-1 text-[#000] -500">
             COMPANY NAME
           </strong>
           <a href="name" className="block text-black">
@@ -54,7 +51,7 @@ const ProfilePage = () => {
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-gray-500">
+          <strong className="font-medium text-sm mr-1 text-[#000] -500">
             WEBSITE LINK
           </strong>
           <span className="block text-black">
@@ -62,7 +59,7 @@ const ProfilePage = () => {
           </span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-gray-500">
+          <strong className="font-medium text-sm mr-1 text-[#000] -500">
             INDUSTRY TYPE
           </strong>
           <a href="industry:" className="block text-black">
@@ -70,7 +67,7 @@ const ProfilePage = () => {
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-gray-500">
+          <strong className="font-medium text-sm mr-1 text-[#000] -500">
             SOCIAL MEDIA
           </strong>
           <div className="flex">
@@ -103,27 +100,21 @@ const ProfilePage = () => {
       <ul className="mt-2 mb-10 ml-1">
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Stage</strong>
-          <p className="block text-gray">
-            Enquiry
-          </p>
+          <p className="block text-[#000] ">Enquiry</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Status</strong>
-          <p className="block text-gray">
-            Contacted
-          </p>
+          <p className="block text-[#000] ">Contacted</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Source</strong>
-          <p className="block text-gray">
-            Website
-          </p>
+          <p className="block text-[#000] ">Website</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Owner(Primary)
           </strong>
-          <span className="block text-gray">
+          <span className="block text-[#000] ">
             <p>Aarti.S</p>
           </span>
         </li>
@@ -131,26 +122,19 @@ const ProfilePage = () => {
           <strong className="font-medium mr-1 text-black">
             Lead Owner(Secondary)
           </strong>
-          <p className="block text-gray">
-            Raghav V.
-            Ajay P.
-          </p>
+          <p className="block text-[#000] ">Raghav V. Ajay P.</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Created By
           </strong>
-          <p className="block text-gray">
-            -
-          </p>
+          <p className="block text-[#000] ">-</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Updated on
           </strong>
-          <p className="block text-gray">
-            26 January 2023 4:55 PM
-          </p>
+          <p className="block text-[#000] ">26 January 2023 4:55 PM</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
@@ -258,12 +242,12 @@ const ProfilePage = () => {
           }}
         />
         <div className="ml-3">
-          <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-wide text-gray-900 font-normal">
+          <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-wide text-[#000] -900 font-normal">
             Sharddha P
           </h2>
           <a
             href="#0"
-            className="block text-xs text-[14px] text-gray-500 tracking-wide hover:text-indigo-500"
+            className="block text-xs text-[14px] text-[#000] -500 tracking-wide hover:text-indigo-500"
           >
             Sales Manager
           </a>
@@ -272,23 +256,29 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-1 ml-2 text-black">INFO</h3>
       <ul className="mt-2 mb-10 ml-auto">
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-gray-500">GENDER</strong>
+          <strong className="font-medium text-sm mr-1 text-[#000] -500">
+            GENDER
+          </strong>
           <a href="tel:+821023456789" className="block text-black">
             Female
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-gray-500">PHONE</strong>
+          <strong className="font-medium text-sm mr-1 text-[#000] -500">
+            PHONE
+          </strong>
           <span className="block text-black">9786XXXXXX</span>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-gray-500">E-MAIL</strong>
+          <strong className="font-medium text-sm mr-1 text-[#000] -500">
+            E-MAIL
+          </strong>
           <a href="mailto:" className="block text-black">
             aspiringfe@helloworld.com
           </a>
         </li>
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-gray-500">
+          <strong className="font-medium text-sm mr-1 text-[#000] -500">
             SOCIAL MEDIA
           </strong>
           <div className="flex">
@@ -353,7 +343,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-xs font-small text-gray-500 hover:text-indigo-500"
+                className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
               >
                 Co-Founder
               </a>
@@ -384,7 +374,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-xs font-small text-gray-500 hover:text-indigo-500"
+                className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
               >
                 Project Lead
               </a>
@@ -415,7 +405,7 @@ const ProfilePage = () => {
               </h4>
               <a
                 href="#0"
-                className="block text-xs font-small text-gray-500 hover:text-indigo-500"
+                className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
               >
                 HR
               </a>
