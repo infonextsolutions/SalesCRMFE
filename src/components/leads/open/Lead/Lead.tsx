@@ -367,6 +367,7 @@ const LeadContainer = ({
       setBool(true);
     }, 1700);
   };
+  
   const cancelNotes1 = () => {
     setBool(false);
     setTimeout(() => {

@@ -285,7 +285,7 @@ const LeadContainer = ({
           bottomText={"Sales Rep"}
           bold={true}
           click={true}
-          route={`${pathname}/${id}/company-profile`}
+          route={`${pathname}/leads`}
         />
         <LeadItem
           width={150}
@@ -293,7 +293,6 @@ const LeadContainer = ({
           color={"#000"}
           text={"950"}
           click={true}
-          route={`${pathname}/${id}/lead-profile`}
         />
         <LeadItem
           width={130}
@@ -301,15 +300,8 @@ const LeadContainer = ({
           text={"2100"}
           bold={true}
           click={true}
-          route={`${pathname}/${id}/company-profile`}
         />
-        <LeadItem
-          width={110}
-          left={10}
-          text={"1,00,000"}
-          click={true}
-          route={`${pathname}/${id}/client-poc-profile`}
-        />
+        <LeadItem width={110} left={10} text={"1,00,000"} click={true} />
         <LeadItem width={150} left={20} text={"2,70,000"} />
         <LeadItem width={130} left={20} text={"930"} />
         <LeadItem width={110} left={10} text={"1060"} />
