@@ -8,9 +8,9 @@ const Attachements = () => {
       <div className="bg-[#ffffff] my-[30px]">
         <div className="flex">
           <h2 className="text-[#3F434A] text-2xl font-medium">Attachments</h2>
-          <button className="ml-[400px] flex bg-renal-blue pl-[6px] rounded-xl pr-[6px] p-[8px]">
+          <button className="ml-[400px] absolute right-[20px]  flex bg-renal-blue pl-[18px] rounded-xl pr-[18px] py-[10px]">
             <Image
-               src="/Images/Logo/Upload.svg"
+              src="/Images/Logo/Upload.svg"
               className={`w-[18px] svg-white`}
               alt=""
               width={20}
@@ -19,7 +19,9 @@ const Attachements = () => {
                 objectFit: "contain",
               }}
             />
-            <p className="whitespace-nowrap font-large  text-[14px] pl-[5px] pr-[5px] text-[#ffffff] ">Upload</p>
+            <p className="whitespace-nowrap font-medium  text-[14px] pl-[5px] pr-[5px] text-[#ffffff] ">
+              Upload
+            </p>
           </button>
         </div>
         <div className="py-5 text-gray text-small">
@@ -33,9 +35,11 @@ const Attachements = () => {
                 alt=""
                 className="w-[55px] px-[10px] "
                 // fill={true}
-                style={{
-                  // objectFit:"contain"
-                }}
+                style={
+                  {
+                    // objectFit:"contain"
+                  }
+                }
                 width={55}
                 height={40}
               />
@@ -75,14 +79,16 @@ const Attachements = () => {
           </p>
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
-            <Image
+              <Image
                 src="/Images/Logo/ZIP 1.svg"
                 alt=""
                 className="w-[55px] px-[10px] "
                 // fill={true}
-                style={{
-                  // objectFit:"contain"
-                }}
+                style={
+                  {
+                    // objectFit:"contain"
+                  }
+                }
                 width={55}
                 height={40}
               />
@@ -122,14 +128,16 @@ const Attachements = () => {
           </p>
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
-            <Image
+              <Image
                 src="/Images/Logo/DOC 1.svg"
                 alt=""
                 className="w-[55px] px-[10px] "
                 // fill={true}
-                style={{
-                  // objectFit:"contain"
-                }}
+                style={
+                  {
+                    // objectFit:"contain"
+                  }
+                }
                 width={55}
                 height={40}
               />
@@ -169,14 +177,16 @@ const Attachements = () => {
           </p>
           <div className="mt-[8px] ml-auto mr-[220px] mx-[10px] flex flex-col gap-y-1.5">
             <div className="text-[14px] pl-[10px] py-[8px] text-[#8A9099] leading-[21px] flex justify-between bg-[#F5F5F5] rounded-xl">
-            <Image
+              <Image
                 src="/Images/Logo/JPG 2.svg"
                 alt=""
                 className="w-[55px] px-[10px] "
                 // fill={true}
-                style={{
-                  // objectFit:"contain"
-                }}
+                style={
+                  {
+                    // objectFit:"contain"
+                  }
+                }
                 width={55}
                 height={40}
               />
