@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/open/Container";
 import Backdrop from "@/components/View/Backdrop";
 import ImportLead from "@/components/View/import-lead/Index";
 import AddLeadForm from "@/components/View/add-lead/addLead";
+import { CSVLink } from "react-csv";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -44,7 +45,7 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const SalesOpen = ({ data }: any) => {
+const SalesOpen = ({ data }: props) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
 
@@ -88,10 +89,22 @@ const SalesOpen = ({ data }: any) => {
       showImports();
     }
   };
+  const ref: any = useRef();
+
+  const exportCSV = () => {};
+
+  const addExport = (e: any, e1: any) => {
+    if (e1 === 3) {
+      console.log("exorting");
+      exportCSV();
+    }
+  };
+  console.log(data);
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
+
       {imports && (
         <Backdrop bool={bool}>
           <ImportLead cancel={cancelImports} />
@@ -141,11 +154,24 @@ const SalesOpen = ({ data }: any) => {
             id: 1,
             icon: "Download",
             light: true,
+            click: addExport,
             list: [
               { title: "Print", Icon: "Printer" },
               { title: "Excel", Icon: "Excel" },
               { title: "PDF", Icon: "PDF" },
-              { title: "CSV", Icon: "CSV" },
+              {
+                title: "CSV",
+                Icon: "CSV",
+                wrapper: (
+                  <CSVLink
+                    data={data.result}
+                    className=""
+                    ref={ref}
+                  >
+                    CSV
+                  </CSVLink>
+                ),
+              },
             ],
           },
         ]}
@@ -156,3 +182,7 @@ const SalesOpen = ({ data }: any) => {
 };
 
 export default SalesOpen;
+
+interface props {
+  data: any;
+}
