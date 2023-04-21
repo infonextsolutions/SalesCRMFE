@@ -56,13 +56,11 @@ const Notes = () => {
           </div>
         </div>
         <div className="py-2"></div>
-        <div className=" px-[10%]" >
-
-
-        <Note />
-        <Note />
-        <Note />
-        <Note />
+        <div className=" px-[10%]">
+          <Note />
+          <Note />
+          <Note />
+          <Note />
         </div>
       </div>
     </>

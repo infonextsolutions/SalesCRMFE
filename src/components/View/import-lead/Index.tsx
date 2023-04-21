@@ -7,33 +7,35 @@ import { useState } from "react";
 
 const Drag = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="w-[100px] flex items-end mt-[40px]">
-        <Image
-          src={getBasicIcon("Excel")}
-          className="svg-excel"
-          width={40}
-          height={40}
-          alt=""
-        />
-        <span className="text-[#3F434A] text-[18px] mx-[4px] font-medium tracking-wide">
-          or
-        </span>
-        <Image
-          src={getBasicIcon("CSV")}
-          className="svg-csv"
-          width={40}
-          height={40}
-          alt=""
-        />
+    <>
+      <div className="flex flex-col justify-center items-center ">
+        <div className="w-[100px] flex items-end mt-[40px]">
+          <Image
+            src={getBasicIcon("Excel")}
+            className="svg-excel"
+            width={40}
+            height={40}
+            alt=""
+          />
+          <span className="text-[#3F434A] text-[18px] mx-[4px] font-medium tracking-wide">
+            or
+          </span>
+          <Image
+            src={getBasicIcon("CSV")}
+            className="svg-csv"
+            width={40}
+            height={40}
+            alt=""
+          />
+        </div>
+        <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px] w-[280px]  text-center">
+          Drop or Browse to upload your files.
+        </p>
+        <p className="text-[#3F434A] text-[14px] font-medium tracking-wide w-[280px] text-center">
+          (.csv, .xlsx formats supported)
+        </p>
       </div>
-      <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px] w-[280px]  text-center">
-        Drop or Browse to upload your files.
-      </p>
-      <p className="text-[#3F434A] text-[14px] font-medium tracking-wide w-[280px] text-center">
-        (.csv, .xlsx formats supported)
-      </p>
-    </div>
+    </>
   );
 };
 
@@ -176,15 +178,15 @@ const Step1 = ({ next, cancel }: any) => {
           .
         </p>
         <div
-          className="w-[100%] bg-[#f8f8f8] h-[200px] cursor-grab mt-[40px] rounded-2xl border-dashed border-[1px] border-[#d2d4d7] flex flex-col justify-center items-center"
+          className="w-[100%] bg-[#f8f8f8] h-[200px] cursor-grab mt-[40px] relative rounded-2xl border-dashed border-[1px] border-[#d2d4d7] flex flex-col justify-center items-center"
           onClick={() => {
             const random = activeBox === 0 ? 1 : activeBox === 2 ? 0 : 2;
             setActiveBox(random);
           }}
         >
-          {activeBox === 0 && <Drag />}
-          {activeBox === 1 && <Loading />}
-          {activeBox === 2 && <Finished />}
+          <Drag />
+          {/* {activeBox === 1 && <Loading />}
+          {activeBox === 2 && <Finished />} */}
         </div>
         <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px]">
           Check if your file has data in the{" "}
