@@ -9,7 +9,7 @@ import RecordProfile from "@/components/Profile/RecordProfile";
 //Manya will make this page
 
 const AudioProfile = () => {
-  const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES", "Questionnaire"];
+  const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES", "QUESTIONNAIRE"];
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation

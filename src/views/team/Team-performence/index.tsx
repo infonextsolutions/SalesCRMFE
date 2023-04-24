@@ -1,10 +1,20 @@
 import Navigation from "@/components/app/Navigation";
 import Performence from "@/components/team/Container/Performence";
+import Filter from "@/components/team/genUtils/Filter";
 import React from "react";
 
 const TeamsPerformence = ({ data }: any) => {
+  const [filter, setFilter] = React.useState(false);
+
   return (
-    <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+    <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px] relative">
+      {filter && (
+        <Filter
+          cancel={() => {
+            setFilter(false);
+          }}
+        />
+      )}
       <Navigation
         title={"Team > Team Activity> My Team"}
         buttons={[
@@ -30,10 +40,12 @@ const TeamsPerformence = ({ data }: any) => {
             dropdown: true,
             id: 1,
             light: true,
-            list: [
-              { title: "Using Form", Icon: "Text" },
-              { title: "Import Leads", Icon: "Download" },
-            ],
+            click: (e1, e2) => {
+              if (e2 === 0) {
+                setFilter(true);
+              }
+            },
+            list: [{ title: "Filter", Icon: "Text" }],
           },
         ]}
       />

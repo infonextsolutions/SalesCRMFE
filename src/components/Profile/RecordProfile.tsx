@@ -6,6 +6,7 @@ import Comments from "./AudioProfileDetails/Comment";
 import Notes from "./AudioProfileDetails/Notes";
 import CallInfo from "./AudioProfileDetails/CallInfo";
 import Activityhistory from "./ProfileDetails/Lead/activity";
+import Questionnaire from "../View/Questionnaire/Index";
 
 const RecordProfile = ({
   titles,
@@ -41,6 +42,7 @@ const RecordProfile = ({
           {activeTitle === 0 && <CallInfo check={check} info={info} />}
           {activeTitle === 1 && <Activityhistory/>}
           {activeTitle === 2 && <Notes />}
+          {activeTitle === 3 && <Questionnaire />}
         </div>
       </div>
     </div>
