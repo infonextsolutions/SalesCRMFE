@@ -1,3 +1,5 @@
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 import React from "react";
 
 const HeaderCheckBox = ({ width, click }: any) => {
@@ -17,20 +19,27 @@ const HeaderCheckBox = ({ width, click }: any) => {
   );
 };
 
-const HeaderItem = ({ width, text, left, align }: any) => {
+const HeaderItem = ({ width, text, left, align, sort }: any) => {
   return (
     <div
       className={`flex items-center  h-[20px] shrink-0`}
       style={{ width: width, marginLeft: left }}
     >
       <p
-        className="text-[#8A9099] uppercase text-[12px] font-medium tracking-wider w-[100%]"
+        className="text-[#8A9099] uppercase text-[12px] font-medium tracking-wider"
         style={{
           textAlign: align && "center",
         }}
       >
         {text}
       </p>
+        <Image
+          src={getBasicIcon("Arrow Down 3")}
+          width={20}
+          className="ml-[3px] cursor-pointer"
+          height={20}
+          alt=""
+        />
     </div>
   );
 };
@@ -58,7 +67,12 @@ const Header = ({ selectAll }: any) => {
         <HeaderItem width={120} left={20} text={"owner"} />
         <HeaderItem width={150} left={10} text={"lead inquiry"} />
         <HeaderItem width={150} left={10} text={"product/service"} />
-        <HeaderItem width={180} left={0} text={"activity history"} align={true} />
+        <HeaderItem
+          width={180}
+          left={0}
+          text={"activity history"}
+          align={true}
+        />
         <HeaderItem width={130} left={20} text={"last activity"} />
         <HeaderItem width={150} left={10} text={"next action/date"} />
         <HeaderItem width={150} left={10} text={"win probability"} />
