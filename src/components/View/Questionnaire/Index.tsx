@@ -71,7 +71,9 @@ const Mcq = () => {
                   <div className="w-[8px] h-[8px] shrink-0 bg-[#304ffd] rounded-[50%]"></div>
                 )}
               </div>
-              <p className="text-[14px] text-[#000] leading-[14px] font-medium ml-[15px] mt-[-3px]" >{item.title}</p>
+              <p className="text-[14px] text-[#000] leading-[14px] font-medium ml-[15px] mt-[-3px]">
+                {item.title}
+              </p>
             </div>
           );
         })}
