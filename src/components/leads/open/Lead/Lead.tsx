@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import ActivityHistory from "../../genUtils/Activity";
 import Events from "@/components/View/Event/Events";
 import Notes1 from "@/components/View/NotesSalesView";
+import EmailPage from '../../../View/Email/index'
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -132,7 +133,7 @@ const LeadItemMultiple = ({
   );
 };
 
-const QuickActions = ({ width, left, notes, events }: any) => {
+const QuickActions = ({ width, left, notes, events,emails }: any) => {
   return (
     <div
       className={`flex  h-[18px] item-center shrink-0`}
@@ -152,6 +153,9 @@ const QuickActions = ({ width, left, notes, events }: any) => {
         src={getBasicIcon("Mail")}
         alt=""
         width={25}
+        onClick={() => {
+          emails();
+        }}
         height={25}
         style={{
           objectFit: "contain",
@@ -338,11 +342,15 @@ const LeadContainer = ({
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);
   const [notes1, setNotes1] = React.useState(false);
+  const [emails, setEmail] = React.useState(false);
   const [bool, setBool] = React.useState(true);
   const [detailShow, setDetailShow] = useState(false);
 
   const showNotes = () => {
     setNotes(true);
+  };
+  const showEmail= () => {
+    setEmail(true);
   };
   const showNotes1 = () => {
     setNotes1(true);
@@ -356,6 +364,14 @@ const LeadContainer = ({
     setBool(false);
     setTimeout(() => {
       setEvents(false);
+      setBool(true);
+    }, 500);
+  };
+
+  const cancelEmails = () => {
+    setBool(false);
+    setTimeout(() => {
+      setEmail(false);
       setBool(true);
     }, 500);
   };
@@ -383,6 +399,8 @@ const LeadContainer = ({
       showEvents();
     } else if (e1 === 2) {
       showNotes1();
+    }else if(e1===3){
+      showEmail();
     }
   };
 
@@ -476,6 +494,9 @@ const LeadContainer = ({
             }}
             events={() => {
               AddLead(1, 1);
+            }}
+            emails={()=>{
+              AddLead(1,3);
             }}
           />
           <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
@@ -614,6 +635,16 @@ const LeadContainer = ({
       {events && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <Events cancel={cancelEvents} />
+        </Backdrop>
+      )}
+      {events && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <Events cancel={cancelEvents} />
+        </Backdrop>
+      )}
+      {emails && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <EmailPage cancel={cancelEmails} />
         </Backdrop>
       )}
       {notes1 && (
