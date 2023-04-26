@@ -4,9 +4,9 @@ import Image from "next/image";
 
 const ProfilePage = () => {
   return (
-    <div>
+    <div className="">
       <div className="flex -space-x-2 overflow-hidden">
-        <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
+        <div className="flex items-center w-[100%] border-gray-300 justify-between border-b-[1px] pb-[30px] pt-[20px] ">
           <Image
             className="inline-block w-[50px] rounded-full ring-2 ring-white"
             src={getRoundedAvatar(5, 30)}
@@ -17,18 +17,18 @@ const ProfilePage = () => {
               objectFit: "contain",
             }}
           />
-          <div className="ml-3">
-            <h2 className="text-base text-[16px] whitespace-nowrap leading-7 tracking-wide text-[#000] -900 font-medium">
-              LEAD-XYZ info
+          <div className="flex items-center justify-center flex-col">
+            <h2 className="text-[20px] whitespace-nowrap leading-7 tracking-wide text-[#000] capitalize -900 font-medium">
+              Lead-XYZ info
             </h2>
-            <p className="block ml-3 py-2 text-xs text-[14px] text-[#000] -600 hover:text-indigo-500">
+            <p className="block  py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
               LEAD-ID123456
             </p>
           </div>
-          <div className="h-[120%] ml-auto ">
+          <div className="w-[40px] h-[100%] flex items-center justify-center">
             <Image
               src={getBasicIcon("Edit")}
-              className={`w-[20px] svg-grey ml-auto svg-not-selected mt-[9px]`}
+              className={`w-[20px] svg-grey svg-not-selected mt-[-24px]`}
               alt="Edit"
               width={20}
               height={20}
@@ -70,7 +70,7 @@ const ProfilePage = () => {
           <strong className="font-medium text-sm mr-1 text-[#000] -500">
             SOCIAL MEDIA
           </strong>
-          <div className="flex">
+          <div className="flex mt-[5px]">
             <Image
               src={getBasicIcon("Twitter")}
               className={`w-[20px] svg-grey mr-2`}
@@ -142,7 +142,7 @@ const ProfilePage = () => {
           </strong>
         </li>
         <div
-          className={`flex h-[20px] items-center justify-between mt-[5px] px-1 shrink-0`}
+          className={`flex h-[20px] items-center justify-between mt-[5px] px-2 mt-[10px] shrink-0`}
           style={{ width: "width", marginLeft: "left" }}
         >
           <div className="flex">

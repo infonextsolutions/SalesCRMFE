@@ -12,7 +12,7 @@ const Profile = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Manage Leads > ABC Corp."
+        title="Manage Leads>Lead XYZ -Info"
         buttons={[
           {
             text: "Take Action",
@@ -31,7 +31,7 @@ const Profile = () => {
         ]}
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-        <div className="w-[400px] min-h-[70vh] bg-white rounded-xl p-[20px]">
+        <div className="w-[320px] min-h-[70vh] bg-white rounded-xl shrink-0 p-[20px]">
           <ProfilePage />
         </div>
         <LeadProfileContainer

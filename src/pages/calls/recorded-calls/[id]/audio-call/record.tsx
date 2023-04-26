@@ -4,15 +4,16 @@ import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
 import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
 import dummy from "@/shared/dummy";
 import Script from "@/components/activeCalls/Script/index.";
+import RecordProfile from "@/components/Profile/RecordProfile";
 
 //Manya will make this page
 
 const AudioProfile = () => {
-  const titles = ["LEAD INFO","ACTIVITY HISTORY","NOTES"];
+  const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES", "Questionnaire"];
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-      title="Profile"
+        title="Profile"
         buttons={[
           {
             text: "Take Action",
@@ -31,9 +32,22 @@ const AudioProfile = () => {
         ]}
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-        <AudioProfileContainer width={"50%"} titles={titles} check={false} current={0} info={dummy.audioCallDetails}/>
-        <div className="w-[50%] min-h-[50vh] bg-white rounded-xl" >
-            <Script/>
+        {/* <AudioProfileContainer
+          width={"50%"}
+          titles={titles}
+          check={false}
+          current={0}
+          info={dummy.audioCallDetails}
+        /> */}
+        <RecordProfile
+          width={"50%"}
+          titles={titles}
+          check={false}
+          current={0}
+          info={dummy.audioCallDetails}
+        />
+        <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
+          <Script />
         </div>
       </div>
       {/* write your code here for profile page manya! */}

@@ -4,7 +4,8 @@ import { getBasicIcon } from "../AssetsHelper";
 
 const DropItem = ({ item, value, onClick, i }: any) => {
   const [mouseOver, setMouseOver] = React.useState(false);
-
+  const Wrapper = item?.wrapper;
+  console.log(Wrapper);
   return (
     <div
       className={`mb-[4px] ${
@@ -35,13 +36,23 @@ const DropItem = ({ item, value, onClick, i }: any) => {
           }}
         />
       )}
-      <p
-        className={` text-[13px] whitespace-nowrap tracking-wider pl-[10px] pr-[10px] font-medium ${
-          mouseOver ? "text-black" : "text-[#595f69]"
-        }`}
-      >
-        {item.title}
-      </p>
+      {Wrapper ? (
+        <div
+          className={` text-[13px] whitespace-nowrap tracking-wider pl-[10px] pr-[10px] font-medium ${
+            mouseOver ? "text-black" : "text-[#595f69]"
+          }`}
+        >
+          {item.wrapper}
+        </div>
+      ) : (
+        <p
+          className={` text-[13px] whitespace-nowrap tracking-wider pl-[10px] pr-[10px] font-medium ${
+            mouseOver ? "text-black" : "text-[#595f69]"
+          }`}
+        >
+          {item.title}
+        </p>
+      )}
     </div>
   );
 };
@@ -57,7 +68,7 @@ const DropDown = ({ list, direction, value, onClick, close }: any) => {
       hide-scrollbar
       `}
       style={{
-        zIndex:100000000000
+        zIndex: 100000000000,
       }}
     >
       {list.map((item: any, i: any) => {

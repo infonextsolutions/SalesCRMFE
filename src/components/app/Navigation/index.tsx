@@ -18,6 +18,7 @@ const Navigation = ({ buttons, title }: NavigationProps) => {
                 icon={item.icon}
                 text={item.text}
                 id={item.id}
+                
                 key={i}
                 light={item.light}
               />
