@@ -22,6 +22,10 @@ const Cross = ({ cancel }: any) => {
 };
 
 const EmailPage = ({ cancel }: any) => {
+  function setInputValue(value: string): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div>
       <Cross cancel={cancel} />
@@ -33,7 +37,7 @@ const EmailPage = ({ cancel }: any) => {
         <input
           type="text"
           id="username"
-          className="border-[1px] text-base px-4 rounded-xl bg-gray-200 text-black outline-none focus:ring-0 focus:border-gray-400"
+          className="border-[1px] text-base rounded-xl pr-20 pl-3 bg-gray-200 text-black outline-none focus:border-gray-400"
         />
         <div className="py-3"></div>
         <p className="text-[14px] text-[#8a9099] tracking-tight font-small">Client POC*</p>
@@ -41,18 +45,22 @@ const EmailPage = ({ cancel }: any) => {
         <input
           type="text"
           id="username"
-          className="border-[1px] text-base px-4 rounded-xl bg-gray-200 text-black outline-none focus:ring-0 focus:border-gray-400"
+          className="border-[1px] text-base pl-3 pr-20 rounded-xl bg-gray-200 text-black outline-none focus:ring-0 focus:border-gray-400"
         />
         <div className="py-4"></div>
-        <div
-          className="w-[95%] h-[40px] block bg-white border align-items-center rounded-l py-2 px-4 focus:outline-none">
-          <div className="flex  items-start">
-            <p className="text-[14px] text-black-200">To:</p>
-            <h3 className="text-[14px] px-[85%] text-gray-400">Cc</h3>
-          </div>
+        <div className="w-[95%] h-[40px] block bg-white border flex  rounded-xxl py-2 px-2 focus:outline-none">
+         <div className="flex">
+         <p className="text-[14px] text-black-200">To:</p>
+         </div>
+        <label className="mb-2 text-sm font-sm text-gray-900 sr-only"></label>
+          <input type="clear" id="button" className="block w-[25%] ml-2 rounded-small border">
+        </input>
+        <div className="w-100 flex flex-row items-end justify-end">
+        <p className="ml-[330px]">Bcc</p>
         </div>
-        <form className="bg-gray-100 w-[95%] justify-between rounded-l items-center border-[1px] py-1 flex">
-          <div className="ql-toolbar flex flex-wrap  space-x-2 sm:pr-4 items-center divide-gray-200 sm:divide-x dark:divide-gray-600 ql-snow">
+       </div>
+        <form className="bg-gray-100 w-[95%] justify-between rounded-xxl items-center border-[1px] py-1 flex">
+          <div className="ql-toolbar flex flex-wrap  space-x-4 sm:pr-4 items-center divide-gray-200 sm:divide-x dark:divide-gray-600 ql-snow">
             <span className="ql-formats">
               <button type="button" className="Font">
                 <Image
@@ -208,9 +216,22 @@ const EmailPage = ({ cancel }: any) => {
         <div className="flex-col flex items-center relative justify-center w-[95%]">
           <textarea className="w-full h-[140px] px-3 py-2 text-gray-700 border rounded-l focus:outline-none" placeholder="Type something"></textarea>
           <button className="absolute ml-2 mb-2 bottom-0 left-0 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg focus:bg-blue-600">Send</button>
-            </div>
-          </div>
+          <span className="absolute ml-12 mb-2 bottom-0 left-0 px-4 py-2 text-sm font-medium text-white ">
+          <Image
+                  src="/Images/Logo/Attachment.svg"
+                  className={`w-[16px] ml-3 `}
+                  alt="Attachment"
+                  width={17}
+                  height={17}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+          </span>
+
         </div>
+      </div>
+    </div>
   );
 };
 
