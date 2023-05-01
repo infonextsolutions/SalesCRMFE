@@ -28,7 +28,9 @@ const EmailPage = ({ cancel }: any) => {
       <div className="w-100 py-5 ml-6 flex-col items-center justify-left">
         <h2 className="text-[24px] tracking-wide font-medium">New Email</h2>
         <div className="py-3"></div>
-        <p className="text-[14px] text-[#8A9099] tracking-tight font-small">Company Name*</p>
+        <p className="text-[14px] text-[#8A9099] tracking-tight font-small">
+          Company Name*
+        </p>
         <div className="py-1"></div>
         <input
           type="text"
@@ -36,7 +38,9 @@ const EmailPage = ({ cancel }: any) => {
           className="border-[1px] text-base px-4 rounded-xl bg-gray-200 text-black outline-none focus:ring-0 focus:border-gray-400"
         />
         <div className="py-3"></div>
-        <p className="text-[14px] text-[#8a9099] tracking-tight font-small">Client POC*</p>
+        <p className="text-[14px] text-[#8a9099] tracking-tight font-small">
+          Client POC*
+        </p>
         <div className="py-1"></div>
         <input
           type="text"
@@ -44,8 +48,7 @@ const EmailPage = ({ cancel }: any) => {
           className="border-[1px] text-base px-4 rounded-xl bg-gray-200 text-black outline-none focus:ring-0 focus:border-gray-400"
         />
         <div className="py-4"></div>
-        <div
-          className="w-[95%] h-[40px] block bg-white border align-items-center rounded-l py-2 px-4 focus:outline-none">
+        <div className="w-[95%] h-[40px] block bg-white border align-items-center rounded-l py-2 px-4 focus:outline-none">
           <div className="flex  items-start">
             <p className="text-[14px] text-black-200">To:</p>
             <h3 className="text-[14px] px-[85%] text-gray-400">Cc</h3>
@@ -206,11 +209,16 @@ const EmailPage = ({ cancel }: any) => {
           </div>
         </form>
         <div className="flex-col flex items-center relative justify-center w-[95%]">
-          <textarea className="w-full h-[140px] px-3 py-2 text-gray-700 border rounded-l focus:outline-none" placeholder="Type something"></textarea>
-          <button className="absolute ml-2 mb-2 bottom-0 left-0 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg focus:bg-blue-600">Send</button>
-            </div>
-          </div>
+          <textarea
+            className="w-full h-[140px] px-3 py-2 text-gray-700 border rounded-l focus:outline-none"
+            placeholder="Type something"
+          ></textarea>
+          <button className="absolute ml-2 mb-2 bottom-0 left-0 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg focus:bg-blue-600">
+            Send
+          </button>
         </div>
+      </div>
+    </div>
   );
 };
 

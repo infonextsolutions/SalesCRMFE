@@ -1,7 +1,7 @@
 import React from "react";
 import Call from "@/types/Calls";
-import Header from "@/components/calls/Header/Header";
-import CallContainer from "@/components/calls/Call/Call";
+import Header from "@/components/calls/recorded-calls/Header/Header";
+import CallContainer from "@/components/calls/recorded-calls/Call/Call";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 
