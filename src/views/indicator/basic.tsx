@@ -1,9 +1,13 @@
+import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
-import CallsContainer from "@/components/calls/recorded-calls/Container/Container";
-import DUMMY from "@/shared/dummy";
-import React from "react";
-import axios from "axios";
-import dummy from "@/shared/dummy";
+import LeadsContainer from "@/components/leads/open/Container";
+import Backdrop from "@/components/View/Backdrop";
+import ImportLead from "@/components/View/import-lead/Index";
+import AddLeadForm from "@/components/View/add-lead/addLead";
+import { CSVLink } from "react-csv";
+import IndicatorContainer from "@/components/Indicator/basic";
+
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -42,42 +46,17 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const Calls = () => {
-
+const Indicator = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-      {/* <Navigation  /> */}
-      <Navigation
-        title={"Calls>Recorded Calls"}
-        buttons={[
-          {
-            text: "Export",
-            dropdown: true,
-            id: 1,
-            icon: "Download",
-            light: true,
-            list: [
-              { title: "Print", Icon: "Printer" },
-              { title: "Excel", Icon: "Excel" },
-              { title: "PDF", Icon: "PDF" },
-              { title: "CSV", Icon: "CSV" },
-            ],
-          },
-        ]}
-      />
-      <CallsContainer dummy1={DUMMY} dummy2={dummy}/>
+      <Navigation title={"Indicators Setup"} buttons={[]} />
+      <IndicatorContainer />
     </div>
   );
 };
-export async function getServerSideProps({ query, ...params }: any) {
-  const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/recordings/find-all"
-  );
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-    }, // will be passed to the page component as props
-  };
+
+export default Indicator;
+
+interface props {
+  data: any;
 }
-export default Calls;

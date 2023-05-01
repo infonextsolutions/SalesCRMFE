@@ -1,6 +1,14 @@
 import React from "react";
 
-const SimpleButton = ({ theme, text, left, right, click }: ButtonProps) => {
+const SimpleButton = ({
+  theme,
+  text,
+  left,
+  right,
+  width,
+  height,
+  click,
+}: ButtonProps) => {
   const Theme =
     theme === 1
       ? "bg-renal-blue"
@@ -11,15 +19,25 @@ const SimpleButton = ({ theme, text, left, right, click }: ButtonProps) => {
       : "bg-[#e8ebfd]";
   return (
     <div
-      className={`h-[40px] w-[110px] ${Theme} rounded-2xl ml-[${
-        left ? left : 0
-      }px] mr-[${
+      className={`${Theme} rounded-2xl ml-[${left ? left : 0}px] mr-[${
         right ? right : 0
       }px] flex items-center justify-center cursor-pointer`}
       onClick={click}
+      style={{
+        width: width ? width : 110,
+        height: height ? height : 40,
+      }}
     >
       {text && (
-        <p className={`${theme === 1 ? "" : "text-[#3F434A] font-medium text-[15px] tracking-wide"}`}>{text}</p>
+        <p
+          className={`${
+            theme === 1
+              ? ""
+              : "text-[#3F434A] font-medium text-[15px] tracking-wide"
+          }`}
+        >
+          {text}
+        </p>
       )}
     </div>
   );
@@ -28,11 +46,11 @@ const SimpleButton = ({ theme, text, left, right, click }: ButtonProps) => {
 export default SimpleButton;
 
 interface ButtonProps {
-  width?: Number;
+  width?: any;
   text?: String;
   id?: Number;
   theme: Number;
-  height?: Number;
+  height?: any;
   left?: Number;
   right?: Number;
   border?: Boolean;

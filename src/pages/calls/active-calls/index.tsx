@@ -1,5 +1,5 @@
 import Navigation from "@/components/app/Navigation";
-import CallsContainer from "@/components/calls/recorded-calls/Container/Container";
+import CallsContainer from "@/components/calls/active-calls/Container/Container";
 import DUMMY from "@/shared/dummy";
 import React from "react";
 import axios from "axios";
@@ -43,12 +43,10 @@ const Dummy = [
 ];
 
 const Calls = () => {
-
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-      {/* <Navigation  /> */}
       <Navigation
-        title={"Calls>Recorded Calls"}
+        title={"Calls>Active Calls"}
         buttons={[
           {
             text: "Export",
@@ -65,7 +63,7 @@ const Calls = () => {
           },
         ]}
       />
-      <CallsContainer dummy1={DUMMY} dummy2={dummy}/>
+      <CallsContainer dummy1={DUMMY} dummy2={dummy} />
     </div>
   );
 };
