@@ -15,6 +15,7 @@ const ButtonDropDown = ({
   dropdown,
   click,
   value,
+  width,
   dropDirection,
 }: ButtonProps) => {
   const [clicked, setclicked] = React.useState(false);
@@ -64,6 +65,7 @@ const ButtonDropDown = ({
       }}
       style={{
         height: height ? `${height}px` : "40px",
+        width:width? `${width}px` : "initial",
       }}
     >
       {dropdown ? (
