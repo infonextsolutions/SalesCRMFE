@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation title={"Call Analysis"} buttons={[]} />
-      <CallAnalysis/>
+      <CallAnalysis />
     </div>
   );
 };

@@ -233,3 +233,8 @@ a {
   background-color: #585858;
   width: 2px;
 }
+
+
+.apexcharts-toolbar{
+  display: none !important;
+}
