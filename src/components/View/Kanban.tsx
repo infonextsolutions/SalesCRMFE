@@ -6,16 +6,16 @@ import axios from "axios";
 
 const Kanban = ({ list }: KanbasProps) => {
   // console.log(list);
-  const fetchItems = async () =>{
+  const fetchItems = async () => {
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all`
     );
-  }
+  };
   fetchItems();
   const leads = ["enquiry", "interaction", "proposal", "win", "Lost", "Dead"];
   const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WIN", "LOST", "DEAD"];
   return (
-    <div className="px-[20px] mt-[10px] flex gap-[20px] h-[1200px] overflow-x-auto hide-scrollbar">
+    <div className="px-[20px] mt-[10px] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll">
       {leads.map((col, i) => {
         var res = list.filter((obj) => {
           return obj.type === col;
@@ -28,7 +28,7 @@ const Kanban = ({ list }: KanbasProps) => {
                   <div className="w-[76%] bg-renal-blue h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
                     <div className="enq-header text-[13px] flex gap-[8px] items-center">
                       <p className="">{titles[i]}</p>
-                      <div className="text-[10px] flex items-center bg-slate-400 px-[4px] h-[13px] rounded-[4px]">
+                      <div className="text-[10px] text-[#fff] flex items-center bg-slate-400 px-[4px] h-[13px] rounded-[4px]">
                         {res.length}
                       </div>
                     </div>
