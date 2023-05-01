@@ -65,7 +65,7 @@ const Icon = ({ src }: any) => {
 
 const Toolbar = () => {
   return (
-    <div className="ql-toolbar flex flex-wrap h-[40px] m space-x-2 sm:pr-4 items-center divide-gray-200 sm:divide-x dark:divide-gray-600 ql-snow">
+    <div className="ql-toolbar bg-gray-100 flex flex-wrap h-[40px] m space-x-2 sm:pr-4 items-center divide-gray-200  ql-snow">
       <div className="w-[38px] flex  pr-[10px] ">
         <Image
           src="/Images/Logo/Font.svg"
