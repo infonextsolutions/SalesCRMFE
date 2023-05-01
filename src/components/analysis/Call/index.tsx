@@ -12,7 +12,7 @@ const CallAnalysis = () => {
         <Selling />
       </div>
       <Emotion />
-      <TreeMap/>
+      <TreeMap />
     </div>
   );
 };

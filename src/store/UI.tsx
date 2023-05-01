@@ -36,6 +36,14 @@ const menuOptions = [
     ],
     icon: "Tasks",
   },
+  {
+    title: "Indicator",
+    route: "indicator",
+    list: [
+      { title: "Indicator-basic", route: "basic" },
+    ],
+    icon: "Zap",
+  },
 ];
 
 const UISlice = createSlice({
