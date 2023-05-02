@@ -16,6 +16,16 @@ const AudioProfile = () => {
         title="Profile"
         buttons={[
           {
+            text: "Make Call",
+            dropdown: true,
+            id: 1,
+            light: false,
+            list: [],
+            onClick1: async () => {
+              
+            },
+          },
+          {
             text: "Take Action",
             dropdown: true,
             id: 1,
