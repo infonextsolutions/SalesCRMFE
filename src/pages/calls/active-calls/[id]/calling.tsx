@@ -5,6 +5,7 @@ import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
 import dummy from "@/shared/dummy";
 import Script from "@/components/activeCalls/Script/index.";
 import RecordProfile from "@/components/Profile/RecordProfile";
+import axios from "axios";
 
 //Manya will make this page
 
@@ -13,7 +14,7 @@ const AudioProfile = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Profile"
+        title="Calls>Active Calls>Discussion on PX features"
         buttons={[
           {
             text: "Make Call",
@@ -22,7 +23,12 @@ const AudioProfile = () => {
             light: false,
             list: [],
             onClick1: async () => {
-              
+              const response = await axios.post(
+                "https://testsalescrm.nextsolutions.in/api/calling/make-call",{
+                  callTo:"7669481778"
+                }
+              );
+              console.log(response.data);
             },
           },
           {
