@@ -22,7 +22,7 @@ const Item = ({
         {Alternatives.length === 0
           ? "----"
           : Alternatives.map((item: any, i: any) => {
-              return <li className="" key={i} >{item}</li>;
+              return <li key={i} className="">{item}</li>;
             })}
       </div>
     </div>
