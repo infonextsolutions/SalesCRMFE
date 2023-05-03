@@ -3,7 +3,10 @@
     "development"
   ],
   "hints": {
+<<<<<<< Updated upstream
     "no-inline-styles": "off",
+=======
+>>>>>>> Stashed changes
     "axe/forms": [
       "default",
       {
