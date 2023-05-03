@@ -15,7 +15,7 @@ const Kanban = ({ list }: KanbasProps) => {
   const leads = ["enquiry", "interaction", "proposal", "win", "Lost", "Dead"];
   const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WIN", "LOST", "DEAD"];
   return (
-    <div className="px-[20px] mt-[10px] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll">
+    <div className="px-[20px] mt-[10px] text-[#ffffff] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll">
       {leads.map((col, i) => {
         var res = list.filter((obj) => {
           return obj.type === col;
