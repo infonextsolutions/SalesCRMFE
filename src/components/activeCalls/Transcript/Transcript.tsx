@@ -22,7 +22,7 @@ const Search = () => {
             placeholder="Search Transcript..."
           />
         </div>
-        <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
+        {/* <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
           <Image
             className="w-[100%]"
             src={getBasicIcon("Filter")}
@@ -30,7 +30,7 @@ const Search = () => {
             height={16}
             alt=""
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
