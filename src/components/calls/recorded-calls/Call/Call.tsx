@@ -40,8 +40,14 @@ const CallItem = ({
           src={img}
           alt=""
           width={20}
+          onClick={() => {
+            if (click) {
+              console.log(route);
+              router.replace(route);
+            }
+          }}
           height={20}
-          className="w-[20px] mr-[5px] ml-[10px]"
+          className="w-[20px] mr-[5px] ml-[10px] cursor-pointer"
         />
       )}
       {link ? (
@@ -385,7 +391,7 @@ const CallContainer = ({
             color={"#000"}
             text={"Discussion on PX features"}
             click={true}
-            route={`${pathname}/${id}/video-call`}
+            route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}

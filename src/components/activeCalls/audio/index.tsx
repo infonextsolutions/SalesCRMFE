@@ -4,6 +4,7 @@ import Tracker from "../conversation-tracker";
 import Transcript from "../Transcript/Transcript";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import useSound from "use-sound";
+
 const CallHolder = ({ click }: any) => {
   return (
     <div
@@ -24,6 +25,9 @@ const CallHolder = ({ click }: any) => {
     </div>
   );
 };
+
+
+
 const CallPlayer = () => {
   const [play, { stop ,duration}] = useSound("/poor-audio.ogg");
   const [playing, setPlaying] = React.useState(false);
