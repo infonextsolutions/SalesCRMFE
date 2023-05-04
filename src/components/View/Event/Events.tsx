@@ -334,7 +334,7 @@ const Events = ({ cancel }: any) => {
           },
         ]}
       />
-      <div className=" flex justify-end mt-[30px] w-[100%]">
+      <div className=" flex justify-end mt-[30px] text-[#ffffff] w-[100%]">
         <SimpleButton theme={1} text={"Create"} left={20} right={0} />
       </div>
     </div>
