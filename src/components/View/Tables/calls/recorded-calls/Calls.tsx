@@ -11,7 +11,7 @@ const CallsTable = ({ result, totalRecords }: TableProps) => {
 
   return (
     <>
-      <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
+      <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto overflow-y-hidden custom-scroll ">
         <Header />
         {Leads.map((item: Call, i: any) => {
           return (

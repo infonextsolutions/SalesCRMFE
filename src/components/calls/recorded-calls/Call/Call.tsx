@@ -391,7 +391,7 @@ const CallContainer = ({
             color={"#000"}
             text={"Discussion on PX features"}
             click={true}
-            route={`${pathname}/${id}/video-call`}
+            route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}

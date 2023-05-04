@@ -5,7 +5,7 @@ import React from "react";
 const Search = () => {
   return (
     <div className="w-full px-[38px] mt-[30px] ">
-      <div className="w-[100%] h-[40px] border-[#ccc] border-[1px] rounded-[12px]  flex items-center">
+      <div className="w-[100%] h-[40px] border-[#ccc] border-[1px] rounded-[12px]  flex items-center overflow-hidden">
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
           <Image
             className="w-[100%]"
