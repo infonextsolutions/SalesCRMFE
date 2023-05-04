@@ -62,10 +62,10 @@ const CallProfile = () => {
         title="Calls>Recorded Calls>Discussion on PX features"
         buttons={[
           {
-            text: "Take Action",
+            text: "Share",
             dropdown: true,
             id: 1,
-            icon: "Plus",
+            icon: "Share",
             light: false,
             click: addCall,
             list: [

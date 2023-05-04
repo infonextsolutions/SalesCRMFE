@@ -48,6 +48,18 @@ const EmailPage = ({ cancel }: any) => {
           type="text"
           id="username"
           className="border-[1px] text-base px-4 rounded-xl bg-gray-200 text-black outline-none focus:ring-0 focus:border-gray-400"
+
+    <div className="ql-toolbar bg-gray-100 flex flex-wrap h-[40px] m space-x-2 sm:pr-4 items-center divide-gray-200  ql-snow">
+      <div className="w-[38px] flex  pr-[10px] ">
+        <Image
+          src="/Images/Logo/Font.svg"
+          className={` ml-3  svg-gray-2`}
+          alt="Bold"
+          width={15}
+          height={15}
+          style={{
+            objectFit: "contain",
+          }}
         />
         <div className="py-3"></div>
         <p className="text-[14px] text-[#8a9099] tracking-tight font-small">Client POC*</p>

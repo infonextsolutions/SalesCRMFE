@@ -32,7 +32,7 @@ const SimpleButton = ({
         <p
           className={`${
             theme === 1
-              ? ""
+              ? "text-[#fff] font-medium text-[15px] tracking-wide"
               : "text-[#3F434A] font-medium text-[15px] tracking-wide"
           }`}
         >

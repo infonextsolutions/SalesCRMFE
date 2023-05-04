@@ -6,6 +6,7 @@ import Backdrop from "@/components/View/Backdrop";
 import ImportLead from "@/components/View/import-lead/Index";
 import AddLeadForm from "@/components/View/add-lead/addLead";
 import { CSVLink } from "react-csv";
+import axios from "axios";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -93,10 +94,20 @@ const SalesOpen = ({ data }: props) => {
 
   const exportCSV = () => {};
 
+  const makecall = async () => {
+    const res = await axios.post("https://testsalescrm.nextsolutions.in/api/calling/make-call", {
+      callTo: "7669481778",
+    });
+    console.log(res,"only check here!");
+  };
+
   const addExport = (e: any, e1: any) => {
     if (e1 === 3) {
       console.log("exorting");
       exportCSV();
+    } else if (e1 === 1) {
+      console.log("running");
+      makecall();
     }
   };
   console.log(data);
@@ -163,11 +174,7 @@ const SalesOpen = ({ data }: props) => {
                 title: "CSV",
                 Icon: "CSV",
                 wrapper: (
-                  <CSVLink
-                    data={data.result}
-                    className=""
-                    ref={ref}
-                  >
+                  <CSVLink data={data.result} className="" ref={ref}>
                     CSV
                   </CSVLink>
                 ),
