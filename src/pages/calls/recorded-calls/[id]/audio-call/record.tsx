@@ -16,7 +16,7 @@ const AudioProfile = () => {
         title="Profile"
         buttons={[
           {
-            text: "Take Action",
+            text: "Share",
             dropdown: true,
             id: 1,
             icon: "Plus",

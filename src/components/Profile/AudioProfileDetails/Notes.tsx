@@ -26,7 +26,7 @@ const Notes = () => {
   return (
     <>
       <div className="w-[100%]">
-        <div className="bg-gray-100 px-4 py-3 mb-[20px] flex items-center justify-end">
+        <div className="bg-gray-100 px-4 py-3 mb-[20px]  flex items-center justify-end">
           <Image
             src={getBasicIcon("Filter")}
             className={`w-[30px] p-[6px] mr-[5px] bg-white rounded-md svg-grey`}

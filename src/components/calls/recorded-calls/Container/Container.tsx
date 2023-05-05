@@ -16,6 +16,10 @@ const CallsContainer = ({ dummy1 }: LeadContainerProps) => {
           id={1}
           dropdown={true}
           list={[]}
+          click={() => {
+            // add your click handler code here
+            console.log("Button clicked");
+          }}
         />
       </div>
       <CallsTable result={dummy1.result} totalRecords={dummy1.totalRecords} />

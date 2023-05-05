@@ -13,7 +13,8 @@ const Search = () => {
             <input type="text" className="w-[100%] h-[32px] bg-white outline-0 text-black " placeholder="Search contact..." />
         </div>
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer "  >
-            <Image className="w-[100%]"   src={getBasicIcon("Filter")} alt="" width={16} height={16} />
+            <Image className="w-[100%]"  
+             src={getBasicIcon("Filter")} alt="" width={16} height={16} />
         </div>
     </div>
   );
