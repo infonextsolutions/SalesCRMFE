@@ -6,6 +6,7 @@ import Search from "../../genUtils/Search";
 // import KanbanContainer from "@/components/View/Kanban";
 import { useSelector } from "react-redux";
 import Spinner from "@/components/loader/spinner";
+import KanbanTable from "@/components/View/Tables/open/Kanban";
 
 const LeadsTable = React.lazy(
   () => import("@/components/View/Tables/open/LeadsSearch")
@@ -64,7 +65,8 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
         </Suspense>
       ) : (
         <Suspense fallback={<Spinner />}>
-          <KanbanContainer list={list} />
+          {/* <KanbanContainer list={list} /> */}
+          <KanbanTable totalRecords={records} search={search}/>
         </Suspense>
       )}
     </div>

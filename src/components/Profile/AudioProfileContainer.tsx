@@ -5,6 +5,8 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Comments from "./AudioProfileDetails/Comment";
 import Notes from "./AudioProfileDetails/Notes";
 import CallInfo from "./AudioProfileDetails/CallInfo";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrent } from "@/store/UI";
 
 const AudioProfileContainer = ({
   titles,
@@ -13,10 +15,11 @@ const AudioProfileContainer = ({
   check,
   width,
 }: AudioProfileContainerProps) => {
-  const [activeTitle, setActiveTitle] = useState(0);
-
+  const activeTitle = useSelector((state: any) => state.ui.current);
+  const dispatch = useDispatch();
   function CallBack(childData: any) {
-    setActiveTitle(childData);
+    // setActiveTitle(childData);
+    dispatch(setCurrent(childData));
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
@@ -26,8 +29,7 @@ const AudioProfileContainer = ({
         width ? width : "100%"
       }]  bg-white rounded-xl p-[25px] px-[35px] pt-[30px]`}
     >
-    
-      <Navigator callback={CallBack} current={current} list={list} />
+      <Navigator callback={CallBack} current={activeTitle} list={list} />
       <div className="flex justify-between w-[100%] relative overflow-hidden">
         <div className="text-black text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && <CallInfo check={check} info={info} />}

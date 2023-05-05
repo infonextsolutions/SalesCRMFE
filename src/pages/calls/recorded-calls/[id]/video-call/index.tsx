@@ -8,6 +8,7 @@ import Backdrop from "@/components/View/Backdrop/Center";
 import FullCall from "@/components/View/full-call";
 import CallSnippet from "@/components/View/call-snippet";
 import DetailedNavigator from "@/components/View/DetailedNavigator";
+import { useSelector } from "react-redux";
 
 //Manya will make this page
 
@@ -17,6 +18,9 @@ const CallProfile = () => {
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
   const [bool, setBool] = useState(true);
+
+  const state = useSelector((state: any) => state.ui);
+  console.log(state);
 
   const showFull = () => {
     setFullCall(true);
@@ -85,7 +89,7 @@ const CallProfile = () => {
           width={"50%"}
           titles={titles}
           check={true}
-          current={0}
+          current={state.current}
           info={dummy.audioCallDetails}
         />
       </div>
