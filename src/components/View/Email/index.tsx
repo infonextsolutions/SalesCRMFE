@@ -35,6 +35,122 @@ const Senders = () => {
   );
 };
 
+
+
+const SendersDetails = () => {
+  return (
+    <div className="w-[100%] px-[15px] h-[42px] items-center bg-[#fff] flex justify-between">
+      <div className="flex items-center">
+        <p className="text-[14px] tracking-wide font-medium text-[#3F434A]">
+          To:
+        </p>
+        <Senders />
+      </div>
+    </div>
+  );
+};
+
+const Icon = ({ src }: any) => {
+  return (
+    <Image
+      src={src}
+      className={` ml-4 `}
+      alt="Bold"
+      width={15}
+      height={15}
+      style={{
+        objectFit: "contain",
+      }}
+    />
+  );
+};
+
+const Toolbar = () => {
+  return (
+    <div className="ql-toolbar bg-gray-100 flex flex-wrap h-[40px] m space-x-2 sm:pr-4 items-center divide-gray-200  ql-snow">
+      <div className="w-[38px] flex  pr-[10px] ">
+        <Image
+          src="/Images/Logo/Font.svg"
+          className={` ml-3  svg-gray-2`}
+          alt="Bold"
+          width={15}
+          height={15}
+          style={{
+            objectFit: "contain",
+          }}
+        />
+        <Image
+          src={getBasicIcon("Arrow Down 3")}
+          width={20}
+          className=" cursor-pointer"
+          height={20}
+          alt=""
+        />
+      </div>
+      <div className="border-x-[1px] border-x-[#E8E9EB] flex">
+        <Icon src="/Images/Logo/Bold.svg" />
+        <Icon src="/Images/Logo/Italic.svg" />
+        <Icon src="/Images/Logo/Underline.svg" />
+      </div>
+      <div className="border-x-[1px] border-x-[#E8E9EB] flex">
+        <Icon src="/Images/Logo/Link.svg" />
+        <Icon src="/Images/Logo/Smile.svg" />
+        <Icon src="/Images/Logo/Image.svg" />
+      </div>
+      <div className="border-x-[1px] border-x-[#E8E9EB] flex">
+        <Icon src="/Images/Logo/List.svg" />
+        <Icon src="/Images/Logo/Numbered List.svg" />
+      </div>
+      <div className="border-x-[1px] border-x-[#E8E9EB] flex">
+        <Icon src="/Images/Logo/Align-Left.svg" />
+        <Icon src={getBasicIcon("text-center")} />
+        <Icon src={getBasicIcon("text-right")} />
+        <Icon src={getBasicIcon("text-along")} />
+      </div>
+    </div>
+  );
+};
+
+const TextBox = () => {
+  return (
+    <textarea
+      name=""
+      id=""
+      className="w-[100%] outline-none text-[14px] font-medium text-text-norm h-[110px] py-[10px] px-[18px] bg-[#fff]"
+      placeholder="Type Something"
+    ></textarea>
+  );
+};
+
+const SendEmail = () => {
+  return (
+    <>
+      <div className=" w-[100%] overflow-hidden rounded-xl items-center border-[1px] ">
+        <SendersDetails />
+        <Toolbar />
+        <TextBox />
+        <div className="w-[100%] flex mb-[15px] items-center">
+          <SimpleButton
+            theme={1}
+            text={"Send"}
+            left={20}
+            height={40}
+            width={90}
+            right={0}
+          />
+          <Image
+            className="svg-gray-2 ml-[10px]"
+            src={getBasicIcon("Attachment")}
+            width={20}
+            height={20}
+            alt=""
+          />
+        </div>
+      </div>
+    </>
+  );
+};
+
 const EmailPage = ({ cancel }: any) => {
   return (
     <div>

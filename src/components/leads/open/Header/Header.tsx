@@ -19,7 +19,7 @@ const HeaderCheckBox = ({ width, click }: any) => {
   );
 };
 
-const HeaderItem = ({ width, text, left, align, sort }: any) => {
+const HeaderItem = ({ width, text, left, align, sort, showArrowDown }: any) => {
   return (
     <div
       className={`flex items-center  h-[20px] shrink-0`}
@@ -33,13 +33,15 @@ const HeaderItem = ({ width, text, left, align, sort }: any) => {
       >
         {text}
       </p>
-        <Image
-          src={getBasicIcon("Arrow Down 3")}
-          width={20}
-          className="ml-[3px] cursor-pointer"
-          height={20}
-          alt=""
-        />
+      {showArrowDown && (
+      <Image
+        src={getBasicIcon("Arrow Down 3")}
+        width={20}
+        className="ml-[3px] cursor-pointer"
+        height={20}
+        alt=""
+      />
+  )}
     </div>
   );
 };
@@ -55,7 +57,7 @@ const Header = ({ selectAll }: any) => {
           }}
         />
         <HeaderItem width={120} left={70} text={"LEAD ID"} />
-        <HeaderItem width={150} left={0} text={"Custom name"} />
+        <HeaderItem width={150} left={0} text={"Lead name"} />
         <HeaderItem width={130} left={20} text={"COMPANY NAME"} />
         <HeaderItem width={110} left={10} text={"CLIENT POC"} />
         <HeaderItem width={150} left={20} text={"EMAIL"} />
@@ -75,9 +77,24 @@ const Header = ({ selectAll }: any) => {
         />
         <HeaderItem width={130} left={20} text={"last activity"} />
         <HeaderItem width={150} left={10} text={"next action/date"} />
-        <HeaderItem width={150} left={10} text={"win probability"} />
-        <HeaderItem width={140} left={20} text={"deal size"} />
-        <HeaderItem width={150} left={10} text={"existing budget"} />
+        <HeaderItem
+          width={150}
+          left={10}
+          text={"win probability"}
+          showArrowDown={true}
+        />
+        <HeaderItem
+          width={140}
+          left={20}
+          text={"deal size"}
+          showArrowDown={true}
+        />
+        <HeaderItem
+          width={150}
+          left={10}
+          text={"existing budget"}
+          showArrowDown={true}
+        />
         <HeaderItem width={150} left={10} text={"lead source"} />
         {/* <HeaderItem width={150} left={10} text={"close date"} /> */}
         <HeaderItem width={150} left={20} text={"notes"} />

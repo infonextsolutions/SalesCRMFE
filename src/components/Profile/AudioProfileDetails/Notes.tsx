@@ -5,7 +5,7 @@ import Image from "next/image";
 const Note = () => {
   return (
     <div className="mb-[30px] min-h-[250px] w-[100%] px-[28px] border-black border-[2px] py-[28px] pb-[40px] rounded-[20px] ">
-      <p className="font-medium border-b-[2px] border-[#E8E9EB] border-dashed pb-[10px] mb-[20px] text-gray-600">
+      <p className="font-medium border-b-[2px]  flex border-[#E8E9EB] border-dashed pb-[10px] mb-[20px] text-gray-600">
         12 June 2020
       </p>
       <p className=" text-[18px] font-medium text-[#3F434A] capitalize">

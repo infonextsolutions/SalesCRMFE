@@ -14,7 +14,9 @@ const ButtonDropDown = ({
   list,
   dropdown,
   click,
+  onClick1,
   value,
+  width,
   dropDirection,
 }: ButtonProps) => {
   const [clicked, setclicked] = React.useState(false);
@@ -60,10 +62,14 @@ const ButtonDropDown = ({
         setMouseOver(false);
       }}
       onClick={() => {
+        if (onClick1) {
+          onClick1();
+        }
         if (mouseOver) setclicked(true);
       }}
       style={{
         height: height ? `${height}px` : "40px",
+        width: width ? `${width}px` : "initial",
       }}
     >
       {dropdown ? (
@@ -110,28 +116,30 @@ const ButtonDropDown = ({
           {text}
         </p>
       )}
-      <div
-        className={`absolute ${
-          tight ? "right-3 w-[16px]" : "right-2 w-[24px]"
-        } `}
-      >
+      {list.length !== 0 && (
         <div
-          className={`w-[100%] ${tight ? "p-[1px]" : "p-[3px]"} rounded-md ${
-            clicked && (light ? "bg-[#eeeeee]" : "bg-[#263fca]")
-          }`}
+          className={`absolute ${
+            tight ? "right-3 w-[16px]" : "right-2 w-[24px]"
+          } `}
         >
-          <Image
-            src={getBasicIcon("Arrow-Down 2")}
-            className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
-            alt=""
-            width={24}
-            height={24}
-            style={{
-              objectFit: "contain",
-            }}
-          />
+          <div
+            className={`w-[100%] ${tight ? "p-[1px]" : "p-[3px]"} rounded-md ${
+              clicked && (light ? "bg-[#eeeeee]" : "bg-[#263fca]")
+            } `}
+          >
+            <Image
+              src={getBasicIcon("Arrow-Down 2")}
+              className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
+              alt=""
+              width={24}
+              height={24}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -147,6 +155,7 @@ export interface ButtonProps {
   light: Boolean;
   height?: Number;
   border?: Boolean;
+  onClick1?: any;
   pl?: Number;
   tight?: Boolean;
   list?: [] | any;

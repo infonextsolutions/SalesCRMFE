@@ -2,6 +2,89 @@ import Image from "next/image";
 import React from "react";
 import Tracker from "../conversation-tracker";
 import Transcript from "../Transcript/Transcript";
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import useSound from "use-sound";
+const CallHolder = ({ click }: any) => {
+  return (
+    <div
+      onClick={() => {
+        click();
+      }}
+      className="w-[25px]  h-[25px] flex shrink-0 drop-shadow-md  absolute items-center cursor-pointer justify-center  top-[-10px] right-[-10px] "
+    >
+      <Image
+        src={getBasicIcon("CallPlay")}
+        style={{
+          zIndex: 10,
+        }}
+        alt=""
+        width={25}
+        height={25}
+      />
+    </div>
+  );
+};
+const CallPlayer = () => {
+  const [play, { stop ,duration}] = useSound("/poor-audio.ogg");
+  const [playing, setPlaying] = React.useState(false);
+  console.log(duration);
+  return (
+    <div className="w-[100%] h-[100px] mb-[100px] mt-[20px] px-[40px]">
+      <p className="text-[34px] mb-[70px] font-medium tracking-wide text-[#000]">
+        Call Player
+      </p>
+      <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
+        <div className="h-[100%] w-[40%] bg-renal-blue rounded-l-[3px] relative">
+          <CallHolder click={() => {}} />
+        </div>
+        <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
+          15:53/30:00
+        </div>
+      </div>
+      <div className="w-[100%] mt-[15px] flex justify-center items-center">
+        <Image
+          src={getBasicIcon("playRev")}
+          style={{
+            zIndex: 10,
+          }}
+          alt=""
+          width={13}
+          height={13}
+          className="mr-[9px] cursor-pointer"
+        />
+        <Image
+          src={getBasicIcon("playBtn")}
+          style={{
+            zIndex: 10,
+          }}
+          onClick={() => {
+            if (!playing) {
+              play();
+              setPlaying(true);
+            } else {
+              stop();
+              setPlaying(false);
+            }
+          }}
+          className="translate-y-[1px] cursor-pointer"
+          alt=""
+          width={40}
+          height={40}
+        />
+        <Image
+          src={getBasicIcon("playFor")}
+          style={{
+            zIndex: 10,
+          }}
+          className="ml-[8px] cursor-pointer"
+          alt=""
+          width={13}
+          height={13}
+        />
+      </div>
+    </div>
+  );
+};
 
 const list = [
   {
@@ -49,6 +132,7 @@ const Audio = () => {
         </div>
         <img src="/video.svg" className="w-full rounded-2xl" alt="" />
       </div> */}
+      <CallPlayer />
       <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
         <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
           call data

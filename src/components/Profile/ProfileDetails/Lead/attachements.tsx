@@ -50,7 +50,7 @@ const Attachements = () => {
               <div className="w-[190px] flex items-center">
                 <Image
                   src="/Images/Logo/Download.svg"
-                  className={`w-[22px] ml-[125px]`}
+                  className={`w-[22px] ml-[145px]`}
                   alt="Download"
                   width={17}
                   height={17}
@@ -99,7 +99,7 @@ const Attachements = () => {
               <div className="w-[190px] flex items-center">
                 <Image
                   src="/Images/Logo/Download.svg"
-                  className={`w-[22px] ml-[125px]`}
+                  className={`w-[22px] ml-[145px]`}
                   alt="Download"
                   width={17}
                   height={17}
@@ -148,7 +148,7 @@ const Attachements = () => {
               <div className="w-[190px] flex items-center">
                 <Image
                   src="/Images/Logo/Download.svg"
-                  className={`w-[22px] ml-[125px]`}
+                  className={`w-[22px] ml-[145px]`}
                   alt="Download"
                   width={17}
                   height={17}
@@ -197,7 +197,7 @@ const Attachements = () => {
               <div className="w-[190px] flex items-center">
                 <Image
                   src="/Images/Logo/Download.svg"
-                  className={`w-[22px] ml-[125px]`}
+                  className={`w-[22px] ml-[145px]`}
                   alt="Download"
                   width={17}
                   height={17}

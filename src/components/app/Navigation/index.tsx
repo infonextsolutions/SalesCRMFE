@@ -18,7 +18,7 @@ const Navigation = ({ buttons, title }: NavigationProps) => {
                 icon={item.icon}
                 text={item.text}
                 id={item.id}
-                
+                onClick1={item.onClick1}
                 key={i}
                 light={item.light}
               />
