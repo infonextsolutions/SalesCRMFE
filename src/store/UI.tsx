@@ -51,6 +51,7 @@ const UISlice = createSlice({
   initialState: {
     menuOpen: false,
     menuOptions: menuOptions,
+    current:0
   },
   reducers: {
     openMenu: (state) => {
@@ -62,9 +63,12 @@ const UISlice = createSlice({
     triggerMenu: (state) => {
       state.menuOpen = !state.menuOpen;
     },
+    setCurrent:(state,action)=>{
+        state.current=action.payload;
+    }
   },
 });
 
-export const { openMenu, closeMenu, triggerMenu } = UISlice.actions;
+export const { openMenu, closeMenu, triggerMenu ,setCurrent} = UISlice.actions;
 
 export default UISlice.reducer;

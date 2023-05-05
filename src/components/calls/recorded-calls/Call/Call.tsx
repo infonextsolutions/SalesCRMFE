@@ -1,8 +1,10 @@
+import { setCurrent } from "@/store/UI";
 import Call, { CompanyId, CustomerId } from "@/types/Calls";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const CallBox = ({ width }: any) => {
   return (
@@ -27,6 +29,7 @@ const CallItem = ({
   color,
   bold,
   img,
+  onClick,
 }: any) => {
   const router = useRouter();
 
@@ -41,6 +44,10 @@ const CallItem = ({
           alt=""
           width={20}
           onClick={() => {
+            if (onClick) {
+              console.log("exec");
+              onClick();
+            }
             if (click) {
               console.log(route);
               router.replace(route);
@@ -70,6 +77,9 @@ const CallItem = ({
             color: color ? color : "#8A9099",
           }}
           onClick={() => {
+            if (onClick) {
+              onClick();
+            }
             if (click) {
               console.log(route);
               router.replace(route);
@@ -358,12 +368,11 @@ const CallContainer = ({
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log(CallData, "Call-data");
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
-  console.log(hover);
   const ref: any = useRef();
+  const dispatch = useDispatch();
   return (
     <>
       <div className="flex">
@@ -437,6 +446,9 @@ const CallContainer = ({
             width={110}
             left={20}
             img={"/msg.svg"}
+            onClick={() => {
+              dispatch(setCurrent(1));
+            }}
             click={true}
             route={`${pathname}/${id}/video-call`}
             text={"3"}
