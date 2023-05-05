@@ -130,6 +130,27 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           selectAll={() => {
             setSelectAll(!selectAll);
           }}
+          win={() => {
+            console.log("win");
+            console.log(Leads);
+            const wins = [];
+            for (let i = 0; i < Leads.length; i++) {
+              const str = Leads[i].win_probability;
+              let strr = "";
+              for (let j = 0; j < str.length - 1; j++) {
+                strr += str[j];
+              }
+              console.log(str,strr);
+              wins.push(Number(strr));
+            }
+            console.log(wins);
+          }}
+          deal={() => {
+            console.log("deal");
+          }}
+          budget={() => {
+            console.log("budget");
+          }}
         />
         {loading ? (
           <Spinner />

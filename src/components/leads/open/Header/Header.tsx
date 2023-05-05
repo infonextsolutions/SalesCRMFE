@@ -19,7 +19,15 @@ const HeaderCheckBox = ({ width, click }: any) => {
   );
 };
 
-const HeaderItem = ({ width, text, left, align, sort, showArrowDown }: any) => {
+const HeaderItem = ({
+  width,
+  text,
+  left,
+  align,
+  sort,
+  onClick,
+  showArrowDown,
+}: any) => {
   return (
     <div
       className={`flex items-center  h-[20px] shrink-0`}
@@ -34,19 +42,24 @@ const HeaderItem = ({ width, text, left, align, sort, showArrowDown }: any) => {
         {text}
       </p>
       {showArrowDown && (
-      <Image
-        src={getBasicIcon("Arrow Down 3")}
-        width={20}
-        className="ml-[3px] cursor-pointer"
-        height={20}
-        alt=""
-      />
-  )}
+        <Image
+          src={getBasicIcon("Arrow Down 3")}
+          width={20}
+          className="ml-[3px] cursor-pointer"
+          height={20}
+          alt=""
+          onClick={() => {
+            if (onClick) {
+              onClick();
+            }
+          }}
+        />
+      )}
     </div>
   );
 };
 
-const Header = ({ selectAll }: any) => {
+const Header = ({ selectAll, win, deal, budget }: any) => {
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
@@ -81,6 +94,9 @@ const Header = ({ selectAll }: any) => {
           width={150}
           left={10}
           text={"win probability"}
+          onClick={() => {
+            win();
+          }}
           showArrowDown={true}
         />
         <HeaderItem
@@ -88,12 +104,18 @@ const Header = ({ selectAll }: any) => {
           left={20}
           text={"deal size"}
           showArrowDown={true}
+          onClick={() => {
+            deal();
+          }}
         />
         <HeaderItem
           width={150}
           left={10}
           text={"existing budget"}
           showArrowDown={true}
+          onClick={() => {
+            budget();
+          }}
         />
         <HeaderItem width={150} left={10} text={"lead source"} />
         {/* <HeaderItem width={150} left={10} text={"close date"} /> */}
