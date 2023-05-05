@@ -88,7 +88,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
 
           if (res.length) {
             return (
-              <div className="flex gap-[20px]">
+              <div className="flex gap-[20px]" key={i} >
                 <div className="w-[270px] shrink-0 ">
                   <div className="leadName flex mb-[10px]">
                     <div className="w-[76%] bg-renal-blue h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
@@ -146,7 +146,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
               </div>
             );
           }
-          return <></>;
+          return <React.Fragment key={i} ></React.Fragment>
         })}
       </div>
 
