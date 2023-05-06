@@ -1,12 +1,39 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import React from "react";
+import Image from "next/image";
 
 const Comments = () => {
   return (
     
-    <><textarea placeholder="write a comment here..."
-    className="w-[85%] ml-14 h-[100px] apperance-none block bg-gray-50 text-gray-600 border rounded-xl py-4 px-3 focus:outline-none">
-    </textarea>
+    <><div className="relative">
+  <textarea
+    placeholder="write a comment here..."
+    className="w-[85%] ml-14 h-[100px] apperance-none block bg-gray-50 text-gray-600 border rounded-xl py-4 px-3 focus:outline-none"
+  ></textarea>
+  <div className="absolute right-0 bottom-0 space-x-2 flex mr-7 mb-2">
+    <Image
+      src={getBasicIcon("Smile")}
+      className="w-4 h-4 cursor-pointer"
+      alt=""
+      width={16}
+      height={16}
+    />
+    <Image
+      src={getBasicIcon("Attachment")}
+      className="w-4 h-4 cursor-pointer"
+      alt=""
+      width={16}
+      height={16}
+    />
+       <Image
+      src={getBasicIcon("Time")}
+      className="w-4 h-4 cursor-pointer"
+      alt=""
+      width={16}
+      height={16}
+    />
+  </div>
+</div>
     <div className="py-2">
     <button className="bg-renal-blue rounded-xl justify-end  ml-[350px] w-[20%] pl-[5px] pr-[5px] p-[6px]">
     <p className="whitespace-nowrap font-large text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">comment</p>

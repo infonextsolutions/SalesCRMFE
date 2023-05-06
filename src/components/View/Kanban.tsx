@@ -195,15 +195,15 @@ const Kanban = ({ list }: KanbasProps) => {
                         />
                         <p>{item.data.mails}</p>
                         <Image
-                          src={getBasicIcon("calendar")}
-                          className={`w-[14px]`}
-                          alt=""
-                          width={14}
-                          height={14}
-                          style={{
-                            objectFit: "contain",
-                          }}
-                        />
+                            src={getBasicIcon("Calendar")}
+                            className={`w-[14px]`}
+                            alt=""
+                            width={14}
+                            height={14}
+                            style={{
+                              objectFit: "contain",
+                            }}
+                          />
                         <p>{item.data.meetings}</p>
                         <Image
                           src={getBasicIcon("Tasks")}

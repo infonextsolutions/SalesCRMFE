@@ -14,10 +14,10 @@ const CallProfile = () => {
         title="Calls>Recorided Calls>Discussion on PX features"
         buttons={[
           {
-            text: "Take Action",
+            text: "Share",
             dropdown: true,
             id: 1,
-            icon: "Plus",
+            icon: "Share",
             light: false,
             list: [
               { title: "Call", Icon: "Phone" },

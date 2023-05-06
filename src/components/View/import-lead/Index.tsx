@@ -226,7 +226,7 @@ const Step1 = ({ next, cancel }: any) => {
             <option value="DE">Germany</option>
           </select>
         </div>
-        <div className="w-[100%] flex my-[30px] ">
+        <div className="w-[100%] t-[#fff] flex my-[30px] ">
           <SimpleButton
             theme={1}
             text={"Next"}
@@ -318,7 +318,7 @@ const Step2 = ({ next, cancel }: any) => {
             <option value="DE">Germany</option>
           </select>
         </div>
-        <div className="w-[100%] flex my-[30px] ">
+        <div className="w-[100%] t-[#fff] flex my-[30px] ">
           <SimpleButton
             theme={1}
             text={"Next"}
@@ -486,7 +486,7 @@ const Step3 = ({ next, cancel }: any) => {
             <option value="DE">Germany</option>
           </select>
         </div>
-        <div className="w-[100%] flex my-[30px] ">
+        <div className="w-[100%] t-[#fff] flex my-[30px] ">
           <SimpleButton
             theme={1}
             text={"Submit"}
