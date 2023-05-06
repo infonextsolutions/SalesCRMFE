@@ -12,7 +12,13 @@ const CallBox = ({ width }: any) => {
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" className="checkbox" />
+     <input
+        onChange={() => {
+          click();
+        }}
+        type="checkbox"
+        className="checkbox"
+      />
     </div>
   );
 };
@@ -505,3 +511,7 @@ interface CallProps {
   CallData: Call;
   last: any;
 }
+function click() {
+  throw new Error("Function not implemented.");
+}
+

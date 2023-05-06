@@ -204,7 +204,7 @@ const Kanban = ({ list }: KanbasProps) => {
                               objectFit: "contain",
                             }}
                           />
-                        <p>{item.data.meetings}</p>
+                        <p>{item.data.Calendar}</p>
                         <Image
                           src={getBasicIcon("Tasks")}
                           className={`w-[14px]`}

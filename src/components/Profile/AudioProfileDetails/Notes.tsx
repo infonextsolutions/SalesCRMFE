@@ -4,9 +4,9 @@ import Image from "next/image";
 
 const Note = () => {
   return (
-    <div className="mb-[30px] min-h-[250px] w-[100%] px-[28px] border-black border-[2px] py-[28px] pb-[40px] rounded-[20px] ">
-  <div className="flex items-center justify-between mb-4">
-    <p className="font-medium border-b-[2px] border-[#E8E9EB] border-dashed pb-[10px] text-gray-600 flex items-center">
+    <div className="mb-[30px] min-h-[250px] w-[100%] px-[28px]  border-black border-[2px] py-[28px] pb-[40px] rounded-[20px] ">
+  <div className="flex items-center justify-between mb-4 ">
+    <p className="font-medium border-b-[2px] border-[#E8E9EB] border-dashed  pb-[10px] text-gray-600 flex items-center">
       <span className="mr-2">12 June 2020</span>
       <div className="flex items-center space-x-4">
         <Image
