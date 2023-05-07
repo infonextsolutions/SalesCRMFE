@@ -509,7 +509,7 @@ const LeadContainer = ({
             click={true}
             route={`${pathname}/${id}/client-poc-profile`}
           />
-          <LeadItem width={150} left={20} text={customer.email} />
+          <LeadItem width={190} left={20} text={customer.email} />
           <LeadItem width={130} left={20} text={customer.contact} />
           <QuickActions
             width={120}
