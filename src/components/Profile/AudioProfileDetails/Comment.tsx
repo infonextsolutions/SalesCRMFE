@@ -103,7 +103,7 @@ const Comments = () => {
                 reply: [],
               };
               setList([...list, letsSee]);
-              setText("")
+              setText("");
             }
           }}
           className="bg-renal-blue mt-[18px] rounded-xl justify-end w-[110px] h-[38px] ml-auto font-medium tracking-wide pl-[5px] p-[5px]"
@@ -117,6 +117,7 @@ const Comments = () => {
         {list.map((item: any, i: any) => {
           return (
             <Comment
+              key={i}
               user={item.user}
               content={item.content}
               last={item.last}
