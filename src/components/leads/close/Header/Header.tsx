@@ -46,7 +46,7 @@ const Header = ({ selectAll }: any) => {
           }}
         />
         <HeaderItem width={120} left={70} text={"LEAD ID"} />
-        <HeaderItem width={150} left={0} text={"Custom name"} />
+        <HeaderItem width={150} left={0} text={"Lead Title"} />
         <HeaderItem width={130} left={20} text={"COMPANY NAME"} />
         <HeaderItem width={110} left={10} text={"CLIENT POC"} />
         <HeaderItem width={150} left={20} text={"EMAIL"} />

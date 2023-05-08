@@ -7,11 +7,11 @@ const Note = () => {
     <div className="mb-[30px] min-h-[250px] w-[100%] px-[28px]  border-black border-[2px] py-[28px] pb-[40px] rounded-[20px] ">
   <div className="flex items-center justify-between mb-4 ">
     <p className="font-medium border-b-[2px] border-[#E8E9EB] border-dashed  pb-[10px] text-gray-600 flex items-center">
-      <span className="mr-2">12 June 2020</span>
-      <div className="flex items-center space-x-4">
+      <span className="mr-10">12 June 2020</span>
+      <div className="flex  items-center space-x-3">
         <Image
           src={getBasicIcon("Edit")}
-          className={`w-[16px] h-[16px] ml-[160px] cursor-pointer`}
+          className={`w-[16px] h-[16px]  ml-32 cursor-pointer`}
           alt=""
           width={16}
           height={16}

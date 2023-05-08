@@ -20,11 +20,9 @@ const CallProfile = () => {
             icon: "Share",
             light: false,
             list: [
-              { title: "Call", Icon: "Phone" },
-              { title: "Email", Icon: "Mail" },
-              { title: "Meeting", Icon: "Calendar" },
-              { title: "Task", Icon: "Tasks" },
-              { title: "Message", Icon: "Chat" },
+              { title: "Full Call"},
+              { title: "Call Snippet" },
+            
             ],
           },
         ]}

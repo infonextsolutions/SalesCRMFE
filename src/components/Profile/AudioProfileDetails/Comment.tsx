@@ -25,13 +25,6 @@ const Comments = () => {
       width={16}
       height={16}
     />
-       <Image
-      src={getBasicIcon("Time")}
-      className="w-4 h-4 cursor-pointer"
-      alt=""
-      width={16}
-      height={16}
-    />
   </div>
 </div>
     <div className="py-2">

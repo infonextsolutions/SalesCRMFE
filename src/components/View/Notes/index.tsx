@@ -32,7 +32,21 @@ const AddText = ({ top, title, width }: any) => {
   );
 };
 
-
+const TextBox = ({ title, place }: any) => {
+  return (
+    <div className="w-[100%]">
+      <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
+        {title}
+      </p>
+      <textarea
+        name=""
+        id=""
+        placeholder={place}
+        className="w-[100%] h-[170px] rounded-[14px] bg-[#fff] border-[2px] py-[10px] border-[#d9d9d9] text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
+      ></textarea>
+    </div>
+  );
+};
 
 
 const Notes = ({ cancel }: any) => {
@@ -44,7 +58,7 @@ const Notes = ({ cancel }: any) => {
       <div className="custom-scroll-black w-[100%] pb-[60px] overflow-y-auto ">
         <div>
           <AddText top={"10px"} title="Note Title" />
-          <AddText top={"10px"} title="Description" />
+          <TextBox title="Description" place={"Type something"} />
           <AddText top={"10px"} title="Lead ID" />
           <AddText top={"10px"} title="Date"/>
         </div>
