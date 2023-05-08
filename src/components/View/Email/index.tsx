@@ -1,5 +1,6 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import axios from "axios";
 import Image from "next/image";
 import React from "react";
 
@@ -150,6 +151,20 @@ const SendEmail = () => {
 };
 
 const EmailPage = ({ cancel }: any) => {
+  const submit = () => {
+    const url = "https://testsalescrm.nextsolutions.in/api/send-email";
+    const body = {
+      email: "partharora557@gmail.com",
+      subject: "email subject",
+      content: "testt",
+    };
+    axios.post(url, body).then((e) => {
+      console.log(e);
+    });
+  };
+
+  React.useEffect(() => {});
+
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">

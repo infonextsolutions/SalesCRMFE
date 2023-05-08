@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
 import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
@@ -6,13 +6,31 @@ import dummy from "@/shared/dummy";
 import Script from "@/components/activeCalls/Script/index.";
 import RecordProfile from "@/components/Profile/RecordProfile";
 import axios from "axios";
-
+import Backdrop from "@/components/View/Backdrop/Center";
+import MakeCall from '@/components/View/makeCall/index';
 //Manya will make this page
 
 const AudioProfile = () => {
   const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES", "QUESTIONNAIRE"];
+
+  const [make, setCall] = useState(false);
+  const [bool, setBool] = useState(true);
+
+  const cancelCall = () => {
+    setBool(false);
+    setTimeout(() => {
+      setCall(false);
+      setBool(true);
+    }, 500);
+  };
+
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+      {make && (
+        <Backdrop bool={bool}>
+          <MakeCall cancel={cancelCall} />
+        </Backdrop>
+      )}
       <Navigation
         title="Calls>Active Calls>Discussion on PX features"
         buttons={[
@@ -23,12 +41,13 @@ const AudioProfile = () => {
             light: false,
             list: [],
             onClick1: async () => {
-              const response = await axios.post(
-                "https://testsalescrm.nextsolutions.in/api/calling/make-call",{
-                  callTo:"7669481778"
-                }
-              );
-              console.log(response.data);
+              // const response = await axios.post(
+              //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+              //   {
+              //     callTo: "7669481778",
+              //   }
+              // );
+              setCall(true);
             },
           },
           {

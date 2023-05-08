@@ -66,7 +66,7 @@ const Backdrop = ({ children, bool, pad, width }: any) => {
       <div
         className="fixed top-0 left-0 w-[100%] h-[100%] z-100 overflow-hidden "
         style={{
-          zIndex: 100000000000000,
+          zIndex: 99999999999999,
         }}
       >
         <div
