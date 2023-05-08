@@ -123,6 +123,89 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
 
+  function sortArray(arr: any) {
+    return arr.sort((a: any, b: any) => a - b);
+  }
+
+  const [sortWins, setWins] = useState<any>(null);
+  const [sortDeals, setDeals] = useState<any>(null);
+  const [sortBudget, setBudget] = useState<any>(null);
+
+  const sortwins = (arr: any) => {
+    const sh = arr.sort((a: any, b: any) => {
+      let A = a.win_probability;
+      A = A.slice(0, -1);
+      let B = b.win_probability;
+      B = B.slice(0, -1);
+      console.log(A, B);
+      return Number(A) - Number(B);
+    });
+    if (sortWins === null) {
+      setWins(true);
+      return sh;
+    } else {
+      if (sortWins) {
+        setWins(false);
+        const rev = [];
+        for (let i = sh.length - 1; i >= 0; i--) {
+          rev.push(sh[i]);
+        }
+        return rev;
+      } else {
+        setWins(true);
+        return sh;
+      }
+    }
+  };
+
+  const sortdeals = (arr: any) => {
+    const sh = arr.sort((a: any, b: any) => {
+      let A = a.potential_deal_size;
+      let B = b.potential_deal_size;
+      return Number(A) - Number(B);
+    });
+    if (sortDeals === null) {
+      setDeals(true);
+      return sh;
+    } else {
+      if (sortDeals) {
+        setDeals(false);
+        const rev = [];
+        for (let i = sh.length - 1; i >= 0; i--) {
+          rev.push(sh[i]);
+        }
+        return rev;
+      } else {
+        setDeals(true);
+        return sh;
+      }
+    }
+  };
+
+  const sortbudget = (arr: any) => {
+    const sh = arr.sort((a: any, b: any) => {
+      let A = a.existing_budget;
+      let B = b.existing_budget;
+      return Number(A) - Number(B);
+    });
+    if (sortBudget === null) {
+      setBudget(true);
+      return sh;
+    } else {
+      if (sortBudget) {
+        setBudget(false);
+        const rev = [];
+        for (let i = sh.length - 1; i >= 0; i--) {
+          rev.push(sh[i]);
+        }
+        return rev;
+      } else {
+        setBudget(true);
+        return sh;
+      }
+    }
+  };
+
   return (
     <>
       <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
@@ -140,16 +223,26 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               for (let j = 0; j < str.length - 1; j++) {
                 strr += str[j];
               }
-              console.log(str,strr);
               wins.push(Number(strr));
             }
-            console.log(wins);
+            setItems(sortwins(Leads));
           }}
           deal={() => {
-            console.log("deal");
+            const deals = [];
+            for (let i = 0; i < Leads.length; i++) {
+              const str = Leads[i].potential_deal_size;
+              deals.push(Number(str));
+            }
+            setItems(sortdeals(Leads));
           }}
           budget={() => {
-            console.log("budget");
+            const budget = [];
+            for (let i = 0; i < Leads.length; i++) {
+              const str = Leads[i].existing_budget;
+              budget.push(Number(str));
+            }
+            console.log(sortArray(budget));
+            setItems(sortbudget(Leads));
           }}
         />
         {loading ? (

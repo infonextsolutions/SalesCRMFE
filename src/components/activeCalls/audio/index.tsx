@@ -1,10 +1,10 @@
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import Tracker from "../conversation-tracker";
 import Transcript from "../Transcript/Transcript";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import useSound from "use-sound";
-
+import AudioPlayer from "./components/AudioPlayer";
 const CallHolder = ({ click }: any) => {
   return (
     <div
@@ -26,17 +26,17 @@ const CallHolder = ({ click }: any) => {
   );
 };
 
-
-
 const CallPlayer = () => {
-  const [play, { stop ,duration}] = useSound("/poor-audio.ogg");
   const [playing, setPlaying] = React.useState(false);
-  console.log(duration);
+  const ref: any = useRef();
+  React.useEffect(() => {});
+
   return (
     <div className="w-[100%] h-[100px] mb-[100px] mt-[20px] px-[40px]">
       <p className="text-[34px] mb-[70px] font-medium tracking-wide text-[#000]">
         Call Player
       </p>
+      <audio src="/poor-audio.ogg" ref={ref}></audio>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
         <div className="h-[100%] w-[40%] bg-renal-blue rounded-l-[3px] relative">
           <CallHolder click={() => {}} />
@@ -63,11 +63,11 @@ const CallPlayer = () => {
           }}
           onClick={() => {
             if (!playing) {
-              play();
               setPlaying(true);
+              ref.current.play();
             } else {
-              stop();
               setPlaying(false);
+              ref.current.pause();
             }
           }}
           className="translate-y-[1px] cursor-pointer"
@@ -136,7 +136,9 @@ const Audio = () => {
         </div>
         <img src="/video.svg" className="w-full rounded-2xl" alt="" />
       </div> */}
-      <CallPlayer />
+      {/* <CallPlayer /> */}
+
+      <AudioPlayer />
       <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
         <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
           call data

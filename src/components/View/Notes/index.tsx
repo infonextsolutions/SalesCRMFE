@@ -1,11 +1,15 @@
 import SimpleButton from "@/utils/Button/SimpleButton";
+
 import React from "react";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 
 
+import axios from "axios";
+import React, { useState } from "react";
 
-const AddText = ({ top, title, width }: any) => {
+
+const AddText = ({ top, title, width, change }: any) => {
   return (
     <div
       className="w-[100%] "
@@ -17,6 +21,7 @@ const AddText = ({ top, title, width }: any) => {
       <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
         {title}*
       </p>
+
       
  {title === "Description" ? (
         <textarea
@@ -28,6 +33,14 @@ const AddText = ({ top, title, width }: any) => {
           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
         />
       )}
+      <input
+        onChange={(e: any) => {
+          change(e.target.value);
+        }}
+        type="text"
+        className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+      />
+
     </div>
   );
 };
@@ -35,7 +48,24 @@ const AddText = ({ top, title, width }: any) => {
 
 
 
+
 const Notes = ({ cancel }: any) => {
+
+const Notes = ({ cancel, leadid }: any) => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const submit = () => {
+    const body = {
+      leadId: leadid,
+      title: title,
+      content: content,
+    };
+    const url = "https://testsalescrm.nextsolutions.in/api/leads/notes";
+    axios.post(url, body).then((e: any) => {
+      console.log(e);
+    });
+  };
   return (
     <div className="w-[100%] hide-scrollbar h-[100%] py-[30px] pl-[40px] pr-[40px] overflow-x-auto relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
@@ -47,6 +77,43 @@ const Notes = ({ cancel }: any) => {
           <AddText top={"10px"} title="Description" />
           <AddText top={"10px"} title="Lead ID" />
           <AddText top={"10px"} title="Date"/>
+
+          <AddText
+            top={"10px"}
+            title="Note Title"
+            change={(e: any) => {
+              setTitle(e);
+            }}
+          />
+          <AddText
+            top={"10px"}
+            title="Description"
+            change={(e: any) => {
+              setContent(e);
+            }}
+          />
+        </div>
+        <div className="absolute right-[160px] bottom-[40px] mt-[130px] flex ">
+          <SimpleButton
+            theme={2}
+            text={"Cancel"}
+            left={20}
+            right={0}
+            click={() => {
+              cancel();
+            }}
+          />
+        </div>
+        <div className="absolute right-[40px] bottom-[40px] mt-[130px] flex ">
+          <SimpleButton
+            theme={1}
+            text={"Create"}
+            left={20}
+            right={0}
+            click={() => {
+              submit();
+            }}
+          />
         </div>
       </div>
 

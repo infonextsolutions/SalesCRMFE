@@ -1,7 +1,8 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import axios from "axios";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const AddText = ({ title, place }: any) => {
   return (
@@ -35,15 +36,22 @@ const Senders = () => {
   );
 };
 
-const SendersDetails = () => {
+const SendersDetails = ({ change }: any) => {
   return (
     <div className="w-[100%] px-[15px] h-[42px] items-center bg-[#fff] flex justify-between">
       <div className="flex items-center">
         <p className="text-[14px] tracking-wide font-medium text-[#3F434A]">
           To:
         </p>
-        <Senders />
+        {/* <Senders /> */}
       </div>
+      <input
+        type="text"
+        onChange={(e) => {
+          change(e.target.value);
+        }}
+        className="w-[100%] h-[100%] bg-[#fff] px-[10px] text-[14px] font-medium outline-none text-[#000]"
+      />
     </div>
   );
 };
@@ -109,30 +117,49 @@ const Toolbar = () => {
   );
 };
 
-const TextBox = () => {
+const TextBox = ({ content, title }: any) => {
   return (
-    <textarea
-      name=""
-      id=""
-      className="w-[100%] outline-none text-[14px] font-medium text-text-norm h-[110px] py-[10px] px-[18px] bg-[#fff]"
-      placeholder="Type Something"
-    ></textarea>
+    <>
+      <input
+        name=""
+        type="text"
+        className="w-[100%] outline-none text-[14px] font-medium text-text-norm h-[40px] py-[10px] px-[18px] bg-[#fff]"
+        placeholder="Title"
+        onChange={(e: any) => {
+          title(e.target.value);
+        }}
+      />
+      <textarea
+        name=""
+        id=""
+        onChange={(e: any) => {
+          content(e.target.value);
+        }}
+        className="w-[100%] outline-none text-[14px] font-medium text-text-norm h-[110px] py-[10px] px-[18px] bg-[#fff]"
+        placeholder="Type Something"
+      ></textarea>
+    </>
   );
 };
 
-const SendEmail = () => {
+const SendEmail = ({ change, title, content, clicked }: any) => {
   return (
     <>
       <div className=" w-[100%] overflow-hidden rounded-xl items-center border-[1px] ">
-        <SendersDetails />
+        <SendersDetails
+          change={(e: any) => {
+            change(e);
+          }}
+        />
         <Toolbar />
-        <TextBox />
+        <TextBox title={title} content={content} />
         <div className="w-[100%] flex mb-[15px] items-center">
           <SimpleButton
             theme={1}
             text={"Send"}
             left={20}
             height={40}
+            click={clicked}
             width={90}
             right={0}
           />
@@ -150,6 +177,25 @@ const SendEmail = () => {
 };
 
 const EmailPage = ({ cancel }: any) => {
+  const [sender, setSender] = useState<any>("");
+  const [title, setTitle] = useState<any>("");
+  const [content, setContent] = useState<any>("");
+
+  console.log(sender, title, content);
+
+  const submit = (e1: any, e2: any, e3: any) => {
+    const url = "https://testsalescrm.nextsolutions.in/api/send-email";
+    const body = {
+      email: e1,
+      subject: e2,
+      content: e3,
+    };  
+    axios.post(url, body).then((e) => {
+      console.log(e);
+      cancel();
+    });
+  };
+
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
@@ -171,7 +217,20 @@ const EmailPage = ({ cancel }: any) => {
       </div>
       <AddText title="Company Name*" place={"ABC Corp."} />
       <AddText title="Client POC*" place={"Shraddha P."} />
-      <SendEmail />
+      <SendEmail
+        change={(e: any) => {
+          setSender(e);
+        }}
+        title={(e: any) => {
+          setTitle(e);
+        }}
+        content={(e: any) => {
+          setContent(e);
+        }}
+        clicked={() => {
+          submit(sender, title, content);
+        }}
+      />
     </div>
   );
 };
