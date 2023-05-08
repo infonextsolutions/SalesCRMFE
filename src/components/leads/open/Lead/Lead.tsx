@@ -676,7 +676,7 @@ const LeadContainer = ({
       )}
       {notes && (
         <Backdrop bool={bool}>
-          <Notes cancel={cancelNotes} />
+          <Notes cancel={cancelNotes} leadid={id} />
         </Backdrop>
       )}
       {events && (
@@ -692,7 +692,7 @@ const LeadContainer = ({
       )}
       {notes1 && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Notes1 cancel={cancelNotes1} />
+          <Notes1 cancel={cancelNotes1} note={LeadData?.notes} />
         </Backdrop>
       )}
       {messages && (
