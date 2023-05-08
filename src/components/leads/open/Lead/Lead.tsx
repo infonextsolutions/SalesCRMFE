@@ -11,6 +11,7 @@ import Events from "@/components/View/Event/Events";
 import Notes1 from "@/components/View/NotesSalesView";
 import EmailPage from "../../../View/Email/index";
 import Messages from "@/components/View/messages";
+import ActiveCall from "@/components/View/active-call-add";
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -141,6 +142,7 @@ const QuickActions = ({
   events,
   emails,
   messages,
+  call,
 }: any) => {
   return (
     <div
@@ -153,6 +155,9 @@ const QuickActions = ({
         className="mr-[4px] cursor-pointer"
         width={25}
         height={25}
+        onClick={() => {
+          call();
+        }}
         style={{
           objectFit: "contain",
         }}
@@ -357,6 +362,7 @@ const LeadContainer = ({
   const [messages, setMessages] = React.useState(false);
   const [bool, setBool] = React.useState(true);
   const [detailShow, setDetailShow] = useState(false);
+  const [call, setCall] = React.useState(false);
 
   const showNotes = () => {
     setNotes(true);
@@ -367,12 +373,14 @@ const LeadContainer = ({
   const showNotes1 = () => {
     setNotes1(true);
   };
-
   const showEvents = () => {
     setEvents(true);
   };
   const showMessages = () => {
     setMessages(true);
+  };
+  const showCall = () => {
+    setCall(true);
   };
 
   const cancelEvents = () => {
@@ -413,6 +421,13 @@ const LeadContainer = ({
       setBool(true);
     }, 1700);
   };
+  const cancelCall = () => {
+    setBool(false);
+    setTimeout(() => {
+      setCall(false);
+      setBool(true);
+    }, 1700);
+  };
 
   const AddLead = (e: any, e1: any) => {
     if (e1 === 0) {
@@ -425,6 +440,8 @@ const LeadContainer = ({
       showEmail();
     } else if (e1 === 5) {
       showMessages();
+    } else if (e1 === 6) {
+      showCall();
     }
   };
 
@@ -509,7 +526,7 @@ const LeadContainer = ({
             click={true}
             route={`${pathname}/${id}/client-poc-profile`}
           />
-          <LeadItem width={150} left={20} text={customer.email} />
+          <LeadItem width={190} left={20} text={customer.email} />
           <LeadItem width={130} left={20} text={customer.contact} />
           <QuickActions
             width={120}
@@ -524,6 +541,9 @@ const LeadContainer = ({
             }}
             messages={() => {
               AddLead(1, 5);
+            }}
+            call={() => {
+              AddLead(1, 6);
             }}
           />
           <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
@@ -678,6 +698,11 @@ const LeadContainer = ({
       {messages && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <Messages cancel={cancelMessages} />
+        </Backdrop>
+      )}
+      {call && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <ActiveCall cancel={cancelCall} />
         </Backdrop>
       )}
     </>
