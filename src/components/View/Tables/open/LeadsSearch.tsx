@@ -137,7 +137,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       A = A.slice(0, -1);
       let B = b.win_probability;
       B = B.slice(0, -1);
-      console.log(A, B);
       return Number(A) - Number(B);
     });
     if (sortWins === null) {
@@ -214,8 +213,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
             setSelectAll(!selectAll);
           }}
           win={() => {
-            console.log("win");
-            console.log(Leads);
             const wins = [];
             for (let i = 0; i < Leads.length; i++) {
               const str = Leads[i].win_probability;
@@ -241,7 +238,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               const str = Leads[i].existing_budget;
               budget.push(Number(str));
             }
-            console.log(sortArray(budget));
             setItems(sortbudget(Leads));
           }}
         />

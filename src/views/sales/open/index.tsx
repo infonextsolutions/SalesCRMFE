@@ -98,19 +98,15 @@ const SalesOpen = ({ data }: props) => {
     const res = await axios.post("https://testsalescrm.nextsolutions.in/api/calling/make-call", {
       callTo: "7669481778",
     });
-    console.log(res,"only check here!");
   };
 
   const addExport = (e: any, e1: any) => {
     if (e1 === 3) {
-      console.log("exorting");
       exportCSV();
     } else if (e1 === 1) {
-      console.log("running");
       makecall();
     }
   };
-  console.log(data);
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">

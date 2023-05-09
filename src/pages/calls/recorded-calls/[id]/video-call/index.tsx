@@ -20,7 +20,6 @@ const CallProfile = () => {
   const [bool, setBool] = useState(true);
 
   const state = useSelector((state: any) => state.ui);
-  console.log(state);
 
   const showFull = () => {
     setFullCall(true);

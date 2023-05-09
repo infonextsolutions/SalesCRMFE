@@ -6,6 +6,7 @@ import Search from "../../genUtils/Search";
 // import KanbanContainer from "@/components/View/Kanban";
 import { useSelector } from "react-redux";
 import Spinner from "@/components/loader/spinner";
+import KanbanTable from "@/components/View/Tables/open/Kanban";
 
 const LeadsTable = React.lazy(
   () => import("@/components/View/Tables/close/LeadsSearch")
@@ -23,7 +24,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   const state = useSelector((state: any) => state.auth);
 
   return (
-    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px]  mb-[40px] relative">
+    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] relative mb-[40px]">
       <div className="w-[100%] h-[58px] flex items-center  px-[8px] ">
         <Search change={onChange} view={view} />
         {/* <ButtonDropDown
@@ -64,7 +65,8 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
         </Suspense>
       ) : (
         <Suspense fallback={<Spinner />}>
-          <KanbanContainer list={list} />
+          {/* <KanbanContainer list={list} /> */}
+          <KanbanTable totalRecords={records} search={search}/>
         </Suspense>
       )}
     </div>

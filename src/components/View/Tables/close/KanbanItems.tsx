@@ -107,7 +107,9 @@ const KanbanItem = ({ item, i, Item }: any) => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
     }
+
   });
+  console.log(Item,"checcking")
   return (
     <>
       <div
@@ -119,7 +121,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             onClick={() => {
               leadId();
             }}
-            className="cursor-pointer"
+            className="cursor-pointer text-[#000]"
           >
             Lead Id-{Item._id}
           </p>

@@ -168,7 +168,6 @@ const Time = () => {
         >
           {arr.map((item: any, i: any) => {
             const check = selected === i;
-            console.log(selected, i, check);
             return (
               <div className="w-[100%] relative cursor-pointer" key={i}>
                 {check && (
@@ -190,7 +189,6 @@ const Time = () => {
                     color: check ? "#304FFD" : "#000",
                   }}
                   onClick={() => {
-                    console.log("is updating");
                     setSelected(i);
                     setShow(false);
                   }}
