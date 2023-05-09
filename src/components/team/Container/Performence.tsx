@@ -13,12 +13,14 @@ const LeadsTable = React.lazy(
 );
 // const About = lazy(() => import("./pages/About"));
 
-const Performence = ({ records }: any) => {
+const Performence = ({ records ,results}: any) => {
   const [search, setSearch] = useState("");
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
   };
+
+  console.log(results);
 
   const state = useSelector((state: any) => state.auth);
 
