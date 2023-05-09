@@ -42,7 +42,7 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const Calls = () => {
+const Calls = ({ data }: any) => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
@@ -63,13 +63,13 @@ const Calls = () => {
           },
         ]}
       />
-      <CallsContainer dummy1={DUMMY} dummy2={dummy} />
+      <CallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
     </div>
   );
 };
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/recordings/find-all"
+    "https://testsalescrm.nextsolutions.in/api/active-call/find-all"
   );
   return {
     props: {
