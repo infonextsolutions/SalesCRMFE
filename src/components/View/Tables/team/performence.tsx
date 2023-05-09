@@ -13,6 +13,7 @@ import {
   RightArrow,
 } from "@/utils/AssetsHelper";
 import axios from "axios";
+import Root from "@/types/teams";
 const PerformenceTable = ({ totalRecords }: TableProps) => {
   // console.log(totalRecords);
   const [pageCount, setpageCount]: any = useState(0);
@@ -33,7 +34,7 @@ const PerformenceTable = ({ totalRecords }: TableProps) => {
       //   `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${pageNumber}`
       // );
       const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${pageNumber}`
+        `https://testsalescrm.nextsolutions.in/api/lead-report/find-all?limit=${limit}&page=${pageNumber}`
       );
       // const data = await res.json();
       // console.log(data);
@@ -55,7 +56,7 @@ const PerformenceTable = ({ totalRecords }: TableProps) => {
     //   `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
     // );
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
+      `https://testsalescrm.nextsolutions.in/api/lead-report/find-all?limit=${limit}&page=${current}`
     );
     // console.log(res.data,"only check this!");
     // const data = await res.json();
@@ -94,18 +95,13 @@ const PerformenceTable = ({ totalRecords }: TableProps) => {
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
         <Header />
         {Leads != null &&
-          Leads.map((item: Lead, ind: Number) => {
+          Leads.map((item: Root, ind: Number) => {
             return (
               <LeadContainer
                 selectAll={false}
                 key={item._id}
                 id={item._id}
                 index={ind}
-                company={item.companyId}
-                customer={item.customerId}
-                leadStage={item.leadStage}
-                leadStatus={item.leadStatus}
-                custom={item.customer_name}
                 LeadData={item}
                 last={ind === Leads.length - 1}
               />

@@ -70,7 +70,8 @@ const ChartItem = ({ down, chartColor,title }: any) => {
   );
 };
 
-const Charts = () => {
+const Charts = ({results}:any) => {
+  console.log(results);
   return (
     <div className="w-[100%] mb-[20px] flex h-[120px]">
       <ChartItem chartColor={"#304cfdś"} title={"Open Deals"} />

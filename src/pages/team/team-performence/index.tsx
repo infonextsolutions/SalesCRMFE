@@ -83,6 +83,9 @@ export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/lead-report/find-all?page=0&limit=10"
   );
+  // const response = await axios.get(
+  //   "https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Open"
+  // );
   console.log(response.data)
   return {
     props: {

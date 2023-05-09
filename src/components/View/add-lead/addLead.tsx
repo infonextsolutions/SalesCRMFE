@@ -27,7 +27,6 @@ const AddText = ({ top, title, width, change }: any) => {
 
 const AddLead = ({ cancel }: any) => {
   const [data, setData] = React.useState<any>({});
-  console.log(data);
   const submit = () => {
     axios
       .post("https://testsalescrm.nextsolutions.in/api/leads/create", data)

@@ -252,7 +252,6 @@ const DateContainer = () => {
 };
 
 const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
-  console.log(id);
   function generateUniqueId() {
     const timestamp: any = Date.now().toString(36); // Convert timestamp to base36 string
     const randomNum = Math.random().toString(36).substr(2, 5); // Generate random number and take 5 characters starting from index 2
@@ -284,7 +283,6 @@ const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
     })
   };
 
-  console.log(data);
 
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Events from "@/components/View/Event/Events";
+import Root from "@/types/teams";
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -199,11 +200,6 @@ const QuickActions = ({ width, left, notes, events }: any) => {
 const LeadContainer = ({
   index,
   id,
-  company,
-  customer,
-  leadStage,
-  leadStatus,
-  custom,
   LeadData,
   selectAll,
   last,
@@ -247,6 +243,11 @@ const LeadContainer = ({
     }
   };
 
+  function parseDateString(dateString:any) {
+    const date = dateString ? new Date(dateString) : new Date();
+    const options:any = { month: 'long', day: 'numeric', year: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  }
 
   return (
     <div className="flex">
@@ -280,8 +281,8 @@ const LeadContainer = ({
         <LeadItemMultiple
           width={120}
           left={20}
-          upperText={"Steve"}
-          bottomText={"Sales Rep"}
+          upperText={LeadData.user[0].name}
+          bottomText={LeadData.user[0].designation}
           bold={true}
           click={true}
           route={`${pathname}/leads`}
@@ -290,38 +291,57 @@ const LeadContainer = ({
           width={150}
           left={0}
           color={"#000"}
-          text={"950"}
+          text={LeadData.openDeals}
           click={true}
         />
         <LeadItem
           width={130}
           left={20}
-          text={"2100"}
+          text={LeadData.closeDeals}
           bold={true}
           click={true}
         />
-        <LeadItem width={110} left={10} text={"1,00,000"} click={true} />
-        <LeadItem width={150} left={20} text={"2,70,000"} />
-        <LeadItem width={130} left={20} text={"930"} />
-        <LeadItem width={110} left={10} text={"1060"} />
-        <LeadItem width={150} left={20} text={"110"} />
-        <LeadItem width={120} left={10} textLeft={10} text={"23"} />
-        <LeadItem width={120} left={10} text={"23 Feburary 2023"} />
+        <LeadItem
+          width={110}
+          left={10}
+          text={LeadData.openDealsRs}
+          click={true}
+        />
+        <LeadItem width={150} left={20} text={LeadData.closeDealsRs} />
+        <LeadItem width={130} left={20} text={LeadData.dealsWon} />
+        <LeadItem width={110} left={10} text={LeadData.dealsLost} />
+        <LeadItem width={150} left={20} text={LeadData.dealsDead} />
+        <LeadItem
+          width={120}
+          left={10}
+          textLeft={10}
+          text={LeadData.stageEnquery}
+        />
+        <LeadItem
+          width={120}
+          left={10}
+          text={parseDateString(LeadData.lastActivity)}
+        />
         <LeadItem
           width={130}
           left={10}
           textLeft={10}
-          text={"2 Feburary 2023"}
+          text={parseDateString(LeadData.lastLeadClose)}
         />
-        <LeadItem width={150} left={10} text={"21"} />
-        <LeadItem width={150} left={10} textLeft={10} text={"12"} />
+        <LeadItem width={150} left={10} text={LeadData.callReted} />
+        <LeadItem
+          width={150}
+          left={10}
+          textLeft={10}
+          text={LeadData.totalFeedBacks}
+        />
         <LeadItemMultiple
           width={130}
           left={20}
           upperText={"Read Feedback"}
-          bottomText={"22 Janurary 2023"}
+          bottomText={parseDateString(LeadData.lastFeedBack)}
         />
-        <LeadItem width={150} left={10} text={"12"} />
+        <LeadItem width={150} left={10} text={LeadData.warningsInOpenLeads} />
       </div>
     </div>
   );
@@ -330,13 +350,8 @@ const LeadContainer = ({
 export default LeadContainer;
 
 interface LeadProps {
-  company: CompanyId;
-  customer: CustomerId;
   id: String;
-  leadStage: String;
-  leadStatus: String;
-  custom: String;
-  LeadData: Lead;
+  LeadData: Root;
   index: Number;
   selectAll: any;
   last: any;

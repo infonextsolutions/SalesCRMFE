@@ -371,7 +371,6 @@ const CallContainer = ({
   const ref: any = useRef();
   const dispatch = useDispatch();
 
-  console.log(CallData);
   return (
     <>
       <div className="flex">
