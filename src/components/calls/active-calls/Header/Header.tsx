@@ -1,12 +1,12 @@
 import React from "react";
 
-const HeaderCheckBox = ({ width }: any) => {
+const HeaderCheckBox = ({ width}: any) => {
   return (
     <div
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" className="checkbox" />
+     <input type="checkbox" className="checkbox" />
     </div>
   );
 };
@@ -31,11 +31,16 @@ const HeaderItem = ({ width, text, left, align, bold, color }: any) => {
   );
 };
 
-const Header = () => {
+const Header = ({ selectAll }: any) => {
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
-        <HeaderCheckBox width={30} />
+      <HeaderCheckBox
+          width={30}
+          click={() => {
+            selectAll();
+          }}
+        />
         <HeaderItem width={130} left={20} text={"CALL ID"} />
         <HeaderItem width={130} left={20} text={"CALL title"} />
         <HeaderItem width={200} left={10} text={"lead id"} />
@@ -50,3 +55,13 @@ const Header = () => {
 };
 
 export default Header;
+
+
+function selectAll() {
+  throw new Error("Function not implemented.");
+}
+
+function click() {
+  throw new Error("Function not implemented.");
+}
+

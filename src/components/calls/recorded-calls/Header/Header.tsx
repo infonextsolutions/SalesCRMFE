@@ -35,7 +35,7 @@ const Header = () => {
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
-        <HeaderCheckBox width={30} />
+      <HeaderCheckBox width={30} />
         <HeaderItem width={130} left={70} text={"CALL ID"} />
         <HeaderItem width={130} left={20} text={"CALL title"} />
         <HeaderItem width={200} left={10} text={"lead id"} />
@@ -53,3 +53,5 @@ const Header = () => {
 };
 
 export default Header;
+
+
