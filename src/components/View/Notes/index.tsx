@@ -37,7 +37,6 @@ const Notes = ({ cancel, leadid }: any) => {
     };
     const url = "https://testsalescrm.nextsolutions.in/api/leads/notes";
     axios.post(url, body).then((e: any) => {
-      console.log(e);
       cancel();
     });
   };

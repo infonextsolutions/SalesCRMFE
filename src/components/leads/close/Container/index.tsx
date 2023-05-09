@@ -6,7 +6,7 @@ import Search from "../../genUtils/Search";
 // import KanbanContainer from "@/components/View/Kanban";
 import { useSelector } from "react-redux";
 import Spinner from "@/components/loader/spinner";
-import KanbanTable from "@/components/View/Tables/open/Kanban";
+import KanbanTable from "@/components/View/Tables/close/Kanban";
 
 const LeadsTable = React.lazy(
   () => import("@/components/View/Tables/close/LeadsSearch")

@@ -49,7 +49,7 @@ const TeamsPerformence = ({ data }: any) => {
           },
         ]}
       />
-      <Performence records={data.totalRecords} />
+      <Performence results={data} records={data.totalRecords} />
     </div>
   );
 };
