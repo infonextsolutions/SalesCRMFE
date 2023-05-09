@@ -247,7 +247,6 @@ const LeadContainer = ({
     }
   };
 
-  console.log(LeadData);
 
   return (
     <div className="flex">

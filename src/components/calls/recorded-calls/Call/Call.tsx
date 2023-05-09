@@ -45,11 +45,9 @@ const CallItem = ({
           width={20}
           onClick={() => {
             if (onClick) {
-              console.log("exec");
               onClick();
             }
             if (click) {
-              console.log(route);
               router.replace(route);
             }
           }}
@@ -81,7 +79,6 @@ const CallItem = ({
               onClick();
             }
             if (click) {
-              console.log(route);
               router.replace(route);
             }
           }}

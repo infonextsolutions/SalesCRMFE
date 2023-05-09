@@ -5,7 +5,6 @@ import { getBasicIcon } from "../AssetsHelper";
 const DropItem = ({ item, value, onClick, i }: any) => {
   const [mouseOver, setMouseOver] = React.useState(false);
   const Wrapper = item?.wrapper;
-  console.log(Wrapper);
   return (
     <div
       className={`mb-[4px] ${

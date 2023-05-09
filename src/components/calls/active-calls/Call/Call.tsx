@@ -65,7 +65,6 @@ const CallItem = ({
           }}
           onClick={() => {
             if (click) {
-              console.log(route);
               router.replace(route);
             }
           }}
@@ -352,11 +351,9 @@ const CallContainer = ({
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log(CallData, "Call-data");
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
-  console.log(hover);
   const ref: any = useRef();
   return (
     <>

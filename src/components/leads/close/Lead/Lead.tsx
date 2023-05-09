@@ -8,6 +8,10 @@ import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ActivityHistory from "../../genUtils/Activity";
 import Events from "@/components/View/Event/Events";
+import Notes1 from "@/components/View/NotesSalesView";
+import EmailPage from "../../../View/Email/index";
+import Messages from "@/components/View/messages";
+import ActiveCall from "@/components/View/active-call-add";
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -131,7 +135,15 @@ const LeadItemMultiple = ({
   );
 };
 
-const QuickActions = ({ width, left, notes, events }: any) => {
+const QuickActions = ({
+  width,
+  left,
+  notes,
+  events,
+  emails,
+  messages,
+  call,
+}: any) => {
   return (
     <div
       className={`flex  h-[18px] item-center shrink-0`}
@@ -143,6 +155,9 @@ const QuickActions = ({ width, left, notes, events }: any) => {
         className="mr-[4px] cursor-pointer"
         width={25}
         height={25}
+        onClick={() => {
+          call();
+        }}
         style={{
           objectFit: "contain",
         }}
@@ -151,6 +166,9 @@ const QuickActions = ({ width, left, notes, events }: any) => {
         src={getBasicIcon("Mail")}
         alt=""
         width={25}
+        onClick={() => {
+          emails();
+        }}
         height={25}
         style={{
           objectFit: "contain",
@@ -191,6 +209,9 @@ const QuickActions = ({ width, left, notes, events }: any) => {
         height={25}
         style={{
           objectFit: "contain",
+        }}
+        onClick={() => {
+          messages();
         }}
       />
     </div>
@@ -309,7 +330,6 @@ const ExpandableRow = ({
     </div>
   );
 };
-
 const MidPath = () => {
   return (
     <div className="w-[31px] flex items-center justify-between">
@@ -337,21 +357,44 @@ const LeadContainer = ({
 
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);
+  const [notes1, setNotes1] = React.useState(false);
+  const [emails, setEmail] = React.useState(false);
+  const [messages, setMessages] = React.useState(false);
   const [bool, setBool] = React.useState(true);
   const [detailShow, setDetailShow] = useState(false);
+  const [call, setCall] = React.useState(false);
 
   const showNotes = () => {
     setNotes(true);
   };
-
+  const showEmail = () => {
+    setEmail(true);
+  };
+  const showNotes1 = () => {
+    setNotes1(true);
+  };
   const showEvents = () => {
     setEvents(true);
+  };
+  const showMessages = () => {
+    setMessages(true);
+  };
+  const showCall = () => {
+    setCall(true);
   };
 
   const cancelEvents = () => {
     setBool(false);
     setTimeout(() => {
       setEvents(false);
+      setBool(true);
+    }, 500);
+  };
+
+  const cancelEmails = () => {
+    setBool(false);
+    setTimeout(() => {
+      setEmail(false);
       setBool(true);
     }, 500);
   };
@@ -364,15 +407,44 @@ const LeadContainer = ({
     }, 1700);
   };
 
+  const cancelNotes1 = () => {
+    setBool(false);
+    setTimeout(() => {
+      setNotes1(false);
+      setBool(true);
+    }, 1700);
+  };
+  const cancelMessages = () => {
+    setBool(false);
+    setTimeout(() => {
+      setMessages(false);
+      setBool(true);
+    }, 1700);
+  };
+  const cancelCall = () => {
+    setBool(false);
+    setTimeout(() => {
+      setCall(false);
+      setBool(true);
+    }, 1700);
+  };
+
   const AddLead = (e: any, e1: any) => {
     if (e1 === 0) {
       showNotes();
     } else if (e1 === 1) {
       showEvents();
+    } else if (e1 === 2) {
+      showNotes1();
+    } else if (e1 === 3) {
+      showEmail();
+    } else if (e1 === 5) {
+      showMessages();
+    } else if (e1 === 6) {
+      showCall();
     }
   };
 
-  console.log(LeadData);
 
   const [w, setW] = useState(0);
   const wRef: any = useRef();
@@ -382,15 +454,19 @@ const LeadContainer = ({
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log(w);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
-  console.log(hover);
   const ref: any = useRef();
+  console.log(LeadData)
   return (
     <>
-      <div className="flex">
+      <div
+        className="flex relative h-[50px]"
+        style={{
+          zIndex: 1000,
+        }}
+      >
         <div
           className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
           ref={wRef}
@@ -406,7 +482,7 @@ const LeadContainer = ({
             />
         </div> 
         */}
-          
+
           <LeadBox width={30} bool={selectAll} />
           <ExpandingIcon
             change={(e: any) => {
@@ -447,7 +523,7 @@ const LeadContainer = ({
             click={true}
             route={`${pathname}/${id}/client-poc-profile`}
           />
-          <LeadItem width={150} left={20} text={customer.email} />
+          <LeadItem width={190} left={20} text={customer.email} />
           <LeadItem width={130} left={20} text={customer.contact} />
           <QuickActions
             width={120}
@@ -457,6 +533,15 @@ const LeadContainer = ({
             events={() => {
               AddLead(1, 1);
             }}
+            emails={() => {
+              AddLead(1, 3);
+            }}
+            messages={() => {
+              AddLead(1, 5);
+            }}
+            call={() => {
+              AddLead(1, 6);
+            }}
           />
           <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
           <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
@@ -464,7 +549,6 @@ const LeadContainer = ({
           <LeadItem width={130} left={10} textLeft={10} text={"John C."} />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
           <LeadItem width={150} left={10} textLeft={10} text={"Product A"} />
-          {/* <ActivityHistory width={180} left={0} last={last} /> */}
 
           {/* activity history starts here*/}
           <div
@@ -493,6 +577,8 @@ const LeadContainer = ({
             <MidPath />
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
           </div>
+
+          {/* activity history ends here*/}
           <LeadItemMultiple
             width={130}
             left={20}
@@ -526,8 +612,14 @@ const LeadContainer = ({
           />
           {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
           {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
-          <LeadItem width={160} left={10} text={"Read Notes"} />
-          <LeadItem width={150} left={10} text={"12/1/23"} />
+          <LeadItem
+            width={150}
+            left={10}
+            text={"Read Notes"}
+            onClick={() => {
+              AddLead(1, 2);
+            }}
+          />
         </div>
       </div>
       <div
@@ -535,26 +627,29 @@ const LeadContainer = ({
         style={{
           width: w,
           height: detailShow ? 150 : 0,
+          zIndex: -1,
           clipPath: detailShow
             ? "inset(0px 0px 0 1px)"
             : "inset(0px 0px 150px 1px)",
         }}
       >
-        <ExpandableRow
-          leadDesc={
-            "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
-          }
-          companyDesc={
-            "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
-          }
-          companyWebsite={"www.abccorp.in"}
-          LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
-          otherContacts={[
-            { name: "Regina Cooper", position: "Project Manager" },
-            { name: "Suman A.", position: "Sales Manager" },
-            { name: "Judith Black", position: "Creative Director" },
-          ]}
-        />
+        {detailShow && (
+          <ExpandableRow
+            leadDesc={
+              "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
+            }
+            companyDesc={
+              "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
+            }
+            companyWebsite={"www.abccorp.in"}
+            LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
+            otherContacts={[
+              { name: "Regina Cooper", position: "Project Manager" },
+              { name: "Suman A.", position: "Sales Manager" },
+              { name: "Judith Black", position: "Creative Director" },
+            ]}
+          />
+        )}
       </div>
       {hover && (
         <div
@@ -577,15 +672,35 @@ const LeadContainer = ({
         </div>
       )}
       {notes && (
-            <Backdrop bool={bool}>
-              <Notes cancel={cancelNotes} />
-            </Backdrop>
-          )}
-          {events && (
-            <Backdrop bool={bool} pad={"50px 0"}>
-              <Events cancel={cancelEvents} />
-            </Backdrop>
-          )}
+        <Backdrop bool={bool}>
+          <Notes cancel={cancelNotes} leadid={id} />
+        </Backdrop>
+      )}
+      {events && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <Events cancel={cancelEvents} />
+        </Backdrop>
+      )}
+      {emails && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <EmailPage cancel={cancelEmails} />
+        </Backdrop>
+      )}
+      {notes1 && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <Notes1 cancel={cancelNotes1} note={LeadData?.notes} />
+        </Backdrop>
+      )}
+      {messages && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <Messages cancel={cancelMessages} />
+        </Backdrop>
+      )}
+      {call && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <ActiveCall cancel={cancelCall} />
+        </Backdrop>
+      )}
     </>
   );
 };

@@ -15,7 +15,6 @@ const MidPath = () => {
 const ActivityHistory = ({ width, left, last }: any) => {
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
-  console.log(hover);
   const ref: any = useRef();
   return (
     <>

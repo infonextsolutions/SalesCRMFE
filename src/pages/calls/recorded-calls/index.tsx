@@ -43,7 +43,6 @@ const Dummy = [
 ];
 
 const Calls = () => {
-
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
@@ -65,7 +64,7 @@ const Calls = () => {
           },
         ]}
       />
-      <CallsContainer dummy1={DUMMY} dummy2={dummy}/>
+      <CallsContainer dummy1={DUMMY} dummy2={dummy} />
     </div>
   );
 };

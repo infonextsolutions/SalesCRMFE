@@ -445,7 +445,6 @@ const LeadContainer = ({
     }
   };
 
-  console.log(LeadData);
 
   const [w, setW] = useState(0);
   const wRef: any = useRef();
@@ -455,13 +454,11 @@ const LeadContainer = ({
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log(w);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
-  console.log(hover);
   const ref: any = useRef();
-
+  console.log(LeadData)
   return (
     <>
       <div
@@ -684,7 +681,6 @@ const LeadContainer = ({
           <Events cancel={cancelEvents} />
         </Backdrop>
       )}
-
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <EmailPage cancel={cancelEmails} />

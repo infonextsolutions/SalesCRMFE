@@ -181,7 +181,6 @@ const EmailPage = ({ cancel }: any) => {
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
 
-  console.log(sender, title, content);
 
   const submit = (e1: any, e2: any, e3: any) => {
     const url = "https://testsalescrm.nextsolutions.in/api/send-email";
@@ -191,7 +190,6 @@ const EmailPage = ({ cancel }: any) => {
       content: e3,
     };  
     axios.post(url, body).then((e) => {
-      console.log(e);
       cancel();
     });
   };
