@@ -370,6 +370,8 @@ const CallContainer = ({
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
   const dispatch = useDispatch();
+
+  console.log(CallData);
   return (
     <>
       <div className="flex">
