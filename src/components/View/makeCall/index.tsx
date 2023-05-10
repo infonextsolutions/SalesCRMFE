@@ -1,7 +1,9 @@
 import SimpleButton from "@/utils/Button/SimpleButton";
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
-const AddText = ({ top, title, width }: any) => {
+const AddText = ({ top, title, width, value, click }: any) => {
+  const [input, setInput] = useState<any>("");
   return (
     <div
       className="w-[100%] "
@@ -15,6 +17,10 @@ const AddText = ({ top, title, width }: any) => {
       </p>
       <div className="w-[100%] flex items-center justify-between">
         <input
+          value={value}
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
           type="text"
           className="w-[70%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
         />
@@ -25,6 +31,11 @@ const AddText = ({ top, title, width }: any) => {
             text={"Call"}
             left={20}
             right={0}
+            click={() => {
+              if (click) {
+                click(input);
+              }
+            }}
           />
         </div>
       </div>
@@ -33,6 +44,15 @@ const AddText = ({ top, title, width }: any) => {
 };
 
 const Notes = ({ cancel }: any) => {
+  const makecall = async (e: any) => {
+    const res = await axios.post(
+      "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+      {
+        callTo: e,
+      }
+    );
+    console.log(res);
+  };
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium   tracking-[1px]">
@@ -46,11 +66,24 @@ const Notes = ({ cancel }: any) => {
       </p>
       <div className="custom-scroll-black w-[100%] pb-[60px] overflow-y-auto ">
         <div>
-          <AddText top={"10px"} title="Phone" />
+          <AddText
+            top={"10px"}
+            title="Phone"
+            value="7669481778"
+            change={(e: any) => {}}
+            click={() => {
+              makecall("7669481778");
+            }}
+          />
           <p className="text-[14px] text-center text-[#8A9099] mt-[10px] font-medium">
             Or
           </p>
-          <AddText title="New Number" />
+          <AddText
+            title="New Number"
+            click={(e:any) => {
+              makecall(e);
+            }}
+          />
         </div>
         <div className="absolute right-[40px] bottom-[40px] mt-[130px] flex ">
           <SimpleButton

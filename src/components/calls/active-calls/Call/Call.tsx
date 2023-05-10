@@ -341,7 +341,7 @@ const CallContainer = ({
 
   const [w, setW] = useState(0);
   const wRef: any = useRef();
-
+  console.log(id)
   React.useEffect(() => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
@@ -351,6 +351,7 @@ const CallContainer = ({
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
+
   return (
     <>
       <div className="flex">
@@ -362,7 +363,7 @@ const CallContainer = ({
           <CallItem
             width={200}
             left={20}
-            text={CallData._id}
+            text={CallData.callId}
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/calling`}

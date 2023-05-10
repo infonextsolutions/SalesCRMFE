@@ -1,3 +1,4 @@
+import Recorded from "@/types/recorded-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import DualRange from "@/utils/dualRange";
 import Image from "next/image";
@@ -84,11 +85,11 @@ const Tracker = ({ title, color }: any) => {
   );
 };
 
-const Text = ({ top, title, width }: any) => {
+const Text = ({ top, title, width, src }: any) => {
   return (
     <>
       <div
-        className="w-[100%] "
+        className="w-[100%]"
         style={{
           width: width ? width : "100%",
           marginTop: top,
@@ -113,15 +114,15 @@ const Text = ({ top, title, width }: any) => {
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
           Link
         </p>
-        <p className="text-renal-blue text-[14px] font-medium mt-[6px]">
-          https://hello.productx.listen?link23456_1
-        </p>
+        <a href={src}  target={"_blank"} className="text-renal-blue text-[14px] font-medium mt-[6px] ">
+          {src.substring(0,50)}...
+        </a>
       </div>
     </>
   );
 };
 
-const FullCall = ({ cancel }: any) => {
+const FullCall = ({ cancel, data }: props) => {
   return (
     <div className="hide-scrollbar w-[100%]  px-[40px] py-[30px] h-[100%] overflow-y-auto relative ">
       <div
@@ -168,7 +169,7 @@ const FullCall = ({ cancel }: any) => {
           <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
         </div>
         <div className="w-[50%] h-[100%] px-[60px] py-[40px]">
-          <Text title={"Snippet Name"} top={20} />
+          <Text title={"Snippet Name"} top={20} src={data.RecordingUrl} />
         </div>
       </div>
     </div>
@@ -176,3 +177,8 @@ const FullCall = ({ cancel }: any) => {
 };
 
 export default FullCall;
+
+interface props {
+  data: Recorded;
+  cancel: () => void;
+}

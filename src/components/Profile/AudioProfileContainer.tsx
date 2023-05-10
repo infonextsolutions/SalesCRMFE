@@ -7,12 +7,14 @@ import Notes from "./AudioProfileDetails/Notes";
 import CallInfo from "./AudioProfileDetails/CallInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/store/UI";
+import Recorded from "@/types/recorded-call";
 
 const AudioProfileContainer = ({
   titles,
   current,
   info,
   check,
+  data,
   width,
 }: AudioProfileContainerProps) => {
   const activeTitle = useSelector((state: any) => state.ui.current);
@@ -22,6 +24,8 @@ const AudioProfileContainer = ({
     dispatch(setCurrent(childData));
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
+
+  console.log(data);
 
   return (
     <div
@@ -48,4 +52,5 @@ interface AudioProfileContainerProps {
   current: Number;
   [key: string]: any;
   check: Boolean;
+  data: Recorded;
 }

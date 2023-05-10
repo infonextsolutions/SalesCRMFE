@@ -7,10 +7,10 @@ import Script from "@/components/activeCalls/Script/index.";
 import RecordProfile from "@/components/Profile/RecordProfile";
 import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
-import MakeCall from '@/components/View/makeCall/index';
+import MakeCall from "@/components/View/makeCall/index";
 //Manya will make this page
 
-const AudioProfile = () => {
+const AudioProfile = ({data}:any) => {
   const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES", "QUESTIONNAIRE"];
 
   const [make, setCall] = useState(false);
@@ -23,6 +23,8 @@ const AudioProfile = () => {
       setBool(true);
     }, 500);
   };
+
+  console.log(data);
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
@@ -91,3 +93,16 @@ const AudioProfile = () => {
 };
 
 export default AudioProfile;
+
+export async function getServerSideProps({ query, params }: any) {
+  // "https://testsalescrm.nextsolutions.in/api/active-call/find-all"
+  const response = await axios.get(
+    `https://testsalescrm.nextsolutions.in/api/active-call/find-by-id?id=${params.id}`
+  );
+  return {
+    props: {
+      // TODO: Can do better error handling here by passing another property error in the component
+      data: response.data || {},
+    }, // will be passed to the page component as props
+  };
+}
