@@ -6,6 +6,7 @@ import Backdrop from "@/components/View/Backdrop";
 import ImportLead from "@/components/View/import-lead/Index";
 import AddLeadForm from "@/components/View/add-lead/addLead";
 import { CSVLink } from "react-csv";
+import * as XLSX from "xlsx";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -92,8 +93,19 @@ const SalesOpen = ({ data }: any) => {
 
   const ref: any = useRef();
 
+  const exportXLSX = () => {
+    const worksheet = XLSX.utils.json_to_sheet(data.result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, "DataSheet.xlsx");
+    console.log("exporting", data);
+  };
+
   const addExport = (e: any, e1: any) => {
-    if (e1 === 3) {
+    if (e1 === 0) {
+      exportXLSX()
     }
   };
 
@@ -151,9 +163,9 @@ const SalesOpen = ({ data }: any) => {
             light: true,
             click: addExport,
             list: [
-              { title: "Print", Icon: "Printer" },
+              // { title: "Print", Icon: "Printer" },
               { title: "Excel", Icon: "Excel" },
-              { title: "PDF", Icon: "PDF" },
+              // { title: "PDF", Icon: "PDF" },
               {
                 title: "CSV",
                 Icon: "CSV",
