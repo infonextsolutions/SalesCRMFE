@@ -63,7 +63,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       setpageCount(count);
       setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
     };
-
     getItems();
     setLoading(false);
   }, [limit, pageNumber, search]);
