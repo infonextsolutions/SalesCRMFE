@@ -9,7 +9,7 @@ import Spinner from "@/components/loader/spinner";
 import KanbanTable from "@/components/View/Tables/open/Kanban";
 
 const LeadsTable = React.lazy(
-  () => import("@/components/View/Tables/close/LeadsSearch")
+  () => import("@/components/View/Tables/open/LeadsSearch")
 );
 const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
@@ -66,7 +66,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
       ) : (
         <Suspense fallback={<Spinner />}>
           {/* <KanbanContainer list={list} /> */}
-          <KanbanTable totalRecords={records} search={search}/>
+          <KanbanTable totalRecords={records} search={search} />
         </Suspense>
       )}
     </div>
