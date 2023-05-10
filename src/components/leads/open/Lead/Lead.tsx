@@ -489,12 +489,12 @@ const LeadContainer = ({
             }}
           />
           <LeadItem
-            width={200}
+            width={150}
             left={20}
             textLeft={0}
             weight={500}
             color={"#000"}
-            text={LeadData._id}
+            text={LeadData.leadId}
             click={true}
             route={`${pathname}/${id}/lead-profile`}
           />

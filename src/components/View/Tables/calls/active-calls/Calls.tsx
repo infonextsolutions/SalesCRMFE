@@ -49,14 +49,10 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
         setItems(allItems);
       }
       const filtered = data.filter(
-        (e: Lead) =>
-          e.companyId?.company_name.includes(search) ||
-          e.customerId?.contact?.includes(search) ||
-          e.potential_deal_size?.includes(search) ||
-          e.leadStatus?.includes(search) ||
-          e.leadStage?.includes(search) ||
-          e.customerId?.email?.includes(search) ||
-          e.companyId?.company_website_url?.includes(search)
+        (e: ActiveCall) =>
+          e._id.includes(search) ||
+          e.call_title?.includes(search) ||
+          e.customerId.name?.includes(search)
       );
 
       // const filtered = data;
@@ -67,7 +63,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       setpageCount(count);
       setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
     };
-
     getItems();
     setLoading(false);
   }, [limit, pageNumber, search]);

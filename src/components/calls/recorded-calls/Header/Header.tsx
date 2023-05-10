@@ -31,7 +31,7 @@ const HeaderItem = ({ width, text, left, align, bold, color }: any) => {
   );
 };
 
-const Header = () => {
+const Header = ({ selectAll, win, deal, budget }: any) => {
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
