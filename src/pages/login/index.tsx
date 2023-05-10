@@ -46,7 +46,7 @@ const Login = () => {
           ) {
             dispatch(setUser1({ _id: id, User: name, Role: role }));
             dispatch(setLoggedInStatus(true));
-            router.replace("/sales/open");
+            // router.replace("/sales/open");
           }
         }
       } else if (logged === null) {
