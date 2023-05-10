@@ -5,6 +5,7 @@ import Transcript from "../Transcript/Transcript";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import useSound from "use-sound";
 import AudioPlayer from "./components/AudioPlayer";
+import Recorded from "@/types/recorded-call";
 const CallHolder = ({ click }: any) => {
   return (
     <div
@@ -125,7 +126,8 @@ const list = [
   },
 ];
 
-const Audio = () => {
+const Audio = ({data}:props) => {
+  console.log(data);
   return (
     <>
       {/* <div className="w-full relative p-[20px] ">
@@ -138,7 +140,7 @@ const Audio = () => {
       </div> */}
       {/* <CallPlayer /> */}
 
-      <AudioPlayer />
+      <AudioPlayer src={data.RecordingUrl}  />
       <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
         <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
           call data
@@ -173,3 +175,7 @@ const Audio = () => {
 };
 
 export default Audio;
+
+interface props{
+  data:Recorded
+}
