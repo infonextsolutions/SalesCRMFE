@@ -5,6 +5,8 @@ import React, { useRef } from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
 import { CSVLink } from "react-csv";
+import * as XLSX from "xlsx";
+
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -47,8 +49,19 @@ const Calls = ({ data }: any) => {
 
   const ref: any = useRef();
 
+  const exportXLSX = () => {
+    const worksheet = XLSX.utils.json_to_sheet(data.result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, "DataSheet.xlsx");
+    console.log("exporting", data);
+  };
+
   const addExport = (e: any, e1: any) => {
-    if (e1 === 3) {
+    if (e1 === 0) {
+      exportXLSX()
     }
   };
   return (
