@@ -1,9 +1,10 @@
 import Navigation from "@/components/app/Navigation";
 import CallsContainer from "@/components/calls/active-calls/Container/Container";
 import DUMMY from "@/shared/dummy";
-import React from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
+import { CSVLink } from "react-csv";
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -43,6 +44,13 @@ const Dummy = [
 ];
 
 const Calls = ({ data }: any) => {
+
+  const ref: any = useRef();
+
+  const addExport = (e: any, e1: any) => {
+    if (e1 === 3) {
+    }
+  };
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
@@ -54,11 +62,20 @@ const Calls = ({ data }: any) => {
             id: 1,
             icon: "Download",
             light: true,
+            click: addExport,
             list: [
               { title: "Print", Icon: "Printer" },
               { title: "Excel", Icon: "Excel" },
               { title: "PDF", Icon: "PDF" },
-              { title: "CSV", Icon: "CSV" },
+              {
+                title: "CSV",
+                Icon: "CSV",
+                wrapper: (
+                  <CSVLink data={data.result} className="" ref={ref}>
+                    CSV
+                  </CSVLink>
+                ),
+              },
             ],
           },
         ]}
