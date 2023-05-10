@@ -1,5 +1,6 @@
 import { setCurrent } from "@/store/UI";
 import Call, { CompanyId, CustomerId } from "@/types/Calls";
+import { ActiveCall } from "@/types/active-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -346,11 +347,6 @@ const ParticipantsHover = ({ last, bounding }: any) => {
 
 const CallContainer = ({
   id,
-  company,
-  customer,
-  leadStage,
-  leadStatus,
-  custom,
   CallData,
   last,
 }: CallProps) => {
@@ -409,7 +405,7 @@ const CallContainer = ({
             route={`/sales/open/${CallData._id}/lead-profile`}
             color={"#000"}
           />
-          <CallItem width={120} left={10} text={custom} color={"#000"} />
+          <CallItem width={120} left={10} text={"-"} color={"#000"} />
           <div
             className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
             style={{ width: 200, marginLeft: 20 }}
@@ -495,12 +491,7 @@ const CallContainer = ({
 export default CallContainer;
 
 interface CallProps {
-  company: CompanyId;
-  customer: CustomerId;
   id: String;
-  leadStage: String;
-  leadStatus: String;
-  custom: String;
-  CallData: Call;
+  CallData: ActiveCall;
   last: any;
 }

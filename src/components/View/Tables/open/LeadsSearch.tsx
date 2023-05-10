@@ -48,13 +48,10 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       }
       const filtered = data.filter(
         (e: Lead) =>
-          e.companyId?.company_name.includes(search) ||
-          e.customerId?.contact?.includes(search) ||
-          e.potential_deal_size?.includes(search) ||
-          e.leadStatus?.includes(search) ||
-          e.leadStage?.includes(search) ||
-          e.customerId?.email?.includes(search) ||
-          e.companyId?.company_website_url?.includes(search)
+          e.leadId?.includes(search) ||
+          e.lead_title?.includes(search) ||
+          e.companyId.company_name?.includes(search) ||
+          e.customer_name?.includes(search)
       );
 
       // const filtered = data;
@@ -77,13 +74,10 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     const data = res.data.result;
     const filtered = data.filter(
       (e: Lead) =>
-        e.companyId?.company_name.includes(search) ||
-        e.customerId?.contact?.includes(search) ||
-        e.potential_deal_size?.includes(search) ||
-        e.leadStatus?.includes(search) ||
-        e.leadStage?.includes(search) ||
-        e.customerId?.email?.includes(search) ||
-        e.companyId?.company_website_url?.includes(search)
+        e.leadId?.includes(search) ||
+        e.lead_title?.includes(search) ||
+        e.companyId.company_name?.includes(search) ||
+        e.customer_name?.includes(search)
     );
     settotalLeads(filtered.length);
     return filtered;
