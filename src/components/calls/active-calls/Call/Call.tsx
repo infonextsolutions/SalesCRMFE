@@ -1,4 +1,5 @@
 import Call, { CompanyId, CustomerId } from "@/types/Calls";
+import { ActiveCall } from "@/types/active-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -332,11 +333,6 @@ const ParticipantsHover = ({ last, bounding }: any) => {
 
 const CallContainer = ({
   id,
-  company,
-  customer,
-  leadStage,
-  leadStatus,
-  custom,
   CallData,
   last,
 }: CallProps) => {
@@ -364,9 +360,9 @@ const CallContainer = ({
         >
           <CallBox width={30} />
           <CallItem
-            width={130}
+            width={200}
             left={20}
-            text={"345345354335"}
+            text={CallData._id}
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/calling`}
@@ -375,18 +371,18 @@ const CallContainer = ({
             width={130}
             left={20}
             color={"#000"}
-            text={"Discussion on PX features"}
+            text={CallData.call_title}
             click={true}
           />
           <CallItem
             width={200}
             left={10}
-            text={CallData._id}
+            text={CallData.leadId?._id}
             click={true}
             route={`/sales/open/${CallData._id}/lead-profile`}
             color={"#000"}
           />
-          <CallItem width={120} left={10} text={custom} color={"#000"} />
+          <CallItem width={120} left={10} text={CallData?.leadId?.lead_title} color={"#000"} />
           <div
             className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
             style={{ width: 200, marginLeft: 20 }}
@@ -459,12 +455,7 @@ const CallContainer = ({
 export default CallContainer;
 
 interface CallProps {
-  company: CompanyId;
-  customer: CustomerId;
   id: String;
-  leadStage: String;
-  leadStatus: String;
-  custom: String;
-  CallData: Call;
+  CallData: ActiveCall;
   last: any;
 }

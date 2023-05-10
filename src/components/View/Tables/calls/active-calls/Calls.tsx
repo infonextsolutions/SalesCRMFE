@@ -4,6 +4,7 @@ import Header from "@/components/calls/active-calls/Header/Header";
 import CallContainer from "@/components/calls/active-calls/Call/Call";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
+import { ActiveCall } from "@/types/active-call";
 
 const CallsTable = ({ result, totalRecords }: TableProps) => {
   const totalLeads = totalRecords;
@@ -13,16 +14,11 @@ const CallsTable = ({ result, totalRecords }: TableProps) => {
     <>
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto overflow-y-hidden custom-scroll">
         <Header />
-        {Leads.map((item: Call, i: any) => {
+        {Leads.map((item: ActiveCall, i: any) => {
           return (
             <CallContainer
               key={item._id}
               id={item._id}
-              company={item.companyId}
-              customer={item.customerId}
-              leadStage={item.leadStage}
-              leadStatus={item.leadStatus}
-              custom={item.customer_name}
               CallData={item}
               last={Leads.length - 1 === i}
             />
