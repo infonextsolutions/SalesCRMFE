@@ -20,7 +20,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [limit, setLimit]: any = useState(10);
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
-  console.log(pageNumber)
+
   const getallItems = async (current: any) => {
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`

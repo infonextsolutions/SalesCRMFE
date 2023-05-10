@@ -15,6 +15,7 @@ const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
 
 const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
+  
   const [search, setSearch] = useState("");
   const onChange = (e: any) => {
     const val = e.target.value;

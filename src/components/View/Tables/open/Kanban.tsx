@@ -83,7 +83,6 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
         )} */}
 
         {stages.map((col, i) => {
-          console.log(items[0]);
           const res = items;
 
           if (res.length) {

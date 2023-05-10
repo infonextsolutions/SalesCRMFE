@@ -109,7 +109,6 @@ const KanbanItem = ({ item, i, Item }: any) => {
     }
 
   });
-  console.log(Item,"checcking")
   return (
     <>
       <div

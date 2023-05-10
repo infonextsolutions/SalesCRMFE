@@ -458,7 +458,6 @@ const LeadContainer = ({
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
-  console.log(LeadData)
   return (
     <>
       <div

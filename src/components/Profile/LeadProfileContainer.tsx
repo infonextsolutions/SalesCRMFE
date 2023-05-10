@@ -4,11 +4,13 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ActivityHistory from "./ProfileDetails/Lead/activity";
 import Attachements from "./ProfileDetails/Lead/attachements";
+import { LeadId } from "@/types/leadId";
 
 const LeadProfileContainer = ({
   titles,
   current,
   info,
+  data,
   width,
 }: LeadProfileContainerProps) => {
   const [activeTitle, setActiveTitle] = useState(0);
@@ -41,54 +43,46 @@ const LeadProfileContainer = ({
                 />
               </div>
               <div className="">
-                <p className="mt-[20px] text-[#3F434A] font-medium">
+                {/* <p className="mt-[20px] text-[#3F434A] font-medium">
                   Last Activity
                 </p>
                 <p className="text-[#595F69]">
                   {info[activeTitle].data.lastActivity}
-                </p>
+                </p> */}
                 <p className="mt-[20px] text-[#3F434A] font-medium">
                   Inquiry type
                 </p>
-                <p className="text-[#595F69]">
-                  {info[activeTitle].data.inquiryType}
-                </p>
+                <p className="text-[#595F69]">{data.inquiry}</p>
                 <p className="mt-[20px] text-[#3F434A] font-medium">
                   Product/Service Type
                 </p>
                 <p className="text-[#595F69]">
-                  {info[activeTitle].data.productType}
+                  {data.companyId.company_product_category}
                 </p>
                 <p className="mt-[20px] text-[#3F434A] font-medium">
                   Potential Deal Size
                 </p>
-                <p className="text-[#595F69]">
-                  {info[activeTitle].data.dealSize}
-                </p>
+                <p className="text-[#595F69]">{data.potential_deal_size}</p>
                 <p className="mt-[20px] text-[#3F434A] font-medium">
                   Existing Budget
                 </p>
-                <p className="text-[#595F69]">
-                  {info[activeTitle].data.budget}
-                </p>
+                <p className="text-[#595F69]">{data.existing_budget}</p>
                 <p className="mt-[20px] text-[#3F434A] font-medium">
                   Win Probability
                 </p>
-                <p className="text-[#595F69]">
-                  {info[activeTitle].data.winProb}
-                </p>
-                <p className="mt-[20px] text-[#3F434A] font-medium">
+                <p className="text-[#595F69]">{data.win_probability}</p>
+                {/* <p className="mt-[20px] text-[#3F434A] font-medium">
                   Next Action
                 </p>
                 <p className="text-[#595F69]">
                   {info[activeTitle].data.nextAction}
-                </p>
-                <p className="mt-[20px] text-[#3F434A] font-medium">
+                </p> */}
+                {/* <p className="mt-[20px] text-[#3F434A] font-medium">
                   Interested Product/Service Type
                 </p>
                 <p className="text-[#595F69]">
                   {info[activeTitle].data.interestedProductType}
-                </p>
+                </p> */}
               </div>
             </>
           )}
@@ -106,4 +100,5 @@ interface LeadProfileContainerProps {
   titles: any[] | any;
   current: Number;
   [key: string]: any;
+  data: LeadId;
 }
