@@ -1,6 +1,6 @@
 import Backdrop from "@/components/View/Backdrop/Center";
 import Notes from "@/components/View/Notes";
-import Lead, { CompanyId, CustomerId } from "@/types/Leads";
+import Lead, { CompanyId, CustomerId, Owner } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -302,13 +302,13 @@ const ExpandableRow = ({
       </div>
       <div className="w-[100px] ml-[50px]">
         <p className="text-[16px] text-[#000] font-medium">Lead Owners</p>
-        {LeadOwners.map((item: any, i: any) => {
+        {LeadOwners.map((item: Owner, i: any) => {
           return (
             <p
               key={i}
               className="text-[#8A9099] font-medium mt-[2px] text-[14px] tracking-wide"
             >
-              {item}
+              {item.name}
             </p>
           );
         })}
@@ -458,7 +458,6 @@ const LeadContainer = ({
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
-  console.log(LeadData)
   return (
     <>
       <div
@@ -490,20 +489,20 @@ const LeadContainer = ({
             }}
           />
           <LeadItem
-            width={120}
+            width={200}
             left={20}
             textLeft={0}
             weight={500}
             color={"#000"}
-            text={"12XXXX"}
+            text={LeadData._id}
             click={true}
             route={`${pathname}/${id}/lead-profile`}
           />
           <LeadItem
-            width={150}
+            width={250}
             left={0}
             color={"#000"}
-            text={custom}
+            text={LeadData.lead_title}
             click={true}
             route={`${pathname}/${id}/lead-profile`}
           />
@@ -583,7 +582,7 @@ const LeadContainer = ({
             width={130}
             left={20}
             upperText={"Email Sent"}
-            bottomText={LeadData.last_activity}
+            bottomText={""}
           />
           <LeadItemMultiple
             width={150}
@@ -635,14 +634,21 @@ const LeadContainer = ({
       >
         {detailShow && (
           <ExpandableRow
+            // leadDesc={
+            //   "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
+            // }
             leadDesc={
-              "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
+              LeadData.lead_description
             }
+            // companyDesc={
+            //   "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
+            // }
             companyDesc={
-              "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
+              LeadData.companyId.company_description
             }
-            companyWebsite={"www.abccorp.in"}
-            LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
+            companyWebsite={LeadData.companyId.company_website_url}
+            // LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
+            LeadOwners={LeadData.owners}
             otherContacts={[
               { name: "Regina Cooper", position: "Project Manager" },
               { name: "Suman A.", position: "Sales Manager" },

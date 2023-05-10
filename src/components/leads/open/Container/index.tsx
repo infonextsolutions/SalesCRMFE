@@ -66,7 +66,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
       ) : (
         <Suspense fallback={<Spinner />}>
           {/* <KanbanContainer list={list} /> */}
-          <KanbanTable totalRecords={records} search={search}/>
+          <KanbanTable totalRecords={records} search={search} />
         </Suspense>
       )}
     </div>

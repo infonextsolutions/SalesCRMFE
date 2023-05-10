@@ -1,12 +1,14 @@
 import Backdrop from "@/components/View/Backdrop/Center";
 import Notes from "@/components/View/Notes";
-import Lead, { CompanyId, CustomerId } from "@/types/Leads";
+import { CompanyId, CustomerId } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Events from "@/components/View/Event/Events";
+import Lead from "@/types/teams";
+
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -199,11 +201,6 @@ const QuickActions = ({ width, left, notes, events }: any) => {
 const LeadContainer = ({
   index,
   id,
-  company,
-  customer,
-  leadStage,
-  leadStatus,
-  custom,
   LeadData,
   selectAll,
   last,
@@ -330,12 +327,7 @@ const LeadContainer = ({
 export default LeadContainer;
 
 interface LeadProps {
-  company: CompanyId;
-  customer: CustomerId;
   id: String;
-  leadStage: String;
-  leadStatus: String;
-  custom: String;
   LeadData: Lead;
   index: Number;
   selectAll: any;

@@ -1,14 +1,19 @@
 import React from "react";
-import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
+import {
+  getBasicIcon,
+  getRoundedAvatar,
+  parseDateString,
+} from "@/utils/AssetsHelper";
 import Image from "next/image";
+import { LeadId } from "@/types/leadId";
 
-const ProfilePage = () => {
+const ProfilePage = ({ data }: props) => {
   return (
     <div className="">
       <div className="flex -space-x-2 overflow-hidden">
         <div className="flex items-center w-[100%] border-gray-300 justify-between border-b-[1px] pb-[30px] pt-[20px] ">
           <Image
-            className="inline-block w-[50px] rounded-full ring-2 ring-white"
+            className="inline-block w-[60px] translate-y-[-10px] rounded-full ring-2 ring-white"
             src={getRoundedAvatar(5, 30)}
             alt=""
             width={60}
@@ -17,12 +22,12 @@ const ProfilePage = () => {
               objectFit: "contain",
             }}
           />
-          <div className="flex items-center justify-center flex-col">
-            <h2 className="text-[20px] whitespace-nowrap leading-7 tracking-wide text-[#000] capitalize -900 font-medium">
-              Lead-XYZ info
+          <div className="flex items-center justify-center flex-col pl-[10px] pr-[20px]">
+            <h2 className="text-[15px] leading-[20px] text-center  tracking-wide text-[#000] capitalize -900 font-medium">
+              {data.lead_title}
             </h2>
-            <p className="block  py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
-              LEAD-ID123456
+            <p className="block cursor-pointer py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
+              LEAD-{data._id.substring(0, 10)}
             </p>
           </div>
           <div className="w-[40px] h-[100%] flex items-center justify-center">
@@ -43,19 +48,17 @@ const ProfilePage = () => {
       <h3 className="text-sm font-medium mt-5 ml-2 text-black">COMPANY INFO</h3>
       <ul className="mt-2 mb-10 ml-[1px]">
         <li className="px-2 mt-4">
-          <strong className="font-medium text-sm mr-1 text-[#000] -500">
+          <strong className="font-medium text-[12px]  mr-1 text-[#8A9099] -500">
             COMPANY NAME
           </strong>
-          <a href="name" className="block text-black">
-            ABC Corp
-          </a>
+          <p className="block text-black">{data.companyId.company_name}</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium text-sm mr-1 text-[#000] -500">
             WEBSITE LINK
           </strong>
           <span className="block text-black">
-            <a href="https://www.example.com">www.example.com</a>
+            <p> {data.companyId.company_website_url}</p>
           </span>
         </li>
         <li className="px-2 mt-4">
@@ -100,35 +103,35 @@ const ProfilePage = () => {
       <ul className="mt-2 mb-10 ml-1">
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Stage</strong>
-          <p className="block text-[#000] ">Enquiry</p>
+          <p className="block text-[#000] ">{data.leadStage}</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Status</strong>
-          <p className="block text-[#000] ">Contacted</p>
+          <p className="block text-[#000] ">{data.leadStatus}</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">Lead Source</strong>
-          <p className="block text-[#000] ">Website</p>
+          <p className="block text-[#000] ">{data.source}</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Owner(Primary)
           </strong>
           <span className="block text-[#000] ">
-            <p>Aarti.S</p>
+            <p>{data.owners[0].name}</p>
           </span>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Owner(Secondary)
           </strong>
-          <p className="block text-[#000] ">Raghav V. Ajay P.</p>
+          <p className="block text-[#000] "> {data.owners[1].name}</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
             Lead Created By
           </strong>
-          <p className="block text-[#000] ">-</p>
+          <p className="block text-[#000] ">{data.created_by}</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium mr-1 text-black">
@@ -351,71 +354,13 @@ const ProfilePage = () => {
           </div>
         </li>
       </ul>
-      <div className="py-2"></div>
-      <ul
-        role="list"
-        className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-      >
-        <li>
-          <div className="flex items-center gap-x-3 mr-3">
-            <Image
-              className="h-12 w-10 rounded-full ml-2"
-              src={getRoundedAvatar(4, 30)}
-              alt=""
-              width={64}
-              height={48}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-            <div>
-              <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                Reginacooper
-              </h4>
-              <a
-                href="#0"
-                className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
-              >
-                Project Lead
-              </a>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div className="py-2"></div>
-      <ul
-        role="list"
-        className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-      >
-        <li>
-          <div className="flex items-center gap-x-3 mr-3">
-            <Image
-              className="h-12 w-10 rounded-full ml-2"
-              src={getRoundedAvatar(3, 30)}
-              alt=""
-              width={64}
-              height={48}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-            <div>
-              <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                Judith
-              </h4>
-              <a
-                href="#0"
-                className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
-              >
-                HR
-              </a>
-            </div>
-          </div>
-        </li>
-      </ul>
       <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
     </div>
   );
 };
 
 export default ProfilePage;
+
+interface props {
+  data: LeadId;
+}
