@@ -49,16 +49,23 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
   //     "callId":"34567890876546788"
   // }
 
+  console.log(data);
+
   const transcriptUpdate = async () => {
     const res = await axios.post(
       "https://testsalescrm.nextsolutions.in/api/audio-transcript/create/by-audio-url",
       {
         audio_url: src,
-        leadId: data.leadId,
-        callId: data.Sid,
+        leadId: data.leadId._id,
+        callId: data._id,
       }
     );
-    console.log(res.data.message);
+    console.log( {
+      audio_url: src,
+      leadId: data.leadId._id,
+      callId: data._id,
+    })
+    console.log(res.data)
   };
   React.useEffect(() => {
     transcriptUpdate();

@@ -1,3 +1,4 @@
+import { ActiveCall } from "@/types/active-call";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import React, { useState } from "react";
@@ -43,15 +44,18 @@ const AddText = ({ top, title, width, value, click }: any) => {
   );
 };
 
-const Notes = ({ cancel }: any) => {
+const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
   const makecall = async (e: any) => {
     console.log(e);
     const res = await axios.post(
       "https://testsalescrm.nextsolutions.in/api/calling/make-call",
       {
         callTo: e,
+        leadId:data._id
       }
     );
+    console.log(res.data);
+
   };
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
@@ -80,7 +84,7 @@ const Notes = ({ cancel }: any) => {
           </p>
           <AddText
             title="New Number"
-            click={(e:any) => {
+            click={(e: any) => {
               makecall(e);
             }}
           />

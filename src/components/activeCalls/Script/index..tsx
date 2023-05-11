@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import { getBasicIcon } from "@/utils/AssetsHelper";
@@ -75,7 +75,13 @@ const ScriptDoc = ({ title, docName, List, size, data }: any) => {
   );
 };
 
-const ScriptList = ({ data ,moredata}: {data:any,moredata:ActiveCall}) => {
+const ScriptList = ({
+  data,
+  moredata,
+}: {
+  data: any;
+  moredata: ActiveCall;
+}) => {
   const [activeTitle, setActiveTitle] = React.useState(0);
   function CallBack(childData: any) {
     setActiveTitle(childData);
@@ -102,7 +108,13 @@ const ScriptList = ({ data ,moredata}: {data:any,moredata:ActiveCall}) => {
     <>
       {uploads && (
         <Backdrop bool={bool}>
-          <Uploads cancel={cancelUploads} id={moredata._id} leadId={moredata.leadId} />
+          <Uploads
+            cancel={cancelUploads}
+            id={moredata._id}
+            leadId={moredata.leadId._id}
+            
+            owners={moredata.leadId.owners[0]}
+          />
         </Backdrop>
       )}
       <div className="w-[100%] p-[30px]">
@@ -145,26 +157,16 @@ const ScriptList = ({ data ,moredata}: {data:any,moredata:ActiveCall}) => {
   );
 };
 
-const Script = ({ data }: { data: ActiveCall }) => {
+const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   const [activeTitle, setActiveTitle] = React.useState(0);
 
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
-
-  const [currScripts, setCurrScripts] = useState([]);
+  console.log(scripts.results);
+  const [currScripts, setCurrScripts] = useState<any[]>(scripts.result);
   const [selected, setSelected] = useState(false);
-
-  const getScript = async () => {
-    const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/call-script/active-call?activeCallId=${data._id}`
-    );
-    setCurrScripts(res.data.result);
-  };
-
-  React.useEffect(() => {
-    getScript();
-  });
+  console.log(currScripts);
 
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
