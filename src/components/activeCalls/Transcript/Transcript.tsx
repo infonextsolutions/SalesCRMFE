@@ -50,7 +50,6 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
   // }
 
   console.log(data);
-
   const transcriptUpdate = async () => {
     const res = await axios.post(
       "https://testsalescrm.nextsolutions.in/api/audio-transcript/create/by-audio-url",
@@ -67,6 +66,7 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
     })
     console.log(res.data)
   };
+  
   React.useEffect(() => {
     transcriptUpdate();
   });

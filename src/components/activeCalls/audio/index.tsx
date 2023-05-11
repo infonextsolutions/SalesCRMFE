@@ -129,8 +129,6 @@ const list = [
 const Audio = ({data}:props) => {
   console.log(data);
 
-
-
   return (
     <>
       {/* <div className="w-full relative p-[20px] ">
