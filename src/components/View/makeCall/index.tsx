@@ -52,7 +52,6 @@ const Notes = ({ cancel }: any) => {
         callTo: e,
       }
     );
-    console.log(res);
   };
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
