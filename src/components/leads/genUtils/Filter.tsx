@@ -2,6 +2,8 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import DualRange from "@/utils/dualRange";
 import Image from "next/image";
 import React, { useState } from "react";
+import SimpleButton from "@/utils/Button/SimpleButton";
+
 
 const AddText = ({ top, title, width, list }: any) => {
   return (
@@ -14,7 +16,7 @@ const AddText = ({ top, title, width, list }: any) => {
       <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
         {title}
       </p>
-      <div className="w-[100%] px-[10px] border-[1px]   rounded-xl border-[#ccc]">
+      <div className="w-[100%] px-[10px] border-[1px]  rounded-xl border-[#ccc]">
         <select
           id="countries"
           className="outline-none cursor-pointer capitalize text-gray-900 py-[7px]   text-sm tracking-wide text-[#3F434A] font-medium  block w-full bg-white"
@@ -103,7 +105,7 @@ const Filter = ({ cancel, left, top }: any) => {
 
   return (
     <div
-      className="w-[400px] rounded-lg shadow-2xl min-h-[400px] bg-[#fff] py-[10px] px-[20px] absolute"
+      className="w-[400px] rounded-lg shadow-2xl min-h-[400px]  bg-[#fff] py-[10px] px-[20px] absolute"
       style={{
         zIndex: 99999999999,
         top: top,
@@ -266,6 +268,24 @@ const Filter = ({ cancel, left, top }: any) => {
       />
       <DualRange title={"Deal Size"} />
       <DualRange title={"Existing"} />
+      <div className="w-[100%] mt-[30px] text-[#ffffff] flex ">
+        <SimpleButton
+          theme={1}
+          text={"Save"}
+          left={0}
+          right={0}
+          click={() => {}}
+        />
+        <SimpleButton
+          theme={2}
+          text={"Cancel"}
+          left={20}
+          right={0}
+          click={() => {
+            cancel();
+          }}
+        />
+      </div>
     </div>
   );
 };

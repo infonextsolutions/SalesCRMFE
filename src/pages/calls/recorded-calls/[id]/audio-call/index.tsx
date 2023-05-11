@@ -71,8 +71,10 @@ const CallProfile = ({ data }: any) => {
             light: false,
             click: addCall,
             list: [
-              { title: "Full Call", Icon: "Phone" },
-              { title: "Call Snippet", Icon: "Mail" },
+
+              { title: "Full Call"},
+              { title: "Call Snippet" }
+
             ],
           },
         ]}

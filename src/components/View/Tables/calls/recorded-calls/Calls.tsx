@@ -421,7 +421,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
             Showing 1-10 of 100
           </p>
         </div>
-        <div className="flex mr-[10%]">
+        <div className="flex mr-[10%] text-[#fff] ">
           <SmallButton leftDblIcon={true} theme={2} left={10} />
           <SmallButton leftIcon={true} theme={2} left={10} />
           <SmallButton text={"1"} theme={1} left={10} />

@@ -296,7 +296,7 @@ const Events = ({ cancel }: any) => {
         top={20}
         list={[
           {
-            title: "Choose Outcome",
+            title: "Choose Type",
             val: 0,
             selected: true,
           },
@@ -326,7 +326,7 @@ const Events = ({ cancel }: any) => {
         top={20}
         list={[
           {
-            title: "Choose Outcome",
+            title: "Choose Type",
             val: 0,
             selected: true,
           },

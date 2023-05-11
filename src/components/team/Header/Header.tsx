@@ -52,7 +52,7 @@ const Header = ({ selectAll }: any) => {
         <HeaderCheckBox
           width={30}
           click={() => {
-            // selectAll();
+          // selectAll();
           }}
         />
         <HeaderItem width={120} left={20} text={"Team member"} />

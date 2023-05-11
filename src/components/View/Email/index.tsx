@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 const AddText = ({ title, place }: any) => {
   return (
-    <div className="w-[100%] mb-[15px]">
+    <div className="w-[100%] mb-[15px] hide-scrollbar overflow-x-auto">
       <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
         {title}
       </p>
