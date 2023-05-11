@@ -1,13 +1,6 @@
 import SimpleButton from "@/utils/Button/SimpleButton";
-
-import React from "react";
-import { getBasicIcon } from "@/utils/AssetsHelper";
-import Image from "next/image";
-
-
 import axios from "axios";
 import React, { useState } from "react";
-
 
 const AddText = ({ top, title, width, change }: any) => {
   return (
@@ -22,11 +15,8 @@ const AddText = ({ top, title, width, change }: any) => {
         {title}*
       </p>
 
-      
- {title === "Description" ? (
-        <textarea
-          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[120px] outline-none resize-none"
-        ></textarea>
+      {title === "Description" ? (
+        <textarea className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[120px] outline-none resize-none"></textarea>
       ) : (
         <input
           type="text"
@@ -40,7 +30,6 @@ const AddText = ({ top, title, width, change }: any) => {
         type="text"
         className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
       />
-
     </div>
   );
 };
@@ -60,10 +49,6 @@ const TextBox = ({ title, place }: any) => {
     </div>
   );
 };
-
-
-
-const Notes = ({ cancel }: any) => {
 
 const Notes = ({ cancel, leadid }: any) => {
   const [title, setTitle] = useState("");
@@ -91,7 +76,7 @@ const Notes = ({ cancel, leadid }: any) => {
           <AddText top={"10px"} title="Note Title" />
           <TextBox title="Description" place={"Type something"} />
           <AddText top={"10px"} title="Lead ID" />
-          <AddText top={"10px"} title="Date"/>
+          <AddText top={"10px"} title="Date" />
 
           <AddText
             top={"10px"}
@@ -132,25 +117,22 @@ const Notes = ({ cancel, leadid }: any) => {
         </div>
       </div>
 
-
       <div className="absolute right-[160px]  flex ">
-    <SimpleButton
-      theme={2}
-      text={"Cancel"}
-      left={20}
-      right={0}
-      click={() => {
-        cancel();
-      }}
-    />
-  </div>
-  <div className="absolute right-[40px]  flex ">
-    <SimpleButton theme={1} text={"Create"} left={20} right={0} />
-  </div>
+        <SimpleButton
+          theme={2}
+          text={"Cancel"}
+          left={20}
+          right={0}
+          click={() => {
+            cancel();
+          }}
+        />
+      </div>
+      <div className="absolute right-[40px]  flex ">
+        <SimpleButton theme={1} text={"Create"} left={20} right={0} />
+      </div>
     </div>
   );
 };
-
-
 
 export default Notes;
