@@ -45,6 +45,7 @@ const AddText = ({ top, title, width, value, click }: any) => {
 
 const Notes = ({ cancel }: any) => {
   const makecall = async (e: any) => {
+    console.log(e);
     const res = await axios.post(
       "https://testsalescrm.nextsolutions.in/api/calling/make-call",
       {
