@@ -81,7 +81,6 @@ const Transcript = () => {
   const [Arrr, setArr] = useState<any>(arrr);
 
   const [input, setInput] = useState("");
-  console.log(input);
   return (
     <div>
       <Search

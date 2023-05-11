@@ -7,6 +7,7 @@ import ImportLead from "@/components/View/import-lead/Index";
 import AddLeadForm from "@/components/View/add-lead/addLead";
 import { CSVLink } from "react-csv";
 import axios from "axios";
+import * as XLSX from "xlsx";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -92,25 +93,30 @@ const SalesOpen = ({ data }: props) => {
   };
   const ref: any = useRef();
 
-  const exportCSV = () => {};
+  const exportXLSX = () => {
+    const worksheet = XLSX.utils.json_to_sheet(data.result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, "DataSheet.xlsx");
+    console.log("exporting", data);
+  };
 
   const makecall = async () => {
-    const res = await axios.post("https://testsalescrm.nextsolutions.in/api/calling/make-call", {
-      callTo: "7669481778",
-    });
-    console.log(res,"only check here!");
+    const res = await axios.post(
+      "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+      {
+        callTo: "7669481778",
+      }
+    );
   };
 
   const addExport = (e: any, e1: any) => {
-    if (e1 === 3) {
-      console.log("exorting");
-      exportCSV();
-    } else if (e1 === 1) {
-      console.log("running");
-      makecall();
+    if (e1 === 0) {
+      exportXLSX();
     }
   };
-  console.log(data);
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
@@ -167,9 +173,9 @@ const SalesOpen = ({ data }: props) => {
             light: true,
             click: addExport,
             list: [
-              { title: "Print", Icon: "Printer" },
+              // { title: "Print", Icon: "Printer" },
               { title: "Excel", Icon: "Excel" },
-              { title: "PDF", Icon: "PDF" },
+              // { title: "PDF", Icon: "PDF" },
               {
                 title: "CSV",
                 Icon: "CSV",

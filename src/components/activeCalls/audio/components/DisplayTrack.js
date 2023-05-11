@@ -4,6 +4,7 @@ import { BsMusicNoteBeamed } from "react-icons/bs";
 const DisplayTrack = ({
   currentTrack,
   audioRef,
+  src,
   setDuration,
   progressBarRef,
   handleNext,
@@ -17,11 +18,11 @@ const DisplayTrack = ({
   React.useEffect(()=>{
     onLoadedMetadata();
   })
-
+  console.log(src)
   return (
     <div>
       <audio
-        src={currentTrack.src}
+        src={src}
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={handleNext}

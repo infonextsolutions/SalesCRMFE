@@ -91,3 +91,9 @@ export const RightDoubleArrow = ({ renal }: any) => {
     </>
   );
 };
+
+export function parseDateString(dateString:any) {
+  const date = dateString ? new Date(dateString) : new Date();
+  const options:any = { month: 'long', day: 'numeric', year: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+}

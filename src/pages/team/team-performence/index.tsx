@@ -63,6 +63,7 @@ export default function Open({ data }: any) {
       }
     }
   }, [state.isLoggedIn, logged]);
+  console.log(data);
 
   return (
     <>
@@ -79,14 +80,16 @@ export default function Open({ data }: any) {
   );
 }
 
+
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/leads/find-all"
+    "https://testsalescrm.nextsolutions.in/api/lead-report/find-all?page=0&limit=10"
   );
+  console.log(response.data)
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
+      data:response.data || {},
     }, // will be passed to the page component as props
   };
 }

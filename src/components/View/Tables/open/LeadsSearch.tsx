@@ -48,13 +48,10 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       }
       const filtered = data.filter(
         (e: Lead) =>
-          e.companyId?.company_name.includes(search) ||
-          e.customerId?.contact?.includes(search) ||
-          e.potential_deal_size?.includes(search) ||
-          e.leadStatus?.includes(search) ||
-          e.leadStage?.includes(search) ||
-          e.customerId?.email?.includes(search) ||
-          e.companyId?.company_website_url?.includes(search)
+          e.leadId?.includes(search) ||
+          e.lead_title?.includes(search) ||
+          e.companyId.company_name?.includes(search) ||
+          e.customer_name?.includes(search)
       );
 
       // const filtered = data;
@@ -77,13 +74,10 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     const data = res.data.result;
     const filtered = data.filter(
       (e: Lead) =>
-        e.companyId?.company_name.includes(search) ||
-        e.customerId?.contact?.includes(search) ||
-        e.potential_deal_size?.includes(search) ||
-        e.leadStatus?.includes(search) ||
-        e.leadStage?.includes(search) ||
-        e.customerId?.email?.includes(search) ||
-        e.companyId?.company_website_url?.includes(search)
+        e.leadId?.includes(search) ||
+        e.lead_title?.includes(search) ||
+        e.companyId.company_name?.includes(search) ||
+        e.customer_name?.includes(search)
     );
     settotalLeads(filtered.length);
     return filtered;
@@ -137,7 +131,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       A = A.slice(0, -1);
       let B = b.win_probability;
       B = B.slice(0, -1);
-      console.log(A, B);
       return Number(A) - Number(B);
     });
     if (sortWins === null) {
@@ -214,8 +207,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
             setSelectAll(!selectAll);
           }}
           win={() => {
-            console.log("win");
-            console.log(Leads);
             const wins = [];
             for (let i = 0; i < Leads.length; i++) {
               const str = Leads[i].win_probability;
@@ -241,7 +232,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               const str = Leads[i].existing_budget;
               budget.push(Number(str));
             }
-            console.log(sortArray(budget));
             setItems(sortbudget(Leads));
           }}
         />

@@ -1,3 +1,5 @@
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 import React from "react";
 
 const HeaderCheckBox = ({ width, click }: any) => {
@@ -17,25 +19,47 @@ const HeaderCheckBox = ({ width, click }: any) => {
   );
 };
 
-const HeaderItem = ({ width, text, left, align }: any) => {
+const HeaderItem = ({
+  width,
+  text,
+  left,
+  align,
+  sort,
+  onClick,
+  showArrowDown,
+}: any) => {
   return (
     <div
       className={`flex items-center  h-[20px] shrink-0`}
       style={{ width: width, marginLeft: left }}
     >
       <p
-        className="text-[#8A9099] uppercase text-[12px] font-medium tracking-wider w-[100%]"
+        className="text-[#8A9099] uppercase text-[12px] font-medium tracking-wider"
         style={{
           textAlign: align && "center",
         }}
       >
         {text}
       </p>
+      {showArrowDown && (
+        <Image
+          src={getBasicIcon("Arrow Down 3")}
+          width={20}
+          className="ml-[3px] cursor-pointer"
+          height={20}
+          alt=""
+          onClick={() => {
+            if (onClick) {
+              onClick();
+            }
+          }}
+        />
+      )}
     </div>
   );
 };
 
-const Header = ({ selectAll }: any) => {
+const Header = ({ selectAll, win, deal, budget }: any) => {
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
@@ -45,11 +69,16 @@ const Header = ({ selectAll }: any) => {
             selectAll();
           }}
         />
+
         <HeaderItem width={120} left={70} text={"LEAD ID"} />
         <HeaderItem width={150} left={0} text={"Lead Title"} />
+
+        <HeaderItem width={200} left={70} text={"LEAD ID"} />
+        <HeaderItem width={250} left={0} text={"Lead title"} />
+
         <HeaderItem width={130} left={20} text={"COMPANY NAME"} />
         <HeaderItem width={110} left={10} text={"CLIENT POC"} />
-        <HeaderItem width={150} left={20} text={"EMAIL"} />
+        <HeaderItem width={190} left={20} text={"EMAIL"} />
         <HeaderItem width={130} left={20} text={"PHONE"} />
         <HeaderItem width={120} text={"Quick Actions"} />
         <HeaderItem width={150} left={20} text={"more contacts"} />
@@ -58,16 +87,44 @@ const Header = ({ selectAll }: any) => {
         <HeaderItem width={120} left={20} text={"owner"} />
         <HeaderItem width={150} left={10} text={"lead inquiry"} />
         <HeaderItem width={150} left={10} text={"product/service"} />
-        <HeaderItem width={180} left={0} text={"activity history"} align={true} />
+        <HeaderItem
+          width={180}
+          left={0}
+          text={"activity history"}
+          align={true}
+        />
         <HeaderItem width={130} left={20} text={"last activity"} />
         <HeaderItem width={150} left={10} text={"next action/date"} />
-        <HeaderItem width={150} left={10} text={"win probability"} />
-        <HeaderItem width={140} left={20} text={"deal size"} />
-        <HeaderItem width={150} left={10} text={"existing budget"} />
+        <HeaderItem
+          width={150}
+          left={10}
+          text={"win probability"}
+          onClick={() => {
+            win();
+          }}
+          showArrowDown={true}
+        />
+        <HeaderItem
+          width={140}
+          left={20}
+          text={"deal size"}
+          showArrowDown={true}
+          onClick={() => {
+            deal();
+          }}
+        />
+        <HeaderItem
+          width={150}
+          left={10}
+          text={"existing budget"}
+          showArrowDown={true}
+          onClick={() => {
+            budget();
+          }}
+        />
         <HeaderItem width={150} left={10} text={"lead source"} />
         {/* <HeaderItem width={150} left={10} text={"close date"} /> */}
         <HeaderItem width={150} left={20} text={"notes"} />
-        <HeaderItem width={150} left={10} text={"close date"} />
       </div>
     </div>
   );

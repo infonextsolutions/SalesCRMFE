@@ -1,9 +1,10 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import axios from "axios";
 import Image from "next/image";
 import React from "react";
 
-const DropItems = ({ title, list, top }: any) => {
+const DropItems = ({ title, list, top, change }: any) => {
   return (
     <div
       className="w-[100%]"
@@ -16,6 +17,9 @@ const DropItems = ({ title, list, top }: any) => {
       </p>
       <select
         id="countries"
+        onChange={(e: any) => {
+          change(e.target.value);
+        }}
         className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
       >
         {list.map((item: any, i: any) => {
@@ -30,13 +34,16 @@ const DropItems = ({ title, list, top }: any) => {
   );
 };
 
-const AddText = ({ title, place }: any) => {
+const AddText = ({ title, place, change }: any) => {
   return (
     <div className="w-[100%] mb-[15px]">
       <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
         {title}
       </p>
       <input
+        onChange={(e: any) => {
+          change(e.target.value);
+        }}
         className="w-[100%] h-[41px] rounded-[14px] bg-[#D9D9D954] text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
         type="text"
         name=""
@@ -160,7 +167,6 @@ const Time = () => {
         >
           {arr.map((item: any, i: any) => {
             const check = selected === i;
-            console.log(selected, i, check);
             return (
               <div className="w-[100%] relative cursor-pointer" key={i}>
                 {check && (
@@ -182,7 +188,6 @@ const Time = () => {
                     color: check ? "#304FFD" : "#000",
                   }}
                   onClick={() => {
-                    console.log("is updating");
                     setSelected(i);
                     setShow(false);
                   }}
@@ -198,7 +203,7 @@ const Time = () => {
   );
 };
 
-const Date = () => {
+const DatePage = () => {
   return (
     <div className="w-[58%] h-[100%] cursor-pointer">
       <div className="w-[100%] h-[100%] overflow-hidden relative py-[7px] pl-[10px] px-[3px] flex items-center justify-center">
@@ -228,7 +233,7 @@ const DateTime = () => {
     <div className="w-[45%] border-[#ccc] flex  border-[1px] rounded-2xl h-[44px] ">
       <Time />
 
-      <Date />
+      <DatePage />
     </div>
   );
 };
@@ -246,7 +251,41 @@ const DateContainer = () => {
   );
 };
 
-const ActiveCall = ({ cancel }: any) => {
+const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
+  console.log(id);
+  function generateUniqueId() {
+    const timestamp: any = Date.now().toString(36); // Convert timestamp to base36 string
+    const randomNum = Math.random().toString(36).substr(2, 5); // Generate random number and take 5 characters starting from index 2
+    return `${timestamp}-${randomNum}`;
+  }
+  const [data, setData] = React.useState<any>({
+    callId: generateUniqueId(),
+    call_title: "Shraddha P.",
+    leadId: id,
+    companyId: companyId,
+    customerId: customerId,
+    call_date: Date,
+    call_start_time: getCurrentTimeInHours(),
+  });
+
+  function getCurrentTimeInHours() {
+    const date = new Date();
+    const hours = date.getHours();
+    return hours;
+  }
+
+  const submit = () => {
+    axios.post("https://testsalescrm.nextsolutions.in/api/active-call/create", {
+      ...data,
+      call_date: Date,
+      call_start_time: getCurrentTimeInHours(),
+    }).then((e:any)=>{
+      cancel()
+    })
+  };
+
+  console.log(data);
+
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
@@ -266,8 +305,20 @@ const ActiveCall = ({ cancel }: any) => {
           alt=""
         />
       </div>
-      <AddText title="Company Name*" place={"ABC Corp."} />
-      <AddText title="Call Title" place={"Shraddha P."} />
+      {/* <AddText
+        title="Company Name*"
+        place={"ABC Corp."}
+        change={(e: any) => {
+          setData({ ...data, });
+        }}
+      /> */}
+      <AddText
+        title="Call Title"
+        place={"Shraddha P."}
+        change={(e: any) => {
+          setData({ ...data, call_title: e });
+        }}
+      />
       <DateContainer />
       <DropItems
         title="Call Owner"
@@ -279,21 +330,24 @@ const ActiveCall = ({ cancel }: any) => {
             selected: true,
           },
           {
-            title: "Task",
-            val: 0,
+            title: "Shradha .P",
+            val: "Shradha .P",
             selected: false,
           },
           {
-            title: "Meeting",
-            val: 0,
+            title: "John. C",
+            val: "John .C",
             selected: false,
           },
           {
-            title: "Reminder",
-            val: 0,
+            title: "karla. C",
+            val: "karla. C",
             selected: false,
           },
         ]}
+        change={(e: any) => {
+          setData({ ...data });
+        }}
       />
       <DropItems
         title="Call  Participants"
@@ -305,24 +359,33 @@ const ActiveCall = ({ cancel }: any) => {
             selected: true,
           },
           {
-            title: "Task",
-            val: 0,
+            title: "Shradha .P",
+            val: "Shradha .P",
             selected: false,
           },
           {
-            title: "Meeting",
-            val: 0,
+            title: "John. C",
+            val: "John .C",
             selected: false,
           },
           {
-            title: "Reminder",
-            val: 0,
+            title: "karla. C",
+            val: "karla. C",
             selected: false,
           },
         ]}
+        change={(e: any) => {
+          setData({ ...data });
+        }}
       />
       <div className="w-[100%] flex justify-end mt-[20px]">
-        <SimpleButton theme={1} text={"Send"} left={20} right={0} />
+        <SimpleButton
+          theme={1}
+          click={submit}
+          text={"Send"}
+          left={20}
+          right={0}
+        />
       </div>
     </div>
   );

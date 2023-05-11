@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/close/Container";
 import Backdrop from "@/components/View/Backdrop";
 import ImportLead from "@/components/View/import-lead/Index";
 import AddLeadForm from "@/components/View/add-lead/addLead";
+import { CSVLink } from "react-csv";
+import * as XLSX from "xlsx";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -89,6 +91,24 @@ const SalesOpen = ({ data }: any) => {
     }
   };
 
+  const ref: any = useRef();
+
+  const exportXLSX = () => {
+    const worksheet = XLSX.utils.json_to_sheet(data.result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, "DataSheet.xlsx");
+    console.log("exporting", data);
+  };
+
+  const addExport = (e: any, e1: any) => {
+    if (e1 === 0) {
+      exportXLSX()
+    }
+  };
+
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
@@ -141,11 +161,20 @@ const SalesOpen = ({ data }: any) => {
             id: 1,
             icon: "Download",
             light: true,
+            click: addExport,
             list: [
-              { title: "Print", Icon: "Printer" },
+              // { title: "Print", Icon: "Printer" },
               { title: "Excel", Icon: "Excel" },
-              { title: "PDF", Icon: "PDF" },
-              { title: "CSV", Icon: "CSV" },
+              // { title: "PDF", Icon: "PDF" },
+              {
+                title: "CSV",
+                Icon: "CSV",
+                wrapper: (
+                  <CSVLink data={data.result} className="" ref={ref}>
+                    CSV
+                  </CSVLink>
+                ),
+              },
             ],
           },
         ]}

@@ -10,7 +10,6 @@ const Dashboard = React.lazy(() => import("@/views/Dashboard/index"));
 const DashboardPage = () => {
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
-  console.log("running");
 
 
   const dispatch = useDispatch();
