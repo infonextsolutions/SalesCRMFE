@@ -35,14 +35,14 @@ const Bars = ({ color }: any) => {
   );
 };
 
-const ChartItem = ({ down, chartColor,title }: any) => {
+const ChartItem = ({ deals, down, chartColor, title }: any) => {
   return (
     <div className="w-[280px] mr-[20px] rounded-2xl overflow-hidden h-[100%] bg-[#fff] flex ">
       <div className="w-[60%] flex flex-col px-[22px] py-[25px] h-[100%] ">
         <p className="text-[#8A9099] text-[16px]">{title}</p>
         <div className="w-[100%] flex items-center justify-between pl-[7px]">
           <p className="text-[29px] text-[#000] font-medium tracking-wider">
-            101
+            {deals}
           </p>
           <div className="flex items-center mb-[-12px] mr-[10px]">
             <Image
@@ -70,12 +70,27 @@ const ChartItem = ({ down, chartColor,title }: any) => {
   );
 };
 
-const Charts = () => {
+const Charts = ({ data }: any) => {
+  console.log(data.deals);
   return (
     <div className="w-[100%] mb-[20px] flex h-[120px]">
-      <ChartItem chartColor={"#304cfdś"} title={"Open Deals"} />
-      <ChartItem down={true} chartColor={"#49C96D"} title={"Close Deals"} />
-      <ChartItem down={true} chartColor={"#fd8983"} title={"Lost Deals"} />
+      <ChartItem
+        chartColor={"#304cfdś"}
+        title={"Open Deals"}
+        deals={data.deals.openDeals}
+      />
+      <ChartItem
+        down={true}
+        chartColor={"#49C96D"}
+        title={"Close Deals"}
+        deals={data.deals.closeDeals}
+      />
+      <ChartItem
+        down={true}
+        chartColor={"#fd8983"}
+        title={"Lost Deals"}
+        deals={data.deals.lostDeals}
+      />
     </div>
   );
 };

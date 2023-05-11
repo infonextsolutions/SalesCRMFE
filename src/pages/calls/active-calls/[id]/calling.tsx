@@ -84,7 +84,7 @@ const AudioProfile = ({data}:any) => {
           info={dummy.audioCallDetails}
         />
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
-          <Script />
+          <Script data={data.result}  />
         </div>
       </div>
       {/* write your code here for profile page manya! */}
