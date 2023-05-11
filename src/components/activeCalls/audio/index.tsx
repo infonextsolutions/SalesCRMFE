@@ -128,6 +128,9 @@ const list = [
 
 const Audio = ({data}:props) => {
   console.log(data);
+
+
+
   return (
     <>
       {/* <div className="w-full relative p-[20px] ">
@@ -169,7 +172,7 @@ const Audio = ({data}:props) => {
       <Tracker title={"John"} list={list} color={"#304FFD"} />
       <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
       <Tracker title={"Topics"} list={list} color={"#0090FF"} />
-      <Transcript />
+      <Transcript src={data.RecordingUrl} data={data} />
     </>
   );
 };

@@ -67,7 +67,6 @@ const Uploads = ({ cancel, leadId, id }: any) => {
     inputRef.current.click();
   };
 
-
   const submit = async () => {
     if (file) {
       const res = await axios.post(
