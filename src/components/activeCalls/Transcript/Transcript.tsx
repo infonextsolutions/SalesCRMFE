@@ -80,7 +80,7 @@ const Transcript = () => {
   ];
   const [Arrr, setArr] = useState<any>(arrr);
 
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<any>("");
   return (
     <div>
       <Search
@@ -116,9 +116,6 @@ const Transcript = () => {
       />
       <div className="w-full px-[22px] mt-[30px] bg-[#ccc] min-h-[30vh]">
         <div className="w-[100%] h-[400px] hide-scrollbar custom-scroll overflow-x-auto bg-white px-[30px] py-[26px] overflow-y-auto">
-          {arrr.map((item, i) => {
-
-        <div className="w-[100%] h-[400px] hide-scrollbar bg-white px-[30px] py-[26px] overflow-y-auto">
           {Arrr.map((item: any, i: any) => {
             return (
               <React.Fragment key={i}>
