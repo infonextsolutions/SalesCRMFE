@@ -5,6 +5,7 @@ import React from "react";
 
 const TeamsPerformence = ({ data }: any) => {
   const [filter, setFilter] = React.useState(false);
+  const [currData, setData] = React.useState(data);
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px] relative">
@@ -49,7 +50,7 @@ const TeamsPerformence = ({ data }: any) => {
           },
         ]}
       />
-      <Performence records={data.totalRecords} />
+      <Performence records={currData.totalRecords} charts={currData} />
     </div>
   );
 };

@@ -63,6 +63,7 @@ export default function Open({ data }: any) {
       }
     }
   }, [state.isLoggedIn, logged]);
+  console.log(data);
 
   return (
     <>
@@ -78,6 +79,7 @@ export default function Open({ data }: any) {
     </>
   );
 }
+
 
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
