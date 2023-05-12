@@ -92,9 +92,6 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
   ];
   const [Arrr, setArr] = useState<any>([]);
 
-<<<<<<< HEAD
-  const [input, setInput] = useState<any>("");
-=======
   const [input, setInput] = useState("");
 
   const transcriptUpdate = async () => {
@@ -124,7 +121,6 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
     }
   });
 
->>>>>>> c3623aa2a99330acbfb8973e391c0254bb0aca94
   return (
     <div>
       <Search
