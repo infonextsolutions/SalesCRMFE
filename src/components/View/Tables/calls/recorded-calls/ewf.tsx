@@ -43,9 +43,12 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       // console.log(res, "only check here");
       const data = res.data.result;
 
+      console.log(data);
+      console.log(search.length);
       if (search.length) {
         setpageNumber(0);
         const allItems = await getallItems(pageNumber);
+        console.log(allItems);
         setItems(allItems);
       }
       const filtered = data.filter(
@@ -61,6 +64,9 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       // console.log(data, search);
       const count = Math.ceil(Number(filtered.length) / limit);
       setpageCount(count);
+      console.log(
+        filtered.slice(pageNumber * limit, pageNumber * limit + limit)
+      );
       setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
     };
 
@@ -68,17 +74,14 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setLoading(false);
   }, [limit, pageNumber, search]);
 
+  console.log();
+
   const fetchItems = async (current: any) => {
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/recording/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
-    const filtered = data.filter(
-      (e: ActiveCall) =>
-        e._id.includes(search) ||
-        e.call_title?.includes(search) ||
-        e.customerId.name?.includes(search)
-    );
+    const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
     settotalLeads(filtered.length);
     return filtered;
   };
@@ -198,6 +201,8 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       }
     }
   };
+
+  console.log(Leads);
 
   return (
     <>
@@ -416,7 +421,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
             Showing 1-10 of 100
           </p>
         </div>
-        <div className="flex mr-[10%] text-[#fff] ">
+        <div className="flex mr-[10%]">
           <SmallButton leftDblIcon={true} theme={2} left={10} />
           <SmallButton leftIcon={true} theme={2} left={10} />
           <SmallButton text={"1"} theme={1} left={10} />

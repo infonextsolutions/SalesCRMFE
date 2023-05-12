@@ -1,21 +1,15 @@
 import Navigation from "@/components/app/Navigation";
 import Performence from "@/components/team/Container/Performence";
 import Filter from "@/components/team/genUtils/Filter";
+import axios from "axios";
 import React from "react";
 
 const TeamsPerformence = ({ data }: any) => {
-  const [filter, setFilter] = React.useState(false);
+  const [filter, setFilter] = React.useState<any>(null);
   const [currData, setData] = React.useState(data);
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px] relative">
-      {filter && (
-        <Filter
-          cancel={() => {
-            setFilter(false);
-          }}
-        />
-      )}
       <Navigation
         title={"Team > Team Activity> My Team"}
         buttons={[
@@ -26,27 +20,49 @@ const TeamsPerformence = ({ data }: any) => {
             light: true,
             list: [
               {
-                title: "Table View",
+                title: "My Team",
                 Icon: "List 2",
               },
               {
-                title: "Kanban View",
+                title: "Aarav Patel",
+                Icon: "Grid",
+              },
+              {
+                title: "Anika Sharma",
                 Icon: "Grid",
               },
             ],
             value: 0,
           },
           {
-            text: "Last 7 days",
+            text:
+              filter === null
+                ? "date filter"
+                : filter === 0
+                ? "last 7 days"
+                : filter === 1
+                ? "last 15 days"
+                : filter && "last 30 days",
             dropdown: true,
             id: 1,
             light: true,
             click: (e1, e2) => {
               if (e2 === 0) {
-                setFilter(true);
+                setFilter(0);
+              } else if (e2 === 1) {
+                setFilter(1);
+              } else if (e2 === 2) {
+                setFilter(2);
+              } else if (e2 === 3) {
+                setFilter(null);
               }
             },
-            list: [{ title: "Filter", Icon: "Text" }],
+            list: [
+              { title: "last 7 days", Icon: "Text" },
+              { title: "last 15 days", Icon: "Text" },
+              { title: "last 30 days", Icon: "Text" },
+              { title: "remove filter", Icon: "Text" },
+            ],
           },
         ]}
       />

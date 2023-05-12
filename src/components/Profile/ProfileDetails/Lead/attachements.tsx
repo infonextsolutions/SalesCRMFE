@@ -48,6 +48,7 @@ const Attachements = () => {
                 <p className="text-xs mb-2">5.6 MB</p>
               </div>
               <div className="w-[190px] flex items-center">
+<<<<<<< HEAD
                 <Image
                   src="/Images/Logo/Download.svg"
                   className={`w-[22px] ml-[80%]`}
@@ -58,6 +59,20 @@ const Attachements = () => {
                     objectFit: "contain",
                   }}
                 />
+=======
+                <a href="/check.pdf">
+                  <Image
+                    src="/Images/Logo/Download.svg"
+                    className={`w-[22px] ml-[145px]`}
+                    alt="Download"
+                    width={17}
+                    height={17}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+>>>>>>> c3623aa2a99330acbfb8973e391c0254bb0aca94
               </div>
               <Image
                 src="/Images/Logo/Delete.svg"
@@ -73,7 +88,7 @@ const Attachements = () => {
             <p className="text-[#8A9099] ml-2">23 January 2023,3:00PM</p>
           </div>
         </div>
-        <div className="text-gray text-small">
+        {/* <div className="text-gray text-small">
           <p className="text-[#3F434A] font-semibold">
             Demo Product A documents for customer
           </p>
@@ -219,7 +234,7 @@ const Attachements = () => {
             </div>
             <p className="text-[#8A9099] ml-2">23 January 2023,3:00PM</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
