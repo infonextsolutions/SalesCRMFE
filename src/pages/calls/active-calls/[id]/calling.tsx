@@ -37,6 +37,16 @@ const AudioProfile = ({ data, scripts }: any) => {
         title="Calls>Active Calls>Discussion on PX features"
         buttons={[
           {
+            text: "Refresh",
+            dropdown: true,
+            id: 1,
+            light: false,
+            list: [],
+            onClick1: async () => {
+             
+            },
+          },
+          {
             text: "Make Call",
             dropdown: true,
             id: 1,

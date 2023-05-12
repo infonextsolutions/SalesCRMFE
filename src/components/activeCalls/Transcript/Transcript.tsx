@@ -59,14 +59,15 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
         callId: data._id,
       }
     );
-    console.log( {
+
+    console.log({
       audio_url: src,
       leadId: data.leadId._id,
       callId: data._id,
-    })
-    console.log(res.data)
+    });
+    console.log(res.data);
   };
-  
+
   React.useEffect(() => {
     transcriptUpdate();
   });
