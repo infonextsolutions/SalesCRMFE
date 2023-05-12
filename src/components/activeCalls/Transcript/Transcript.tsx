@@ -50,27 +50,6 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
   // }
 
   console.log(data);
-  const transcriptUpdate = async () => {
-    const res = await axios.post(
-      "https://testsalescrm.nextsolutions.in/api/audio-transcript/create/by-audio-url",
-      {
-        audio_url: src,
-        leadId: data.leadId._id,
-        callId: data._id,
-      }
-    );
-
-    console.log({
-      audio_url: src,
-      leadId: data.leadId._id,
-      callId: data._id,
-    });
-    console.log(res.data);
-  };
-
-  React.useEffect(() => {
-    transcriptUpdate();
-  });
 
   const arr = new Array(10).fill(10);
   const arrr: any = [
@@ -111,9 +90,37 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
         "Because I was paid to train and employed at the same time. In the 70s, things were very different in [???] of jobs and employment...",
     },
   ];
-  const [Arrr, setArr] = useState<any>(arrr);
+  const [Arrr, setArr] = useState<any>([]);
 
   const [input, setInput] = useState("");
+
+  const transcriptUpdate = async () => {
+    const res = await axios.post(
+      "https://testsalescrm.nextsolutions.in/api/audio-transcript/create/by-audio-url",
+      {
+        audio_url: src,
+        leadId: data.leadId._id,
+        callId: data._id,
+      }
+    );
+
+    console.log({
+      audio_url: src,
+      leadId: data.leadId._id,
+      callId: data._id,
+    });
+    console.log(res.data.result.text);
+    setArr([{ title: "speaker 1", message: res.data.result.text }]);
+  };
+
+  React.useEffect(() => {
+    if (Arrr) {
+      if (Arrr.length === 0) {
+        transcriptUpdate();
+      }
+    }
+  });
+
   return (
     <div>
       <Search
