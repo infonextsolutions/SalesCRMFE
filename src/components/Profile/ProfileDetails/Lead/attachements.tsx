@@ -48,18 +48,6 @@ const Attachements = () => {
                 <p className="text-xs mb-2">5.6 MB</p>
               </div>
               <div className="w-[190px] flex items-center">
-<<<<<<< HEAD
-                <Image
-                  src="/Images/Logo/Download.svg"
-                  className={`w-[22px] ml-[80%]`}
-                  alt="Download"
-                  width={17}
-                  height={17}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-=======
                 <a href="/check.pdf">
                   <Image
                     src="/Images/Logo/Download.svg"
@@ -72,7 +60,6 @@ const Attachements = () => {
                     }}
                   />
                 </a>
->>>>>>> c3623aa2a99330acbfb8973e391c0254bb0aca94
               </div>
               <Image
                 src="/Images/Logo/Delete.svg"
