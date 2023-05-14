@@ -1,3 +1,11 @@
+import React from "react";
+
+const Asset = () => {
+  return <></>;
+};
+
+export default Asset;
+
 // import Lead from "@/types/Leads";
 // import ButtonDropDown from "@/utils/Button/Button";
 // import SmallButton from "@/utils/Button/SmallButton";
