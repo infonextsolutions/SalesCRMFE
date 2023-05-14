@@ -26,7 +26,7 @@ const AddText = ({ top, title, width, change }: any) => {
   );
 };
 
-const Uploads = ({ cancel, leadId, id }: any) => {
+const Uploads = ({ cancel, leadId, id, owners }: any) => {
   const [file, setFile] = useState<any>();
 
   const [dragActive, setDragActive] = React.useState(false);
@@ -57,27 +57,39 @@ const Uploads = ({ cancel, leadId, id }: any) => {
     if (e.target.files && e.target.files[0]) {
       // at least one file has been selected so do something
       // handleFiles(e.target.files);
+
       setFile(e.target.files[0]);
     }
   };
-
+  console.log(file);
   const inputRef: any = React.useRef(null);
 
   const onButtonClick = () => {
     inputRef.current.click();
   };
 
-
   const submit = async () => {
     if (file) {
+      console.log(leadId);
+
+      console.log({
+        activeCallId: id,
+        title: "file-1",
+        file: file,
+        leadId: leadId,
+        userId: owners,
+      });
+
+      const formdate = new FormData();
+      formdate.append("userId", owners);
+      formdate.append("leadId", leadId);
+      formdate.append("title", "file-1");
+      formdate.append("file", file);
+      formdate.append("activeCallId", id);
+
       const res = await axios.post(
         `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
-        {
-          userId: id,
-          title: "file-1",
-          file: file,
-          leadId: leadId,
-        }
+        formdate
       );
       console.log(res);
     }

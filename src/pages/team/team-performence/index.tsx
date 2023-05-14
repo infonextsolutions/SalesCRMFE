@@ -9,6 +9,7 @@ import BigSpinner from "@/components/loader/BigSpinner";
 const Performence = React.lazy(() => import("@/views/team/Team-performence"));
 
 export default function Open({ data }: any) {
+  
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
 
