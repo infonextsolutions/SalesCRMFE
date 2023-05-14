@@ -426,6 +426,7 @@ const ParticipantsHover = ({
       {data.owners.map((item, i) => {
         return (
           <p
+          key={i}
             className={`${
               i === 0 ? "text-renal-blue mt-[19px]" : "text-[#000]"
             } text-[13px] ml-[2px]  w-[100%] font-medium`}
