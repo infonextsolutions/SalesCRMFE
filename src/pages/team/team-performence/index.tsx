@@ -9,7 +9,6 @@ import BigSpinner from "@/components/loader/BigSpinner";
 const Performence = React.lazy(() => import("@/views/team/Team-performence"));
 
 export default function Open({ data }: any) {
-  
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
 
@@ -81,16 +80,15 @@ export default function Open({ data }: any) {
   );
 }
 
-
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/lead-report/find-all?page=0&limit=10"
   );
-  console.log(response.data)
+  console.log(response.data);
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component
-      data:response.data || {},
+      data: response.data || {},
     }, // will be passed to the page component as props
   };
 }

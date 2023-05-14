@@ -1,5 +1,4 @@
 export default interface Root {
-  comments: any[]
   _id: string
   Sid: string
   ParentCallSid: string
@@ -20,33 +19,14 @@ export default interface Root {
   CallerName: string
   Uri: string
   RecordingUrl: string
-  createdAt: string
-  updatedAt: string
-  notes: Note[]
-  questionnaire: Questionnaire[]
   leadId: LeadId
-}
-
-export interface Note {
-  title: string
-  content: string
-  _id: string
+  questionnaire: any[]
+  comments: any[]
+  notes: any[]
+  call_title:string;
   createdAt: string
   updatedAt: string
-}
-
-export interface Questionnaire {
-  question: string
-  answerOptions: AnswerOptions
-  answer: string
-}
-
-export interface AnswerOptions {
-  a: string
-  b: string
-  c: string
-  d: string
-  e: string
+  transcriptId: string
 }
 
 export interface LeadId {
@@ -63,7 +43,7 @@ export interface LeadId {
   leadStage: string
   lead_title: string
   lead_description: string
-  notes: Note2[]
+  notes: Note[]
   source: string
   leadId: string
   owners: string[]
@@ -71,9 +51,10 @@ export interface LeadId {
   updatedAt: string
   createdAt: string
   scriptId: string
+  callId: string
 }
 
-export interface Note2 {
+export interface Note {
   title: string
   content: string
   _id: string

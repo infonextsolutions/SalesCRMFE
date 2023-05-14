@@ -71,7 +71,6 @@ const ChartItem = ({ deals, down, chartColor, title }: any) => {
 };
 
 const Charts = ({ data }: any) => {
-  console.log(data.deals);
   return (
     <div className="w-[100%] mb-[20px] flex h-[120px]">
       <ChartItem

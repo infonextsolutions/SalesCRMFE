@@ -14,7 +14,10 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Root from "@/types/teams";
-const PerformenceTable = ({ totalRecords }: TableProps) => {
+const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
+
+  console.log(filter);
+
   // console.log(totalRecords);
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
@@ -285,4 +288,5 @@ interface TableProps {
   [key: string]: any;
   icon?: String;
   search?: String;
+  filter:any
 }

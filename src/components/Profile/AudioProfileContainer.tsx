@@ -25,7 +25,6 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  console.log(data);
 
   return (
     <div

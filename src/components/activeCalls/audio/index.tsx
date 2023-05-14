@@ -1,11 +1,12 @@
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Tracker from "../conversation-tracker";
 import Transcript from "../Transcript/Transcript";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import useSound from "use-sound";
 import AudioPlayer from "./components/AudioPlayer";
 import Recorded from "@/types/recorded-call";
+import axios from "axios";
 const CallHolder = ({ click }: any) => {
   return (
     <div
@@ -126,8 +127,25 @@ const list = [
   },
 ];
 
-const Audio = ({data}:props) => {
+const Audio = ({ data }: props) => {
   console.log(data);
+  const [check, setCheck] = useState(false);
+
+  const callit = () => {
+    const url = "https://testsalescrm.nextsolutions.in/api/calling/call-status";
+    axios
+      .post(url, {
+        sid: data.Sid,
+        leadId: data.leadId._id,
+      })
+      .then((e) => {
+        console.log(e);
+      });
+  };
+
+  React.useEffect(() => {
+    callit();
+  });
 
   return (
     <>
@@ -141,7 +159,7 @@ const Audio = ({data}:props) => {
       </div> */}
       {/* <CallPlayer /> */}
 
-      <AudioPlayer src={data.RecordingUrl}  />
+      <AudioPlayer src={data.RecordingUrl} />
       <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
         <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
           call data
@@ -170,13 +188,13 @@ const Audio = ({data}:props) => {
       <Tracker title={"John"} list={list} color={"#304FFD"} />
       <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
       <Tracker title={"Topics"} list={list} color={"#0090FF"} />
-      <Transcript src={data.RecordingUrl} data={data} />
+      {/* <Transcript src={data.RecordingUrl} data={data} /> */}
     </>
   );
 };
 
 export default Audio;
 
-interface props{
-  data:Recorded
+interface props {
+  data: Recorded;
 }

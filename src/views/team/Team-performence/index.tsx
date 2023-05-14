@@ -66,7 +66,7 @@ const TeamsPerformence = ({ data }: any) => {
           },
         ]}
       />
-      <Performence records={currData.totalRecords} charts={currData} />
+      <Performence records={currData.totalRecords} charts={currData} filter={filter} />
     </div>
   );
 };
