@@ -8,7 +8,6 @@ import ProgressBar from "./ProgressBar";
 import TopBar from "./TopBar";
 
 const AudioPlayer = ({src}) => {
-  console.log(src)
   // states
   const [trackIndex, setTrackIndex] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);

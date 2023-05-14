@@ -13,7 +13,7 @@ const LeadsTable = React.lazy(
 );
 // const About = lazy(() => import("./pages/About"));
 
-const Performence = ({ records ,results,charts}: any) => {
+const Performence = ({ records ,results,charts,filter}: any) => {
 
   const [search, setSearch] = useState("");
   const onChange = (e: any) => {
@@ -21,7 +21,6 @@ const Performence = ({ records ,results,charts}: any) => {
     setSearch(val);
   };
 
-  console.log(results);
 
   const state = useSelector((state: any) => state.auth);
   
@@ -30,7 +29,7 @@ const Performence = ({ records ,results,charts}: any) => {
       <Charts data={charts}  />
       <div className="w-[100%] bg-white min-h-[70vh] pt-[30px] rounded-[18px] overflow-hidden mb-[40px]">
         <Suspense fallback={<Spinner />}>
-          <LeadsTable totalRecords={records} search={search} />
+          <LeadsTable totalRecords={records} search={search} filter={filter} />
         </Suspense>
       </div>
     </>

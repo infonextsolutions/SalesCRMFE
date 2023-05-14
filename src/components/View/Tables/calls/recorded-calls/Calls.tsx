@@ -14,7 +14,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-import { ActiveCall } from "@/types/active-call";
+import ActiveCall from "@/types/recorded-call";
 import CallContainer from "@/components/calls/recorded-calls/Call/Call";
 const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
@@ -48,12 +48,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
         const allItems = await getallItems(pageNumber);
         setItems(allItems);
       }
-      const filtered = data.filter(
-        (e: ActiveCall) =>
-          e._id.includes(search) ||
-          e.call_title?.includes(search) ||
-          e.customerId.name?.includes(search)
-      );
+      const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
 
       // const filtered = data;
       // console.log(filtered);
@@ -73,12 +68,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       `https://testsalescrm.nextsolutions.in/api/recording/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
-    const filtered = data.filter(
-      (e: ActiveCall) =>
-        e._id.includes(search) ||
-        e.call_title?.includes(search) ||
-        e.customerId.name?.includes(search)
-    );
+    const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
     settotalLeads(filtered.length);
     return filtered;
   };
@@ -198,6 +188,8 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       }
     }
   };
+
+  console.log(Leads, "please check here");
 
   return (
     <>

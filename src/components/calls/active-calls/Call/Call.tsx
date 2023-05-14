@@ -331,17 +331,12 @@ const ParticipantsHover = ({ last, bounding }: any) => {
   );
 };
 
-const CallContainer = ({
-  id,
-  CallData,
-  last,
-}: CallProps) => {
+const CallContainer = ({ id, CallData, last }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
   const [w, setW] = useState(0);
   const wRef: any = useRef();
-  console.log(id)
   React.useEffect(() => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
@@ -383,7 +378,12 @@ const CallContainer = ({
             route={`/sales/open/${CallData._id}/lead-profile`}
             color={"#000"}
           />
-          <CallItem width={120} left={10} text={CallData?.leadId?.lead_title} color={"#000"} />
+          <CallItem
+            width={120}
+            left={10}
+            text={CallData?.leadId?.lead_title}
+            color={"#000"}
+          />
           <div
             className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
             style={{ width: 200, marginLeft: 20 }}
@@ -453,7 +453,7 @@ const CallContainer = ({
   );
 };
 
-export default CallContainer;
+export default React.memo(CallContainer);
 
 interface CallProps {
   id: String;

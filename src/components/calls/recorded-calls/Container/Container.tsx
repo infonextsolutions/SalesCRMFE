@@ -11,7 +11,6 @@ const CallsContainer = ({ dummy1, data }: LeadContainerProps) => {
     const val = e.target.value;
     setSearch(val);
   };
-  console.log(data);
   return (
     <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] overflow-hidden mb-[40px]">
       <div className="w-[100%] h-[58px] flex items-center  px-[8px]">

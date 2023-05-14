@@ -1,8 +1,4 @@
-import Lead from "@/types/Leads";
-import ButtonDropDown from "@/utils/Button/Button";
-import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState, Suspense } from "react";
-import LeadContainer from "@/components/leads/open/Lead/Lead";
 import Header from "@/components/calls/active-calls/Header/Header";
 import ReactPaginate from "react-paginate";
 import Image from "next/image";
@@ -16,6 +12,7 @@ import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import { ActiveCall } from "@/types/active-call";
 import CallContainer from "@/components/calls/active-calls/Call/Call";
+
 const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
@@ -25,46 +22,54 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+      `https://testsalescrm.nextsolutions.in/api/active-call/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
     return data;
   };
   const [loading, setLoading] = React.useState(false);
+  const [checked, setChecked] = useState(true);
+
   useEffect(() => {
-    setLoading(true);
-    const count = Math.ceil(Number(totalRecords) / limit);
-    setpageCount(count);
-    if (pageNumber >= count && pageCount != 0) setpageNumber(0);
-    const getItems = async () => {
-      const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/active-call/find-all`
-      );
-      // console.log(res, "only check here");
-      const data = res.data.result;
-
-      if (search.length) {
-        setpageNumber(0);
-        const allItems = await getallItems(pageNumber);
-        setItems(allItems);
-      }
-      const filtered = data.filter(
-        (e: ActiveCall) =>
-          e._id.includes(search) ||
-          e.call_title?.includes(search) ||
-          e.customerId.name?.includes(search)
-      );
-
-      // const filtered = data;
-      // console.log(filtered);
-      settotalLeads(filtered.length);
-      // console.log(data, search);
-      const count = Math.ceil(Number(filtered.length) / limit);
+    if (checked) {
+      setLoading(true);
+      const count = Math.ceil(Number(totalRecords) / limit);
       setpageCount(count);
-      setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
-    };
-    getItems();
-    setLoading(false);
+      if (pageNumber >= count && pageCount != 0) setpageNumber(0);
+      const getItems = async () => {
+        const res = await axios.get(
+          `https://testsalescrm.nextsolutions.in/api/active-call/find-all`
+        );
+        // console.log(res, "only check here");
+        const data = res.data.result;
+
+        if (search.length) {
+          setpageNumber(0);
+          const allItems = await getallItems(pageNumber);
+          setItems(allItems);
+        }
+        const filtered = data.filter(
+          (e: ActiveCall) =>
+            e._id.includes(search) ||
+            e.call_title?.includes(search) ||
+            e.customerId.name?.includes(search)
+        );
+        filtered.reverse();
+
+        // const filtered = data;
+        // console.log(filtered);
+        settotalLeads(filtered.length);
+        // console.log(data, search);
+        const count = Math.ceil(Number(filtered.length) / limit);
+        setpageCount(count);
+        setItems(
+          filtered.slice(pageNumber * limit, pageNumber * limit + limit)
+        );
+      };
+      getItems();
+      setLoading(false);
+      console.log("exec");
+    }
   }, [limit, pageNumber, search]);
 
   const fetchItems = async (current: any) => {
@@ -73,16 +78,14 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     );
     const data = res.data.result;
     const filtered = data.filter(
-      (e: Lead) =>
-        e.companyId?.company_name.includes(search) ||
-        e.customerId?.contact?.includes(search) ||
-        e.potential_deal_size?.includes(search) ||
-        e.leadStatus?.includes(search) ||
-        e.leadStage?.includes(search) ||
-        e.customerId?.email?.includes(search) ||
-        e.companyId?.company_website_url?.includes(search)
+      (e: ActiveCall) =>
+        e._id.includes(search) ||
+        e.call_title?.includes(search) ||
+        e.customerId.name?.includes(search)
     );
+    filtered.reverse();
     settotalLeads(filtered.length);
+    console.log("exec1");
     return filtered;
   };
 
@@ -107,15 +110,21 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setItems(allItems);
     setLoading(false);
   };
+
   const handlePageClick = async (data: any) => {
+    setChecked(false);
     setLoading(true);
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
+    console.log("exec2");
     setItems(allItems);
     setLoading(false);
+    setChecked(true);
   };
+
   const Leads = items;
+  console.log(Leads);
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);

@@ -49,7 +49,6 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
   //     "callId":"34567890876546788"
   // }
 
-  console.log(data);
 
   const arr = new Array(10).fill(10);
   const arrr: any = [
@@ -104,12 +103,6 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
       }
     );
 
-    console.log({
-      audio_url: src,
-      leadId: data.leadId._id,
-      callId: data._id,
-    });
-    console.log(res.data.result.text);
     setArr([{ title: "speaker 1", message: res.data.result.text }]);
   };
 

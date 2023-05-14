@@ -1,11 +1,94 @@
 import { setCurrent } from "@/store/UI";
 import Call, { CompanyId, CustomerId } from "@/types/Calls";
-import { ActiveCall } from "@/types/active-call";
+import ActiveCall from "@/types/recorded-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import Lead from "@/types/Leads";
+import axios from "axios";
+
+const example = {
+  _id: "6457d6b590467877fd40291c",
+  companyId: {
+    _id: "6457d6b590467877fd402915",
+    company_name: "Zen Corp.",
+    company_website_url: "www.faxquote.com",
+    company_icon: "",
+    company_location: "New Delhi",
+    company_product_category: "Product C",
+    company_description:
+      "XYZ Corp is a marketing and advertising agency providing creative solutions to help businesses increase brand awareness, generate leads, and drive sales.",
+    createdAt: "2023-05-07T16:49:57.100Z",
+    updatedAt: "2023-05-07T16:49:57.100Z",
+    __v: 0,
+  },
+  customerId: {
+    _id: "6457d6b590467877fd402918",
+    name: "Ishita Patel",
+    contact: "(208) 555-0112",
+    email: "ishitapatel@example.com",
+    parentId: "6411718c074708bce819b8c1",
+    designation: "Sales Manager",
+    companyId: "6457d6b590467877fd402915",
+    createdAt: "2023-05-07T16:49:57.183Z",
+    updatedAt: "2023-05-07T16:49:57.183Z",
+    __v: 0,
+  },
+  potential_deal_size: "50001",
+  win_probability: "80%",
+  created_by: "Sales",
+  customer_name: "Ishita Patel",
+  inquiry: "Trial Inquiry",
+  existing_budget: "30001",
+  leadStatus: "Close",
+  leadStage: "Lost",
+  lead_title: "Product discussion with Zen Corp.",
+  lead_description: "Interested to know about Product A.",
+  notes: [
+    {
+      title: "Product feature A",
+      content: "Interested to know about Product A.",
+      _id: "6457d6b590467877fd40291d",
+      createdAt: "2023-05-10T11:06:35.095Z",
+      updatedAt: "2023-05-10T11:06:35.095Z",
+    },
+  ],
+  source: "Phone",
+  leadId: "14023",
+  owners: [
+    {
+      _id: "645662800c64d03119111371",
+      name: "Anika Sharma",
+      email: "anika.sharma@gmail.com",
+      password: "$2a$08$keNizUi5NrepC16mgviYKuyGU9R022MfaOFoCUJlkGOziAl1ecx2K",
+      phone: "1234567892",
+      roles: ["63fdcc5251dadb27a426df6c"],
+      token: "",
+      createdAt: "2023-05-06T14:21:52.401Z",
+      updatedAt: "2023-05-06T14:21:52.477Z",
+      __v: 1,
+      designation: "Sales Executive",
+    },
+    {
+      _id: "6457d28ac7275bff6e607e88",
+      name: "Sanya Reddy",
+      email: "sanya.reddy@gmail.com",
+      password: "$2a$08$jIydspUt73TuVJlHzr3fe.rLCWGQrV2cHT3xDSW6PLBMhuIdZ3xmO",
+      phone: "9876543213",
+      roles: ["63fdcc5251dadb27a426df6c"],
+      token: "",
+      createdAt: "2023-05-07T16:32:10.246Z",
+      updatedAt: "2023-05-07T16:32:10.345Z",
+      __v: 1,
+      designation: "Sales Rep",
+    },
+  ],
+  __v: 0,
+  createdAt: "2023-04-03T00:00:00.000Z",
+  updatedAt: "2023-04-03T00:00:00.000Z",
+};
 
 const CallBox = ({ width }: any) => {
   return (
@@ -123,7 +206,7 @@ const CallItemMultiple = ({
         {upperText ? upperText : "-"}
       </p>
       <p
-        className="text-[#8A9099] text-[12px] flex tracking-wide "
+        className="text-[#8A9099] font-medium text-[12px] flex tracking-wide "
         style={{
           textAlign: align && "center",
         }}
@@ -316,7 +399,15 @@ const ExpandableRow = ({
   );
 };
 
-const ParticipantsHover = ({ last, bounding }: any) => {
+const ParticipantsHover = ({
+  last,
+  bounding,
+  data,
+}: {
+  last: any;
+  bounding: any;
+  data: Lead;
+}) => {
   return (
     <div
       className="bg-[#E8E9EB] max-w-[240px] flex flex-col items-center pb-[40px] rounded-[15px] fixed py-[13px] px-[15px]  right-[10px] drop-shadow-sm"
@@ -332,24 +423,25 @@ const ParticipantsHover = ({ last, bounding }: any) => {
       <p className="text-[#000] w-[100%] text-[15px] font-medium">
         Call Participants
       </p>
-      <p className="text-renal-blue mt-[19px] text-[13px] ml-[2px]  w-[100%] font-medium">
-        Shraddha P. (Sales Manager)
-      </p>
-      <p className="text-[#000]  text-[13px] ml-[2px]  w-[100%] font-medium">
-        John C. (Sales Rep)
-      </p>
-      <p className="text-[#000] text-[13px] ml-[2px] w-[100%] font-medium">
-        Aarti P. (Sales Rep)
-      </p>
+      {data.owners.map((item, i) => {
+        return (
+          <p
+          key={i}
+            className={`${
+              i === 0 ? "text-renal-blue mt-[19px]" : "text-[#000]"
+            } text-[13px] ml-[2px]  w-[100%] font-medium`}
+          >
+            {item.name} {"("}
+            {item.designation}
+            {")"}
+          </p>
+        );
+      })}
     </div>
   );
 };
 
-const CallContainer = ({
-  id,
-  CallData,
-  last,
-}: CallProps) => {
+const CallContainer = ({ id, CallData, last }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -367,7 +459,59 @@ const CallContainer = ({
   const ref: any = useRef();
   const dispatch = useDispatch();
 
-  console.log(CallData);
+  const [checked, setChecked] = useState(true);
+  const [LeadData, setLeadData] = useState<Lead>(example);
+  const GetLeadData = () => {
+    axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${CallData.leadId._id}`
+      )
+      .then((e: any) => {
+        console.log(e);
+        setChecked(false);
+        setLeadData(e.data.result);
+      });
+  };
+
+  console.log(LeadData);
+
+  React.useEffect(() => {
+    if (checked) {
+      GetLeadData();
+    }
+  });
+
+  function convertTimestampToTime(timestamp: string) {
+    const dateTime = new Date(timestamp);
+    const hours = dateTime.getUTCHours().toString().padStart(2, "0");
+    const minutes = dateTime.getUTCMinutes().toString().padStart(2, "0");
+    const seconds = dateTime.getUTCSeconds().toString().padStart(2, "0");
+    const timeStr = hours + ":" + minutes + ":" + seconds;
+    return timeStr;
+  }
+
+  function convertTimestampToDate(timestamp: string) {
+    const dateTime = new Date(timestamp);
+    const options: any = { year: "numeric", month: "long", day: "numeric" };
+    const dateStr = dateTime.toLocaleDateString("en-US", options);
+    return dateStr;
+  }
+
+  function calculateTimeDifference(startTime: any, endTime: any) {
+    if (startTime  && endTime) {
+      const startDateTime: any = new Date(startTime);
+      const endDateTime: any = new Date(endTime);
+
+      const timeDifference = Math.abs(endDateTime - startDateTime);
+      const minutes = Math.floor(timeDifference / (1000 * 60));
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      return `${minutes}:${seconds}`;
+    } else {
+      return "-";
+    }
+  }
+
   return (
     <>
       <div className="flex">
@@ -382,9 +526,10 @@ const CallContainer = ({
             }}
           />
           <CallItem
-            width={130}
+            width={200}
             left={20}
-            text={"345345354335"}
+            // text={"345345354335"}
+            text={CallData._id}
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/audio-call`}
@@ -393,19 +538,25 @@ const CallContainer = ({
             width={130}
             left={20}
             color={"#000"}
-            text={"Discussion on PX features"}
+            // text={"Discussion on PX features"}
+            text={CallData?.call_title}
             click={true}
             route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
             left={10}
-            text={CallData._id}
+            text={CallData.leadId._id}
             click={true}
             route={`/sales/open/${CallData._id}/lead-profile`}
             color={"#000"}
           />
-          <CallItem width={120} left={10} text={"-"} color={"#000"} />
+          <CallItem
+            width={120}
+            left={10}
+            text={LeadData.customerId.name}
+            color={"#000"}
+          />
           <div
             className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
             style={{ width: 200, marginLeft: 20 }}
@@ -424,19 +575,24 @@ const CallContainer = ({
                 true ? "text-[#3F434A]" : "text-[#8A9099]"
               }`}
             >
-              <span className="text-renal-blue ">Shraddha P.,</span> John C.,
-              Aarti P.
+              {LeadData.owners?.map((item, i) => {
+                return (
+                  <span className={i === 0 ? "text-renal-blue" : ""} key={i}>
+                    {i < 2 && item.name} ,
+                  </span>
+                );
+              })}
             </p>
           </div>
           <CallItem width={100} left={20} text={"John C"} />
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={"Send Email"}
-            bottomText={"on 23 Jan 2023"}
+            upperText={convertTimestampToDate(CallData.DateCreated)}
+            bottomText={"on " + convertTimestampToTime(CallData.DateCreated)}
           />
-          <CallItem width={120} left={10} text={"30 min."} />
-          <CallItem width={110} left={20} text={"80"} />
+          <CallItem width={120} left={10} text={calculateTimeDifference(CallData.StartTime,CallData.EndTime)} />
+          <CallItem width={110} left={20} text={"-"} />
           <CallItem
             width={110}
             left={20}
@@ -446,7 +602,7 @@ const CallContainer = ({
             }}
             click={true}
             route={`${pathname}/${id}/video-call`}
-            text={"3"}
+            text={`${CallData.comments.length}`}
           />
           <CallItem width={110} left={20} text={"Read Summary"} />
         </div>
@@ -483,7 +639,9 @@ const CallContainer = ({
           engagingQuestions={3}
         />
       </div>
-      {hover && <ParticipantsHover bounding={bounding} last={last} />}
+      {hover && (
+        <ParticipantsHover bounding={bounding} data={LeadData} last={last} />
+      )}
     </>
   );
 };

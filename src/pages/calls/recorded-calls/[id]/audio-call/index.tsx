@@ -11,7 +11,6 @@ import CallSnippet from "@/components/View/call-snippet";
 //Manya will make this page
 
 const CallProfile = ({ data }: any) => {
-  console.log(data);
   const titles = ["CALL INFO", "COMMENTS", "NOTES", "COACHING"];
 
   const [fullCall, setFullCall] = useState(false);
@@ -48,6 +47,8 @@ const CallProfile = ({ data }: any) => {
       showSnippet();
     }
   };
+
+  
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {fullCall && (
@@ -98,9 +99,11 @@ const CallProfile = ({ data }: any) => {
 export default CallProfile;
 
 export async function getServerSideProps({ query, params }: any) {
+
   const response = await axios.get(
     `https://testsalescrm.nextsolutions.in/api/calling/find-by-id?id=${params.id}`
   );
+  
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component

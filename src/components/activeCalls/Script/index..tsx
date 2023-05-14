@@ -163,10 +163,8 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
-  console.log(scripts.results);
   const [currScripts, setCurrScripts] = useState<any[]>(scripts.result);
   const [selected, setSelected] = useState(false);
-  console.log(currScripts);
 
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
