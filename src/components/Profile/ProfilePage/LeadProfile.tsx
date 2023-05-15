@@ -27,8 +27,8 @@ const ProfilePage = ({ data }: props) => {
   return (
     <>
       {edit && (
-        <Backdrop bool={true}>
-          <EditLead cancel={cancelEdit} data={data}  />
+        <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
+          <EditLead cancel={cancelEdit} data={data} />
         </Backdrop>
       )}
       <div className="">

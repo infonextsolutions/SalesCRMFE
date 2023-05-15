@@ -46,17 +46,26 @@ const AddText = ({ top, title, width, value, click }: any) => {
 
 const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
   const makecall = async (e: any) => {
-    console.log(e);
+
+    console.log(e,data._id,data);
     const res = await axios.post(
       "https://testsalescrm.nextsolutions.in/api/calling/make-call",
       {
         callTo: e,
-        leadId:data._id
+        leadId:data.leadId._id
       }
     );
-    console.log(res.data);
-
   };
+  // const makecall = async (e: any) => {
+  //   console.log(e,data._id);
+  //   // const res = await axios.post(
+  //   //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+  //   //   {
+  //   //     callTo: e,
+  //   //     leadId:data._id
+  //   //   }
+  //   // );
+  // };
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium   tracking-[1px]">

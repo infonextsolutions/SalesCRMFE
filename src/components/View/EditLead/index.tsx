@@ -28,16 +28,14 @@ const AddText = ({ top, title, width, change }: any) => {
 
 const EditLead = ({ cancel, data }: { cancel: any; data: LeadId }) => {
   const [content, setContent] = useState<any>({});
-
+  console.log(data);
   const submit = () => {
     const url = "https://testsalescrm.nextsolutions.in/api/leads/update";
-
     axios
       .post(url, {
         ...data,
         id: data._id,
-        inquiry: content.inquiry,
-        win_probability: content.win_probability,
+        lead_title: content.lead_title,
       })
       .then((e: any) => {
         console.log(e);
@@ -46,37 +44,111 @@ const EditLead = ({ cancel, data }: { cancel: any; data: LeadId }) => {
 
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
-      <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
-        Edit Lead
+      <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
+        Lead Information
       </h1>
-      <div className="custom-scroll-black w-[100%] pr-[20px] h-[300px] hidden-scroll pb-[60px] overflow-y-auto pb-[50px]">
-        <div>
+      <div className="custom-scroll-black w-[100%] flex justify-between pr-[20px] scrollbar-hidden pb-[60px] pb-[50px]">
+        <div className="w-[55%]">
+          <div className="flex items-center justify-between">
+            <AddText
+              top={"10px"}
+              title="Lead Id"
+              width={"30%"}
+              change={(e: any) => {
+                setContent({ ...content, leadId: e });
+              }}
+            />
+            <AddText
+              top={"10px"}
+              title="Lead title"
+              width={"65%"}
+              change={(e: any) => {
+                setContent({ ...content, lead_title: e });
+              }}
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <AddText
+              top={"10px"}
+              title="Company name"
+              width={"48%"}
+              change={(e: any) => {
+                setContent({ ...content, company_name: e });
+              }}
+            />
+            <AddText
+              top={"10px"}
+              title="Company location"
+              width={"48%"}
+              change={(e: any) => {
+                setContent({ ...content, company_location: e });
+              }}
+            />
+          </div>
           <AddText
             top={"10px"}
-            title="Inquiry Type"
+            title="LinkedIn"
+            width={"100%"}
             change={(e: any) => {
-              setContent({ ...content, inquiry: e });
+              setContent({ ...content, linkedInurl: e });
             }}
           />
           <AddText
             top={"10px"}
-            title="Deal Size"
+            title="Twitter"
+            width={"100%"}
             change={(e: any) => {
-              setContent({ ...content, dealSize: e });
+              setContent({ ...content, Twitter: e });
             }}
           />
           <AddText
             top={"10px"}
-            title="Existing Budget"
+            title="Website URL"
+            width={"100%"}
             change={(e: any) => {
-              setContent({ ...content, ExistingBudget: e });
+              setContent({ ...content, website_url: e });
             }}
           />
           <AddText
             top={"10px"}
-            title="Win Probability"
+            title="Industry Type"
+            width={"100%"}
             change={(e: any) => {
-              setContent({ ...content, win_probability: e });
+              setContent({ ...content, industry_type: e });
+            }}
+          />
+        </div>
+        <div className="w-[40%]">
+          <AddText
+            top={"10px"}
+            title="Lead Owner"
+            width={"100%"}
+            change={(e: any) => {
+              setContent({ ...content, lead_owner: e });
+            }}
+          />
+          <AddText
+            top={"10px"}
+            title="Lead Stage"
+            width={"100%"}
+            change={(e: any) => {
+              setContent({ ...content, Stage: e });
+            }}
+          />
+          <AddText
+            top={"10px"}
+            title="Lead Status"
+            width={"100%"}
+            change={(e: any) => {
+              setContent({ ...content, Status: e });
+            }}
+          />
+          <AddText
+            top={"10px"}
+            title="Source"
+            width={"100%"}
+            change={(e: any) => {
+              setContent({ ...content, Source: e });
             }}
           />
         </div>
