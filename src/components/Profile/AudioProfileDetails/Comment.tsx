@@ -51,21 +51,21 @@ const Comment = ({ user, content, time, reply, last }: any) => {
 const Comments = () => {
   const [text, setText] = React.useState("");
   const [list, setList] = React.useState<any>([
-    {
-      user: "Jane Cooper",
-      content: `Good call on answering features!<span> @Micheal</span>
-    <span> #introcall</span>`,
-      last: "16h Ago",
-      time: "2:11",
-      reply: [
-        {
-          user: "Micheal",
-          content:
-            "Thanks Jane!Thought was the best way to give more clarity about our product and services.",
-          last: "16h ago",
-        },
-      ],
-    },
+    // {
+    //   user: "Jane Cooper",
+    //   content: `Good call on answering features!<span> @Micheal</span>
+    // <span> #introcall</span>`,
+    //   last: "16h Ago",
+    //   time: "2:11",
+    //   reply: [
+    //     {
+    //       user: "Micheal",
+    //       content:
+    //         "Thanks Jane!Thought was the best way to give more clarity about our product and services.",
+    //       last: "16h ago",
+    //     },
+    //   ],
+    // },
   ]);
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();

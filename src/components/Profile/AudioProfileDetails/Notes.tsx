@@ -21,13 +21,13 @@ const Note = ({ title, content }: any) => {
 
 const Notes = () => {
   const [list, setList] = useState<any>([
-    {
-      title: "note-1",
-      content: `  lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod
-    faucibus tempor. Pellentesque habitant morbi tristique senectus et netus
-    et malesuada fames ac turpis egestas. Sed id nisi id turpis sagittis
-    tincidunt...`,
-    },
+    // {
+    //   title: "note-1",
+    //   content: `  lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis euismod
+    // faucibus tempor. Pellentesque habitant morbi tristique senectus et netus
+    // et malesuada fames ac turpis egestas. Sed id nisi id turpis sagittis
+    // tincidunt...`,
+    // },
   ]);
   const [notes, setNotes] = React.useState(false);
   const [bool, setBool] = React.useState(true);

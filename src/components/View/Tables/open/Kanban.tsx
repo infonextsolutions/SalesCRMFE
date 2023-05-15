@@ -84,7 +84,9 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
 
         {stages.map((col, i) => {
           const toBeFilter = items;
-          const res = items.filter((obj: any) => obj.leadStage.includes(stages[i]));
+          const res = items.filter((obj: any) => {
+            return obj.leadStage.includes(stages[i]);
+          });
           if (res.length) {
             return (
               <div className="flex gap-[20px]" key={i}>
