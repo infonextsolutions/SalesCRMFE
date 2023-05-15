@@ -31,36 +31,41 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     return data;
   };
   const [loading, setLoading] = React.useState(false);
+  const [checked, setChecked] = React.useState(true);
   useEffect(() => {
-    setLoading(true);
-    const count = Math.ceil(Number(totalRecords) / limit);
-    setpageCount(count);
-    if (pageNumber >= count && pageCount != 0) setpageNumber(0);
-    const getItems = async () => {
-      const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/recording/find-all`
-      );
-      // console.log(res, "only check here");
-      const data = res.data.result;
-
-      if (search.length) {
-        setpageNumber(0);
-        const allItems = await getallItems(pageNumber);
-        setItems(allItems);
-      }
-      const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
-
-      // const filtered = data;
-      // console.log(filtered);
-      settotalLeads(filtered.length);
-      // console.log(data, search);
-      const count = Math.ceil(Number(filtered.length) / limit);
+    if (checked) {
+      setLoading(true);
+      const count = Math.ceil(Number(totalRecords) / limit);
       setpageCount(count);
-      setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
-    };
+      if (pageNumber >= count && pageCount != 0) setpageNumber(0);
+      const getItems = async () => {
+        const res = await axios.get(
+          `https://testsalescrm.nextsolutions.in/api/recording/find-all`
+        );
+        // console.log(res, "only check here");
+        const data = res.data.result;
 
-    getItems();
-    setLoading(false);
+        if (search.length) {
+          setpageNumber(0);
+          const allItems = await getallItems(pageNumber);
+          setItems(allItems);
+        }
+        const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
+
+        // const filtered = data;
+        // console.log(filtered);
+        settotalLeads(filtered.length);
+        // console.log(data, search);
+        const count = Math.ceil(Number(filtered.length) / limit);
+        setpageCount(count);
+        setItems(
+          filtered.slice(pageNumber * limit, pageNumber * limit + limit)
+        );
+      };
+
+      getItems();
+      setLoading(false);
+    }
   }, [limit, pageNumber, search]);
 
   const fetchItems = async (current: any) => {
@@ -95,12 +100,14 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setLoading(false);
   };
   const handlePageClick = async (data: any) => {
+    setChecked(false);
     setLoading(true);
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
     setItems(allItems);
     setLoading(false);
+    setChecked(true);
   };
   const Leads = items;
   // console.log(Leads);
