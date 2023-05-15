@@ -40,7 +40,15 @@ const Search = ({ input, change }: any) => {
   );
 };
 
-const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
+const Transcript = ({
+  src,
+  data,
+  text,
+}: {
+  src: any;
+  data: Recorded;
+  text: any;
+}) => {
   //   url = https://testsalescrm.nextsolutions.in/api/audio-transcript/create/by-audio-url
   // method = post
   // body = {
@@ -48,7 +56,6 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
   //     "leadId":"21345678778678687",
   //     "callId":"34567890876546788"
   // }
-
 
   const arr = new Array(10).fill(10);
   const arrr: any = [
@@ -89,30 +96,30 @@ const Transcript = ({ src, data }: { src: any; data: Recorded }) => {
         "Because I was paid to train and employed at the same time. In the 70s, things were very different in [???] of jobs and employment...",
     },
   ];
-  const [Arrr, setArr] = useState<any>([]);
+  const [Arrr, setArr] = useState<any>([{ title: "speaker 1", message: text }]);
 
   const [input, setInput] = useState("");
 
-  const transcriptUpdate = async () => {
-    const res = await axios.post(
-      "https://testsalescrm.nextsolutions.in/api/audio-transcript/create/by-audio-url",
-      {
-        audio_url: src,
-        leadId: data.leadId._id,
-        callId: data._id,
-      }
-    );
+  // const transcriptUpdate = async () => {
+  //   const res = await axios.post(
+  //     "https://testsalescrm.nextsolutions.in/api/audio-transcript/create/by-audio-url",
+  //     {
+  //       audio_url: src,
+  //       leadId: data.leadId._id,
+  //       callId: data._id,
+  //     }
+  //   );
 
-    setArr([{ title: "speaker 1", message: res.data.result.text }]);
-  };
+  //   setArr([{ title: "speaker 1", message: res.data.result.text }]);
+  // };
 
-  React.useEffect(() => {
-    if (Arrr) {
-      if (Arrr.length === 0) {
-        transcriptUpdate();
-      }
-    }
-  });
+  // React.useEffect(() => {
+  //   if (Arrr) {
+  //     if (Arrr.length === 0) {
+  //       transcriptUpdate();
+  //     }
+  //   }
+  // });
 
   return (
     <div>
