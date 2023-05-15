@@ -34,7 +34,7 @@ const Search = ({ change }: any) => {
             placeholder="Search contact..."
           />
         </div>
-        <div
+        {/* <div
           className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer "
           onClick={() => {
             const box = ref.current.getBoundingClientRect();
@@ -53,7 +53,7 @@ const Search = ({ change }: any) => {
               objectFit: "contain",
             }}
           />
-        </div>
+        </div> */}
       </div>
     </>
   );

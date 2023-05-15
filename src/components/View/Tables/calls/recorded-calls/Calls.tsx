@@ -109,6 +109,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setLoading(false);
     setChecked(true);
   };
+  
   const Leads = items;
   // console.log(Leads);
   // console.log(`limit is ${limit}`);

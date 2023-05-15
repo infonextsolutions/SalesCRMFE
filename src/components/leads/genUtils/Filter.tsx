@@ -3,7 +3,7 @@ import DualRange from "@/utils/dualRange";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const AddText = ({ top, title, width, list }: any) => {
+const AddText = ({ top, title, width, list, change }: any) => {
   return (
     <div
       style={{
@@ -16,6 +16,9 @@ const AddText = ({ top, title, width, list }: any) => {
       </p>
       <div className="w-[100%] px-[10px] border-[1px]   rounded-xl border-[#ccc]">
         <select
+          onChange={(e) => {
+            change(e.target.value);
+          }}
           id="countries"
           className="outline-none cursor-pointer capitalize text-gray-900 py-[7px]   text-sm tracking-wide text-[#3F434A] font-medium  block w-full bg-white"
         >
@@ -101,6 +104,8 @@ const Filter = ({ cancel, left, top }: any) => {
     };
   });
 
+  const [content, setContent] = useState<any>({});
+
   return (
     <div
       className="w-[400px] rounded-lg shadow-2xl min-h-[400px] bg-[#fff] py-[10px] px-[20px] absolute"
@@ -126,18 +131,28 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 0,
           },
           {
-            title: "state",
+            title: "Demo Inquiry",
             selected: false,
             value: 1,
           },
           {
-            title: "checked",
+            title: "Trial Inquiry",
             selected: false,
             value: 2,
           },
+          {
+            title: "Product Inquiry",
+            selected: false,
+            value: 3,
+          },
+          {
+            title: "Referral Inquiry",
+            selected: false,
+            value: 4,
+          },
         ]}
       />
-      <AddText
+      {/* <AddText
         top={10}
         title={"Status"}
         list={[
@@ -157,8 +172,8 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 2,
           },
         ]}
-      />
-      <AddText
+      /> */}
+      {/* <AddText
         top={10}
         title={"Product/Service"}
         list={[
@@ -178,7 +193,7 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 2,
           },
         ]}
-      />
+      /> */}
       <AddText
         top={10}
         title={"Lead source"}
@@ -221,7 +236,7 @@ const Filter = ({ cancel, left, top }: any) => {
           },
         ]}
       />
-      <LastActivity />
+      {/* <LastActivity /> */}
       <AddText
         top={10}
         title={"Lead inquiry Type"}
@@ -264,8 +279,8 @@ const Filter = ({ cancel, left, top }: any) => {
           },
         ]}
       />
-      <DualRange title={"Deal Size"} />
-      <DualRange title={"Existing"} />
+      {/* <DualRange title={"Deal Size"} />
+      <DualRange title={"Existing"} /> */}
     </div>
   );
 };

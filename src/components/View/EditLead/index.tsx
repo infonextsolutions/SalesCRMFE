@@ -3,6 +3,38 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import { LeadId } from "@/types/leadId";
 
+const AddDropDown = ({ top, title, width, list, change }: any) => {
+  return (
+    <div
+      style={{
+        width: width ? width : "100%",
+        marginTop: top ? top : "10px",
+      }}
+    >
+      <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
+        {title}
+      </p>
+      <div className="w-[100%] px-[10px] border-[1px]   rounded-xl border-[#ccc]">
+        <select
+          onChange={(e) => {
+            change(e.target.value);
+          }}
+          id="countries"
+          className="outline-none cursor-pointer capitalize text-gray-900 py-[7px]   text-sm tracking-wide text-[#3F434A] font-medium  block w-full bg-white"
+        >
+          {list.map((item: any, i: any) => {
+            return (
+              <option value={item.value} key={i} selected={item.selected}>
+                {item.title}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+    </div>
+  );
+};
+
 const AddText = ({ top, title, width, change }: any) => {
   return (
     <div
