@@ -17,9 +17,11 @@ const KanbanItem = ({ item, i, Item }: any) => {
   };
   const companyId = () => {
     const route = `${pathname}/${Item._id}/company-profile`;
+    replace(route);
   };
   const clientId = () => {
     const route = `${pathname}/${Item._id}/client-poc-profile`;
+    replace(route);
   };
 
   const [notes, setNotes] = React.useState(false);
