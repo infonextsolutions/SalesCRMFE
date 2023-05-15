@@ -619,7 +619,7 @@ const Audio = ({ data }: props) => {
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
             <h1 className="text-[16px] font-medium text-[#888] text-center  capitalize mb-[10px]">
-              Sorry, there is no recording or transcript as the Call Was'nt
+              Sorry, there is no recording or transcript as the Call Was&apos;nt
               Answered
             </h1>
           </div>
