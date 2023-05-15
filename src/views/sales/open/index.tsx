@@ -121,7 +121,6 @@ const SalesOpen = ({ data }: props) => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
-
       {imports && (
         <Backdrop bool={bool}>
           <ImportLead cancel={cancelImports} />
