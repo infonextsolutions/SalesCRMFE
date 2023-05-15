@@ -1,6 +1,7 @@
+import React, { useState } from "react";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
-import React, { useState } from "react";
+import { LeadId } from "@/types/leadId";
 
 const AddText = ({ top, title, width, change }: any) => {
   return (
@@ -25,13 +26,15 @@ const AddText = ({ top, title, width, change }: any) => {
   );
 };
 
-const EditLead = ({ cancel, leadid, data }: any) => {
+const EditLead = ({ cancel, data }: { cancel: any; data: LeadId }) => {
   const [content, setContent] = useState<any>({});
 
   const submit = () => {
     const url = "https://testsalescrm.nextsolutions.in/api/leads/update";
+
     axios
       .post(url, {
+        ...data,
         id: data._id,
         inquiry: content.inquiry,
         win_probability: content.win_probability,
@@ -67,13 +70,6 @@ const EditLead = ({ cancel, leadid, data }: any) => {
             title="Existing Budget"
             change={(e: any) => {
               setContent({ ...content, ExistingBudget: e });
-            }}
-          />
-          <AddText
-            top={"10px"}
-            title="Win Probability"
-            change={(e: any) => {
-              setContent({ ...content, win_probability: e });
             }}
           />
           <AddText

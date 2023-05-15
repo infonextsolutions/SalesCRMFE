@@ -426,7 +426,7 @@ const ParticipantsHover = ({
       {data.owners.map((item, i) => {
         return (
           <p
-          key={i}
+            key={i}
             className={`${
               i === 0 ? "text-renal-blue mt-[19px]" : "text-[#000]"
             } text-[13px] ml-[2px]  w-[100%] font-medium`}
@@ -462,15 +462,17 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
   const [checked, setChecked] = useState(true);
   const [LeadData, setLeadData] = useState<Lead>(example);
   const GetLeadData = () => {
-    axios
-      .get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${CallData.leadId._id}`
-      )
-      .then((e: any) => {
-        console.log(e);
-        setChecked(false);
-        setLeadData(e.data.result);
-      });
+    if (CallData.leadId?._id) {
+      axios
+        .get(
+          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${CallData.leadId._id}`
+        )
+        .then((e: any) => {
+          console.log(e);
+          setChecked(false);
+          setLeadData(e.data.result);
+        });
+    }
   };
 
   console.log(LeadData);
@@ -498,7 +500,7 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
   }
 
   function calculateTimeDifference(startTime: any, endTime: any) {
-    if (startTime  && endTime) {
+    if (startTime && endTime) {
       const startDateTime: any = new Date(startTime);
       const endDateTime: any = new Date(endTime);
 
@@ -541,12 +543,12 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
             // text={"Discussion on PX features"}
             text={CallData?.call_title}
             click={true}
-            route={`${pathname}/${id}/audio-call`}
+            // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
             left={10}
-            text={CallData.leadId._id}
+            text={CallData.leadId?._id}
             click={true}
             route={`/sales/open/${CallData._id}/lead-profile`}
             color={"#000"}
@@ -591,7 +593,11 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
             upperText={convertTimestampToDate(CallData.DateCreated)}
             bottomText={"on " + convertTimestampToTime(CallData.DateCreated)}
           />
-          <CallItem width={120} left={10} text={calculateTimeDifference(CallData.StartTime,CallData.EndTime)} />
+          <CallItem
+            width={120}
+            left={10}
+            text={calculateTimeDifference(CallData.StartTime, CallData.EndTime)}
+          />
           <CallItem width={110} left={20} text={"-"} />
           <CallItem
             width={110}

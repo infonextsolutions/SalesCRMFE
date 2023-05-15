@@ -1,16 +1,18 @@
 import BigSpinner from "@/components/loader/BigSpinner";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
+import axios from "axios";
 import { useRouter } from "next/router";
 import React, { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = React.lazy(() => import("@/views/Dashboard/index"));
 
-const DashboardPage = () => {
+const DashboardPage = ({ data1, data2, data3 }: any) => {
+
+
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
-
 
   const dispatch = useDispatch();
 
@@ -56,7 +58,7 @@ const DashboardPage = () => {
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
-            <Dashboard />
+            <Dashboard data={{ first: data1, second: data2, third: data3 }} />
           </Suspense>
         )}
       </Suspense>
@@ -66,3 +68,25 @@ const DashboardPage = () => {
 
 export default DashboardPage;
 
+// https://testsalescrm.nextsolutions.in/api/pitch-analysis/find-one
+
+export async function getServerSideProps({ query, ...params }: any) {
+  const response1 = await axios.get(
+    "https://testsalescrm.nextsolutions.in/api/pitch-analysis/find-one"
+  );
+  const response2 = await axios.get(
+    "https://testsalescrm.nextsolutions.in/api/script-analysis/find-one"
+  );
+  const response3 = await axios.get(
+    "https://testsalescrm.nextsolutions.in/api/selling-analysis/find-one"
+  );
+
+  return {
+    props: {
+      // TODO: Can do better error handling here by passing another property error in the component
+      data1: response1.data || {},
+      data2: response2.data || {},
+      data3: response3.data || {},
+    }, // will be passed to the page component as props
+  };
+}

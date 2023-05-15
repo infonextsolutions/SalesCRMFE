@@ -34,7 +34,7 @@ const ChartContainer = ({ children }: any) => {
   );
 };
 
-const Selling = () => {
+const Selling = ({ selling }: { selling: Result }) => {
   return (
     <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
       <div className="w-[100%] flex items-center justify-between">
@@ -62,17 +62,31 @@ const Selling = () => {
         </div>
       </div>
       <ChartContainer>
-        <Chart title={"Consultative Selling"} percent={"20%"} />
-        <Chart title={"Empathy"} percent={"30%"} />
-        <Chart title={"Listening Skills"} percent={"50%"} />
-        <Chart title={"Confidence"} percent={"90%"} />
-        <Chart title={"Urgency Creation"} percent={"70%"} />
-        <Chart title={"Positive Energy"} percent={"60%"} />
-        <Chart title={"Rapport Building"} percent={"50%"} />
-        <Chart title={"Politeness"} percent={"50%"} />
+        <Chart title={"Consultative Selling"} percent={`${selling.consultative_selling}%`} />
+        <Chart title={"Empathy"} percent={`${selling.empathy}%`} />
+        <Chart title={"Listening Skills"} percent={`${selling.listening_skills}%`} />
+        <Chart title={"Confidence"} percent={`${selling.confidence}%`} />
+        <Chart title={"Urgency Creation"} percent={`${selling.urgency_creation}%`} />
+        <Chart title={"Positive Energy"} percent={`${selling.positive_energy}%`} />
+        <Chart title={"Rapport Building"} percent={`${selling.report_building}%`} />
+        <Chart title={"Politeness"} percent={`${selling.politeness}%`} />
       </ChartContainer>
     </div>
   );
 };
 
 export default Selling;
+
+export interface Result {
+  _id: string;
+  consultative_selling: number;
+  empathy: number;
+  listening_skills: number;
+  confidence: number;
+  urgency_creation: number;
+  positive_energy: number;
+  report_building: number;
+  politeness: number;
+  createdAt: string;
+  updatedAt: string;
+}
