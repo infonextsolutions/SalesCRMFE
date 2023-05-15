@@ -62,7 +62,7 @@ const CallProfile = ({ data }: any) => {
         </Backdrop>
       )}
       <Navigation
-        title="Calls>Recorided Calls>Discussion on PX features"
+        title="Calls>Recorded Calls>Discussion on PX features"
         buttons={[
           {
             text: "Share",

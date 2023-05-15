@@ -13,7 +13,7 @@ const menuOptions = [
     list: [
       { title: "Open", route: "open" },
       { title: "Closed", route: "closed" },
-      { title: "Estimates and Insights", route: "estimates-and-insights" },
+      // { title: "Estimates and Insights", route: "estimates-and-insights" },
     ],
     icon: "Sort",
   },
@@ -22,7 +22,7 @@ const menuOptions = [
     route: "calls",
     list: [
       { title: "Recorded Calls", route: "recorded-calls" },
-      { title: "Call Library", route: "call-library" },
+      // { title: "Call Library", route: "call-library" },
       { title: "Active Calls", route: "active-calls" },
     ],
     icon: "Phone",
@@ -32,7 +32,7 @@ const menuOptions = [
     route: "team",
     list: [
       { title: "Team Performence", route: "team-performence" },
-      { title: "Coaching", route: "coaching" },
+      // { title: "Coaching", route: "coaching" },
     ],
     icon: "Tasks",
   },
