@@ -73,10 +73,10 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
           <AddText
             top={"10px"}
             title="Phone"
-            value="7669481778"
+            value="8076166051"
             change={(e: any) => {}}
             click={() => {
-              makecall("7669481778");
+              makecall("8076166051");
             }}
           />
           <p className="text-[14px] text-center text-[#8A9099] mt-[10px] font-medium">

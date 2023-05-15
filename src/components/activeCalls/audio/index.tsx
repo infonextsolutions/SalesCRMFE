@@ -18,7 +18,7 @@ const example = {
   To: "07669481778",
   From: "09639973583",
   PhoneNumberSid: "01140845638",
-  Status: "completed",
+  Status: "loading",
   StartTime: "2023-05-12T06:56:19.000Z",
   EndTime: "2023-05-12T06:57:46.000Z",
   Duration: "1970-01-01T00:00:00.087Z",
@@ -541,16 +541,18 @@ const Audio = ({ data }: props) => {
 
   const callit = () => {
     const url = "https://testsalescrm.nextsolutions.in/api/calling/call-status";
-    axios
-      .post(url, {
-        sid: data.Sid,
-        leadId: data.leadId._id,
-      })
-      .then((e) => {
-        console.log(e);
-        setCallData(e.data.result);
-        setCheck(false);
-      });
+    if (data.leadId?._id) {
+      axios
+        .post(url, {
+          sid: data.Sid,
+          leadId: data.leadId._id,
+        })
+        .then((e) => {
+          console.log(e);
+          setCallData(e.data.result);
+          setCheck(false);
+        });
+    }
   };
 
   React.useEffect(() => {
@@ -629,6 +631,16 @@ const Audio = ({ data }: props) => {
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
             <h1 className="text-[16px] font-medium text-[#888] text-center  capitalize mb-[10px]">
               Sorry, the Call status failed for some unknown reason!
+            </h1>
+          </div>
+        </>
+      )}
+      {callData.Status === "loading" && (
+        <>
+          {/* <AudioPlayer src={data.RecordingUrl} /> */}
+          <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
+            <h1 className="text-[16px] font-medium text-[#888] text-center  capitalize mb-[10px]">
+              The Results are not available right now, please try again later
             </h1>
           </div>
         </>

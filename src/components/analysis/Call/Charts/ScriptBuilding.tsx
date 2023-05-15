@@ -34,7 +34,8 @@ const ChartContainer = ({ children }: any) => {
   );
 };
 
-const ScriptBuilding = () => {
+const ScriptBuilding = ({ script }: { script: Root }) => {
+  console.log(script);
   return (
     <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
@@ -62,16 +63,42 @@ const ScriptBuilding = () => {
         </div>
       </div>
       <ChartContainer>
-        <Chart title={"Opening"} percent={"20%"} />
-        <Chart title={"Lead Qualififcation"} percent={"30%"} />
-        <Chart title={"Need Discovery"} percent={"50%"} />
-        <Chart title={"Key Value Proposition"} percent={"90%"} />
-        <Chart title={"Product Knowledge"} percent={"70%"} />
-        <Chart title={"Price Discussion"} percent={"60%"} />
-        <Chart title={"Closing"} percent={"50%"} />
+        {/* percent={`${script.closing}%`} */}
+        <Chart title={"Opening"} percent={`${script.opening}%`} />
+        <Chart
+          title={"Lead Qualififcation"}
+          percent={`${script.lead_qualification}%`}
+        />
+        <Chart title={"Need Discovery"} percent={`${script.need_discovery}%`} />
+        <Chart
+          title={"Key Value Proposition"}
+          percent={`${script.key_value_proposition}%`}
+        />
+        <Chart
+          title={"Product Knowledge"}
+          percent={`${script.product_knowledge}%`}
+        />
+        <Chart
+          title={"Price Discussion"}
+          percent={`${script.price_discussion}%`}
+        />
+        <Chart title={"Closing"} percent={`${script.closing}%`} />
       </ChartContainer>
     </div>
   );
 };
 
 export default ScriptBuilding;
+
+export interface Root {
+  _id: string;
+  opening: number;
+  lead_qualification: number;
+  need_discovery: number;
+  key_value_proposition: number;
+  product_knowledge: number;
+  price_discussion: number;
+  closing: number;
+  createdAt: string;
+  updatedAt: string;
+}

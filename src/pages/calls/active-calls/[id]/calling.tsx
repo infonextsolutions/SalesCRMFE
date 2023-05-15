@@ -36,22 +36,22 @@ const AudioProfile = ({ data, scripts }: any) => {
       <Navigation
         title="Calls>Active Calls>Discussion on PX features"
         buttons={[
-          {
-            text: "Refresh",
-            dropdown: true,
-            id: 1,
-            light: false,
-            list: [],
-            onClick1: async () => {
-              const url =
-                "https://testsalescrm.nextsolutions.in/api/calling/call-status";
-              axios.post(url, {
-                sid: "8af470ce2b4befc3f0e8292d237e175b",
-              }).then((e)=>{
-                console.log(e.data);
-              })
-            },
-          },
+          // {
+          //   text: "Refresh",
+          //   dropdown: true,
+          //   id: 1,
+          //   light: false,
+          //   list: [],
+          //   onClick1: async () => {
+          //     const url =
+          //       "https://testsalescrm.nextsolutions.in/api/calling/call-status";
+          //     axios.post(url, {
+          //       sid: "8af470ce2b4befc3f0e8292d237e175b",
+          //     }).then((e)=>{
+          //       console.log(e.data);
+          //     })
+          //   },
+          // },
           {
             text: "Make Call",
             dropdown: true,
