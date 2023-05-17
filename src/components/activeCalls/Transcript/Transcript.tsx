@@ -64,8 +64,10 @@ const Transcript = ({
   const arr = [];
   for (let i = 0; i < utterances.length; i++) {
     arr.push({
-      title: utterances[i].speaker==="A"?"A":"B",
+      title: utterances[i].speaker === "A" ? "A" : "B",
       message: utterances[i].text,
+      start: utterances[i].start,
+      end: utterances[i].end,
     });
   }
 
@@ -133,6 +135,12 @@ const Transcript = ({
   //   }
   // });
 
+  function convertMilliseconds(milliseconds: any) {
+    let seconds = Math.floor(milliseconds / 1000) % 60;
+    let minutes = Math.floor(milliseconds / (1000 * 60));
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  }
+
   return (
     <div>
       <Search
@@ -175,10 +183,11 @@ const Transcript = ({
                   <p
                     className="text-[#304FFD] shrink-0 w-[100px] font-medium text-[15px] mr-[30px] tracking-wide"
                     style={{
-                      color:item.title==="A" ? "#304FFD" : "#FF965D",
+                      color: item.title === "A" ? "#304FFD" : "#FF965D",
                     }}
                     dangerouslySetInnerHTML={{
-                      __html: `00:05 ${item.title}:`,
+                      // __html: `00:05 ${item.title}:`,
+                      __html: `${convertMilliseconds(item.start)} ${item.title}:`,
                     }}
                   ></p>
                   <p
