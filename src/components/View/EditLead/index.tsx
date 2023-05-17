@@ -59,15 +59,58 @@ const AddText = ({ top, title, width, change }: any) => {
 };
 
 const EditLead = ({ cancel, data }: { cancel: any; data: LeadId }) => {
-  const [content, setContent] = useState<any>({});
+  const [content, setContent] = useState<any>({})
+  //   companyId:data.companyId._id,
+  //   company_name,
+  //   company_website_url,
+  //   company_icon,
+  //   company_location,
+  //   company_product_category,
+  //   company_description,
+  //   customerId,
+  //   customer_name,
+  //   customer_contact,
+  //   customer_email,
+  //   designation,
+  //   gender,
+  //   industry,
+  //   interested_product,
+  //   id,
+  //   potential_deal_size,
+  //   win_probability,
+  //   created_by,
+  //   last_updated_by,
+  //   activity_history,
+  //   document_attached,
+  //   conversation_history,
+  //   customer_name,
+  //   inquiry,
+  //   existing_budget,
+  //   close_date,
+  //   last_activity,
+  //   leadStatus,
+  //   leadStage,
+  //   follow_up_action,
+  //   next_action,
+  //   lead_title,
+  //   lead_description,
+  //   source
+  // );
   console.log(data);
+  console.log({
+    id: data._id,
+    lead_title: content.lead_title,
+    companyId: data.companyId._id,
+    customerId: data.companyId._id,
+  });
   const submit = () => {
     const url = "https://testsalescrm.nextsolutions.in/api/leads/update";
     axios
-      .post(url, {
-        ...data,
+      .put(url, {
         id: data._id,
         lead_title: content.lead_title,
+        companyId: data.companyId._id,
+        customerId: data.companyId._id,
       })
       .then((e: any) => {
         console.log(e);
