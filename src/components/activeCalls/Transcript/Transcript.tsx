@@ -44,10 +44,12 @@ const Transcript = ({
   src,
   data,
   text,
+  utterances,
 }: {
   src: any;
   data: Recorded;
   text: any;
+  utterances: any;
 }) => {
   //   url = https://testsalescrm.nextsolutions.in/api/audio-transcript/create/by-audio-url
   // method = post
@@ -57,7 +59,16 @@ const Transcript = ({
   //     "callId":"34567890876546788"
   // }
 
-  const arr = new Array(10).fill(10);
+  console.log(utterances);
+
+  const arr = [];
+  for (let i = 0; i < utterances.length; i++) {
+    arr.push({
+      title: utterances[i].speaker==="A"?"A":"B",
+      message: utterances[i].text,
+    });
+  }
+
   const arrr: any = [
     {
       title: "Interviewer",
@@ -96,7 +107,8 @@ const Transcript = ({
         "Because I was paid to train and employed at the same time. In the 70s, things were very different in [???] of jobs and employment...",
     },
   ];
-  const [Arrr, setArr] = useState<any>([{ title: "speaker 1", message: text }]);
+  const [Arrr, setArr] = useState<any>(arr);
+  // const [Arrr, setArr] = useState<any>([{ title: "speaker 1", message: text }]);
 
   const [input, setInput] = useState("");
 
@@ -163,7 +175,7 @@ const Transcript = ({
                   <p
                     className="text-[#304FFD] shrink-0 w-[100px] font-medium text-[15px] mr-[30px] tracking-wide"
                     style={{
-                      color: i % 2 === 0 ? "#304FFD" : "#FF965D",
+                      color:item.title==="A" ? "#304FFD" : "#FF965D",
                     }}
                     dangerouslySetInnerHTML={{
                       __html: `00:05 ${item.title}:`,

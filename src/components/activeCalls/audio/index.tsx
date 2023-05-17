@@ -610,6 +610,7 @@ const Audio = ({ data }: props) => {
           <Transcript
             src={data.RecordingUrl}
             data={data}
+            utterances={callData.transcriptId.utterances}
             text={callData.transcriptId.text}
           />
         </>
