@@ -615,6 +615,47 @@ const Audio = ({ data }: props) => {
           />
         </>
       )}
+      {callData.Status === "in-progress" && (
+        <>
+          <AudioPlayer src={data.RecordingUrl} />
+          <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
+            <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
+              call data
+            </h1>
+            <div className="w-full flex items-center">
+              <Image
+                src="/Images/dots/Dot.svg"
+                className="h-[18px] svg-ellipse-5 mr-[25px]"
+                alt=""
+                width={10}
+                height={10}
+              />
+              <p className="text-[#304FFD] text-[14px]">Participant 1:John</p>
+            </div>
+            <div className="w-full flex items-center mt-[6px]">
+              <Image
+                src="/Images/dots/Dot.svg"
+                className="h-[18px] svg-ellipse-6 mr-[25px]"
+                alt=""
+                width={10}
+                height={10}
+              />
+              <p className="text-[#FF965D] text-[14px]">
+                Participant 2:Shraddha
+              </p>
+            </div>
+          </div>
+          <Tracker title={"John"} list={list} color={"#304FFD"} />
+          <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
+          <Tracker title={"Topics"} list={list} color={"#0090FF"} />
+          <Transcript
+            src={data.RecordingUrl}
+            data={data}
+            utterances={callData.transcriptId.utterances}
+            text={callData.transcriptId.text}
+          />
+        </>
+      )}
       {callData.Status === "no-answer" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
