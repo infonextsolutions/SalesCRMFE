@@ -61,7 +61,7 @@ const Transcript = ({
 
   console.log(utterances);
 
-  const arr = [];
+  const arr :any= [];
   for (let i = 0; i < utterances.length; i++) {
     arr.push({
       title: utterances[i].speaker === "A" ? "A" : "B",
@@ -147,7 +147,7 @@ const Transcript = ({
         change={(e: any) => {
           setInput(e.target.value);
           const str = e.target.value;
-          const newArr = Arrr
+          const newArr = arr
             .filter(
               (item: any) =>
                 item.title.toLowerCase().includes(str.toLowerCase()) ||
