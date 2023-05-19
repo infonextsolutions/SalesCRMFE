@@ -147,7 +147,7 @@ const Transcript = ({
         change={(e: any) => {
           setInput(e.target.value);
           const str = e.target.value;
-          const newArr = arrr
+          const newArr = Arrr
             .filter(
               (item: any) =>
                 item.title.toLowerCase().includes(str.toLowerCase()) ||
