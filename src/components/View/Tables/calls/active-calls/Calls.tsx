@@ -19,6 +19,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [limit, setLimit]: any = useState(10);
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
+  const [selectAll, setSelectAll] = useState(false);
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
@@ -127,7 +128,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   console.log(Leads);
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
-  const [selectAll, setSelectAll] = useState(false);
 
   function sortArray(arr: any) {
     return arr.sort((a: any, b: any) => a - b);
@@ -216,6 +216,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
         <Header
           selectAll={() => {
+            console.log(selectAll)
             setSelectAll(!selectAll);
           }}
           win={() => {
@@ -258,6 +259,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
                 id={item._id}
                 CallData={item}
                 last={Leads.length - 1 === i}
+                selectAll={selectAll}
               />
             );
           })
@@ -280,36 +282,32 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               <option value="13">13</option>
             </select>
             <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${
-                (pageNumber + 1) * limit > totalLeads
-                  ? totalLeads
-                  : (pageNumber + 1) * limit
-              } of ${totalLeads}`}
+              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${(pageNumber + 1) * limit > totalLeads
+                ? totalLeads
+                : (pageNumber + 1) * limit
+                } of ${totalLeads}`}
             </p>
           </div>
           <div className="flex justify-center my-[45px] ">
             <div
-              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${
-                pageNumber === 0
-                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
-                  : "bg-[#e8ebfd] cursor-pointer"
-              }`}
+              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === 0
+                ? "bg-[#f5f5f5] opacity-30 cursor-auto"
+                : "bg-[#e8ebfd] cursor-pointer"
+                }`}
               onClick={setFirstPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != 0 ? "svg-blue" : ""
-                } rotate-180 translate-x-[6px]`}
+                className={`${pageNumber != 0 ? "svg-blue" : ""
+                  } rotate-180 translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != 0 ? "svg-blue" : ""
-                } rotate-180 translate-x-[-6px]`}
+                className={`${pageNumber != 0 ? "svg-blue" : ""
+                  } rotate-180 translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}
@@ -348,47 +346,40 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               containerClassName={"text-black flex justify-center gap-[8px]"}
               pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
               pageLinkClassName={``}
-              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-                pageNumber === 0 ? "bg-[#f5f5f5] opacity-30" : "bg-[#e8ebfd]"
-              }`}
-              previousLinkClassName={`flex justify-center ${
-                pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
-              }`}
-              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-                pageNumber === pageCount - 1
-                  ? "bg-[#f5f5f5] opacity-30"
-                  : "bg-[#e8ebfd]"
-              }`}
-              nextLinkClassName={`flex justify-center ${
-                pageNumber === pageCount - 1 ? "cursor-auto" : ""
-              }`}
+              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === 0 ? "bg-[#f5f5f5] opacity-30" : "bg-[#e8ebfd]"
+                }`}
+              previousLinkClassName={`flex justify-center ${pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
+                }`}
+              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === pageCount - 1
+                ? "bg-[#f5f5f5] opacity-30"
+                : "bg-[#e8ebfd]"
+                }`}
+              nextLinkClassName={`flex justify-center ${pageNumber === pageCount - 1 ? "cursor-auto" : ""
+                }`}
               breakClassName={""}
               breakLinkClassName={""}
               forcePage={pageNumber}
               activeClassName={`bg-renal-blue text-[#fff] rounded-[10px]`}
             />
             <div
-              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${
-                pageNumber === pageCount - 1
-                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
-                  : "bg-[#e8ebfd] cursor-pointer"
-              }`}
+              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === pageCount - 1
+                ? "bg-[#f5f5f5] opacity-30 cursor-auto"
+                : "bg-[#e8ebfd] cursor-pointer"
+                }`}
               onClick={setLastPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != pageCount - 1 ? "svg-blue" : ""
-                } translate-x-[6px]`}
+                className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""
+                  } translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != pageCount - 1 ? "svg-blue" : ""
-                } translate-x-[-6px]`}
+                className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""
+                  } translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}

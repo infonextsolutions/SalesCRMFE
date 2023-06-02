@@ -131,22 +131,22 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 0,
           },
           {
-            title: "Demo Inquiry",
+            title: "Demo Enquiry",
             selected: false,
             value: 1,
           },
           {
-            title: "Trial Inquiry",
+            title: "Trial Enquiry",
             selected: false,
             value: 2,
           },
           {
-            title: "Product Inquiry",
+            title: "Product Enquiry",
             selected: false,
             value: 3,
           },
           {
-            title: "Referral Inquiry",
+            title: "Referral Enquiry",
             selected: false,
             value: 4,
           },
@@ -217,7 +217,7 @@ const Filter = ({ cancel, left, top }: any) => {
       />
       <AddText
         top={10}
-        title={"Lead inquiry Type"}
+        title={"Lead enquiry Type"}
         list={[
           {
             title: "Demo Requested",
@@ -239,7 +239,7 @@ const Filter = ({ cancel, left, top }: any) => {
       {/* <LastActivity /> */}
       <AddText
         top={10}
-        title={"Lead inquiry Type"}
+        title={"Lead enquiry Type"}
         list={[
           {
             title: "Demo Requested",

@@ -34,7 +34,7 @@ const HeaderItem = ({
       style={{ width: width, marginLeft: left }}
     >
       <p
-        className="text-[#8A9099] uppercase text-[12px] font-medium tracking-wider"
+        className="text-[#000] uppercase text-[12px] font-bolc tracking-wider"
         style={{
           textAlign: align && "center",
         }}
@@ -80,7 +80,7 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
         <HeaderItem width={120} left={10} text={"lead stage"} />
         <HeaderItem width={120} left={10} text={"lead status"} />
         <HeaderItem width={120} left={20} text={"owner"} />
-        <HeaderItem width={150} left={10} text={"lead inquiry"} />
+        <HeaderItem width={150} left={10} text={"lead enquiry"} />
         <HeaderItem width={150} left={10} text={"product/service"} />
         <HeaderItem
           width={180}

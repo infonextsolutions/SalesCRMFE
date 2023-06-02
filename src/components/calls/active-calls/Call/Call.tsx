@@ -5,13 +5,25 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 
-const CallBox = ({ width }: any) => {
+const CallBox = ({ width, bool }: any) => {
+  const [check, setCheck] = useState(false);
+  React.useEffect(() => {
+    if (check) {
+      if (bool) {
+        ref.current.checked = true;
+      } else {
+        ref.current.checked = false;
+      }
+    }
+    setCheck(true);
+  }, [bool]);
+  const ref: any = useRef();
   return (
     <div
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" className="checkbox" />
+      <input type="checkbox" ref={ref} className="checkbox" />
     </div>
   );
 };
@@ -99,9 +111,8 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -331,7 +342,7 @@ const ParticipantsHover = ({ last, bounding }: any) => {
   );
 };
 
-const CallContainer = ({ id, CallData, last }: CallProps) => {
+const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -354,7 +365,7 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
           className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
           ref={wRef}
         >
-          <CallBox width={30} />
+          <CallBox width={30} bool={selectAll} />
           <CallItem
             width={200}
             left={20}
@@ -398,9 +409,8 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
-                true ? "text-[#3F434A]" : "text-[#8A9099]"
-              }`}
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
+                }`}
             >
               <span className="text-renal-blue ">Shraddha P.,</span> John C.,
               Aarti P.
@@ -459,4 +469,5 @@ interface CallProps {
   id: String;
   CallData: ActiveCall;
   last: any;
+  selectAll: any;
 }
