@@ -402,8 +402,8 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
                 true ? "text-[#3F434A]" : "text-[#8A9099]"
               }`}
             >
-              <span className="text-renal-blue ">Shraddha P.,</span> John C.,
-              Aarti P.
+              <span>Shraddha P.,</span> <span className="text-renal-blue ">John C.,
+              Aarti P. </span>
             </p>
           </div>
           <CallItem width={100} left={20} text={"John C"} />
