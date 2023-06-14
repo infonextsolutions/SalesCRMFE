@@ -40,7 +40,7 @@ const example = {
   win_probability: "80%",
   created_by: "Sales",
   customer_name: "Ishita Patel",
-  inquiry: "Trial Inquiry",
+  inquiry: "Trial Enquiry",
   existing_budget: "30001",
   leadStatus: "Close",
   leadStage: "Lost",
@@ -90,13 +90,25 @@ const example = {
   updatedAt: "2023-04-03T00:00:00.000Z",
 };
 
-const CallBox = ({ width }: any) => {
+const CallBox = ({ width, bool }: any) => {
+  const [check, setCheck] = useState(false);
+  React.useEffect(() => {
+    if (check) {
+      if (bool) {
+        ref.current.checked = true;
+      } else {
+        ref.current.checked = false;
+      }
+    }
+    setCheck(true);
+  }, [bool]);
+  const ref: any = useRef();
   return (
     <div
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" className="checkbox" />
+      <input type="checkbox" ref={ref} className="checkbox" />
     </div>
   );
 };
@@ -196,9 +208,8 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -427,9 +438,8 @@ const ParticipantsHover = ({
         return (
           <p
             key={i}
-            className={`${
-              i === 0 ? "text-renal-blue mt-[19px]" : "text-[#000]"
-            } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${i === 0 ? "text-renal-blue mt-[19px]" : "text-[#000]"
+              } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -441,7 +451,7 @@ const ParticipantsHover = ({
   );
 };
 
-const CallContainer = ({ id, CallData, last }: CallProps) => {
+const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -521,7 +531,7 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
           className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
           ref={wRef}
         >
-          <CallBox width={30} />
+          <CallBox width={30} bool={selectAll} />
           <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
@@ -543,7 +553,7 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
             // text={"Discussion on PX features"}
             text={CallData?.call_title}
             click={true}
-            // route={`${pathname}/${id}/audio-call`}
+          // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
@@ -573,9 +583,8 @@ const CallContainer = ({ id, CallData, last }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
-                true ? "text-[#3F434A]" : "text-[#8A9099]"
-              }`}
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
+                }`}
             >
               {LeadData.owners?.map((item, i) => {
                 return (
@@ -658,4 +667,5 @@ interface CallProps {
   id: String;
   CallData: ActiveCall;
   last: any;
+  selectAll: any;
 }

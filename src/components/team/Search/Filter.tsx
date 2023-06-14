@@ -199,7 +199,7 @@ const Filter = ({ cancel }: any) => {
       />
       <AddText
         top={10}
-        title={"Lead inquiry Type"}
+        title={"Lead enquiry Type"}
         list={[
           {
             title: "Demo Requested",
@@ -221,7 +221,7 @@ const Filter = ({ cancel }: any) => {
       <LastActivity />
       <AddText
         top={10}
-        title={"Lead inquiry Type"}
+        title={"Lead enquiry Type"}
         list={[
           {
             title: "Demo Requested",
