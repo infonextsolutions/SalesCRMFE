@@ -358,4 +358,3 @@ const AddLead = ({ cancel }: any) => {
 };
 
 export default AddLead;
-
