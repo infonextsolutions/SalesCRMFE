@@ -98,7 +98,7 @@ const Comments = () => {
               const letsSee = {
                 user: "Jane Cooper",
                 content: text,
-                last: "recently",
+                last: "16 hrs ago",
                 time: getCurrentTimeInHoursAndMinutes(),
                 reply: [],
               };
