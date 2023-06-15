@@ -69,6 +69,43 @@ const AddLead = ({ cancel }: any) => {
       </div> */}
       {/* Location dropdown */}
       <div className="py-1"></div>
+
+
+      {/* adde state dropdown in add a lead task no 39 */}
+      <div className="w-[100%]">
+        <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+          State*
+        </p>
+        <select
+          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+          onChange={(e: any) => {
+            setData({
+              ...data,
+              companyId: {
+                ...data.companyId,
+                company_State: e.target.value,
+              },
+            });
+          }}
+        >
+          <option value="" selected>
+            -- Select a State --
+          </option>
+          <option value="Delhi">Delhi</option>
+          <option value="UttarPradesh">UttarPradesh</option>
+          <option value="Goa">Goa</option>
+          <option value="Rajastha">Rajasthan</option>
+          <option value="kerela">Kerela</option>
+        </select>
+      </div>
+
+      <div className="py-1"></div>
+
+
+
+
+
+
       <div className="w-[100%]">
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
           Location*
@@ -95,6 +132,9 @@ const AddLead = ({ cancel }: any) => {
           <option value="Bangalore">Bangalore</option>
         </select>
       </div>
+
+
+
       {/* <AddText
         top={"10px"}
         change={(e: any) => {
@@ -102,7 +142,41 @@ const AddLead = ({ cancel }: any) => {
         }}
         title="Client POC Name"
       />
+      
       <AddText top={"10px"} title="Client POC Designation" /> */}
+
+      {/* added client POC Name according to UI and setData function needs to be updated */}
+      <AddText
+        top={"10px"}
+        title="Client POC Name"
+        change={(e: any) => {
+          setData({
+            ...data,
+            customerId: {
+              ...data.customerId,
+              POC_Name: e,
+            },
+          });
+        }}
+      />
+
+
+      {/* added client POC Designation according to UI and setData function needs to be updated */}
+      <AddText
+        top={"10px"}
+        title="Client POC Designation"
+        change={(e: any) => {
+          setData({
+            ...data,
+            customerId: {
+              ...data.customerId,
+              POC_Designation: e,
+            },
+          });
+        }}
+      />
+
+
       <AddText
         top={"10px"}
         title="Phone"
@@ -116,6 +190,8 @@ const AddLead = ({ cancel }: any) => {
           });
         }}
       />
+
+
       <AddText
         top={"10px"}
         title="Email"
@@ -128,6 +204,8 @@ const AddLead = ({ cancel }: any) => {
       />
       {/* product/service */}
       <div className="py-1"></div>
+
+
       {/* <div className="w-[100%]">
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
           Product/Service*
@@ -147,6 +225,40 @@ const AddLead = ({ cancel }: any) => {
           <option value="P3">P3</option>
         </select>
       </div> */}
+
+
+
+        {/* adde product dropdown in add a lead task no 39 */}
+      <div className="w-[100%]">
+        <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+          Product/Service*
+        </p>
+        <select
+          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+          onChange={(e: any) => {
+            setData({
+              ...data,
+              companyId: {
+                ...data.companyId,
+                product: e.target.value,
+              },
+            });
+          }}
+        >
+          
+         <option value="" selected>Product/Service</option>
+          <option value="P1">P1</option>
+          <option value="P2">P2</option>
+          <option value="P3">P3</option>
+       
+        </select>
+      </div>
+
+      <div className="py-1"></div>
+
+
+
+      
       {/* Lead Inquiry */}
       <div className="py-1"></div>
       <div className="w-[100%]">
@@ -246,3 +358,4 @@ const AddLead = ({ cancel }: any) => {
 };
 
 export default AddLead;
+
