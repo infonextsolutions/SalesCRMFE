@@ -92,59 +92,7 @@ const LeadItem = ({
     </div>
   );
 };
-const LeadStatus = ({
-  width,
-  text,
-  left,
-  align,
-  textLeft,
-  link,
-  click,
-  route,
-  onClick,
-  color,
-  weight,
-}: any) => {
-  const { push } = useRouter();
-  const [status,setStatus] = useState(text);
-  return (
-    <div
-      className={`flex items-center  h-[20px] shrink-0 `}
-      style={{ width: width, marginLeft: left }}
-    >
-        <p
-          className="text-[13px] tracking-wide cursor-pointer"
-          style={{
-            textAlign: align && "center",
-            marginLeft: textLeft && `${textLeft}px`,
-            color: color ? color : "#8A9099",
-            fontWeight: weight ? weight : 500,
-          }}
-          onClick={() => {
-            if (click) {
-              push(route);
-            }
-            if (onClick) {
-              onClick();
-            }
-          }}
-        >
-          {/* {text ? text : "-"} */}
-          <select name="status" id="status"
-          className="bg-transparent w-20 border-1"
-          value={status} onChange={(e)=>{
-            setStatus(e.target.value);
-          }}>
-            <option value="open">Open</option>
-            <option value="close">Close</option>
-          </select>
-          
-           
-        </p>
-      
-    </div>
-  );
-}
+
 
 const LeadItemMultiple = ({
   width,
@@ -599,8 +547,7 @@ const LeadContainer = ({
           />
           <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
           <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
-          {/* <LeadItem width={120} left={10} text={leadStatus} textLeft={5} /> */}
-          <LeadStatus width={120} left={10} text={leadStatus} textLeft={0}/>
+          <LeadItem width={120} left={10} text={leadStatus} textLeft={5} /> 
           <LeadItem width={130} left={10} textLeft={10} text={"John C."} />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
           <LeadItem width={150} left={10} textLeft={10} text={"Product A"} />
