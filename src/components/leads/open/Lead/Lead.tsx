@@ -12,6 +12,7 @@ import Notes1 from "@/components/View/NotesSalesView";
 import EmailPage from "../../../View/Email/index";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
+import ButtonDropDown from "@/utils/Button/Button";
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -91,6 +92,7 @@ const LeadItem = ({
     </div>
   );
 };
+
 
 const LeadItemMultiple = ({
   width,
@@ -340,6 +342,7 @@ const MidPath = () => {
   );
 };
 
+
 const LeadContainer = ({
   index,
   id,
@@ -544,7 +547,7 @@ const LeadContainer = ({
           />
           <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
           <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
-          <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
+          <LeadItem width={120} left={10} text={leadStatus} textLeft={5} /> 
           <LeadItem width={130} left={10} textLeft={10} text={"John C."} />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
           <LeadItem width={150} left={10} textLeft={10} text={"Product A"} />

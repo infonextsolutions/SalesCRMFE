@@ -53,7 +53,7 @@ const ButtonDropDown = ({
       className={`${icon ? "pl-[32px]" : ""} ${
         border ? "border-[1px] border-[#ccc]" : ""
       } ${
-        light ? "bg-white" : "bg-renal-blue"
+        light ? "bg-white hover:bg-gray-200" : "bg-renal-blue hover:bg-[#350dff]"
       } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px]  p-[10px] relative`}
       onMouseOver={() => {
         setMouseOver(true);

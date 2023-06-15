@@ -98,7 +98,7 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
             }}
           />
         </div>
-        <div className="absolute right-[40px] bottom-[40px] mt-[130px] flex ">
+        <div className="absolute right-[40px] bottom-[40px] mt-[130px] flex">
           <SimpleButton
             theme={2}
             text={"Cancel"}
