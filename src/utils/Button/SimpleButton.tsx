@@ -11,15 +11,15 @@ const SimpleButton = ({
 }: ButtonProps) => {
   const Theme =
     theme === 1
-      ? "bg-renal-blue"
+      ? "bg-renal-blue hover:bg-[#350dff]"
       : theme === 2
-      ? "bg-[#f5f5f5]"
+      ? "bg-[#f5f5f5] hover:bg-gray-200"
       : theme === 3
       ? "bg-white"
       : "bg-[#e8ebfd]";
   return (
     <div
-      className={`${Theme} rounded-2xl ml-[${left ? left : 0}px] mr-[${
+      className={`${Theme}  rounded-2xl ml-[${left ? left : 0}px] mr-[${
         right ? right : 0
       }px] flex items-center justify-center cursor-pointer`}
       onClick={click}

@@ -2,6 +2,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import DualRange from "@/utils/dualRange";
 import Image from "next/image";
 import React, { useState } from "react";
+import SimpleButton from "@/utils/Button/SimpleButton";
 
 const AddText = ({ top, title, width, list, change }: any) => {
   return (
@@ -131,28 +132,30 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 0,
           },
           {
-            title: "Demo Enquiry",
+            title: "Demo Inquiry",
             selected: false,
             value: 1,
           },
           {
-            title: "Trial Enquiry",
+            title: "Trial Inquiry",
             selected: false,
             value: 2,
           },
           {
-            title: "Product Enquiry",
+            title: "Product Inquiry",
             selected: false,
             value: 3,
           },
           {
-            title: "Referral Enquiry",
+            title: "Referral Inquiry",
             selected: false,
             value: 4,
           },
         ]}
       />
-      {/* <AddText
+
+      {/* Status, product is set up bug no 36 */}
+      <AddText
         top={10}
         title={"Status"}
         list={[
@@ -172,8 +175,11 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 2,
           },
         ]}
-      /> */}
-      {/* <AddText
+      />
+
+
+
+      <AddText
         top={10}
         title={"Product/Service"}
         list={[
@@ -193,7 +199,7 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 2,
           },
         ]}
-      /> */}
+      />
       <AddText
         top={10}
         title={"Lead source"}
@@ -217,7 +223,7 @@ const Filter = ({ cancel, left, top }: any) => {
       />
       <AddText
         top={10}
-        title={"Lead enquiry Type"}
+        title={"Lead inquiry Type"}
         list={[
           {
             title: "Demo Requested",
@@ -237,9 +243,13 @@ const Filter = ({ cancel, left, top }: any) => {
         ]}
       />
       {/* <LastActivity /> */}
+
+        <LastActivity/>
+
+
       <AddText
         top={10}
-        title={"Lead enquiry Type"}
+        title={"Lead inquiry Type"}
         list={[
           {
             title: "Demo Requested",
@@ -279,8 +289,21 @@ const Filter = ({ cancel, left, top }: any) => {
           },
         ]}
       />
-      {/* <DualRange title={"Deal Size"} />
-      <DualRange title={"Existing"} /> */}
+      <DualRange title={"Deal Size"}  />
+      <DualRange title={"Existing"} />
+
+       <div className="w-[100%] mt-[70px] text-[#ffffff] flex ">
+        <SimpleButton
+          theme={1}
+          text={"Save"}
+          left={0}
+          right={0}
+          click={() => {
+            // submit();
+          }}
+        />
+       
+      </div>
     </div>
   );
 };

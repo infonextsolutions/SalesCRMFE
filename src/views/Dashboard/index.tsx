@@ -2,6 +2,7 @@ import CallAnalysis from "@/components/analysis/Call";
 import Navigation from "@/components/app/Navigation";
 import React from "react";
 
+// const Dashboard = ({ data }: any) => {
 const Dashboard = ({ data }: any) => {
   console.log(data.first);
   console.log(data.second);
