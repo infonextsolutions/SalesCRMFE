@@ -1,5 +1,6 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import { create } from "domain";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -14,17 +15,18 @@ const DropItems = ({ title, list, top }: any) => {
       <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
         {title}
       </p>
+
       <select
-        id="countries"
         className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
       >
-        {list.map((item: any, i: any) => {
-          return (
-            <option key={i} value={item.value} selected={item.selected}>
+        
+      {list.map((item: any, i: any) => (
+          
+            <option className="text-[#3F434A] " key={i} value={item.value} selected={item.selected}>
               {item.title}
             </option>
-          );
-        })}
+          )
+        )} 
       </select>
     </div>
   );
@@ -70,6 +72,55 @@ const AddTextArea = ({ top, title, width }: any) => {
     </div>
   );
 };
+const AddMember = ({title}:any) =>{
+  const [members,setMembers] = React.useState([]);
+  const [value,setValue] = React.useState()
+  const addMember = (e:any) =>{ 
+    if(e.keyCode === 13 && value){
+      setMembers([...members, value]);
+      setValue("");
+    } 
+  }
+
+  const removeMemberHandler = (removeMember:any) =>{
+    const newMembers = members.filter((member)=> member !==removeMember);
+    setMembers(newMembers);
+
+  }
+  return(<>
+  <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+  {title} 
+  </p>
+  <div className=" text-gray-700 flex flex-wrap border border-[#e8e9eb] mt-[10px] rounded-[13px] tracking-wide text-[14px] font-medium px-[14px] h-auto ">
+      <ul className="flex flex-wrap my-[3px] gap-2">
+      {
+        members.length >=1 && members.map((member,i)=>(
+      <li className="flex items-center gap-1 px-2 bg-gray-200 rounded-md">{member}
+       
+         <div
+        className="cursor-pointer"
+        onClick={()=>removeMemberHandler(member)}
+      >
+        <Image
+          className="w-[12px] h-[12px]"
+          src={getBasicIcon("Cross")}
+          width={10}
+          height={10}
+          alt=""
+        />
+      </div> 
+       
+        </li>
+        ))
+      }
+        
+      </ul>
+    <input type="text"  className=" bg-white text-[#3f434a] rounded-[13px] tracking-wide text-[14px] font-medium px-[14px] h-[35px] outline-none"
+      onKeyUp={addMember} onChange={(e)=>setValue(e.target.value)} value={value}/>
+  </div>
+ </> )
+
+}
 
 const Time = () => {
   const [show, setShow] = useState(false);
@@ -274,6 +325,12 @@ const AllDay = () => {
 };
 
 const Events = ({ cancel }: any) => {
+  const submit =() =>{
+    const body = {}
+    //  need api integration
+
+    cancel();
+    };
   return (
     <div className="hide-scrollbar w-[100%]  px-[40px] py-[30px] h-[100%] overflow-y-auto relative ">
       <div
@@ -321,6 +378,7 @@ const Events = ({ cancel }: any) => {
       <AddTextArea title={"Description"} top={20} />
       <DateContainer />
       <AllDay />
+      <AddMember title={"Members"}/>
       <DropItems
         title={"Outcome"}
         top={20}
@@ -330,10 +388,22 @@ const Events = ({ cancel }: any) => {
             val: 0,
             selected: true,
           },
+          {
+            title: "Dummy1",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Dummy2",
+            val: 0,
+            selected: false,
+          },
         ]}
       />
       <div className=" flex justify-end mt-[30px] w-[100%]">
-        <SimpleButton theme={1} text={"Create"} left={20} right={0} />
+        <SimpleButton theme={1} text={"Create"} left={20} right={0} click={() => {
+              submit();
+            }}/>
       </div>
     </div>
   );
