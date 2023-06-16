@@ -95,7 +95,7 @@ const AddMember = ({title}:any) =>{
       <ul className="flex flex-wrap my-[3px] gap-2">
       {
         members.length >=1 && members.map((member,i)=>(
-      <li className="flex items-center gap-1 px-2 bg-gray-200 rounded-md">{member}
+      <li key={i} className="flex items-center gap-1 px-2 bg-gray-200 rounded-md">{member}
        
          <div
         className="cursor-pointer"
