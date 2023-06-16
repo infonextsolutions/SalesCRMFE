@@ -73,8 +73,8 @@ const AddTextArea = ({ top, title, width }: any) => {
   );
 };
 const AddMember = ({title}:any) =>{
-  const [members,setMembers] = React.useState([]);
-  const [value,setValue] = React.useState()
+  const [members,setMembers] = React.useState<string[]>([]);
+  const [value,setValue] = React.useState("")
   const addMember = (e:any) =>{ 
     if(e.keyCode === 13 && value){
       setMembers([...members, value]);
@@ -203,7 +203,7 @@ const Time = () => {
         onMouseLeave={() => {
           setHover(false);
         }}
-        className="text-gray-900 h-[100%] cursor-pointer tracking-wider text-sm rounded-2xl tracking-wide text-[#3F434A] flex items-center justify-center font-medium px-[5px] w-full p-0 bg-white"
+        className="text-gray-900 h-[100%] cursor-pointer tracking-wider text-sm rounded-2xl text-[#3F434A] flex items-center justify-center font-medium px-[5px] w-full p-0 bg-white"
       >
         {arr[selected]}
       </div>
