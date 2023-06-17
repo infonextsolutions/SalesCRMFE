@@ -52,7 +52,7 @@ const ProfilePage = ({ data }: props) => {
                 LEAD-{data._id.substring(0, 10)}
               </p>
             </div>
-            <div className="w-[40px] h-[100%] flex items-center justify-center">
+            <div className="w-[40px] h-[50%] flex mt-[-25px] justify-center">
               <Image
                 src={getBasicIcon("Edit")}
                 className={`w-[20px] svg-grey svg-not-selected mt-[-24px] cursor-pointer`}

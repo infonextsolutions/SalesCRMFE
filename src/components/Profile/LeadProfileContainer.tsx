@@ -26,7 +26,7 @@ const LeadProfileContainer = ({
       }] bg-white rounded-xl p-[25px] px-[35px] pt-[30px] `}
     >
       <Navigator callback={CallBack} current={current} list={list} />
-      <div className="flex justify-between pl-[20px]  relative">
+      <div className="flex justify-between pl-[20px] relative">
         <div className="text-black text-[14px] leading-[21px] mt-[25px] w-[100%] tracking-wide  ">
           {activeTitle === 0 && (
             <>
