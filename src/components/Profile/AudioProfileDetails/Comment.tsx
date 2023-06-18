@@ -1,7 +1,12 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
-import React from "react";
+import React, { useState } from "react";
 
 const Comment = ({ user, content, time, reply, last }: any) => {
+  const [repVis, setRepVis] = useState(false);
+  const [text, setText] = React.useState("");
+  const setReply=()=>{
+    reply.push(text)
+  }
   return (
     <div className="border-t-[1px] border-[#ccc] py-[20px]">
       <div className="flex items-center justify-between my-2 ml-4">
@@ -19,11 +24,33 @@ const Comment = ({ user, content, time, reply, last }: any) => {
           dangerouslySetInnerHTML={{ __html: content }}
         ></p>
       </div>
+      <button
+        onClick={() => {
+          setRepVis((prev) => !prev);
+        }}
+        className="py-2 text-gray-500 text-small font-medium ml-7"
+      >
+        Reply
+      </button>
+      {repVis && (
+        <div>
+          <textarea
+            value={text}
+            onChange={(e: any) => {
+              setText(e.target.value);
+            }}
+            placeholder="write a reply"
+            className="w-[80%] relative left-20 font-medium h-[100px] bg-[#fff] apperance-none block font-medium text-[14px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 "
+          ></textarea>
+          <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[480px]">
+            <p onClick={setReply} className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
+              Reply
+            </p>
+          </button>
+        </div>
+      )}
       {reply?.length > 0 && (
         <>
-          <button className="py-2 text-gray-500 text-small font-medium ml-7">
-            Reply
-          </button>
           {reply.map((item: any, i: any) => {
             return (
               <>
@@ -100,7 +127,12 @@ const Comments = () => {
                 content: text,
                 last: "16 hrs ago",
                 time: getCurrentTimeInHoursAndMinutes(),
-                reply: [],
+                reply: [{
+                        user: "Micheal",
+                        content:
+                          "Thanks Jane!Thought was the best way to give more clarity about our product and services.",
+                        last: "16h ago",
+                      },],
               };
               setList([...list, letsSee]);
               setText("");
