@@ -21,7 +21,7 @@ const Profile = ({ data }: any) => {
             icon: "Plus",
             light: false,
             list: [
-              { title: "Call", Icon: "Phone" },
+              // { title: "Call", Icon: "Phone" },
               { title: "Email", Icon: "Mail" },
               { title: "Event", Icon: "Calendar" },
               { title: "Task", Icon: "Tasks" },

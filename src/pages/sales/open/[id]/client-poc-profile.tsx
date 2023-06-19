@@ -24,7 +24,7 @@ const ClientProfile = () => {
             icon: "Plus",
             light: false,
             list: [
-              { title: "Call", Icon: "Phone" },
+              // { title: "Call", Icon: "Phone" },
               { title: "Email", Icon: "Mail" },
               { title: "Meeting", Icon: "Calendar" },
               { title: "Task", Icon: "Tasks" },
