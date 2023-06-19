@@ -1,8 +1,12 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
+// import React, { useState } from 'react';
+import { Navbar, Page, BlockTitle, Range, List, ListItem, Icon, Block } from 'framework7-react';
 import DualRange from "@/utils/dualRange";
 import Image from "next/image";
 import React, { useState } from "react";
 import SimpleButton from "@/utils/Button/SimpleButton";
+
+
 
 const AddText = ({ top, title, width, list, change }: any) => {
   return (
@@ -106,6 +110,14 @@ const Filter = ({ cancel, left, top }: any) => {
   });
 
   const [content, setContent] = useState<any>({});
+
+  const [initialRange, setInitialRange] = useState(0);
+  const [finalRange, setFinalRange] = useState(100);
+
+  const handleRangeChange = (initialRange: number, finalRange: number) => {
+    setInitialRange(initialRange);
+    setFinalRange(finalRange);
+  };
 
   return (
     <div
@@ -291,6 +303,32 @@ const Filter = ({ cancel, left, top }: any) => {
       />
       <DualRange title={"Deal Size"}  />
       <DualRange title={"Existing"} />
+      {/* <RangeSlider minValue={0} maxValue={100} /> */}
+
+        
+
+      {/* <DualRangeSlider onRangeChange={handleRangeChange} />  */}
+
+        
+
+      {/* <p className="block mb-2 mt-1 text-sm font-medium text-[#8a9099] tracking-wide">
+        Deal Size
+      </p>
+       <MultiRangeSlider
+      min={0}
+      max={500}
+      onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
+    />
+      <p className="block mb-2  text-sm font-medium text-[#8a9099] tracking-wide">
+        Existing
+      </p>
+       <MultiRangeSlider
+       
+      min={0}
+      max={500}
+      onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
+    /> */}
+      
 
        <div className="w-[100%] mt-[70px] text-[#ffffff] flex ">
         <SimpleButton

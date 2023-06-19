@@ -24,6 +24,21 @@ const ProfilePage = ({ data }: props) => {
     }, 500);
   };
 
+  function extractDomain(url: string): string {
+  const match = url.match(/^(?:https?:\/\/)?(?:www\.)?([^/?#]+)/);
+  if (match) {
+    return match[1];
+  }
+  return ""; // Return an empty string if no match is found
+}
+
+const domain = extractDomain(data.companyId.company_website_url);
+
+  const openWebsite = () => {
+    window.open("http://" + domain, "_blank");
+  };
+
+
   return (
     <>
       {edit && (
@@ -85,7 +100,15 @@ const ProfilePage = ({ data }: props) => {
               WEBSITE LINK
             </strong>
             <span className="block text-black">
-              <p> {data.companyId.company_website_url}</p>
+
+
+              {/* made website link to be open in new tab  */}
+              <p> 
+                {/* <a href={extractDomain(data.companyId.company_website_url)} target="_blank">{(data.companyId.company_website_url)}
+              </a> */}
+              
+                  <button onClick={openWebsite}>{data.companyId.company_website_url}</button>
+                </p>
             </span>
           </li>
           <li className="px-2 mt-4">
