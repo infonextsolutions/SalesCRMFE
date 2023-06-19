@@ -140,6 +140,16 @@ const CompanyProfile = () => {
       <div className="py-1"></div>
       <div className="flex items-center justify-between mt-2 ml-2">
         <h3 className="text-sm text-[#000] font-medium">ALL CONTACTS</h3>
+        <Image
+              src={getBasicIcon("Plus")}
+              className={`w-[20px] mr-2 svg-grey fill-gray`}
+              alt=""
+              width={20}
+              height={20}
+              style={{
+                objectFit: "contain",
+              }}
+            />
       </div>
       <div className="py-3"></div>
       <ul
