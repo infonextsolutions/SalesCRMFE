@@ -31,6 +31,7 @@ const ClientProfile = () => {
               { title: "Message", Icon: "Chat" },
             ],
           },
+
         ]}
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
