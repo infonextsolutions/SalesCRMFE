@@ -161,7 +161,7 @@ const Login = () => {
                       placeholder="Enter Username"
                     />
                     {errors.user && touched.user && (
-                      <p className="block text-[#ff0000] text-start mt-[10px] mb-2 font-medium tracking-wide">
+                      <p className="block text-[#ff0000] text-start mt-[4px] mb-6 font-medium tracking-wide">
                         *{errors.user}
                       </p>
                     )}
@@ -242,7 +242,7 @@ const Login = () => {
                         </div>
                       </div>
                       {errors.pass && touched.pass && (
-                        <p className="block text-[#ff0000] text-start mt-[10px] mb-2 font-medium tracking-wide">
+                        <p className="block text-[#ff0000] text-start mt-[8px] mb-2 font-medium tracking-wide">
                           *{errors.pass}
                         </p>
                       )}
@@ -252,7 +252,7 @@ const Login = () => {
                         *Invalid Credentials
                       </p>
                     )}
-                    <div className="flex justify-between ">
+                    <div className="mt-[25px] flex justify-between ">
                       <div className="flex items-center">
                         <input type="checkbox" className="form-checkbox h-3 w-3 mr-2 dark:bg-white " />
                         <p className=" text-base text-[#000]  ">

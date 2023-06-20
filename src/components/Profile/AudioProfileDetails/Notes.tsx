@@ -92,7 +92,7 @@ const Notes = () => {
           </div>
         </div>
         <div className="py-2"></div>
-        <div className=" px-[10%]">
+        <div className=" px-[10%] overflow-y-auto h-[90vh]">
           {list.map((item: any, i: any) => {
             return <Note title={item.title} key={i} content={item.content} />;
           })}

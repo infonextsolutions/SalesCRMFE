@@ -329,13 +329,13 @@ const ParticipantsHover = ({ last, bounding }: any) => {
       <p className="text-[#000] w-[100%] text-[15px] font-medium">
         Call Participants
       </p>
-      <p className="text-renal-blue mt-[19px] text-[13px] ml-[2px]  w-[100%] font-medium">
+      <p className=" mt-[19px] text-[13px] ml-[2px]  w-[100%] font-medium">
         Shraddha P. (Sales Manager)
       </p>
-      <p className="text-[#000]  text-[13px] ml-[2px]  w-[100%] font-medium">
+      <p className="text-renal-blue text-[#000]  text-[13px] ml-[2px]  w-[100%] font-medium">
         John C. (Sales Rep)
       </p>
-      <p className="text-[#000] text-[13px] ml-[2px] w-[100%] font-medium">
+      <p className="text-renal-blue text-[#000] text-[13px] ml-[2px] w-[100%] font-medium">
         Aarti P. (Sales Rep)
       </p>
     </div>

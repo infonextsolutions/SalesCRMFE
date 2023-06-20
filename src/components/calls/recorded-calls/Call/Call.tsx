@@ -438,7 +438,7 @@ const ParticipantsHover = ({
         return (
           <p
             key={i}
-            className={`${i === 0 ? "text-renal-blue mt-[19px]" : "text-[#000]"
+            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-renal-blue"
               } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
@@ -588,7 +588,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             >
               {LeadData.owners?.map((item, i) => {
                 return (
-                  <span className={i === 0 ? "text-renal-blue" : ""} key={i}>
+                  <span className={i !== 0 ? "text-renal-blue" : ""} key={i}>
                     {i < 2 && item.name} ,
                   </span>
                 );

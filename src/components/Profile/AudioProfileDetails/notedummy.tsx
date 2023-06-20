@@ -1,7 +1,7 @@
 import SimpleButton from "@/utils/Button/SimpleButton";
 import React, { useState } from "react";
 
-const AddText = ({ top, title, width, change }: any) => {
+const AddText = ({ top, title, width, change,placeholder }: any) => {
   const [input, setInput] = useState();
   return (
     <div
@@ -17,6 +17,7 @@ const AddText = ({ top, title, width, change }: any) => {
       <input
         type="text"
         value={input}
+        placeholder={placeholder}
         onChange={(e: any) => {
           setInput(e.target.value);
           change(e.target.value);
@@ -53,6 +54,14 @@ const Notesd = ({ cancel }: any) => {
               setContent({ ...content, content: e });
             }}
             title="Description"
+          />
+          <AddText
+            top={"10px"}
+            change={(e: any) => {
+              setContent({ ...content, content: e });
+            }}
+            placeholder="12XXXXX"
+            title="Lead Id"
           />
         </div>
         <div className="absolute right-[160px] bottom-[40px] mt-[130px] flex ">

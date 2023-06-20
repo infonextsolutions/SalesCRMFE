@@ -34,7 +34,7 @@ const AudioProfileContainer = ({
     >
       <Navigator callback={CallBack} current={activeTitle} list={list} />
       <div className="flex justify-between w-[100%] relative overflow-hidden">
-        <div className="text-black text-[14px] leading-[21px] mt-[25px] tracking-wide ">
+        <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && <CallInfo check={check} info={info} />}
           {activeTitle === 1 && <Comments />}
           {activeTitle === 2 && <Notes />}
