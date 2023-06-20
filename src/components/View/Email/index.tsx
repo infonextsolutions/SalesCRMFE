@@ -60,7 +60,7 @@ const Icon = ({ src }: any) => {
   return (
     <Image
       src={src}
-      className={` ml-4 `}
+      className={`mx-2`}
       alt="Bold"
       width={15}
       height={15}
@@ -71,19 +71,21 @@ const Icon = ({ src }: any) => {
   );
 };
 
-const Toolbar = () => {
+const Toolbar = ({setIsBold,setIsItalic,isBold,isItalic,isUnderline,setIsUnderline}:any) => {
+
   return (
     <div className="ql-toolbar bg-gray-100 flex flex-wrap h-[40px] m space-x-2 sm:pr-4 items-center divide-gray-200  ql-snow">
       <div className="w-[38px] flex  pr-[10px] ">
         <Image
           src="/Images/Logo/Font.svg"
-          className={` ml-3  svg-gray-2`}
+          className={` ml-3  svg-gray-2 cursor-pointer`}
           alt="Bold"
           width={15}
           height={15}
           style={{
             objectFit: "contain",
           }}
+          
         />
         <Image
           src={getBasicIcon("Arrow Down 3")}
@@ -93,10 +95,13 @@ const Toolbar = () => {
           alt=""
         />
       </div>
-      <div className="border-x-[1px] border-x-[#E8E9EB] flex">
-        <Icon src="/Images/Logo/Bold.svg" />
-        <Icon src="/Images/Logo/Italic.svg" />
-        <Icon src="/Images/Logo/Underline.svg" />
+      <div className="border-x-[1px] border-x-[#E8E9EB] flex gap-1 ">
+        <button className={`${isBold ? "bg-slate-300" : "bg-transparent"} p-1 rounded-lg w-[38px]  flex`}  onClick={()=>setIsBold((prev:any) => !prev)}><Icon src="/Images/Logo/Bold.svg"/></button>
+        <button className={`${isItalic ? "bg-slate-300" : "bg-transparent"} p-1 rounded-lg w-[38px]  flex`}  onClick={()=>setIsItalic((prev:any) => !prev)}><Icon src="/Images/Logo/Italic.svg" /></button>
+        <button className={`${isUnderline ? "bg-slate-300" : "bg-transparent"} p-1 rounded-lg w-[38px]  flex`}  onClick={()=>setIsUnderline((prev:any) => !prev)}> <Icon src="/Images/Logo/Underline.svg" /></button>
+        
+        
+       
       </div>
       <div className="border-x-[1px] border-x-[#E8E9EB] flex">
         <Icon src="/Images/Logo/Link.svg" />
@@ -117,9 +122,10 @@ const Toolbar = () => {
   );
 };
 
-const TextBox = ({ content, title }: any) => {
+const TextBox = ({ content, title, isBold,isItalic,isUnderline }: any) => {
   return (
     <>
+    
       <input
         name=""
         type="text"
@@ -135,14 +141,21 @@ const TextBox = ({ content, title }: any) => {
         onChange={(e: any) => {
           content(e.target.value);
         }}
-        className="w-[100%] outline-none text-[14px] font-medium text-text-norm h-[110px] py-[10px] px-[18px] bg-[#fff]"
+        className={` ${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"} ${isUnderline ? "underline underline-offset-1" : "underline-offset-0"}
+        w-[100%] outline-none text-[14px] text-text-norm h-[110px] py-[10px] px-[18px] bg-[#fff]`}
         placeholder="Type Something"
       ></textarea>
+
+      
+    {isBold}
     </>
   );
 };
 
 const SendEmail = ({ change, title, content, clicked }: any) => {
+  const [isBold,setIsBold] = useState(false);
+  const [isItalic,setIsItalic] = useState(false);
+  const [isUnderline,setIsUnderline] = useState(false);
   return (
     <>
       <div className=" w-[100%] overflow-hidden rounded-xl items-center border-[1px] ">
@@ -151,9 +164,10 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
             change(e);
           }}
         />
-        <Toolbar />
-        <TextBox title={title} content={content} />
-        <div className="w-[100%] flex mb-[15px] items-center">
+        <Toolbar setIsBold={setIsBold} isBold={isBold} setIsItalic={setIsItalic} isItalic={isItalic} isUnderline={isUnderline} setIsUnderline={setIsUnderline}/>
+        <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} />
+      </div>
+        <div className="w-[100%] flex my-[15px] items-center">
           <SimpleButton
             theme={1}
             text={"Send"}
@@ -171,7 +185,6 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
             alt=""
           />
         </div>
-      </div>
     </>
   );
 };

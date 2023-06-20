@@ -4,7 +4,7 @@ import { create } from "domain";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const DropItems = ({ title, list, top }: any) => {
+const DropItems = ({ title, list, top,setEventType }: any) => {
   return (
     <div
       className="w-[100%]"
@@ -18,6 +18,7 @@ const DropItems = ({ title, list, top }: any) => {
 
       <select
         className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
+        onChange={(e)=>setEventType(e.target.value)}
       >
         
       {list.map((item: any, i: any) => (
@@ -325,6 +326,7 @@ const AllDay = () => {
 };
 
 const Events = ({ cancel }: any) => {
+  const [eventType , setEventType] = useState("");
   const submit =() =>{
     const body = {}
     //  need api integration
@@ -351,6 +353,7 @@ const Events = ({ cancel }: any) => {
       <DropItems
         title={"Type"}
         top={20}
+        setEventType={setEventType}
         list={[
           {
             title: "Choose Outcome",
@@ -373,13 +376,15 @@ const Events = ({ cancel }: any) => {
             selected: false,
           },
         ]}
-      />
+      /> 
       <AddText title={"Title"} top={20} />
       <AddTextArea title={"Description"} top={20} />
       <DateContainer />
       <AllDay />
-      <AddMember title={"Members"}/>
-      <DropItems
+     {
+       eventType === "Meeting" && <AddMember title={"Members"}/>
+     }
+     <DropItems
         title={"Outcome"}
         top={20}
         list={[
