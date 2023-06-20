@@ -96,8 +96,11 @@ const CompanyProfile = () => {
           <strong className="font-medium text-sm text-gray-500 mr-1">
             WEBSITE LINK
           </strong>
+
+
+          {/* made company website open in new page */}
           <span className="block text-black">
-            <a href="https://www.example.com">www.example.com</a>
+            <a href="https://www.example.com" target="_blank">www.example.com</a>
           </span>
         </li>
         <li className="px-2 mt-4">

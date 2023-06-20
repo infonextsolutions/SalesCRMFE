@@ -33,8 +33,9 @@ const HeaderItem = ({
       className={`flex items-center  h-[20px] shrink-0`}
       style={{ width: width, marginLeft: left }}
     >
+      {/* change the color from #000 to #222 */}
       <p
-        className="text-[#000] uppercase text-[12px] font-bold tracking-wider w-[100%] "
+        className="text-[#222] uppercase text-[12px] font-bold tracking-wider w-[100%] "
         style={{
           textAlign: align && "center",
         }}
