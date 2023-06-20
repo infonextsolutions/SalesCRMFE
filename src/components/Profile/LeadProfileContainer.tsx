@@ -50,7 +50,7 @@ const LeadProfileContainer = ({
                   {info[activeTitle].data.lastActivity}
                 </p> */}
                 <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Inquiry type
+                  Enquiry type
                 </p>
                 <p className="text-[#595F69]">{data.inquiry}</p>
                 <p className="mt-[20px] text-[#3F434A] font-medium">

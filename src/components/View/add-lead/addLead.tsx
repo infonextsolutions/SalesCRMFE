@@ -263,7 +263,7 @@ const AddLead = ({ cancel }: any) => {
       <div className="py-1"></div>
       <div className="w-[100%]">
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
-          Lead Inquiry*
+          Lead Enquiry*
         </p>
         <select
           onChange={(e: any) => {
@@ -275,7 +275,7 @@ const AddLead = ({ cancel }: any) => {
           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
         >
           <option value="" selected>
-            -- Select Lead Inquiry --
+            -- Select Lead Enquiry --
           </option>
           <option value="P1">Demo Requested</option>
           <option value="P2">Task</option>

@@ -9,21 +9,21 @@ const CompanyProfile = () => {
       <Navigation
         title="Manage Leads>ABC Corp." 
         buttons={[
-        //   {
-        //     text: "Take Action",
-        //     dropdown: true,
-        //     id: 1,
-        //     icon: "Plus",
-        //     light: false,
-        //     list: [
-        //       { title: "Call", Icon: "Phone" },
-        //       { title: "Email", Icon: "Mail" },
-        //       { title: "Event", Icon: "Calendar" },
-        //       { title: "Task", Icon: "Tasks" },
-        //       { title: "Message", Icon: "Chat" },
-        //     ],
-        //   },
-         ]}
+          //   {
+          //     text: "Take Action",
+          //     dropdown: true,
+          //     id: 1,
+          //     icon: "Plus",
+          //     light: false,
+          //     list: [
+          //       { title: "Call", Icon: "Phone" },
+          //       { title: "Email", Icon: "Mail" },
+          //       { title: "Event", Icon: "Calendar" },
+          //       { title: "Task", Icon: "Tasks" },
+          //       { title: "Message", Icon: "Chat" },
+          //     ],
+          //   },
+           ]}
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[320px] shrink-0 min-h-[70vh] bg-white rounded-xl p-[20px]">
