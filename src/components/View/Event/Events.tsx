@@ -89,7 +89,7 @@ const AddMember = ({title}:any) =>{
 
   }
   return(<>
-  <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+  <p className="text-[14px] font-medium mt-[20px] tracking-wide text-[#8a9099]">
   {title} 
   </p>
   <div className=" text-gray-700 flex flex-wrap border border-[#e8e9eb] mt-[10px] rounded-[13px] tracking-wide text-[14px] font-medium px-[14px] h-auto ">
