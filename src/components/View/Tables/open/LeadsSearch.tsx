@@ -44,6 +44,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       if (search.length) {
         setpageNumber(0);
         const allItems = await getallItems(pageNumber);
+        
         setItems(allItems);
       }
       const filtered = data.filter(
@@ -113,6 +114,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setLoading(false);
   };
   const Leads = items;
+  console.log("allitems ",Leads)
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);

@@ -523,7 +523,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       return "-";
     }
   }
-
+  console.log("calldata:",CallData)
   return (
     <>
       <div className="flex">
@@ -558,9 +558,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={200}
             left={10}
-            text={CallData.leadId?._id}
+            text={CallData.leadId?.leadId}
             click={true}
-            route={`/sales/open/${CallData._id}/lead-profile`}
+            route={`/sales/open/${CallData.leadId?._id}/lead-profile`}
             color={"#000"}
           />
           <CallItem
