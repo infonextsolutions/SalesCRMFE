@@ -2,8 +2,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import 'quill/dist/quill.snow.css'; 
-import Image from "next/image";
-import 'quill/dist/quill.snow.css'; 
+import Image from "next/image"; 
 import React, { useState } from "react";
 import { useQuill } from 'react-quilljs';
 
