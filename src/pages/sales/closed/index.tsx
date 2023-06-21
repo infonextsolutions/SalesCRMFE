@@ -31,7 +31,7 @@ export default function Open({ data }: any) {
       //   }
       // );
     };
-    doACall();
+    // doACall(); 
   }, []);
 
   React.useEffect(() => {
@@ -79,7 +79,7 @@ export default function Open({ data }: any) {
   );
 }
 
-export async function getServerSideProps({ query, ...params }: any) {
+export async function getServerSideProps({query, ...params }: any) {
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Close"
   );

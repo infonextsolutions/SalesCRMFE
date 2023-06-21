@@ -1,8 +1,10 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
+import 'quill/dist/quill.snow.css'; 
 import Image from "next/image";
 import React, { useState } from "react";
+import { useQuill } from 'react-quilljs';
 
 const AddText = ({ title, place }: any) => {
   return (
@@ -151,23 +153,54 @@ const TextBox = ({ content, title, isBold,isItalic,isUnderline }: any) => {
     </>
   );
 };
+const EmailLayout = () =>{
+  const theme = 'snow'; 
+  const { quill} = useQuill();
+  const modules = {
+    toolbar: [
+      [{ size: ['small', false, 'large', 'huge'] }],
+      ['bold', 'italic', 'underline'],
+      [{ align: [] }],
+      [{ list: 'ordered'}, { list: 'bullet' }],
+      [{ indent: '-1'}, { indent: '+1' }],
+      
+     ['link', 'image'],
+    ],
+  };
+  const placeholder = 'Type Something';
 
+  const formats = ['size', 'bold', 'italic', 'underline',
+                  'align', 'list', 'indent','link', 'image',
+];
+  const { quillRef } = useQuill({ theme, modules, formats, placeholder });
+
+
+  return (
+    <div className="text-black">
+
+      <div className="min-h-[167px]" ref={quillRef} />  
+    </div> 
+  );
+}
 const SendEmail = ({ change, title, content, clicked }: any) => {
-  const [isBold,setIsBold] = useState(false);
-  const [isItalic,setIsItalic] = useState(false);
-  const [isUnderline,setIsUnderline] = useState(false);
+  // const [isBold,setIsBold] = useState(false);
+  // const [isItalic,setIsItalic] = useState(false);
+  // const [isUnderline,setIsUnderline] = useState(false);
   return (
     <>
-      <div className=" w-[100%] overflow-hidden rounded-xl items-center border-[1px] ">
+      <div className=" w-[100%] rounded-xl items-center border-[1px] ">
         <SendersDetails
           change={(e: any) => {
             change(e);
           }}
-        />
-        <Toolbar setIsBold={setIsBold} isBold={isBold} setIsItalic={setIsItalic} isItalic={isItalic} isUnderline={isUnderline} setIsUnderline={setIsUnderline}/>
-        <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} />
-      </div>
-        <div className="w-[100%] flex my-[15px] items-center">
+        /> 
+        {/* <Toolbar setIsBold={setIsBold} isBold={isBold} setIsItalic={setIsItalic} isItalic={isItalic} isUnderline={isUnderline} setIsUnderline={setIsUnderline}/>
+        <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} /> */}
+       <div className="w-full h-[210px] overflow-auto rounded-lg">
+        <EmailLayout/>
+       </div>
+       </div>
+        <div className="w-[100%] flex my-[18px] items-center">
           <SimpleButton
             theme={1}
             text={"Send"}
