@@ -148,17 +148,14 @@ const TextBox = ({ content, title, isBold,isItalic,isUnderline }: any) => {
         placeholder="Type Something"
       ></textarea>
 
-      
-    {isBold}
     </>
   );
 };
-const EmailLayout = () =>{
+const EmailLayout = ({content}:any) =>{
   const theme = 'snow'; 
-  const { quill} = useQuill();
   const modules = {
     toolbar: [
-      [{ size: ['small', false, 'large', 'huge'] }],
+      // [{ size: ['small', false, 'large', 'huge'] }],
       ['bold', 'italic', 'underline'],
       [{ align: [] }],
       [{ list: 'ordered'}, { list: 'bullet' }],
@@ -172,7 +169,18 @@ const EmailLayout = () =>{
   const formats = ['size', 'bold', 'italic', 'underline',
                   'align', 'list', 'indent','link', 'image',
 ];
-  const { quillRef } = useQuill({ theme, modules, formats, placeholder });
+  const { quill,quillRef} =useQuill({ theme, modules, formats, placeholder });
+  React.useEffect(()=>{
+    if(quill){
+      quill.on('text-change',()=>{
+        // console.log(quillRef.current.firstChild.innerHTML);
+        content(quillRef.current.firstChild.innerHTML);
+
+      })
+    }
+  },[quill])
+
+  // const {  } = useQuill({ theme, modules, formats, placeholder });
 
 
   return (
@@ -197,7 +205,7 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
         {/* <Toolbar setIsBold={setIsBold} isBold={isBold} setIsItalic={setIsItalic} isItalic={isItalic} isUnderline={isUnderline} setIsUnderline={setIsUnderline}/>
         <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} /> */}
        <div className="w-full h-[210px] overflow-auto rounded-lg">
-        <EmailLayout/>
+        <EmailLayout content={content}/>
        </div>
        </div>
         <div className="w-[100%] flex my-[18px] items-center">
