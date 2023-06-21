@@ -3,6 +3,7 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import 'quill/dist/quill.snow.css'; 
 import Image from "next/image";
+import 'quill/dist/quill.snow.css'; 
 import React, { useState } from "react";
 import { useQuill } from 'react-quilljs';
 
@@ -161,13 +162,13 @@ const EmailLayout = ({content}:any) =>{
       [{ list: 'ordered'}, { list: 'bullet' }],
       [{ indent: '-1'}, { indent: '+1' }],
       
-     ['link', 'image'],
+     ['link'],
     ],
   };
   const placeholder = 'Type Something';
 
   const formats = ['size', 'bold', 'italic', 'underline',
-                  'align', 'list', 'indent','link', 'image',
+                  'align', 'list', 'indent','link',
 ];
   const { quill,quillRef} =useQuill({ theme, modules, formats, placeholder });
   React.useEffect(()=>{
@@ -191,9 +192,7 @@ const EmailLayout = ({content}:any) =>{
   );
 }
 const SendEmail = ({ change, title, content, clicked }: any) => {
-  // const [isBold,setIsBold] = useState(false);
-  // const [isItalic,setIsItalic] = useState(false);
-  // const [isUnderline,setIsUnderline] = useState(false);
+ 
   return (
     <>
       <div className=" w-[100%] rounded-xl items-center border-[1px] ">
@@ -201,14 +200,15 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
           change={(e: any) => {
             change(e);
           }}
-        /> 
+        />
         {/* <Toolbar setIsBold={setIsBold} isBold={isBold} setIsItalic={setIsItalic} isItalic={isItalic} isUnderline={isUnderline} setIsUnderline={setIsUnderline}/>
         <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} /> */}
-       <div className="w-full h-[210px] overflow-auto rounded-lg">
+
+      <div className="w-full h-[210px] overflow-auto rounded-lg">
         <EmailLayout content={content}/>
        </div>
-       </div>
-        <div className="w-[100%] flex my-[18px] items-center">
+      </div>
+        <div className="w-[100%] flex my-[15px] items-center">
           <SimpleButton
             theme={1}
             text={"Send"}

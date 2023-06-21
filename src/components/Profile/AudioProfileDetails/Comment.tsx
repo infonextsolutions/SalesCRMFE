@@ -42,7 +42,7 @@ const Comment = ({ user, content, time, reply, last }: any) => {
             placeholder="write a reply"
             className="w-[80%] relative left-20 font-medium h-[100px] bg-[#fff] apperance-none block font-medium text-[14px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 "
           ></textarea>
-          <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[480px]">
+          <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[26vw]">
             <p onClick={setReply} className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
               Reply
             </p>

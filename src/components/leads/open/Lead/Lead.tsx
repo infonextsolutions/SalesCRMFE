@@ -549,10 +549,9 @@ const LeadContainer = ({
           <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
           <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
           <LeadItem width={120} left={10} text={leadStatus} textLeft={5} /> 
-          <LeadItem width={120} left={10} textLeft={10} text=
-                 {owners[0].name}
-           />
+          <LeadItem width={130} left={10} textLeft={10} text={LeadData?.owners[0]?.name} />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
+          <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} />
           <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} />
 
           {/* activity history starts here*/}

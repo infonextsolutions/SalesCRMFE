@@ -23,7 +23,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open`
     );
     const data = res.data.result; 
     return data;
@@ -114,6 +114,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setLoading(false);
   };
   const Leads = items;
+  // console.log("allitems ",Leads)
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
