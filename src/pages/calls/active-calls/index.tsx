@@ -6,10 +6,9 @@ import axios from "axios";
 import dummy from "@/shared/dummy";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
 
-// Register fonts
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const dummyItem = {
@@ -69,8 +68,8 @@ const Calls = ({ data }: any) => {
           style: "header",
         },
         {
-          text: JSON.stringify(data.result, null, 4), // Stringify the JSON data
-          style: "json",
+          text: JSON.stringify(data.result, null, 4),
+          style: "contentStyle",
         },
       ],
       styles: {
@@ -79,17 +78,17 @@ const Calls = ({ data }: any) => {
           bold: true,
           marginBottom: 10,
         },
-        json: {
+        contentStyle: {
           fontSize: 12,
-          margin: [0, 5, 0, 15],
+          margin: [0, 5, 0, 15] as [number, number, number, number],
         },
       },
     };
 
-    const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
-    pdfDocGenerator.download("converted_data.pdf");
+    pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
     console.log("Exporting to PDF", data);
   };
+
 
   const addExport = (e: any, e1: any) => {
     if (e1 === 0) {
@@ -133,7 +132,9 @@ const Calls = ({ data }: any) => {
 };
 
 export async function getServerSideProps({ query, ...params }: any) {
-  const response = await axios.get("https://testsalescrm.nextsolutions.in/api/active-call/find-all");
+  const response = await axios.get(
+    "https://testsalescrm.nextsolutions.in/api/active-call/find-all"
+  );
   return {
     props: {
       data: response.data || {},
