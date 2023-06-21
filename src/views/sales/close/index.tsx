@@ -46,7 +46,7 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const SalesOpen = ({ data }: any) => {
+const SalesClose = ({ data }: any) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
 
@@ -184,4 +184,4 @@ const SalesOpen = ({ data }: any) => {
   );
 };
 
-export default SalesOpen;
+export default SalesClose;
