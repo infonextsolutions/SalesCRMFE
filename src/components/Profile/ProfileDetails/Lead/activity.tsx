@@ -18,7 +18,7 @@ const Activityhistory = () => {
           Title and Description
         </p>
       </div>
-      <div className="mt-[10px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5 w-[100%]">
+      {/* <div className="mt-[10px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5 w-[100%]">
         <div className="text-[14px] pl-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
           <div className="w-[19%]">
             <p className="text-[#3F434A] font-medium">23 January</p>
@@ -200,7 +200,7 @@ const Activityhistory = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

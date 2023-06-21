@@ -2,7 +2,8 @@ import React from "react";
 import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import Image from "next/image";
 
-const CompanyProfile = () => {
+const CompanyProfile = ({ data }: any) => {
+  console.log("data3:",data.result)
   return (
     <div>
       <div className="flex">
@@ -54,10 +55,10 @@ const CompanyProfile = () => {
           />
           <div className="flex items-center justify-center flex-col">
             <h2 className="text-[24px] whitespace-nowrap leading-7 tracking-wide text-[#000] capitalize -900 font-medium">
-              ABC Corp.
+              {data.result.companyId.company_name}
             </h2>
             <p className="block  py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
-              Noida,UP
+            {data.result.companyId.company_location}
             </p>
           </div>
           <div className="w-[40px] h-[100%] flex items-center justify-center">
@@ -82,15 +83,15 @@ const CompanyProfile = () => {
           <strong className="font-medium text-sm text-gray-500 mr-2">
             COMPANY NAME
           </strong>
-          <p className="block text-black ">ABC Corp</p>
+          <p className="block text-black ">{data.result.companyId.company_name}</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium text-sm text-gray-500 ml-auto">
             {" "}
             COMPANY ADDRESS
           </strong>
-          <p className="block text-black">12th Block tower A,</p>
-          <p className="block text-black">Noida,UP-11XXXX</p>
+          {/* <p className="block text-black">12th Block tower A,</p> */}
+          <p className="block text-black">{data.result.companyId.company_location}</p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium text-sm text-gray-500 mr-1">
@@ -100,7 +101,7 @@ const CompanyProfile = () => {
 
           {/* made company website open in new page */}
           <span className="block text-black">
-            <a href="https://www.example.com" target="_blank">www.example.com</a>
+            <a href={`https://${data.result.companyId.company_website_url}`} target="_blank">{data.result.companyId.company_website_url}</a>
           </span>
         </li>
         <li className="px-2 mt-4">
@@ -108,7 +109,7 @@ const CompanyProfile = () => {
             INDUSTRY TYPE
           </strong>
           <a href="industry:" className="block text-black">
-            IT Solutions
+            -
           </a>
         </li>
         <li className="px-2 mt-4">
@@ -252,11 +253,11 @@ const CompanyProfile = () => {
         Company Description
       </h3>
       <p className="text-base text-gray-500 font-medium mt-[10px] text-sm text-[12px]">
-        ABC Corp. is a IT company serving industry such as Finance and Edtech.
-        Company has 10+ existing clients and also works with individual people.
+      {data.result.companyId.company_description}
       </p>
     </div>
   );
 };
 
 export default CompanyProfile;
+

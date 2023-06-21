@@ -12,7 +12,6 @@ import CallSnippet from "@/components/View/call-snippet";
 
 const CallProfile = ({ data }: any) => {
   const titles = ["CALL INFO", "COMMENTS", "NOTES", "COACHING"];
-
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
   const [bool, setBool] = useState(true);
