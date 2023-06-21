@@ -18,20 +18,20 @@ const ClientProfile = ({ data }: any) => {
       <Navigation
         title="Manage Leads>Shraddha P. "
         buttons={[
-          {
-            text: "Take Action",
-            dropdown: true,
-            id: 1,
-            icon: "Plus",
-            light: false,
-            list: [
-              // { title: "Call", Icon: "Phone" },
-              { title: "Email", Icon: "Mail" },
-              { title: "Meeting", Icon: "Calendar" },
-              { title: "Task", Icon: "Tasks" },
-              { title: "Message", Icon: "Chat" },
-            ],
-          },
+          // {
+          //   text: "Take Action",
+          //   dropdown: true,
+          //   id: 1,
+          //   icon: "Plus",
+          //   light: false,
+          //   list: [
+          //     // { title: "Call", Icon: "Phone" },
+          //     { title: "Email", Icon: "Mail" },
+          //     { title: "Meeting", Icon: "Calendar" },
+          //     { title: "Task", Icon: "Tasks" },
+          //     { title: "Message", Icon: "Chat" },
+          //   ],
+          // },
 
         ]}
       />
