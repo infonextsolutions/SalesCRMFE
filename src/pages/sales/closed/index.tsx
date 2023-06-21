@@ -31,11 +31,7 @@ export default function Open({ data }: any) {
       //   }
       // );
     };
-<<<<<<< HEAD
     // doACall(); 
-=======
-    doACall(); 
->>>>>>> piyush-work-1
   }, []);
 
   React.useEffect(() => {

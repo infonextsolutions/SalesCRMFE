@@ -107,6 +107,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
                 leadStatus={item.leadStatus}
                 custom={item.customer_name}
                 LeadData={item}
+                owners={item.owners}
                 last={ind === Leads.length - 1}
               />
             );
