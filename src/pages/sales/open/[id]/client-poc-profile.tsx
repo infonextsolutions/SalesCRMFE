@@ -8,6 +8,7 @@ import axios from 'axios'
 
 const ClientProfile = ({ data }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
+  console.log("clientprofile:",data)
   function CallBack (childData:any){
         setActiveTitle(childData); 
   }
@@ -16,7 +17,7 @@ const ClientProfile = ({ data }: any) => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Manage Leads>Shraddha P. "
+        title={`Manage Leads>${data.result.customerId.name}`}
         buttons={[
           // {
           //   text: "Take Action",
