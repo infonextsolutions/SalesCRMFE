@@ -6,7 +6,7 @@ import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
 
-const SalesOpen = React.lazy(() => import("@/views/sales/close"));
+const SalesClose = React.lazy(() => import("@/views/sales/close"));
 
 export default function Open({ data }: any) {
   const state = useSelector((state: any) => state.auth);
@@ -31,7 +31,7 @@ export default function Open({ data }: any) {
       //   }
       // );
     };
-    doACall();
+    // doACall(); 
   }, []);
 
   React.useEffect(() => {
@@ -71,7 +71,7 @@ export default function Open({ data }: any) {
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
-            <SalesOpen data={data} />
+            <SalesClose data={data} />
           </Suspense>
         )}
       </Suspense>
@@ -79,7 +79,7 @@ export default function Open({ data }: any) {
   );
 }
 
-export async function getServerSideProps({ query, ...params }: any) {
+export async function getServerSideProps({query, ...params }: any) {
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Close"
   );

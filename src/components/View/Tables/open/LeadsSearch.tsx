@@ -23,9 +23,9 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open`
     );
-    const data = res.data.result;
+    const data = res.data.result; 
     return data;
   };
   const [loading, setLoading] = React.useState(false);
@@ -44,7 +44,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       if (search.length) {
         setpageNumber(0);
         const allItems = await getallItems(pageNumber);
-        
+        console.log(allItems)
         setItems(allItems);
       }
       const filtered = data.filter(
@@ -114,7 +114,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setLoading(false);
   };
   const Leads = items;
-  console.log("allitems ",Leads)
+  // console.log("allitems ",Leads)
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
@@ -254,6 +254,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
                 leadStatus={item.leadStatus}
                 custom={item.customer_name}
                 LeadData={item}
+                owners ={item.owners}
                 last={Leads.length - 1 === ind}
               />
             );
