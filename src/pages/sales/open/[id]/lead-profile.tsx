@@ -8,6 +8,7 @@ import axios from "axios";
 //Manya will make this page
 
 const Profile = ({ data }: any) => {
+  
   const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS", "COACHING"];
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
@@ -21,7 +22,7 @@ const Profile = ({ data }: any) => {
             icon: "Plus",
             light: false,
             list: [
-              // { title: "Call", Icon: "Phone" },
+              { title: "Call", Icon: "Phone" },
               { title: "Email", Icon: "Mail" },
               { title: "Event", Icon: "Calendar" },
               { title: "Task", Icon: "Tasks" },

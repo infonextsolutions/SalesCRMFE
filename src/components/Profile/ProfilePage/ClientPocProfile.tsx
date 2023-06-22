@@ -2,7 +2,8 @@ import React from "react";
 import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import Image from "next/image";
 
-const ClientPocProfile = () => {
+const ClientPocProfile = ({ data }: any) => {
+  console.log("data4:",data.result)
   return (
     <div>
       <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
@@ -20,14 +21,14 @@ const ClientPocProfile = () => {
             />
             <div className="ml-3 items-center ">
               <h2 className="text-base text-xl font-small whitespace-nowrap leading-7 tracking-wide text-black">
-                Shraddha P.
+                {data.result.customerId.name}
               </h2>
 
               <a
                 href="#0"
                 className="block ml-1 text-sm text-[12px] text-gray-500 hover:text-indigo-500"
               >
-                Sales Manager
+                 {data.result.customerId.designation}
               </a>
             </div>
             <div className="h-[120%] ml-auto ">
@@ -53,21 +54,21 @@ const ClientPocProfile = () => {
               GENDER
             </strong>
             <a href="female" className="block text-black">
-              Female
+              -
             </a>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm mr-1 text-gray-500">
               PHONE
             </strong>
-            <p className="block text-black">9786XXXXXX</p>
+            <p className="block text-black">{data.result.customerId.contact}</p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm text-gray-500 mr-1">
               EMAIL
             </strong>
             <a href="mailto:" className="block text-black">
-              aspiringfe@helloworld.com
+            {data.result.customerId.email}
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -109,22 +110,21 @@ const ClientPocProfile = () => {
               COMPANY NAME
             </strong>
             <a href="name" className="block text-black">
-              ABC Corp.
+            {data.result.companyId.company_name}
             </a>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm text-gray-500 mr-1">
               COMPANY ADDRESS
             </strong>
-            <p className="block text-black">12th Block tower A,</p>
-            <p className="block text-black">Noida,UP-11XXXX</p>
+            <p className="block text-black">{data.result.companyId.company_location}</p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm text-gray-500 mr-1">
               WEBSITE LINK
             </strong>
             <span className="block text-black">
-              <a href="https://www.example.com">www.example.com</a>
+              <a href={`https://${data.result.companyId.company_website_url}`}>{data.result.companyId.company_website_url}</a>
             </span>
           </li>
           <li className="px-2 mt-4">
@@ -132,7 +132,7 @@ const ClientPocProfile = () => {
               INDUSTRY TYPE
             </strong>
             <a href="industry:" className="block text-black">
-              IT Solutions
+              -
             </a>
           </li>
           <li className="px-2 mt-4">

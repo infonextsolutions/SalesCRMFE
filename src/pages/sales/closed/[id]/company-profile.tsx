@@ -2,8 +2,8 @@ import Navigation from "@/components/app/Navigation";
 import Deals from "@/components/Profile/DealsContainer";
 import ProfilePage from "@/components/Profile/ProfilePage/CompanyProfile";
 import React from "react";
-
-const CompanyProfile = () => {
+import axios from "axios";
+const CompanyProfile = ({ data }: any) => {
   return (<div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
   <Navigation
   title="Profile"
@@ -26,7 +26,7 @@ const CompanyProfile = () => {
   />
   <div className="w-[100%] flex gap-[25px] mb-[100px] ">
     <div className="w-[350%] min-h-[70vh] bg-white rounded-xl p-[20px]">
-      <ProfilePage/>
+      <ProfilePage data={data}/>
     </div>
     <div className="bg-white rounded-xl w-[100%] px-[25px]">
             <Deals/>
@@ -37,3 +37,15 @@ const CompanyProfile = () => {
 };
 
 export default CompanyProfile;
+
+export async function getServerSideProps({ query, params }: any) {
+  const response = await axios.get(
+    `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${params.id}`
+  );
+  return {
+    props: {
+      // TODO: Can do better error handling here by passing another property error in the component
+      data: response.data || {},
+    }, // will be passed to the page component as props
+  };
+}

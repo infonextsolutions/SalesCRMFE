@@ -18,7 +18,6 @@ const LeadProfileContainer = ({
     setActiveTitle(childData);
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
-
   return (
     <div
       className={`w-[${
