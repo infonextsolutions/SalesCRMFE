@@ -1,10 +1,10 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
-import Image from "next/image";
-import 'quill/dist/quill.snow.css';
-import { useQuill } from 'react-quilljs';
+import 'quill/dist/quill.snow.css'; 
+import Image from "next/image"; 
 import React, { useState } from "react";
+import { useQuill } from 'react-quilljs';
 
 const AddText = ({ title, place }: any) => {
   return (
@@ -148,61 +148,64 @@ const TextBox = ({ content, title, isBold,isItalic,isUnderline }: any) => {
         placeholder="Type Something"
       ></textarea>
 
-      
-    {isBold}
     </>
   );
 };
-const EmailLayout = () =>{
-  const theme = 'snow';
-  // const theme = 'bubble';
-
+const EmailLayout = ({content}:any) =>{
+  const theme = 'snow'; 
   const modules = {
     toolbar: [
-      [{ size: ['small', false, 'large', 'huge'] }],
-      ['bold', 'italic', 'underline', 'strike'],
+      // [{ size: ['small', false, 'large', 'huge'] }],
+      ['bold', 'italic', 'underline'],
       [{ align: [] }],
-
-    [{ list: 'ordered'}, { list: 'bullet' }],
-    [{ indent: '-1'}, { indent: '+1' }],
-
-    ['link', 'image'],
+      [{ list: 'ordered'}, { list: 'bullet' }],
+      [{ indent: '-1'}, { indent: '+1' }],
+      
+     ['link'],
     ],
   };
-
   const placeholder = 'Type Something';
 
-  const formats = [
-    'bold', 'italic', 'underline', 'strike',
-    'align', 'list', 'indent',
-    'size',
-    'link', 'image',];
+  const formats = ['size', 'bold', 'italic', 'underline',
+                  'align', 'list', 'indent','link',
+];
+  const { quill,quillRef} =useQuill({ theme, modules, formats, placeholder });
+  React.useEffect(()=>{
+    if(quill){
+      quill.on('text-change',()=>{
+        // console.log(quillRef.current.firstChild.innerHTML);
+        content(quillRef.current.firstChild.innerHTML);
 
-  const { quillRef } = useQuill({ theme, modules, formats, placeholder });
+      })
+    }
+  },[quill])
+
+  // const {  } = useQuill({ theme, modules, formats, placeholder });
+
 
   return (
-    <div className="w-full h-[180px] text-black appearance-none">
-      <div ref={quillRef} />
-    </div>
+    <div className="text-black">
+
+      <div className="min-h-[167px]" ref={quillRef} />  
+    </div> 
   );
 }
-
 const SendEmail = ({ change, title, content, clicked }: any) => {
-  // const [isBold,setIsBold] = useState(false);
-  // const [isItalic,setIsItalic] = useState(false);
-  // const [isUnderline,setIsUnderline] = useState(false);
+ 
   return (
     <>
-      <div className=" w-[100%] overflow-hidden rounded-xl items-center border-[1px] ">
+      <div className=" w-[100%] rounded-xl items-center border-[1px] ">
         <SendersDetails
           change={(e: any) => {
             change(e);
           }}
         />
-        <EmailLayout/>
         {/* <Toolbar setIsBold={setIsBold} isBold={isBold} setIsItalic={setIsItalic} isItalic={isItalic} isUnderline={isUnderline} setIsUnderline={setIsUnderline}/>
-        <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} />
-       */}
+        <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} /> */}
+
+      <div className="w-full h-[210px] overflow-auto rounded-lg">
+        <EmailLayout content={content}/>
+       </div>
       </div>
         <div className="w-[100%] flex my-[15px] items-center">
           <SimpleButton
