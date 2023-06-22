@@ -64,7 +64,7 @@ const domain = extractDomain(data.companyId.company_website_url);
                 {data.lead_title}
               </h2>
               <p className="block cursor-pointer py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
-                LEAD-{data._id.substring(0, 10)}
+                LEAD-{data._id}
               </p>
             </div>
             <div className="w-[40px] h-[50%] flex mt-[-25px] justify-center">
