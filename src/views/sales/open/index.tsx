@@ -8,6 +8,10 @@ import AddLeadForm from "@/components/View/add-lead/addLead";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 import * as XLSX from "xlsx";
+import Notes from "@/components/View/Notes";
+import EditLead from "@/components/View/EditLead";
+import Notes1 from "@/components/View/NotesSalesView";
+import PromptEdit from "@/components/View/PromptEdit";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -61,6 +65,7 @@ const SalesOpen = ({ data }: props) => {
   };
 
   const [form, setForm] = useState(false);
+  const [promptVal, setPromptVal] = useState(false);
   const [imports, setImports] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -70,6 +75,12 @@ const SalesOpen = ({ data }: props) => {
   const showImports = () => {
     setImports(true);
   };
+
+  const showPrompt =()=>{
+    console.log('checking')
+    setPromptVal(true)
+  }
+
   const cancelImports = () => {
     setBool(false);
     setTimeout(() => {
@@ -83,14 +94,30 @@ const SalesOpen = ({ data }: props) => {
       setForm(false);
       setBool(true);
     }, 500);
+  }; 
+   const cancelPrompts = () => {
+    setBool(false);
+    setTimeout(() => {
+      setPromptVal(false);
+      setBool(true);
+    }, 500);
   };
   const AddLead = (e: any, e1: any) => {
+    console.log(e1)
     if (e1 === 0) {
       showForm();
-    } else if (e1 === 1) {
+    } 
+    else if (e1 === 1) {
       showImports();
     }
+    else if(e1===2){
+      showPrompt();
+      // showForm()
+    }
   };
+
+  console.log(prompt,imports,"here is it")
+
   const ref: any = useRef();
 
   const exportXLSX = () => {
@@ -131,6 +158,11 @@ const SalesOpen = ({ data }: props) => {
           <AddLeadForm cancel={cancelForms} />
         </Backdrop>
       )}
+      {promptVal&&(
+        <PromptEdit cancel = {cancelPrompts} />
+        // <EditLead data={data} cancel={cancelPrompts}/>
+      )
+      }
       <Navigation
         title={"Sales>Open>Manage Leads"}
         buttons={[
@@ -162,6 +194,7 @@ const SalesOpen = ({ data }: props) => {
             list: [
               { title: "Using Form", Icon: "Text" },
               { title: "Import Leads", Icon: "Download" },
+              { title: "Using Prompt", Icon: "Text" },
             ],
           },
           {

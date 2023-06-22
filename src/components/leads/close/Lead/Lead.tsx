@@ -391,7 +391,7 @@ const LeadContainer = ({
       setEvents(false);
       setBool(true);
     }, 500);
-  };
+  }; 
 
   const cancelEmails = () => {
     setBool(false);
