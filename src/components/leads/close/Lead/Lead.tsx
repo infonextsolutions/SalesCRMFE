@@ -578,7 +578,7 @@ const LeadContainer = ({
             <MidPath />
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
           </div> */}
-          <ActivityHistory widt={180} left={0} last={num}/>
+            <ActivityHistory width={180} left={10} random={num}/>
           {/* activity history ends here*/}
           <LeadItemMultiple
             width={130}
@@ -659,7 +659,7 @@ const LeadContainer = ({
           />
         )}
       </div>
-      {hover && (
+      {/* {hover && (
         <div
           className="bg-[#E8E9EB] max-w-[180px] flex flex-col items-center rounded-[15px] fixed py-[8px] px-[15px]  right-[10px] drop-shadow-sm"
           style={{
@@ -678,7 +678,7 @@ const LeadContainer = ({
             | 23 Jan 2023 | 4:00 PM | 30 Min |
           </p>
         </div>
-      )}
+      )} */}
       {notes && (
         <Backdrop bool={bool}>
           <Notes cancel={cancelNotes} leadid={id} />
