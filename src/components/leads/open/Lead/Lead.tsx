@@ -368,6 +368,8 @@ const LeadContainer = ({
   const [detailShow, setDetailShow] = useState(false);
   const [call, setCall] = React.useState(false);
 
+  
+  const num= Math.floor(Math.random() * 4);
   const showNotes = () => {
     setNotes(true);
   };
@@ -552,10 +554,10 @@ const LeadContainer = ({
           <LeadItem width={130} left={10} textLeft={10} text={LeadData?.owners[0]?.name} />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
           <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} />
-          <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} />
+          {/* <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} /> */}
 
           {/* activity history starts here*/}
-          <div
+          {/* <div
             className={`flex items-center justify-between h-[20px] relative shrink-0 cursor-pointer`}
             style={{ width: 180, marginLeft: 0 }}
             ref={ref}
@@ -580,7 +582,8 @@ const LeadContainer = ({
             <Image src={getBasicIcon("Mail")} alt="" width={15} height={15} />
             <MidPath />
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
-          </div>
+          </div> */}
+          <ActivityHistory width={180} left={0} last={num}/>
 
           {/* activity history ends here*/}
           <LeadItemMultiple
