@@ -279,7 +279,7 @@ const ExpandableRow = ({
         <div className="w-[100%]">
           <p className="text-[16px] text-[#000] font-medium">Company Website</p>
           <p className="text-[#8A9099] font-medium mt-[0px] text-[14px] tracking-wide">
-            {companyWebsite}
+            <a href={`https://${companyWebsite}`} target="_blank">{companyWebsite}</a>
           </p>
         </div>
         <div className="w-[100%] mt-[10px]">
