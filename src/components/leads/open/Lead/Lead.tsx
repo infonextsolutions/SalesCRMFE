@@ -226,7 +226,7 @@ const ExpandingIcon = ({ change }: any) => {
   return (
     <div className="w-[50px] flex items-center justify-center cursor-pointer">
       {!show ? (
-        <Image
+        <Image 
           onClick={() => {
             change(!show);
             setShow(!show);
