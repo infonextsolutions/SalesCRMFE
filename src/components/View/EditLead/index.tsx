@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import { LeadId } from "@/types/leadId";
+import Navigation from "@/components/app/Navigation";
+// import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
+import FormEditContainer from "./FormEditContainer";
+// FormEditContainer
 
 const AddDropDown = ({ top, title, width, list, change }: any) => {
   return (
@@ -59,8 +63,9 @@ const AddText = ({ top, title, width, change }: any) => {
 };
 
 const EditLead = ({ cancel, data }: { cancel: any; data: LeadId }) => {
-  const [content, setContent] = useState<any>({})
-  //   companyId:data.companyId._id,
+  const titles = ["DEAL INFO", "LEAD INFO", "CONTACT INFO"];
+  const [content, setContent] = useState<any>({});
+  //   companyId:data.companyId._id,34
   //   company_name,
   //   company_website_url,
   //   company_icon,
@@ -118,139 +123,15 @@ const EditLead = ({ cancel, data }: { cancel: any; data: LeadId }) => {
   };
 
   return (
-    <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
-      <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
-        Lead Information
-      </h1>
-      <div className="custom-scroll-black w-[100%] flex justify-between pr-[20px] scrollbar-hidden pb-[60px] pb-[50px]">
-        <div className="w-[55%]">
-          <div className="flex items-center justify-between">
-            <AddText
-              top={"10px"}
-              title="Lead Id"
-              width={"30%"}
-              change={(e: any) => {
-                setContent({ ...content, leadId: e });
-              }}
-            />
-            <AddText
-              top={"10px"}
-              title="Lead title"
-              width={"65%"}
-              change={(e: any) => {
-                setContent({ ...content, lead_title: e });
-              }}
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <AddText
-              top={"10px"}
-              title="Company name"
-              width={"48%"}
-              change={(e: any) => {
-                setContent({ ...content, company_name: e });
-              }}
-            />
-            <AddText
-              top={"10px"}
-              title="Company location"
-              width={"48%"}
-              change={(e: any) => {
-                setContent({ ...content, company_location: e });
-              }}
-            />
-          </div>
-          <AddText
-            top={"10px"}
-            title="LinkedIn"
-            width={"100%"}
-            change={(e: any) => {
-              setContent({ ...content, linkedInurl: e });
-            }}
-          />
-          <AddText
-            top={"10px"}
-            title="Twitter"
-            width={"100%"}
-            change={(e: any) => {
-              setContent({ ...content, Twitter: e });
-            }}
-          />
-          <AddText
-            top={"10px"}
-            title="Website URL"
-            width={"100%"}
-            change={(e: any) => {
-              setContent({ ...content, website_url: e });
-            }}
-          />
-          <AddText
-            top={"10px"}
-            title="Industry Type"
-            width={"100%"}
-            change={(e: any) => {
-              setContent({ ...content, industry_type: e });
-            }}
-          />
-        </div>
-        <div className="w-[40%]">
-          <AddText
-            top={"10px"}
-            title="Lead Owner"
-            width={"100%"}
-            change={(e: any) => {
-              setContent({ ...content, lead_owner: e });
-            }}
-          />
-          <AddText
-            top={"10px"}
-            title="Lead Stage"
-            width={"100%"}
-            change={(e: any) => {
-              setContent({ ...content, Stage: e });
-            }}
-          />
-          <AddText
-            top={"10px"}
-            title="Lead Status"
-            width={"100%"}
-            change={(e: any) => {
-              setContent({ ...content, Status: e });
-            }}
-          />
-          <AddText
-            top={"10px"}
-            title="Source"
-            width={"100%"}
-            change={(e: any) => {
-              setContent({ ...content, Source: e });
-            }}
-          />
-        </div>
-        <div className="absolute right-[160px] bottom-[20px] mt-[130px] flex ">
-          <SimpleButton
-            theme={2}
-            text={"Cancel"}
-            left={20}
-            right={0}
-            click={() => {
-              cancel();
-            }}
-          />
-        </div>
-        <div className="absolute right-[40px] bottom-[20px] mt-[130px] flex ">
-          <SimpleButton
-            theme={1}
-            text={"Save"}
-            left={20}
-            right={0}
-            click={() => {
-              submit();
-            }}
-          />
-        </div>
-      </div>
-    </div>
+    <>
+      <FormEditContainer
+        data={data}
+        titles={titles}
+        current={0}
+        cancel={cancel}
+        // info={dummy.leadInfo}
+      />
+    </>
   );
 };
 
