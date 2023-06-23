@@ -523,7 +523,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       return "-";
     }
   }
-  console.log("calldata:",CallData)
+  console.log("calldata:",LeadData)
   return (
     <>
       <div className="flex">
@@ -564,11 +564,19 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             color={"#000"}
           />
           <CallItem
+            width={220}
+            left={-55}
+            text={LeadData?.lead_title}
+            click={true}
+            route={`/sales/open/${LeadData?._id}/lead-profile`}
+            color={"#000"}
+          />
+          {/* <CallItem
             width={120}
             left={10}
             text={LeadData.customerId.name}
             color={"#000"}
-          />
+          /> */}
           <div
             className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
             style={{ width: 200, marginLeft: 20 }}
@@ -595,7 +603,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               })}
             </p>
           </div>
-          <CallItem width={100} left={20} text={"John C"} />
+          <CallItem width={100} left={20} text={"--"} />
           <CallItemMultiple
             width={130}
             left={20}

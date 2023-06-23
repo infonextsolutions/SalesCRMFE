@@ -25,7 +25,7 @@ const CompanyProfile = ({ data }: any) => {
     ]}
   />
   <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-    <div className="w-[350%] min-h-[70vh] bg-white rounded-xl p-[20px]">
+    <div className="w-[35%] min-h-[70vh] bg-white rounded-xl p-[20px]">
       <ProfilePage data={data}/>
     </div>
     <div className="bg-white rounded-xl w-[100%] px-[25px]">
