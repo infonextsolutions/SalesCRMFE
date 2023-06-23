@@ -358,7 +358,6 @@ const LeadContainer = ({
 }: LeadProps) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
-
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);
   const [notes1, setNotes1] = React.useState(false);
@@ -458,8 +457,9 @@ const LeadContainer = ({
   React.useEffect(() => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
+      
     }
-  });
+  },);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });

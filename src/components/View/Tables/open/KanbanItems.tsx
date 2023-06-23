@@ -108,7 +108,8 @@ const KanbanItem = ({ item, i, Item }: any) => {
   React.useEffect(() => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
-    }
+    }   
+ 
   });
   return (
     <>
@@ -307,7 +308,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
       </div>
       {notes && (
         <Backdrop bool={bool}>
-          <Notes cancel={cancelNotes} />
+          <Notes cancel={cancelNotes} note={Item.notes} />
         </Backdrop>
       )}
       {events && (
@@ -323,7 +324,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {notes1 && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Notes1 cancel={cancelNotes1} />
+          <Notes1 cancel={cancelNotes1} note={Item.notes} />
         </Backdrop>
       )}
       {messages && (

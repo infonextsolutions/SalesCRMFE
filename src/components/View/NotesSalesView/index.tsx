@@ -3,7 +3,8 @@ import Image from "next/image";
 import React from "react";
 
 const Notes1 = ({ cancel,note }: any) => {
-  const Note = note[note.length-1];
+
+  const Note = note.length==0 ? {}:note[note.length-1] ;
   return (
     <>
       <div className="hide-scrollbar w-[100%] pb-[20px] px-[40px] py-[30px] h-[100%] overflow-y-auto relative ">
