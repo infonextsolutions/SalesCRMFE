@@ -107,9 +107,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
     }
-
   });
-  console.log(Item,"checcking")
   return (
     <>
       <div
@@ -244,7 +242,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
               objectFit: "contain",
             }}
           />
-          <p>{item.data.calls}</p>
+          <p>{item.data.callsh}</p>
           <Image
             src={getBasicIcon("Attachment")}
             className={`w-[14px]`}
@@ -307,7 +305,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
       </div>
       {notes && (
         <Backdrop bool={bool}>
-          <Notes cancel={cancelNotes} />
+          <Notes cancel={cancelNotes}  />
         </Backdrop>
       )}
       {events && (
@@ -323,7 +321,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {notes1 && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Notes1 cancel={cancelNotes1} />
+          <Notes1 cancel={cancelNotes1} note={Item.notes} />
         </Backdrop>
       )}
       {messages && (
