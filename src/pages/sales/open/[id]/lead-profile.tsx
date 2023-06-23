@@ -8,11 +8,12 @@ import axios from "axios";
 //Manya will make this page
 
 const Profile = ({ data }: any) => {
+  console.log("data10",data)
   const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS", "COACHING"];
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Manage Leads>Lead XYZ -Info"
+        title={`Manage Leads>${data.result.lead_title}`}
         buttons={[
           {
             text: "Take Action",
@@ -21,7 +22,7 @@ const Profile = ({ data }: any) => {
             icon: "Plus",
             light: false,
             list: [
-              // { title: "Call", Icon: "Phone" },
+              { title: "Call", Icon: "Phone" },
               { title: "Email", Icon: "Mail" },
               { title: "Event", Icon: "Calendar" },
               { title: "Task", Icon: "Tasks" },

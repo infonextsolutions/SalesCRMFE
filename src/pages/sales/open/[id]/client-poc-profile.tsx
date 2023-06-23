@@ -4,9 +4,11 @@ import ProfilePage from "@/components/Profile/ProfilePage/ClientPocProfile";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Navigator from "@/utils/customNavigator";
 import React, { useState } from "react";
+import axios from 'axios'
 
-const ClientProfile = () => {
+const ClientProfile = ({ data }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
+  console.log("clientprofile:",data)
   function CallBack (childData:any){
         setActiveTitle(childData); 
   }
@@ -15,7 +17,7 @@ const ClientProfile = () => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title="Manage Leads>Shraddha P. "
+        title={`Manage Leads>${data.result.customerId.name}`}
         buttons={[
           // {
           //   text: "Take Action",
@@ -36,7 +38,7 @@ const ClientProfile = () => {
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[400px] min-h-[70vh] bg-white rounded-xl p-[20px]">
-          <ProfilePage />
+          <ProfilePage data={data}/>
         </div>
         <div className="bg-white rounded-xl w-[100%] px-[25px]">
             <Deals/>
@@ -48,3 +50,15 @@ const ClientProfile = () => {
 };
 
 export default ClientProfile;
+
+export async function getServerSideProps({ query, params }: any) {
+  const response = await axios.get(
+    `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${params.id}`
+  );
+  return {
+    props: {
+      // TODO: Can do better error handling here by passing another property error in the component
+      data: response.data || {},
+    }, // will be passed to the page component as props
+  };
+}

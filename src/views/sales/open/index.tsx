@@ -21,7 +21,7 @@ const dummyItem = {
   names: "Anil L., Paul G., Rekha",
   lastActivity: "Email sent on 23 Jan 2023",
   dealSize: "11000",
-  product: "Product A",
+  product: "Product ",
   calls: 5,
   docs: 2,
   chats: 5,

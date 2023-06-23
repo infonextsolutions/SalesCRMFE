@@ -32,7 +32,7 @@ export default function Open({ data }: any) {
       //   }
       // );
     };
-    doACall();
+    // doACall();
   }, []);
 
   React.useEffect(() => {

@@ -258,6 +258,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
                 leadStatus={item.leadStatus}
                 custom={item.customer_name}
                 LeadData={item}
+                owners={item.owners}
                 last={Leads.length - 1 === ind}
               />
             );
@@ -453,4 +454,5 @@ interface TableProps {
   [key: string]: any;
   icon?: String;
   search: String | any;
+  owners:any
 }

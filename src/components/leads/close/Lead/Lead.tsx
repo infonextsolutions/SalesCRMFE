@@ -364,6 +364,8 @@ const LeadContainer = ({
   const [detailShow, setDetailShow] = useState(false);
   const [call, setCall] = React.useState(false);
 
+  const num= Math.floor(Math.random() * 4);
+
   const showNotes = () => {
     setNotes(true);
   };
@@ -545,12 +547,12 @@ const LeadContainer = ({
           <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
           <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
           <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
-          <LeadItem width={130} left={10} textLeft={10} text={"John C."} />
+          <LeadItem width={130} left={10} textLeft={10} text={LeadData?.owners[0]?.name} />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
-          <LeadItem width={150} left={10} textLeft={10} text={"Product A"} />
+          <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} />
 
           {/* activity history starts here*/}
-          <div
+          {/* <div
             className={`flex items-center justify-between h-[20px] relative shrink-0 cursor-pointer`}
             style={{ width: 180, marginLeft: 0 }}
             ref={ref}
@@ -563,7 +565,7 @@ const LeadContainer = ({
               setHover(false);
             }}
           >
-            <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
+          <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
             <MidPath />
             <Image
               src={getBasicIcon("Calendar")}
@@ -575,8 +577,8 @@ const LeadContainer = ({
             <Image src={getBasicIcon("Mail")} alt="" width={15} height={15} />
             <MidPath />
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
-          </div>
-
+          </div> */}
+            <ActivityHistory width={180} left={10} random={num}/>
           {/* activity history ends here*/}
           <LeadItemMultiple
             width={130}
@@ -657,7 +659,7 @@ const LeadContainer = ({
           />
         )}
       </div>
-      {hover && (
+      {/* {hover && (
         <div
           className="bg-[#E8E9EB] max-w-[180px] flex flex-col items-center rounded-[15px] fixed py-[8px] px-[15px]  right-[10px] drop-shadow-sm"
           style={{
@@ -676,7 +678,7 @@ const LeadContainer = ({
             | 23 Jan 2023 | 4:00 PM | 30 Min |
           </p>
         </div>
-      )}
+      )} */}
       {notes && (
         <Backdrop bool={bool}>
           <Notes cancel={cancelNotes} leadid={id} />

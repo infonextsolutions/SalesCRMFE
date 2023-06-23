@@ -2,7 +2,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import React from "react";
 
-const CallInfo = ({ check, info }: any) => {
+const CallInfo = ({ check, info ,data}: any) => {
   const activeTitle = 0;
 
   return (

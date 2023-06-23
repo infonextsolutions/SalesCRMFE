@@ -38,7 +38,7 @@ const domain = extractDomain(data.companyId.company_website_url);
     window.open("http://" + domain, "_blank");
   };
 
-
+  console.log("data:",data)
   return (
     <>
       {edit && (
@@ -64,7 +64,7 @@ const domain = extractDomain(data.companyId.company_website_url);
                 {data.lead_title}
               </h2>
               <p className="block cursor-pointer py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
-                LEAD-{data._id.substring(0, 10)}
+                LEAD-{data.leadId}
               </p>
             </div>
             <div className="w-[40px] h-[50%] flex mt-[-25px] justify-center">
@@ -116,7 +116,7 @@ const domain = extractDomain(data.companyId.company_website_url);
               INDUSTRY TYPE
             </strong>
             <a href="industry:" className="block text-black">
-              IT Solutions
+              -
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -187,7 +187,7 @@ const domain = extractDomain(data.companyId.company_website_url);
             <strong className="font-medium mr-1 text-black">
               Lead Updated on
             </strong>
-            <p className="block text-[#000] ">26 January 2023 4:55 PM</p>
+            <p className="block text-[#000] ">-</p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1 text-black">
@@ -209,7 +209,7 @@ const domain = extractDomain(data.companyId.company_website_url);
                   objectFit: "contain",
                 }}
               />
-              <p className="text-black">5</p>
+              <p className="text-black">-</p>
             </div>
             <div className="flex">
               <Image
@@ -222,7 +222,7 @@ const domain = extractDomain(data.companyId.company_website_url);
                   objectFit: "contain",
                 }}
               />
-              <p className="text-black">4</p>
+              <p className="text-black">-</p>
             </div>
             <div className="flex">
               <Image
@@ -235,7 +235,7 @@ const domain = extractDomain(data.companyId.company_website_url);
                   objectFit: "contain",
                 }}
               />
-              <p className="text-black">2</p>
+              <p className="text-black">-</p>
             </div>
             <div className="flex">
               <Image
@@ -248,7 +248,7 @@ const domain = extractDomain(data.companyId.company_website_url);
                   objectFit: "contain",
                 }}
               />
-              <p className="text-black">3</p>
+              <p className="text-black">-</p>
             </div>
             <div className="flex">
               <Image
@@ -261,7 +261,7 @@ const domain = extractDomain(data.companyId.company_website_url);
                 }}
                 className="mr-[3px] svg-grey cursor-pointer"
               />
-              <p className="text-black">4</p>
+              <p className="text-black">-</p>
             </div>
             <div className="flex">
               <Image
@@ -274,7 +274,7 @@ const domain = extractDomain(data.companyId.company_website_url);
                 }}
                 className="mr-[3px] svg-grey cursor-pointer"
               />
-              <p className="text-black">4</p>
+              <p className="text-black">-</p>
             </div>
           </div>
         </ul>
@@ -313,7 +313,7 @@ const domain = extractDomain(data.companyId.company_website_url);
               GENDER
             </strong>
             <a href="tel:+821023456789" className="block text-black">
-              Female
+              -
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -327,8 +327,8 @@ const domain = extractDomain(data.companyId.company_website_url);
               E-MAIL
             </strong>
             <a href="mailto:" className="block text-black">
-              aspiringfe@helloworld.com
-              {data.customerId.email[0]}
+              {/* aspiringfe@helloworld.com */}
+              {data.customerId.email}
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -393,13 +393,13 @@ const domain = extractDomain(data.companyId.company_website_url);
               />
               <div>
                 <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                  LeslieAlexander
+                  -
                 </h4>
                 <a
                   href="#0"
                   className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
                 >
-                  Co-Founder
+                  -
                 </a>
               </div>
             </div>

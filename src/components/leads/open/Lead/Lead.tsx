@@ -107,7 +107,7 @@ const LeadItemMultiple = ({
   const { push } = useRouter();
   return (
     <div
-      className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
+      className={`flex relative justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
       style={{ width: width, marginLeft: left }}
       onClick={() => {
         if (click) {
@@ -279,7 +279,7 @@ const ExpandableRow = ({
         <div className="w-[100%]">
           <p className="text-[16px] text-[#000] font-medium">Company Website</p>
           <p className="text-[#8A9099] font-medium mt-[0px] text-[14px] tracking-wide">
-            {companyWebsite}
+            <a href={`https://${companyWebsite}`} target="_blank">{companyWebsite}</a>
           </p>
         </div>
         <div className="w-[100%] mt-[10px]">
@@ -353,6 +353,7 @@ const LeadContainer = ({
   custom,
   LeadData,
   selectAll,
+  owners,
   last,
 }: LeadProps) => {
   const { pathname } = useRouter();
@@ -367,6 +368,8 @@ const LeadContainer = ({
   const [detailShow, setDetailShow] = useState(false);
   const [call, setCall] = React.useState(false);
 
+  
+  const num= Math.floor(Math.random() * 4);
   const showNotes = () => {
     setNotes(true);
   };
@@ -551,9 +554,10 @@ const LeadContainer = ({
           <LeadItem width={130} left={10} textLeft={10} text={LeadData?.owners[0]?.name} />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
           <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} />
+          {/* <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} /> */}
 
           {/* activity history starts here*/}
-          <div
+          {/* <div
             className={`flex items-center justify-between h-[20px] relative shrink-0 cursor-pointer`}
             style={{ width: 180, marginLeft: 0 }}
             ref={ref}
@@ -578,15 +582,18 @@ const LeadContainer = ({
             <Image src={getBasicIcon("Mail")} alt="" width={15} height={15} />
             <MidPath />
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
-          </div>
+          </div>  */}
 
-          {/* activity history ends here*/}
+          <ActivityHistory width={180} left={0} random={num}/>
+
+          {/* activity history ends here*/} 
+
           <LeadItemMultiple
             width={130}
             left={20}
             upperText={"Email Sent"}
             bottomText={""}
-          />
+            /> 
           <LeadItemMultiple
             width={150}
             left={10}
@@ -660,7 +667,7 @@ const LeadContainer = ({
           />
         )}
       </div>
-      {hover && (
+      {/* {hover && (
         <div
           className="bg-[#E8E9EB] max-w-[180px] flex flex-col items-center rounded-[15px] fixed py-[8px] px-[15px]  right-[10px] drop-shadow-sm"
           style={{
@@ -679,7 +686,7 @@ const LeadContainer = ({
             | 23 Jan 2023 | 4:00 PM | 30 Min |
           </p>
         </div>
-      )}
+      )} */}
       {notes && (
         <Backdrop bool={bool}>
           <Notes cancel={cancelNotes} leadid={id} />
@@ -727,4 +734,5 @@ interface LeadProps {
   index: Number;
   selectAll: any;
   last: any;
+  owners:any;
 }
