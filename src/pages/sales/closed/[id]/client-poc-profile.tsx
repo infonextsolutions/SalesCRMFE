@@ -8,6 +8,7 @@ import axios from "axios";
 
 const ClientProfile = ({ data }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
+  
   function CallBack (childData:any){
         setActiveTitle(childData); 
   }

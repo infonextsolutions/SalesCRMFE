@@ -7,6 +7,7 @@ import Notes from "./AudioProfileDetails/Notes";
 import CallInfo from "./AudioProfileDetails/CallInfo";
 import Activityhistory from "./ProfileDetails/Lead/activity";
 import Questionnaire from "../View/Questionnaire/Index";
+import { data } from "../analysis/Call/Tree/data";
 
 const RecordProfile = ({
   titles,
@@ -39,7 +40,7 @@ const RecordProfile = ({
       <Navigator callback={CallBack} current={current} list={list} />
       <div className="flex justify-between w-[100%] relative overflow-hidden">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
-          {activeTitle === 0 && <CallInfo check={check} info={info} />}
+          {activeTitle === 0 && <CallInfo check={check} data={data} info={info} />}
           {activeTitle === 1 && <Activityhistory/>}
           {activeTitle === 2 && <Notes />}
           {activeTitle === 3 && <Questionnaire />}

@@ -1,12 +1,36 @@
+import Backdrop from "@/components/View/Backdrop";
+import EditLead from "@/components/View/EditLead";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+
 
 const CallInfo = ({ check, info ,data}: any) => {
   const activeTitle = 0;
+  const [edit, setEdit] = useState(false);
+  const [bool, setBool] = useState(true);
+
+  const showEdit = () => {
+    setEdit(true);
+  };
+
+  const cancelEdit = () => {
+    setBool(false);
+    setTimeout(() => {
+      setEdit(false);
+      setBool(true);
+    }, 500);
+  };
+
+  console.log(data.result.leadId,"here is it")
 
   return (
     <div>
+       {edit && (
+        <Backdrop pad={"50px 0"} bool={true} width={"900px"} >
+          <EditLead cancel={cancelEdit} data={data.result.leadId} />
+        </Backdrop>
+      )}
       <div className="absolute top-[16px] right-0">
         <Image
           src={getBasicIcon("Edit")}
@@ -14,6 +38,10 @@ const CallInfo = ({ check, info ,data}: any) => {
           alt=""
           width={16}
           height={16}
+          onClick={() => {
+            showEdit();
+          }}
+          
         />
       </div>
       <div className="pl-[30px]">

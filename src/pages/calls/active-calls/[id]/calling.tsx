@@ -37,7 +37,7 @@ const AudioProfile = ({ data, scripts }: any) => {
         title="Calls>Active Calls>Discussion on PX features"
         buttons={[
           // {
-          //   text: "Refresh",
+          //   text: "Refresh", 
           //   dropdown: true,
           //   id: 1,
           //   light: false,
