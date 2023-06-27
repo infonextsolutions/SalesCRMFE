@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import Image from "next/image";
+import Backdrop from "@/components/View/Backdrop/Center";
+import EditLead from "@/components/View/EditLead";
 
 const CompanyProfile = ({ data }: any) => {
   console.log("data3:",data.result)
+  const [edit, setEdit] = useState(false);
+  const [bool, setBool] = useState(true);
+
+  const showEdit = () => {
+    setEdit(true);
+  };
+
+  const cancelEdit = () => {
+    setBool(false);
+    setTimeout(() => {
+      setEdit(false);
+      setBool(true);
+    }, 500);
+  };
   return (
-    <div>
+    <>
+    {edit && (
+        <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
+          <EditLead cancel={cancelEdit} data={data.result} />
+        </Backdrop>
+      )}
       <div className="flex">
         {/* <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px]">
           <Image
@@ -64,12 +85,15 @@ const CompanyProfile = ({ data }: any) => {
           <div className="w-[40px] h-[100%] flex items-center justify-center">
             <Image
               src={getBasicIcon("Edit")}
-              className={`w-[20px] svg-grey svg-not-selected mt-[-24px]`}
+              className={`cursor-pointer`}
               alt="Edit"
               width={20}
               height={20}
               style={{
                 objectFit: "contain",
+              }}
+              onClick={() => {
+                showEdit();
               }}
             />
           </div>
@@ -255,7 +279,7 @@ const CompanyProfile = ({ data }: any) => {
       <p className="text-base text-gray-500 font-medium mt-[10px] text-sm text-[12px]">
       {data.result.companyId.company_description}
       </p>
-    </div>
+    </>
   );
 };
 

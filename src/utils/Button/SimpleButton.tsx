@@ -8,6 +8,7 @@ const SimpleButton = ({
   width,
   height,
   click,
+  type
 }: ButtonProps) => {
   const Theme =
     theme === 1
@@ -54,5 +55,6 @@ interface ButtonProps {
   left?: Number;
   right?: Number;
   border?: Boolean;
+  type?:string;
   click?: () => void;
 }

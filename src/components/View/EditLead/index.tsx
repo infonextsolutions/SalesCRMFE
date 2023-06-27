@@ -63,7 +63,7 @@ const AddText = ({ top, title, width, change }: any) => {
 };
 
 const EditLead = ({ cancel, data }: { cancel: any; data: LeadId }) => {
-  const titles = ["DEAL INFO", "LEAD INFO", "CONTACT INFO"];
+  const titles = ["LEAD INFO", "CONTACT INFO" , "DEAL INFO"];
   const [content, setContent] = useState<any>({});
   //   companyId:data.companyId._id,34
   //   company_name,

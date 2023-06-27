@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import { LeadId } from "@/types/leadId";
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 
 const AddText = ({ top, title, width, change }: any) => {
   return (
@@ -80,229 +82,63 @@ const FormEditContainer = ({
       }] bg-white rounded-xl p-[10px] px-[30px] pt-[8px] `}
     >
       <Navigator callback={CallBack} current={current} list={list} />
-      <div className="flex justify-between pl-[20px] relative">
+      <div className="flex justify-between pl-[20px] relative ">
         <div className="text-black text-[14px] leading-[21px] mt-[10px] w-[100%] tracking-wide  ">
           {activeTitle === 0 && (
-            <>
-              <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
-                Deal Information
-              </h1>
-              <Formik
-                initialValues={{
-                  leadUpdatedOn: "",
-                  inquiryType: "",
-                  productService: "",
-                  dealSize: "",
-                  existingBudget: "",
-                  winProbability: "",
-                  leadCreatedBy: "",
-                  interestedProductService: "",
-                }}
-                onSubmit={(values) => {
-                  // Handle form submission
-                  console.log(values);
-                  // Submit logic here
-                  cancel();
-                }}
-              >
-                <Form className="grid grid-cols-2 gap-4">
-                  <div className="col-span-1">
-                    <div className="mb-4">
-                      <label
-                        htmlFor="leadUpdatedOn"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Lead Updated On
-                      </label>
-                      <Field
-                        type="date"
-                        id="leadUpdatedOn"
-                        name="leadUpdatedOn"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="inquiryType"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Inquiry Type
-                      </label>
-                      <Field
-                        as="select"
-                        id="inquiryType"
-                        name="inquiryType"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      >
-                        <option value="">Select Inquiry Type</option>
-                        <option value="type1">Type 1</option>
-                        <option value="type2">Type 2</option>
-                        {/* Add more options as needed */}
-                      </Field>
-                    </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="productService"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Product/Service
-                      </label>
-                      <Field
-                        as="select"
-                        id="productService"
-                        name="productService"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      >
-                        <option value="">Select Product/Service</option>
-                        <option value="product1">Product 1</option>
-                        <option value="product2">Product 2</option>
-                        {/* Add more options as needed */}
-                      </Field>
-                    </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="dealSize"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Deal Size
-                      </label>
-                      <Field
-                        type="number"
-                        id="dealSize"
-                        name="dealSize"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-span-1">
-                    <div className="mb-4">
-                      <label
-                        htmlFor="existingBudget"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Existing Budget
-                      </label>
-                      <Field
-                        type="number"
-                        id="existingBudget"
-                        name="existingBudget"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="winProbability"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Win Probability
-                      </label>
-                      <Field
-                        as="select"
-                        id="winProbability"
-                        name="winProbability"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      >
-                        <option value="">Select Win Probability</option>
-                        <option value="10%">10%</option>
-                        <option value="20%">20%</option>
-                        {/* Add more options as needed */}
-                      </Field>
-                    </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="leadCreatedBy"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Lead Created By
-                      </label>
-                      <Field
-                        as="select"
-                        id="leadCreatedBy"
-                        name="leadCreatedBy"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      >
-                        <option value="">Select Lead Created By</option>
-                        <option value="user1">User 1</option>
-                        <option value="user2">User 2</option>
-                        {/* Add more options as needed */}
-                      </Field>
-                    </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="interestedProductService"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Interested Product/Service
-                      </label>
-                      <Field
-                        as="select"
-                        id="interestedProductService"
-                        name="interestedProductService"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      >
-                        <option value="">
-                          Select Interested Product/Service
-                        </option>
-                        <option value="product1">Product 1</option>
-                        <option value="product2">Product 2</option>
-                        {/* Add more options as needed */}
-                      </Field>
-                    </div>
-                  </div>
-                  <div className="mt-16 ">
-                    <div className="absolute right-[160px] bottom-[10px] flex">
-                      <SimpleButton
-                        theme={2}
-                        text="Cancel"
-                        left={20}
-                        right={0}
-                        click={() => {
-                          cancel();
-                        }}
-                      />
-                    </div>
-                    <div className="absolute right-[40px] bottom-[10px] flex">
-                      <SimpleButton
-                        theme={1}
-                        text="Save"
-                        left={20}
-                        right={0}
-                        //   type="submit"
-                      />
-                    </div>
-                  </div>
-                </Form>
-              </Formik>
-            </>
-          )}
-
-          {activeTitle === 1 && (
             <>
               <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
                 <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
                   Lead Information
                 </h1>
                 <Formik
-                  initialValues={initialValues}
-                  onSubmit={() => {
-                    console.log(initialValues);
+                  initialValues={{
+                    leadId: "",
+                    lead_title: "",
+                    company_name: "",
+                    company_location: "",
+                    linkedInurl: "",
+                    Twitter: "",
+                    website_url: "",
+                    industry_type: "",
+                    lead_owner: "",
+                    Stage: "",
+                    Status: "",
+                    Source: "",
+                  }}
+                  onSubmit={async (values) => {
+                    try {
+                      const response = await axios.post(
+                        "https://testsalescrm.nextsolutions.in/api/leads/edit",
+                        values
+                      );
+                      // Handle success response
+                      console.log(response.data);
+                      cancel(); // Close the form or perform any other action
+                    } catch (error) {
+                      // Handle error
+                      console.error(error);
+                    }
                   }}
                 >
                   <Form className="custom-scroll-black w-[100%] flex justify-between pr-[20px] pb-[50px]">
                     <div className="w-[55%]">
                       <div className="flex items-center justify-between">
                         <div className="w-[30%]">
+                          <label htmlFor="leadId">Lead Id</label>
                           <Field
                             type="text"
                             name="leadId"
+                            id="leadId"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Lead Id"
                           />
                         </div>
                         <div className="w-[65%]">
+                          <label htmlFor="lead_title">Lead Title</label>
                           <Field
                             type="text"
                             name="lead_title"
+                            id="lead_title"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Lead title"
                           />
@@ -310,84 +146,133 @@ const FormEditContainer = ({
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="w-[48%]">
+                          <label htmlFor="company_name">Company Name</label>
                           <Field
                             type="text"
                             name="company_name"
+                            id="company_name"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Company name"
                           />
                         </div>
                         <div className="w-[48%]">
+                          <label htmlFor="company_location">
+                            Company Location
+                          </label>
                           <Field
                             type="text"
                             name="company_location"
+                            id="company_location"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Company location"
                           />
                         </div>
                       </div>
                       <div className="mt-6">
+                        <label htmlFor="linkedInurl">LinkedIn URL</label>
                         <Field
                           type="text"
                           name="linkedInurl"
+                          id="linkedInurl"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           placeholder="LinkedIn"
                         />
                       </div>
                       <div className="mt-6">
+                        <label htmlFor="Twitter">Twitter</label>
                         <Field
                           type="text"
                           name="Twitter"
+                          id="Twitter"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           placeholder="Twitter"
                         />
                       </div>
                       <div className="mt-6">
+                        <label htmlFor="website_url">Website URL</label>
                         <Field
                           type="text"
                           name="website_url"
+                          id="website_url"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           placeholder="Website URL"
                         />
                       </div>
                       <div className="mt-6">
+                        <label htmlFor="industry_type">Industry Type</label>
                         <Field
                           type="text"
                           name="industry_type"
+                          id="industry_type"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           placeholder="Industry Type"
                         />
                       </div>
                     </div>
                     <div className="w-[40%]">
+                      <div className="flex items-start justify-center">
+                        <div className="flex flex-col items-center relative">
+                          <div>Company Logo</div>
+                          <div
+                            className="h-20 w-20 rounded-full"
+                            style={{ backgroundColor: "#304FFD" }}
+                          ></div>
+                          <div className="absolute top-0 right-0">
+                            <label htmlFor="logoInput">
+                              <Image
+                                src={getBasicIcon("Edit")}
+                                className="w-6 h-6 cursor-pointer mt-3 mr-3"
+                                alt=""
+                                width={16}
+                                height={16}
+                              />
+                            </label>
+                            <input
+                              type="file"
+                              id="logoInput"
+                              className="hidden"
+                              accept="image/*"
+                              // onChange={handleLogoChange}
+                            />
+                          </div>
+                        </div>
+                      </div>
                       <div className="mt-6">
+                        <label htmlFor="lead_owner">Lead Owner</label>
                         <Field
                           type="text"
                           name="lead_owner"
+                          id="lead_owner"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           placeholder="Lead Owner"
                         />
                       </div>
                       <div className="mt-6">
+                        <label htmlFor="Stage">Lead Stage</label>
                         <Field
                           type="text"
                           name="Stage"
+                          id="Stage"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           placeholder="Lead Stage"
                         />
                       </div>
                       <div className="mt-6">
+                        <label htmlFor="Status">Lead Status</label>
                         <Field
                           type="text"
                           name="Status"
+                          id="Status"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           placeholder="Lead Status"
                         />
                       </div>
                       <div className="mt-6">
+                        <label htmlFor="Source">Source</label>
                         <Field
                           type="text"
                           name="Source"
+                          id="Source"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           placeholder="Source"
                         />
@@ -410,7 +295,10 @@ const FormEditContainer = ({
                         text="Save"
                         left={20}
                         right={0}
-                        //  type="submit"
+                        type="submit"
+                        click={() => {
+                          cancel();
+                        }}
                       />
                     </div>
                   </Form>
@@ -418,10 +306,11 @@ const FormEditContainer = ({
               </div>
             </>
           )}
-          {activeTitle === 2 && (
+
+          {activeTitle === 1 && (
             <>
               <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
-                contact Information
+                Contact Information
               </h1>
               <Formik
                 initialValues={{
@@ -438,11 +327,19 @@ const FormEditContainer = ({
                   moreContactInfoPhone: "",
                   moreContactInfoEmail: "",
                 }}
-                onSubmit={(values) => {
-                  // Handle form submission
-                  console.log(values);
-                  // Submit logic here
-                  cancel();
+                onSubmit={async (values) => {
+                  try {
+                    const response = await axios.post(
+                      "https://testsalescrm.nextsolutions.in/api/leads/edit",
+                      values
+                    );
+                    // Handle success response
+                    console.log(response.data);
+                    cancel(); // Close the form or perform any other action
+                  } catch (error) {
+                    // Handle error
+                    console.error(error);
+                  }
                 }}
               >
                 <Form>
@@ -677,7 +574,214 @@ const FormEditContainer = ({
                         text="Save"
                         left={20}
                         right={0}
-                        //   type="submit"
+                        type="submit"
+                        click={() => {
+                          cancel();
+                        }}
+                      />
+                    </div>
+                  </div>
+                </Form>
+              </Formik>
+            </>
+          )}
+          {activeTitle === 2 && (
+            <>
+              <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
+                Deal Information
+              </h1>
+              <Formik
+                initialValues={{
+                  leadUpdatedOn: "",
+                  inquiryType: "",
+                  productService: "",
+                  dealSize: "",
+                  existingBudget: "",
+                  winProbability: "",
+                  leadCreatedBy: "",
+                  interestedProductService: "",
+                }}
+                onSubmit={async (values) => {
+                  try {
+                    const response = await axios.post(
+                      "https://testsalescrm.nextsolutions.in/api/leads/edit",
+                      values
+                    );
+                    // Handle success response
+                    console.log(response.data);
+                    cancel(); // Close the form or perform any other action
+                  } catch (error) {
+                    // Handle error
+                    console.error(error);
+                  }
+                }}
+              >
+                <Form className="grid grid-cols-2 gap-4">
+                  <div className="col-span-1">
+                    <div className="mb-4">
+                      <label
+                        htmlFor="leadUpdatedOn"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Lead Updated On
+                      </label>
+                      <Field
+                        type="date"
+                        id="leadUpdatedOn"
+                        name="leadUpdatedOn"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="inquiryType"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Inquiry Type
+                      </label>
+                      <Field
+                        as="select"
+                        id="inquiryType"
+                        name="inquiryType"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      >
+                        <option value="">Select Inquiry Type</option>
+                        <option value="type1">Type 1</option>
+                        <option value="type2">Type 2</option>
+                        {/* Add more options as needed */}
+                      </Field>
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="productService"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Product/Service
+                      </label>
+                      <Field
+                        as="select"
+                        id="productService"
+                        name="productService"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      >
+                        <option value="">Select Product/Service</option>
+                        <option value="product1">Product 1</option>
+                        <option value="product2">Product 2</option>
+                        {/* Add more options as needed */}
+                      </Field>
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="dealSize"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Deal Size
+                      </label>
+                      <Field
+                        type="number"
+                        id="dealSize"
+                        name="dealSize"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-1">
+                    <div className="mb-4">
+                      <label
+                        htmlFor="existingBudget"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Existing Budget
+                      </label>
+                      <Field
+                        type="number"
+                        id="existingBudget"
+                        name="existingBudget"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="winProbability"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Win Probability
+                      </label>
+                      <Field
+                        as="select"
+                        id="winProbability"
+                        name="winProbability"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      >
+                        <option value="">Select Win Probability</option>
+                        <option value="10%">10%</option>
+                        <option value="20%">20%</option>
+                        {/* Add more options as needed */}
+                      </Field>
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="leadCreatedBy"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Lead Created By
+                      </label>
+                      <Field
+                        as="select"
+                        id="leadCreatedBy"
+                        name="leadCreatedBy"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      >
+                        <option value="">Select Lead Created By</option>
+                        <option value="user1">User 1</option>
+                        <option value="user2">User 2</option>
+                        {/* Add more options as needed */}
+                      </Field>
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="interestedProductService"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Interested Product/Service
+                      </label>
+                      <Field
+                        as="select"
+                        id="interestedProductService"
+                        name="interestedProductService"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      >
+                        <option value="">
+                          Select Interested Product/Service
+                        </option>
+                        <option value="product1">Product 1</option>
+                        <option value="product2">Product 2</option>
+                        {/* Add more options as needed */}
+                      </Field>
+                    </div>
+                  </div>
+                  <div className="mt-16 ">
+                    <div className="absolute right-[160px] bottom-[10px] flex">
+                      <SimpleButton
+                        theme={2}
+                        text="Cancel"
+                        left={20}
+                        right={0}
+                        click={() => {
+                          cancel();
+                        }}
+                      />
+                    </div>
+                    <div className="absolute right-[40px] bottom-[10px] flex">
+                      <SimpleButton
+                        theme={1}
+                        text="Save"
+                        left={20}
+                        right={0}
+                        type="submit"
+                        click={() => {
+                          cancel();
+                        }}
                       />
                     </div>
                   </div>

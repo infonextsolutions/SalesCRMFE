@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import Image from "next/image";
+import Backdrop from "@/components/View/Backdrop/Center";
+import EditLead from "@/components/View/EditLead";
 
 const ClientPocProfile = ({ data }: any) => {
-  console.log("data4:",data.result)
+  const [edit, setEdit] = useState(false);
+  const [bool, setBool] = useState(true);
+
+  const showEdit = () => {
+    setEdit(true);
+  };
+
+  const cancelEdit = () => {
+    setBool(false);
+    setTimeout(() => {
+      setEdit(false);
+      setBool(true);
+    }, 500);
+  };
+  //client profile
+
+  console.log("data4:", data.result);
   return (
-    <div>
+    <>
+      {edit && (
+        <Backdrop pad={"50px 0"} bool={true} width={"900px"} >
+          <EditLead cancel={cancelEdit} data={data.result} />
+        </Backdrop>
+      )}
       <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
         <div className="flex -space-x-2 overflow-hidden">
           <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
@@ -20,7 +43,7 @@ const ClientPocProfile = ({ data }: any) => {
               }}
             />
             <div className="ml-3 items-center ">
-              <h2 className="text-base text-xl font-small whitespace-nowrap leading-7 tracking-wide text-black">
+              <h2 className="text-xl font-small whitespace-nowrap leading-7 tracking-wide text-black">
                 {data.result.customerId.name}
               </h2>
 
@@ -28,18 +51,21 @@ const ClientPocProfile = ({ data }: any) => {
                 href="#0"
                 className="block ml-1 text-sm text-[12px] text-gray-500 hover:text-indigo-500"
               >
-                 {data.result.customerId.designation}
+                {data.result.customerId.designation}
               </a>
             </div>
             <div className="h-[120%] ml-auto ">
               <Image
                 src={getBasicIcon("Edit")}
-                className={`w-[20px] svg-grey ml-auto svg-not-selected mt-[9px]`}
+                className={`cursor-pointer`}
                 alt="Edit"
                 width={20}
                 height={20}
                 style={{
                   objectFit: "contain",
+                }}
+                onClick={() => {
+                  showEdit();
                 }}
               />
             </div>
@@ -68,7 +94,7 @@ const ClientPocProfile = ({ data }: any) => {
               EMAIL
             </strong>
             <a href="mailto:" className="block text-black">
-            {data.result.customerId.email}
+              {data.result.customerId.email}
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -110,21 +136,25 @@ const ClientPocProfile = ({ data }: any) => {
               COMPANY NAME
             </strong>
             <a href="name" className="block text-black">
-            {data.result.companyId.company_name}
+              {data.result.companyId.company_name}
             </a>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm text-gray-500 mr-1">
               COMPANY ADDRESS
             </strong>
-            <p className="block text-black">{data.result.companyId.company_location}</p>
+            <p className="block text-black">
+              {data.result.companyId.company_location}
+            </p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm text-gray-500 mr-1">
               WEBSITE LINK
             </strong>
             <span className="block text-black">
-              <a href={`https://${data.result.companyId.company_website_url}`}>{data.result.companyId.company_website_url}</a>
+              <a href={`https://${data.result.companyId.company_website_url}`}>
+                {data.result.companyId.company_website_url}
+              </a>
             </span>
           </li>
           <li className="px-2 mt-4">
@@ -273,7 +303,7 @@ const ClientPocProfile = ({ data }: any) => {
         </ul>
         <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
       </div>
-    </div>
+    </>
   );
 };
 

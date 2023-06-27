@@ -195,7 +195,7 @@ const domain = extractDomain(data.companyId.company_website_url);
             </strong>
           </li>
           <div
-            className={`flex h-[20px] items-center justify-between mt-[5px] px-2 mt-[10px] shrink-0`}
+            className={`flex h-[20px] items-center justify-between px-2 mt-[10px] shrink-0`}
             style={{ width: "width", marginLeft: "left" }}
           >
             <div className="flex">
