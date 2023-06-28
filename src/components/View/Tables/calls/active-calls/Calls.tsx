@@ -49,13 +49,16 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           const allItems = await getallItems(pageNumber);
           setItems(allItems);
         }
-        console.log("data: ",data)
+        console.log("data: I am here",data)
         const filtered = data.filter(
           (e: ActiveCall) =>
           
             e._id.includes(search) ||
             e.call_title?.includes(search) ||
-            e.customerId.name?.includes(search)
+            e.customerId.name?.includes(search)||
+            e.callId?.includes(search)||
+            e.leadId?.leadId?.includes(search)||
+            e.leadId?.customer_name?.includes(search)
         );
         filtered.reverse();
 
