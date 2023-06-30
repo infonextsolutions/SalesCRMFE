@@ -64,13 +64,13 @@ const Backdrop = ({ children, bool, pad, width }: any) => {
   return (
     <>
       <div
-        className="fixed top-0 left-0 w-[100%] h-[100%] z-100 overflow-hidden "
+        className="fixed top-0 left-0 w-[100%] h-[100%] z-100 overflow-auto"
         style={{
           zIndex: 99999999999999,
         }}
       >
         <div
-          className="w-[100%] h-[100vh] absolute top-0 left-0 bg-black z-10"
+          className="w-[100%] h-[140vh] absolute top-0 left-0 bg-black z-10 "
           style={{
             zIndex: 100,
             opacity: 0,
@@ -79,14 +79,14 @@ const Backdrop = ({ children, bool, pad, width }: any) => {
           ref={backdrop}
         ></div>
         <div
-          className="w-[100%] h-[100vh] top-0 z-100 absolute flex justify-center  overflow-hidden"
+          className="w-[100%] overflow-auto top-0 z-100 absolute flex justify-center "
           style={{
             zIndex: 1000,
             padding: pad ? pad : "100px 0",
           }}
         >
           <motion.div
-            className={`h-[100%] bg-[#fff] rounded-3xl relative py-[10px] `}
+            className={`h-[100%] rounded-3xl  relative py-[10px] `}
             style={{
               width: width ? width : "600px",
             }}

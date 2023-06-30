@@ -22,7 +22,7 @@ const CallInfo = ({ check, info ,data}: any) => {
     }, 500);
   };
 
-  console.log(data.result.leadId,"here is it")
+  // console.log(data.result.leadId,"here is it")
 
   return (
     <div>

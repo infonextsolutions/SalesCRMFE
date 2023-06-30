@@ -1,9 +1,29 @@
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/open/Container";
 import Charts from "@/components/team/Charts";
-import React from "react";
+import { useRouter } from "next/router";
+import React,{useEffect} from "react";
+
 
 const TeamsPerformence = ({ data }: any) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleBeforeHistoryChange = () => {
+      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.beforePopState(() => {
+        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        return true;
+      });
+    };
+
+    handleBeforeHistoryChange();
+
+    return () => {
+      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+    };
+  }, []);
+
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation

@@ -36,9 +36,9 @@ const Backdrop = ({ children, bool }: any) => {
   return (
     <>
       <div
-        className="fixed top-0 left-0 w-[100%] h-[100%] z-100 overflow-hidden "
+        className="fixed top-0 left-0 w-[100%] h-[100%] z-100 overflow-y-auto "
         style={{
-          zIndex: 10000000000,
+          zIndex: 1000,
         }}
       >
         <div
