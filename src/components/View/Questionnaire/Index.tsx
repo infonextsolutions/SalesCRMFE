@@ -485,7 +485,7 @@ const [questionList, setQuestionList] = useState<any[]>([]);
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white rounded-xl p-6 w-[744px]  h-[720px] overflow-y-scroll">
+          <div className="bg-white rounded-xl p-6 w-[744px]  h-[820px] overflow-y-scroll">
             <div className="flex justify-space-between">
               <h1 className="text-[#222] text-4xl font-semibold mb-4 mr-80">Edit Questionnaire</h1>
             <div className="flex justify-end">

@@ -42,7 +42,7 @@ const Backdrop = ({ children, bool }: any) => {
         }}
       >
         <div
-          className="w-[100%] h-[100vh] absolute top-0 left-0 bg-black z-10"
+          className="w-[100%] h-[118vh] absolute top-0 left-0 bg-black z-10"
           style={{
             zIndex: 100,
             opacity: 0,

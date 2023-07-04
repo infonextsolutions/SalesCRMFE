@@ -28,7 +28,7 @@ const CallInfo = ({ check, info ,data}: any) => {
     <div>
        {edit && (
         <Backdrop pad={"50px 0"} bool={true} width={"900px"} >
-          <EditLead cancel={cancelEdit} data={data.result.leadId} />
+          <EditLead cancel={cancelEdit} data={data.result?.leadId} />
         </Backdrop>
       )}
       <div className="absolute top-[16px] right-0">
