@@ -1,11 +1,13 @@
 import Navigation from "@/components/app/Navigation";
 import CallsContainer from "@/components/calls/recorded-calls/Container/Container";
 import DUMMY from "@/shared/dummy";
-import React, { useRef } from "react";
+import React, { useRef,useEffect } from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
+import { useRouter } from "next/router";
+
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -46,6 +48,26 @@ const Dummy = [
 ];
 
 const Calls = ({ data }: any) => {
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleBeforeHistoryChange = () => {
+      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.beforePopState(() => {
+        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        return true;
+      });
+    };
+
+    handleBeforeHistoryChange();
+
+    return () => {
+      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+    };
+  }, []);
+
+
   const ref: any = useRef();
   const exportXLSX = () => {
     const worksheet = XLSX.utils.json_to_sheet(data.result);

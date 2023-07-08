@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/open/Container";
@@ -7,6 +7,8 @@ import ImportLead from "@/components/View/import-lead/Index";
 import AddLeadForm from "@/components/View/add-lead/addLead";
 import { CSVLink } from "react-csv";
 import IndicatorContainer from "@/components/Indicator/basic";
+import { useRouter } from "next/router";
+
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -47,6 +49,24 @@ const Dummy = [
 ];
 
 const Indicator = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleBeforeHistoryChange = () => {
+      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.beforePopState(() => {
+        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        return true;
+      });
+    };
+
+    handleBeforeHistoryChange();
+
+    return () => {
+      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+    };
+  }, []);
+
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation title={"Indicators Setup"} buttons={[]} />

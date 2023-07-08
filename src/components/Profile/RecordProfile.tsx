@@ -38,7 +38,7 @@ const RecordProfile = ({
         </div>
       )}
       <Navigator callback={CallBack} current={current} list={list} />
-      <div className="flex justify-between w-[100%] relative overflow-hidden">
+      <div className="flex justify-between w-[100%] relative overflow-hidden ">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && <CallInfo check={check} data={data} info={info} />}
           {activeTitle === 1 && <Activityhistory/>}

@@ -2,9 +2,31 @@ import Navigation from "@/components/app/Navigation";
 import Performence from "@/components/team/Container/Performence";
 import Filter from "@/components/team/genUtils/Filter";
 import axios from "axios";
-import React from "react";
+import { useRouter } from "next/router";
+import React,{useEffect} from "react";
+
 
 const TeamsPerformence = ({ data }: any) => {
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleBeforeHistoryChange = () => {
+      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.beforePopState(() => {
+        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        return true;
+      });
+    };
+
+    handleBeforeHistoryChange();
+
+    return () => {
+      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+    };
+  }, []);
+
+
   const [filter, setFilter] = React.useState<any>(null);
   const [currData, setData] = React.useState(data);
 

@@ -2,6 +2,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Button from "@/utils/Button/Button";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
+import Filter from "@/components/leads/genUtils/Filter";
 
 const Search = ({ change }: any) => {
   const [show, setShow] = useState(false);
@@ -34,7 +35,7 @@ const Search = ({ change }: any) => {
             placeholder="Search contact..."
           />
         </div>
-        {/* <div
+        <div
           className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer "
           onClick={() => {
             const box = ref.current.getBoundingClientRect();
@@ -53,8 +54,17 @@ const Search = ({ change }: any) => {
               objectFit: "contain",
             }}
           />
-        </div> */}
+        </div>
       </div>
+       {show && (
+        <Filter
+          top={bounding.top}
+          left={bounding.left}
+          cancel={() => {
+            setShow(false);
+          }}
+        />
+      )}
     </>
   );
 };

@@ -1,13 +1,15 @@
 import Navigation from "@/components/app/Navigation";
 import CallsContainer from "@/components/calls/active-calls/Container/Container";
 import DUMMY from "@/shared/dummy";
-import React, { useRef } from "react";
+import React, { useRef ,useEffect} from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { useRouter } from "next/router";
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -51,6 +53,24 @@ const Dummy = [
 
 const Calls = ({ data }: any) => {
   const ref: any = useRef();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleBeforeHistoryChange = () => {
+      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.beforePopState(() => {
+        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        return true;
+      });
+    };
+
+    handleBeforeHistoryChange();
+
+    return () => {
+      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+    };
+  }, []);
 
   const exportXLSX = () => {
     const worksheet = XLSX.utils.json_to_sheet(data.result);
@@ -101,7 +121,7 @@ const Calls = ({ data }: any) => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title={"Calls>Active Calls"}
+        title={"Calls>Active Calls "}
         buttons={[
           {
             text: "Export",

@@ -22,13 +22,13 @@ const CallInfo = ({ check, info ,data}: any) => {
     }, 500);
   };
 
-  console.log(data.result.leadId,"here is it")
+  // console.log(data.result.leadId,"here is it")
 
   return (
     <div>
        {edit && (
         <Backdrop pad={"50px 0"} bool={true} width={"900px"} >
-          <EditLead cancel={cancelEdit} data={data.result.leadId} />
+          <EditLead cancel={cancelEdit} data={data.result?.leadId} />
         </Backdrop>
       )}
       <div className="absolute top-[16px] right-0">

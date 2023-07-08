@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/close/Container";
@@ -7,6 +7,8 @@ import ImportLead from "@/components/View/import-lead/Index";
 import AddLeadForm from "@/components/View/add-lead/addLead";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
+import { useRouter } from "next/router";
+
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -49,6 +51,25 @@ const Dummy = [
 const SalesClose = ({ data }: any) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleBeforeHistoryChange = () => {
+      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.beforePopState(() => {
+        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        return true;
+      });
+    };
+
+    handleBeforeHistoryChange();
+
+    return () => {
+      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+    };
+  }, []);
+
 
   const viewButtinClick = (prev: Number, current: Number) => {
     // console.log(prev,current);

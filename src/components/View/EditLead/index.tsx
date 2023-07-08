@@ -103,10 +103,10 @@ const EditLead = ({ cancel, data }: { cancel: any; data: LeadId }) => {
   // );
   console.log(data);
   console.log({
-    id: data._id,
+    id: data?._id,
     lead_title: content.lead_title,
-    companyId: data.companyId._id,
-    customerId: data.companyId._id,
+    companyId: data?.companyId._id,
+    customerId: data?.companyId._id,
   });
   const submit = () => {
     const url = "https://testsalescrm.nextsolutions.in/api/leads/update";

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/open/Container";
@@ -12,6 +12,8 @@ import Notes from "@/components/View/Notes";
 import EditLead from "@/components/View/EditLead";
 import Notes1 from "@/components/View/NotesSalesView";
 import PromptEdit from "@/components/View/PromptEdit";
+import { useRouter } from "next/router";
+
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -63,6 +65,26 @@ const SalesOpen = ({ data }: props) => {
       setView(false);
     }
   };
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handlePopState = () => {
+      // Get the previous route from the browser history
+      const previousRoute = document.referrer;
+
+      // Navigate to the previous route within your Next.js app
+      router.push(previousRoute);
+    };
+
+    // Add event listener to handle popstate (browser back button)
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      // Clean up the event listener when the component is unmounted
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [router]);
 
   const [form, setForm] = useState(false);
   const [promptVal, setPromptVal] = useState(false);
@@ -194,7 +216,7 @@ const SalesOpen = ({ data }: props) => {
             list: [
               { title: "Using Form", Icon: "Text" },
               { title: "Import Leads", Icon: "Download" },
-              { title: "Using Prompt", Icon: "Text" },
+              // { title: "Using Prompt", Icon: "Text" },
             ],
           },
           {

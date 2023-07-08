@@ -79,11 +79,11 @@ const FormEditContainer = ({
     <div
       className={`w-[${
         width ? width : "100%"
-      }] bg-white rounded-xl p-[10px] px-[30px] pt-[8px] `}
+      }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
     >
       <Navigator callback={CallBack} current={current} list={list} />
       <div className="flex justify-between pl-[20px] relative ">
-        <div className="text-black text-[14px] leading-[21px] mt-[10px] w-[100%] tracking-wide  ">
+        <div className="text-black text-[14px] overflow-auto leading-[21px] mt-[10px] w-[100%] tracking-wide  ">
           {activeTitle === 0 && (
             <>
               <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
