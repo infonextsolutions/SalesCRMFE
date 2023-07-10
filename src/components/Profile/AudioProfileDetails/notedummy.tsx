@@ -35,7 +35,7 @@ const Notesd = ({ cancel }: any) => {
   });
 
   return (
-    <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
+    <div className="w-[100%] h-[100%] bg-white rounded-xl  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
         Add Note
       </h1>

@@ -47,6 +47,8 @@ const CallProfile = ({ data }: any) => {
     }
   };
 
+  console.log(data,"here is audio")
+
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {fullCall && (

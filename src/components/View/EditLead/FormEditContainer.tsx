@@ -7,28 +7,6 @@ import { LeadId } from "@/types/leadId";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 
-const AddText = ({ top, title, width, change }: any) => {
-  return (
-    <div
-      className="w-[100%] "
-      style={{
-        width: width ? width : "100%",
-        marginTop: top,
-      }}
-    >
-      <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
-        {title}*
-      </p>
-      <input
-        onChange={(e: any) => {
-          change(e.target.value);
-        }}
-        type="text"
-        className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-      />
-    </div>
-  );
-};
 
 const FormEditContainer = ({
   titles,
@@ -43,38 +21,9 @@ const FormEditContainer = ({
     setActiveTitle(childData);
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
-  const [content, setContent] = useState<any>({});
 
-  //titles = ['','kas','sdf']
-  const initialValues = {
-    leadId: "",
-    lead_title: "",
-    company_name: "",
-    company_location: "",
-    linkedInurl: "",
-    Twitter: "",
-    website_url: "",
-    industry_type: "",
-    lead_owner: "",
-    Stage: "",
-    Status: "",
-    Source: "",
-  };
-
-  const submit = () => {
-    // const url = "https://testsalescrm.nextsolutions.in/api/leads/update";
-    // axios
-    //   .put(url, {
-    //     id: data._id,
-    //     lead_title: content.lead_title,
-    //     companyId: data.companyId._id,
-    //     customerId: data.companyId._id,
-    //   })
-    //   .then((e: any) => {
-    //     console.log(e);
-    //   });
-  };
-
+  console.log(data,"here is form data")
+ 
   return (
     <div
       className={`w-[${
@@ -92,18 +41,18 @@ const FormEditContainer = ({
                 </h1>
                 <Formik
                   initialValues={{
-                    leadId: "",
-                    lead_title: "",
-                    company_name: "",
+                    leadId: data?.leadId,
+                    lead_title: data?.lead_title,
+                    company_name: data?.customer_name,
                     company_location: "",
                     linkedInurl: "",
                     Twitter: "",
                     website_url: "",
                     industry_type: "",
                     lead_owner: "",
-                    Stage: "",
-                    Status: "",
-                    Source: "",
+                    Stage:data?.leadStage,
+                    Status:data?.leadStatus,
+                    Source: data?.source,
                   }}
                   onSubmit={async (values) => {
                     try {
@@ -130,7 +79,7 @@ const FormEditContainer = ({
                             name="leadId"
                             id="leadId"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Lead Id"
+                            placeholder="Lead Id" 
                           />
                         </div>
                         <div className="w-[65%]">
@@ -314,7 +263,7 @@ const FormEditContainer = ({
               </h1>
               <Formik
                 initialValues={{
-                  primaryClientName: "",
+                  primaryClientName:"",
                   primaryClientDesignation: "",
                   gender: "",
                   phone: "",

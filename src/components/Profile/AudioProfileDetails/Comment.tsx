@@ -10,12 +10,12 @@ const Comment = ({ user, content, time, reply, last }: any) => {
   return (
     <div className="border-t-[1px] border-[#ccc] py-[20px]">
       <div className="flex items-center justify-between my-2 ml-4">
-        <h3 className="text-[16px] text-black font-medium ml-4  font-medium">
+        <h3 className="text-[16px] text-black  ml-4  font-medium">
           {user}
         </h3>
         <p className="text-sm text-gray-600 mr-10 font-medium">{last}</p>
       </div>
-      <p className="block  font-medium  text-renal-blue py-2 ml-7 text-xs font-small text-renal-blue hover:text-indigo-500">
+      <p className="block  font-medium  text-renal-blue py-2 ml-7 text-xs font-small  hover:text-indigo-500">
         *{time}
       </p>
       <div className="flex items-center ">
@@ -40,7 +40,7 @@ const Comment = ({ user, content, time, reply, last }: any) => {
               setText(e.target.value);
             }}
             placeholder="write a reply"
-            className="w-[80%] relative left-20 font-medium h-[100px] bg-[#fff] apperance-none block font-medium text-[14px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 "
+            className="w-[80%] relative left-20 font-medium h-[100px] bg-[#fff] apperance-none block  text-[14px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 "
           ></textarea>
           <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[26vw]">
             <p onClick={setReply} className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
@@ -55,7 +55,7 @@ const Comment = ({ user, content, time, reply, last }: any) => {
             return (
               <>
                 <div className="flex items-center justify-between mt-2 ml-4">
-                  <h3 className="text-sm text-black font-medium ml-8  font-medium ">
+                  <h3 className="text-sm text-black  ml-8  font-medium ">
                     Micheal
                   </h3>
                   <p className="text-sm text-gray-600 mr-10  font-medium  ">

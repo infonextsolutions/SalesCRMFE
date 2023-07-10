@@ -22,7 +22,7 @@ const CallInfo = ({ check, info ,data}: any) => {
     }, 500);
   };
 
-  // console.log(data.result.leadId,"here is it")
+  console.log(data,"here is it")
 
   return (
     <div>
@@ -49,7 +49,7 @@ const CallInfo = ({ check, info ,data}: any) => {
           Call Id- {info[activeTitle].data.callId}
         </p>
         <div className="text-[#8A9099] mt-[7px] leading-[21px]">
-          <p>LEAD ID-{info[activeTitle].data.leadID}</p>
+          <p>LEAD ID-{ data.result?.leadId.leadId }</p>
           <p>{info[activeTitle].data.leadInfo}</p>
         </div>
         <p className="mt-[20px] text-[#3F434A] leading-[22px] text-[15px] font-medium">
@@ -68,7 +68,8 @@ const CallInfo = ({ check, info ,data}: any) => {
             CLIENT POC
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
-            {info[activeTitle].data.clientPOC}
+            {/* {info[activeTitle].data.clientPOC} */}
+            { data.result?.leadId.customer_name }
           </p>
         </div>
         <div className="mt-[11px]">
@@ -92,7 +93,8 @@ const CallInfo = ({ check, info ,data}: any) => {
             LEAD STAGE
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
-            {info[activeTitle].data.leadStage}
+            {/* {info[activeTitle].data.leadStage} */}
+            {data.result?.leadId.leadStage}
           </p>
         </div>
       </div>

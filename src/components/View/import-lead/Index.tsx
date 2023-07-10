@@ -202,7 +202,7 @@ const Step1 = ({ next, cancel }: any) => {
           </p>
           <select
             id="countries"
-            className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
+            className=" border border-gray-300  text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
           >
             <option selected>Choose Owner</option>
             <option value="US">United States</option>
@@ -217,7 +217,7 @@ const Step1 = ({ next, cancel }: any) => {
           </p>
           <select
             id="countries"
-            className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
+            className=" border border-gray-300  text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
           >
             <option selected>Enquiry</option>
             <option value="US">United States</option>
