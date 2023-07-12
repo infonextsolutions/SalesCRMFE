@@ -24,6 +24,19 @@ const AudioProfile = ({ data, scripts }: any) => {
     }, 500);
   };
 
+  const takeAction = (e: any, e1: any) => {
+    if (e1 === 0) {
+      console.log("email");
+    } else if (e1 === 1) {
+      console.log("meeting");
+    } else if (e1 === 2) {
+      console.log("task");
+    }
+    if (e1 === 3) {
+      console.log("message");
+    }
+  };
+
   console.log(data);
 
   return (
@@ -37,7 +50,7 @@ const AudioProfile = ({ data, scripts }: any) => {
         title="Calls>Active Calls>Discussion on PX features"
         buttons={[
           // {
-          //   text: "Refresh", 
+          //   text: "Refresh",
           //   dropdown: true,
           //   id: 1,
           //   light: false,
@@ -68,17 +81,18 @@ const AudioProfile = ({ data, scripts }: any) => {
               setCall(true);
             },
           },
+
           {
-            text: "Take Action",
+            text: "Take Action ",
+            click: takeAction,
             dropdown: true,
             id: 1,
             icon: "Plus",
             light: false,
             list: [
-              // { title: "Call", Icon: "Phone" },
               { title: "Email", Icon: "Mail" },
               { title: "Meeting", Icon: "Calendar" },
-              { title: "Task", Icon: "Tasks" },
+              { title: "Notes", Icon: "Tasks" },
               { title: "Message", Icon: "Chat" },
             ],
           },
