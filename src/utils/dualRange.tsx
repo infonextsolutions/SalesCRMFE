@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { getBasicIcon } from "./AssetsHelper";
+import { DualHRangeBar } from 'dual-range-bar'
 
 const RangeHolder = ({ align }: any) => {
   return (
@@ -25,22 +26,25 @@ const RangeHolder = ({ align }: any) => {
 };
 
 const DualRange = ({ width, top, title }: any) => {
+  // const drbar = new DualHRangeBar('my-drbar-container')
   return (
     <div
-      style={{
-        width: width ? width : "100%",
-        marginTop: top ? top : "10px",
-      }}
-      className="my-[15px]"
+    style={{
+      width: width ? width : "100%",
+      marginTop: top ? top : "10px",
+    }}
+    className="my-[15px]"
     >
       <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
         {title}
       </p>
       <div className="w-[100%]  h-[4px] mt-[12px] flex bg-[#fff] relative rounded-[3px]">
+
         <div className="h-[100%] w-[100%] bg-renal-blue rounded-l-[3px] relative">
           <RangeHolder align={true} />
           <RangeHolder />
         </div>
+      
       </div>
     </div>
   );
