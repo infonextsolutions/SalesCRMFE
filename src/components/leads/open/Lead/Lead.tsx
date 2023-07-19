@@ -469,7 +469,7 @@ const LeadContainer = ({
       <div
         className="flex relative h-[50px]"
         style={{
-          zIndex: 1000,
+          zIndex: 100,
         }}
       >
         <div

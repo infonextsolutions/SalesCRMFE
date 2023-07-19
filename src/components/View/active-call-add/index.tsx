@@ -285,8 +285,8 @@ const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
 
 
   return (
-    <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
-      <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
+    <div className="w-[100%] h-[100%] py-[30px] pl-[40px] pr-[40px]  relative">
+      <h1 className="text-[#3f434a] text-[31px] font-medium mb-[24px] tracking-[1px]">
         Setup Call Page
       </h1>
       <div

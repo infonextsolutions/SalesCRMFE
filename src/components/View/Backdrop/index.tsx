@@ -54,7 +54,7 @@ const Backdrop = ({ children, bool }: any) => {
           ref={container}
           className={`w-[600px] h-[100vh] top-0 right-0 absolute z-100 bg-[#fff] `}
           style={{
-            zIndex: 1000,
+            zIndex: 100000,
             transform: "translateX(10000px)",
           }}
         >

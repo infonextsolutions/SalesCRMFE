@@ -6,7 +6,7 @@ import Image from "next/image";
 const Activityhistory = () => {
   return (
     <div className="bg-[#ffffff] my-[50px] w-[100%]">
-      <h2 className="text-[#3F434A] font-medium text-2xl font-medium">
+      <h2 className="text-[#3F434A] text-2xl font-medium">
         Activity History
       </h2>
       <div className="flex text-[14px] mt-[30px] w-[100%] text-[#8A9099] leading-[21px] items-center">

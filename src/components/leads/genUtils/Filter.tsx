@@ -171,6 +171,7 @@ const Filter = ({ cancel, left, top }: any) => {
         top={10}
         title={"Status"}
         list={[
+         
           {
             title: "open",
             selected: true,

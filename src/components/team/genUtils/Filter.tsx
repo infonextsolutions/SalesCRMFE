@@ -17,7 +17,7 @@ const AddText = ({ top, title, width, list }: any) => {
       <div className="w-[100%] px-[10px] border-[1px]   rounded-xl border-[#ccc]">
         <select
           id="countries"
-          className="outline-none cursor-pointer capitalize text-gray-900 py-[7px]   text-sm tracking-wide text-[#3F434A] font-medium  block w-full bg-white"
+          className="outline-none cursor-pointer capitalize py-[7px]   text-sm tracking-wide text-[#3F434A] font-medium  block w-full bg-white"
         >
           {list.map((item: any, i: any) => {
             return (
