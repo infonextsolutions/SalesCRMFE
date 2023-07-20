@@ -12,7 +12,7 @@ const SalesOpen = React.lazy(() => import("@/views/sales/open"));
 export default function Open({ data }: any) {
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
-
+  console.log(data)
   const dispatch = useDispatch();
 
   const [logged] = useLocalStorage("logged", "loading");
