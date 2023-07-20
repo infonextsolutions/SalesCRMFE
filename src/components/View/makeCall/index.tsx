@@ -46,15 +46,19 @@ const AddText = ({ top, title, width, value, click }: any) => {
 
 const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
   const makecall = async (e: any) => {
-
-    console.log(e,data._id,data);
-    const res = await axios.post(
-      "https://testsalescrm.nextsolutions.in/api/calling/make-call",
-      {
-        callTo: e,
-        leadId:data.leadId._id
-      }
-    );
+    try {
+      console.log(e, data._id, data);
+      const res = await axios.post(
+        "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+        {
+          callTo: e,
+          leadId: data.leadId._id,
+        }
+      );
+      cancel();
+    } catch (err) {
+      cancel();
+    }
   };
   // const makecall = async (e: any) => {
   //   console.log(e,data._id);
