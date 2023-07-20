@@ -111,8 +111,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -353,11 +354,35 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log("calldataactive:",CallData)
+  console.log("calldataactive:", CallData);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
+
+  function formatDateToCustomFormat(isoDate:any) {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const dateObj = new Date(isoDate);
+    const day = dateObj.getUTCDate();
+    const month = months[dateObj.getUTCMonth()];
+    const year = dateObj.getUTCFullYear();
+
+    return `${day} ${month} ${year}`;
+  }
 
   return (
     <>
@@ -410,11 +435,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
-                }`}
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
+                true ? "text-[#3F434A]" : "text-[#8A9099]"
+              }`}
             >
-              <span>Shraddha P.,</span> <span className="text-renal-blue ">John C.,
-              Aarti P. </span>
+              <span>Shraddha P.,</span>{" "}
+              <span className="text-renal-blue ">John C., Aarti P. </span>
             </p>
           </div>
           <CallItem width={100} left={20} text={"John C"} />
@@ -422,9 +448,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             width={130}
             left={20}
             upperText={"Send Email"}
-            bottomText={"on 23 Jan 2023"}
+            bottomText={`on ${formatDateToCustomFormat(CallData.updatedAt)}`}
           />
-          <CallItem width={120} left={10} text={"30 min."} />
+          {/* <CallItem width={120} left={10} text={"30 min."} /> */}
         </div>
       </div>
       <div

@@ -54,6 +54,8 @@ const Dummy = [
 const Calls = ({ data }: any) => {
   const ref: any = useRef();
 
+  console.log(data)
+
   const router = useRouter();
 
   useEffect(() => {
