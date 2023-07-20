@@ -104,6 +104,8 @@ const ScriptList = ({
     }, 500);
   };
 
+  console.log(moredata,"here is more")
+
   return (
     <>
       {uploads && (
@@ -158,6 +160,9 @@ const ScriptList = ({
 };
 
 const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
+
+  console.log(scripts)
+
   const [activeTitle, setActiveTitle] = React.useState(0);
 
   function CallBack(childData: any) {

@@ -12,6 +12,7 @@ import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import { ActiveCall } from "@/types/active-call";
 import CallContainer from "@/components/calls/active-calls/Call/Call";
+import { data } from "@/components/analysis/Call/Tree/data";
 
 const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
@@ -215,6 +216,8 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       }
     }
   };
+
+  console.log(data,"coda")
 
   return (
     <>
