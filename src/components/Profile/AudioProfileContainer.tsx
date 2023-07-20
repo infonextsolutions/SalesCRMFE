@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Comments from "./AudioProfileDetails/Comment";
 import Notes from "./AudioProfileDetails/Notes";
-import CallInfo from "./AudioProfileDetails/CallInfo";
+import CallInfo from "./AudioProfileDetails/recordedCallInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/store/UI";
 import Recorded from "@/types/recorded-call";
@@ -27,7 +27,7 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-
+  console.log(data1);
   return (
     <div
       className={`w-[${

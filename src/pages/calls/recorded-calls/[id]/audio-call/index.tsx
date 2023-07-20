@@ -10,7 +10,7 @@ import FullCall from "@/components/View/full-call";
 import CallSnippet from "@/components/View/call-snippet";
 //Manya will make this page
 
-const CallProfile = ({ data }: any) => {
+const CallProfile = ({ data,data1 }: any) => {
   const titles = ["CALL INFO", "COMMENTS", "NOTES", "COACHING"];
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
@@ -47,7 +47,7 @@ const CallProfile = ({ data }: any) => {
     }
   };
 
-  console.log(data,"here is audio")
+  console.log(data1,"here is audio")
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
@@ -88,7 +88,7 @@ const CallProfile = ({ data }: any) => {
           titles={titles}
           check={true}
           current={0}
-          data1={data.result}
+          data1={data1.result}
           info={dummy.audioCallDetails}
         />
       </div>
@@ -104,10 +104,16 @@ export async function getServerSideProps({ query, params }: any) {
     `https://testsalescrm.nextsolutions.in/api/calling/find-by-id?id=${params.id}`
   );
 
+  console.log(response.data.result.leadId._id)
+  const response1 = await axios.get(
+    `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${response.data.result.leadId._id}`
+  );
+
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component
       data: response.data || {},
+      data1:response1.data || {}
     }, // will be passed to the page component as props
   };
 }
