@@ -16,7 +16,7 @@ const NotAvailable = () => {
   React.useEffect(() => {
     if (!state.isLoggedIn) {
       if (logged === null) {
-        router.replace("/login");
+        router.push("/login");
       }
     }
   }, [id, name, role, logged,router]);

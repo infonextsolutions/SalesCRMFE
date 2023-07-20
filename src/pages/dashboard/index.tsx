@@ -25,7 +25,7 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
     if (!state.isLoggedIn) {
       if (logged === "loading" || logged === "loggedIn") {
         if (id === null || name === null || role === null) {
-          router.replace("/login");
+          router.push("/login");
         }
         if (id && name && role) {
           if (
@@ -38,7 +38,7 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
           }
         }
       } else if (logged === null) {
-        router.replace("/login");
+        router.push("/login");
       }
     }
   }, [id, name, role, logged]);
@@ -46,7 +46,7 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
   React.useEffect(() => {
     if (!state.isLoggedIn) {
       if (logged === null) {
-        router.replace("/login");
+        router.push("/login");
       }
     }
   }, [state.isLoggedIn, logged]);

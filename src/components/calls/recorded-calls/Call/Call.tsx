@@ -144,7 +144,7 @@ const CallItem = ({
               onClick();
             }
             if (click) {
-              router.replace(route);
+              router.push(route);
             }
           }}
           height={20}
@@ -175,7 +175,7 @@ const CallItem = ({
               onClick();
             }
             if (click) {
-              router.replace(route);
+              router.push(route);
             }
           }}
         >

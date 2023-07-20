@@ -112,6 +112,7 @@ const AudioProfile = ({ data, scripts }: any) => {
           check={false}
           current={0}
           info={dummy.audioCallDetails}
+          data1={data.result}
         />
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
           <Script data={data.result} scripts={scripts} />

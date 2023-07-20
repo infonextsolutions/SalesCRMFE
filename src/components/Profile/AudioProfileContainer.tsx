@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Comments from "./AudioProfileDetails/Comment";
 import Notes from "./AudioProfileDetails/Notes";
-import CallInfo from "./AudioProfileDetails/CallInfo";
+import CallInfo from "./AudioProfileDetails/recordedCallInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/store/UI";
 import Recorded from "@/types/recorded-call";
@@ -16,6 +16,7 @@ const AudioProfileContainer = ({
   check,
   data,
   width,
+  data1
 }: AudioProfileContainerProps) => {
   console.log("data7:",data)
   const activeTitle = useSelector((state: any) => state.ui.current);
@@ -26,7 +27,7 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-
+  console.log(data1);
   return (
     <div
       className={`w-[${
@@ -36,7 +37,7 @@ const AudioProfileContainer = ({
       <Navigator callback={CallBack} current={activeTitle} list={list} />
       <div className="flex justify-between w-[100%] relative overflow-hidden">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
-          {activeTitle === 0 && <CallInfo data={data} check={check} info={info} />}
+          {activeTitle === 0 && <CallInfo data1={data1} data={data} check={check} info={info} />}
           {activeTitle === 1 && <Comments />}
           {activeTitle === 2 && <Notes />}
         </div>

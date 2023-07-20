@@ -45,11 +45,11 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
       </div>
       <div className="pl-[30px]">
         <p className="mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id- {data1.callId}
+          Call Id- {data1?.leadId}
         </p>
         <div className="text-[#8A9099] mt-[7px] leading-[21px]">
-          <p>LEAD ID-{data1.leadId._id}</p>
-          <p>{data1.leadId.lead_title}</p>
+          <p>LEAD ID-{data1?._id}</p>
+          <p>{data1?.lead_title}</p>
         </div>
         <p className="mt-[20px] text-[#3F434A] leading-[22px] text-[15px] font-medium">
           INFO
@@ -59,7 +59,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
             COMPANY NAME
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
-            {data1.companyId.company_name}
+            {data1?.companyId.company_name}
           </p>
         </div>
         <div className="mt-[11px]">
@@ -68,7 +68,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
             {/* {info[activeTitle].data.clientPOC} */}
-            {data1.customerId.name}
+            {data1?.customerId.name}
           </p>
         </div>
         <div className="mt-[11px]">
@@ -76,7 +76,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
             PRODUCT/SERVICE
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
-            {data1.companyId.company_product_category}
+            {data1?.companyId.company_product_category}
           </p>
         </div>
         <div className="mt-[11px]">
@@ -84,7 +84,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
             DEAL SIZE
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
-            {data1.leadId.potential_deal_size}
+            {data1?.potential_deal_size}
           </p>
         </div>
         <div className="mt-[11px]">
@@ -93,7 +93,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
             {/* {info[activeTitle].data.leadStage} */}
-            {data1.leadId.leadStage}
+            {data1?.leadStage}
           </p>
         </div>
       </div>
@@ -107,10 +107,10 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
             Client POC
           </p>
           <p className="mt-[5px] text-[#8A9099] text-[12px]">
-            {data1.customerId.name}
+            {data1?.customerId.name}
           </p>
           <p className="text-[#8A9099] text-[10px] leading-[15px]">
-            {data1.customerId.designation}
+            {data1?.customerId.designation}
           </p>
         </div>
         <div className="mt-[12px]">
@@ -194,75 +194,74 @@ interface Props {
   data1: Root;
 }
 
-interface Root {
-  _id: string;
-  callId: string;
-  call_title: string;
-  leadId: LeadId;
-  companyId: CompanyId;
-  customerId: CustomerId;
-  call_start_time: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  scriptId: string;
-}
-
-interface LeadId {
-  _id: string;
-  companyId: string;
-  customerId: string;
-  potential_deal_size: string;
-  win_probability: string;
-  created_by: string;
-  customer_name: string;
-  inquiry: string;
-  existing_budget: string;
-  leadStatus: string;
-  leadStage: string;
-  lead_title: string;
-  lead_description: string;
-  notes: Note[];
-  source: string;
-  leadId: string;
-  owners: string[];
-  __v: number;
-  updatedAt: string;
-  createdAt: string;
-  scriptId: string;
-  callId: string;
-}
-
-interface Note {
-  title: string;
-  content: string;
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface CompanyId {
-  _id: string;
-  company_name: string;
-  company_website_url: string;
-  company_icon: string;
-  company_location: string;
-  company_product_category: string;
-  company_description: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-interface CustomerId {
-  _id: string;
-  name: string;
-  contact: string;
-  email: string;
-  parentId: string;
-  designation: string;
-  companyId: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
+export interface Root {
+    _id: string
+    companyId: CompanyId
+    customerId: CustomerId
+    potential_deal_size: string
+    win_probability: string
+    created_by: string
+    customer_name: string
+    inquiry: string
+    existing_budget: string
+    leadStatus: string
+    leadStage: string
+    lead_title: string
+    lead_description: string
+    notes: Note[]
+    source: string
+    leadId: string
+    owners: Owner[]
+    __v: number
+    createdAt: string
+    updatedAt: string
+  }
+  
+  export interface CompanyId {
+    _id: string
+    company_name: string
+    company_website_url: string
+    company_icon: string
+    company_location: string
+    company_product_category: string
+    company_description: string
+    createdAt: string
+    updatedAt: string
+    __v: number
+  }
+  
+  export interface CustomerId {
+    _id: string
+    name: string
+    contact: string
+    email: string
+    parentId: string
+    designation: string
+    companyId: string
+    createdAt: string
+    updatedAt: string
+    __v: number
+  }
+  
+  export interface Note {
+    title: string
+    content: string
+    _id: string
+    createdAt: string
+    updatedAt: string
+  }
+  
+  export interface Owner {
+    _id: string
+    name: string
+    email: string
+    password: string
+    phone: string
+    roles: string[]
+    token: string
+    createdAt: string
+    updatedAt: string
+    __v: number
+    designation: string
+  }
+  
