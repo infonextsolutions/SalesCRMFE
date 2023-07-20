@@ -15,6 +15,7 @@ const RecordProfile = ({
   info,
   check,
   live,
+  data1,
   width,
 }: AudioProfileContainerProps) => {
   const [activeTitle, setActiveTitle] = useState(0);
@@ -40,7 +41,7 @@ const RecordProfile = ({
       <Navigator callback={CallBack} current={current} list={list} />
       <div className="flex justify-between w-[100%] relative overflow-hidden ">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
-          {activeTitle === 0 && <CallInfo check={check} data={data} info={info} />}
+          {activeTitle === 0 && <CallInfo check={check} data={data} data1={data1} info={info} />}
           {activeTitle === 1 && <Activityhistory/>}
           {activeTitle === 2 && <Notes />}
           {activeTitle === 3 && <Questionnaire />}

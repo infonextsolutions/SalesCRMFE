@@ -4,8 +4,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import React, { useState } from "react";
 
-
-const CallInfo = ({ check, info ,data}: any) => {
+const CallInfo = ({ check, info, data, data1 }: Props) => {
   const activeTitle = 0;
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
@@ -22,12 +21,13 @@ const CallInfo = ({ check, info ,data}: any) => {
     }, 500);
   };
 
-  console.log(data,"here is it")
+  // console.log(data,"here is it");
+  console.log(data1, "please only notice this!");
 
   return (
     <div>
-       {edit && (
-        <Backdrop pad={"50px 0"} bool={true} width={"900px"} >
+      {edit && (
+        <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
           <EditLead cancel={cancelEdit} data={data.result?.leadId} />
         </Backdrop>
       )}
@@ -41,16 +41,15 @@ const CallInfo = ({ check, info ,data}: any) => {
           onClick={() => {
             showEdit();
           }}
-          
         />
       </div>
       <div className="pl-[30px]">
         <p className="mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id- {info[activeTitle].data.callId}
+          Call Id- {data1.callId}
         </p>
         <div className="text-[#8A9099] mt-[7px] leading-[21px]">
-          <p>LEAD ID-{ data.result?.leadId.leadId }</p>
-          <p>{info[activeTitle].data.leadInfo}</p>
+          <p>LEAD ID-{data1.leadId._id}</p>
+          <p>{data1.leadId.lead_title}</p>
         </div>
         <p className="mt-[20px] text-[#3F434A] leading-[22px] text-[15px] font-medium">
           INFO
@@ -60,7 +59,7 @@ const CallInfo = ({ check, info ,data}: any) => {
             COMPANY NAME
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
-            {info[activeTitle].data.companyName}
+            {data1.companyId.company_name}
           </p>
         </div>
         <div className="mt-[11px]">
@@ -69,7 +68,7 @@ const CallInfo = ({ check, info ,data}: any) => {
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
             {/* {info[activeTitle].data.clientPOC} */}
-            { data.result?.leadId.customer_name }
+            {data1.customerId.name}
           </p>
         </div>
         <div className="mt-[11px]">
@@ -77,7 +76,7 @@ const CallInfo = ({ check, info ,data}: any) => {
             PRODUCT/SERVICE
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
-            {info[activeTitle].data.product}
+            {data1.companyId.company_product_category}
           </p>
         </div>
         <div className="mt-[11px]">
@@ -85,7 +84,7 @@ const CallInfo = ({ check, info ,data}: any) => {
             DEAL SIZE
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
-            {info[activeTitle].data.dealSize}
+            {data1.leadId.potential_deal_size}
           </p>
         </div>
         <div className="mt-[11px]">
@@ -94,7 +93,7 @@ const CallInfo = ({ check, info ,data}: any) => {
           </p>
           <p className="mt-[4px] text-[#3F434A] text-[14px] leading-[21px]">
             {/* {info[activeTitle].data.leadStage} */}
-            {data.result?.leadId.leadStage}
+            {data1.leadId.leadStage}
           </p>
         </div>
       </div>
@@ -108,10 +107,10 @@ const CallInfo = ({ check, info ,data}: any) => {
             Client POC
           </p>
           <p className="mt-[5px] text-[#8A9099] text-[12px]">
-            {info[activeTitle].data.clientPOC}
+            {data1.customerId.name}
           </p>
           <p className="text-[#8A9099] text-[10px] leading-[15px]">
-            {info[activeTitle].data.pocJob}
+            {data1.customerId.designation}
           </p>
         </div>
         <div className="mt-[12px]">
@@ -187,3 +186,83 @@ const CallInfo = ({ check, info ,data}: any) => {
 };
 
 export default CallInfo;
+
+interface Props {
+  check: any;
+  info: any;
+  data: any;
+  data1: Root;
+}
+
+interface Root {
+  _id: string;
+  callId: string;
+  call_title: string;
+  leadId: LeadId;
+  companyId: CompanyId;
+  customerId: CustomerId;
+  call_start_time: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  scriptId: string;
+}
+
+interface LeadId {
+  _id: string;
+  companyId: string;
+  customerId: string;
+  potential_deal_size: string;
+  win_probability: string;
+  created_by: string;
+  customer_name: string;
+  inquiry: string;
+  existing_budget: string;
+  leadStatus: string;
+  leadStage: string;
+  lead_title: string;
+  lead_description: string;
+  notes: Note[];
+  source: string;
+  leadId: string;
+  owners: string[];
+  __v: number;
+  updatedAt: string;
+  createdAt: string;
+  scriptId: string;
+  callId: string;
+}
+
+interface Note {
+  title: string;
+  content: string;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface CompanyId {
+  _id: string;
+  company_name: string;
+  company_website_url: string;
+  company_icon: string;
+  company_location: string;
+  company_product_category: string;
+  company_description: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface CustomerId {
+  _id: string;
+  name: string;
+  contact: string;
+  email: string;
+  parentId: string;
+  designation: string;
+  companyId: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
