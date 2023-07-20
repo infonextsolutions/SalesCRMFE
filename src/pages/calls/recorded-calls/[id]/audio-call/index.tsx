@@ -88,6 +88,7 @@ const CallProfile = ({ data }: any) => {
           titles={titles}
           check={true}
           current={0}
+          data1={data.result}
           info={dummy.audioCallDetails}
         />
       </div>
