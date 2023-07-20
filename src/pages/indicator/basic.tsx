@@ -24,7 +24,7 @@ const Indicator = () => {
     if (!state.isLoggedIn) {
       if (logged === "loading" || logged === "loggedIn") {
         if (id === null || name === null || role === null) {
-          router.replace("/login");
+          router.push("/login");
         }
         if (id && name && role) {
           if (
@@ -37,7 +37,7 @@ const Indicator = () => {
           }
         }
       } else if (logged === null) {
-        router.replace("/login");
+        router.push("/login");
       }
     }
   }, [id, name, role, logged]);
@@ -45,7 +45,7 @@ const Indicator = () => {
   React.useEffect(() => {
     if (!state.isLoggedIn) {
       if (logged === null) {
-        router.replace("/login");
+        router.push("/login");
       }
     }
   }, [state.isLoggedIn, logged]);

@@ -60,7 +60,7 @@ const Login = () => {
     if (!state.isLoggedIn) {
       if (logged === "loading" || logged === "loggedIn") {
         if (id === null || name === null || role === null) {
-          router.replace("/login");
+          router.push("/login");
         }
         if (id && name && role) {
           if (
@@ -70,11 +70,11 @@ const Login = () => {
           ) {
             dispatch(setUser1({ _id: id, User: name, Role: role }));
             dispatch(setLoggedInStatus(true));
-            // router.replace("/sales/open");
+            // router.push("/sales/open");
           }
         }
       } else if (logged === null) {
-        router.replace("/login");
+        router.push("/login");
       }
     }
   }, [id, name, role, logged]);
@@ -114,7 +114,7 @@ const Login = () => {
   const state = useSelector((state: any) => state.auth);
   React.useEffect(() => {
     if (state.isLoggedIn) {
-      router.replace("/sales/open");
+      router.push("/sales/open");
     }
   });
   return (

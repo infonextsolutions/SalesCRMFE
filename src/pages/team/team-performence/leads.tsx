@@ -39,7 +39,7 @@ export default function Open({ data }: any) {
     if (!state.isLoggedIn) {
       if (logged === "loading" || logged === "loggedIn") {
         if (id === null || name === null || role === null) {
-          router.replace("/login");
+          router.push("/login");
         }
         if (id && name && role) {
           if (
@@ -52,7 +52,7 @@ export default function Open({ data }: any) {
           }
         }
       } else if (logged === null) {
-        router.replace("/login");
+        router.push("/login");
       }
     }
   }, [id, name, role, logged]);
@@ -60,7 +60,7 @@ export default function Open({ data }: any) {
   React.useEffect(() => {
     if (!state.isLoggedIn) {
       if (logged === null) {
-        router.replace("/login");
+        router.push("/login");
       }
     }
   }, [state.isLoggedIn, logged]);
