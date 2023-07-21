@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Tween } from "react-gsap";
 import { Power2 } from "gsap";
 import { setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 
 const ApiSuccess = () => {
-  const success = useSelector((state:any) => state.ai);
+  const success = useSelector((state: any) => state.ai);
 
   const [percent, setPercent] = useState(0);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   function runPercentageEffect() {
     let percentage = 1;
@@ -45,7 +46,6 @@ const ApiSuccess = () => {
     }
   }, [success.successShow]);
 
-
   return (
     <Tween
       from={{
@@ -63,7 +63,11 @@ const ApiSuccess = () => {
           zIndex: 1000000,
         }}
       >
-          {success.success ? (success.success.length===0?"Success":success.success):"Success"}
+        {success.success
+          ? success.success.length === 0
+            ? "Success"
+            : success.success
+          : "Success"}
         <div className="w-[100%] h-[5px] bottom-0 absolute ">
           <div
             className="h-[100%] duration-100 bg-[#00000040]"

@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Power2 } from "gsap";
 import { setError } from "@/store/ai";
 import { Tween } from "react-gsap";
+import { useAppDispatch } from "@/store/store";
 
 const ApiErrorPrompt = () => {
   const error = useSelector((state:any) => state.ai);
 
   const [percent, setPercent] = useState(0);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   function runPercentageEffect() {
     let percentage = 1;

@@ -1,10 +1,13 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
-import 'quill/dist/quill.snow.css'; 
-import Image from "next/image"; 
+import "quill/dist/quill.snow.css";
+import Image from "next/image";
 import React, { useState } from "react";
-import { useQuill } from 'react-quilljs';
+import { useQuill } from "react-quilljs";
+import { Root } from "../EditLead/FormEditContainer";
+import { useAppDispatch } from "@/store/store";
+import { setError, setSuccess } from "@/store/ai";
 
 const AddText = ({ title, place }: any) => {
   return (
@@ -73,8 +76,14 @@ const Icon = ({ src }: any) => {
   );
 };
 
-const Toolbar = ({setIsBold,setIsItalic,isBold,isItalic,isUnderline,setIsUnderline}:any) => {
-
+const Toolbar = ({
+  setIsBold,
+  setIsItalic,
+  isBold,
+  isItalic,
+  isUnderline,
+  setIsUnderline,
+}: any) => {
   return (
     <div className="ql-toolbar bg-gray-100 flex flex-wrap h-[40px] m space-x-2 sm:pr-4 items-center divide-gray-200  ql-snow">
       <div className="w-[38px] flex  pr-[10px] ">
@@ -87,7 +96,6 @@ const Toolbar = ({setIsBold,setIsItalic,isBold,isItalic,isUnderline,setIsUnderli
           style={{
             objectFit: "contain",
           }}
-          
         />
         <Image
           src={getBasicIcon("Arrow Down 3")}
@@ -98,12 +106,31 @@ const Toolbar = ({setIsBold,setIsItalic,isBold,isItalic,isUnderline,setIsUnderli
         />
       </div>
       <div className="border-x-[1px] border-x-[#E8E9EB] flex gap-1 ">
-        <button className={`${isBold ? "bg-slate-300" : "bg-transparent"} p-1 rounded-lg w-[38px]  flex`}  onClick={()=>setIsBold((prev:any) => !prev)}><Icon src="/Images/Logo/Bold.svg"/></button>
-        <button className={`${isItalic ? "bg-slate-300" : "bg-transparent"} p-1 rounded-lg w-[38px]  flex`}  onClick={()=>setIsItalic((prev:any) => !prev)}><Icon src="/Images/Logo/Italic.svg" /></button>
-        <button className={`${isUnderline ? "bg-slate-300" : "bg-transparent"} p-1 rounded-lg w-[38px]  flex`}  onClick={()=>setIsUnderline((prev:any) => !prev)}> <Icon src="/Images/Logo/Underline.svg" /></button>
-        
-        
-       
+        <button
+          className={`${
+            isBold ? "bg-slate-300" : "bg-transparent"
+          } p-1 rounded-lg w-[38px]  flex`}
+          onClick={() => setIsBold((prev: any) => !prev)}
+        >
+          <Icon src="/Images/Logo/Bold.svg" />
+        </button>
+        <button
+          className={`${
+            isItalic ? "bg-slate-300" : "bg-transparent"
+          } p-1 rounded-lg w-[38px]  flex`}
+          onClick={() => setIsItalic((prev: any) => !prev)}
+        >
+          <Icon src="/Images/Logo/Italic.svg" />
+        </button>
+        <button
+          className={`${
+            isUnderline ? "bg-slate-300" : "bg-transparent"
+          } p-1 rounded-lg w-[38px]  flex`}
+          onClick={() => setIsUnderline((prev: any) => !prev)}
+        >
+          {" "}
+          <Icon src="/Images/Logo/Underline.svg" />
+        </button>
       </div>
       <div className="border-x-[1px] border-x-[#E8E9EB] flex">
         <Icon src="/Images/Logo/Link.svg" />
@@ -124,10 +151,9 @@ const Toolbar = ({setIsBold,setIsItalic,isBold,isItalic,isUnderline,setIsUnderli
   );
 };
 
-const TextBox = ({ content, title, isBold,isItalic,isUnderline }: any) => {
+const TextBox = ({ content, title, isBold, isItalic, isUnderline }: any) => {
   return (
     <>
-    
       <input
         name=""
         type="text"
@@ -143,55 +169,64 @@ const TextBox = ({ content, title, isBold,isItalic,isUnderline }: any) => {
         onChange={(e: any) => {
           content(e.target.value);
         }}
-        className={` ${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"} ${isUnderline ? "underline underline-offset-1" : "underline-offset-0"}
+        className={` ${isBold ? "font-bold" : "font-normal"} ${
+          isItalic ? "italic" : "not-italic"
+        } ${isUnderline ? "underline underline-offset-1" : "underline-offset-0"}
         w-[100%] outline-none text-[14px] text-text-norm h-[110px] py-[10px] px-[18px] bg-[#fff]`}
         placeholder="Type Something"
       ></textarea>
-
     </>
   );
 };
-const EmailLayout = ({content}:any) =>{
-  const theme = 'snow'; 
+const EmailLayout = ({ content }: any) => {
+  const theme = "snow";
   const modules = {
     toolbar: [
       // [{ size: ['small', false, 'large', 'huge'] }],
-      ['bold', 'italic', 'underline'],
+      ["bold", "italic", "underline"],
       [{ align: [] }],
-      [{ list: 'ordered'}, { list: 'bullet' }],
-      [{ indent: '-1'}, { indent: '+1' }],
-      
-     ['link'],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ indent: "-1" }, { indent: "+1" }],
+
+      ["link"],
     ],
   };
-  const placeholder = 'Type Something';
+  const placeholder = "Type Something";
 
-  const formats = ['size', 'bold', 'italic', 'underline',
-                  'align', 'list', 'indent','link',
-];
-  const { quill,quillRef} =useQuill({ theme, modules, formats, placeholder });
-  React.useEffect(()=>{
-    if(quill){
-      quill.on('text-change',()=>{
+  const formats = [
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "align",
+    "list",
+    "indent",
+    "link",
+  ];
+  const { quill, quillRef } = useQuill({
+    theme,
+    modules,
+    formats,
+    placeholder,
+  });
+  React.useEffect(() => {
+    if (quill) {
+      quill.on("text-change", () => {
         // console.log(quillRef.current.firstChild.innerHTML);
         content(quillRef.current.firstChild.innerHTML);
-
-      })
+      });
     }
-  },[quill])
+  }, [quill]);
 
   // const {  } = useQuill({ theme, modules, formats, placeholder });
 
-
   return (
     <div className="text-black">
-
-      <div className="min-h-[167px]" ref={quillRef} />  
-    </div> 
+      <div className="min-h-[167px]" ref={quillRef} />
+    </div>
   );
-}
+};
 const SendEmail = ({ change, title, content, clicked }: any) => {
- 
   return (
     <>
       <div className=" w-[100%] rounded-xl items-center border-[1px] ">
@@ -203,47 +238,60 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
         {/* <Toolbar setIsBold={setIsBold} isBold={isBold} setIsItalic={setIsItalic} isItalic={isItalic} isUnderline={isUnderline} setIsUnderline={setIsUnderline}/>
         <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} /> */}
 
-      <div className="w-full h-[210px] overflow-auto rounded-lg">
-        <EmailLayout content={content}/>
-       </div>
-      </div>
-        <div className="w-[100%] flex my-[15px] items-center">
-          <SimpleButton
-            theme={1}
-            text={"Send"}
-            left={20}
-            height={40}
-            click={clicked}
-            width={90}
-            right={0}
-          />
-          <Image
-            className="svg-gray-2 ml-[10px]"
-            src={getBasicIcon("Attachment")}
-            width={20}
-            height={20}
-            alt=""
-          />
+        <div className="w-full h-[210px] overflow-auto rounded-lg">
+          <EmailLayout content={content} />
         </div>
+      </div>
+      <div className="w-[100%] flex my-[15px] items-center">
+        <SimpleButton
+          theme={1}
+          text={"Send"}
+          left={20}
+          height={40}
+          click={clicked}
+          width={90}
+          right={0}
+        />
+        <Image
+          className="svg-gray-2 ml-[10px]"
+          src={getBasicIcon("Attachment")}
+          width={20}
+          height={20}
+          alt=""
+        />
+      </div>
     </>
   );
 };
 
-const EmailPage = ({ cancel }: any) => {
+const EmailPage = ({ cancel,data }:{cancel:()=>void;data:any}) => {
   const [sender, setSender] = useState<any>("");
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
 
-
+  console.log(data);
+  const dispatch = useAppDispatch();
   const submit = (e1: any, e2: any, e3: any) => {
+    const payload = {
+      leadId: data.leadId,
+      companyName: data.companyId.company_name,
+      clientPoc: "",
+      email: e1,
+      subject:e2,
+      content: e3,
+    };
     const url = "https://testsalescrm.nextsolutions.in/api/send-email";
     const body = {
+
       email: e1,
       subject: e2,
       content: e3,
-    };  
-    axios.post(url, body).then((e) => {
+    };
+    axios.post(url, payload).then((e) => {
       cancel();
+      dispatch(setSuccess({show:true,success:"email sent!"}))
+    }).catch((e)=>{
+      dispatch(setError({show:true,error:"Error Occured"}))
     });
   };
 
