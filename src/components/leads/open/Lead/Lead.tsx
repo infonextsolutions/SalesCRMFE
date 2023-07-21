@@ -461,17 +461,6 @@ const LeadContainer = ({
     }
   },);
 
-  function formatDate(dateString:any) {
-    if(dateString){
-
-      const options:any = { year: 'numeric', month: 'short', day: 'numeric' };
-      const date = new Date(dateString);
-      return date.toLocaleDateString('en-GB', options);
-    }else{
-      return ""
-    }
-  }
-
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
@@ -602,8 +591,8 @@ const LeadContainer = ({
           <LeadItemMultiple
             width={130}
             left={20}
-            upperText={LeadData.activityId?.lastActivity.type}
-            bottomText={formatDate(LeadData.activityId?.lastActivity.createdAt)}
+            upperText={"Email Sent"}
+            bottomText={""}
             /> 
           <LeadItemMultiple
             width={150}
@@ -738,7 +727,6 @@ interface LeadProps {
   company: CompanyId;
   customer: CustomerId;
   id: String;
-
   leadStage: String;
   leadStatus: String;
   custom: String;
@@ -748,4 +736,3 @@ interface LeadProps {
   last: any;
   owners:any;
 }
-
