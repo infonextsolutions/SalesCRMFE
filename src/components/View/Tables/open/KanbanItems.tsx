@@ -316,10 +316,9 @@ const KanbanItem = ({ item, i, Item }: any) => {
           <Events cancel={cancelEvents} />
         </Backdrop>
       )}
-
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage cancel={cancelEmails} />
+          <EmailPage cancel={cancelEmails} data={Item} />
         </Backdrop>
       )}
       {notes1 && (
