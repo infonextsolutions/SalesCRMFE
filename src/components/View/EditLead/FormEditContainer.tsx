@@ -307,7 +307,7 @@ const FormEditContainer = ({
                 initialValues={{
                   primaryClientName: data.customerId.name,
                   primaryClientDesignation: data.customerId.designation,
-                  gender: "",
+                  gender: data.customerId.gender,
                   phone: data.customerId.contact,
                   email: data.customerId.email,
                   linkedin: "",
@@ -840,6 +840,7 @@ export interface CustomerId {
   companyId: string;
   createdAt: string;
   updatedAt: string;
+  gender:string;
   __v: number;
 }
 
