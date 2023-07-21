@@ -264,7 +264,7 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
   );
 };
 
-const EmailPage = ({ cancel,data }:{cancel:()=>void;data:any}) => {
+const EmailPage = ({ cancel, data }: { cancel: () => void; data: any }) => {
   const [sender, setSender] = useState<any>("");
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
@@ -277,22 +277,26 @@ const EmailPage = ({ cancel,data }:{cancel:()=>void;data:any}) => {
       companyName: data.companyId.company_name,
       clientPoc: "",
       email: e1,
-      subject:e2,
+      subject: e2,
       content: e3,
     };
     const url = "https://testsalescrm.nextsolutions.in/api/send-email";
     const body = {
-
       email: e1,
       subject: e2,
       content: e3,
     };
-    axios.post(url, payload).then((e) => {
-      cancel();
-      dispatch(setSuccess({show:true,success:"email sent!"}))
-    }).catch((e)=>{
-      dispatch(setError({show:true,error:"Error Occured"}))
-    });
+    axios
+      .post(url, payload)
+      .then((e) => {
+        cancel();
+        dispatch(
+          setSuccess({ show: true, success: "Email Sent Successfully!" })
+        );
+      })
+      .catch((e) => {
+        dispatch(setError({ show: true, error: "Error Occured" }));
+      });
   };
 
   return (

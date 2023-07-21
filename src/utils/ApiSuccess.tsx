@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Tween } from "react-gsap";
-import { Power2 } from "gsap";
+import { Power2, gsap } from "gsap";
 import { setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 
@@ -45,37 +44,46 @@ const ApiSuccess = () => {
       }, 3600);
     }
   }, [success.successShow]);
+  const ref: any = useRef();
+
+  const [check, setCheck] = useState(false);
+
+  useEffect(() => {
+    if (check) {
+      gsap.to(ref.current, {
+        x: success.successShow ? "0" : "-200%",
+        duration: 0.5,
+        ease: Power2.easeInOut,
+      });
+    } else {
+      gsap.to(ref.current, {
+        x: "-200%",
+        duration: 0,
+      });
+      setCheck(true);
+    }
+  }, [success.successShow]);
 
   return (
-    <Tween
-      from={{
-        x: "-200%",
+    <div
+      className="h-[50px]  min-w-[100px] px-[20px] text-[13px] good-fonted text-[#fff] font-medium flex items-center  justify-center bg-[#00d62e] absolute bottom-[20px] left-[20px] "
+      style={{
+        zIndex: 1000000,
       }}
-      to={{
-        x: success.successShow ? "0" : "-200%",
-      }}
-      duration={0.5}
-      ease={Power2.easeInOut}
+      ref={ref}
     >
-      <div
-        className="h-[50px] min-w-[100px] px-[20px] text-[13px] good-fonted text-[#fff] font-medium flex items-center  justify-center bg-[#00d62e] absolute bottom-[20px] left-[20px] "
-        style={{
-          zIndex: 1000000,
-        }}
-      >
-        {success.success
-          ? success.success.length === 0
-            ? "Success"
-            : success.success
-          : "Success"}
-        <div className="w-[100%] h-[5px] bottom-0 absolute ">
-          <div
-            className="h-[100%] duration-100 bg-[#00000040]"
-            style={{ width: `${percent}%` }}
-          ></div>
-        </div>
+      {success.success
+        ? success.success.length === 0
+          ? "Success"
+          : success.success
+        : "Success"}
+      <div className="w-[100%] h-[5px] bottom-0 absolute ">
+        <div
+          className="h-[100%] duration-100 bg-[#00000040]"
+          style={{ width: `${percent}%` }}
+        ></div>
       </div>
-    </Tween>
+    </div>
   );
 };
 
