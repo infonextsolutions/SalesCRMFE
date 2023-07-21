@@ -523,7 +523,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       return "-";
     }
   }
-  console.log("calldata:",LeadData)
+  console.log("calldata:",CallData)
   return (
     <>
       <div className="flex">
@@ -603,7 +603,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               })}
             </p>
           </div>
-          <CallItem width={100} left={20} text={"--"} />
+          <CallItem width={100} left={20} text={LeadData.owners[0].name} />
           <CallItemMultiple
             width={130}
             left={20}

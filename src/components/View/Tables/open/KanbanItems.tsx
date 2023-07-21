@@ -10,18 +10,18 @@ import Notes1 from "../../NotesSalesView";
 import Messages from "../../messages";
 
 const KanbanItem = ({ item, i, Item }: any) => {
-  const { pathname, replace } = useRouter();
+  const { pathname, replace,push } = useRouter();
   const leadId = () => {
-    const route = `${pathname}/${Item._id}/lead-profile`;
-    replace(route);
+      const route = `${pathname}/${Item._id}/lead-profile`;
+    push(route)
   };
   const companyId = () => {
     const route = `${pathname}/${Item._id}/company-profile`;
-    replace(route);
+    push(route)
   };
   const clientId = () => {
     const route = `${pathname}/${Item._id}/client-poc-profile`;
-    replace(route);
+    push(route)
   };
 
   const [notes, setNotes] = React.useState(false);

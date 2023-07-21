@@ -37,7 +37,7 @@ const AudioProfile = ({ data, scripts }: any) => {
     }
   };
 
-  console.log(data);
+  console.log(data.result,scripts);
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
