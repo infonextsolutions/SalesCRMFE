@@ -16,8 +16,39 @@ export default interface Lead {
   source: string
   leadId: string
   owners: Owner[]
+  activityId:Activity
   __v: number
 }
+
+export interface Activity {
+  _id: string
+  leadId: string
+  __v: number
+  createdAt: string
+  history: History[]
+  lastActivity: LastActivity
+  updatedAt: string
+}
+
+export interface History {
+  type: string
+  title?: string
+  content: string
+  createdAt: string
+  subject?: string
+  leadId?: string
+  companyName?: string
+  clientPoc?: string
+  email?: string
+}
+
+export interface LastActivity {
+  type: string
+  title: string
+  content: string
+  createdAt: string
+}
+
 
 export interface CompanyId {
   _id: string

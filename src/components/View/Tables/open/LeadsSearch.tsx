@@ -201,6 +201,8 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     }
   };
 
+  
+
   return (
     <>
       <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
