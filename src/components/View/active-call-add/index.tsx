@@ -54,7 +54,7 @@ const AddText = ({ title, place, change }: any) => {
   );
 };
 
-const TextBox = ({ title, place }: any) => {
+const TextBox = ({ title, place ,change}: any) => {
   return (
     <div className="w-[100%]">
       <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
@@ -64,6 +64,9 @@ const TextBox = ({ title, place }: any) => {
         name=""
         id=""
         placeholder={place}
+        onChange={(e: any) => {
+          change(e.target.value);
+        }}
         className="w-[100%] h-[170px] rounded-[14px] bg-[#fff] border-[2px] py-[10px] border-[#d9d9d9] text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
       ></textarea>
     </div>
@@ -260,6 +263,7 @@ const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
   const [data, setData] = React.useState<any>({
     callId: generateUniqueId(),
     call_title: "Shraddha P.",
+    call_desc:"desc",
     leadId: id,
     companyId: companyId,
     customerId: customerId,
@@ -274,6 +278,7 @@ const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
   }
 
   const submit = () => {
+    // console.log("Caling data",data)
     axios.post("https://testsalescrm.nextsolutions.in/api/active-call/create", {
       ...data,
       call_date: Date,
@@ -317,6 +322,13 @@ const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
           setData({ ...data, call_title: e });
         }}
       />
+      <TextBox 
+          title="Call Description"
+          place="Description"
+          change={(e: any) => {
+            setData({ ...data, call_desc: e });
+          }}
+          />
       <DateContainer />
       <DropItems
         title="Call Owner"
