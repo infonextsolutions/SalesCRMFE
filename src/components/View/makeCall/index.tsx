@@ -79,7 +79,7 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
         Choose a number to make a call.
       </p>
       <p className="text-[14px] text-[#8A9099] my-[10px] font-medium">
-        Client POC: Jane Cooper
+        Client POC: {data.customerId.name}
       </p>
       <div className="custom-scroll-black w-[100%] pb-[60px] overflow-y-auto ">
         <div>
