@@ -269,7 +269,6 @@ const EmailPage = ({ cancel, data }: { cancel: () => void; data: any }) => {
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
 
-  console.log(data);
   const dispatch = useAppDispatch();
   const submit = (e1: any, e2: any, e3: any) => {
     const payload = {

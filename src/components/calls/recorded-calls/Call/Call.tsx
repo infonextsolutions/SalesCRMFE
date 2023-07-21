@@ -593,6 +593,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             <p
               className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
                 }`}
+            // >
             >
               {LeadData.owners?.map((item:any, i:any) => {
                 return (
