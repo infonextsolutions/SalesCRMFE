@@ -7,7 +7,7 @@ import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Uploads from "@/components/View/uploads";
 
-const ScriptDoc = ({ title, docName, List, size, data }: any) => {
+const ScriptDoc = ({ title, docName, List, size, data, file, check }: any) => {
   return (
     <div className="w-[100%] mt-[20px]">
       <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
@@ -15,7 +15,9 @@ const ScriptDoc = ({ title, docName, List, size, data }: any) => {
       </p>
       <div className="flex items-center mt-[14px]">
         <Image
-          src="/Images/Logo/DOC 1.svg"
+          src={
+            check === 1 ? "/Images/Logo/PDF 1.svg" : "/Images/Logo/DOC 1.svg"
+          }
           alt=""
           className="w-[55px] px-[10px] "
           // fill={true}
@@ -35,6 +37,10 @@ const ScriptDoc = ({ title, docName, List, size, data }: any) => {
           <Image
             src={getBasicIcon("Download")}
             alt=""
+            className="cursor-pointer"
+            onClick={() => {
+              window.open(file, "_blank");
+            }}
             // fill={true}
             style={
               {
@@ -104,7 +110,91 @@ const ScriptList = ({
     }, 500);
   };
 
-  console.log(moredata,"here is more")
+  console.log(moredata, "here is more");
+
+  function convertDatetime(inputStr: any) {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    // Parse the input string into a Date object
+    const dateObj = new Date(inputStr);
+
+    // Get the components of the date
+    const day = dateObj.getUTCDate();
+    const month = months[dateObj.getUTCMonth()];
+    const year = dateObj.getUTCFullYear();
+    const hours = dateObj.getUTCHours();
+    const minutes = dateObj.getUTCMinutes();
+
+    // Format the time part (hours and minutes)
+    let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${
+      hours >= 12 ? "PM" : "AM"
+    }`;
+
+    // Format the date and time as desired
+    return `${day} ${month} ${year}, ${timeStr}`;
+  }
+  function getTitleFromURL(url: any) {
+    const parts = url.split("/");
+    const title = parts[parts.length - 1];
+
+    // Remove any query parameters if present
+    const titleWithoutParams = title.split("?")[0];
+
+    // Remove the file extension if present (e.g., ".pdf")
+    const titleWithoutExtension = titleWithoutParams.split(".")[0];
+
+    // Replace underscores with spaces and capitalize the words
+    const words = titleWithoutExtension.split("_");
+    const formattedTitle = words
+      .map((word: any) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    return formattedTitle;
+  }
+
+  function getLastFileNameWithExtension(url: any) {
+    const parts = url.split("/");
+    const lastPart = parts[parts.length - 1];
+
+    // Remove any query parameters if present
+    const fileNameWithoutParams = lastPart.split("?")[0];
+
+    return fileNameWithoutParams;
+  }
+
+  function getFileType(url: any) {
+    const parts = url.split("/");
+    const lastPart = parts[parts.length - 1];
+
+    // Remove any query parameters if present
+    const fileNameWithoutParams = lastPart.split("?")[0];
+
+    // Extract the file extension (e.g., ".pdf")
+    const fileExtension = fileNameWithoutParams.split(".").pop().toLowerCase();
+
+    if (fileExtension === "doc" || fileExtension === "docx") {
+      return 0; // Word file
+    } else if (fileExtension === "pdf") {
+      return 1; // PDF file
+    } else if (fileExtension === "csv") {
+      return 2; // CSV file
+    } else {
+      return 3; // Anything else
+    }
+  }
 
   return (
     <>
@@ -114,7 +204,6 @@ const ScriptList = ({
             cancel={cancelUploads}
             id={moredata._id}
             leadId={moredata.leadId._id}
-            
             owners={moredata.leadId.owners[0]}
           />
         </Backdrop>
@@ -144,13 +233,16 @@ const ScriptList = ({
           </button>
         </div>
         {data.map((item: any, i: any) => {
+          console.log(item, "please checck here");
           return (
             <ScriptDoc
               key={i}
-              title={"Demo product A documents for customer"}
-              docName="Wireframe UI Kit.doc"
+              check={getFileType(item.fileUrl)}
+              title={getTitleFromURL(item.fileUrl)}
+              docName={getLastFileNameWithExtension(item.fileUrl)}
               size="5.8 MB"
-              data="23 January 2023, 3:00PM"
+              file={item.fileUrl}
+              data={convertDatetime(item.createdAt)}
             />
           );
         })}
@@ -160,8 +252,7 @@ const ScriptList = ({
 };
 
 const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
-
-  console.log(scripts)
+  console.log(scripts);
 
   const [activeTitle, setActiveTitle] = React.useState(0);
 
