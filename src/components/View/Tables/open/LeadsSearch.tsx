@@ -14,7 +14,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-const LeadsTable = ({ totalRecords, search }: TableProps) => {
+const LeadsTable = ({ totalRecords, search,filter }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -66,6 +66,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
     getItems();
     setLoading(false);
+    console.log("Filter",filter)
   }, [limit, pageNumber, search]);
 
   const fetchItems = async (current: any) => {

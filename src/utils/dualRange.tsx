@@ -52,7 +52,7 @@ const DualRange = ({ width, top, title }: any) => {
       ariaValuetext={state => `Thumb value ${state.valueNow}`}
       renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
       pearling
-      minDistance={5}
+      minDistance={10}
       />
         </div>
       

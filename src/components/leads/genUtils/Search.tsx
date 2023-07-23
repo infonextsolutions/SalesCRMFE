@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import Filter from "./Filter";
 
-const Search = ({ change, view }: any) => {
+const Search = ({ change, view,setFilter }: any) => {
   const [show, setShow] = useState(false);
   const ref: any = useRef();
   const [bounding, setBounding] = useState({ left: 0, top: 0 });
@@ -60,6 +60,7 @@ const Search = ({ change, view }: any) => {
         <Filter
           top={bounding.top}
           left={bounding.left}
+          setFilter={setFilter}
           cancel={() => {
             setShow(false);
           }}
