@@ -5,13 +5,16 @@ import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import React, { Suspense } from "react";
 import Spinner from "@/components/loader/spinner";
+import ApiErrorPrompt from "@/utils/ApiPrompt";
+import ApiSuccess from "@/utils/ApiSuccess";
 
 export default function App({ Component, pageProps }: AppProps) {
-
   return (
     <Provider store={store}>
+      <ApiErrorPrompt />
+      <ApiSuccess />
       <HomeLayout>
-          <Component {...pageProps} />
+        <Component {...pageProps} />
       </HomeLayout>
     </Provider>
   );

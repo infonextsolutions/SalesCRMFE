@@ -533,7 +533,7 @@ const list = [
   },
 ];
 
-const Audio = ({ data }: props) => {
+const Audio = ({ data,data1 }: props) => {
   console.log(data);
   const [check, setCheck] = useState(true);
 
@@ -589,7 +589,7 @@ const Audio = ({ data }: props) => {
                 width={10}
                 height={10}
               />
-              <p className="text-[#304FFD] text-[14px]">Participant 1:John</p>
+              <p className="text-[#304FFD] text-[14px]">Participant 1:{data1.owners[0].name}</p>
             </div>
             <div className="w-full flex items-center mt-[6px]">
               <Image
@@ -600,7 +600,7 @@ const Audio = ({ data }: props) => {
                 height={10}
               />
               <p className="text-[#FF965D] text-[14px]">
-                Participant 2:Shraddha
+                Participant 2:{data1.customerId.name}
               </p>
             </div>
           </div>
@@ -695,6 +695,7 @@ export default Audio;
 
 interface props {
   data: Recorded;
+  data1:Root
 }
 
 export interface AudioData {
@@ -759,4 +760,78 @@ export interface Word {
   end: number;
   confidence: number;
   speaker: any;
+}
+
+
+
+
+export interface Root {
+  _id: string;
+  companyId: CompanyId;
+  customerId: CustomerId;
+  potential_deal_size: string;
+  win_probability: string;
+  created_by: string;
+  customer_name: string;
+  inquiry: string;
+  existing_budget: string;
+  leadStatus: string;
+  leadStage: string;
+  lead_title: string;
+  lead_description: string;
+  notes: Note[];
+  source: string;
+  leadId: string;
+  owners: Owner[];
+  __v: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CompanyId {
+  _id: string;
+  company_name: string;
+  company_website_url: string;
+  company_icon: string;
+  company_location: string;
+  company_product_category: string;
+  company_description: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface CustomerId {
+  _id: string;
+  name: string;
+  contact: string;
+  email: string;
+  parentId: string;
+  designation: string;
+  companyId: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface Note {
+  title: string;
+  content: string;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Owner {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  roles: string[];
+  token: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  designation: string;
 }

@@ -240,7 +240,9 @@ const LeadsTable = ({ totalRecords, search,filter }: TableProps) => {
         />
         {loading ? (
           <Spinner />
-        ) : (
+          ) : (
+            // ) : (
+
           Leads != null &&
           Leads.map((item: Lead, ind: any) => {
             return (

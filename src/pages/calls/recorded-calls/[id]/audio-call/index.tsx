@@ -80,7 +80,7 @@ const CallProfile = ({ data,data1 }: any) => {
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
-          <Audio data={data.result} />
+          <Audio data={data.result} data1={data1.result} />
         </div>
         <AudioProfileContainer
           data={data}

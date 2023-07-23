@@ -685,7 +685,6 @@ const LeadContainer = ({
           <p className="text-[#000] text-[9px] w-[100%] font-medium">
             | 23 Jan 2023 | 4:00 PM | 30 Min |
           </p>
-        </div>
       )} */}
       {notes && (
         <Backdrop bool={bool}>
@@ -699,7 +698,7 @@ const LeadContainer = ({
       )}
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage cancel={cancelEmails} />
+          <EmailPage cancel={cancelEmails} data={LeadData} />
         </Backdrop>
       )}
       {notes1 && (

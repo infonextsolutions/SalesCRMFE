@@ -470,7 +470,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const dispatch = useDispatch();
 
   const [checked, setChecked] = useState(true);
-  const [LeadData, setLeadData] = useState<Lead>(example);
+  const [LeadData, setLeadData] = useState<any>(example);
   const GetLeadData = () => {
     if (CallData.leadId?._id) {
       axios
@@ -523,7 +523,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       return "-";
     }
   }
-  console.log("calldata:",LeadData)
+  console.log("calldata:",CallData)
   return (
     <>
       <div className="flex">
@@ -593,8 +593,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             <p
               className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
                 }`}
+            // >
             >
-              {LeadData.owners?.map((item, i) => {
+              {LeadData.owners?.map((item:any, i:any) => {
                 return (
                   <span className={i !== 0 ? "text-renal-blue" : ""} key={i}>
                     {i < 2 && item.name} ,
@@ -603,7 +604,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               })}
             </p>
           </div>
-          <CallItem width={100} left={20} text={"--"} />
+          <CallItem width={100} left={20} text={LeadData.owners[0].name} />
           <CallItemMultiple
             width={130}
             left={20}
