@@ -9,9 +9,13 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
   const history = data.activityId?.history ?data.activityId?.history:[] ;
 
   function formatDateAndTime(dateString: any) {
-    // Create a Date object from the given date string
+    // Create a Date object from the given date string (UTC time)
     const dateObj = new Date(dateString);
-
+  
+    // Convert the UTC time to IST (Indian Standard Time)
+    const utcToIstOffset = 5.5 * 60 * 60 * 1000; // 5 hours 30 minutes in milliseconds
+    dateObj.setTime(dateObj.getTime() + utcToIstOffset);
+  
     // Months array to get the month name
     const months = [
       "January",
@@ -27,26 +31,26 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
       "November",
       "December",
     ];
-
+  
     // Get the day and month
     const day = dateObj.getUTCDate();
     const month = months[dateObj.getUTCMonth()];
-
-    // Get the hours and minutes
+  
+    // Get the hours and minutes in IST
     let hours = dateObj.getUTCHours();
     let minutes: string = dateObj.getUTCMinutes().toString();
-
+  
     // Convert the hours to 12-hour format and determine AM/PM
     const amPm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12; // Convert 0 to 12
-
+  
     // Pad single-digit minutes with a leading zero
     minutes = minutes.toString().padStart(2, "0");
-
+  
     // Create the formatted date and time string
     const formattedDate = `${day} ${month}`;
     const formattedTime = `${hours}:${minutes} ${amPm}`;
-
+  
     return { date: formattedDate, time: formattedTime };
   }
   return (
