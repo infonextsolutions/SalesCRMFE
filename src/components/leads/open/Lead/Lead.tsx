@@ -464,9 +464,7 @@ const LeadContainer = ({
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
 
-
-  const [LeadData1,setLeadData] = useState(LeadData);
-
+  const [LeadData1, setLeadData] = useState(LeadData);
 
   const UpdateData = async () => {
     const response = await axios
@@ -480,7 +478,6 @@ const LeadContainer = ({
         console.log(e, "error occured");
       });
   };
-
 
   const activities: any = LeadData1;
   const activity = activities?.activityId;
@@ -496,7 +493,7 @@ const LeadContainer = ({
     return "on " + formattedDate;
   }
 
-
+  console.log(activity, "p2-33");
 
   return (
     <>
@@ -642,13 +639,19 @@ const LeadContainer = ({
             left={20}
             upperText={
               activity
-                ? activity.lastActivity.type === "note"
-                  ? "Note added"
-                  : "Email Sent"
+                ? activity.history.length > 0 &&
+                  (activity.history[activity.history.length - 1].type === "note"
+                    ? "Note added"
+                    : "Email Sent")
                 : "-"
             }
             bottomText={
-              activity ? convertToFormattedDate(activity.createdAt) : ""
+              activity
+                ? activity.history.length > 0 &&
+                  convertToFormattedDate(
+                    activity.history[activity.history.length - 1].createdAt
+                  )
+                : ""
             }
           />
           <LeadItemMultiple
@@ -753,7 +756,11 @@ const LeadContainer = ({
       )}
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage refresh={UpdateData} cancel={cancelEmails} data={LeadData} />
+          <EmailPage
+            refresh={UpdateData}
+            cancel={cancelEmails}
+            data={LeadData}
+          />
         </Backdrop>
       )}
       {notes1 && (

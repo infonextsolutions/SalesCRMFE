@@ -111,7 +111,7 @@ const Profile = ({ data }: any) => {
       showNotes();
     } else if (e1 === 4) {
       showMessages();
-    } 
+    }
   };
 
   return (
@@ -128,9 +128,11 @@ const Profile = ({ data }: any) => {
       )}
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage refresh={(e)=>{
-            
-          }} cancel={cancelEmails} data={data1.result} />
+          <EmailPage
+            refresh={(e) => {}}
+            cancel={cancelEmails}
+            data={data1.result}
+          />
         </Backdrop>
       )}
       {messages && (

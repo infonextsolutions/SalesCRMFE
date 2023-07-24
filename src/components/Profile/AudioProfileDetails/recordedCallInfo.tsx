@@ -41,11 +41,11 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
 
   return (
     <div>
-      {edit && (
+      {/* {edit && (
         <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
           <EditLead cancel={cancelEdit} update={UpdateData} data={data2} />
         </Backdrop>
-      )}
+      )} */}
       <div className="absolute top-[16px] right-0">
         <Image
           src={getBasicIcon("Edit")}
