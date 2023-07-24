@@ -20,11 +20,13 @@ const Profile = ({ data }: any) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data._id}`
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data.result._id}`
       )
       .then((e) => {
         setData(e.data);
-      });
+      }).catch(()=>{
+
+      })
   };
   const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS", "COACHING"];
 
@@ -119,7 +121,11 @@ const Profile = ({ data }: any) => {
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {notes && (
         <Backdrop bool={bool}>
-          <Notes cancel={cancelNotes} leadid={data.result._id} />
+          <Notes
+            cancel={cancelNotes}
+            update={UpdateData}
+            leadid={data.result._id}
+          />
         </Backdrop>
       )}
       {events && (
@@ -130,7 +136,9 @@ const Profile = ({ data }: any) => {
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <EmailPage
-            refresh={(e) => {}}
+            refresh={(e) => {
+              UpdateData();
+            }}
             cancel={cancelEmails}
             data={data1.result}
           />
@@ -141,11 +149,14 @@ const Profile = ({ data }: any) => {
           <Messages cancel={cancelMessages} />
         </Backdrop>
       )}
-       {call && (
+      {call && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <ActiveCall
             cancel={cancelCall}
             id={data1.result._id}
+            refresh={() => {
+              UpdateData();
+            }}
             companyId={data1.result.companyId._id}
             customerId={data1.result.customerId._id}
           />

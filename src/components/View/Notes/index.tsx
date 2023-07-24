@@ -54,7 +54,7 @@ const DatePage = () => {
     </div>
   );
 };
-const Notes = ({ cancel, leadid }: any) => {
+const Notes = ({ cancel, leadid ,update}: any) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -68,7 +68,12 @@ const Notes = ({ cancel, leadid }: any) => {
     axios.post(url, body).then((e: any) => {
       console.log(e);
       cancel();
-    });
+      if(update){
+        update();
+      }
+    }).catch((e)=>{
+
+    })
   };
 
   return (
