@@ -5,7 +5,7 @@ import Backdrop from "@/components/View/Backdrop/Center";
 import Notesd from "./notedummy";
 import axios from "axios";
 import { useAppDispatch } from "@/store/store";
-import { setSuccess } from "@/store/ai";
+import { setError, setSuccess } from "@/store/ai";
 
 const Note = ({ title, content }: any) => {
   return (
@@ -67,7 +67,15 @@ const Notes = ({ data }: any) => {
               success: "Note Added Successfully!",
             })
           );
-        });
+        }).catch((e)=>{
+          console.log(e);
+          dispatch(
+            setError({
+              show: true,
+              error: "Error Occured!",
+            })
+          );
+        })
     }
     setBool(false);
     setTimeout(() => {
