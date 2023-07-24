@@ -247,7 +247,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           Leads.map((item: Lead, ind: any) => {
             return (
               <LeadContainer
-                fetchItems={handlePageClick}
                 selectAll={selectAll}
                 key={item._id}
                 index={ind}

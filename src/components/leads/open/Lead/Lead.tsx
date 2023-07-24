@@ -356,7 +356,6 @@ const LeadContainer = ({
   selectAll,
   owners,
   last,
-  fetchItems
 }: LeadProps) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
@@ -795,5 +794,4 @@ interface LeadProps {
   selectAll: any;
   last: any;
   owners: any;
-  fetchItems:(e:any)=>Promise<any>;
 }
