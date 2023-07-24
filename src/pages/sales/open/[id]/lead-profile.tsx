@@ -10,6 +10,7 @@ import Events from "@/components/View/Event/Events";
 import EmailPage from "@/components/View/Email/index";
 import Notes from "@/components/View/Notes";
 import Messages from "@/components/View/messages";
+import ActiveCall from "@/components/View/active-call-add";
 
 const Profile = ({ data }: any) => {
   console.log("data10", data);
@@ -140,6 +141,16 @@ const Profile = ({ data }: any) => {
           <Messages cancel={cancelMessages} />
         </Backdrop>
       )}
+       {call && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <ActiveCall
+            cancel={cancelCall}
+            id={data1.result._id}
+            companyId={data1.result.companyId._id}
+            customerId={data1.result.customerId._id}
+          />
+        </Backdrop>
+      )}
       <Navigation
         title={`Manage Leads>${data.result.lead_title}`}
         buttons={[
@@ -154,7 +165,7 @@ const Profile = ({ data }: any) => {
               { title: "Call", Icon: "Phone" },
               { title: "Email", Icon: "Mail" },
               { title: "Event", Icon: "Calendar" },
-              { title: "Task", Icon: "Tasks" },
+              { title: "Add note", Icon: "Tasks" },
               { title: "Message", Icon: "Chat" },
             ],
           },
