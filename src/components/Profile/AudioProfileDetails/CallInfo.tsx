@@ -1,8 +1,9 @@
-import Backdrop from "@/components/View/Backdrop";
+import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import axios from "axios";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const CallInfo = ({ check, info, data, data1 }: Props) => {
   const activeTitle = 0;
@@ -24,11 +25,34 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   // console.log(data,"here is it");
   console.log(data1, "please only notice this!");
 
+  const [data2, setData] = useState<any>({});
+
+  const UpdateData = async () => {
+    const response = await axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1.leadId._id}`
+      )
+      .then((e) => {
+        setData(e.data);
+      })
+      .catch((e) => {
+        console.log(e, "error occured");
+      });
+  };
+
+  useEffect(() => {
+    UpdateData();
+  });
+
   return (
     <div>
       {edit && (
         <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
-          <EditLead cancel={cancelEdit} data={data.result?.leadId} />
+          <EditLead
+            cancel={cancelEdit}
+            update={UpdateData}
+            data={data2?.result}
+          />
         </Backdrop>
       )}
       <div className="absolute top-[16px] right-0">

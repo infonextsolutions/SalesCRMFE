@@ -8,8 +8,9 @@ import Image from "next/image";
 import { LeadId } from "@/types/leadId";
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
+import axios from "axios";
 
-const ProfilePage = ({ data }: props) => {
+const ProfilePage = ({ data1, updated }: any) => {
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -25,25 +26,38 @@ const ProfilePage = ({ data }: props) => {
   };
 
   function extractDomain(url: string): string {
-  const match = url.match(/^(?:https?:\/\/)?(?:www\.)?([^/?#]+)/);
-  if (match) {
-    return match[1];
+    const match = url.match(/^(?:https?:\/\/)?(?:www\.)?([^/?#]+)/);
+    if (match) {
+      return match[1];
+    }
+    return ""; // Return an empty string if no match is found
   }
-  return ""; // Return an empty string if no match is found
-}
 
-const domain = extractDomain(data.companyId.company_website_url);
+  const [data, setData] = useState<LeadId>(data1);
+
+  const domain = extractDomain(data.companyId.company_website_url);
 
   const openWebsite = () => {
     window.open("http://" + domain, "_blank");
   };
 
-  console.log("data:",data)
+  const UpdateData = async () => {
+    const response = await axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1._id}`
+      )
+      .then((e) => {
+        setData(e.data.result);
+      });
+    updated();
+  };
+
+  console.log("data:", data);
   return (
     <>
       {edit && (
         <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
-          <EditLead cancel={cancelEdit} data={data} />
+          <EditLead cancel={cancelEdit} update={UpdateData} data={data} />
         </Backdrop>
       )}
       <div className="">
@@ -100,15 +114,15 @@ const domain = extractDomain(data.companyId.company_website_url);
               WEBSITE LINK
             </strong>
             <span className="block text-black">
-
-
               {/* made website link to be open in new tab  */}
-              <p> 
+              <p>
                 {/* <a href={extractDomain(data.companyId.company_website_url)} target="_blank">{(data.companyId.company_website_url)}
               </a> */}
-              
-                  <button onClick={openWebsite}>{data.companyId.company_website_url}</button>
-                </p>
+
+                <button onClick={openWebsite}>
+                  {data.companyId.company_website_url}
+                </button>
+              </p>
             </span>
           </li>
           <li className="px-2 mt-4">
@@ -124,26 +138,36 @@ const domain = extractDomain(data.companyId.company_website_url);
               SOCIAL MEDIA
             </strong>
             <div className="flex mt-[5px]">
-              <Image
-                src={getBasicIcon("Twitter")}
-                className={`w-[20px] svg-grey mr-2`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <Image
-                src="/Images/Icons/Basic/Linked.svg"
-                className={`w-[20px] svg-grey`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
+              {data?.companyId.twitter_url.length !== 0 && (
+                <Image
+                  onClick={() => {
+                    window.open(data?.companyId.twitter_url, "_blank");
+                  }}
+                  src={getBasicIcon("Twitter")}
+                  className={`w-[20px] svg-grey mr-2`}
+                  alt=""
+                  width={20}
+                  height={20}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              )}
+              {data?.companyId.linkedin_url.length !== 0 && (
+                <Image
+                  onClick={() => {
+                    window.open(data?.companyId.linkedin_url, "_blank");
+                  }}
+                  src="/Images/Icons/Basic/Linked.svg"
+                  className={`w-[20px] svg-grey`}
+                  alt=""
+                  width={20}
+                  height={20}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              )}
             </div>
           </li>
         </ul>
@@ -313,7 +337,7 @@ const domain = extractDomain(data.companyId.company_website_url);
               GENDER
             </strong>
             <a href="tel:+821023456789" className="block text-black">
-              -
+              {data.customerId.gender}
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -336,26 +360,36 @@ const domain = extractDomain(data.companyId.company_website_url);
               SOCIAL MEDIA
             </strong>
             <div className="flex">
-              <Image
-                src={getBasicIcon("Twitter")}
-                className={`w-[20px] svg-grey mr-2`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <Image
-                src="/Images/Icons/Basic/Linked.svg"
-                className={`w-[20px] svg-grey`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
+              {data?.companyId.twitter_url.length !== 0 && (
+                <Image
+                  onClick={() => {
+                    window.open(data?.companyId.twitter_url, "_blank");
+                  }}
+                  src={getBasicIcon("Twitter")}
+                  className={`w-[20px] svg-grey mr-2`}
+                  alt=""
+                  width={20}
+                  height={20}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              )}
+              {data?.companyId.linkedin_url.length !== 0 && (
+                <Image
+                  onClick={() => {
+                    window.open(data?.companyId.linkedin_url, "_blank");
+                  }}
+                  src="/Images/Icons/Basic/Linked.svg"
+                  className={`w-[20px] svg-grey`}
+                  alt=""
+                  width={20}
+                  height={20}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              )}
             </div>
           </li>
         </ul>
