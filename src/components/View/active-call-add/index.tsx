@@ -54,7 +54,7 @@ const AddText = ({ title, place, change }: any) => {
   );
 };
 
-const TextBox = ({ title, place ,change}: any) => {
+const TextBox = ({ title, place, change }: any) => {
   return (
     <div className="w-[100%]">
       <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
@@ -254,7 +254,7 @@ const DateContainer = () => {
   );
 };
 
-const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
+const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
   function generateUniqueId() {
     const timestamp: any = Date.now().toString(36); // Convert timestamp to base36 string
     const randomNum = Math.random().toString(36).substr(2, 5); // Generate random number and take 5 characters starting from index 2
@@ -263,7 +263,7 @@ const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
   const [data, setData] = React.useState<any>({
     callId: generateUniqueId(),
     call_title: "Shraddha P.",
-    call_desc:"desc",
+    call_desc: "desc",
     leadId: id,
     companyId: companyId,
     customerId: customerId,
@@ -279,15 +279,20 @@ const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
 
   const submit = () => {
     // console.log("Caling data",data)
-    axios.post("https://testsalescrm.nextsolutions.in/api/active-call/create", {
-      ...data,
-      call_date: Date,
-      call_start_time: getCurrentTimeInHours(),
-    }).then((e:any)=>{
-      cancel()
-    })
+    axios
+      .post("https://testsalescrm.nextsolutions.in/api/active-call/create", {
+        ...data,
+        call_date: Date,
+        call_start_time: getCurrentTimeInHours(),
+      })
+      .then((e: any) => {
+        cancel();
+        if (refresh) {
+          refresh();
+        }
+      })
+      .catch((e) => {});
   };
-
 
   return (
     <div className="w-[100%] h-[100%] py-[30px] pl-[40px] pr-[40px]  relative">
@@ -322,13 +327,13 @@ const ActiveCall = ({ cancel, id, companyId, customerId }: any) => {
           setData({ ...data, call_title: e });
         }}
       />
-      <TextBox 
-          title="Call Description"
-          place="Description"
-          change={(e: any) => {
-            setData({ ...data, call_desc: e });
-          }}
-          />
+      <TextBox
+        title="Call Description"
+        place="Description"
+        change={(e: any) => {
+          setData({ ...data, call_desc: e });
+        }}
+      />
       <DateContainer />
       <DropItems
         title="Call Owner"
