@@ -50,7 +50,9 @@ const ProfilePage = ({ data1, updated }: any) => {
       )
       .then((e) => {
         setData(e.data.result);
-      });
+      }).catch(e=>{
+          console.log(e);
+      })
     updated();
   };
 
