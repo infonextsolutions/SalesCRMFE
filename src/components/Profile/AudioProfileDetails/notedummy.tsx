@@ -55,14 +55,14 @@ const Notesd = ({ cancel }: any) => {
             }}
             title="Description"
           />
-          <AddText
+          {/* <AddText
             top={"10px"}
             change={(e: any) => {
               setContent({ ...content, content: e });
             }}
             placeholder="12XXXXX"
             title="Lead Id"
-          />
+          /> */}
         </div>
         <div className="absolute right-[160px] bottom-[40px] mt-[130px] flex ">
           <SimpleButton

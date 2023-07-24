@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Notesd from "./notedummy";
+import axios from "axios";
+import { useAppDispatch } from "@/store/store";
+import { setError, setSuccess } from "@/store/ai";
 
 const Note = ({ title, content }: any) => {
   return (
@@ -19,7 +22,7 @@ const Note = ({ title, content }: any) => {
   );
 };
 
-const Notes = () => {
+const Notes = ({ data }: any) => {
   const [list, setList] = useState<any>([
     // {
     //   title: "note-1",
@@ -29,6 +32,9 @@ const Notes = () => {
     // tincidunt...`,
     // },
   ]);
+
+  console.log(data.result.notes, "please ch-11", data);
+
   const [notes, setNotes] = React.useState(false);
   const [bool, setBool] = React.useState(true);
   const showNotes = () => {
@@ -38,9 +44,37 @@ const Notes = () => {
     title: "",
     content: "",
   });
+  const dispatch = useAppDispatch();
   const cancelNotes = (e: any) => {
     if (e) {
-      setList([...list, e]);
+      // setList([...list, e]);
+      const url = "https://testsalescrm.nextsolutions.in/api/calling/notes";
+      const { title, content } = e;
+
+      console.log(e, "please ch-11");
+      axios
+        .post(url, {
+          title: title,
+          content: content,
+          callId: data._id,
+        })
+        .then((e) => {
+          console.log(e,"ch-11");
+          dispatch(
+            setSuccess({
+              show: true,
+              success: "Note Added Successfully!",
+            })
+          );
+        }).catch((e)=>{
+          console.log(e);
+          dispatch(
+            setError({
+              show: true,
+              error: "Error Occured!",
+            })
+          );
+        })
     }
     setBool(false);
     setTimeout(() => {

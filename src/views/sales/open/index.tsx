@@ -180,7 +180,6 @@ const SalesOpen = ({ data }: props) => {
           <AddLeadForm cancel={cancelForms} />
         </Backdrop>
       )}
-
       <Navigation
         title={"Sales>Open>Manage Leads"}
         buttons={[

@@ -168,7 +168,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
           <div className="icons flex gap-[4px] opacity-70">
             <Image
-              src={getBasicIcon("Phone")}
+              src={getBasicIcon("Tasks")}
               className={`w-[14px] cursor-pointer`}
               alt=""
               width={14}
@@ -207,7 +207,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
               }}
             />
             <Image
-              src={getBasicIcon("Tasks")}
+              src={getBasicIcon("Phone")}
               className={`w-[14px] cursor-pointer`}
               alt=""
               width={14}
