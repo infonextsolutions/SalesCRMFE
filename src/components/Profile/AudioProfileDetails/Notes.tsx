@@ -52,7 +52,6 @@ const Notes = ({ data }: any) => {
       const { title, content } = e;
 
       console.log(e, "please ch-11");
-
       axios
         .post(url, {
           title: title,

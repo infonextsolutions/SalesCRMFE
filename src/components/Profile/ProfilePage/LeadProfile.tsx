@@ -26,20 +26,22 @@ const ProfilePage = ({ data1, updated }: any) => {
   };
 
   function extractDomain(url: string): string {
-    const match = url.match(/^(?:https?:\/\/)?(?:www\.)?([^/?#]+)/);
-    if (match) {
-      return match[1];
+    if (url || url?.length !== 0) {
+      const match = url.match(/^(?:https?:\/\/)?(?:www\.)?([^/?#]+)/);
+      if (match) {
+        return match[1];
+      }
     }
     return ""; // Return an empty string if no match is found
   }
 
   const [data, setData] = useState<LeadId>(data1);
 
-  const domain = extractDomain(data.companyId.company_website_url);
+  // const domain = extractDomain(data.companyId?.company_website_url);
 
-  const openWebsite = () => {
-    window.open("http://" + domain, "_blank");
-  };
+  // const openWebsite = () => {
+  //   window.open("http://" + domain, "_blank");
+  // };
 
   const UpdateData = async () => {
     const response = await axios
@@ -119,7 +121,9 @@ const ProfilePage = ({ data1, updated }: any) => {
                 {/* <a href={extractDomain(data.companyId.company_website_url)} target="_blank">{(data.companyId.company_website_url)}
               </a> */}
 
-                <button onClick={openWebsite}>
+                <button
+                // onClick={openWebsite}
+                >
                   {data.companyId.company_website_url}
                 </button>
               </p>
@@ -138,36 +142,38 @@ const ProfilePage = ({ data1, updated }: any) => {
               SOCIAL MEDIA
             </strong>
             <div className="flex mt-[5px]">
-              {data?.companyId.twitter_url.length !== 0 && (
-                <Image
-                  onClick={() => {
-                    window.open(data?.companyId.twitter_url, "_blank");
-                  }}
-                  src={getBasicIcon("Twitter")}
-                  className={`w-[20px] svg-grey mr-2`}
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              )}
-              {data?.companyId.linkedin_url.length !== 0 && (
-                <Image
-                  onClick={() => {
-                    window.open(data?.companyId.linkedin_url, "_blank");
-                  }}
-                  src="/Images/Icons/Basic/Linked.svg"
-                  className={`w-[20px] svg-grey`}
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              )}
+              {data?.companyId.twitter_url &&
+                data?.companyId.twitter_url.length !== 0 && (
+                  <Image
+                    onClick={() => {
+                      window.open(data?.companyId.twitter_url, "_blank");
+                    }}
+                    src={getBasicIcon("Twitter")}
+                    className={`w-[20px] svg-grey mr-2`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                )}
+              {data?.companyId.linkedin_url &&
+                data?.companyId.linkedin_url.length !== 0 && (
+                  <Image
+                    onClick={() => {
+                      window.open(data?.companyId.linkedin_url, "_blank");
+                    }}
+                    src="/Images/Icons/Basic/Linked.svg"
+                    className={`w-[20px] svg-grey`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                )}
             </div>
           </li>
         </ul>
@@ -192,14 +198,16 @@ const ProfilePage = ({ data1, updated }: any) => {
               Lead Owner(Primary)
             </strong>
             <span className="block text-[#000] ">
-              <p>{data.owners[0].name}</p>
+              <p>{data.owners.length !== 0 && data.owners[0].name}</p>
             </span>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1 text-black">
               Lead Owner(Secondary)
             </strong>
-            <p className="block text-[#000] "> {data.owners[1].name}</p>
+            <p className="block text-[#000] ">
+              {data.owners.length !== 0 && data.owners[1].name}
+            </p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1 text-black">
@@ -360,36 +368,38 @@ const ProfilePage = ({ data1, updated }: any) => {
               SOCIAL MEDIA
             </strong>
             <div className="flex">
-              {data?.companyId.twitter_url.length !== 0 && (
-                <Image
-                  onClick={() => {
-                    window.open(data?.companyId.twitter_url, "_blank");
-                  }}
-                  src={getBasicIcon("Twitter")}
-                  className={`w-[20px] svg-grey mr-2`}
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              )}
-              {data?.companyId.linkedin_url.length !== 0 && (
-                <Image
-                  onClick={() => {
-                    window.open(data?.companyId.linkedin_url, "_blank");
-                  }}
-                  src="/Images/Icons/Basic/Linked.svg"
-                  className={`w-[20px] svg-grey`}
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              )}
+              {data?.companyId.twitter_url &&
+                data?.companyId.twitter_url.length !== 0 && (
+                  <Image
+                    onClick={() => {
+                      window.open(data?.companyId.twitter_url, "_blank");
+                    }}
+                    src={getBasicIcon("Twitter")}
+                    className={`w-[20px] svg-grey mr-2`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                )}
+              {data?.companyId.linkedin_url &&
+                data?.companyId.linkedin_url.length !== 0 && (
+                  <Image
+                    onClick={() => {
+                      window.open(data?.companyId.linkedin_url, "_blank");
+                    }}
+                    src="/Images/Icons/Basic/Linked.svg"
+                    className={`w-[20px] svg-grey`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                )}
             </div>
           </li>
         </ul>

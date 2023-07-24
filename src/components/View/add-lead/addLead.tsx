@@ -30,7 +30,7 @@ const AddLead = ({ cancel }: any) => {
   const submit = () => {
     axios
       .post("https://testsalescrm.nextsolutions.in/api/leads/create", data)
-      .then((e:any) => {
+      .then((e: any) => {
         cancel();
       });
   };
@@ -45,6 +45,13 @@ const AddLead = ({ cancel }: any) => {
       <h1 className="text-[#3f434a] text-[31px] font-medium mb-[40px] tracking-[1px]">
         Add Lead
       </h1>
+      <AddText
+        top={"10px"}
+        change={(e: any) => {
+          setData({ ...data, lead_title: e });
+        }}
+        title="Lead Title"
+      />
       <AddText
         top={"10px"}
         change={(e: any) => {
@@ -69,7 +76,6 @@ const AddLead = ({ cancel }: any) => {
       </div> */}
       {/* Location dropdown */}
       <div className="py-1"></div>
-
 
       {/* adde state dropdown in add a lead task no 39 */}
       <div className="w-[100%]">
@@ -101,11 +107,6 @@ const AddLead = ({ cancel }: any) => {
 
       <div className="py-1"></div>
 
-
-
-
-
-
       <div className="w-[100%]">
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
           Location*
@@ -115,10 +116,7 @@ const AddLead = ({ cancel }: any) => {
           onChange={(e: any) => {
             setData({
               ...data,
-              companyId: {
-                ...data.companyId,
-                company_location: e.target.value,
-              },
+              company_location: e.target.value,
             });
           }}
         >
@@ -132,8 +130,6 @@ const AddLead = ({ cancel }: any) => {
           <option value="Bangalore">Bangalore</option>
         </select>
       </div>
-
-
 
       {/* <AddText
         top={"10px"}
@@ -152,14 +148,10 @@ const AddLead = ({ cancel }: any) => {
         change={(e: any) => {
           setData({
             ...data,
-            customerId: {
-              ...data.customerId,
-              POC_Name: e,
-            },
+            customer_name: e,
           });
         }}
       />
-
 
       {/* added client POC Designation according to UI and setData function needs to be updated */}
       <AddText
@@ -168,14 +160,10 @@ const AddLead = ({ cancel }: any) => {
         change={(e: any) => {
           setData({
             ...data,
-            customerId: {
-              ...data.customerId,
-              POC_Designation: e,
-            },
+            designation: e,
           });
         }}
       />
-
 
       <AddText
         top={"10px"}
@@ -183,14 +171,10 @@ const AddLead = ({ cancel }: any) => {
         change={(e: any) => {
           setData({
             ...data,
-            customerId: {
-              ...data.customerId,
-              contact: e,
-            },
+            customer_contact: e,
           });
         }}
       />
-
 
       <AddText
         top={"10px"}
@@ -198,13 +182,12 @@ const AddLead = ({ cancel }: any) => {
         change={(e: any) => {
           setData({
             ...data,
-            email: e,
+            customer_email: e,
           });
         }}
       />
       {/* product/service */}
       <div className="py-1"></div>
-
 
       {/* <div className="w-[100%]">
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
@@ -226,9 +209,7 @@ const AddLead = ({ cancel }: any) => {
         </select>
       </div> */}
 
-
-
-        {/* adde product dropdown in add a lead task no 39 */}
+      {/* adde product dropdown in add a lead task no 39 */}
       <div className="w-[100%]">
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
           Product/Service*
@@ -238,27 +219,21 @@ const AddLead = ({ cancel }: any) => {
           onChange={(e: any) => {
             setData({
               ...data,
-              companyId: {
-                ...data.companyId,
-                product: e.target.value,
-              },
+              company_product_category: e.target.value,
             });
           }}
         >
-          
-         <option value="" selected>Product/Service</option>
+          <option value="" selected>
+            Product/Service
+          </option>
           <option value="P1">P1</option>
           <option value="P2">P2</option>
           <option value="P3">P3</option>
-       
         </select>
       </div>
 
       <div className="py-1"></div>
 
-
-
-      
       {/* Lead Inquiry */}
       <div className="py-1"></div>
       <div className="w-[100%]">
@@ -274,9 +249,7 @@ const AddLead = ({ cancel }: any) => {
           }}
           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
         >
-          <option value="" selected>
-            -- Select Lead Enquiry --
-          </option>
+          <option value="" selected></option>
           <option value="P1">Demo Requested</option>
           <option value="P2">Task</option>
           <option value="P3">Meeting Scheduled</option>
