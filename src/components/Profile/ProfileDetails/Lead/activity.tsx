@@ -5,9 +5,8 @@ import Image from "next/image";
 import { LeadId } from "@/types/leadId";
 
 const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
-  console.log(data.activityId.history, "activity");
 
-  const history = data.activityId.history;
+  const history = data.activityId?.history ?data.activityId?.history:[] ;
 
   function formatDateAndTime(dateString: any) {
     // Create a Date object from the given date string
