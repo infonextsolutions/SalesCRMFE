@@ -18,6 +18,8 @@ const LeadProfileContainer = ({
     setActiveTitle(childData);
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
+
+  console.log(data,"please checkk here")
   return (
     <div
       className={`w-[${
@@ -85,7 +87,7 @@ const LeadProfileContainer = ({
               </div>
             </>
           )}
-          {activeTitle === 1 && <ActivityHistory />}
+          {activeTitle === 1 && <ActivityHistory data1={data} data={data} />}
           {activeTitle === 2 && <Attachements />}
         </div>
       </div>

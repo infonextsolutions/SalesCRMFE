@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import { getBasicIcon } from "@/utils/AssetsHelper";
@@ -8,6 +8,7 @@ import CallInfo from "./AudioProfileDetails/CallInfo";
 import Activityhistory from "./ProfileDetails/Lead/activity";
 import Questionnaire from "../View/Questionnaire/Index";
 import { data } from "../analysis/Call/Tree/data";
+import axios from "axios";
 
 const RecordProfile = ({
   titles,
@@ -25,6 +26,24 @@ const RecordProfile = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
+  const [data2, setData] = useState<any>({});
+
+  const UpdateData = async () => {
+    const response = await axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1.leadId._id}`
+      )
+      .then((e) => {
+        setData(e.data.result);
+      })
+      .catch((e) => {
+        console.log(e, "error occured");
+      });
+  };
+
+  useEffect(() => {
+    UpdateData();
+  });
   return (
     <div
       className={`w-[${
@@ -41,8 +60,10 @@ const RecordProfile = ({
       <Navigator callback={CallBack} current={current} list={list} />
       <div className="flex justify-between w-[100%] relative overflow-hidden ">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
-          {activeTitle === 0 && <CallInfo check={check} data={data} data1={data1} info={info} />}
-          {activeTitle === 1 && <Activityhistory/>}
+          {activeTitle === 0 && (
+            <CallInfo check={check} data={data} data1={data1} info={info} />
+          )}
+          {activeTitle === 1 && <Activityhistory data={data2} data1={data2} />}
           {activeTitle === 2 && <Notes />}
           {activeTitle === 3 && <Questionnaire />}
         </div>

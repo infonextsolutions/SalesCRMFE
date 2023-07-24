@@ -5,7 +5,6 @@ import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
 import dummy from "@/shared/dummy";
 import axios from "axios";
 import {useState} from 'react';
-//Manya will make this page
 
 const Profile = ({ data }: any) => {
   console.log("data10",data)
