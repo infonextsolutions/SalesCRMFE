@@ -3,9 +3,10 @@ import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
+import axios from "axios";
 
-const CompanyProfile = ({ data }: any) => {
-  console.log("data3:",data.result)
+const CompanyProfile = ({ data1 }: any) => {
+  console.log("data3:", data1.result);
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -20,11 +21,30 @@ const CompanyProfile = ({ data }: any) => {
       setBool(true);
     }, 500);
   };
+
+  const [data, setData] = useState(data1);
+
+  const UpdateData = async () => {
+    const response = await axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1.result._id}`
+      )
+      .then((e) => {
+        setData(e.data);
+      })
+      .catch((e) => {
+        console.log(e,"error occured")
+      });
+  };
   return (
     <>
-    {edit && (
+      {edit && (
         <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
-          <EditLead cancel={cancelEdit} data={data.result} />
+          <EditLead
+            update={UpdateData}
+            cancel={cancelEdit}
+            data={data.result}
+          />
         </Backdrop>
       )}
       <div className="flex">
@@ -79,7 +99,7 @@ const CompanyProfile = ({ data }: any) => {
               {data.result.companyId.company_name}
             </h2>
             <p className="block  py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
-            {data.result.companyId.company_location}
+              {data.result.companyId.company_location}
             </p>
           </div>
           <div className="w-[40px] h-[100%] flex items-center justify-center">
@@ -107,7 +127,9 @@ const CompanyProfile = ({ data }: any) => {
           <strong className="font-medium text-sm text-gray-500 mr-2">
             COMPANY NAME
           </strong>
-          <p className="block text-black ">{data.result.companyId.company_name}</p>
+          <p className="block text-black ">
+            {data.result.companyId.company_name}
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium text-sm text-gray-500 ml-auto">
@@ -115,17 +137,23 @@ const CompanyProfile = ({ data }: any) => {
             COMPANY ADDRESS
           </strong>
           {/* <p className="block text-black">12th Block tower A,</p> */}
-          <p className="block text-black">{data.result.companyId.company_location}</p>
+          <p className="block text-black">
+            {data.result.companyId.company_location}
+          </p>
         </li>
         <li className="px-2 mt-4">
           <strong className="font-medium text-sm text-gray-500 mr-1">
             WEBSITE LINK
           </strong>
 
-
           {/* made company website open in new page */}
           <span className="block text-black">
-            <a href={`https://${data.result.companyId.company_website_url}`} target="_blank">{data.result.companyId.company_website_url}</a>
+            <a
+              href={`https://${data.result.companyId.company_website_url}`}
+              target="_blank"
+            >
+              {data.result.companyId.company_website_url}
+            </a>
           </span>
         </li>
         <li className="px-2 mt-4">
@@ -169,15 +197,15 @@ const CompanyProfile = ({ data }: any) => {
       <div className="flex items-center justify-between mt-2 ml-2">
         <h3 className="text-sm text-[#000] font-medium">ALL CONTACTS</h3>
         <Image
-              src={getBasicIcon("Plus")}
-              className={`w-[20px] mr-2 svg-grey fill-gray`}
-              alt=""
-              width={20}
-              height={20}
-              style={{
-                objectFit: "contain",
-              }}
-            />
+          src={getBasicIcon("Plus")}
+          className={`w-[20px] mr-2 svg-grey fill-gray`}
+          alt=""
+          width={20}
+          height={20}
+          style={{
+            objectFit: "contain",
+          }}
+        />
       </div>
       <div className="py-3"></div>
       <ul
@@ -277,11 +305,10 @@ const CompanyProfile = ({ data }: any) => {
         Company Description
       </h3>
       <p className="text-base text-gray-500 font-medium mt-[10px] text-sm text-[12px]">
-      {data.result.companyId.company_description}
+        {data.result.companyId.company_description}
       </p>
     </>
   );
 };
 
 export default CompanyProfile;
-

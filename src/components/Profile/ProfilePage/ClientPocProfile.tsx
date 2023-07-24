@@ -3,8 +3,9 @@ import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
+import axios from "axios";
 
-const ClientPocProfile = ({ data }: any) => {
+const ClientPocProfile = ({ data1 }: any) => {
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -20,13 +21,26 @@ const ClientPocProfile = ({ data }: any) => {
     }, 500);
   };
   //client profile
+  const [data, setData] = useState(data1);
 
+  const UpdateData = async () => {
+    const response = await axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1.result._id}`
+      )
+      .then((e) => {
+        setData(e.data);
+      })
+      .catch((e) => {
+        console.log(e,"error occured")
+      });
+  };
   console.log("data4:", data.result);
   return (
     <>
       {edit && (
         <Backdrop pad={"50px 0"} bool={true} width={"900px"} >
-          <EditLead cancel={cancelEdit} data={data.result} />
+          <EditLead update={UpdateData} cancel={cancelEdit} data={data.result} />
         </Backdrop>
       )}
       <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">

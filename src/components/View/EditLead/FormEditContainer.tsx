@@ -6,11 +6,14 @@ import { Field, Form, Formik } from "formik";
 import { LeadId } from "@/types/leadId";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
+import { setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 
 const FormEditContainer = ({
   titles,
   current,
   info,
+  update,
   data,
   width,
   cancel,
@@ -22,7 +25,7 @@ const FormEditContainer = ({
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
   console.log(data, "here is form data");
-
+  const dispatch = useAppDispatch();
   return (
     <div
       className={`w-[${
@@ -44,8 +47,8 @@ const FormEditContainer = ({
                     lead_title: data?.lead_title,
                     company_name: data?.companyId.company_name,
                     company_location: data.companyId.company_location,
-                    linkedInurl: "",
-                    Twitter: "",
+                    linkedInurl: data?.companyId.linkedin_url,
+                    Twitter: data?.companyId.twitter_url,
                     website_url: data.companyId.company_website_url,
                     industry_type: data.companyId.company_product_category,
                     lead_owner: data.owners[0].name,
@@ -57,13 +60,15 @@ const FormEditContainer = ({
                     try {
                       const val = {
                         lead_title: values.lead_title,
-                        _id:data._id,
+                        _id: data._id,
                         companyId: {
                           _id: data.companyId._id,
                           company_name: values.company_name,
                           company_location: values.company_location,
                           company_website_url: values.website_url,
                           company_product_category: values.industry_type,
+                          linkedin_url: values.linkedInurl,
+                          twitter_url: values.Twitter,
                         },
                         // linkedInurl: values.linkedInurl,
                         // Twitter: values.Twitter,
@@ -72,9 +77,16 @@ const FormEditContainer = ({
                         leadStatus: values.Status,
                         source: values.Source,
                       };
+                      update();
                       const response = await axios.put(
                         "https://testsalescrm.nextsolutions.in/api/leads/update",
                         val
+                      );
+                      dispatch(
+                        setSuccess({
+                          show: true,
+                          success: "Data Updated Successfully!",
+                        })
                       );
                       // Handle success response
                       console.log(response.data);
@@ -320,20 +332,37 @@ const FormEditContainer = ({
                   email: data.customerId.email,
                   linkedin: "",
                   twitter: "",
-                  moreContactInfoName: "",
-                  moreContactInfoDesignation: "",
-                  moreContactInfoGender: "",
-                  moreContactInfoPhone: "",
-                  moreContactInfoEmail: "",
+                  // moreContactInfoName: "",
+                  // moreContactInfoDesignation: "",
+                  // moreContactInfoGender: "",
+                  // moreContactInfoPhone: "",
+                  // moreContactInfoEmail: "",
                 }}
                 onSubmit={async (values) => {
                   try {
-                    const response = await axios.post(
-                      "https://testsalescrm.nextsolutions.in/api/leads/edit",
-                      values
+                    const val = {
+                      _id: data._id,
+                      customerId: {
+                        name: values.primaryClientName,
+                        _id: data.customerId._id,
+                        designation: values.primaryClientDesignation,
+                        gender: values.gender,
+                        contact: values.phone,
+                        email: values.email,
+                      },
+                    };
+                    const response = await axios.put(
+                      "https://testsalescrm.nextsolutions.in/api/leads/update",
+                      val
                     );
+                    dispatch(
+                      setSuccess({
+                        show: true,
+                        success: "Data Updated Successfully!",
+                      })
+                    );
+                    update();
                     // Handle success response
-                    console.log(response.data);
                     cancel(); // Close the form or perform any other action
                   } catch (error) {
                     // Handle error
@@ -341,36 +370,37 @@ const FormEditContainer = ({
                   }
                 }}
               >
-                <Form>
-                  <div className="mb-4">
-                    <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] mt-[10px] tracking-[1px]">
-                      Primary Client POC
-                    </h2>
-                    <div className="flex">
-                      <div className="mb-4 flex-grow">
-                        <label
-                          htmlFor="primaryClientName"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Primary Client Name
-                        </label>
-                        <Field
-                          type="text"
-                          id="primaryClientName"
-                          name="primaryClientName"
-                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
-                      </div>
-                      <div className="mb-4 flex-grow"></div>{" "}
-                      {/* Add spacing here */}
-                      <div className="mb-4 flex-grow">
-                        <label
-                          htmlFor="primaryClientDesignation"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Primary Client Designation
-                        </label>
-                        {/* <Field
+                {({ handleSubmit }) => (
+                  <Form>
+                    <div className="mb-4">
+                      <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] mt-[10px] tracking-[1px]">
+                        Primary Client POC
+                      </h2>
+                      <div className="flex">
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor="primaryClientName"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Primary Client Name
+                          </label>
+                          <Field
+                            type="text"
+                            id="primaryClientName"
+                            name="primaryClientName"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
+                        <div className="mb-4 flex-grow"></div>{" "}
+                        {/* Add spacing here */}
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor="primaryClientDesignation"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Primary Client Designation
+                          </label>
+                          {/* <Field
                           as="select"
                           id="primaryClientDesignation"
                           name="primaryClientDesignation"
@@ -380,97 +410,97 @@ const FormEditContainer = ({
                           <option value="designation1">Designation 1</option>
                           <option value="designation2">Designation 2</option>
                         </Field> */}
+                          <Field
+                            type="text"
+                            id="primaryClientDesignation"
+                            name="primaryClientDesignation"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
+                        <div className="mb-4 flex-grow"></div>{" "}
+                        {/* Add spacing here */}
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor="gender"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Gender
+                          </label>
+                          <Field
+                            as="select"
+                            id="gender"
+                            name="gender"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            {/* Add more options as needed */}
+                          </Field>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mb-4 flex">
+                      <div className="mr-4">
+                        <label
+                          htmlFor="phone"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Phone
+                        </label>
                         <Field
                           type="text"
-                          id="primaryClientDesignation"
-                          name="primaryClientDesignation"
+                          id="phone"
+                          name="phone"
                           className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                         />
                       </div>
-                      <div className="mb-4 flex-grow"></div>{" "}
-                      {/* Add spacing here */}
-                      <div className="mb-4 flex-grow">
+                      <div className="mr-4">
                         <label
-                          htmlFor="gender"
+                          htmlFor="email"
                           className="block font-medium mb-2 text-[#8a9099]"
                         >
-                          Gender
+                          Email
                         </label>
                         <Field
-                          as="select"
-                          id="gender"
-                          name="gender"
+                          type="email"
+                          id="email"
+                          name="email"
                           className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        />
+                      </div>
+                      <div className="mr-4">
+                        <label
+                          htmlFor="linkedin"
+                          className="block font-medium mb-2 text-[#8a9099]"
                         >
-                          <option value="">Select Gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          {/* Add more options as needed */}
-                        </Field>
+                          LinkedIn
+                        </label>
+                        <Field
+                          type="text"
+                          id="linkedin"
+                          name="linkedin"
+                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        />
+                      </div>
+                      <div>
+                        {/* <div> */}
+                        <label
+                          htmlFor="twitter"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Twitter
+                        </label>
+                        <Field
+                          type="text"
+                          id="twitter"
+                          name="twitter"
+                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        />
                       </div>
                     </div>
-                  </div>
-                  <div className="mb-4 flex">
-                    <div className="mr-4">
-                      <label
-                        htmlFor="phone"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Phone
-                      </label>
-                      <Field
-                        type="text"
-                        id="phone"
-                        name="phone"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div>
-                    <div className="mr-4">
-                      <label
-                        htmlFor="email"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Email
-                      </label>
-                      <Field
-                        type="email"
-                        id="email"
-                        name="email"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div>
-                    <div className="mr-4">
-                      <label
-                        htmlFor="linkedin"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        LinkedIn
-                      </label>
-                      <Field
-                        type="text"
-                        id="linkedin"
-                        name="linkedin"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div>
-                    <div>
-                    {/* <div> */}
-                      <label
-                        htmlFor="twitter"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Twitter
-                      </label>
-                      <Field
-                        type="text"
-                        id="twitter"
-                        name="twitter"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div>
-                  </div>
 
-                  {/* <div className="mb-4">
+                    {/* <div className="mb-4">
                     <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] tracking-[1px]">
                       More Contact Information - 1 Details
                     </h2>
@@ -558,32 +588,33 @@ const FormEditContainer = ({
                       </div>
                     </div>
                   </div> */}
-                  <div className="mt-16 ">
-                    <div className="absolute right-[160px] bottom-[10px] flex">
-                      <SimpleButton
-                        theme={2}
-                        text="Cancel"
-                        left={20}
-                        right={0}
-                        click={() => {
-                          cancel();
-                        }}
-                      />
+                    <div className="mt-16 ">
+                      <div className="absolute right-[160px] bottom-[10px] flex">
+                        <SimpleButton
+                          theme={2}
+                          text="Cancel"
+                          left={20}
+                          right={0}
+                          click={() => {
+                            cancel();
+                          }}
+                        />
+                      </div>
+                      <div className="absolute right-[40px] bottom-[10px] flex">
+                        <SimpleButton
+                          theme={1}
+                          text="Save"
+                          left={20}
+                          right={0}
+                          type="submit"
+                          click={() => {
+                            handleSubmit();
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className="absolute right-[40px] bottom-[10px] flex">
-                      <SimpleButton
-                        theme={1}
-                        text="Save"
-                        left={20}
-                        right={0}
-                        type="submit"
-                        click={() => {
-                          cancel();
-                        }}
-                      />
-                    </div>
-                  </div>
-                </Form>
+                  </Form>
+                )}
               </Formik>
             </>
           )}
@@ -601,16 +632,34 @@ const FormEditContainer = ({
                   existingBudget: data.existing_budget,
                   winProbability: data.win_probability,
                   leadCreatedBy: data.created_by,
-                  interestedProductService: "",
+                  // interestedProductService: "",
                 }}
                 onSubmit={async (values) => {
                   try {
-                    const response = await axios.post(
-                      "https://testsalescrm.nextsolutions.in/api/leads/edit",
-                      values
+                    const val = {
+                      _id: data._id,
+                      inquiry: values.inquiryType,
+                      potential_deal_size: values.dealSize,
+                      existing_budget: values.existingBudget,
+                      win_probability: values.winProbability,
+                      created_by: values.leadCreatedBy,
+                      companyId: {
+                        _id: data.companyId._id,
+                        company_product_category: values.productService,
+                      },
+                    };
+                    const response = await axios.put(
+                      "https://testsalescrm.nextsolutions.in/api/leads/update",
+                      val
                     );
+                    dispatch(
+                      setSuccess({
+                        show: true,
+                        success: "Data Updated Successfully!",
+                      })
+                    );
+                    update();
                     // Handle success response
-                    console.log(response.data);
                     cancel(); // Close the form or perform any other action
                   } catch (error) {
                     // Handle error
@@ -618,9 +667,10 @@ const FormEditContainer = ({
                   }
                 }}
               >
-                <Form className="grid grid-cols-2 gap-4">
-                  <div className="col-span-1">
-                    {/* <div className="mb-4">
+                {({ handleSubmit }) => (
+                  <Form className="grid grid-cols-2 gap-4">
+                    <div className="col-span-1">
+                      {/* <div className="mb-4">
                       <label
                         htmlFor="leadUpdatedOn"
                         className="block font-medium mb-2 text-[#8a9099]"
@@ -634,14 +684,14 @@ const FormEditContainer = ({
                         className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                       />
                     </div> */}
-                    <div className="mb-4">
-                      <label
-                        htmlFor="inquiryType"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Inquiry Type
-                      </label>
-                      {/* <Field
+                      <div className="mb-4">
+                        <label
+                          htmlFor="inquiryType"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Inquiry Type
+                        </label>
+                        {/* <Field
                         as="select"
                         id="inquiryType"
                         name="inquiryType"
@@ -651,133 +701,134 @@ const FormEditContainer = ({
                         <option value="type1">Type 1</option>
                         <option value="type2">Type 2</option>
                       </Field> */}
-                      <Field
-                        type="text"
-                        id="inquiryType"
-                        name="inquiryType"
-                        className="w-full font-medium bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
+                        <Field
+                          type="text"
+                          id="inquiryType"
+                          name="inquiryType"
+                          className="w-full font-medium bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="productService"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Product/Service
+                        </label>
+                        <Field
+                          type="text"
+                          id="productService"
+                          name="productService"
+                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        ></Field>
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="dealSize"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Deal Size
+                        </label>
+                        <Field
+                          type="number"
+                          id="dealSize"
+                          name="dealSize"
+                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="interestedProductService"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Interested Product/Service
+                        </label>
+                        <Field
+                          as="select"
+                          id="interestedProductService"
+                          name="interestedProductService"
+                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        >
+                          <option value="">
+                            Select Interested Product/Service
+                          </option>
+                          <option value="product1">Product 1</option>
+                          <option value="product2">Product 2</option>
+                          {/* Add more options as needed */}
+                        </Field>
+                      </div>
                     </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="productService"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Product/Service
-                      </label>
-                      <Field
-                        type="text"
-                        id="productService"
-                        name="productService"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      ></Field>
+                    <div className="col-span-1">
+                      <div className="mb-4">
+                        <label
+                          htmlFor="existingBudget"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Existing Budget
+                        </label>
+                        <Field
+                          type="number"
+                          id="existingBudget"
+                          name="existingBudget"
+                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="winProbability"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Win Probability
+                        </label>
+                        <Field
+                          type="text"
+                          id="winProbability"
+                          name="winProbability"
+                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        ></Field>
+                      </div>
+                      <div className="mb-4">
+                        <label
+                          htmlFor="leadCreatedBy"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Lead Created By
+                        </label>
+                        <Field
+                          type="text"
+                          id="leadCreatedBy"
+                          name="leadCreatedBy"
+                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        ></Field>
+                      </div>
                     </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="dealSize"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Deal Size
-                      </label>
-                      <Field
-                        type="number"
-                        id="dealSize"
-                        name="dealSize"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
+                    <div className="mt-16 ">
+                      <div className="absolute right-[160px] bottom-[10px] flex">
+                        <SimpleButton
+                          theme={2}
+                          text="Cancel"
+                          left={20}
+                          right={0}
+                          click={() => {
+                            cancel();
+                          }}
+                        />
+                      </div>
+                      <div className="absolute right-[40px] bottom-[10px] flex">
+                        <SimpleButton
+                          theme={1}
+                          text="Save"
+                          left={20}
+                          right={0}
+                          type="submit"
+                          click={() => {
+                            handleSubmit();
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="interestedProductService"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Interested Product/Service
-                      </label>
-                      <Field
-                        as="select"
-                        id="interestedProductService"
-                        name="interestedProductService"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      >
-                        <option value="">
-                          Select Interested Product/Service
-                        </option>
-                        <option value="product1">Product 1</option>
-                        <option value="product2">Product 2</option>
-                        {/* Add more options as needed */}
-                      </Field>
-                    </div>
-                  </div>
-                  <div className="col-span-1">
-                    <div className="mb-4">
-                      <label
-                        htmlFor="existingBudget"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Existing Budget
-                      </label>
-                      <Field
-                        type="number"
-                        id="existingBudget"
-                        name="existingBudget"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="winProbability"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Win Probability
-                      </label>
-                      <Field
-                        type="text"
-                        id="winProbability"
-                        name="winProbability"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      ></Field>
-                    </div>
-                    <div className="mb-4">
-                      <label
-                        htmlFor="leadCreatedBy"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Lead Created By
-                      </label>
-                      <Field
-                        type="text"
-                        id="leadCreatedBy"
-                        name="leadCreatedBy"
-                        className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      ></Field>
-                    </div>
-                  </div>
-                  <div className="mt-16 ">
-                    <div className="absolute right-[160px] bottom-[10px] flex">
-                      <SimpleButton
-                        theme={2}
-                        text="Cancel"
-                        left={20}
-                        right={0}
-                        click={() => {
-                          cancel();
-                        }}
-                      />
-                    </div>
-                    <div className="absolute right-[40px] bottom-[10px] flex">
-                      <SimpleButton
-                        theme={1}
-                        text="Save"
-                        left={20}
-                        right={0}
-                        type="submit"
-                        click={() => {
-                          cancel();
-                        }}
-                      />
-                    </div>
-                  </div>
-                </Form>
+                  </Form>
+                )}
               </Formik>
             </>
           )}
@@ -793,6 +844,7 @@ interface FormEditContainerProps {
   titles: any[] | any;
   current: Number;
   [key: string]: any;
+  update: () => void;
   data: Root;
   cancel: any;
 }
@@ -832,6 +884,8 @@ export interface CompanyId {
   company_description: string;
   createdAt: string;
   updatedAt: string;
+  linkedin_url: string;
+  twitter_url: string;
   __v: number;
 }
 

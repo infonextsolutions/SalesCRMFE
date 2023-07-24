@@ -29,7 +29,7 @@ const CompanyProfile = ({ data }: any) => {
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[320px] shrink-0 min-h-[70vh] bg-white rounded-xl p-[20px]">
-          <ProfilePage data={data}/>
+          <ProfilePage data1={data}/>
         </div>
         <div className="bg-white rounded-xl w-[100%] px-[25px]">
           <Deals />

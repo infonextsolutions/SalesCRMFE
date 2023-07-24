@@ -20,7 +20,6 @@ export default interface Lead {
   __v: number
 }
 
-
 export interface Activity {
   _id: string
   leadId: string

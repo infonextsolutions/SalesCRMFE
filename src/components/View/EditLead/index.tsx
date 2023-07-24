@@ -62,7 +62,7 @@ const AddText = ({ top, title, width, change }: any) => {
   );
 };
 
-const EditLead = ({ cancel, data }: { cancel: any; data: any}) => {
+const EditLead = ({ cancel, data,update }: { cancel: any; data: any;update:()=>void}) => {
   const titles = ["LEAD INFO", "CONTACT INFO" , "DEAL INFO"];
   const [content, setContent] = useState<any>({});
   //   companyId:data.companyId._id,34
@@ -126,6 +126,7 @@ const EditLead = ({ cancel, data }: { cancel: any; data: any}) => {
     <>
       <FormEditContainer
         data={data}
+        update={update}
         titles={titles}
         current={0}
         cancel={cancel}

@@ -25,6 +25,8 @@ export interface LeadId {
     company_website_url: string;
     company_icon: string;
     company_location: string;
+    linkedin_url:string;
+    twitter_url:string;
     company_product_category: string;
     company_description: string;
     createdAt: string;
@@ -38,6 +40,7 @@ export interface LeadId {
     contact: string;
     email: string;
     parentId: string;
+    gender:string;
     designation: string;
     companyId: string;
     createdAt: string;
