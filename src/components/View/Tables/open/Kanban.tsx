@@ -54,8 +54,14 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
 
-  const stages = ["Enquiry", "interaction", "proposal", "win", "Lost", "Dead"];
+  const stages = ["Enquiry", "Interaction", "Proposal", "win", "Lost", "Dead"];
   const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WIN", "LOST", "DEAD"];
+  console.log(items, "please check here");
+  useEffect(() => {
+    items.map((e: any, i: any) => {
+      console.log(e.leadStage, i, "ccc");
+    });
+  }, [items]);
   return (
     <>
       <div className="px-[20px] mt-[10px] text-[#ffffff] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll">

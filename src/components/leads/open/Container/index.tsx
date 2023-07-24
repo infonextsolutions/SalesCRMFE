@@ -41,7 +41,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
             { title: "Active/InActive Lead", Icon: "CSV" },
           ]}
         /> */}
-        {view && (
+        {/* {view && (
           <ButtonDropDown
             light={false}
             text={"Add Stage"}
@@ -57,7 +57,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
               { title: "Active/InActive Lead", Icon: "CSV" },
             ]}
           />
-        )}
+        )} */}
       </div>
       {!view ? (
         <Suspense fallback={<Spinner />}>
