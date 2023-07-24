@@ -384,6 +384,16 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     return `${day} ${month} ${year}`;
   }
 
+  function convertDatetimeToCustomFormat(dateStr:any) {
+    // Convert the string to a Date object
+    const dt:any = new Date(dateStr);
+  
+    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+    const referenceDate:any = new Date('1400-01-01T00:00:00Z');
+    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+  
+    return secondsDifference;
+  }
   return (
     <>
       <div className="flex">
@@ -395,7 +405,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={200}
             left={20}
-            text={CallData.callId}
+
+            // text={CallData.callId}
+            text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/calling`}

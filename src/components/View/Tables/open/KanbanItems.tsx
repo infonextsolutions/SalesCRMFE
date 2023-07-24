@@ -35,6 +35,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
   const showNotes = () => {
     setNotes(true);
   };
+  
   const showEmail = () => {
     setEmail(true);
   };
