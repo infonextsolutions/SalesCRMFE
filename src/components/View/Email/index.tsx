@@ -264,7 +264,15 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
   );
 };
 
-const EmailPage = ({ cancel, data }: { cancel: () => void; data: any }) => {
+const EmailPage = ({
+  cancel,
+  data,
+  refresh,
+}: {
+  cancel: () => void;
+  data: any;
+  refresh: (e: any) => any;
+}) => {
   const [sender, setSender] = useState<any>("");
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
@@ -272,7 +280,7 @@ const EmailPage = ({ cancel, data }: { cancel: () => void; data: any }) => {
   const dispatch = useAppDispatch();
   const submit = (e1: any, e2: any, e3: any) => {
     const payload = {
-      _id:data._id,
+      _id: data._id,
       leadId: data._id,
       companyName: data.companyId.company_name,
       clientPoc: "",
@@ -290,6 +298,7 @@ const EmailPage = ({ cancel, data }: { cancel: () => void; data: any }) => {
       .post(url, payload)
       .then((e) => {
         cancel();
+        refresh({selected:1});
         dispatch(
           setSuccess({ show: true, success: "Email Sent Successfully!" })
         );

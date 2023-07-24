@@ -22,6 +22,7 @@ const CompanyProfile = ({ data1 }: any) => {
     }, 500);
   };
 
+
   const [data, setData] = useState(data1);
 
   const UpdateData = async () => {
@@ -161,7 +162,7 @@ const CompanyProfile = ({ data1 }: any) => {
             INDUSTRY TYPE
           </strong>
           <a href="industry:" className="block text-black">
-            -
+           {data.result.companyId.company_product_category}
           </a>
         </li>
         <li className="px-2 mt-4">
