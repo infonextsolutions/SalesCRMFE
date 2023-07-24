@@ -13,6 +13,7 @@ import EmailPage from "../../../View/Email/index";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 import ButtonDropDown from "@/utils/Button/Button";
+import axios from "axios";
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -355,6 +356,7 @@ const LeadContainer = ({
   selectAll,
   owners,
   last,
+  fetchItems
 }: LeadProps) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
@@ -463,7 +465,25 @@ const LeadContainer = ({
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
 
-  const activities: any = LeadData;
+
+  const [LeadData1,setLeadData] = useState(LeadData);
+
+
+  const UpdateData = async () => {
+    const response = await axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${LeadData._id}`
+      )
+      .then((e) => {
+        setLeadData(e.data.result);
+      })
+      .catch((e) => {
+        console.log(e, "error occured");
+      });
+  };
+
+
+  const activities: any = LeadData1;
   const activity = activities?.activityId;
 
   function convertToFormattedDate(dateString: any) {
@@ -476,6 +496,8 @@ const LeadContainer = ({
 
     return "on " + formattedDate;
   }
+
+
 
   return (
     <>
@@ -732,7 +754,7 @@ const LeadContainer = ({
       )}
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage cancel={cancelEmails} data={LeadData} />
+          <EmailPage refresh={UpdateData} cancel={cancelEmails} data={LeadData} />
         </Backdrop>
       )}
       {notes1 && (
@@ -773,4 +795,5 @@ interface LeadProps {
   selectAll: any;
   last: any;
   owners: any;
+  fetchItems:(e:any)=>Promise<any>;
 }

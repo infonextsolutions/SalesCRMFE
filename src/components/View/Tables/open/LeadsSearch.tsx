@@ -25,7 +25,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open`
     );
-    const data = res.data.result; 
+    const data = res.data.result;
     return data;
   };
   const [loading, setLoading] = React.useState(false);
@@ -44,7 +44,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       if (search.length) {
         setpageNumber(0);
         const allItems = await getallItems(pageNumber);
-        console.log(allItems)
+        console.log(allItems);
         setItems(allItems);
       }
       const filtered = data.filter(
@@ -69,6 +69,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   }, [limit, pageNumber, search]);
 
   const fetchItems = async (current: any) => {
+  
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
     );
@@ -239,13 +240,14 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
         />
         {loading ? (
           <Spinner />
-          ) : (
-            // ) : (
+        ) : (
+          // ) : (
 
           Leads != null &&
           Leads.map((item: Lead, ind: any) => {
             return (
               <LeadContainer
+                fetchItems={handlePageClick}
                 selectAll={selectAll}
                 key={item._id}
                 index={ind}
@@ -256,7 +258,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
                 leadStatus={item.leadStatus}
                 custom={item.customer_name}
                 LeadData={item}
-                owners ={item.owners}
+                owners={item.owners}
                 last={Leads.length - 1 === ind}
               />
             );
