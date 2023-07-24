@@ -93,7 +93,6 @@ const LeadItem = ({
   );
 };
 
-
 const LeadItemMultiple = ({
   width,
   upperText,
@@ -226,7 +225,7 @@ const ExpandingIcon = ({ change }: any) => {
   return (
     <div className="w-[50px] flex items-center justify-center cursor-pointer">
       {!show ? (
-        <Image 
+        <Image
           onClick={() => {
             change(!show);
             setShow(!show);
@@ -279,7 +278,9 @@ const ExpandableRow = ({
         <div className="w-[100%]">
           <p className="text-[16px] text-[#000] font-medium">Company Website</p>
           <p className="text-[#8A9099] font-medium mt-[0px] text-[14px] tracking-wide">
-            <a href={`https://${companyWebsite}`} target="_blank">{companyWebsite}</a>
+            <a href={`https://${companyWebsite}`} target="_blank">
+              {companyWebsite}
+            </a>
           </p>
         </div>
         <div className="w-[100%] mt-[10px]">
@@ -342,7 +343,6 @@ const MidPath = () => {
   );
 };
 
-
 const LeadContainer = ({
   index,
   id,
@@ -367,8 +367,8 @@ const LeadContainer = ({
   const [detailShow, setDetailShow] = useState(false);
   const [call, setCall] = React.useState(false);
 
-  
-  const num= Math.floor(Math.random() * 4);
+  console.log(LeadData, "please chhhh");
+  const num = Math.floor(Math.random() * 4);
   const showNotes = () => {
     setNotes(true);
   };
@@ -450,20 +450,33 @@ const LeadContainer = ({
     }
   };
 
-
   const [w, setW] = useState(0);
   const wRef: any = useRef();
 
   React.useEffect(() => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
-      
     }
-  },);
+  });
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
+
+  const activities: any = LeadData;
+  const activity = activities?.activityId;
+
+  function convertToFormattedDate(dateString: any) {
+    const dateObject = new Date(dateString);
+    const formattedDate = dateObject.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+    return "on " + formattedDate;
+  }
+
   return (
     <>
       <div
@@ -548,12 +561,27 @@ const LeadContainer = ({
               AddLead(1, 6);
             }}
           />
-          <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
+          <LeadItem
+            width={150}
+            left={20}
+            text={"-"}
+            // text={"Anil L, Paul G, Rekha"}
+          />
           <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
-          <LeadItem width={120} left={10} text={leadStatus} textLeft={5} /> 
-          <LeadItem width={130} left={10} textLeft={10} text={LeadData?.owners[0]?.name} />
+          <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
+          <LeadItem
+            width={130}
+            left={10}
+            textLeft={10}
+            text={LeadData?.owners[0]?.name}
+          />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
-          <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} />
+          <LeadItem
+            width={150}
+            left={10}
+            textLeft={10}
+            text={company.company_product_category}
+          />
           {/* <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} /> */}
 
           {/* activity history starts here*/}
@@ -584,21 +612,31 @@ const LeadContainer = ({
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
           </div>  */}
 
-          <ActivityHistory width={180} left={0} random={num}/>
+          <ActivityHistory width={180} left={0} random={num} />
 
-          {/* activity history ends here*/} 
+          {/* activity history ends here*/}
 
           <LeadItemMultiple
             width={130}
             left={20}
-            upperText={"Email Sent"}
-            bottomText={""}
-            /> 
+            upperText={
+              activity
+                ? activity.lastActivity.type === "note"
+                  ? "Note added"
+                  : "Email Sent"
+                : "-"
+            }
+            bottomText={
+              activity ? convertToFormattedDate(activity.createdAt) : ""
+            }
+          />
           <LeadItemMultiple
             width={150}
             left={10}
-            upperText={"Send Email"}
-            bottomText={"on 23 Jan 2023"}
+            // upperText={"Send Email"}
+            // bottomText={"on 23 Jan 2023"}
+            upperText={"-"}
+            bottomText={"-"}
           />
           <LeadItem
             width={150}
@@ -647,15 +685,11 @@ const LeadContainer = ({
             // leadDesc={
             //   "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
             // }
-            leadDesc={
-              LeadData.lead_description
-            }
+            leadDesc={LeadData.lead_description}
             // companyDesc={
             //   "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
             // }
-            companyDesc={
-              LeadData.companyId.company_description
-            }
+            companyDesc={LeadData.companyId.company_description}
             companyWebsite={LeadData.companyId.company_website_url}
             // LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
             LeadOwners={LeadData.owners}
@@ -713,7 +747,12 @@ const LeadContainer = ({
       )}
       {call && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <ActiveCall cancel={cancelCall} id={LeadData._id} companyId={LeadData.companyId._id} customerId={LeadData.customerId._id} />
+          <ActiveCall
+            cancel={cancelCall}
+            id={LeadData._id}
+            companyId={LeadData.companyId._id}
+            customerId={LeadData.customerId._id}
+          />
         </Backdrop>
       )}
     </>
@@ -733,5 +772,5 @@ interface LeadProps {
   index: Number;
   selectAll: any;
   last: any;
-  owners:any;
+  owners: any;
 }
