@@ -303,7 +303,9 @@ const Filter = ({ cancel, left, top }: any) => {
         ]}
       />
       <DualRange title={"Deal Size"}  />
-      <DualRange title={"Existing"} />
+      <DualRange title={"Existing"}  />
+    
+     
       {/* <RangeSlider minValue={0} maxValue={100} /> */}
 
         

@@ -16,7 +16,6 @@ export default interface Lead {
   source: string
   leadId: string
   owners: Owner[]
-  activityId:Activity
   __v: number
 }
 
@@ -48,7 +47,6 @@ export interface LastActivity {
   content: string
   createdAt: string
 }
-
 
 export interface CompanyId {
   _id: string
