@@ -98,214 +98,222 @@ const FormEditContainer = ({
                     }
                   }}
                 >
-                  <Form className="custom-scroll-black w-[100%] flex justify-between pr-[20px] pb-[50px]">
-                    <div className="w-[55%]">
-                      <div className="flex items-center justify-between">
-                        <div className="w-[30%]">
-                          <label className="font-medium" htmlFor="leadId">
-                            Lead Id
-                          </label>
-                          <Field
-                            type="text"
-                            name="leadId"
-                            id="leadId"
-                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Lead Id"
-                          />
-                        </div>
-                        <div className="w-[65%]">
-                          <label className="font-medium" htmlFor="lead_title">
-                            Lead Title
-                          </label>
-                          <Field
-                            type="text"
-                            name="lead_title"
-                            id="lead_title"
-                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Lead title"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex mt-[10px] items-center justify-between">
-                        <div className="w-[48%]">
-                          <label className="font-medium" htmlFor="company_name">
-                            Company Name
-                          </label>
-                          <Field
-                            type="text"
-                            name="company_name"
-                            id="company_name"
-                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Company name"
-                          />
-                        </div>
-                        <div className="w-[48%]">
-                          <label
-                            className="font-medium"
-                            htmlFor="company_location"
-                          >
-                            Company Location
-                          </label>
-                          <Field
-                            type="text"
-                            name="company_location"
-                            id="company_location"
-                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Company location"
-                          />
-                        </div>
-                      </div>
-                      <div className="mt-6">
-                        <label className="font-medium" htmlFor="linkedInurl">
-                          LinkedIn URL
-                        </label>
-                        <Field
-                          type="text"
-                          name="linkedInurl"
-                          id="linkedInurl"
-                          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                          placeholder="LinkedIn"
-                        />
-                      </div>
-                      <div className="mt-6">
-                        <label className="font-medium" htmlFor="Twitter">
-                          Twitter
-                        </label>
-                        <Field
-                          type="text"
-                          name="Twitter"
-                          id="Twitter"
-                          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                          placeholder="Twitter"
-                        />
-                      </div>
-                      <div className="mt-6">
-                        <label className="font-medium" htmlFor="website_url">
-                          Website URL
-                        </label>
-                        <Field
-                          type="text"
-                          name="website_url"
-                          id="website_url"
-                          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                          placeholder="Website URL"
-                        />
-                      </div>
-                      <div className="mt-6">
-                        <label className="font-medium" htmlFor="industry_type">
-                          Industry Type
-                        </label>
-                        <Field
-                          type="text"
-                          name="industry_type"
-                          id="industry_type"
-                          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                          placeholder="Industry Type"
-                        />
-                      </div>
-                    </div>
-                    <div className="w-[40%]">
-                      <div className="flex items-start justify-center">
-                        <div className="flex flex-col items-center relative">
-                          <div className="font-medium">Company Logo</div>
-
-                          <div
-                            className="h-20 mt-[25px] w-20 rounded-full"
-                            style={{ backgroundColor: "#304FFD" }}
-                          ></div>
-                          <div className="absolute top-[12px] right-[-10px]">
-                            <label htmlFor="logoInput">
-                              <Image
-                                src={getBasicIcon("Edit")}
-                                className="w-5 h-5 cursor-pointer mt-3 mr-3"
-                                alt=""
-                                width={12}
-                                height={12}
-                              />
+                  {({ handleSubmit }) => (
+                    <Form className="custom-scroll-black w-[100%] flex justify-between pr-[20px] pb-[50px]">
+                      <div className="w-[55%]">
+                        <div className="flex items-center justify-between">
+                          <div className="w-[30%]">
+                            <label className="font-medium" htmlFor="leadId">
+                              Lead Id
                             </label>
-                            <input
-                              type="file"
-                              id="logoInput"
-                              className="hidden"
-                              accept="image/*"
-                              // onChange={handleLogoChange}
+                            <Field
+                              type="text"
+                              name="leadId"
+                              id="leadId"
+                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                              placeholder="Lead Id"
+                            />
+                          </div>
+                          <div className="w-[65%]">
+                            <label className="font-medium" htmlFor="lead_title">
+                              Lead Title
+                            </label>
+                            <Field
+                              type="text"
+                              name="lead_title"
+                              id="lead_title"
+                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                              placeholder="Lead title"
                             />
                           </div>
                         </div>
+                        <div className="flex mt-[10px] items-center justify-between">
+                          <div className="w-[48%]">
+                            <label
+                              className="font-medium"
+                              htmlFor="company_name"
+                            >
+                              Company Name
+                            </label>
+                            <Field
+                              type="text"
+                              name="company_name"
+                              id="company_name"
+                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                              placeholder="Company name"
+                            />
+                          </div>
+                          <div className="w-[48%]">
+                            <label
+                              className="font-medium"
+                              htmlFor="company_location"
+                            >
+                              Company Location
+                            </label>
+                            <Field
+                              type="text"
+                              name="company_location"
+                              id="company_location"
+                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                              placeholder="Company location"
+                            />
+                          </div>
+                        </div>
+                        <div className="mt-6">
+                          <label className="font-medium" htmlFor="linkedInurl">
+                            LinkedIn URL
+                          </label>
+                          <Field
+                            type="text"
+                            name="linkedInurl"
+                            id="linkedInurl"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="LinkedIn"
+                          />
+                        </div>
+                        <div className="mt-6">
+                          <label className="font-medium" htmlFor="Twitter">
+                            Twitter
+                          </label>
+                          <Field
+                            type="text"
+                            name="Twitter"
+                            id="Twitter"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="Twitter"
+                          />
+                        </div>
+                        <div className="mt-6">
+                          <label className="font-medium" htmlFor="website_url">
+                            Website URL
+                          </label>
+                          <Field
+                            type="text"
+                            name="website_url"
+                            id="website_url"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="Website URL"
+                          />
+                        </div>
+                        <div className="mt-6">
+                          <label
+                            className="font-medium"
+                            htmlFor="industry_type"
+                          >
+                            Industry Type
+                          </label>
+                          <Field
+                            type="text"
+                            name="industry_type"
+                            id="industry_type"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="Industry Type"
+                          />
+                        </div>
                       </div>
-                      <div className="mt-6">
-                        <label className="font-medium" htmlFor="lead_owner">
-                          Lead Owner
-                        </label>
-                        <Field
-                          type="text"
-                          name="lead_owner"
-                          id="lead_owner"
-                          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                          placeholder="Lead Owner"
+                      <div className="w-[40%]">
+                        <div className="flex items-start justify-center">
+                          <div className="flex flex-col items-center relative">
+                            <div className="font-medium">Company Logo</div>
+
+                            <div
+                              className="h-20 mt-[25px] w-20 rounded-full"
+                              style={{ backgroundColor: "#304FFD" }}
+                            ></div>
+                            <div className="absolute top-[12px] right-[-10px]">
+                              <label htmlFor="logoInput">
+                                <Image
+                                  src={getBasicIcon("Edit")}
+                                  className="w-5 h-5 cursor-pointer mt-3 mr-3"
+                                  alt=""
+                                  width={12}
+                                  height={12}
+                                />
+                              </label>
+                              <input
+                                type="file"
+                                id="logoInput"
+                                className="hidden"
+                                accept="image/*"
+                                // onChange={handleLogoChange}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-6">
+                          <label className="font-medium" htmlFor="lead_owner">
+                            Lead Owner
+                          </label>
+                          <Field
+                            type="text"
+                            name="lead_owner"
+                            id="lead_owner"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="Lead Owner"
+                          />
+                        </div>
+                        <div className="mt-6">
+                          <label className="font-medium" htmlFor="Stage">
+                            Lead Stage
+                          </label>
+                          <Field
+                            type="text"
+                            name="Stage"
+                            id="Stage"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="Lead Stage"
+                          />
+                        </div>
+                        <div className="mt-6">
+                          <label className="font-medium" htmlFor="Status">
+                            Lead Status
+                          </label>
+                          <Field
+                            type="text"
+                            name="Status"
+                            id="Status"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="Lead Status"
+                          />
+                        </div>
+                        <div className="mt-6">
+                          <label className="font-medium" htmlFor="Source">
+                            Source
+                          </label>
+                          <Field
+                            type="text"
+                            name="Source"
+                            id="Source"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="Source"
+                          />
+                        </div>
+                      </div>
+                      <div className="absolute right-[160px] bottom-[20px] mt-[130px] flex ">
+                        <SimpleButton
+                          theme={2}
+                          text="Cancel"
+                          left={20}
+                          right={0}
+                          click={() => {
+                            cancel();
+                          }}
                         />
                       </div>
-                      <div className="mt-6">
-                        <label className="font-medium" htmlFor="Stage">
-                          Lead Stage
-                        </label>
-                        <Field
-                          type="text"
-                          name="Stage"
-                          id="Stage"
-                          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                          placeholder="Lead Stage"
+                      <div className="absolute right-[40px] bottom-[20px] mt-[130px] flex ">
+                        <SimpleButton
+                          theme={1}
+                          text="Save"
+                          left={20}
+                          right={0}
+                          type="submit"
+                          click={() => {
+                            handleSubmit();
+                          }}
                         />
                       </div>
-                      <div className="mt-6">
-                        <label className="font-medium" htmlFor="Status">
-                          Lead Status
-                        </label>
-                        <Field
-                          type="text"
-                          name="Status"
-                          id="Status"
-                          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                          placeholder="Lead Status"
-                        />
-                      </div>
-                      <div className="mt-6">
-                        <label className="font-medium" htmlFor="Source">
-                          Source
-                        </label>
-                        <Field
-                          type="text"
-                          name="Source"
-                          id="Source"
-                          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                          placeholder="Source"
-                        />
-                      </div>
-                    </div>
-                    <div className="absolute right-[160px] bottom-[20px] mt-[130px] flex ">
-                      <SimpleButton
-                        theme={2}
-                        text="Cancel"
-                        left={20}
-                        right={0}
-                        click={() => {
-                          cancel();
-                        }}
-                      />
-                    </div>
-                    <div className="absolute right-[40px] bottom-[20px] mt-[130px] flex ">
-                      <SimpleButton
-                        theme={1}
-                        text="Save"
-                        left={20}
-                        right={0}
-                        type="submit"
-                        click={() => {
-                          cancel();
-                        }}
-                      />
-                    </div>
-                  </Form>
+                    </Form>
+                  )}
                 </Formik>
               </div>
             </>
@@ -892,7 +900,7 @@ export interface CustomerId {
   companyId: string;
   createdAt: string;
   updatedAt: string;
-  gender:string;
+  gender: string;
   __v: number;
 }
 
