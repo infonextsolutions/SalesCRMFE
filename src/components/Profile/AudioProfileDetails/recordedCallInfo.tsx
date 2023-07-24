@@ -7,37 +7,37 @@ import React, { useState } from "react";
 
 const CallInfo = ({ check, info, data, data1 }: Props) => {
   const activeTitle = 0;
-  const [edit, setEdit] = useState(false);
-  const [bool, setBool] = useState(true);
+  // const [edit, setEdit] = useState(false);
+  // const [bool, setBool] = useState(true);
 
-  const showEdit = () => {
-    setEdit(true);
-  };
+  // const showEdit = () => {
+  //   setEdit(true);
+  // };
 
-  const cancelEdit = () => {
-    setBool(false);
-    setTimeout(() => {
-      setEdit(false);
-      setBool(true);
-    }, 500);
-  };
+  // const cancelEdit = () => {
+  //   setBool(false);
+  //   setTimeout(() => {
+  //     setEdit(false);
+  //     setBool(true);
+  //   }, 500);
+  // };
 
   // console.log(data,"here is it");
   console.log(data1, "please only notice this!");
-  const [data2, setData] = useState(data1);
+  // const [data2, setData] = useState(data1);
 
-  const UpdateData = async () => {
-    const response = await axios
-      .get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1._id}`
-      )
-      .then((e) => {
-        setData(e.data);
-      })
-      .catch((e) => {
-        console.log(e,"error occured")
-      });
-  };
+  // const UpdateData = async () => {
+  //   const response = await axios
+  //     .get(
+  //       `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1._id}`
+  //     )
+  //     .then((e) => {
+  //       setData(e.data);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e,"error occured")
+  //     });
+  // };
 
   return (
     <div>
@@ -46,7 +46,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
           <EditLead cancel={cancelEdit} update={UpdateData} data={data2} />
         </Backdrop>
       )} */}
-      <div className="absolute top-[16px] right-0">
+      {/* <div className="absolute top-[16px] right-0">
         <Image
           src={getBasicIcon("Edit")}
           className={`w-[16px] h-[16px] cursor-pointer mt-[35px] mr-[30px]`}
@@ -57,7 +57,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
             showEdit();
           }}
         />
-      </div>
+      </div> */}
       <div className="pl-[30px]">
         <p className="mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Call Id- {data1?._id}

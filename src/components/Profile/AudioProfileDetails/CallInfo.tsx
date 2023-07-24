@@ -40,8 +40,13 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
       });
   };
 
+  const [check1, setCheck] = useState(false);
+
   useEffect(() => {
-    UpdateData();
+    if (!check1) {
+      UpdateData();
+      setCheck(true);
+    }
   });
 
   return (
@@ -50,7 +55,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
         <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
           <EditLead
             cancel={cancelEdit}
-            update={UpdateData}
+            update={()=>{UpdateData()}}
             data={data2?.result}
           />
         </Backdrop>

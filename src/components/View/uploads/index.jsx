@@ -2,8 +2,9 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
+import Dropzone from "react-dropzone";
 
-const AddText = ({ top, title, width, change }: any) => {
+const AddText = ({ top, title, width, change }) => {
   return (
     <div
       className="w-[100%] "
@@ -16,7 +17,7 @@ const AddText = ({ top, title, width, change }: any) => {
         {title}*
       </p>
       <input
-        onChange={(e: any) => {
+        onChange={(e) => {
           change(e.target.value);
         }}
         type="text"
@@ -26,14 +27,14 @@ const AddText = ({ top, title, width, change }: any) => {
   );
 };
 
-const Uploads = ({ cancel, leadId, id, owners }: any) => {
-  const [file, setFile] = useState<any>();
+const Uploads = ({ cancel, leadId, id, owners }) => {
+  const [file, setFile] = useState();
   const [fileSelected, setFileSelected] = useState(false);
-
+  const [dropzoneActive, setDropzoneActive] = useState(false);
   const [dragActive, setDragActive] = React.useState(false);
 
   // handle drag events
-  const handleDrag = function (e: any) {
+  const handleDrag = function (e) {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -43,17 +44,12 @@ const Uploads = ({ cancel, leadId, id, owners }: any) => {
     }
   };
 
-  const handleDrop = function (e: any) {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      // at least one file has been dropped so do something
-      // handleFiles(e.dataTransfer.files);
-    }
+  const handleDrop = function (e) {
+    console.log(e[0], "please check here");
+    setFile(e[0])
   };
 
-  const handleChange = function (e: any) {
+  const handleChange = function (e) {
     e.preventDefault();
     if (e.target.files[0]) {
       // at least one file has been selected so do something
@@ -61,11 +57,11 @@ const Uploads = ({ cancel, leadId, id, owners }: any) => {
 
       setFile(e.target.files[0]);
       setFileSelected(true);
-      console.log(e.target.files[0])
+      console.log(e.target.files[0]);
     }
   };
   console.log(file);
-  const inputRef: any = React.useRef(null);
+  const inputRef = React.useRef(null);
 
   const onButtonClick = () => {
     inputRef.current.click();
@@ -75,7 +71,7 @@ const Uploads = ({ cancel, leadId, id, owners }: any) => {
     try {
       if (file) {
         console.log(leadId);
-  
+
         console.log({
           activeCallId: id,
           title: "file-1",
@@ -83,85 +79,83 @@ const Uploads = ({ cancel, leadId, id, owners }: any) => {
           leadId: leadId,
           userId: owners,
         });
-  
+
         const formData = new FormData();
         formData.append("userId", owners);
         formData.append("leadId", leadId);
         formData.append("title", "file-1");
         formData.append("file", file);
         formData.append("activeCallId", id);
-  
+
         const res = await axios.post(
           `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
           formData
         );
         console.log(res.data);
       }
-      cancel()
+      cancel();
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
         Upload file
       </h1>
-      {fileSelected && (
+      {file && (
         <p className="text-[#3f434a] mt-4">File selected: {file.name}</p>
       )}
-      <form
-        id="form-file-upload"
-        className="w-[100%] h-[250px] mt-[30px]"
-        onDragEnter={handleDrag}
+      <Dropzone
+        onDrop={handleDrop}
+        // onDragEnter={() => setDropzoneActive(true)}
+        // onDragLeave={() => setDropzoneActive(false)}
+        // accept={{
+        //   "application/pdf": [],
+        // }}
+        onDragEnter={() => setDropzoneActive(true)}
+        onDragLeave={() => setDropzoneActive(false)}
+        accept={{
+          "application/pdf": [],
+        }}
       >
-        <input
-          type="file"
-          accept="application/pdf"
-          ref={inputRef}
-          id="input-file-upload"
-          multiple={true}
-          onChange={handleChange}
-        />
-        <label
-          id="label-file-upload"
-          htmlFor="input-file-upload"
-          className={dragActive ? "drag-active" : ""}
-        >
-          <div>
-            <Image
-              src="/PDF.svg"
-              alt=""
-              width={30}
-              height={30}
-              className="mx-auto"
-            />
-            <p className="text-[#000] mt-[30px] ">
-              Drop or{" "}
-              <span
-                onClick={() => {
-                  onButtonClick();
-                }}
-                className="text-renal-blue underline cursor-pointer"
-              >
-                Browse
-              </span>{" "}
-              to upload your file. 
-            </p>
-          </div>
-        </label>
-        {dragActive && (
+        {({ getRootProps, getInputProps }) => (
           <div
-            id="drag-file-element"
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-          />
+            {...getRootProps()}
+            id="form-file-upload"
+            className="w-[100%] h-[250px] mt-[30px]"
+          >
+            <input
+              // accept="application/pdf"
+              ref={inputRef}
+              {...getInputProps()}
+            />
+            <label
+              id="label-file-upload"
+              htmlFor="input-file-upload"
+              className={dragActive ? "drag-active" : ""}
+            >
+              <div>
+                <Image
+                  src="/PDF.svg"
+                  alt=""
+                  width={30}
+                  height={30}
+                  className="mx-auto"
+                />
+                <p className="text-[#000] mt-[30px] ">
+                  Drop or{" "}
+                  <span className="text-renal-blue underline cursor-pointer">
+                    Browse
+                  </span>{" "}
+                  to upload your file.
+                </p>
+              </div>
+            </label>
+          </div>
         )}
-      </form>
+      </Dropzone>
       <div className="custom-scroll-black w-[100%] pb-[60px] overflow-y-auto ">
         <div className="absolute right-[40px] bottom-[40px] mt-[130px] flex ">
           <SimpleButton

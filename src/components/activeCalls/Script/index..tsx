@@ -5,7 +5,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import { ActiveCall } from "@/types/active-call";
 import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
-import Uploads from "@/components/View/uploads";
+import Uploads from "@/components/View/uploads/index.jsx";
 
 const ScriptDoc = ({ title, docName, List, size, data, file, check }: any) => {
   return (
