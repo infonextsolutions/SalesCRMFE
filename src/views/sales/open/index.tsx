@@ -14,7 +14,6 @@ import Notes1 from "@/components/View/NotesSalesView";
 import PromptEdit from "@/components/View/PromptEdit";
 import { useRouter } from "next/router";
 
-
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
