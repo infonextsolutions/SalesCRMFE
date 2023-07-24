@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ActivityHistory from "../../genUtils/Activity";
-import Events from "@/components/View/Event/Events";
 import Notes1 from "@/components/View/NotesSalesView";
+import Events from "@/components/View/Event/Events";
 import EmailPage from "../../../View/Email/index";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
@@ -364,8 +364,8 @@ const LeadContainer = ({
   const [emails, setEmail] = React.useState(false);
   const [messages, setMessages] = React.useState(false);
   const [bool, setBool] = React.useState(true);
-  const [detailShow, setDetailShow] = useState(false);
   const [call, setCall] = React.useState(false);
+  const [detailShow, setDetailShow] = useState(false);
 
   console.log(LeadData, "please chhhh");
   const num = Math.floor(Math.random() * 4);
