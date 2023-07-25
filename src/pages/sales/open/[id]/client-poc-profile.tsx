@@ -4,44 +4,49 @@ import ProfilePage from "@/components/Profile/ProfilePage/ClientPocProfile";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Navigator from "@/utils/customNavigator";
 import React, { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 
 const ClientProfile = ({ data }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
-  console.log("clientprofile:",data)
-  function CallBack (childData:any){
-        setActiveTitle(childData); 
+  console.log("clientprofile:", data);
+  function CallBack(childData: any) {
+    setActiveTitle(childData);
   }
   const titles = ["Deals"];
-  const list = titles.map((title:any,i:any)=>({id:i,title:title}));
+  const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
+
+  const [ttitle,setTitle] = useState(data.result.customerId.name);
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <Navigation
-        title={`Manage Leads>${data.result.customerId.name}`}
-        buttons={[
-          // {
-          //   text: "Take Action",
-          //   dropdown: true,
-          //   id: 1,
-          //   icon: "Plus",
-          //   light: false,
-          //   list: [
-          //     // { title: "Call", Icon: "Phone" },
-          //     { title: "Email", Icon: "Mail" },
-          //     { title: "Meeting", Icon: "Calendar" },
-          //     { title: "Task", Icon: "Tasks" },
-          //     { title: "Message", Icon: "Chat" },
-          //   ],
-          // },
-
-        ]}
+        title={`Manage Leads>${ttitle}`}
+        buttons={
+          [
+            // {
+            //   text: "Take Action",
+            //   dropdown: true,
+            //   id: 1,
+            //   icon: "Plus",
+            //   light: false,
+            //   list: [
+            //     // { title: "Call", Icon: "Phone" },
+            //     { title: "Email", Icon: "Mail" },
+            //     { title: "Meeting", Icon: "Calendar" },
+            //     { title: "Task", Icon: "Tasks" },
+            //     { title: "Message", Icon: "Chat" },
+            //   ],
+            // },
+          ]
+        }
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[400px] min-h-[70vh] bg-white rounded-xl p-[20px]">
-          <ProfilePage data1={data}/>
+          <ProfilePage refresh={(e:any)=>{
+            setTitle(e);
+          }} data1={data} />
         </div>
         <div className="bg-white rounded-xl w-[100%] px-[25px]">
-            <Deals/>
+          <Deals />
         </div>
       </div>
       {/* write your code here for profile page manya! */}
