@@ -100,9 +100,9 @@ const Notes = ({ cancel, leadid ,update}: any) => {
             }}
           />
         </div>
-        <div className="absolute w-[24%] border-[#ccc] flex mt-5  border-[1px] rounded-2xl h-34px] ">
+        {/* <div className="absolute w-[24%] border-[#ccc] flex mt-5  border-[1px] rounded-2xl h-34px] ">
           <DatePage/>
-        </div>
+        </div> */}
         <div className="absolute right-[160px] bottom-[20px] mt-[130px] ">
           <SimpleButton
             theme={2}

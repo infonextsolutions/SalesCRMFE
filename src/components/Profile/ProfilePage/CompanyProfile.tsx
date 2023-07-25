@@ -22,7 +22,6 @@ const CompanyProfile = ({ data1 }: any) => {
     }, 500);
   };
 
-
   const [data, setData] = useState(data1);
 
   const UpdateData = async () => {
@@ -34,7 +33,7 @@ const CompanyProfile = ({ data1 }: any) => {
         setData(e.data);
       })
       .catch((e) => {
-        console.log(e,"error occured")
+        console.log(e, "error occured");
       });
   };
   return (
@@ -162,7 +161,7 @@ const CompanyProfile = ({ data1 }: any) => {
             INDUSTRY TYPE
           </strong>
           <a href="industry:" className="block text-black">
-           {data.result.companyId.company_product_category}
+            {data.result.companyId.company_product_category}
           </a>
         </li>
         <li className="px-2 mt-4">
@@ -170,26 +169,38 @@ const CompanyProfile = ({ data1 }: any) => {
             SOCIAL MEDIA
           </strong>
           <div className="flex mt-[10px]">
-            <Image
-              src={getBasicIcon("Twitter")}
-              className={`w-[20px] mr-2 svg-grey fill-gray`}
-              alt=""
-              width={20}
-              height={20}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-            <Image
-              src="/Images/Icons/Basic/Linked.svg"
-              className={`w-[20px] svg-grey`}
-              alt=""
-              width={20}
-              height={20}
-              style={{
-                objectFit: "contain",
-              }}
-            />
+            {data?.companyId?.twitter_url &&
+              data?.companyId?.twitter_url.length !== 0 && (
+                <Image
+                  onClick={() => {
+                    window.open(data?.companyId.twitter_url, "_blank");
+                  }}
+                  src={getBasicIcon("Twitter")}
+                  className={`w-[20px] svg-grey mr-2`}
+                  alt=""
+                  width={20}
+                  height={20}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              )}
+            {data?.companyId?.linkedin_url &&
+              data?.companyId?.linkedin_url.length !== 0 && (
+                <Image
+                  onClick={() => {
+                    window.open(data?.companyId.linkedin_url, "_blank");
+                  }}
+                  src="/Images/Icons/Basic/Linked.svg"
+                  className={`w-[20px] svg-grey`}
+                  alt=""
+                  width={20}
+                  height={20}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              )}
           </div>
         </li>
       </ul>

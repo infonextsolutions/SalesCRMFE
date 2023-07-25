@@ -44,16 +44,20 @@ const ProfilePage = ({ data1, updated }: any) => {
   // };
 
   const UpdateData = async () => {
-    const response = await axios
-      .get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1._id}`
-      )
-      .then((e) => {
-        setData(e.data.result);
-      }).catch(e=>{
+    setTimeout(async () => {
+      const response = await axios
+        .get(
+          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1._id}`
+        )
+        .then((e) => {
+          setData(e.data.result);
+          console.log("svfev ");
+        })
+        .catch((e) => {
           console.log(e);
-      })
-    updated();
+        });
+      updated();
+    },1000);
   };
 
   console.log("data:", data);
