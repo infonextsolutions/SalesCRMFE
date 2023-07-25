@@ -3,7 +3,7 @@ import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Comments from "./AudioProfileDetails/Comment";
-import Notes from "./AudioProfileDetails/Notes";
+import Notes from "./AudioProfileDetails/notesRecordt";
 import CallInfo from "./AudioProfileDetails/recordedCallInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/store/UI";
@@ -39,7 +39,7 @@ const AudioProfileContainer = ({
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && <CallInfo data1={data1} data={data} check={check} info={info} />}
           {activeTitle === 1 && <Comments />}
-          {activeTitle === 2 && <Notes  data={data} />}
+          {activeTitle === 2 && <Notes  data={data}  />}
         </div>
       </div>
     </div>

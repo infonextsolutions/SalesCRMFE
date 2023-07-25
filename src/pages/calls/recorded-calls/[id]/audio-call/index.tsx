@@ -83,7 +83,7 @@ const CallProfile = ({ data,data1 }: any) => {
           <Audio data={data.result} data1={data1.result} />
         </div>
         <AudioProfileContainer
-          data={data}
+          data={data.result}
           width={"50%"}
           titles={titles}
           check={true}
