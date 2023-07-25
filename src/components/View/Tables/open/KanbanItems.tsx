@@ -1,7 +1,7 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Notes from "../../Notes";
 import Events from "../../Event/Events";
@@ -10,18 +10,18 @@ import Notes1 from "../../NotesSalesView";
 import Messages from "../../messages";
 
 const KanbanItem = ({ item, i, Item }: any) => {
-  const { pathname, replace,push } = useRouter();
+  const { pathname, replace, push } = useRouter();
   const leadId = () => {
-      const route = `${pathname}/${Item._id}/lead-profile`;
-    push(route)
+    const route = `${pathname}/${Item._id}/lead-profile`;
+    push(route);
   };
   const companyId = () => {
     const route = `${pathname}/${Item._id}/company-profile`;
-    push(route)
+    push(route);
   };
   const clientId = () => {
     const route = `${pathname}/${Item._id}/client-poc-profile`;
-    push(route)
+    push(route);
   };
 
   const [notes, setNotes] = React.useState(false);
@@ -35,7 +35,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
   const showNotes = () => {
     setNotes(true);
   };
-  
+
   const showEmail = () => {
     setEmail(true);
   };
@@ -109,13 +109,66 @@ const KanbanItem = ({ item, i, Item }: any) => {
   React.useEffect(() => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
-    }   
- 
+    }
   });
+
+  const activities: any = Item;
+  const activity = activities?.activityId;
+
+  function convertToFormattedDate(dateString: any) {
+    const dateObject = new Date(dateString);
+    const formattedDate = dateObject.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+    return "on " + formattedDate;
+  }
+
+  const [Activities, setActivities] = useState({
+    call: 0,
+    email: 0,
+    notes: 0,
+  });
+
+  const [check, setCheck] = useState(false);
+
+  useEffect(() => {
+    if (!check) {
+      if (Item?.activityId) {
+        if (Item.activityId.history) {
+          const history = Item.activityId.history;
+          let calls = 0;
+          let emails = 0;
+          let notes = 0;
+          for (let i = 0; i < history.length; i++) {
+            console.log(history[i], "effeqw");
+            if (history[i]?.type) {
+              if (history[i].type === "note") {
+                notes++;
+              } else if (history[i].type === "email") {
+                emails++;
+              }
+            } else {
+              calls++;
+            }
+          }
+          setActivities({
+            call: calls,
+            notes: notes,
+            email: emails,
+          });
+        }
+      }
+      setCheck(true);
+    }
+  });
+
   return (
     <>
       <div
-        className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] shadow-lg shadow-slate-400"
+        className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] flex flex-col justify-between h-[260px] shadow-lg shadow-slate-400"
         key={i}
       >
         <div className="block-heading text-black text-[11px] leading-4 mb-[23px]">
@@ -125,10 +178,10 @@ const KanbanItem = ({ item, i, Item }: any) => {
             }}
             className="cursor-pointer"
           >
-            Lead Id-{Item._id}
+            Lead Id-{Item?.leadId}
           </p>
           <p className="text-bold">
-            Lead XYZ-Info |
+            {Item?.lead_title} |
             <span
               onClick={() => {
                 companyId();
@@ -138,7 +191,8 @@ const KanbanItem = ({ item, i, Item }: any) => {
               {" "}
               {Item.companyId.company_name} |{" "}
             </span>
-            {item.data.companyAddress}
+            {/* {item.data.companyAddress} */}
+            {Item?.companyId.company_location}
             {/* {"Noida"} */}
           </p>
           <p
@@ -154,7 +208,21 @@ const KanbanItem = ({ item, i, Item }: any) => {
         <div className="block-details text-black text-[10px] mb-[20px]">
           <div className="flex justify-between">
             <p className="text-black/[.65]">Last Activity:</p>
-            <p className="text-black/[.35]">{Item.last_activity}</p>
+            <p className="text-black/[.35]">
+              {activity
+                ? activity.history.length > 0 &&
+                  (activity.history[activity.history.length - 1].type === "note"
+                    ? "Note added"
+                    : "Email Sent")
+                : ""}{" "}
+              {activity ? "|" : "-"}{" "}
+              {activity
+                ? activity.history.length > 0 &&
+                  convertToFormattedDate(
+                    activity.history[activity.history.length - 1].createdAt
+                  )
+                : ""}
+            </p>
           </div>
           <div className="flex justify-between">
             <p className="text-black/[.65]">Deal Size:</p>
@@ -165,7 +233,8 @@ const KanbanItem = ({ item, i, Item }: any) => {
             <p className="text-black/[.35]">{item.data.product}</p>
           </div>
         </div>
-        <div className="quick-actions text-[10px] px-[9px] py-[5px] bg-slate-200 rounded-[12px] flex items-center justify-between">
+
+        <div className="quick-actions text-[10px] px-[9px] mt-auto py-[5px]  bg-slate-200 rounded-[12px] flex items-center justify-between">
           <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
           <div className="icons flex gap-[4px] opacity-70">
             <Image
@@ -179,7 +248,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
               }}
               onClick={() => {
                 AddLead(1, 0);
-              }}
+              }}  
             />
             <Image
               src={getBasicIcon("Mail")}
@@ -246,29 +315,8 @@ const KanbanItem = ({ item, i, Item }: any) => {
               objectFit: "contain",
             }}
           />
-          <p>{item.data.calls}</p>
-          <Image
-            src={getBasicIcon("Attachment")}
-            className={`w-[14px]`}
-            alt=""
-            width={14}
-            height={14}
-            style={{
-              objectFit: "contain",
-            }}
-          />
-          <p>{item.data.docs}</p>
-          <Image
-            src={getBasicIcon("Chat")}
-            className={`w-[14px]`}
-            alt=""
-            width={14}
-            height={14}
-            style={{
-              objectFit: "contain",
-            }}
-          />
-          <p>{item.data.chats}</p>
+          <p>{Activities.call}</p>
+
           <Image
             src={getBasicIcon("Mail")}
             className={`w-[14px]`}
@@ -279,18 +327,8 @@ const KanbanItem = ({ item, i, Item }: any) => {
               objectFit: "contain",
             }}
           />
-          <p>{item.data.mails}</p>
-          <Image
-            src={getBasicIcon("calendar")}
-            className={`w-[14px]`}
-            alt=""
-            width={14}
-            height={14}
-            style={{
-              objectFit: "contain",
-            }}
-          />
-          <p>{item.data.meetings}</p>
+          <p>{Activities.email}</p>
+
           <Image
             src={getBasicIcon("Tasks")}
             className={`w-[14px] cursor-pointer`}
@@ -304,7 +342,40 @@ const KanbanItem = ({ item, i, Item }: any) => {
               objectFit: "contain",
             }}
           />
-          <p>{item.data.tasks}</p>
+          <p>{Activities.notes}</p>
+          <Image
+            src={getBasicIcon("calendar")}
+            className={`w-[14px]`}
+            alt=""
+            width={14}
+            height={14}
+            style={{
+              objectFit: "contain",
+            }}
+          />
+          <p>-</p>
+          <Image
+            src={getBasicIcon("Attachment")}
+            className={`w-[14px]`}
+            alt=""
+            width={14}
+            height={14}
+            style={{
+              objectFit: "contain",
+            }}
+          />
+          <p>-</p>
+          <Image
+            src={getBasicIcon("Chat")}
+            className={`w-[14px]`}
+            alt=""
+            width={14}
+            height={14}
+            style={{
+              objectFit: "contain",
+            }}
+          />
+          <p>-</p>
         </div>
       </div>
       {notes && (
@@ -319,9 +390,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage refresh={()=>{
-            
-          }} cancel={cancelEmails} data={Item} />
+          <EmailPage refresh={() => {}} cancel={cancelEmails} data={Item} />
         </Backdrop>
       )}
       {notes1 && (
