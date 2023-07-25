@@ -51,7 +51,7 @@ const FormEditContainer = ({
                     Twitter: data?.companyId.twitter_url,
                     website_url: data.companyId.company_website_url,
                     industry_type: data.companyId.company_product_category,
-                    lead_owner: data.owners[0].name,
+                    lead_owner:data.owners.length>0? data.owners[0].name:"",
                     Stage: data?.leadStage,
                     Status: data?.leadStatus,
                     Source: data?.source,
