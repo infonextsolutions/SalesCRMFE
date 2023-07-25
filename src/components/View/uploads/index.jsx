@@ -1,8 +1,11 @@
+import { setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
 import Dropzone from "react-dropzone";
+import { useDispatch } from "react-redux";
 
 const AddText = ({ top, title, width, change }) => {
   return (
@@ -27,7 +30,7 @@ const AddText = ({ top, title, width, change }) => {
   );
 };
 
-const Uploads = ({ cancel, leadId, id, owners }) => {
+const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
   const [file, setFile] = useState();
   const [fileSelected, setFileSelected] = useState(false);
   const [dropzoneActive, setDropzoneActive] = useState(false);
@@ -46,7 +49,7 @@ const Uploads = ({ cancel, leadId, id, owners }) => {
 
   const handleDrop = function (e) {
     console.log(e[0], "please check here");
-    setFile(e[0])
+    setFile(e[0]);
   };
 
   const handleChange = function (e) {
@@ -66,6 +69,8 @@ const Uploads = ({ cancel, leadId, id, owners }) => {
   const onButtonClick = () => {
     inputRef.current.click();
   };
+
+  const dispatch = useAppDispatch();
 
   const submit = async () => {
     try {
@@ -87,13 +92,23 @@ const Uploads = ({ cancel, leadId, id, owners }) => {
         formData.append("file", file);
         formData.append("activeCallId", id);
 
-        const res = await axios.post(
-          `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
-          formData
-        );
+        const res = await axios
+          .post(
+            `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
+            formData
+          )
+          .then((e) => {
+            refresh();
+            dispatch(
+              setSuccess({
+                show: true,
+                success: "Note Added Successfully!",
+              })
+            );
+            cancel();
+          });
         console.log(res.data);
       }
-      cancel();
     } catch (error) {
       console.log(error);
     }

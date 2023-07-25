@@ -424,7 +424,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             left={10}
             text={CallData.leadId?.leadId}
             click={true}
-            route={`/sales/open/${CallData.leadId._id}/lead-profile`}
+            route={`/sales/open/${CallData?.leadId?._id}/lead-profile`}
             color={"#000"}
           />
           <CallItem

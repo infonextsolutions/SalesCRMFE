@@ -7,7 +7,17 @@ import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Uploads from "@/components/View/uploads/index.jsx";
 
-const ScriptDoc = ({ title, docName, List, size, data, file, check }: any) => {
+const ScriptDoc = ({
+  title,
+  docName,
+  List,
+  size,
+  data,
+  file,
+  refresh,
+  check,
+  id,
+}: any) => {
   return (
     <div className="w-[100%] mt-[20px]">
       <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
@@ -52,7 +62,19 @@ const ScriptDoc = ({ title, docName, List, size, data, file, check }: any) => {
           />
           <Image
             src={getBasicIcon("Delete")}
+            className="cursor-pointer"
             alt=""
+            onClick={(e) => {
+              axios
+                .delete(`https://testsalescrm.nextsolutions.in/api/call-script/delete-by-id?id=${id}`)
+                .then((e) => {
+                  console.log(e, "huqbfq");
+                  refresh();
+                })
+                .catch((e) => {
+                  console.log(e, "huqbfq");
+                });
+            }}
             // fill={true}
             style={
               {
@@ -84,9 +106,11 @@ const ScriptDoc = ({ title, docName, List, size, data, file, check }: any) => {
 const ScriptList = ({
   data,
   moredata,
+  refresh,
 }: {
   data: any;
   moredata: ActiveCall;
+  refresh: () => void;
 }) => {
   const [activeTitle, setActiveTitle] = React.useState(0);
   function CallBack(childData: any) {
@@ -131,14 +155,18 @@ const ScriptList = ({
     // Parse the input string into a Date object
     const dateObj = new Date(inputStr);
 
-    // Get the components of the date
-    const day = dateObj.getUTCDate();
-    const month = months[dateObj.getUTCMonth()];
-    const year = dateObj.getUTCFullYear();
-    const hours = dateObj.getUTCHours();
-    const minutes = dateObj.getUTCMinutes();
+    // Convert UTC time to IST
+    const istOffset = 5.5 * 60 * 60 * 1000; // Offset in milliseconds (5 hours and 30 minutes)
+    const istTime = new Date(dateObj.getTime() + istOffset);
 
-    // Format the time part (hours and minutes)
+    // Get the components of the IST date
+    const day = istTime.getUTCDate();
+    const month = months[istTime.getUTCMonth()];
+    const year = istTime.getUTCFullYear();
+    const hours = istTime.getUTCHours();
+    const minutes = istTime.getUTCMinutes();
+
+    // Format the time part (hours and minutes) in 12-hour clock format with AM/PM indicator
     let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${
       hours >= 12 ? "PM" : "AM"
     }`;
@@ -201,6 +229,7 @@ const ScriptList = ({
       {uploads && (
         <Backdrop bool={bool}>
           <Uploads
+            refresh={refresh}
             cancel={cancelUploads}
             id={moredata._id}
             leadId={moredata.leadId._id}
@@ -233,7 +262,7 @@ const ScriptList = ({
           </button>
         </div>
         {data.map((item: any, i: any) => {
-          console.log(item, "please checck here");
+          console.log(item, "please checck here", i);
           return (
             <ScriptDoc
               key={i}
@@ -241,7 +270,9 @@ const ScriptList = ({
               title={getTitleFromURL(item.fileUrl)}
               docName={getLastFileNameWithExtension(item.fileUrl)}
               size="5.8 MB"
+              id={item._id}
               file={item.fileUrl}
+              refresh={refresh}
               data={convertDatetime(item.createdAt)}
             />
           );
@@ -261,6 +292,17 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   }
   const [currScripts, setCurrScripts] = useState<any[]>(scripts.result);
   const [selected, setSelected] = useState(false);
+
+  const refresh = () => {
+    axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/call-script/active-call?activeCallId=${data._id}`
+      )
+      .then((e) => {
+        console.log(setCurrScripts(e.data.result));
+      })
+      .catch((e) => {});
+  };
 
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
@@ -291,7 +333,7 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
           )}
         </>
       )}
-      <ScriptList data={currScripts} moredata={data} />
+      <ScriptList refresh={refresh} data={currScripts} moredata={data} />
     </div>
   );
 };
