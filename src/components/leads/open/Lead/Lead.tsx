@@ -578,11 +578,7 @@ const LeadContainer = ({
     return null;
   };
 
-  console.log(
-    findFutureCallStartTime(activity.history),
-    "123141",
-    activity.history
-  );
+
 
   return (
     <>
