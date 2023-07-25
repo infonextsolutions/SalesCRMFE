@@ -578,8 +578,6 @@ const LeadContainer = ({
     return null;
   };
 
-
-
   return (
     <>
       <div
@@ -875,6 +873,7 @@ const LeadContainer = ({
           <ActiveCall
             cancel={cancelCall}
             id={LeadData._id}
+            lead={LeadData}
             companyId={LeadData.companyId._id}
             customerId={LeadData.customerId._id}
           />
