@@ -32,15 +32,19 @@ const ClientPocProfile = ({ data1 }: any) => {
         setData(e.data);
       })
       .catch((e) => {
-        console.log(e,"error occured")
+        console.log(e, "error occured");
       });
   };
   console.log("data4:", data.result);
   return (
     <>
       {edit && (
-        <Backdrop pad={"50px 0"} bool={true} width={"900px"} >
-          <EditLead update={UpdateData} cancel={cancelEdit} data={data.result} />
+        <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
+          <EditLead
+            update={UpdateData}
+            cancel={cancelEdit}
+            data={data.result}
+          />
         </Backdrop>
       )}
       <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
@@ -85,7 +89,6 @@ const ClientPocProfile = ({ data1 }: any) => {
             </div>
           </div>
         </div>
-
         <div className="py-2"></div>
         <h3 className="text-sm font-medium text-black mt-5 ml-4">INFO</h3>
         <ul className="mt-2 mb-10 ml-2">
@@ -93,9 +96,7 @@ const ClientPocProfile = ({ data1 }: any) => {
             <strong className="font-medium text-sm mr-1 text-gray-500 ">
               GENDER
             </strong>
-            <a href="female" className="block text-black">
-              -
-            </a>
+            <p className="block text-black">{data.result.customerId.gender}</p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm mr-1 text-gray-500">

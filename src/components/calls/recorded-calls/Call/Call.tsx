@@ -538,6 +538,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   
     return secondsDifference;
   }
+
+  const call_title:any = CallData;
+
   return (
     <>
       <div className="flex">
@@ -565,7 +568,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             left={20}
             color={"#000"}
             // text={"Discussion on PX features"}
-            text={CallData?.call_title}
+            text={call_title?.active_calls[0].call_title }
             click={true}
           // route={`${pathname}/${id}/audio-call`}
           />
