@@ -193,7 +193,7 @@ const DropDownEditable = ({ind,setOption}:any) => {
               onClick={() => deleteDropdownOption(index)}
             >
              <Image
-            src={getBasicIcon("delete")}
+            src={getBasicIcon("Delete")}
             className={`svg-black mt-[1px]`}
             alt=""
             width={15}
@@ -301,7 +301,7 @@ const McqEditable = ({ind,setOption}:any) => {
                 onClick={() => deleteOption(index)}
               >
                <Image
-            src={getBasicIcon("delete")}
+            src={getBasicIcon("Delete")}
             className={`svg-black mt-[1px]`}
             alt=""
             width={15}
@@ -388,7 +388,7 @@ const CheckboxEdit = ({ind,setOption}:any) => {
                 onClick={() => deleteOption(index)}
               >
                <Image
-            src={getBasicIcon("delete")}
+            src={getBasicIcon("Delete")}
             className={`svg-black mt-[1px]`}
             alt=""
             width={15}
@@ -556,7 +556,7 @@ const [title,setTitle] = useState("")
           onClick={openModal}
         >
           <Image
-            src={getBasicIcon("edit")}
+            src={getBasicIcon("Edit")}
             className={`svg-white mt-[1px]`}
             alt=""
             width={15}
@@ -634,40 +634,13 @@ const [title,setTitle] = useState("")
                 <input
                 name=""
                 id=""
-                className="w-[100%] h-[40px] outline-none mt-[16px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[1px]"
+                className="w-[100%] h-[40px] outline-none mt-[8px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[1px]"
                 placeholder="Title"
                 value={title}
                 onChange={(e)=>setTitle(e.target.value)}
               />
               
-            </div>
-
-      <div className="py-1"></div>
-
-
-      
-      {/* State */}
-      <div className="py-1 text-[16px] text-[#222]"></div>
-
-
-      {/* <div className="w-[100%]">
-        <p className="text-[16px] font-medium tracking-wide text-[#222]">
-          Q2. What is your budget range?
-        </p>
-        <select
-          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-          
-        >
-          <option value="" selected>
-            Choose range
-          </option>
-          <option value="1">1</option>
-          
-        </select>
-      </div> */}
-
-      <div className="py-1"></div>
-
+            </div> 
     <>
       {/* <p className="text-[#000] text-[16px] font-medium">
         Q3. Choose among the following?
@@ -696,7 +669,7 @@ const [title,setTitle] = useState("")
     </>
  
 
-     <div className="text-[#000] mt-1 text-[16px] font-medium">
+     <div className="text-[#000] text-[16px] font-medium">
       <div className="w-[100%]"> 
         <div className="flex flex-col ml-9"> 
         <div className="py-1 text-[16px] text-[#222]"></div>
@@ -740,7 +713,7 @@ const [title,setTitle] = useState("")
             </div>
             <button className="absolute right-1 top-16" onClick={() => deleteQuestion(index)}>
             <Image
-            src={getBasicIcon("delete")}
+            src={getBasicIcon("Delete")}
             className={`svg-black`}
             alt=""
             width={15}
@@ -765,7 +738,7 @@ const [title,setTitle] = useState("")
             
             
     {/* Render your form fields here */}
-      <button className="bg-blue-500 font-bold text-[18px] text-white px-4 py-2 rounded-md mt-2" onClick={handleSave}>
+      <button className="bg-blue-500 font-semibold text-[16px] text-white px-4 py-2 rounded-md mt-4" onClick={handleSave}>
           Save
       </button>
 
