@@ -82,7 +82,7 @@ const ProfilePage = ({ data1, updated }: any) => {
               }}
             />
             <div className="flex items-center justify-center flex-col pl-[10px] pr-[20px]">
-              <h2 className="text-[15px] leading-[20px] text-center  tracking-wide text-[#000] capitalize -900 font-medium">
+              <h2 className="text-[15px] leading-[20px] text-center  tracking-wide text-[#000]  -900 font-medium">
                 {data.lead_title}
               </h2>
               <p className="block cursor-pointer py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">

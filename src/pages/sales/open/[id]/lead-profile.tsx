@@ -163,7 +163,7 @@ const Profile = ({ data }: any) => {
         </Backdrop>
       )}
       <Navigation
-        title={`Manage Leads>${data.result.lead_title}`}
+        title={`Manage Leads>${data1.result.lead_title}`}
         buttons={[
           {
             text: "Take Action",

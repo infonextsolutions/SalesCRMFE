@@ -5,7 +5,7 @@ import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
 import axios from "axios";
 
-const ClientPocProfile = ({ data1 }: any) => {
+const ClientPocProfile = ({ data1,refresh }: any) => {
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -30,6 +30,8 @@ const ClientPocProfile = ({ data1 }: any) => {
       )
       .then((e) => {
         setData(e.data);
+        refresh(e.data.result.customerId.name);
+        
       })
       .catch((e) => {
         console.log(e, "error occured");
