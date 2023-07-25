@@ -492,6 +492,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   React.useEffect(() => {
     if (checked) {
       GetLeadData();
+      setChecked(false);
     }
   });
 

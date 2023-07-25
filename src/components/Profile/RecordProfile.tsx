@@ -27,6 +27,20 @@ const RecordProfile = ({
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
   const [data2, setData] = useState<any>({});
+  const [activeCall, setActiveCall] = useState(data1);
+
+  const UpdateCall = async () => {
+    const response = await axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/active-call/find-by-id?id=${data1._id}`
+      )
+      .then((e) => {
+        setActiveCall(e.data.result);
+      })
+      .catch((e) => {
+        console.log(e, "error occured");
+      });
+  };
 
   const UpdateData = async () => {
     const response = await axios
@@ -41,8 +55,13 @@ const RecordProfile = ({
       });
   };
 
+  const [checked, setChecked] = useState(false);
+
   useEffect(() => {
-    UpdateData();
+    if (!checked) {
+      UpdateData();
+      setChecked(true);
+    }
   });
   return (
     <div
@@ -64,7 +83,9 @@ const RecordProfile = ({
             <CallInfo check={check} data={data} data1={data1} info={info} />
           )}
           {activeTitle === 1 && <Activityhistory data={data2} data1={data2} />}
-          {activeTitle === 2 && <Notes />}
+          {activeTitle === 2 && (
+            <Notes data={activeCall} refresh={UpdateCall} />
+          )}
           {activeTitle === 3 && <Questionnaire />}
         </div>
       </div>
