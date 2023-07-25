@@ -326,7 +326,7 @@ interface Option {
   selected: boolean;
 }
 
-const CheckboxEdit: React.FC = ({ind,setOption}:any) => {
+const CheckboxEdit = ({ind,setOption}:any) => {
   const [options, setOptions] = useState<Option[]>([
     { title: "", selected: false }
   ]);
@@ -367,7 +367,7 @@ const CheckboxEdit: React.FC = ({ind,setOption}:any) => {
   return (
     <>
       <div className="w-full flex flex-col">
-        {options.map((option, index) => (
+        { options.map((option, index) => (
           <div key={index} className="flex items-center mt-3">
             <input
               type="checkbox"
@@ -408,7 +408,7 @@ const CheckboxEdit: React.FC = ({ind,setOption}:any) => {
     </>
   );
 };
-const Checkbox: React.FC = ({index,question,option}:any) => {
+const Checkbox = ({index,question,option}:any) => {
   const [options, setOptions] = useState<Option[]>([
     { title: "", selected: false }
   ]);
@@ -435,7 +435,7 @@ const Checkbox: React.FC = ({index,question,option}:any) => {
       </p>
       <div className="w-full flex flex-col">
 
-        {option.map((item:any, index:any) => (
+        {option && option.map((item:any, index:any) => (
           <div key={index} className="flex items-center mt-3">
             <input
               type="checkbox"
