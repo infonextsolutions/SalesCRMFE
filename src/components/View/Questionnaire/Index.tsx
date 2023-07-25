@@ -23,11 +23,11 @@ const AddText = ({ top, title, width, change,index }: any) => {
   );
 };
 
-const TextBox = ({question,answer}:any) => {
+const TextBox = ({index,question,answer}:any) => {
   return (
     <>
       <p className="text-[#000] text-[16px] font-medium">
-        Q1.  {question} 
+        Q{index+1}.  {question} 
       </p>
       <input
         name=""
@@ -39,11 +39,11 @@ const TextBox = ({question,answer}:any) => {
     </>
   );
 };
-const TextBox2 = ({question,answer}:any) => {
+const TextBox2 = ({index,question,answer}:any) => {
   return (
     <>
        <p className="text-[#000] text-[16px] font-medium">
-        Q1.  {question} 
+        Q{index+1}.  {question} 
       </p>
       <textarea
         name=""
@@ -586,8 +586,8 @@ const [title,setTitle] = useState("")
         questionList.map((questionItem:any,i:any)=>{
           return(
             <div className="w-[100%] my-[20px]" key={i}>
-              {questionItem.answerType === 'Short Answer' && <TextBox question={questionItem.question} answer={questionItem.answer}/>}
-              {questionItem.answerType === 'Long Answer' && <TextBox2 question={questionItem.question} answer={questionItem.answer}/>}
+              {questionItem.answerType === 'Short Answer' && <TextBox index={i} question={questionItem.question} answer={questionItem.answer}/>}
+              {questionItem.answerType === 'Long Answer' && <TextBox2 index={i} question={questionItem.question} answer={questionItem.answer}/>}
               {questionItem.answerType === 'Multiple Choice' && <Mcq index={i} question={questionItem.question} option={questionItem.option} />}
               {questionItem.answerType === 'Dropdown' && <Dropdown index={i} question={questionItem.question} option={questionItem.option}/>}
               {questionItem.answerType === 'Checkbox' && <Checkbox index={i} question={questionItem.question} option={questionItem.option}/>}
