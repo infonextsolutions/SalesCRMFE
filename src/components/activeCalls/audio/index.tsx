@@ -5,7 +5,7 @@ import Transcript from "../Transcript/Transcript";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import useSound from "use-sound";
 import AudioPlayer from "./components/AudioPlayer";
-import Recorded from "@/types/recorded-call";
+import Recorded from "@/types/reco-1";
 import axios from "axios";
 
 const example = {
@@ -548,7 +548,7 @@ const Audio = ({ data,data1 }: props) => {
           leadId: data.leadId._id,
         })
         .then((e) => {
-          console.log(e);
+          console.log(e.data.result,"bc-23141");
           setCallData(e.data.result);
           setCheck(false);
         });

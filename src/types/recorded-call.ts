@@ -19,7 +19,7 @@ export default interface Root {
   CallerName: string
   Uri: string
   RecordingUrl: string
-  leadId: LeadId
+  leadId: [LeadId]
   questionnaire: any[]
   comments: any[]
   notes: any[]

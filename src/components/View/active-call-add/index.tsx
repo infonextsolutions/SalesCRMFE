@@ -2,7 +2,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const DropItems = ({ title, list, top, change }: any) => {
   return (
@@ -73,7 +73,7 @@ const TextBox = ({ title, place, change }: any) => {
   );
 };
 
-const Time = () => {
+const Time = ({ date, setDate }: any) => {
   const [show, setShow] = React.useState(false);
   const [hover, setHover] = React.useState(false);
 
@@ -192,6 +192,7 @@ const Time = () => {
                   }}
                   onClick={() => {
                     setSelected(i);
+                    setDate(arr[i]);
                     setShow(false);
                   }}
                 >
@@ -206,7 +207,7 @@ const Time = () => {
   );
 };
 
-const DatePage = () => {
+const DatePage = ({ date, setDate }: any) => {
   return (
     <div className="w-[58%] h-[100%] cursor-pointer">
       <div className="w-[100%] h-[100%] overflow-hidden relative py-[7px] pl-[10px] px-[3px] flex items-center justify-center">
@@ -215,6 +216,9 @@ const DatePage = () => {
           className="bg-[#fff] pl-[3px] w-[100%] outline-none font-medium text-[#000] text-[14px] cursor-pointer"
           name=""
           id=""
+          onChange={(e) => {
+            setDate(e.target.value);
+          }}
         />
         <Image
           src={getBasicIcon("Arrow-Down 2")}
@@ -231,24 +235,33 @@ const DatePage = () => {
   );
 };
 
-const DateTime = () => {
+const DateTime = ({ date, setDate }: any) => {
   return (
     <div className="w-[45%] border-[#ccc] flex  border-[1px] rounded-2xl h-[44px] ">
-      <Time />
-
-      <DatePage />
+      <Time
+        data={date.time}
+        setDate={(e: any) => {
+          setDate({ ...date, time: e });
+        }}
+      />
+      <DatePage
+        data={date.date}
+        setDate={(e: any) => {
+          setDate({ ...date, date: e });
+        }}
+      />
     </div>
   );
 };
 
-const DateContainer = () => {
+const DateContainer = ({ date, setDate }: any) => {
   return (
     <div className="mt-[15px]">
       <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
         Time and Date{" "}
       </p>
       <div className="w-[100%] mt-[18px] flex justify-between items-center">
-        <DateTime />
+        <DateTime date={date} setDate={setDate} />
       </div>
     </div>
   );
@@ -277,13 +290,60 @@ const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
     return hours;
   }
 
+  const [date, setDateData] = useState({
+    time: "",
+    date: null,
+  });
+
+  function combineDateTimeStrings(timeString:any, dateString:any) {
+    // Check if the time string is empty
+    const isTimeStringEmpty = timeString.trim() === "";
+  
+    // If the time string is empty, use the current time
+    const currentDate = new Date();
+    const givenDate = isTimeStringEmpty
+      ? currentDate
+      : new Date(`${dateString}T${timeString}:00`);
+  
+    // Check if the given date is today's date
+    const givenYear = givenDate.getFullYear();
+    const givenMonth = givenDate.getMonth();
+    const givenDay = givenDate.getDate();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+  
+    if (
+      givenYear === currentYear &&
+      givenMonth === currentMonth &&
+      givenDay === currentDay &&
+      givenDate < currentDate
+    ) {
+      // If the given time is before the current time and it's today's date, use the current time and date instead
+      givenDate.setHours(currentDate.getHours());
+      givenDate.setMinutes(currentDate.getMinutes());
+      givenDate.setSeconds(currentDate.getSeconds());
+      givenDate.setMilliseconds(currentDate.getMilliseconds());
+    }
+  
+    const formattedDate = givenDate.toISOString();
+  
+    return formattedDate;
+  }
+
   const submit = () => {
     // console.log("Caling data",data)
+    let timee = null;
+    if (date.date) {
+      timee = combineDateTimeStrings(date.time, date.date);
+    }
+    console.log(timee, "ch1231",date);
+
     axios
       .post("https://testsalescrm.nextsolutions.in/api/active-call/create", {
         ...data,
         call_date: Date,
-        call_start_time: getCurrentTimeInHours(),
+        call_start_time: timee ? timee : getCurrentTimeInHours(),
       })
       .then((e: any) => {
         cancel();
@@ -334,7 +394,7 @@ const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
           setData({ ...data, call_desc: e });
         }}
       />
-      <DateContainer />
+      <DateContainer date={date} setDate={setDateData} />
       <DropItems
         title="Call Owner"
         top={20}

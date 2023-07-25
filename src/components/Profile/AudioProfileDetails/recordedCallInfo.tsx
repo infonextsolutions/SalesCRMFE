@@ -23,7 +23,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   // };
 
   // console.log(data,"here is it");
-  console.log(data1, "please only notice this!");
+  console.log(data1,data, "bc-2317");
   // const [data2, setData] = useState(data1);
 
   // const UpdateData = async () => {
