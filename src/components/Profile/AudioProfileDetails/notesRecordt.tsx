@@ -56,7 +56,7 @@ const Notes = ({ data, refresh }: any) => {
         .post(url, {
           title: title,
           content: content,
-          id: data._id,
+          callId: data._id,
         })
         .then((e) => {
           if (containerRef.current) {
