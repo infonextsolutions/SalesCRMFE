@@ -1,5 +1,5 @@
 import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Notesd from "./notedummy";
@@ -37,7 +37,13 @@ const Notes = ({ data, refresh }: any) => {
     content: "",
   });
 
-  const containerRef:any = useRef();
+  const containerRef: any = useRef();
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0; // Set scrollTop to 0 to scroll to the top
+    }
+  });
 
   const dispatch = useAppDispatch();
   const cancelNotes = (e: any) => {
@@ -57,11 +63,13 @@ const Notes = ({ data, refresh }: any) => {
           if (containerRef.current) {
             containerRef.current.scrollTop = 0; // Set scrollTop to 0 to scroll to the top
           }
+          const iso = new Date().toISOString();
           setList([
             ...list,
             {
               title: title,
               content: content,
+              updatedAt:iso
             },
           ]);
           dispatch(
@@ -119,7 +127,7 @@ const Notes = ({ data, refresh }: any) => {
 
       return formattedDate;
     }
-    return "-"
+    return "-";
   }
 
   return (
@@ -166,18 +174,22 @@ const Notes = ({ data, refresh }: any) => {
         </div>
         <div className="py-2"></div>
         <div
-          ref={containerRef} className=" px-[10%] overflow-y-auto flex flex-col-reverse custom-scroll-black h-[90vh]">
-          {list.map((item: any, i: any) => {
-            console.log(item, "che21441");
-            return (
-              <Note
-                title={item.title}
-                key={i}
-                content={item.content}
-                date={convertISODateToString(item.updatedAt)}
-              />
-            );
-          })}
+          ref={containerRef}
+          className=" px-[10%] overflow-y-auto flex flex-col custom-scroll-black h-[90vh]"
+        >
+          <div className="w-[100%] flex flex-col-reverse " >
+            {list.map((item: any, i: any) => {
+              console.log(item, "che21441");
+              return (
+                <Note
+                  title={item.title}
+                  key={i}
+                  content={item.content}
+                  date={convertISODateToString(item.updatedAt)}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
