@@ -495,6 +495,95 @@ const LeadContainer = ({
 
   console.log(activity, "p2-33");
 
+  function isISODateString(str: any) {
+    // Regular expression to match ISO date string format
+    const isoDateRegex =
+      /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(.\d{1,6})?(Z|[-+]\d{2}:\d{2})?)?$/;
+
+    return isoDateRegex.test(str);
+  }
+
+  function isBeforeOrAfterCurrentTime(isoDateString: any) {
+    try {
+      // Parse the ISO date string to a Date object
+      const isoDate = new Date(isoDateString);
+      // Get the current time as a Date object
+      const currentTime = new Date();
+
+      // Compare the two Date objects
+      if (isoDate < currentTime) {
+        return "Before";
+      } else if (isoDate > currentTime) {
+        return "After";
+      } else {
+        return "Same as";
+      }
+    } catch (error) {
+      return "Invalid ISO date string";
+    }
+  }
+
+  function convertISODateToCustomFormat(isoDate:any) {
+    const dateObj = new Date(isoDate);
+  
+    // Format the date
+    const formattedDate = dateObj.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  
+    // Format the time
+    const formattedTime = dateObj.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  
+    return { date: `on ${formattedDate}`, time: formattedTime };
+  }
+
+  function filterItemsWithSimilarParameters(dataArray: any) {
+    const filteredArray: any = [];
+    for (let i = 0; i < dataArray.length; i++) {
+      if (dataArray[i].call_start_time) {
+        if (isISODateString(dataArray[i].call_start_time)) {
+          if (isBeforeOrAfterCurrentTime(dataArray[i].call_start_time)) {
+            const item = convertISODateToCustomFormat(dataArray[i].call_start_time);
+            console.log(item, 341512);
+            filteredArray.push(item);
+          }
+        }
+      }
+    }
+
+    return filteredArray;
+  }
+
+  const findFutureCallStartTime = (e: any) => {
+    if (e.length > 0) {
+      const targetObject = {
+        call_start_time: "",
+      };
+      const newArr = filterItemsWithSimilarParameters(e);
+
+      if (newArr.length > 0) {
+        console.log(newArr, 133411);
+
+        return { date: newArr[0].date, time: newArr[0].time };
+      } else {
+        return null;
+      }
+    }
+
+    return null;
+  };
+
+  console.log(
+    findFutureCallStartTime(activity.history),
+    "123141",
+    activity.history
+  );
+
   return (
     <>
       <div
@@ -659,8 +748,20 @@ const LeadContainer = ({
             left={10}
             // upperText={"Send Email"}
             // bottomText={"on 23 Jan 2023"}
-            upperText={"-"}
-            bottomText={"-"}
+            upperText={
+              activity
+                ? findFutureCallStartTime(activity.history)
+                  ? findFutureCallStartTime(activity.history)?.time
+                  : "-"
+                : "-"
+            }
+            bottomText={
+              activity
+                ? findFutureCallStartTime(activity.history)
+                  ? findFutureCallStartTime(activity.history)?.date
+                  : "-"
+                : "-"
+            }
           />
           <LeadItem
             width={150}

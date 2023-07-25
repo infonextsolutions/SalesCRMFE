@@ -1,4 +1,4 @@
-import Recorded from "@/types/recorded-call";
+import Recorded from "@/types/reco-1";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Image from "next/image";

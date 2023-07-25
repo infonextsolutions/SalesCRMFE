@@ -472,20 +472,22 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const [checked, setChecked] = useState(true);
   const [LeadData, setLeadData] = useState<any>(example);
   const GetLeadData = () => {
-    if (CallData.leadId?._id) {
+    if (CallData.leadId.length>0) {
       axios
         .get(
-          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${CallData.leadId._id}`
+          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
         )
         .then((e: any) => {
           console.log(e);
           setChecked(false);
           setLeadData(e.data.result);
-        });
+        }).catch((e)=>{
+          console.log(e,"err-12");
+        })
     }
   };
 
-  console.log(LeadData);
+  console.log("lead data-1231",CallData);
 
   React.useEffect(() => {
     if (checked) {
@@ -524,6 +526,17 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     }
   }
   console.log("calldata:",CallData)
+
+  function convertDatetimeToCustomFormat(dateStr:any) {
+    // Convert the string to a Date object
+    const dt:any = new Date(dateStr);
+  
+    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+    const referenceDate:any = new Date('1400-01-01T00:00:00Z');
+    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+  
+    return secondsDifference;
+  }
   return (
     <>
       <div className="flex">
@@ -541,7 +554,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             width={200}
             left={20}
             // text={"345345354335"}
-            text={CallData._id}
+            text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/audio-call`}
@@ -558,9 +571,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={200}
             left={10}
-            text={CallData.leadId?.leadId}
+            text={CallData.leadId.length>0 ?CallData.leadId[0].leadId:"-"}
             click={true}
-            route={`/sales/open/${CallData.leadId?._id}/lead-profile`}
+            route={`/sales/open/${CallData.leadId.length>0 && CallData.leadId[0].leadId}/lead-profile`}
             color={"#000"}
           />
           <CallItem
