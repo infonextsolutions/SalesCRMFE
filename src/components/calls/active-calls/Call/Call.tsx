@@ -314,7 +314,7 @@ const ExpandableRow = ({
   );
 };
 
-const ParticipantsHover = ({ last, bounding }: any) => {
+const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
   return (
     <div
       className="bg-[#E8E9EB] max-w-[240px] flex flex-col items-center pb-[40px] rounded-[15px] fixed py-[13px] px-[15px]  right-[10px] drop-shadow-sm"
@@ -331,13 +331,10 @@ const ParticipantsHover = ({ last, bounding }: any) => {
         Call Participants
       </p>
       <p className=" mt-[19px] text-[13px] ml-[2px]  w-[100%] font-medium">
-        Shraddha P. (Sales Manager)
+        {owner ? owner.name + " (" + owner.designation + ")" : "-"}
       </p>
       <p className="text-renal-blue text-[13px] ml-[2px]  w-[100%] font-medium">
-        John C. (Sales Rep)
-      </p>
-      <p className="text-renal-blue text-[13px] ml-[2px] w-[100%] font-medium">
-        Aarti P. (Sales Rep)
+      {participants ? participants.name + " (" + participants.designation + ")" : "-"}
       </p>
     </div>
   );
@@ -360,7 +357,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
 
-  function formatDateToCustomFormat(isoDate:any) {
+  function formatDateToCustomFormat(isoDate: any) {
     const months = [
       "Jan",
       "Feb",
@@ -384,16 +381,20 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     return `${day} ${month} ${year}`;
   }
 
-  function convertDatetimeToCustomFormat(dateStr:any) {
+  function convertDatetimeToCustomFormat(dateStr: any) {
     // Convert the string to a Date object
-    const dt:any = new Date(dateStr);
-  
+    const dt: any = new Date(dateStr);
+
     // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
-    const referenceDate:any = new Date('1400-01-01T00:00:00Z');
+    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
     const secondsDifference = Math.floor((dt - referenceDate) / 1000);
-  
+
     return secondsDifference;
   }
+
+  const called: any = CallData;
+  const owners = called?.owner;
+  const participants = called?.participants;
   return (
     <>
       <div className="flex">
@@ -405,7 +406,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={200}
             left={20}
-
             // text={CallData.callId}
             text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
@@ -451,8 +451,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
                 true ? "text-[#3F434A]" : "text-[#8A9099]"
               }`}
             >
-              <span>Shraddha P.,</span>{" "}
-              <span className="text-renal-blue ">John C., Aarti P. </span>
+              <span>{participants ? participants.name + "," : "-"}</span>{" "}
+              <span className="text-renal-blue ">
+                {owners ? owners.name : ""}
+              </span>
             </p>
           </div>
           <CallItem width={100} left={20} text={"John C"} />
@@ -497,7 +499,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           engagingQuestions={3}
         />
       </div>
-      {hover && <ParticipantsHover bounding={bounding} last={last} />}
+      {hover && (
+        <ParticipantsHover
+          owner={owners}
+          participants={participants}
+          bounding={bounding}
+          last={last}
+        />
+      )}
     </>
   );
 };
