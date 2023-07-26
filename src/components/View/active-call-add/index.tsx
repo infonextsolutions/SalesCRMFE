@@ -1,3 +1,5 @@
+import { setError, setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
@@ -24,7 +26,9 @@ const DropItems = ({ title, list, top, change }: any) => {
       >
         {list.map((item: any, i: any) => {
           return (
-            <option key={i} value={item.value} selected={item.selected}>
+            <option key={i} onClick={()=>{
+              change(item.value);
+            }} value={item.value} selected={item.selected}>
               {item.title}
             </option>
           );
@@ -267,7 +271,14 @@ const DateContainer = ({ date, setDate }: any) => {
   );
 };
 
-const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
+const ActiveCall = ({
+  cancel,
+  id,
+  companyId,
+  customerId,
+  refresh,
+  lead,
+}: any) => {
   function generateUniqueId() {
     const timestamp: any = Date.now().toString(36); // Convert timestamp to base36 string
     const randomNum = Math.random().toString(36).substr(2, 5); // Generate random number and take 5 characters starting from index 2
@@ -290,21 +301,21 @@ const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
     return hours;
   }
 
-  const [date, setDateData] = useState({
+  const [date, setDateData] = useState<any>({
     time: "",
     date: null,
   });
 
-  function combineDateTimeStrings(timeString:any, dateString:any) {
+  function combineDateTimeStrings(timeString: any, dateString: any) {
     // Check if the time string is empty
     const isTimeStringEmpty = timeString.trim() === "";
-  
+
     // If the time string is empty, use the current time
     const currentDate = new Date();
     const givenDate = isTimeStringEmpty
       ? currentDate
       : new Date(`${dateString}T${timeString}:00`);
-  
+
     // Check if the given date is today's date
     const givenYear = givenDate.getFullYear();
     const givenMonth = givenDate.getMonth();
@@ -312,7 +323,7 @@ const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
     const currentDay = currentDate.getDate();
-  
+
     if (
       givenYear === currentYear &&
       givenMonth === currentMonth &&
@@ -325,11 +336,13 @@ const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
       givenDate.setSeconds(currentDate.getSeconds());
       givenDate.setMilliseconds(currentDate.getMilliseconds());
     }
-  
+
     const formattedDate = givenDate.toISOString();
-  
+
     return formattedDate;
   }
+
+  const dispatch = useAppDispatch();
 
   const submit = () => {
     // console.log("Caling data",data)
@@ -337,22 +350,55 @@ const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
     if (date.date) {
       timee = combineDateTimeStrings(date.time, date.date);
     }
-    console.log(timee, "ch1231",date);
+    console.log({
+      ...data,
+      call_date: Date,
+      call_start_time: timee ? timee : getCurrentTimeInHours(),
+      participants:data?.participants,
+      owner:data?.owner
+    }, "ch1231", date);
 
     axios
       .post("https://testsalescrm.nextsolutions.in/api/active-call/create", {
         ...data,
         call_date: Date,
         call_start_time: timee ? timee : getCurrentTimeInHours(),
+        participants:date?.participants,
+        owner:date?.owner
       })
       .then((e: any) => {
         cancel();
+        dispatch(
+          setSuccess({
+            show: true,
+            success: "Call Added Successfully!",
+          })
+        );
         if (refresh) {
           refresh();
         }
       })
-      .catch((e) => {});
+      .catch((e) => {
+        dispatch(
+          setError({
+            show: true,
+            error: "Error Occured!",
+          })
+        );
+      });
   };
+
+  const list = lead
+    ? lead.owners.map((i: any) => {
+        console.log(i);
+        return {
+          title: i.name,
+          value: i._id,
+          selected: false,
+          _id: i._id,
+        };
+      })
+    : [];
 
   return (
     <div className="w-[100%] h-[100%] py-[30px] pl-[40px] pr-[40px]  relative">
@@ -404,24 +450,10 @@ const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
             val: 0,
             selected: true,
           },
-          {
-            title: "Shradha .P",
-            val: "Shradha .P",
-            selected: false,
-          },
-          {
-            title: "John. C",
-            val: "John .C",
-            selected: false,
-          },
-          {
-            title: "karla. C",
-            val: "karla. C",
-            selected: false,
-          },
+          ...list,
         ]}
         change={(e: any) => {
-          setData({ ...data });
+          setData({ ...data,owner:e });
         }}
       />
       <DropItems
@@ -433,24 +465,10 @@ const ActiveCall = ({ cancel, id, companyId, customerId, refresh }: any) => {
             val: 0,
             selected: true,
           },
-          {
-            title: "Shradha .P",
-            val: "Shradha .P",
-            selected: false,
-          },
-          {
-            title: "John. C",
-            val: "John .C",
-            selected: false,
-          },
-          {
-            title: "karla. C",
-            val: "karla. C",
-            selected: false,
-          },
+          ...list,
         ]}
         change={(e: any) => {
-          setData({ ...data });
+          setData({ ...data,participants:e });
         }}
       />
       <div className="w-[100%] flex justify-end mt-[20px]">
