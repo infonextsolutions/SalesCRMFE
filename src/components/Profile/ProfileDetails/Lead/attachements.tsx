@@ -5,6 +5,8 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Uploads from "./uploads";
 import axios from "axios";
+import { useAppDispatch } from "@/store/store";
+import { setSuccess } from "@/store/ai";
 
 const ScriptDoc = ({
   title,
@@ -16,6 +18,7 @@ const ScriptDoc = ({
   refresh,
   check,
   id,
+  Del,
 }: any) => {
   return (
     <div className="w-[100%] mt-[40px]">
@@ -73,6 +76,7 @@ const ScriptDoc = ({
               //   .catch((e) => {
               //     console.log(e, "huqbfq");
               //   });
+              Del();
             }}
             // fill={true}
             style={
@@ -205,20 +209,24 @@ const Attachements = ({ data }: any) => {
           `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data._id}`
         )
         .then((e) => {
+          console.log(e.data);
           setAttachments(e.data.result.attachments);
         })
         .catch((e) => {
           console.log(e, "error occured");
         });
-    },1000);
+    }, 1000);
   };
+  const dispatch = useAppDispatch();
 
   return (
     <>
       {notes && (
         <Backdrop bool={bool}>
           <Uploads
-            refresh={() => {}}
+            refresh={() => {
+              UpdateData();
+            }}
             cancel={() => {
               setBool(false);
               setTimeout(() => {
@@ -265,6 +273,32 @@ const Attachements = ({ data }: any) => {
               size="5.8 MB"
               id={i}
               file={item}
+              Del={() => {
+                const arr = attachments.filter((e: any, idd: any) => {
+                  return idd !== i;
+                });
+                console.log(arr, attachments, "cheuavakk vq");
+                const val: any = {
+                  attachments: [...arr],
+                  _id: data._id,
+                };
+                axios
+                  .put(
+                    "https://testsalescrm.nextsolutions.in/api/leads/update",
+                    val
+                  )
+                  .then((e) => {
+                    UpdateData();
+                    dispatch(
+                      setSuccess({
+                        show: true,
+                        success: "Deleted Successfully!",
+                      })
+                    );
+                  }).catch((e)=>{
+
+                  })
+              }}
               refresh={() => {
                 UpdateData();
               }}
