@@ -88,7 +88,7 @@ const LeadProfileContainer = ({
             </>
           )}
           {activeTitle === 1 && <ActivityHistory data1={data} data={data} />}
-          {activeTitle === 2 && <Attachements />}
+          {activeTitle === 2 && <Attachements  data={data} />}
         </div>
       </div>
     </div>
