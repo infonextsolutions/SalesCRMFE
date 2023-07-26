@@ -171,6 +171,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
         className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] flex flex-col justify-between h-[260px] shadow-lg shadow-slate-400"
         key={i}
       >
+        
         <div className="block-heading text-black text-[11px] leading-4 mb-[23px]">
           <p
             onClick={() => {
@@ -201,9 +202,12 @@ const KanbanItem = ({ item, i, Item }: any) => {
               clientId();
             }}
           >
-            {item.data.poc} | {item.data.pocJob}
+            {Item.customerId.name} | {Item.customerId.designation}
           </p>
-          <p className="text-black/50">{item.data.names}</p>
+          <p className="text-black/50">
+            
+  -            {/* {item.data.names} */}
+            </p>
         </div>
         <div className="block-details text-black text-[10px] mb-[20px]">
           <div className="flex justify-between">
