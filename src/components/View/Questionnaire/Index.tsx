@@ -674,8 +674,7 @@ const [title,setTitle] = useState("")
         <div className="flex flex-col ml-9"> 
         <div className="py-1 text-[16px] text-[#222]"></div>
       </div>
-
-    <div className="py-1 text-[16px] text-[#304FFD]"></div>
+ 
       <div className="w-[100%] min-h-[43vh]">
       {questionList.map((questionItem: any, index: any) => {
         return (
@@ -683,7 +682,7 @@ const [title,setTitle] = useState("")
             <div className="py-1 mt-3 mr-1 text-[16px] text-[#222]">
               Q{index + 1}. 
             </div>
-            <div className="w-[100%]">
+            <div className="w-[89%]">
               <input
                 className="w-[100%] bg-[#E8E9EB] text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[40px] outline-none"
                 type="text"
@@ -711,13 +710,13 @@ const [title,setTitle] = useState("")
               {questionItem.answerType === 'Dropdown' && <DropDownEditable ind={index} setOption={setOption} />}
               {questionItem.answerType === 'Checkbox' && <CheckboxEdit ind={index} setOption={setOption} /> } 
             </div>
-            <button className="absolute right-1 top-16" onClick={() => deleteQuestion(index)}>
+            <button className="absolute right-1 top-5" onClick={() => deleteQuestion(index)}>
             <Image
             src={getBasicIcon("Delete")}
             className={`svg-black`}
             alt=""
-            width={15}
-            height={15}
+            width={18}
+            height={18}
             style={{
               objectFit: "contain",
             }}
@@ -726,7 +725,7 @@ const [title,setTitle] = useState("")
           </div>
         );
       })}
-      <button className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onClick={addQuestion}>
+      <button className="text-blue-500 px-4 py-2 rounded-md mt-4" onClick={addQuestion}>
         Add Question
       </button>
       </div>
@@ -738,7 +737,7 @@ const [title,setTitle] = useState("")
             
             
     {/* Render your form fields here */}
-      <button className="bg-blue-500 font-semibold text-[16px] text-white px-4 py-2 rounded-md mt-4" onClick={handleSave}>
+      <button className="bg-blue-500 font-semibold text-[16px] text-white px-4 py-2 rounded-md ml-[85%]" onClick={handleSave}>
           Save
       </button>
 
