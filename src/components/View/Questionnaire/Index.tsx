@@ -462,6 +462,7 @@ const Questionnaire = () => {
 
 const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number | null>(null);
 const [questionList, setQuestionList] = useState<any[]>([{}]);
+// const [questionList, setQuestionList] = useState<any[]>([{}]);
 const [title,setTitle] = useState("")
 
   const addQuestion = () => {
@@ -544,8 +545,7 @@ const [title,setTitle] = useState("")
     console.log(questionList);
     closeModal(); // Close the modal after saving
   };
-
-  const questions = [0, 1, 2, 3, 4];
+ 
 
   return (
     <div className="w-[100%] min-h-[50vh]">
