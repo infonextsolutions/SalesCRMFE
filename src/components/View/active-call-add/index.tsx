@@ -26,9 +26,14 @@ const DropItems = ({ title, list, top, change }: any) => {
       >
         {list.map((item: any, i: any) => {
           return (
-            <option key={i} onClick={()=>{
-              change(item.value);
-            }} value={item.value} selected={item.selected}>
+            <option
+              key={i}
+              onClick={() => {
+                change(item.value);
+              }}
+              value={item.value}
+              selected={item.selected}
+            >
               {item.title}
             </option>
           );
@@ -350,22 +355,31 @@ const ActiveCall = ({
     if (date.date) {
       timee = combineDateTimeStrings(date.time, date.date);
     }
-    console.log({
-      ...data,
-      call_date: Date,
-      call_start_time: timee ? timee : getCurrentTimeInHours(),
-      participants:data?.participants,
-      owner:data?.owner
-    }, "ch1231", date);
-
-    axios
-      .post("https://testsalescrm.nextsolutions.in/api/active-call/create", {
+    console.log(
+      {
         ...data,
         call_date: Date,
         call_start_time: timee ? timee : getCurrentTimeInHours(),
-        participants:date?.participants,
-        owner:date?.owner
-      })
+        participants: data?.participants,
+        owner: data?.owner,
+      },
+      "ch1231",
+      date
+    );
+
+    const finalPayload = {
+      call_date: Date,
+      call_start_time: timee ? timee : getCurrentTimeInHours(),
+      participants: date?.participants,
+      owner: date?.owner,
+      ...data,
+    };
+
+    axios
+      .post(
+        "https://testsalescrm.nextsolutions.in/api/active-call/create",
+        finalPayload
+      )
       .then((e: any) => {
         cancel();
         dispatch(
@@ -453,7 +467,7 @@ const ActiveCall = ({
           ...list,
         ]}
         change={(e: any) => {
-          setData({ ...data,owner:e });
+          setData({ ...data, owner: e });
         }}
       />
       <DropItems
@@ -468,7 +482,7 @@ const ActiveCall = ({
           ...list,
         ]}
         change={(e: any) => {
-          setData({ ...data,participants:e });
+          setData({ ...data, participants: e });
         }}
       />
       <div className="w-[100%] flex justify-end mt-[20px]">
