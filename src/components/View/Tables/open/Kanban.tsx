@@ -32,6 +32,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
           e.companyId?.company_name.includes(search) ||
           e.customerId?.name.includes(search) ||
           e.potential_deal_size?.includes(search) ||
+          e?.lead_title?.includes(search)||
           e?.leadId?.includes(search)
       );
 
