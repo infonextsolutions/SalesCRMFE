@@ -2,8 +2,10 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import React, { useState } from "react";
 import { getBasicIcon } from "@/utils/AssetsHelper";
-import Image from "next/image"; 
-const AddText = ({ top, title, width,textarea, change }: any) => {
+import Image from "next/image";
+import { useAppDispatch } from "@/store/store";
+import { setError, setSuccess } from "@/store/ai";
+const AddText = ({ top, title, width, textarea, change }: any) => {
   return (
     <div
       className="w-[100%] "
@@ -15,18 +17,22 @@ const AddText = ({ top, title, width,textarea, change }: any) => {
       <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
         {title}*
       </p>
-      {
-        textarea ? (<textarea  className="w-[100%] h-[150px] appearance-none bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] outline-none"  onChange={(e: any) => {
-          change(e.target.value)
-        }}/>) : ( <input
-        onChange={(e: any) => {
-          change(e.target.value);
-        }}
-        type="text"
-        className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-      />)
-      }
-     
+      {textarea ? (
+        <textarea
+          className="w-[100%] h-[150px] appearance-none bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] outline-none"
+          onChange={(e: any) => {
+            change(e.target.value);
+          }}
+        />
+      ) : (
+        <input
+          onChange={(e: any) => {
+            change(e.target.value);
+          }}
+          type="text"
+          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+        />
+      )}
     </div>
   );
 };
@@ -54,9 +60,11 @@ const DatePage = () => {
     </div>
   );
 };
-const Notes = ({ cancel, leadid ,update}: any) => {
+const Notes = ({ cancel, leadid, update }: any) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const dispatch = useAppDispatch();
 
   const submit = () => {
     const body = {
@@ -65,15 +73,29 @@ const Notes = ({ cancel, leadid ,update}: any) => {
       content: content,
     };
     const url = "https://testsalescrm.nextsolutions.in/api/leads/notes";
-    axios.post(url, body).then((e: any) => {
-      console.log(e);
-      cancel();
-      if(update){
-        update();
-      }
-    }).catch((e)=>{
-
-    })
+    axios
+      .post(url, body)
+      .then((e: any) => {
+        console.log(e);
+        cancel();
+        dispatch(
+          setSuccess({
+            show: true,
+            success: "Note Added Successfully!",
+          })
+        );
+        if (update) {
+          update();
+        }
+      })
+      .catch((e) => {
+        dispatch(
+          setError({
+            show: true,
+            error: "Error Occured!",
+          })
+        );
+      });
   };
 
   return (
