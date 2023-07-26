@@ -2,7 +2,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const AddText = ({ top, title, width, change }: any) => {
+const AddText = ({ top, title, width, change,index }: any) => {
   return (
     <div
       className="w-[100%] "
@@ -11,48 +11,62 @@ const AddText = ({ top, title, width, change }: any) => {
         marginTop: top,
       }}
     >
-      <p className="text-[16px] font-medium tracking-wide text-[#222]">
-        {title}
-      </p>
-      <input
+      {/* <input
       placeholder="Write short answer"
         onChange={(e: any) => {
-          change(e.target.value);
+          change(index,e.target.value);
         }}
         type="text"
         className="w-[100%] bg-white text-[#8a9099] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-      />
+      /> */}
     </div>
   );
 };
 
-const TextBox = () => {
+const TextBox = ({index,question,answer}:any) => {
   return (
     <>
       <p className="text-[#000] text-[16px] font-medium">
-        Q1.  What are you looking in a product?
+        Q{index+1}.  {question} 
+      </p>
+      <input
+        name=""
+        id=""
+        className="w-[100%] h-[40px] outline-none mt-[16px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[1px]"
+        placeholder="Write your Answer"
+        value={answer}
+      />
+    </>
+  );
+};
+const TextBox2 = ({index,question,answer}:any) => {
+  return (
+    <>
+       <p className="text-[#000] text-[16px] font-medium">
+        Q{index+1}.  {question} 
       </p>
       <textarea
         name=""
         id=""
-        className="w-[100%] h-[90px] outline-none mt-[16px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[10px] px-[13px]"
-        placeholder="Write your Answer"
-        
-      ></textarea>
+        className="w-[100%] h-[150
+          px] outline-none mt-[16px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[10px] px-[13px]"
+        placeholder="Write your Answer" 
+        value={answer}
+      />
     </>
   );
 };
-const TextBox2 = () => {
+const AddTextBox = ({index,change}:any) => {
   return (
     <>
       
-      <textarea
+      {/* <textarea
         name=""
         id=""
         className="w-[100%] h-[90px] outline-none mt-[16px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[10px] px-[13px]"
         placeholder="Write your Answer"
-        
-      ></textarea>
+        onChange={(e:any)=>change(index,e.target.value)}
+      ></textarea> */}
     </>
   );
 };
@@ -74,20 +88,20 @@ const NewQuestions: React.FC = () => {
 };
 
 
-const Dropdown = () => {
-  const list: any = [{ value: 1, selected: true, title: "Choose Type" }];
+const Dropdown = ({index,question,option}:any) => {
+  
 
   return (
     <>
       <p className="text-[#000] text-[16px] font-medium">
-        Q2. What is your budget range?
+        Q{index+1}. {question}
       </p>
       <div className="w-[100%] px-[10px] border-[1px] mt-[10px]  rounded-xl border-[#ccc]">
         <select
           id="countries"
           className="outline-none cursor-pointer capitalize text-gray-900 py-[10px] text-sm tracking-wide text-[#3F434A] font-medium  block w-full bg-white"
         >
-          {list.map((item: any, i: any) => {
+          {option &&  option.map((item: any, i: any) => {
             return (
               <option value={item.value} key={i} selected={item.selected}>
                 {item.title}
@@ -106,7 +120,7 @@ interface DropdownOption {
   title: string;
 }
 
-const DropDownEditable = () => {
+const DropDownEditable = ({ind,setOption}:any) => {
   const [list, setList] = useState<DropdownOption[]>([
     { value: 1, selected: true, title: "" },
   ]);
@@ -131,6 +145,7 @@ const DropDownEditable = () => {
     setList((prevList) => {
       const updatedList = [...prevList];
       updatedList[index].title = value;
+      setOption(ind,list);
       return updatedList;
     });
   };
@@ -154,9 +169,7 @@ const DropDownEditable = () => {
           ))}
         </select>
       </div>
-      <button className="text-[#304FFD] px-2 py-1 mt-2" onClick={addDropdownOption}>
-        Add Option
-      </button>
+      
       {/* {list.length > 1 && (
         <button
           className="text-red-500 px-2 py-1 ml-2"
@@ -179,31 +192,38 @@ const DropDownEditable = () => {
               className="text-red-500 px-2 py-1 ml-2"
               onClick={() => deleteDropdownOption(index)}
             >
-              Delete
+             <Image
+            src={getBasicIcon("Delete")}
+            className={`svg-black mt-[1px]`}
+            alt=""
+            width={15}
+            height={15}
+            style={{
+              objectFit: "contain",
+            }}
+          />
             </button>
           )}
         </div>
       ))}
+      <button className="text-[#304FFD] px-2 py-1 mt-2" onClick={addDropdownOption}>
+        Add Option
+      </button>
     </>
   );
 };
 
 
-const Mcq = () => {
-  const list: any = [
-    { title: "option 1" },
-    { title: "option 2" },
-    { title: "option3" },
-    { title: "other" },
-  ];
+const Mcq = ({index,question,option}:any) => {
+  
   const [selected, setSelected] = useState(null);
   return (
     <>
       <p className="text-[#000] text-[16px] font-medium">
-        Q3. Choose among the following?
+        Q{index+1}. {question}
       </p>
       <div className="w-[100%] flex flex-col">
-        {list.map((item: any, i: any) => {
+        {option && option.map((item: any, i: any) => {
           return (
             <div key={i} className="flex items-center mt-[13px]">
               <div
@@ -230,8 +250,8 @@ const Mcq = () => {
 
 
 
-const McqEditable = () => {
-  const [list, setList] = useState([{ title: "option 1" }]);
+const McqEditable = ({ind,setOption}:any) => {
+  const [list, setList] = useState([{ title: "" }]);
   const [selected, setSelected] = useState<number | null>(null);
 
   const addOption = () => {
@@ -243,13 +263,15 @@ const McqEditable = () => {
   };
 
   const updateOption = (index: number, value: string) => {
+    
     setList((prevList) => {
       const updatedList = [...prevList];
       updatedList[index].title = value;
+      setOption(ind,list)
       return updatedList;
-    });
+    }); 
   };
-
+  
   return (
     <>
       
@@ -258,7 +280,9 @@ const McqEditable = () => {
           <div key={index} className="flex items-center mt-[13px]">
             <div
               className="w-[16px] flex items-center justify-center overflow-hidden p-[2px] h-[16px] rounded-[50%] bg-[#E8E9EB] border-[#e8e9eb] border-[2px] cursor-pointer"
-              onClick={() => setSelected(index)}
+              onClick={() => {
+                setSelected(index);
+              }}
             >
               {selected === index && (
                 <div className="w-[8px] h-[8px] shrink-0 bg-[#304ffd] rounded-[50%]"></div>
@@ -273,10 +297,19 @@ const McqEditable = () => {
             />
             {list.length > 1 && (
               <button
-                className="text-red-500 px-2 py-1 ml-2"
+                className="ml-2"
                 onClick={() => deleteOption(index)}
               >
-                Delete
+               <Image
+            src={getBasicIcon("Delete")}
+            className={`svg-black mt-[1px]`}
+            alt=""
+            width={15}
+            height={15}
+            style={{
+              objectFit: "contain",
+            }}
+          />
               </button>
             )}
           </div>
@@ -293,9 +326,9 @@ interface Option {
   selected: boolean;
 }
 
-const Checkbox: React.FC = () => {
+const CheckboxEdit = ({ind,setOption}:any) => {
   const [options, setOptions] = useState<Option[]>([
-    { title: "Option 1", selected: false }
+    { title: "", selected: false }
   ]);
 
   const addOption = () => {
@@ -315,6 +348,7 @@ const Checkbox: React.FC = () => {
     setOptions((prevOptions) => {
       const updatedOptions = [...prevOptions];
       updatedOptions[index] = { ...updatedOptions[index], title: value };
+      setOption(ind,updatedOptions)
       return updatedOptions;
     });
   };
@@ -333,7 +367,7 @@ const Checkbox: React.FC = () => {
   return (
     <>
       <div className="w-full flex flex-col">
-        {options.map((option, index) => (
+        { options.map((option, index) => (
           <div key={index} className="flex items-center mt-3">
             <input
               type="checkbox"
@@ -350,10 +384,19 @@ const Checkbox: React.FC = () => {
             />
             {options.length > 1 && (
               <button
-                className="text-red-500 px-2 py-1 ml-2"
+                className="t ml-2"
                 onClick={() => deleteOption(index)}
               >
-                Delete
+               <Image
+            src={getBasicIcon("Delete")}
+            className={`svg-black mt-[1px]`}
+            alt=""
+            width={15}
+            height={15}
+            style={{
+              objectFit: "contain",
+            }}
+          />
               </button>
             )}
           </div>
@@ -365,7 +408,50 @@ const Checkbox: React.FC = () => {
     </>
   );
 };
+const Checkbox = ({index,question,option}:any) => {
+  const [options, setOptions] = useState<Option[]>([
+    { title: "", selected: false }
+  ]);
 
+   
+
+  
+
+  const toggleOption = (index: number) => {
+    setOptions((prevOptions) => {
+      const updatedOptions = [...prevOptions];
+      updatedOptions[index] = {
+        ...updatedOptions[index],
+        selected: !updatedOptions[index].selected
+      };
+      return updatedOptions;
+    });
+  };
+
+  return (
+    <>
+     <p className="text-[#000] text-[16px] font-medium">
+        Q{index+1}. {question}
+      </p>
+      <div className="w-full flex flex-col">
+
+        {option && option.map((item:any, index:any) => (
+          <div key={index} className="flex items-center mt-3">
+            <input
+              type="checkbox"
+              className="mr-2 bg-white"
+              checked={item.selected}
+              onChange={() => toggleOption(index)}
+            />
+            <p className="text-black">{item.title}</p>
+             
+          </div>
+        ))}
+      </div>
+      
+    </>
+  );
+};
 
 
 
@@ -374,14 +460,13 @@ const Questionnaire = () => {
   
 
 
-  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number | null>(null);
-
-
-const [questionList, setQuestionList] = useState<any[]>([]);
+const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number | null>(null);
+const [questionList, setQuestionList] = useState<any[]>([{}]);
+const [title,setTitle] = useState("")
 
   const addQuestion = () => {
   setSelectedQuestionIndex(null);
-  const newQuestion = { question: '', answerType: '' };
+  const newQuestion = { question: '', answerType: '',answer:'',option:[] };
   setQuestionList([...questionList, newQuestion]);
 };
 
@@ -399,6 +484,20 @@ const [questionList, setQuestionList] = useState<any[]>([]);
     updatedQuestions[index].answerType = answerType;
     setQuestionList(updatedQuestions);
   };
+  
+  const setOption = (index:number,option:any) =>{
+    const updatedQuestions = [...questionList];
+    updatedQuestions[index].option=option;
+    setQuestionList(updatedQuestions);
+    
+  }
+  
+  const updateAnswer = (index: number, answer: any) => {
+    const updatedQuestions = [...questionList];
+    updatedQuestions[index].answer = answer;
+    setQuestionList(updatedQuestions);
+  };
+  
 
   const deleteQuestion = (index: number) => {
   setSelectedQuestionIndex(null);
@@ -442,6 +541,7 @@ const [questionList, setQuestionList] = useState<any[]>([]);
 
   const handleSave = () => {
     // Handle saving the form data
+    console.log(questionList);
     closeModal(); // Close the modal after saving
   };
 
@@ -450,13 +550,13 @@ const [questionList, setQuestionList] = useState<any[]>([]);
   return (
     <div className="w-[100%] min-h-[50vh]">
       <div className="flex items-center justify-between">
-        <h1 className="text-[32px] font-medium text-[#3F434A]">Demo Call</h1>
+        <h1 className="text-[32px] font-medium text-[#3F434A]">{title}</h1>
         <button
           className="ml-auto items-center flex bg-renal-blue pl-[11px] rounded-xl pr-[11px] py-[8px]"
           onClick={openModal}
         >
           <Image
-            src={getBasicIcon("edit")}
+            src={getBasicIcon("Edit")}
             className={`svg-white mt-[1px]`}
             alt=""
             width={15}
@@ -470,10 +570,10 @@ const [questionList, setQuestionList] = useState<any[]>([]);
           </p>
         </button>
       </div>
-      {questions.map((item: any, i: any) => {
+      {/* {questions.map((item: any, i: any) => {
         return (
           <div className="w-[100%] my-[20px]" key={i}>
-            {item === 0 && <TextBox />}
+            {item === 0 && <TextBox  />}
             {item === 1 && <Dropdown />}
             {item === 2 && <Mcq />}
             
@@ -481,13 +581,27 @@ const [questionList, setQuestionList] = useState<any[]>([]);
 
           </div>
         );
-      })}
+      })} */}
+      {
+        questionList.map((questionItem:any,i:any)=>{
+          return(
+            <div className="w-[100%] my-[20px]" key={i}>
+              {questionItem.answerType === 'Short Answer' && <TextBox index={i} question={questionItem.question} answer={questionItem.answer}/>}
+              {questionItem.answerType === 'Long Answer' && <TextBox2 index={i} question={questionItem.question} answer={questionItem.answer}/>}
+              {questionItem.answerType === 'Multiple Choice' && <Mcq index={i} question={questionItem.question} option={questionItem.option} />}
+              {questionItem.answerType === 'Dropdown' && <Dropdown index={i} question={questionItem.question} option={questionItem.option}/>}
+              {questionItem.answerType === 'Checkbox' && <Checkbox index={i} question={questionItem.question} option={questionItem.option}/>}
+            </div>
+          )
+        })
+      }
 
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white rounded-xl p-6 w-[744px]  h-[820px] overflow-y-scroll">
-            <div className="flex justify-space-between">
-              <h1 className="text-[#222] text-4xl font-semibold mb-4 mr-80">Edit Questionnaire</h1>
+      {
+        isModalOpen && (
+        <div className="fixed inset-0 flex justify-center bg-gray-900 bg-opacity-50 overflow-y-scroll py-14">
+          <div className="bg-white rounded-xl p-6 w-[675px] h-fit relative top-15">
+            <div className="flex justify-between">
+              <h1 className="text-[#222] text-4xl font-semibold mb-4">Edit Questionnaire</h1>
             <div className="flex justify-end">
               <button
                 className="text-gray-500 hover:text-gray-700"
@@ -512,58 +626,26 @@ const [questionList, setQuestionList] = useState<any[]>([]);
             </div>
             
             
-
+              {/* title  */}
              <div className="w-[100%]">
-        <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
-          Title
-        </p>
-        <select
-          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-          
-        >
-          <option value="" selected>
-            Demo Call
-          </option>
-          <option value="1">1</option>
-          
-        </select>
-      </div>
-
-      <div className="py-1"></div>
-
-
-      <AddText
-        top={"10px"}
-       
-        title="Q1.What are you looking in a product?"
-      />
-      {/* State */}
-      <div className="py-1 text-[16px] text-[#222]"></div>
-
-
-                   <div className="w-[100%]">
-        <p className="text-[16px] font-medium tracking-wide text-[#222]">
-          Q2. What is your budget range?
-        </p>
-        <select
-          className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-          
-        >
-          <option value="" selected>
-            Choose range
-          </option>
-          <option value="1">1</option>
-          
-        </select>
-      </div>
-
-      <div className="py-1"></div>
-
-      <>
-      <p className="text-[#000] text-[16px] font-medium">
+               <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+                  Title
+                </p>
+                <input
+                name=""
+                id=""
+                className="w-[100%] h-[40px] outline-none mt-[8px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[1px]"
+                placeholder="Title"
+                value={title}
+                onChange={(e)=>setTitle(e.target.value)}
+              />
+              
+            </div> 
+    <>
+      {/* <p className="text-[#000] text-[16px] font-medium">
         Q3. Choose among the following?
-      </p>
-      <div className="w-[100%] flex flex-col">
+      </p> */}
+      {/* <div className="w-[100%] flex flex-col">
         {list.map((item: any, i: any) => {
           return (
             <div key={i} className="flex items-center mt-[13px]">
@@ -583,44 +665,23 @@ const [questionList, setQuestionList] = useState<any[]>([]);
             </div>
           );
         })}
+      </div> */}
+    </>
+ 
+
+     <div className="text-[#000] text-[16px] font-medium">
+      <div className="w-[100%]"> 
+        <div className="flex flex-col ml-9"> 
+        <div className="py-1 text-[16px] text-[#222]"></div>
       </div>
-    </>
 
-        
-         <div className="py-1"></div>
-
-         <p className="text-[#000] text-[16px] font-medium">
-          <div
-      className="w-[100%] "
-      
-    >
-       
-
-        <div className="flex flex-col ml-9">
-
-           
-
-      <div className="py-1 text-[16px] text-[#222]"></div>
-
-
-      
-
-
-       <>
-      
-     
-    </>
-
-
-          </div>
-
-          <div className="py-1 text-[16px] text-[#304FFD]"></div>
-      <div className="w-[100%] min-h-[50vh]">
+    <div className="py-1 text-[16px] text-[#304FFD]"></div>
+      <div className="w-[100%] min-h-[43vh]">
       {questionList.map((questionItem: any, index: any) => {
         return (
-          <div className="w-[100%] my-[20px] flex" key={index}>
+          <div className="w-[100%] relative my-[20px] flex" key={index}>
             <div className="py-1 mt-3 mr-1 text-[16px] text-[#222]">
-              Q{index + 4}. 
+              Q{index + 1}. 
             </div>
             <div className="w-[100%]">
               <input
@@ -644,14 +705,23 @@ const [questionList, setQuestionList] = useState<any[]>([]);
                 <option value="Dropdown">Dropdown</option>
                 <option value="Checkbox">Checkbox</option>
               </select>
-              {questionItem.answerType === 'Short Answer' && <AddText top="10px"  />}
-              {questionItem.answerType === 'Long Answer' && <TextBox2 />}
-              {questionItem.answerType === 'Multiple Choice' && <McqEditable />}
-              {questionItem.answerType === 'Dropdown' && <DropDownEditable />}
-              {questionItem.answerType === 'Checkbox' && <Checkbox />}
+              {/* {questionItem.answerType === 'Short Answer' && <AddText top="10px" index={index} change={updateAnswer} />}
+              {questionItem.answerType === 'Long Answer' && <AddTextBox index={index} change={updateAnswer} />} */}
+              {questionItem.answerType === 'Multiple Choice' && <McqEditable ind={index} setOption={setOption} />}
+              {questionItem.answerType === 'Dropdown' && <DropDownEditable ind={index} setOption={setOption} />}
+              {questionItem.answerType === 'Checkbox' && <CheckboxEdit ind={index} setOption={setOption} /> } 
             </div>
-            <button className="text-red-500 px-2 py-1 mt-2" onClick={() => deleteQuestion(index)}>
-              Delete Question
+            <button className="absolute right-1 top-16" onClick={() => deleteQuestion(index)}>
+            <Image
+            src={getBasicIcon("Delete")}
+            className={`svg-black`}
+            alt=""
+            width={15}
+            height={15}
+            style={{
+              objectFit: "contain",
+            }}
+          />
             </button>
           </div>
         );
@@ -659,31 +729,24 @@ const [questionList, setQuestionList] = useState<any[]>([]);
       <button className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onClick={addQuestion}>
         Add Question
       </button>
-    </div>
+      </div>
     </div>
   
 
          
-      </p>
-      
-    
-
-      
-          
-      
-
+       </div>
             
             
-              {/* Render your form fields here */}
-              <button className="bg-blue-500 font-bold text-[18px] text-white px-4 py-2 rounded-md mt-4" onClick={handleSave}>
-  Save
-</button>
-
+    {/* Render your form fields here */}
+      <button className="bg-blue-500 font-semibold text-[16px] text-white px-4 py-2 rounded-md mt-4" onClick={handleSave}>
+          Save
+      </button>
 
             
           </div>
         </div>
-      )}
+        )
+      }
     </div>
   );
 };
