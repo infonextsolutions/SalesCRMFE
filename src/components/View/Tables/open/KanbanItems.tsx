@@ -9,6 +9,7 @@ import EmailPage from "../../Email";
 import Notes1 from "../../NotesSalesView";
 import Messages from "../../messages";
 import axios from "axios";
+import ActiveCall from "@/components/View/active-call-add";
 
 const KanbanItem = ({ item, i, Item }: any) => {
   const { pathname, replace, push } = useRouter();
@@ -32,7 +33,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
   const [messages, setMessages] = React.useState(false);
   const [bool, setBool] = React.useState(true);
   const [detailShow, setDetailShow] = useState(false);
-
+  const [call, setCall] = React.useState(false);
   const showNotes = () => {
     setNotes(true);
   };
@@ -51,6 +52,9 @@ const KanbanItem = ({ item, i, Item }: any) => {
     setMessages(true);
   };
 
+  const showCall = () => {
+    setCall(true);
+  };
   const cancelEvents = () => {
     setBool(false);
     setTimeout(() => {
@@ -89,6 +93,13 @@ const KanbanItem = ({ item, i, Item }: any) => {
       setBool(true);
     }, 1700);
   };
+  const cancelCall = () => {
+    setBool(false);
+    setTimeout(() => {
+      setCall(false);
+      setBool(true);
+    }, 1700);
+  };
 
   const AddLead = (e: any, e1: any) => {
     if (e1 === 0) {
@@ -101,6 +112,8 @@ const KanbanItem = ({ item, i, Item }: any) => {
       showEmail();
     } else if (e1 === 5) {
       showMessages();
+    } else if (e1 === 6) {
+      showCall();
     }
   };
 
@@ -322,7 +335,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
                 objectFit: "contain",
               }}
               onClick={() => {
-                AddLead(1, 0);
+                AddLead(1, 6);
               }}
             />
             <Image
@@ -433,9 +446,13 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage refresh={() => {
+          <EmailPage
+            refresh={() => {
               update();
-          }} cancel={cancelEmails} data={Item} />
+            }}
+            cancel={cancelEmails}
+            data={Item}
+          />
         </Backdrop>
       )}
       {notes1 && (
@@ -446,6 +463,17 @@ const KanbanItem = ({ item, i, Item }: any) => {
       {messages && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <Messages cancel={cancelMessages} />
+        </Backdrop>
+      )}
+      {call && (
+        <Backdrop bool={bool} pad={"50px 0"}>
+          <ActiveCall
+            cancel={cancelCall}
+            id={Item._id}
+            lead={Item}
+            companyId={Item.companyId._id}
+            customerId={Item.customerId._id}
+          />
         </Backdrop>
       )}
     </>
