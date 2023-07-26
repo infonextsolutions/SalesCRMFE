@@ -1,4 +1,6 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
+import EmojiPicker from 'emoji-picker-react';
 import React, { useState } from "react";
 
 const Comment = ({ user, content, time, reply, last }: any) => {
@@ -42,7 +44,7 @@ const Comment = ({ user, content, time, reply, last }: any) => {
             placeholder="write a reply"
             className="w-[80%] relative left-20 font-medium h-[100px] bg-[#fff] apperance-none block  text-[14px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 "
           ></textarea>
-          <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[26vw]">
+          <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[24vw]">
             <p onClick={setReply} className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
               Reply
             </p>
@@ -94,6 +96,7 @@ const Comments = () => {
     //   ],
     // },
   ]);
+  const [emoji,setEmoji] = useState(false);
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();
     let hours: any = now.getHours();
@@ -111,15 +114,53 @@ const Comments = () => {
   
   return (
     <>
-      <div className="flex w-[100%] flex-col px-[40px]">
+      <div className="flex w-[100%] h-[750px] flex-col px-[40px] ">
+        <div className="relative">
+
         <textarea
           value={text}
           onChange={(e: any) => {
             setText(e.target.value);
           }}
-          placeholder="write a comment here..."
-          className="w-[100%] font-medium h-[160px] bg-[#fff] apperance-none block font-medium text-[14px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 focus:outline-none"
-        ></textarea>
+          placeholder="Write a comment"
+          className="resize-none w-[100%] h-[160px] bg-[#fff] apperance-none block text-[16px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 focus:outline-none"
+          />
+        <div className="flex absolute gap-x-2 right-5 bottom-2">
+          <p className="text-gray-600 font-semibold text-lg cursor-pointer" onClick={()=>setText((prev)=>(prev+"#"))}>#</p>
+          <p className="text-gray-600 font-semibold text-lg cursor-pointer" onClick={()=>setText((prev)=>(prev+"@"))}>@</p>
+          <button className=" font-semibold text-lg mt-[1px]" onClick={()=>setEmoji((prev)=> !prev)}> 
+          <Image
+            src={getBasicIcon("Smile")}
+            className={`svg-black`}
+            alt=""
+            width={19}
+            height={19}
+            style={{
+              objectFit: "contain",
+            }}
+            /> </button>
+            
+            
+           {emoji && <>
+           <button className="absolute top-[78.5px] left-[14px] bg-white z-50" onClick={()=>setEmoji(false)}>
+            <Image
+            src={getBasicIcon("Cross")}
+            className={`svg-black`}
+            alt=""
+            width={15}
+            height={15}
+            style={{
+              objectFit: "contain",
+            }}
+            />
+            </button>
+            <div className="absolute right-6 top-[50px]"> 
+           <EmojiPicker height={500} width={400}  /> 
+            </div>
+            </>}
+           
+        </div>
+            </div>
         <button
           onClick={() => {
             if (text.length !== 0) {
@@ -145,21 +186,21 @@ const Comments = () => {
             comment
           </p>
         </button>
-      </div>
       <div className="py-2">
         {list.map((item: any, i: any) => {
           return (
             <Comment
-              key={i}
-              user={item.user}
-              content={item.content}
-              last={item.last}
-              time={item.time}
-              reply={item.reply}
+            key={i}
+            user={item.user}
+            content={item.content}
+            last={item.last}
+            time={item.time}
+            reply={item.reply}
             />
-          );
-        })}
+            );
+          })}
       </div>
+    </div>
     </>
   );
 };
