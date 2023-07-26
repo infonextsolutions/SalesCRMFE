@@ -49,6 +49,9 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
     }
   });
 
+  const called:any = data1;
+  const owner = called.owner;
+  const participants = called.participants;
   return (
     <div>
       {edit && (
@@ -147,7 +150,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
             Call Owner
           </p>
           <p className="text-[#8A9099] text-[12px] leading-[18px]">
-            {info[activeTitle].data.callOwner}
+            {owner?owner.name:"-"}
           </p>
         </div>
       </div>

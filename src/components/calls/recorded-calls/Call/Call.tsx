@@ -612,13 +612,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
                 }`}
             // >
             >
-              {LeadData.owners?.map((item:any, i:any) => {
+              -
+              {/* {LeadData.owners?.map((item:any, i:any) => {
                 return (
                   <span className={i !== 0 ? "text-renal-blue" : ""} key={i}>
                     {i < 2 && item.name} ,
                   </span>
                 );
-              })}
+              })} */}
             </p>
           </div>
           <CallItem width={100} left={20} text={LeadData.owners[0].name} />

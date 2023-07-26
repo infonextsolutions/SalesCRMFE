@@ -589,7 +589,7 @@ const Audio = ({ data,data1 }: props) => {
                 width={10}
                 height={10}
               />
-              <p className="text-[#304FFD] text-[14px]">Participant 1:{data1.owners[0].name}</p>
+              <p className="text-[#304FFD] text-[14px]">Participant 1:-</p>
             </div>
             <div className="w-full flex items-center mt-[6px]">
               <Image
@@ -600,7 +600,7 @@ const Audio = ({ data,data1 }: props) => {
                 height={10}
               />
               <p className="text-[#FF965D] text-[14px]">
-                Participant 2:{data1.customerId.name}
+                Participant 2:-
               </p>
             </div>
           </div>
