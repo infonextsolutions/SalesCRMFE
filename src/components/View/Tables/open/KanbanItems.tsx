@@ -8,6 +8,7 @@ import Events from "../../Event/Events";
 import EmailPage from "../../Email";
 import Notes1 from "../../NotesSalesView";
 import Messages from "../../messages";
+import axios from "axios";
 
 const KanbanItem = ({ item, i, Item }: any) => {
   const { pathname, replace, push } = useRouter();
@@ -165,13 +166,47 @@ const KanbanItem = ({ item, i, Item }: any) => {
     }
   });
 
+  const update = async () => {
+    setTimeout(async() => {
+      const response = await axios
+        .get(
+          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${Item._id}`
+        )
+        .then((e) => {
+          const history = e.data.result.activityId.history;
+          let calls = 0;
+          let emails = 0;
+          let notes = 0;
+          for (let i = 0; i < history.length; i++) {
+            console.log(history[i], "effeqw");
+            if (history[i]?.type) {
+              if (history[i].type === "note") {
+                notes++;
+              } else if (history[i].type === "email") {
+                emails++;
+              }
+            } else {
+              calls++;
+            }
+          }
+          setActivities({
+            call: calls,
+            notes: notes,
+            email: emails,
+          });
+        })
+        .catch((e) => {
+          console.log(e, "error occured");
+        });
+    });
+  };
+
   return (
     <>
       <div
         className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] flex flex-col justify-between h-[260px] shadow-lg shadow-slate-400"
         key={i}
       >
-        
         <div className="block-heading text-black text-[11px] leading-4 mb-[23px]">
           <p
             onClick={() => {
@@ -204,10 +239,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           >
             {Item.customerId.name} | {Item.customerId.designation}
           </p>
-          <p className="text-black/50">
-            
-  -            {/* {item.data.names} */}
-            </p>
+          <p className="text-black/50">- {/* {item.data.names} */}</p>
         </div>
         <div className="block-details text-black text-[10px] mb-[20px]">
           <div className="flex justify-between">
@@ -252,7 +284,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
               }}
               onClick={() => {
                 AddLead(1, 0);
-              }}  
+              }}
             />
             <Image
               src={getBasicIcon("Mail")}
@@ -384,7 +416,14 @@ const KanbanItem = ({ item, i, Item }: any) => {
       </div>
       {notes && (
         <Backdrop bool={bool}>
-          <Notes cancel={cancelNotes} note={Item.notes} />
+          <Notes
+            leadid={Item._id}
+            cancel={cancelNotes}
+            update={() => {
+              update();
+            }}
+            note={Item.notes}
+          />
         </Backdrop>
       )}
       {events && (
