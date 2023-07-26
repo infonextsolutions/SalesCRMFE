@@ -167,7 +167,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
   });
 
   const update = async () => {
-    setTimeout(async() => {
+    setTimeout(async () => {
       const response = await axios
         .get(
           `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${Item._id}`
@@ -433,7 +433,9 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage refresh={() => {}} cancel={cancelEmails} data={Item} />
+          <EmailPage refresh={() => {
+              update();
+          }} cancel={cancelEmails} data={Item} />
         </Backdrop>
       )}
       {notes1 && (
