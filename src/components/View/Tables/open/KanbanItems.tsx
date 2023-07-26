@@ -275,7 +275,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           </div>
           <div className="flex justify-between">
             <p className="text-black/[.65]">Deal Size:</p>
-            <p className="text-black/[.35]">Rs.{Item.existing_budget}</p>
+            <p className="text-black/[.35]">Rs.{Item?.potential_deal_size}</p>
           </div>
           <div className="flex justify-between">
             <p className="text-black/[.65]">Product/Service:</p>
