@@ -1,4 +1,6 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
+import EmojiPicker from 'emoji-picker-react';
 import React, { useState } from "react";
 
 const Comment = ({ user, content, time, reply, last }: any) => {
@@ -94,6 +96,7 @@ const Comments = () => {
     //   ],
     // },
   ]);
+  const [emoji,setEmoji] = useState(false);
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();
     let hours: any = now.getHours();
@@ -110,15 +113,53 @@ const Comments = () => {
   }
   return (
     <>
-      <div className="flex w-[100%] flex-col px-[40px]">
+      <div className="flex w-[100%] h-[750px] flex-col px-[40px] overflow-y-auto">
+        <div className="relative">
+
         <textarea
           value={text}
           onChange={(e: any) => {
             setText(e.target.value);
           }}
-          placeholder="write a comment here..."
-          className="w-[100%] font-medium h-[160px] bg-[#fff] apperance-none block font-medium text-[14px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 focus:outline-none"
-        ></textarea>
+          placeholder="Write a comment"
+          className="resize-none w-[100%] h-[160px] bg-[#fff] apperance-none block text-[16px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 focus:outline-none"
+          />
+        <div className="flex absolute gap-x-2 right-5 bottom-2">
+          <p className="text-gray-600 font-semibold text-lg cursor-pointer" onClick={()=>setText((prev)=>(prev+"#"))}>#</p>
+          <p className="text-gray-600 font-semibold text-lg cursor-pointer" onClick={()=>setText((prev)=>(prev+"@"))}>@</p>
+          <button className=" font-semibold text-lg mt-[1px]" onClick={()=>setEmoji((prev)=> !prev)}> 
+          <Image
+            src={getBasicIcon("Smile")}
+            className={`svg-black`}
+            alt=""
+            width={19}
+            height={19}
+            style={{
+              objectFit: "contain",
+            }}
+            /> </button>
+            
+            
+           {emoji && <>
+           <button className="absolute top-7 -left-[90px] bg-white z-50" onClick={()=>setEmoji(false)}>
+            <Image
+            src={getBasicIcon("Cross")}
+            className={`svg-black`}
+            alt=""
+            width={15}
+            height={15}
+            style={{
+              objectFit: "contain",
+            }}
+            />
+            </button>
+            <div className="absolute right-32 bottom-100"> 
+           <EmojiPicker height={500} width={400}  /> 
+            </div>
+            </>}
+           
+        </div>
+            </div>
         <button
           onClick={() => {
             if (text.length !== 0) {
@@ -144,21 +185,21 @@ const Comments = () => {
             comment
           </p>
         </button>
-      </div>
       <div className="py-2">
         {list.map((item: any, i: any) => {
           return (
             <Comment
-              key={i}
-              user={item.user}
-              content={item.content}
-              last={item.last}
-              time={item.time}
-              reply={item.reply}
+            key={i}
+            user={item.user}
+            content={item.content}
+            last={item.last}
+            time={item.time}
+            reply={item.reply}
             />
-          );
-        })}
+            );
+          })}
       </div>
+    </div>
     </>
   );
 };
