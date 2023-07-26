@@ -44,7 +44,7 @@ const Comment = ({ user, content, time, reply, last }: any) => {
             placeholder="write a reply"
             className="w-[80%] relative left-20 font-medium h-[100px] bg-[#fff] apperance-none block  text-[14px] tracking-wide text-gray-600 border rounded-2xl py-4 px-3 "
           ></textarea>
-          <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[26vw]">
+          <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[24vw]">
             <p onClick={setReply} className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
               Reply
             </p>
@@ -114,7 +114,7 @@ const Comments = () => {
   
   return (
     <>
-      <div className="flex w-[100%] h-[750px] flex-col px-[40px] overflow-y-auto">
+      <div className="flex w-[100%] h-[750px] flex-col px-[40px] ">
         <div className="relative">
 
         <textarea
@@ -142,7 +142,7 @@ const Comments = () => {
             
             
            {emoji && <>
-           <button className="absolute top-7 -left-[90px] bg-white z-50" onClick={()=>setEmoji(false)}>
+           <button className="absolute top-[78.5px] left-[14px] bg-white z-50" onClick={()=>setEmoji(false)}>
             <Image
             src={getBasicIcon("Cross")}
             className={`svg-black`}
@@ -154,7 +154,7 @@ const Comments = () => {
             }}
             />
             </button>
-            <div className="absolute right-32 bottom-100"> 
+            <div className="absolute right-6 top-[50px]"> 
            <EmojiPicker height={500} width={400}  /> 
             </div>
             </>}
