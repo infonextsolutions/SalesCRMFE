@@ -395,6 +395,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const called: any = CallData;
   const owners = called?.owner;
   const participants = called?.participants;
+
+  function convertISOToTime(isoString: any) {
+    const date = new Date(isoString);
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    return "at " + hours + ":" + minutes;
+  }
+
   return (
     <>
       <div className="flex">
@@ -457,12 +465,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               </span>
             </p>
           </div>
-          <CallItem width={100} left={20} text={"John C"} />
+          <CallItem width={100} left={20} text={owners ? owners.name : ""} />
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={"Send Email"}
-            bottomText={`on ${formatDateToCustomFormat(CallData.updatedAt)}`}
+            upperText={`${formatDateToCustomFormat(CallData.updatedAt)}`}
+            bottomText={convertISOToTime(CallData.updatedAt)}
           />
           {/* <CallItem width={120} left={10} text={"30 min."} /> */}
         </div>
