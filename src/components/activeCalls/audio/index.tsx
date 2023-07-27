@@ -533,7 +533,7 @@ const list = [
   },
 ];
 
-const Audio = ({ data,data1 }: props) => {
+const Audio = ({ data, data1 }: props) => {
   console.log(data);
   const [check, setCheck] = useState(true);
 
@@ -548,7 +548,7 @@ const Audio = ({ data,data1 }: props) => {
           leadId: data.leadId._id,
         })
         .then((e) => {
-          console.log(e.data.result,"bc-23141");
+          console.log(e.data.result, "bc-23141");
           setCallData(e.data.result);
           setCheck(false);
         });
@@ -599,9 +599,7 @@ const Audio = ({ data,data1 }: props) => {
                 width={10}
                 height={10}
               />
-              <p className="text-[#FF965D] text-[14px]">
-                Participant 2:-
-              </p>
+              <p className="text-[#FF965D] text-[14px]">Participant 2:-</p>
             </div>
           </div>
           <Tracker title={"John"} list={list} color={"#304FFD"} />
@@ -695,7 +693,7 @@ export default Audio;
 
 interface props {
   data: Recorded;
-  data1:Root
+  data1: Root;
 }
 
 export interface AudioData {
@@ -761,9 +759,6 @@ export interface Word {
   confidence: number;
   speaker: any;
 }
-
-
-
 
 export interface Root {
   _id: string;
