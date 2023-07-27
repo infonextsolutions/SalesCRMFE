@@ -104,15 +104,17 @@ const Comment = ({ user, content, time, reply, last }: any) => {
    
 </div>
     </div>
+          <div className="flex justify-end">
           <button onClick={()=>{ 
               setReply()
               // console.log(reply)
               setRepVis(false); 
-          }} className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[27vw]">
+          }} className="relative bg-renal-blue mt-[18px] rounded-xl  w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px]">
             <p  className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
               Reply
             </p>
           </button>
+          </div>
         </div>
       )}
       {reply?.length > 0 && (
@@ -193,7 +195,7 @@ const Comments = () => {
   
   return (
     <>
-      <div className="flex w-[100%] h-[800px] flex-col px-[40px] ">
+      <div className="flex w-[100%] h-[800px] flex-col px-[40px] overflow-y-auto ">
         <div className="relative">
 
         <textarea
