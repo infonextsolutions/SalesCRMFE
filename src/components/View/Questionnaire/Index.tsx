@@ -134,17 +134,17 @@ const DropDownEditable = ({ind,setOption,option}:any) => {
     const lastOption = list[list.length - 1];
 
     // Check if the last option's title is not empty
-    if (lastOption.title.trim() !== '') {
+     
       setList((prevList) => [
         ...prevList,
         { value: null, selected: false, title: '' },
       ]);
-    }
   };
 
   const deleteDropdownOption = (index: number) => {
-    setList((prevList) => prevList.filter((_, i) => i !== index));
-    setOption(ind,list);
+    const filtered = list.filter((_, i) => i !== index); 
+    setList(filtered)
+    setOption(ind,filtered);
   };
 
   const updateOption = (index: number, value: string) => {
@@ -193,7 +193,7 @@ const DropDownEditable = ({ind,setOption,option}:any) => {
             className="bg-white flex h-[40px] w-[360px] p-3 rounded-lg"
             onChange={(e) => updateOption(index, e.target.value)}
           />
-          {index > 0 && (
+          {index >= 0 && (
             <button
               className="text-red-500 px-2 py-1 ml-2"
               onClick={() => deleteDropdownOption(index)}
@@ -265,8 +265,9 @@ const McqEditable = ({ind,setOption,option}:any) => {
   };
 
   const deleteOption = (index: number) => {
-    setList((prevList:any) => prevList.filter(({_, i}:any) => i !== index));
-    setOption(ind,list)
+    const filtered = list.filter((_:any,i:any)=>i!==index); 
+    setList(filtered);
+    setOption(ind,filtered); 
   };
 
   const updateOption = (index: number, value: string) => {
@@ -303,7 +304,7 @@ const McqEditable = ({ind,setOption,option}:any) => {
               value={item.title}
               onChange={(e) => updateOption(index, e.target.value)}
             />
-            {list.length > 1 && (
+            {list.length > 0 && (
               <button
                 className="ml-2"
                 onClick={() => deleteOption(index)}
@@ -348,9 +349,9 @@ const CheckboxEdit = ({ind,setOption,option}:any) => {
   };
 
   const deleteOption = (index: number) => {
-    setOptions((prevOptions) =>
-      prevOptions.filter((_, i) => i !== index)
-    );
+    const filtered = options.filter((_, i) => i !== index)
+    setOptions(filtered);
+    setOption(ind,filtered)
   };
 
   const updateOption = (index: number, value: string) => {
@@ -391,7 +392,7 @@ const CheckboxEdit = ({ind,setOption,option}:any) => {
               onChange={(e) => updateOption(index, e.target.value)}
               placeholder="write option"
             />
-            {options.length > 1 && (
+            {options.length > 0 && (
               <button
                 className="t ml-2"
                 onClick={() => deleteOption(index)}
@@ -599,9 +600,9 @@ const [finalTitle,setFinalTitle] = useState("")
             <div className="w-[100%] my-[20px]" key={i}>
               {questionItem.answerType === 'Short Answer' && <TextBox index={i} question={questionItem.question} answer={questionItem.answer} updateAnswer={updateAnswer}/>}
               {questionItem.answerType === 'Long Answer' && <TextBox2 index={i} question={questionItem.question} answer={questionItem.answer} updateAnswer={updateAnswer}/>}
-              {questionItem.answerType === 'Multiple Choice' && <Mcq index={i} question={questionItem.question} option={questionItem.option} updateAnswer={updateAnswer}/>}
+              {questionItem.answerType === 'Single Choice' && <Mcq index={i} question={questionItem.question} option={questionItem.option} updateAnswer={updateAnswer}/>}
               {questionItem.answerType === 'Dropdown' && <Dropdown index={i} question={questionItem.question} option={questionItem.option} updateAnswer={updateAnswer}/>}
-              {questionItem.answerType === 'Checkbox' && <Checkbox index={i} question={questionItem.question} option={questionItem.option} updateAnswer={updateAnswer}/>}
+              {questionItem.answerType === 'Multiple Choice' && <Checkbox index={i} question={questionItem.question} option={questionItem.option} updateAnswer={updateAnswer}/>}
             </div>
           )
         })
@@ -711,15 +712,15 @@ const [finalTitle,setFinalTitle] = useState("")
                 <option value="">Select answer type</option>
                 <option value="Short Answer">Short Answer</option>
                 <option value="Long Answer">Long Answer</option>
-                <option value="Multiple Choice">Multiple Choice</option>
+                <option value="Single Choice">Single Choice</option>
                 <option value="Dropdown">Dropdown</option>
-                <option value="Checkbox">Checkbox</option>
+                <option value="Multiple Choice">Multiple Choice</option>
               </select>
               {/* {questionItem.answerType === 'Short Answer' && <AddText top="10px" index={index} change={updateAnswer} />}
               {questionItem.answerType === 'Long Answer' && <AddTextBox index={index} change={updateAnswer} />} */}
-              {questionItem.answerType === 'Multiple Choice' && <McqEditable ind={index} option={questionItem.option} setOption={setOption} />}
+              {questionItem.answerType === 'Single Choice' && <McqEditable ind={index} option={questionItem.option} setOption={setOption} />}
               {questionItem.answerType === 'Dropdown' && <DropDownEditable ind={index} option={questionItem.option}  setOption={setOption} />}
-              {questionItem.answerType === 'Checkbox' && <CheckboxEdit ind={index} option={questionItem.option}  setOption={setOption} /> } 
+              {questionItem.answerType === 'Multiple Choice' && <CheckboxEdit ind={index} option={questionItem.option}  setOption={setOption} /> } 
             </div>
             <button className="absolute right-1 top-5" onClick={() => deleteQuestion(index)}>
             <Image
