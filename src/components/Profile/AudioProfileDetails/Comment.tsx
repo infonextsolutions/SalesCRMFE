@@ -66,7 +66,7 @@ const Comment = ({ user, content, time, reply, last }: any) => {
     setText(e.target.value);
   }}
   placeholder="Write a comment"
-  className="resize-none w-[95%] h-[160px] bg-[#fff] apperance-none block text-[16px] tracking-wide text-gray-600 border rounded-2xl ml-8 py-4 px-3 focus:outline-none"
+  className="resize-none w-[92%] h-[160px] bg-[#fff] apperance-none block text-[16px] tracking-wide text-gray-600 border rounded-2xl ml-8 py-4 px-3 focus:outline-none"
   />
 <div className="flex absolute gap-x-2 right-5 bottom-2">
   <p className="text-gray-600 font-semibold text-lg cursor-pointer" onClick={()=>setText((prev)=>(prev+"#"))}>#</p>
@@ -109,7 +109,7 @@ const Comment = ({ user, content, time, reply, last }: any) => {
               setReply()
               // console.log(reply)
               setRepVis(false); 
-          }} className="relative bg-renal-blue mt-[18px] rounded-xl  w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px]">
+          }} className="relative bg-renal-blue mt-[18px] rounded-xl  w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] mr-2">
             <p  className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
               Reply
             </p>
@@ -195,7 +195,7 @@ const Comments = () => {
   
   return (
     <>
-      <div className="flex w-[100%] h-[800px] flex-col px-[40px] overflow-y-auto ">
+      <div className="flex w-[100%] h-[800px] flex-col px-[40px]">
         <div className="relative">
 
         <textarea
@@ -269,7 +269,7 @@ const Comments = () => {
             comment
           </p>
         </button>
-      <div className="py-2">
+      <div className="my-4 overflow-y-auto">
         {list.map((item: any, i: any) => {
           return (
             <Comment
