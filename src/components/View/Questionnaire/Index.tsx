@@ -23,7 +23,7 @@ const AddText = ({ top, title, width, change,index }: any) => {
   );
 };
 
-const TextBox = ({index,question,answer}:any) => {
+const TextBox = ({index,question,answer,updateAnswer}:any) => {
   return (
     <>
       <p className="text-[#000] text-[16px] font-medium">
@@ -35,11 +35,13 @@ const TextBox = ({index,question,answer}:any) => {
         className="w-[100%] h-[40px] outline-none mt-[16px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[1px]"
         placeholder="Write your Answer"
         value={answer}
+        onChange={(e)=>updateAnswer(index,e.target.value)}
       />
     </>
   );
 };
-const TextBox2 = ({index,question,answer}:any) => {
+const TextBox2 = ({index,question,answer,updateAnswer}:any) => {
+  const[text,setText] = useState("");
   return (
     <>
        <p className="text-[#000] text-[16px] font-medium">
@@ -49,9 +51,10 @@ const TextBox2 = ({index,question,answer}:any) => {
         name=""
         id=""
         className="w-[100%] h-[150
-          px] outline-none mt-[16px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[10px] px-[13px]"
+          px] outline-none mt-[16px] bg-[#fff] border-[#E8E9EB] border-[2px] rounded-xl px-[10px] font-medium py-[10px]"
         placeholder="Write your Answer" 
         value={answer}
+        onChange={(e)=>updateAnswer(index,e.target.value)}
       />
     </>
   );
@@ -75,6 +78,7 @@ interface Question {
   id: number;
   questionText: string;
   answerType: string;
+  option:Array<Object>;
 }
 
 const NewQuestions: React.FC = () => {
@@ -120,10 +124,11 @@ interface DropdownOption {
   title: string;
 }
 
-const DropDownEditable = ({ind,setOption}:any) => {
-  const [list, setList] = useState<DropdownOption[]>([
-    { value: 1, selected: true, title: "" },
-  ]);
+const DropDownEditable = ({ind,setOption,option}:any) => {
+  // const [list, setList] = useState<DropdownOption[]>([
+  //   { value: 1, selected: true, title: "" },
+  // ]);
+  const [list, setList] = useState<DropdownOption[]>(option);
 
   const addDropdownOption = () => {
     const lastOption = list[list.length - 1];
@@ -139,6 +144,7 @@ const DropDownEditable = ({ind,setOption}:any) => {
 
   const deleteDropdownOption = (index: number) => {
     setList((prevList) => prevList.filter((_, i) => i !== index));
+    setOption(ind,list);
   };
 
   const updateOption = (index: number, value: string) => {
@@ -155,9 +161,9 @@ const DropDownEditable = ({ind,setOption}:any) => {
       <div className="w-[100%] px-[10px] border-[1px] mt-[10px] rounded-xl border-[#ccc]">
         <select
           id="countries"
-          className="outline-none cursor-pointer capitalize text-gray-900 py-[10px] text-sm tracking-wide text-[#3F434A] font-medium block w-full bg-white"
+          className="outline-none cursor-pointer capitalize py-[10px] text-sm tracking-wide text-[#3F434A] font-medium block w-full bg-white"
         >
-          {list.map((item, index) => (
+          {list && list.map((item, index) => (
             <option
               value={item.value?.toString()} // Convert value to string
               key={index}
@@ -250,21 +256,22 @@ const Mcq = ({index,question,option}:any) => {
 
 
 
-const McqEditable = ({ind,setOption}:any) => {
-  const [list, setList] = useState([{ title: "" }]);
+const McqEditable = ({ind,setOption,option}:any) => {
+  const [list, setList] = useState(option); 
   const [selected, setSelected] = useState<number | null>(null);
 
-  const addOption = () => {
-    setList((prevList) => [...prevList, { title: "" }]);
+  const addOption = () => { 
+    setList((prevList:any) => [...prevList, { title: "" }]); 
   };
 
   const deleteOption = (index: number) => {
-    setList((prevList) => prevList.filter((_, i) => i !== index));
+    setList((prevList:any) => prevList.filter(({_, i}:any) => i !== index));
+    setOption(ind,list)
   };
 
   const updateOption = (index: number, value: string) => {
     
-    setList((prevList) => {
+    setList((prevList:any) => {
       const updatedList = [...prevList];
       updatedList[index].title = value;
       setOption(ind,list)
@@ -276,7 +283,8 @@ const McqEditable = ({ind,setOption}:any) => {
     <>
       
       <div className="w-[100%] flex flex-col">
-        {list.map((item, index) => (
+      
+        {list && list.map((item:any, index:any) => (
           <div key={index} className="flex items-center mt-[13px]">
             <div
               className="w-[16px] flex items-center justify-center overflow-hidden p-[2px] h-[16px] rounded-[50%] bg-[#E8E9EB] border-[#e8e9eb] border-[2px] cursor-pointer"
@@ -326,10 +334,11 @@ interface Option {
   selected: boolean;
 }
 
-const CheckboxEdit = ({ind,setOption}:any) => {
-  const [options, setOptions] = useState<Option[]>([
-    { title: "", selected: false }
-  ]);
+const CheckboxEdit = ({ind,setOption,option}:any) => {
+  const [options, setOptions] = useState<Option[]>(option);
+  // const [options, setOptions] = useState<Option[]>([
+  //   { title: "", selected: false }
+  // ]);
 
   const addOption = () => {
     setOptions((prevOptions) => [
@@ -409,9 +418,7 @@ const CheckboxEdit = ({ind,setOption}:any) => {
   );
 };
 const Checkbox = ({index,question,option}:any) => {
-  const [options, setOptions] = useState<Option[]>([
-    { title: "", selected: false }
-  ]);
+  const [options, setOptions] = useState<Option[]>(option);
 
    
 
@@ -435,7 +442,7 @@ const Checkbox = ({index,question,option}:any) => {
       </p>
       <div className="w-full flex flex-col">
 
-        {option && option.map((item:any, index:any) => (
+        {options && options.map((item:any, index:any) => (
           <div key={index} className="flex items-center mt-3">
             <input
               type="checkbox"
@@ -461,13 +468,15 @@ const Questionnaire = () => {
 
 
 const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number | null>(null);
-const [questionList, setQuestionList] = useState<any[]>([{}]);
-// const [questionList, setQuestionList] = useState<any[]>([{}]);
+const [finalQuestionList, setFinalQuestionList] = useState<any[]>([{ question: '', answerType: '',answer:'',option:[{title:"",selected:false}] }]); 
+const [questionList, setQuestionList] = useState<any[]>([{ question: '', answerType: '',answer:'',option:[{title:"",selected:false}] }]);
+
 const [title,setTitle] = useState("")
+const [finalTitle,setFinalTitle] = useState("")
 
   const addQuestion = () => {
   setSelectedQuestionIndex(null);
-  const newQuestion = { question: '', answerType: '',answer:'',option:[] };
+  const newQuestion = { question: '', answerType: '',answer:'',option:[{title:"",selected:false}] };
   setQuestionList([...questionList, newQuestion]);
 };
 
@@ -528,21 +537,23 @@ const [title,setTitle] = useState("")
     { title: "Add option" },
    
   ];
-    const [selectedQ3, setSelectedQ3] = useState(null);
+  const [selectedQ3, setSelectedQ3] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   // const [selected, setSelected] = useState(null);
 
   const openModal = () => {
     setIsModalOpen(true);
+    setFinalQuestionList([]);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpen(false); 
   };
 
   const handleSave = () => {
     // Handle saving the form data
-    console.log(questionList);
+    setFinalQuestionList(questionList); 
+    setFinalTitle(title); 
     closeModal(); // Close the modal after saving
   };
  
@@ -550,7 +561,7 @@ const [title,setTitle] = useState("")
   return (
     <div className="w-[100%] min-h-[50vh]">
       <div className="flex items-center justify-between">
-        <h1 className="text-[32px] font-medium text-[#3F434A]">{title}</h1>
+        <h1 className="text-[32px] font-medium text-[#3F434A]">{finalTitle}</h1>
         <button
           className="ml-auto items-center flex bg-renal-blue pl-[11px] rounded-xl pr-[11px] py-[8px]"
           onClick={openModal}
@@ -583,14 +594,14 @@ const [title,setTitle] = useState("")
         );
       })} */}
       {
-        questionList.map((questionItem:any,i:any)=>{
+        finalQuestionList.map((questionItem:any,i:any)=>{
           return(
             <div className="w-[100%] my-[20px]" key={i}>
-              {questionItem.answerType === 'Short Answer' && <TextBox index={i} question={questionItem.question} answer={questionItem.answer}/>}
-              {questionItem.answerType === 'Long Answer' && <TextBox2 index={i} question={questionItem.question} answer={questionItem.answer}/>}
-              {questionItem.answerType === 'Multiple Choice' && <Mcq index={i} question={questionItem.question} option={questionItem.option} />}
-              {questionItem.answerType === 'Dropdown' && <Dropdown index={i} question={questionItem.question} option={questionItem.option}/>}
-              {questionItem.answerType === 'Checkbox' && <Checkbox index={i} question={questionItem.question} option={questionItem.option}/>}
+              {questionItem.answerType === 'Short Answer' && <TextBox index={i} question={questionItem.question} answer={questionItem.answer} updateAnswer={updateAnswer}/>}
+              {questionItem.answerType === 'Long Answer' && <TextBox2 index={i} question={questionItem.question} answer={questionItem.answer} updateAnswer={updateAnswer}/>}
+              {questionItem.answerType === 'Multiple Choice' && <Mcq index={i} question={questionItem.question} option={questionItem.option} updateAnswer={updateAnswer}/>}
+              {questionItem.answerType === 'Dropdown' && <Dropdown index={i} question={questionItem.question} option={questionItem.option} updateAnswer={updateAnswer}/>}
+              {questionItem.answerType === 'Checkbox' && <Checkbox index={i} question={questionItem.question} option={questionItem.option} updateAnswer={updateAnswer}/>}
             </div>
           )
         })
@@ -706,9 +717,9 @@ const [title,setTitle] = useState("")
               </select>
               {/* {questionItem.answerType === 'Short Answer' && <AddText top="10px" index={index} change={updateAnswer} />}
               {questionItem.answerType === 'Long Answer' && <AddTextBox index={index} change={updateAnswer} />} */}
-              {questionItem.answerType === 'Multiple Choice' && <McqEditable ind={index} setOption={setOption} />}
-              {questionItem.answerType === 'Dropdown' && <DropDownEditable ind={index} setOption={setOption} />}
-              {questionItem.answerType === 'Checkbox' && <CheckboxEdit ind={index} setOption={setOption} /> } 
+              {questionItem.answerType === 'Multiple Choice' && <McqEditable ind={index} option={questionItem.option} setOption={setOption} />}
+              {questionItem.answerType === 'Dropdown' && <DropDownEditable ind={index} option={questionItem.option}  setOption={setOption} />}
+              {questionItem.answerType === 'Checkbox' && <CheckboxEdit ind={index} option={questionItem.option}  setOption={setOption} /> } 
             </div>
             <button className="absolute right-1 top-5" onClick={() => deleteQuestion(index)}>
             <Image
