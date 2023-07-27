@@ -523,22 +523,22 @@ const LeadContainer = ({
     }
   }
 
-  function convertISODateToCustomFormat(isoDate:any) {
+  function convertISODateToCustomFormat(isoDate: any) {
     const dateObj = new Date(isoDate);
-  
+
     // Format the date
     const formattedDate = dateObj.toLocaleDateString("en-GB", {
       day: "numeric",
       month: "short",
       year: "numeric",
     });
-  
+
     // Format the time
     const formattedTime = dateObj.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
     });
-  
+
     return { date: `on ${formattedDate}`, time: formattedTime };
   }
 
@@ -548,7 +548,9 @@ const LeadContainer = ({
       if (dataArray[i].call_start_time) {
         if (isISODateString(dataArray[i].call_start_time)) {
           if (isBeforeOrAfterCurrentTime(dataArray[i].call_start_time)) {
-            const item = convertISODateToCustomFormat(dataArray[i].call_start_time);
+            const item = convertISODateToCustomFormat(
+              dataArray[i].call_start_time
+            );
             console.log(item, 341512);
             filteredArray.push(item);
           }
@@ -578,6 +580,9 @@ const LeadContainer = ({
     return null;
   };
 
+  const contacted: any = LeadData.customerId;
+  const contacts = contacted.contacts;
+  console.log(contacts, "98126192");
   return (
     <>
       <div
@@ -601,7 +606,6 @@ const LeadContainer = ({
             />
         </div> 
         */}
-
           <LeadBox width={30} bool={selectAll} />
           <ExpandingIcon
             change={(e: any) => {
@@ -665,7 +669,13 @@ const LeadContainer = ({
           <LeadItem
             width={150}
             left={20}
-            text={"-"}
+            text={
+              contacts.length > 1
+                ? `${contacts[0].name}, ${contacts[1].name}`
+                : contacts.length > 0
+                ? `${contacts[0].name}`
+                : "-"
+            }
             // text={"Anil L, Paul G, Rekha"}
           />
           <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
