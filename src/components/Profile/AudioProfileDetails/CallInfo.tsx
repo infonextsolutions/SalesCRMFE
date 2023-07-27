@@ -52,6 +52,18 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   const called:any = data1;
   const owner = called.owner;
   const participants = called.participants;
+
+  function convertDatetimeToCustomFormat(dateStr: any) {
+    // Convert the string to a Date object
+    const dt: any = new Date(dateStr);
+
+    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
+    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+
+    return secondsDifference;
+  }
+  console.log(called,"please duvafka")
   return (
     <div>
       {edit && (
@@ -77,7 +89,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
       </div>
       <div className="pl-[30px]">
         <p className="mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id- {data1.callId}
+          Call Id- {convertDatetimeToCustomFormat(data1.updatedAt)}
         </p>
         <div className="text-[#8A9099] mt-[7px] leading-[21px]">
           <p>LEAD ID-{data1.leadId._id}</p>

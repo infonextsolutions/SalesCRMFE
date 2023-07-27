@@ -405,6 +405,15 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     return "at " + hours + ":" + minutes;
   }
 
+
+  function isISOString(inputString:any) {
+    // Define the regular expression pattern for ISO date and time representation
+    const isoPattern = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d{1,3})?)Z?$/;
+  
+    // Test the input string against the ISO pattern
+    return isoPattern.test(inputString);
+  }
+
   return (
     <>
       <div className="flex">
@@ -471,8 +480,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={`${formatDateToCustomFormat(CallData.updatedAt)}`}
-            bottomText={convertISOToTime(CallData.updatedAt)}
+            upperText={`${isISOString(CallData.call_start_time)?formatDateToCustomFormat(CallData.call_start_time):"-"}`}
+            bottomText={isISOString(CallData.call_start_time)?convertISOToTime(CallData.call_start_time):"-"}
           />
           {/* <CallItem width={120} left={10} text={"30 min."} /> */}
         </div>

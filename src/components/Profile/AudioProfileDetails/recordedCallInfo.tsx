@@ -39,6 +39,18 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   //     });
   // };
 
+  
+  function convertDatetimeToCustomFormat(dateStr: any) {
+    // Convert the string to a Date object
+    const dt: any = new Date(dateStr);
+
+    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
+    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+
+    return secondsDifference;
+  }
+
   return (
     <div>
       {/* {edit && (
@@ -60,7 +72,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
       </div> */}
       <div className="pl-[30px]">
         <p className="mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id- {data1?._id}
+          Call Id- {convertDatetimeToCustomFormat(data1.updatedAt)}
         </p>
         <div className="text-[#8A9099] mt-[7px] leading-[21px]">
           <p>LEAD ID-{data1?.leadId}</p>
