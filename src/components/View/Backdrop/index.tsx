@@ -36,7 +36,7 @@ const Backdrop = ({ children, bool }: any) => {
   return (
     <>
       <div
-        className="fixed top-0 left-0 w-[100%] h-[100%] z-100 overflow-y-auto "
+        className="fixed top-0 left-0 w-[100%] h-[100%] z-100 overflow-y-hidden "
         style={{
           zIndex: 1000,
         }}
@@ -52,7 +52,7 @@ const Backdrop = ({ children, bool }: any) => {
         ></div>
         <div
           ref={container}
-          className={`w-[600px] h-[100vh] top-0 right-0 absolute z-100 bg-[#fff] `}
+          className={`w-[600px] h-[100vh] top-0 right-0 absolute  z-100 bg-[#fff] `}
           style={{
             zIndex: 100000,
             transform: "translateX(10000px)",
