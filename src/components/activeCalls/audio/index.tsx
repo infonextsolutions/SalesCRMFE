@@ -600,6 +600,7 @@ const Audio = ({ data, data1 }: props) => {
                 height={10}
               />
               <p className="text-[#FF965D] text-[14px]">Participant 2:-</p>
+
             </div>
           </div>
           <Tracker title={"John"} list={list} color={"#304FFD"} />
