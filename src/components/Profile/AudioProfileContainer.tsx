@@ -27,7 +27,6 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  console.log(data1);
   return (
     <div
       className={`w-[${
@@ -38,7 +37,7 @@ const AudioProfileContainer = ({
       <div className="flex justify-between w-[100%] relative overflow-hidden">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && <CallInfo data1={data1} data={data} check={check} info={info} />}
-          {activeTitle === 1 && <Comments />}
+          {activeTitle === 1 && <Comments data={data}  />}
           {activeTitle === 2 && <Notes  data={data}  />}
         </div>
       </div>
