@@ -51,7 +51,8 @@ const FormEditContainer = ({
                     Twitter: data?.companyId.twitter_url,
                     website_url: data.companyId.company_website_url,
                     industry_type: data.companyId.company_product_category,
-                    lead_owner:data.owners.length>0? data.owners[0].name:"",
+                    lead_owner:
+                      data.owners.length > 0 ? data.owners[0].name : "",
                     Stage: data?.leadStage,
                     Status: data?.leadStatus,
                     Source: data?.source,
@@ -333,11 +334,16 @@ const FormEditContainer = ({
                   email: data.customerId.email,
                   linkedin: "",
                   twitter: "",
-                  // moreContactInfoName: "",
-                  // moreContactInfoDesignation: "",
-                  // moreContactInfoGender: "",
-                  // moreContactInfoPhone: "",
-                  // moreContactInfoEmail: "",
+                  moreContactInfoName: "",
+                  moreContactInfoDesignation: "",
+                  moreContactInfoGender: "",
+                  moreContactInfoPhone: "",
+                  moreContactInfoEmail: "",
+                  moreContactInfoName1: "",
+                  moreContactInfoDesignation1: "",
+                  moreContactInfoGender1: "",
+                  moreContactInfoPhone1: "",
+                  moreContactInfoEmail1: "",
                 }}
                 onSubmit={async (values) => {
                   try {
@@ -350,6 +356,22 @@ const FormEditContainer = ({
                         gender: values.gender,
                         contact: values.phone,
                         email: values.email,
+                        contacts: [
+                          {
+                            name: values.moreContactInfoName,
+                            designation: values.moreContactInfoDesignation,
+                            gender: values.moreContactInfoGender,
+                            contact: values.moreContactInfoPhone,
+                            email: values.moreContactInfoEmail,
+                          },
+                          {
+                            name: values.moreContactInfoName1,
+                            designation: values.moreContactInfoDesignation1,
+                            gender: values.moreContactInfoGender1,
+                            contact: values.moreContactInfoPhone1,
+                            email: values.moreContactInfoEmail1,
+                          },
+                        ],
                       },
                     };
                     const response = await axios.put(
@@ -501,94 +523,186 @@ const FormEditContainer = ({
                       </div>
                     </div>
 
-                    {/* <div className="mb-4">
-                    <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] tracking-[1px]">
-                      More Contact Information - 1 Details
-                    </h2>
-                    <div className="mb-4 flex">
-                      <div className="mr-4">
-                        <label
-                          htmlFor="moreContactInfoName"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Name
-                        </label>
-                        <Field
-                          type="text"
-                          id="moreContactInfoName"
-                          name="moreContactInfoName"
-                          className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
+                    <div className="mb-4">
+                      <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] tracking-[1px]">
+                        More Contact Information - 1 Details
+                      </h2>
+                      <div className="mb-4 flex">
+                        <div className="mr-4">
+                          <label
+                            htmlFor="moreContactInfoName"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Name
+                          </label>
+                          <Field
+                            type="text"
+                            id="moreContactInfoName"
+                            name="moreContactInfoName"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
+                        <div className="mr-4">
+                          <label
+                            htmlFor="moreContactInfoDesignation"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Designation
+                          </label>
+                          <Field
+                            as="select"
+                            id="moreContactInfoDesignation"
+                            name="moreContactInfoDesignation"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="">Select Designation</option>
+                            <option value="Sales Manager">Sales Manager</option>
+                            <option value="Product Manager">
+                              Product Manager
+                            </option>
+                          </Field>
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="moreContactInfoGender"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Gender
+                          </label>
+                          <Field
+                            as="select"
+                            id="moreContactInfoGender"
+                            name="moreContactInfoGender"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </Field>
+                        </div>
                       </div>
-                      <div className="mr-4">
-                        <label
-                          htmlFor="moreContactInfoDesignation"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Designation
-                        </label>
-                        <Field
-                          as="select"
-                          id="moreContactInfoDesignation"
-                          name="moreContactInfoDesignation"
-                          className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        >
-                          <option value="">Select Designation</option>
-                          <option value="designation1">Designation 1</option>
-                          <option value="designation2">Designation 2</option>
-                        </Field>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="moreContactInfoGender"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Gender
-                        </label>
-                        <Field
-                          as="select"
-                          id="moreContactInfoGender"
-                          name="moreContactInfoGender"
-                          className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        >
-                          <option value="">Select Gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                        </Field>
-                      </div>
-                    </div>
 
-                    <div className="mb-4 flex">
-                      <div className="mr-4">
-                        <label
-                          htmlFor="moreContactInfoPhone"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Phone
-                        </label>
-                        <Field
-                          type="text"
-                          id="moreContactInfoPhone"
-                          name="moreContactInfoPhone"
-                          className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="moreContactInfoEmail"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Email
-                        </label>
-                        <Field
-                          type="email"
-                          id="moreContactInfoEmail"
-                          name="moreContactInfoEmail"
-                          className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
+                      <div className="mb-4 flex">
+                        <div className="mr-4">
+                          <label
+                            htmlFor="moreContactInfoPhone"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Phone
+                          </label>
+                          <Field
+                            type="text"
+                            id="moreContactInfoPhone"
+                            name="moreContactInfoPhone"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="moreContactInfoEmail"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Email
+                          </label>
+                          <Field
+                            type="email"
+                            id="moreContactInfoEmail"
+                            name="moreContactInfoEmail"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div> */}
+                    <div className="mb-4">
+                      <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] tracking-[1px]">
+                        More Contact Information - 2 Details
+                      </h2>
+                      <div className="mb-4 flex">
+                        <div className="mr-4">
+                          <label
+                            htmlFor="moreContactInfoName"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Name
+                          </label>
+                          <Field
+                            type="text"
+                            id="moreContactInfoName1"
+                            name="moreContactInfoName1"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
+                        <div className="mr-4">
+                          <label
+                            htmlFor="moreContactInfoDesignation"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Designation
+                          </label>
+                          <Field
+                            as="select"
+                            id="moreContactInfoDesignation1"
+                            name="moreContactInfoDesignation1"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="">Select Designation</option>
+                            <option value="Sales Manager">Sales Manager</option>
+                            <option value="Product Manager">
+                              Product Manager
+                            </option>
+                          </Field>
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="moreContactInfoGender"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Gender
+                          </label>
+                          <Field
+                            as="select"
+                            id="moreContactInfoGender1"
+                            name="moreContactInfoGender1"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </Field>
+                        </div>
+                      </div>
+
+                      <div className="mb-4 flex">
+                        <div className="mr-4">
+                          <label
+                            htmlFor="moreContactInfoPhone"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Phone
+                          </label>
+                          <Field
+                            type="text"
+                            id="moreContactInfoPhone1"
+                            name="moreContactInfoPhone1"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="moreContactInfoEmail"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Email
+                          </label>
+                          <Field
+                            type="email"
+                            id="moreContactInfoEmail1"
+                            name="moreContactInfoEmail1"
+                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
+                      </div>
+                    </div>
                     <div className="mt-16 ">
                       <div className="absolute right-[160px] bottom-[10px] flex">
                         <SimpleButton

@@ -334,7 +334,9 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
         {owner ? owner.name + " (" + owner.designation + ")" : "-"}
       </p>
       <p className="text-renal-blue text-[13px] ml-[2px]  w-[100%] font-medium">
-      {participants ? participants.name + " (" + participants.designation + ")" : "-"}
+        {participants
+          ? participants.name + " (" + participants.designation + ")"
+          : "-"}
       </p>
     </div>
   );
