@@ -334,9 +334,7 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
         {owner ? owner.name + " (" + owner.designation + ")" : "-"}
       </p>
       <p className="text-renal-blue text-[13px] ml-[2px]  w-[100%] font-medium">
-        {participants
-          ? participants.name + " (" + participants.designation + ")"
-          : "-"}
+      {participants ? participants.name + " (" + participants.designation + ")" : "-"}
       </p>
     </div>
   );
@@ -397,8 +395,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const called: any = CallData;
   const owners = called?.owner;
   const participants = called?.participants;
-
-  console.log(called, "Please check here");
 
   function convertISOToTime(isoString: any) {
     const date = new Date(isoString);
