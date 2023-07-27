@@ -5,10 +5,31 @@ import React, { useState } from "react";
 
 const Comment = ({ user, content, time, reply, last }: any) => {
   const [repVis, setRepVis] = useState(false);
+  const [rep,setRep] = useState([{}]);
   const [text, setText] = React.useState("");
   const [emoji,setEmoji]= useState(false);
+  function getCurrentTimeInHoursAndMinutes() {
+    let now = new Date();
+    let hours: any = now.getHours();
+    let minutes: any = now.getMinutes();
+
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    return {
+      time: hours + ":" + minutes,
+      timeInms:now
+    };
+  }
   const setReply=()=>{
-    reply.push(text)
+    setRep((prev)=>[...prev,{time:Date.now(),text:text}])
+    reply.push({time:getCurrentTimeInHoursAndMinutes().time,text:text});
+    setText("");
+    console.log(reply);
   }
   return (
     <div className="border-t-[1px] border-[#ccc] py-[20px]">
@@ -83,8 +104,12 @@ const Comment = ({ user, content, time, reply, last }: any) => {
    
 </div>
     </div>
-          <button className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[27vw]">
-            <p onClick={setReply} className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
+          <button onClick={()=>{ 
+              setReply()
+              // console.log(reply)
+              setRepVis(false); 
+          }} className="relative bg-renal-blue mt-[18px] rounded-xl justify-end w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] left-[27vw]">
+            <p  className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
               Reply
             </p>
           </button>
@@ -97,15 +122,14 @@ const Comment = ({ user, content, time, reply, last }: any) => {
               <>
                 <div className="flex items-center justify-between mt-2 ml-4">
                   <h3 className="text-sm text-black  ml-8  font-medium ">
-                    Micheal
+                    -
                   </h3>
                   <p className="text-sm text-gray-600 mr-10  font-medium  ">
-                    16h ago
+                    {item.time}
                   </p>
                 </div>
                 <p className="ml-12 text-[#3F434A] font-small text-black-500  font-medium ">
-                  Thanks Jane!Thought was the best way to give more clarity
-                  about our product and services.
+                  {item.text}
                 </p>
               </>
             );
@@ -148,7 +172,23 @@ const Comments = () => {
       minutes = "0" + minutes;
     }
 
-    return hours + ":" + minutes;
+    return {
+      time: hours + ":" + minutes,
+      timeInms:now
+    };
+  }
+  function timeToHoursAgo(timestamp:any) {
+    const currentTime = Date.now();
+    const timeDiff = currentTime - timestamp;
+    const hoursAgo = Math.floor(timeDiff / (1000 * 60 * 60));
+  
+    if (hoursAgo === 0) {
+      return "just now";
+    } else if (hoursAgo === 1) {
+      return "1 hour ago";
+    } else {
+      return `${hoursAgo} hours ago`;
+    }
   }
   
   return (
@@ -204,16 +244,18 @@ const Comments = () => {
           onClick={() => {
             if (text.length !== 0) {
               const letsSee = {
-                user: "Jane Cooper",
+                user: "-",
                 content: text,
-                last: "16 hrs ago",
-                time: getCurrentTimeInHoursAndMinutes(),
-                reply: [{
-                        user: "Micheal",
-                        content:
-                          "Thanks Jane!Thought was the best way to give more clarity about our product and services.",
-                        last: "16h ago",
-                      },],
+                time: getCurrentTimeInHoursAndMinutes().time,
+                last: timeToHoursAgo(getCurrentTimeInHoursAndMinutes().timeInms),
+                reply: [
+                  // {
+                  //       user: "Micheal",
+                  //       content:
+                  //         "Thanks Jane!Thought was the best way to give more clarity about our product and services.",
+                  //       last: "16h ago",
+                  //     },
+                    ],
               };
               setList([...list, letsSee]);
               setText("");
