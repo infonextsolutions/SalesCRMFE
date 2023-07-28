@@ -104,7 +104,9 @@ const Dropdown = ({index,question,option}:any) => {
         <select
           id="countries"
           className="outline-none cursor-pointer capitalize text-gray-900 py-[10px] text-sm tracking-wide text-[#3F434A] font-medium  block w-full bg-white"
-        >
+        >{option && <option value="#" selected={true}>
+        Choose Option
+      </option>}
           {option &&  option.map((item: any, i: any) => {
             return (
               <option value={item.value} key={i} selected={item.selected}>
@@ -162,7 +164,11 @@ const DropDownEditable = ({ind,setOption,option}:any) => {
         <select
           id="countries"
           className="outline-none cursor-pointer capitalize py-[10px] text-sm tracking-wide text-[#3F434A] font-medium block w-full bg-white"
-        >
+        > 
+          {list && <option value="#" selected={true}>
+        Choose Option
+      </option>}
+        
           {list && list.map((item, index) => (
             <option
               value={item.value?.toString()} // Convert value to string
