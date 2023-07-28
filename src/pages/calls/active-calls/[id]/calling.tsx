@@ -81,21 +81,20 @@ const AudioProfile = ({ data, scripts }: any) => {
               setCall(true);
             },
           },
-
-          {
-            text: "Take Action ",
-            click: takeAction,
-            dropdown: true,
-            id: 1,
-            icon: "Plus",
-            light: false,
-            list: [
-              { title: "Email", Icon: "Mail" },
-              { title: "Meeting", Icon: "Calendar" },
-              { title: "Notes", Icon: "Tasks" },
-              { title: "Message", Icon: "Chat" },
-            ],
-          },
+          // {
+          //   text: "Take Action ",
+          //   click: takeAction,
+          //   dropdown: true,
+          //   id: 1,
+          //   icon: "Plus",
+          //   light: false,
+          //   list: [
+          //     { title: "Email", Icon: "Mail" },
+          //     { title: "Meeting", Icon: "Calendar" },
+          //     { title: "Notes", Icon: "Tasks" },
+          //     { title: "Message", Icon: "Chat" },
+          //   ],
+          // },
         ]}
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">

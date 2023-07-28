@@ -31,7 +31,7 @@ const Search = ({ change }: any) => {
             type="text"
             onChange={change}
             className="w-[100%] h-[32px] bg-white outline-0 text-black "
-            placeholder="Search contact ..."
+            placeholder="Search Active Call..."
           />
         </div>
         {/* <div

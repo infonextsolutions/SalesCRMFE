@@ -76,7 +76,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
         </Backdrop>
       )}
       <div className="absolute top-[16px] right-0">
-        <Image
+        {/* <Image
           src={getBasicIcon("Edit")}
           className={`w-[16px] h-[16px] cursor-pointer mt-[35px] mr-[30px]`}
           alt=""
@@ -85,14 +85,14 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
           onClick={() => {
             showEdit();
           }}
-        />
+        /> */}
       </div>
       <div className="pl-[30px]">
         <p className="mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Call Id- {convertDatetimeToCustomFormat(data1.updatedAt)}
         </p>
         <div className="text-[#8A9099] mt-[7px] leading-[21px]">
-          <p>LEAD ID-{data1.leadId._id}</p>
+          <p>LEAD ID-{data1.leadId.leadId}</p>
           <p>{data1.leadId.lead_title}</p>
         </div>
         <p className="mt-[20px] text-[#3F434A] leading-[22px] text-[15px] font-medium">
