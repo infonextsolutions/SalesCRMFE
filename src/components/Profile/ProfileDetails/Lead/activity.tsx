@@ -131,7 +131,7 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
                     )}
                   </div>
                   <div>
-                    <Image
+                    {/* <Image
                       src={getBasicIcon("More")}
                       className={`w-[19px]  rotate-90 cursor-pointer opacity-80`}
                       alt=""
@@ -140,7 +140,7 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
                       style={{
                         objectFit: "contain",
                       }}
-                    />
+                    /> */}
                   </div>
                 </div>
               </>

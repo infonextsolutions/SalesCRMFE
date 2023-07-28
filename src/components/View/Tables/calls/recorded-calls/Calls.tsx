@@ -33,6 +33,16 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   };
   const [loading, setLoading] = React.useState(false);
   const [checked, setChecked] = React.useState(true);
+  function convertDatetimeToCustomFormat(dateStr: any) {
+    // Convert the string to a Date object
+    const dt: any = new Date(dateStr);
+
+    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
+    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+
+    return secondsDifference;
+  }
   useEffect(() => {
     if (checked) {
       setLoading(true);
@@ -51,7 +61,16 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           const allItems = await getallItems(pageNumber);
           setItems(allItems);
         }
-        const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
+
+        const filtered = data.filter((e: ActiveCall) => {
+          const idss: any = String(convertDatetimeToCustomFormat(e.updatedAt));
+          const leadid = e.leadId.length > 0 ? e.leadId[0].leadId : "-";
+          const call_title: any = e;
+          const title=  call_title?.active_calls.length > 0
+          ? call_title?.active_calls[0].call_title
+          : ""
+          return idss.includes(search) || leadid.includes(search) ||title.includes(search)
+        });
 
         // const filtered = data;
         // console.log(filtered);
@@ -269,32 +288,36 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               <option value="13">13</option>
             </select>
             <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${(pageNumber + 1) * limit > totalLeads
-                ? totalLeads
-                : (pageNumber + 1) * limit
-                } of ${totalLeads}`}
+              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${
+                (pageNumber + 1) * limit > totalLeads
+                  ? totalLeads
+                  : (pageNumber + 1) * limit
+              } of ${totalLeads}`}
             </p>
           </div>
           <div className="flex justify-center my-[45px] ">
             <div
-              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === 0
-                ? "bg-[#f5f5f5] opacity-30 cursor-auto"
-                : "bg-[#e8ebfd] cursor-pointer"
-                }`}
+              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${
+                pageNumber === 0
+                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
+                  : "bg-[#e8ebfd] cursor-pointer"
+              }`}
               onClick={setFirstPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != 0 ? "svg-blue" : ""
-                  } rotate-180 translate-x-[6px]`}
+                className={`${
+                  pageNumber != 0 ? "svg-blue" : ""
+                } rotate-180 translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != 0 ? "svg-blue" : ""
-                  } rotate-180 translate-x-[-6px]`}
+                className={`${
+                  pageNumber != 0 ? "svg-blue" : ""
+                } rotate-180 translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}
@@ -333,40 +356,47 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               containerClassName={"text-black flex justify-center gap-[8px]"}
               pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
               pageLinkClassName={``}
-              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === 0 ? "bg-[#f5f5f5] opacity-30" : "bg-[#e8ebfd]"
-                }`}
-              previousLinkClassName={`flex justify-center ${pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
-                }`}
-              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === pageCount - 1
-                ? "bg-[#f5f5f5] opacity-30"
-                : "bg-[#e8ebfd]"
-                }`}
-              nextLinkClassName={`flex justify-center ${pageNumber === pageCount - 1 ? "cursor-auto" : ""
-                }`}
+              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
+                pageNumber === 0 ? "bg-[#f5f5f5] opacity-30" : "bg-[#e8ebfd]"
+              }`}
+              previousLinkClassName={`flex justify-center ${
+                pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
+              }`}
+              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
+                pageNumber === pageCount - 1
+                  ? "bg-[#f5f5f5] opacity-30"
+                  : "bg-[#e8ebfd]"
+              }`}
+              nextLinkClassName={`flex justify-center ${
+                pageNumber === pageCount - 1 ? "cursor-auto" : ""
+              }`}
               breakClassName={""}
               breakLinkClassName={""}
               forcePage={pageNumber}
               activeClassName={`bg-renal-blue text-[#fff] rounded-[10px]`}
             />
             <div
-              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === pageCount - 1
-                ? "bg-[#f5f5f5] opacity-30 cursor-auto"
-                : "bg-[#e8ebfd] cursor-pointer"
-                }`}
+              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${
+                pageNumber === pageCount - 1
+                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
+                  : "bg-[#e8ebfd] cursor-pointer"
+              }`}
               onClick={setLastPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""
-                  } translate-x-[6px]`}
+                className={`${
+                  pageNumber != pageCount - 1 ? "svg-blue" : ""
+                } translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""
-                  } translate-x-[-6px]`}
+                className={`${
+                  pageNumber != pageCount - 1 ? "svg-blue" : ""
+                } translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}

@@ -72,45 +72,50 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
 
   const dispatch = useAppDispatch();
 
+  const [submitStart, setSubmitStart] = useState(true);
+
   const submit = async () => {
-    try {
-      if (file) {
-        console.log(leadId);
+    if (submitStart) {
+      setSubmitStart(false);
+      try {
+        if (file) {
+          console.log(leadId);
 
-        console.log({
-          activeCallId: id,
-          title: "file-1",
-          file: file,
-          leadId: leadId,
-          userId: owners,
-        });
-
-        const formData = new FormData();
-        formData.append("userId", owners);
-        formData.append("leadId", leadId);
-        formData.append("title", "file-1");
-        formData.append("file", file);
-        formData.append("activeCallId", id);
-
-        const res = await axios
-          .post(
-            `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
-            formData
-          )
-          .then((e) => {
-            refresh();
-            dispatch(
-              setSuccess({
-                show: true,
-                success: "Note Added Successfully!",
-              })
-            );
-            cancel();
+          console.log({
+            activeCallId: id,
+            title: "file-1",
+            file: file,
+            leadId: leadId,
+            userId: owners,
           });
-        console.log(res.data);
+
+          const formData = new FormData();
+          formData.append("userId", owners);
+          formData.append("leadId", leadId);
+          formData.append("title", "file-1");
+          formData.append("file", file);
+          formData.append("activeCallId", id);
+
+          const res = await axios
+            .post(
+              `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
+              formData
+            )
+            .then((e) => {
+              refresh();
+              dispatch(
+                setSuccess({
+                  show: true,
+                  success: "Note Added Successfully!",
+                })
+              );
+              cancel();
+            });
+          console.log(res.data);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 

@@ -32,6 +32,17 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [loading, setLoading] = React.useState(false);
   const [checked, setChecked] = useState(true);
 
+  function convertDatetimeToCustomFormat(dateStr: any) {
+    // Convert the string to a Date object
+    const dt: any = new Date(dateStr);
+
+    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
+    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+
+    return secondsDifference;
+  }
+
   useEffect(() => {
     if (checked) {
       setLoading(true);
@@ -51,15 +62,15 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           setItems(allItems);
         }
         console.log("data: I am here", data);
-        const filtered = data.filter(
-          (e: ActiveCall) =>
-            e._id.includes(search) ||
-            e.call_title?.includes(search) ||
-            e.customerId.name?.includes(search) ||
-            e.callId?.includes(search) ||
-            e.leadId?.leadId?.includes(search) ||
-            e.leadId?.customer_name?.includes(search)
-        );
+        const filtered = data.filter((e: ActiveCall) => {
+          const idss: any = String(convertDatetimeToCustomFormat(e.updatedAt));
+          const leadid = e.leadId?.leadId;
+          return (
+            idss.includes(search) ||
+            leadid.includes(search) ||
+            e.call_title.includes(search)
+          );
+        });
         filtered.reverse();
 
         // const filtered = data;
