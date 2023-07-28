@@ -132,7 +132,17 @@ const CallItem = ({
   return (
     <div
       className={`flex items-center  h-[20px] shrink-0`}
-      style={{ width: width, marginLeft: left }}
+      style={{ width: width, marginLeft: left, cursor: img && "pointer" }}
+      onClick={() => {
+        if (img) {
+          if (click) {
+            router.push(route);
+          }
+          if (onClick) {
+            onClick();
+          }
+        }
+      }}
     >
       {img && (
         <Image
@@ -208,8 +218,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -438,8 +449,9 @@ const ParticipantsHover = ({
         return (
           <p
             key={i}
-            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-renal-blue"
-              } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${
+              i === 0 ? "text-[#000] mt-[19px]" : "text-renal-blue"
+            } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -472,7 +484,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const [checked, setChecked] = useState(true);
   const [LeadData, setLeadData] = useState<any>(example);
   const GetLeadData = () => {
-    if (CallData.leadId.length>0) {
+    if (CallData.leadId.length > 0) {
       axios
         .get(
           `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
@@ -481,13 +493,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           console.log(e);
           setChecked(false);
           setLeadData(e.data.result);
-        }).catch((e)=>{
-          console.log(e,"err-12");
         })
+        .catch((e) => {
+          console.log(e, "err-12");
+        });
     }
   };
 
-  console.log("lead data-1231",CallData);
+  console.log("lead data-1231", CallData);
 
   React.useEffect(() => {
     if (checked) {
@@ -526,20 +539,20 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       return "-";
     }
   }
-  console.log("calldata:",CallData)
+  console.log("calldata:", CallData);
 
-  function convertDatetimeToCustomFormat(dateStr:any) {
+  function convertDatetimeToCustomFormat(dateStr: any) {
     // Convert the string to a Date object
-    const dt:any = new Date(dateStr);
-  
+    const dt: any = new Date(dateStr);
+
     // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
-    const referenceDate:any = new Date('1400-01-01T00:00:00Z');
+    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
     const secondsDifference = Math.floor((dt - referenceDate) / 1000);
-  
+
     return secondsDifference;
   }
 
-  const call_title:any = CallData;
+  const call_title: any = CallData;
 
   return (
     <>
@@ -568,16 +581,22 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             left={20}
             color={"#000"}
             // text={"Discussion on PX features"}
-            text={call_title?.active_calls.length>0?call_title?.active_calls[0].call_title:"" }
+            text={
+              call_title?.active_calls.length > 0
+                ? call_title?.active_calls[0].call_title
+                : ""
+            }
             click={true}
-          // route={`${pathname}/${id}/audio-call`}
+            // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
             left={10}
-            text={CallData.leadId.length>0 ?CallData.leadId[0].leadId:"-"}
+            text={CallData.leadId.length > 0 ? CallData.leadId[0].leadId : "-"}
             click={true}
-            route={`/sales/open/${CallData.leadId.length>0 && CallData.leadId[0]._id}/lead-profile`}
+            route={`/sales/open/${
+              CallData.leadId.length > 0 && CallData.leadId[0]._id
+            }/lead-profile`}
             color={"#000"}
           />
           <CallItem
@@ -608,9 +627,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
-                }`}
-            // >
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
+                true ? "text-[#3F434A]" : "text-[#8A9099]"
+              }`}
+              // >
             >
               -
               {/* {LeadData.owners?.map((item:any, i:any) => {
@@ -643,7 +663,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               dispatch(setCurrent(1));
             }}
             click={true}
-            route={`${pathname}/${id}/video-call`}
+            route={`${pathname}/${id}/audio-call`}
             text={`${CallData.comments.length}`}
           />
           <CallItem width={110} left={20} text={"Read Summary"} />

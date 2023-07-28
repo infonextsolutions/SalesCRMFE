@@ -106,7 +106,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             </p>
           </div>
           <div className="w-[40px] h-[100%] flex items-center justify-center">
-            <Image
+            {/* <Image
               src={getBasicIcon("Edit")}
               className={`cursor-pointer`}
               alt="Edit"
@@ -118,7 +118,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
               onClick={() => {
                 showEdit();
               }}
-            />
+            /> */}
           </div>
         </div>
       </div>

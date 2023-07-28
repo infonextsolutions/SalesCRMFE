@@ -217,6 +217,21 @@ const Attachements = ({ data }: any) => {
         });
     }, 1000);
   };
+  const UpdateData2 = async () => {
+    setTimeout(async () => {
+      const response = await axios
+        .get(
+          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data._id}`
+        )
+        .then((e) => {
+          console.log(e.data);
+          setAttachments(e.data.result.attachments);
+        })
+        .catch((e) => {
+          console.log(e, "error occured");
+        });
+    }, 2000);
+  };
   const dispatch = useAppDispatch();
 
   return (
@@ -288,16 +303,15 @@ const Attachements = ({ data }: any) => {
                     val
                   )
                   .then((e) => {
-                    UpdateData();
+                    UpdateData2();
                     dispatch(
                       setSuccess({
                         show: true,
                         success: "Deleted Successfully!",
                       })
                     );
-                  }).catch((e)=>{
-
                   })
+                  .catch((e) => {});
               }}
               refresh={() => {
                 UpdateData();

@@ -442,7 +442,7 @@ const ActiveCall = ({
       /> */}
       <AddText
         title="Call Title"
-        place={"Shraddha P."}
+        place={"Call Title"}
         change={(e: any) => {
           setData({ ...data, call_title: e });
         }}
@@ -460,7 +460,7 @@ const ActiveCall = ({
         top={20}
         list={[
           {
-            title: "Choose Outcome",
+            title: "Choose Owner",
             val: 0,
             selected: true,
           },
@@ -475,7 +475,7 @@ const ActiveCall = ({
         top={20}
         list={[
           {
-            title: "Choose Outcome",
+            title: "Choose Participants",
             val: 0,
             selected: true,
           },

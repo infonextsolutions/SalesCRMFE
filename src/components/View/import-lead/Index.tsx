@@ -1,9 +1,13 @@
+import { setError, setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
+import Dropzone from "react-dropzone";
 
 const Drag = () => {
   return (
@@ -117,7 +121,7 @@ const ErrorNotFound = () => {
   );
 };
 
-const ErrorFound = () => {
+const ErrorFound = ({ error }: any) => {
   return (
     <div className="flex flex-col items-center">
       <Image
@@ -128,7 +132,7 @@ const ErrorFound = () => {
         alt=""
       />
       <p className="text-[16px] mt-[10px]  text-[#3F434A] tracking-wide font-medium">
-        File contains errors or is not in proper format.
+        {error}
       </p>
     </div>
   );
@@ -160,16 +164,84 @@ const Col = ({ title, bold, width }: any) => {
 
 const Step1 = ({ next, cancel }: any) => {
   const [activeBox, setActiveBox] = useState(2);
+  const [file, setFile] = useState();
+  const [dropzoneActive, setDropzoneActive] = useState(false);
+  const inputRef = React.useRef(null);
 
+  function isExcelOrCSVFile(fileName: any) {
+    // Convert the file name to lowercase to handle case-insensitive comparisons
+    const lowerCaseFileName = fileName.toLowerCase();
+
+    // Check if the file has a valid extension for Excel or CSV
+    const validExtensions = [".xls", ".xlsx", ".csv"];
+
+    for (const ext of validExtensions) {
+      if (lowerCaseFileName.endsWith(ext)) {
+        return true;
+      }
+    }
+
+    // If no valid extension is found, return false
+    return false;
+  }
+
+  const [error, setError1] = useState({
+    show: false,
+    error: "",
+  });
+
+  const dispatch = useAppDispatch();
+
+  const handleDrop = function (e: any) {
+    console.log(e, "please check here");
+    if (isExcelOrCSVFile(e[0].name)) {
+      // setFile(e[0]);
+      console.log(e[0]);
+      axios
+        .post(
+          "https://testsalescrm.nextsolutions.in/api/leads/upload/afakfabk",
+          {
+            file: e[0],
+          }
+        )
+        .then((e) => {
+          dispatch(
+            setSuccess({
+              show: true,
+              success: "Reply added Successfully!",
+            })
+          );
+        })
+        .catch((e) => {
+          dispatch(
+            setError({
+              show: true,
+              error: "Error Occured!",
+            })
+          );
+        });
+    } else {
+      setError1({
+        show: true,
+        error: "wrong file type,only submit excel or csv files only",
+      });
+      setTimeout(() => {
+        setError1({
+          show: false,
+          error: "wrong file type,only submit excel or csv files only",
+        });
+      }, 1000);
+    }
+  };
   return (
     <div className="w-[100%] h-[100vh] flex flex-col justify-between">
       <div className="w-[100%]">
         <h1 className="text-[#3f434a] text-[31px] font-medium mb-[8px] tracking-[1px]">
           Import Lead
         </h1>
-        <h3 className="text-[#3f434a] text-[22px] font-medium m-[0] tracking-[1px]">
+        {/* <h3 className="text-[#3f434a] text-[22px] font-medium m-[0] tracking-[1px]">
           Step 1 of 3
-        </h3>
+        </h3> */}
         <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px]">
           Import leads using own file or use{" "}
           <span className="text-renal-blue underline cursor-pointer">
@@ -177,26 +249,39 @@ const Step1 = ({ next, cancel }: any) => {
           </span>
           .
         </p>
-        <div
-          className="w-[100%] bg-[#f8f8f8] h-[200px] cursor-grab mt-[40px] relative rounded-2xl border-dashed border-[1px] border-[#d2d4d7] flex flex-col justify-center items-center"
-          onClick={() => {
-            const random = activeBox === 0 ? 1 : activeBox === 2 ? 0 : 2;
-            setActiveBox(random);
-          }}
+        <Dropzone
+          onDrop={handleDrop}
+          // onDragEnter={() => setDropzoneActive(true)}
+          // onDragLeave={() => setDropzoneActive(false)}
+          // accept={{
+          //   "application/pdf": [],
+          // }}
+          onDragEnter={() => setDropzoneActive(true)}
+          onDragLeave={() => setDropzoneActive(false)}
+          accept={{}}
         >
-          <Drag />
-          {/* {activeBox === 1 && <Loading />}
-          {activeBox === 2 && <Finished />} */}
-        </div>
-        <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px]">
+          {({ getRootProps, getInputProps }) => (
+            <div
+              {...getRootProps()}
+              className="w-[100%] bg-[#f8f8f8] h-[200px] cursor-pointer mt-[40px] relative rounded-2xl border-dashed border-[1px] border-[#d2d4d7] flex flex-col justify-center items-center"
+            >
+              <input
+                // accept="application/pdf"
+                {...getInputProps()}
+              />
+              {error.show ? <ErrorFound error={error.error} /> : <Drag />}
+            </div>
+          )}
+        </Dropzone>
+        {/* <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px]">
           Check if your file has data in the{" "}
           <span className="text-renal-blue underline cursor-pointer">
             mandatory fields.
           </span>
-        </p>
+        </p> */}
       </div>
       <div>
-        <div>
+        {/* <div>
           <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
             Owner
           </p>
@@ -225,7 +310,7 @@ const Step1 = ({ next, cancel }: any) => {
             <option value="FR">France</option>
             <option value="DE">Germany</option>
           </select>
-        </div>
+        </div> */}
         <div className="w-[100%] flex my-[30px] ">
           <SimpleButton
             theme={1}
@@ -516,17 +601,12 @@ const ImportLead = ({ cancel }: any) => {
 
   return (
     <div className="w-[100%] h-[100vh] custom-scroll-black pt-[30px] px-[40px] flex flex-col justify-between">
-      {steps === 0 && (
-        <Step1
-          next={() => {
-            setSteps(1);
-          }}
-          cancel={() => {
-            cancel();
-          }}
-        />
-      )}
-      {steps === 1 && (
+      <Step1
+        cancel={() => {
+          cancel();
+        }}
+      />
+      {/* {steps === 1 && (
         <Step2
           next={() => {
             setSteps(2);
@@ -545,7 +625,7 @@ const ImportLead = ({ cancel }: any) => {
             cancel();
           }}
         />
-      )}
+      )} */}
     </div>
   );
 };

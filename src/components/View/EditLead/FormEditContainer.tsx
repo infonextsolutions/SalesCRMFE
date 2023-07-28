@@ -43,7 +43,6 @@ const FormEditContainer = ({
                 </h1>
                 <Formik
                   initialValues={{
-                    leadId: data?.leadId,
                     lead_title: data?.lead_title,
                     company_name: data?.companyId.company_name,
                     company_location: data.companyId.company_location,
@@ -60,7 +59,6 @@ const FormEditContainer = ({
                   onSubmit={async (values) => {
                     try {
                       const val = {
-                        leadId: values.leadId,
                         lead_title: values.lead_title,
                         _id: data._id,
                         companyId: {
@@ -102,32 +100,6 @@ const FormEditContainer = ({
                   {({ handleSubmit }) => (
                     <Form className="custom-scroll-black w-[100%] flex justify-between pr-[20px] pb-[50px]">
                       <div className="w-[55%]">
-                        <div className="flex items-center justify-between">
-                          <div className="w-[30%]">
-                            <label className="font-medium" htmlFor="leadId">
-                              Lead Id
-                            </label>
-                            <Field
-                              type="text"
-                              name="leadId"
-                              id="leadId"
-                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                              placeholder="Lead Id"
-                            />
-                          </div>
-                          <div className="w-[65%]">
-                            <label className="font-medium" htmlFor="lead_title">
-                              Lead Title
-                            </label>
-                            <Field
-                              type="text"
-                              name="lead_title"
-                              id="lead_title"
-                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                              placeholder="Lead title"
-                            />
-                          </div>
-                        </div>
                         <div className="flex mt-[10px] items-center justify-between">
                           <div className="w-[48%]">
                             <label
@@ -213,7 +185,7 @@ const FormEditContainer = ({
                         </div>
                       </div>
                       <div className="w-[40%]">
-                        <div className="flex items-start justify-center">
+                        {/* <div className="flex items-start justify-center">
                           <div className="flex flex-col items-center relative">
                             <div className="font-medium">Company Logo</div>
 
@@ -239,6 +211,20 @@ const FormEditContainer = ({
                                 // onChange={handleLogoChange}
                               />
                             </div>
+                          </div>
+                        </div> */}
+                        <div className="flex items-center justify-between">
+                          <div className="w-[100%]">
+                            <label className="font-medium" htmlFor="lead_title">
+                              Lead Title
+                            </label>
+                            <Field
+                              type="text"
+                              name="lead_title"
+                              id="lead_title"
+                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                              placeholder="Lead title"
+                            />
                           </div>
                         </div>
                         <div className="mt-6">

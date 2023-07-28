@@ -311,7 +311,7 @@ const EmailPage = ({
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
-        New Email
+        Send Email
       </h1>
       <div
         className="w-[30px] h-[30px] cursor-pointer rounded-xl absolute top-[30px] right-[30px] flex items-center justify-center bg-[#f8f8f8]"
@@ -327,8 +327,8 @@ const EmailPage = ({
           alt=""
         />
       </div>
-      <AddText title="Company Name*" place={"ABC Corp."} />
-      <AddText title="Client POC*" place={"Shraddha P."} />
+      <AddText title="Company Name*" place={"Company Name"} />
+      <AddText title="Client POC*" place={"Client Name"} />
       <SendEmail
         change={(e: any) => {
           setSender(e);

@@ -28,7 +28,8 @@ const Profile = ({ data }: any) => {
 
       })
   };
-  const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS", "COACHING"];
+  const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS"
+];
 
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);

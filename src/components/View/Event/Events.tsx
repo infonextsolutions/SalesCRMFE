@@ -356,7 +356,7 @@ const Events = ({ cancel }: any) => {
         setEventType={setEventType}
         list={[
           {
-            title: "Choose Outcome",
+            title: "Choose Type",
             val: 0,
             selected: true,
           },
