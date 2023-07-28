@@ -28,8 +28,8 @@ const Navbar = () => {
         width={20}
         height={40}
       />
-      <div className="flex w-[300px] h-[100%] pt-[14px] pb-[10px] justify-between mr-[50px]">
-        <Image
+      <div className="flex w-[220px] h-[100%] pt-[14px] pb-[10px] justify-between mr-[50px]">
+        {/* <Image
           src={getBasicIcon("Search")}
           className="pt-[7px] pb-[7px] cursor-pointer mx-[10px]"
           alt=""
@@ -50,7 +50,7 @@ const Navbar = () => {
           }}
           width={20}
           height={40}
-        />
+        /> */}
         <div className="flex w-[400px] justify-between items-center border-l-[1px] ml-[10px] border-[#dcd4d4] ">
           <Image
             className="ml-[20px] h-[100%] cursor-pointer"

@@ -31,7 +31,7 @@ const LeadProfileContainer = ({
         <div className="text-black text-[14px] leading-[21px] mt-[25px] w-[100%] tracking-wide  ">
           {activeTitle === 0 && (
             <>
-              <div className="absolute top-[35px] right-[30px]">
+              {/* <div className="absolute top-[35px] right-[30px]">
                 <Image
                   src={getBasicIcon("Edit")}
                   className={`w-[16px] h-[16px] cursor-pointer`}
@@ -42,7 +42,7 @@ const LeadProfileContainer = ({
                     objectFit: "contain",
                   }}
                 />
-              </div>
+              </div> */}
               <div className="">
                 {/* <p className="mt-[20px] text-[#3F434A] font-medium">
                   Last Activity

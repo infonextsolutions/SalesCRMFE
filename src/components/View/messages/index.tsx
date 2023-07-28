@@ -56,8 +56,8 @@ const Messages = ({ cancel }: any) => {
           alt=""
         />
       </div>
-      <AddText title="Company Name*" place={"ABC Corp."} />
-      <AddText title="Client POC*" place={"Shraddha P."} />
+      <AddText title="Company Name*" place={"Company Name"} />
+      <AddText title="Client POC*" place={"Client POC"} />
       <TextBox title="Dear," place={"Type something"} />
       <p className="w-[100%] text-[#8A9099] text-[14px] mt-[4px] font-medium tracking-wide mb-[8px]">
         From 365Sales

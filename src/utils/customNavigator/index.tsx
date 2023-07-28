@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Navigator = ({ list, current, callback }: NavigatorProps) => {
   // console.log(list);
-  const [activeTitle, setActiveTitle] = useState(0);
+  const [activeTitle, setActiveTitle] = useState(current);
   const handleOnClick = (id: any) => {
     setActiveTitle(id);
     callback(id);

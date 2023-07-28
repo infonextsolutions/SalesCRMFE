@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   getBasicIcon,
   getRoundedAvatar,
@@ -57,10 +57,68 @@ const ProfilePage = ({ data1, updated }: any) => {
           console.log(e);
         });
       updated();
-    },1000);
+    }, 1000);
   };
 
   console.log("data:", data);
+  const contacted: any = data.customerId;
+  const contacts = contacted.contacts;
+
+  console.log(contacts, "Pejvfaek");
+
+  const [Activities, setActivities] = useState({
+    call: 0,
+    email: 0,
+    notes: 0,
+  });
+
+  const [check, setCheck] = useState(false);
+
+  const data2: any = data;
+
+  useEffect(() => {
+    if (!check) {
+      if (data2?.activityId) {
+        if (data2?.activityId.history) {
+          const history = data2?.activityId.history;
+          let calls = 0;
+          let emails = 0;
+          let notes = 0;
+          for (let i = 0; i < history.length; i++) {
+            console.log(history[i], "effeqw");
+            if (history[i]?.type) {
+              if (history[i].type === "note") {
+                notes++;
+              } else if (history[i].type === "email") {
+                emails++;
+              }
+            } else {
+              calls++;
+            }
+          }
+          setActivities({
+            call: calls,
+            notes: notes,
+            email: emails,
+          });
+        }
+      }
+      setCheck(true);
+    }
+  });
+
+  function formatDateFromISOString(isoString:any) {
+    const dateObject = new Date(isoString);
+    const hours = String(dateObject.getHours()).padStart(2, '0');
+    const minutes = String(dateObject.getMinutes()).padStart(2, '0');
+    const day = dateObject.getDate();
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = monthNames[dateObject.getMonth()];
+    const year = dateObject.getFullYear();
+  
+    return `${hours}:${minutes}, ${day}, ${month}, ${year}`;
+  }
+
   return (
     <>
       {edit && (
@@ -112,7 +170,7 @@ const ProfilePage = ({ data1, updated }: any) => {
         </h3>
         <ul className="mt-2 mb-10 ml-[1px]">
           <li className="px-2 mt-4">
-            <strong className="font-medium text-[12px]  mr-1 text-[#8A9099] -500">
+            <strong className="text-[12px]  mr-1 text-[#000] font-bold -500">
               COMPANY NAME
             </strong>
             <p className="block text-black">{data.companyId.company_name}</p>
@@ -128,7 +186,12 @@ const ProfilePage = ({ data1, updated }: any) => {
               </a> */}
 
                 <button
-                // onClick={openWebsite}
+                  onClick={() => {
+                    if (data.companyId.company_website_url) {
+                      window.open(data.companyId.company_website_url, "_blank");
+                    }
+                  }}
+                  // onClick={openWebsite}
                 >
                   {data.companyId.company_website_url}
                 </button>
@@ -225,7 +288,7 @@ const ProfilePage = ({ data1, updated }: any) => {
             <strong className="font-medium mr-1 text-black">
               Lead Updated on
             </strong>
-            <p className="block text-[#000] ">-</p>
+            <p className="block text-[#000] ">{formatDateFromISOString(data2?.updatedAt)}</p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1 text-black">
@@ -233,10 +296,10 @@ const ProfilePage = ({ data1, updated }: any) => {
             </strong>
           </li>
           <div
-            className={`flex h-[20px] items-center justify-between px-2 mt-[10px] shrink-0`}
+            className={`flex h-[20px] items-center  px-2 mt-[10px] shrink-0`}
             style={{ width: "width", marginLeft: "left" }}
           >
-            <div className="flex">
+            <div className="flex mr-[8px]">
               <Image
                 src={getBasicIcon("Phone")}
                 alt=""
@@ -247,22 +310,9 @@ const ProfilePage = ({ data1, updated }: any) => {
                   objectFit: "contain",
                 }}
               />
-              <p className="text-black">-</p>
+              <p className="text-black">{Activities.call}</p>
             </div>
-            <div className="flex">
-              <Image
-                src={getBasicIcon("Attachment")}
-                alt=""
-                className="mr-[3px] svg-grey cursor-pointer"
-                width={20}
-                height={30}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <p className="text-black">-</p>
-            </div>
-            <div className="flex">
+            <div className="flex mr-[8px]">
               <Image
                 src={getBasicIcon("Chat")}
                 alt=""
@@ -275,7 +325,7 @@ const ProfilePage = ({ data1, updated }: any) => {
               />
               <p className="text-black">-</p>
             </div>
-            <div className="flex">
+            <div className="flex mr-[8px]">
               <Image
                 src={getBasicIcon("Mail")}
                 alt=""
@@ -286,9 +336,9 @@ const ProfilePage = ({ data1, updated }: any) => {
                   objectFit: "contain",
                 }}
               />
-              <p className="text-black">-</p>
+              <p className="text-black">{Activities.email}</p>
             </div>
-            <div className="flex">
+            <div className="flex mr-[8px]">
               <Image
                 src={getBasicIcon("Calendar")}
                 alt=""
@@ -301,7 +351,7 @@ const ProfilePage = ({ data1, updated }: any) => {
               />
               <p className="text-black">-</p>
             </div>
-            <div className="flex">
+            <div className="flex mr-[8px]">
               <Image
                 src={getBasicIcon("Tasks")}
                 alt=""
@@ -312,7 +362,7 @@ const ProfilePage = ({ data1, updated }: any) => {
                 }}
                 className="mr-[3px] svg-grey cursor-pointer"
               />
-              <p className="text-black">-</p>
+              <p className="text-black">{Activities.notes}</p>
             </div>
           </div>
         </ul>
@@ -350,7 +400,7 @@ const ProfilePage = ({ data1, updated }: any) => {
             <strong className="font-medium text-sm mr-1 text-[#000] -500">
               GENDER
             </strong>
-            <a href="tel:+821023456789" className="block text-black">
+            <a href="tel:+821023456789" className="block capitalize text-black">
               {data.customerId.gender}
             </a>
           </li>
@@ -413,7 +463,7 @@ const ProfilePage = ({ data1, updated }: any) => {
         <div className="py-1"></div>
         <div className="flex items-center justify-between mt-2 ml-3">
           <h3 className="text-sm font-medium text-black">OTHER CONTACTS</h3>
-          <Image
+          {/* <Image
             src={getBasicIcon("Plus")}
             className="w-5 h-5 ml-2 mr-2"
             alt=""
@@ -422,38 +472,49 @@ const ProfilePage = ({ data1, updated }: any) => {
             style={{
               objectFit: "contain",
             }}
-          />
+          /> */}
         </div>
         <div className="py-3"></div>
-        <ul
-          role="list"
-          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-        >
-          <li>
-            <div className="flex items-center gap-x-3 mr-3">
-              <Image
-                className="h-12 w-10 rounded-full ml-2"
-                src={getRoundedAvatar(6, 30)}
-                alt=""
-                width={64}
-                height={48}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <div>
-                <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                  -
-                </h4>
-                <a
-                  href="#0"
-                  className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
-                >
-                  -
-                </a>
-              </div>
-            </div>
-          </li>
+        <ul role="list" className="">
+          {contacts.map((item: any, i: any) => {
+            function random_number_between_1_and_7() {
+              // Generate a random number between 0 and 1 (exclusive)
+              const randomNum = Math.random();
+
+              // Scale the number to the range of 1 to 7
+              const scaledNum = Math.floor(randomNum * 7) + 1;
+
+              return scaledNum;
+            }
+            const random = random_number_between_1_and_7();
+            return (
+              <li className="mb-[10px]">
+                <div className="flex items-center gap-x-3 mr-3">
+                  <Image
+                    className="h-12 w-10 rounded-full ml-2"
+                    src={getRoundedAvatar(random, 30)}
+                    alt=""
+                    width={64}
+                    height={48}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                  <div>
+                    <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
+                      {item.name}
+                    </h4>
+                    <a
+                      href="#0"
+                      className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
+                    >
+                      {item.designation}
+                    </a>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ul>
         <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
       </div>
