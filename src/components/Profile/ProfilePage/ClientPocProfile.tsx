@@ -246,7 +246,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             }
             const random = random_number_between_1_and_7();
             return (
-              <li className="mb-[10px]">
+              <li className="mb-[10px]" key={i} >
                 <div className="flex items-center gap-x-3 mr-3">
                   <Image
                     className="h-12 w-10 rounded-full ml-2"
