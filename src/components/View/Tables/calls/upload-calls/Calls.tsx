@@ -252,7 +252,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           <Spinner />
         ) : (
           Leads != null &&
-          Leads?.map((item: ActiveCall, i: any) => {
+          Leads?.map((item: any, i: any) => {
             return (
               <CallContainer
                 key={item._id}
