@@ -24,6 +24,7 @@ const menuOptions = [
       { title: "Recorded Calls", route: "recorded-calls" },
       // { title: "Call Library", route: "call-library" },
       { title: "Active Calls", route: "active-calls" },
+      { title: "Upload Calls", route: "upload-calls" },
     ],
     icon: "Phone",
   },
