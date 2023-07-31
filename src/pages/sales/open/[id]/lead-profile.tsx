@@ -142,7 +142,7 @@ const Profile = ({ data }: any) => {
               UpdateData();
             }}
             cancel={cancelEmails}
-            data={data1.result.owners}
+            data={data1.result}
           />
         </Backdrop>
       )}
