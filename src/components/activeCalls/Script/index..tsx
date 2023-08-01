@@ -174,6 +174,7 @@ const ScriptList = ({
     // Format the date and time as desired
     return `${day} ${month} ${year}, ${timeStr}`;
   }
+  
   function getTitleFromURL(url: any) {
     const parts = url.split("/");
     const title = parts[parts.length - 1];
