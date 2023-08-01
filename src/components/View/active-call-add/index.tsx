@@ -464,6 +464,7 @@ const ActiveCall = ({
             val: 0,
             selected: true,
           },
+          
           ...list,
         ]}
         change={(e: any) => {

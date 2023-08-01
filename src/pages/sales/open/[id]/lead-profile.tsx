@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
 import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
@@ -13,7 +13,7 @@ import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 
 const Profile = ({ data }: any) => {
-  console.log("data10", data);
+  // console.log("data10", data);
 
   const [data1, setData] = useState(data);
 
@@ -117,6 +117,7 @@ const Profile = ({ data }: any) => {
       showMessages();
     }
   };
+ 
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
@@ -159,6 +160,7 @@ const Profile = ({ data }: any) => {
               UpdateData();
             }}
             companyId={data1.result.companyId._id}
+            lead={data1.result}
             customerId={data1.result.customerId._id}
           />
         </Backdrop>
