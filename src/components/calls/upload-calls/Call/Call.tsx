@@ -489,12 +489,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     return secondsDifference;
   }
 
-  function isoToCustomDate(isoDate:any) {
+  function isoToCustomDate(isoDate: any) {
     try {
       // Parse the ISO date string into a Date object
       const dateObj = new Date(isoDate);
       // Format the Date object into the desired custom format
-      const options:any = { day: 'numeric', month: 'long', year: 'numeric' };
+      const options: any = { day: "numeric", month: "long", year: "numeric" };
       const formattedDate = dateObj.toLocaleDateString(undefined, options);
       return formattedDate;
     } catch (error) {
@@ -522,7 +522,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
             click={true}
-            route={`${pathname}/${id}/audio-call`}
+            route={`${pathname}/${CallData.transId}/audio-call`}
           />
           <CallItem
             width={130}
@@ -603,76 +603,75 @@ interface CallProps {
   selectAll: any;
 }
 
-
 export interface Root {
-  auto_highlights_result: AutoHighlightsResult
-  callTitle: string
-  _id: string
-  audio_url: string
-  transId: string
-  language_model: string
-  acoustic_model: string
-  language_code: string
-  status: string
-  text: string
-  words: Word[]
-  confidence: string
-  audio_duration: string
-  utterances: Utterance[]
-  chapters: any
-  sentiment_analysis_results: SentimentAnalysisResult[]
-  entities: any
-  createdAt: string
-  updatedAt: string
+  auto_highlights_result: AutoHighlightsResult;
+  callTitle: string;
+  _id: string;
+  audio_url: string;
+  transId: string;
+  language_model: string;
+  acoustic_model: string;
+  language_code: string;
+  status: string;
+  text: string;
+  words: Word[];
+  confidence: string;
+  audio_duration: string;
+  utterances: Utterance[];
+  chapters: any;
+  sentiment_analysis_results: SentimentAnalysisResult[];
+  entities: any;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface AutoHighlightsResult {
-  status: string
-  results: Result[]
+  status: string;
+  results: Result[];
 }
 
 export interface Result {
-  count: number
-  rank: number
-  text: string
-  timestamps: Timestamp[]
+  count: number;
+  rank: number;
+  text: string;
+  timestamps: Timestamp[];
 }
 
 export interface Timestamp {
-  start: number
-  end: number
+  start: number;
+  end: number;
 }
 
 export interface Word {
-  text: string
-  start: number
-  end: number
-  confidence: number
-  speaker: string
+  text: string;
+  start: number;
+  end: number;
+  confidence: number;
+  speaker: string;
 }
 
 export interface Utterance {
-  confidence: number
-  end: number
-  speaker: string
-  start: number
-  text: string
-  words: Word2[]
+  confidence: number;
+  end: number;
+  speaker: string;
+  start: number;
+  text: string;
+  words: Word2[];
 }
 
 export interface Word2 {
-  text: string
-  start: number
-  end: number
-  confidence: number
-  speaker: string
+  text: string;
+  start: number;
+  end: number;
+  confidence: number;
+  speaker: string;
 }
 
 export interface SentimentAnalysisResult {
-  text: string
-  start: number
-  end: number
-  sentiment: string
-  confidence: number
-  speaker: string
+  text: string;
+  start: number;
+  end: number;
+  sentiment: string;
+  confidence: number;
+  speaker: string;
 }
