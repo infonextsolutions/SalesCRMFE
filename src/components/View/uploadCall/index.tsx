@@ -6,6 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
 import UploadAudio from "../uploadContainer/index";
+import { useDispatch } from "react-redux";
 const DropItems = ({ title, list, top, change }: any) => {
   return (
     <div
@@ -281,6 +282,7 @@ const ActiveCall = ({ cancel }: any) => {
     callTitle: "",
     callUrl: "",
   });
+  const dispatch = useDispatch();
   return (
     <div className="w-[100%] h-[100%] py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium mb-[24px] tracking-[1px]">
@@ -323,7 +325,34 @@ const ActiveCall = ({ cancel }: any) => {
       <div className="w-[100%] flex justify-end mt-[20px]">
         <SimpleButton
           theme={1}
-          click={() => {}}
+          click={() => {
+            console.log(data, 214121);
+            axios
+              .post(
+                "https://testsalescrm.nextsolutions.in/api/recording/createManualRecording",
+                {
+                  callTitle: data.callTitle,
+                  file: data.callUrl,
+                }
+              )
+              .then(() => {
+                dispatch(
+                  setSuccess({
+                    show: true,
+                    success: "Note Added Successfully!",
+                  })
+                );
+                cancel();
+              })
+              .catch((e) => {
+                dispatch(
+                  setError({
+                    show: true,
+                    error: "Error Occured!",
+                  })
+                );
+              });
+          }}
           text={"Send"}
           left={20}
           right={0}
