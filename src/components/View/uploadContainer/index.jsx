@@ -47,10 +47,58 @@ const UploadAudio = ({ onChange }) => {
     }
   };
 
+  function isAudioFile(file) {
+    const audioExtensions = [
+      "mp3",
+      "wav",
+      "ogg",
+      "m4a",
+      "aac",
+      "flac",
+      "wma",
+      "aiff",
+      "alac",
+      "opus",
+    ];
+
+    const fileName = file.name;
+    const fileExtension = fileName.split(".").pop().toLowerCase();
+
+    return audioExtensions.includes(fileExtension);
+  }
+
+  const [error, setError] = useState({ show: false, error: "" });
   const handleDrop = function (e) {
     console.log(e[0], "please check here");
-    setFile(e[0]);
-    onChange(e[0]);
+    if (isAudioFile(e[0])) {
+      setFile(e[0]);
+      onChange(e[0]);
+      setError({
+        show: true,
+        error: (
+          <p className="text-[14px] font-medium  text-center">
+            File Recieved
+            <br />
+            <span className="text-renal-blue underline cursor-pointer">
+              Browse
+            </span>
+          </p>
+        ),
+      });
+    } else {
+      setError({
+        show: true,
+        error: (
+          <p className="text-[14px] font-medium  text-center">
+            wrong type of file
+            <br />
+            <span className="text-renal-blue underline cursor-pointer">
+              Browse
+            </span>
+          </p>
+        ),
+      });
+    }
   };
 
   const handleChange = function (e) {
@@ -84,9 +132,7 @@ const UploadAudio = ({ onChange }) => {
         // }}
         onDragEnter={() => setDropzoneActive(true)}
         onDragLeave={() => setDropzoneActive(false)}
-        accept={{
-          "application/pdf": [],
-        }}
+        accept={{}}
       >
         {({ getRootProps, getInputProps }) => (
           <div
@@ -106,13 +152,20 @@ const UploadAudio = ({ onChange }) => {
             >
               <div>
                 <p className="text-[#000]  ">
-                  Drop or{" "}
-                  <span className="text-renal-blue underline cursor-pointer">
-                    Browse
-                  </span>{" "}
-                  to upload your file.
-                  <br />
-                  {"("}.MP3, .AAC formats supported{")"}
+                  {error.show ? (
+                    <> {error.error}</>
+                  ) : (
+                    <>
+                      {" "}
+                      Drop or{" "}
+                      <span className="text-renal-blue underline cursor-pointer">
+                        Browse
+                      </span>{" "}
+                      to upload your file.
+                      <br />
+                      {"("}.MP3, .AAC formats supported{")"}
+                    </>
+                  )}
                 </p>
               </div>
             </label>
