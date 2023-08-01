@@ -1,14 +1,14 @@
 import Navigation from "@/components/app/Navigation";
 import CallsContainer from "@/components/calls/upload-calls/Container/Container";
 import DUMMY from "@/shared/dummy";
-import React, { useRef,useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 import { useRouter } from "next/router";
-
-
+import Backdrop from "@/components/View/Backdrop/Center";
+import UploadCall from "@/components/View/uploadCall/index";
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -48,14 +48,13 @@ const Dummy = [
 ];
 
 const Calls = ({ data }: any) => {
-
   const router = useRouter();
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
-      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
       router.beforePopState(() => {
-        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
         return true;
       });
     };
@@ -63,10 +62,9 @@ const Calls = ({ data }: any) => {
     handleBeforeHistoryChange();
 
     return () => {
-      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
     };
   }, []);
-
 
   const ref: any = useRef();
   const exportXLSX = () => {
@@ -85,13 +83,47 @@ const Calls = ({ data }: any) => {
     }
   };
 
-  console.log(data,"please")
+  const AddLead = () => {};
+
+  const [upload, setUpload] = useState(false);
+  const [bool, setBool] = useState(true);
+  console.log(data, "please");
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
+      {upload && (
+        <Backdrop bool={bool}>
+          <UploadCall
+            cancel={() => {
+              setBool(false);
+              setTimeout(() => {
+                setUpload(false);
+                setBool(true);
+              }, 500);
+            }}
+          />
+        </Backdrop>
+      )}
       <Navigation
         title={"Calls>Upload Calls"}
         buttons={[
+          {
+            text: "Upload Call",
+            dropdown: true,
+            id: 1,
+            icon: "Plus",
+            light: false,
+            list: [],
+            onClick1: async () => {
+              // const response = await axios.post(
+              //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+              //   {
+              //     callTo: "7669481778",
+              //   }
+              // );
+              setUpload(true);
+            },
+          },
           {
             text: "Export",
             dropdown: true,
