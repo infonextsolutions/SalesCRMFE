@@ -278,7 +278,7 @@ const DateContainer = ({ date, setDate }: any) => {
 };
 
 const ActiveCall = ({ cancel }: any) => {
-  const [data, setData] = useState({
+  const [data, setData] = useState<any>({
     callTitle: "",
     callUrl: "",
   });
@@ -321,19 +321,18 @@ const ActiveCall = ({ cancel }: any) => {
           setData({ ...data, callTitle: e });
         }}
       />
-
       <div className="w-[100%] flex justify-end mt-[20px]">
         <SimpleButton
           theme={1}
           click={() => {
             console.log(data, 214121);
+            const formdate = new FormData();
+            formdate.append("callTitle", data.callTitle);
+            formdate.append("file", data.callUrl);
             axios
               .post(
                 "https://testsalescrm.nextsolutions.in/api/recording/createManualRecording",
-                {
-                  callTitle: data.callTitle,
-                  file: data.callUrl,
-                }
+                formdate
               )
               .then(() => {
                 dispatch(
