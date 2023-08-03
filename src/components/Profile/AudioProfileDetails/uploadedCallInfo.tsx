@@ -43,7 +43,7 @@ const CallInfo = ({ check, info, data }: Props) => {
           Record Id- {convertDatetimeToCustomFormat(data?.updatedAt)}
         </p>
         <div className="text-[#8A9099] mt-[7px] leading-[21px]">
-          <p>{data?.callTitle.length===0?"-":data?.callTitle}</p>
+          <p>{data?.callTitle? (data?.callTitle.length===0?"-":data?.callTitle):"-"}</p>
         </div>
       </div>
       <div className="border-b mt-[20px] w-[600px] h-[1px] px-[30px]"></div>

@@ -197,12 +197,12 @@ const Step1 = ({ next, cancel }: any) => {
     if (isExcelOrCSVFile(e[0].name)) {
       // setFile(e[0]);
       console.log(e[0]);
+      const formdata = new FormData();
+      formdata.append("file", e[0]);
       axios
         .post(
           "https://testsalescrm.nextsolutions.in/api/leads/upload/afakfabk",
-          {
-            file: e[0],
-          }
+        formdata
         )
         .then((e) => {
           dispatch(
