@@ -475,15 +475,14 @@ const Questionnaire = () => {
 
 
 const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number | null>(null);
-const [finalQuestionList, setFinalQuestionList] = useState<any[]>([{ question: '', answerType: '',answer:'',option:[{title:"",selected:false}] }]); 
+const [finalQuestionList, setFinalQuestionList] = useState<any[]>([]); 
 const [questionList, setQuestionList] = useState<any[]>([{ question: '', answerType: '',answer:'',option:[{title:"",selected:false}] }]);
-
 const [title,setTitle] = useState("")
 const [finalTitle,setFinalTitle] = useState("")
 
   const addQuestion = () => {
   setSelectedQuestionIndex(null);
-  const newQuestion = { question: '', answerType: '',answer:'',option:[{title:"",selected:false}] };
+  const newQuestion = { question: '', answerType:'',answer:'',option:[{title:"",selected:false}] };
   setQuestionList([...questionList, newQuestion]);
 };
 
@@ -533,35 +532,36 @@ const [finalTitle,setFinalTitle] = useState("")
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-   const list: any = [
-    { title: "Project A" },
-    { title: "Project B" },
-    { title: "Project C" },
-    { title: "other" },
-  ];
-   const list2: any = [
-    { title: "Option 1" },
-    { title: "Add option" },
-   
-  ];
+
   const [selectedQ3, setSelectedQ3] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   // const [selected, setSelected] = useState(null);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-    setFinalQuestionList([]);
+  const openModal = () => {  
+    setFinalQuestionList([]); 
+    setIsModalOpen(true); 
+    
   };
-
-  const closeModal = () => {
+  
+  const closeModal = () => { 
     setIsModalOpen(false); 
   };
 
   const handleSave = () => {
-    // Handle saving the form data
-    setFinalQuestionList(questionList); 
-    setFinalTitle(title); 
-    closeModal(); // Close the modal after saving
+    let flag = false;
+    // Handle saving the form data  
+    {
+     questionList.map((questionItem:any,index:any) =>{
+      if(questionItem.answerType==='') {
+       flag=true;
+      }
+    })
+    }
+    if(!flag){ 
+      setFinalQuestionList([...questionList]); 
+      setFinalTitle(title); 
+      closeModal(); // Close the modal after saving
+    }
   };
  
 
@@ -714,13 +714,14 @@ const [finalTitle,setFinalTitle] = useState("")
                 className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                 value={questionItem.answerType}
                 onChange={(e) => updateAnswerType(index, e.target.value)}
+                required
               >
-                <option value="">Select answer type</option>
+                <option >Select answer type</option>
                 <option value="Short Answer">Short Answer</option>
                 <option value="Long Answer">Long Answer</option>
-                <option value="Single Choice">Single Choice</option>
+                <option value="Single Choice">Select</option>
                 <option value="Dropdown">Dropdown</option>
-                <option value="Multiple Choice">Multiple Choice</option>
+                <option value="Multiple Choice">Multiple Select</option>
               </select>
               {/* {questionItem.answerType === 'Short Answer' && <AddText top="10px" index={index} change={updateAnswer} />}
               {questionItem.answerType === 'Long Answer' && <AddTextBox index={index} change={updateAnswer} />} */}
