@@ -61,16 +61,17 @@ const Transcript = ({
 
   console.log(utterances);
 
-  const arr :any= [];
-  for (let i = 0; i < utterances.length; i++) {
-    arr.push({
-      title: utterances[i].speaker === "A" ? "A" : "B",
-      message: utterances[i].text,
-      start: utterances[i].start,
-      end: utterances[i].end,
-    });
+  const arr: any = [];
+  if (utterances?.length > 0) {
+    for (let i = 0; i < utterances.length; i++) {
+      arr.push({
+        title: utterances[i].speaker === "A" ? "A" : "B",
+        message: utterances[i].text,
+        start: utterances[i].start,
+        end: utterances[i].end,
+      });
+    }
   }
-
   const arrr: any = [
     {
       title: "Interviewer",
@@ -187,7 +188,9 @@ const Transcript = ({
                     }}
                     dangerouslySetInnerHTML={{
                       // __html: `00:05 ${item.title}:`,
-                      __html: `${convertMilliseconds(item.start)} ${item.title}:`,
+                      __html: `${convertMilliseconds(item.start)} ${
+                        item.title
+                      }:`,
                     }}
                   ></p>
                   <p
@@ -205,7 +208,6 @@ const Transcript = ({
 };
 
 export default Transcript;
-
 
 export interface Root {
   auto_highlights_result: AutoHighlightsResult;
