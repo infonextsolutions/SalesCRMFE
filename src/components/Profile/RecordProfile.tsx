@@ -63,6 +63,7 @@ const RecordProfile = ({
       setChecked(true);
     }
   });
+  console.log(data2,55)
   return (
     <div
       className={`w-[${
@@ -86,7 +87,7 @@ const RecordProfile = ({
           {activeTitle === 2 && (
             <Notes data={activeCall} refresh={UpdateCall} />
           )}
-          {activeTitle === 3 && <Questionnaire />}
+          {activeTitle === 3 && <Questionnaire data={data1} data1={data2} />}
         </div>
       </div>
     </div>
