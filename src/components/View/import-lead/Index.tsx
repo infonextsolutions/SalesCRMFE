@@ -163,6 +163,7 @@ const Col = ({ title, bold, width }: any) => {
 };
 
 const Step1 = ({ next, cancel }: any) => {
+  
   const [activeBox, setActiveBox] = useState(2);
   const [file, setFile] = useState();
   const [dropzoneActive, setDropzoneActive] = useState(false);
@@ -233,6 +234,7 @@ const Step1 = ({ next, cancel }: any) => {
       }, 1000);
     }
   };
+
   return (
     <div className="w-[100%] h-[100vh] flex flex-col justify-between">
       <div className="w-[100%]">
