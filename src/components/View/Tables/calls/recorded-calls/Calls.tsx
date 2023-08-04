@@ -266,6 +266,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
                 CallData={item}
                 last={Leads.length - 1 === i}
                 selectAll={selectAll}
+                
               />
             );
           })

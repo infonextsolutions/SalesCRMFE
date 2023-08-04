@@ -708,7 +708,7 @@ const LeadContainer = ({
       )}
       {call && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <ActiveCall cancel={cancelCall} id={LeadData._id} companyId={LeadData.companyId._id} customerId={LeadData.customerId._id} />
+          <ActiveCall cancel={cancelCall} id={LeadData._id} companyId={LeadData.companyId._id} lead={LeadData} customerId={LeadData.customerId._id} />
         </Backdrop>
       )}
     </>
