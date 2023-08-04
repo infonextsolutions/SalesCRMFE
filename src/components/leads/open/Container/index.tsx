@@ -16,6 +16,7 @@ const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 
 const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   const [search, setSearch] = useState("");
+  const [filter,setFilter] = useState({});
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
@@ -26,7 +27,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   return (
     <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] relative mb-[40px]">
       <div className="w-[100%] h-[58px] flex items-center  px-[8px] ">
-        <Search change={onChange} view={view} />
+        <Search change={onChange} view={view} setFilter={setFilter} />
         {/* <ButtonDropDown
           light={true}
           text={"Actions"}
@@ -61,12 +62,12 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
       </div>
       {!view ? (
         <Suspense fallback={<Spinner />}>
-          <LeadsTable totalRecords={records} search={search} />
+          <LeadsTable totalRecords={records} search={search} filter={filter} />
         </Suspense>
       ) : (
         <Suspense fallback={<Spinner />}>
           {/* <KanbanContainer list={list} /> */}
-          <KanbanTable totalRecords={records} search={search} />
+          <KanbanTable totalRecords={records} search={search}  filter={filter}/>
         </Suspense>
       )}
     </div>

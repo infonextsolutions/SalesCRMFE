@@ -3,8 +3,9 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import { Navbar, Page, BlockTitle, Range, List, ListItem, Icon, Block } from 'framework7-react';
 import DualRange from "@/utils/dualRange";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import { useSelector } from "react-redux";
 
 
 
@@ -95,7 +96,7 @@ const LastActivity = ({}) => {
   );
 };
 
-const Filter = ({ cancel, left, top }: any) => {
+const Filter = ({ cancel, left, top ,setFilter}: any) => {
   const [hover, setHover] = useState(false);
   React.useEffect(() => {
     const onpointerdown = () => {
@@ -119,6 +120,13 @@ const Filter = ({ cancel, left, top }: any) => {
     setFinalRange(finalRange);
   };
 
+  const [stage,setStage]= useState("");
+  const [status,setStatus] = useState("");
+  const [product,setProduct] = useState("");
+  const [leadEnquiry,setLeadEnquiry]=useState("");
+  const [winPobability,setWinProbability]=useState("");
+ 
+
   return (
     <div
       className="w-[400px] rounded-lg shadow-2xl min-h-[400px] bg-[#fff] py-[10px] px-[20px] absolute"
@@ -139,31 +147,28 @@ const Filter = ({ cancel, left, top }: any) => {
         title={"Stage"}
         list={[
           {
-            title: "enquiry",
+            title: "--select--",
             selected: true,
-            value: 0,
+            value: "",
           },
           {
-            title: "Demo Inquiry",
+            title: "Enquiry",
             selected: false,
-            value: 1,
+            value: "Enquiry",
           },
           {
-            title: "Trial Inquiry",
+            title: "Interaction",
             selected: false,
-            value: 2,
+            value: "Interaction",
           },
           {
-            title: "Product Inquiry",
+            title: "Proposal",
             selected: false,
-            value: 3,
+            value: "Proposal",
           },
-          {
-            title: "Referral Inquiry",
-            selected: false,
-            value: 4,
-          },
+          
         ]}
+        change={setStage}
       />
 
       {/* Status, product is set up bug no 36 */}
@@ -188,6 +193,7 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 2,
           },
         ]}
+        change={setStatus}
       />
 
 
@@ -202,35 +208,51 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 0,
           },
           {
-            title: "state",
+            title: "Product B",
             selected: false,
             value: 1,
           },
           {
-            title: "checked",
+            title: "Product C",
             selected: false,
             value: 2,
           },
         ]}
+        change={setProduct}
       />
       <AddText
         top={10}
         title={"Lead source"}
         list={[
           {
-            title: "Website",
+            title: "--select--",
             selected: true,
-            value: 0,
+            value: "",
           },
           {
-            title: "state",
+            title: "Website",
             selected: false,
-            value: 1,
+            value: "Website",
           },
           {
-            title: "checked",
+            title: "Email Marketing",
             selected: false,
-            value: 2,
+            value: "Email Marketing",
+          },
+          {
+            title: "Phone",
+            selected: false,
+            value: "Phone",
+          },
+          {
+            title: "Organic Search",
+            selected: false,
+            value: "Organic Search",
+          },
+          {
+            title: "Advertising",
+            selected: false,
+            value: "Advertising",
           },
         ]}
       />
@@ -239,48 +261,38 @@ const Filter = ({ cancel, left, top }: any) => {
         title={"Lead inquiry Type"}
         list={[
           {
-            title: "Demo Requested",
+            title: "Enquiry",
             selected: true,
-            value: 0,
+            value: "Enquiry",
           },
           {
-            title: "state",
+            title: "Demo Enquiry",
             selected: false,
-            value: 1,
+            value: "Demo Enquiry",
           },
           {
-            title: "checked",
+            title: "Trial Enquiry",
             selected: false,
-            value: 2,
+            value: "Trial Enquiry",
+          },
+          {
+            title: "Product Enquiry",
+            selected: false,
+            value: "Product Enquiry",
+          },
+          {
+            title: "Referral Enquiry",
+            selected: false,
+            value: "Referral Enquiry",
           },
         ]}
+        change={setLeadEnquiry}
       />
       {/* <LastActivity /> */}
 
         <LastActivity/>
 
 
-      <AddText
-        top={10}
-        title={"Lead inquiry Type"}
-        list={[
-          {
-            title: "Demo Requested",
-            selected: true,
-            value: 0,
-          },
-          {
-            title: "state",
-            selected: false,
-            value: 1,
-          },
-          {
-            title: "checked",
-            selected: false,
-            value: 2,
-          },
-        ]}
-      />
       <AddText
         top={10}
         title={"Win Probability"}
@@ -291,16 +303,17 @@ const Filter = ({ cancel, left, top }: any) => {
             value: 0,
           },
           {
-            title: "state",
+            title: "more than 50%",
             selected: false,
             value: 1,
           },
           {
-            title: "checked",
+            title: "less than 50%",
             selected: false,
             value: 2,
           },
         ]}
+        change={setWinProbability}
       />
       <DualRange title={"Deal Size"}  />
       <DualRange title={"Existing"}  />
@@ -340,7 +353,14 @@ const Filter = ({ cancel, left, top }: any) => {
           left={0}
           right={0}
           click={() => {
-            // submit();
+            setFilter({
+              stage:stage,
+              status:status,
+              product:product,
+              leadEnquiry:leadEnquiry,
+              winPobability:winPobability
+            })
+            cancel();
           }}
         />
        
