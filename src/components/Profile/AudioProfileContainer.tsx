@@ -42,7 +42,7 @@ const AudioProfileContainer = ({
           {activeTitle === 0 && <CallInfo data1={data1} data={data} check={check} info={info} />}
           {activeTitle === 1 && <Comments data={data}  />}
           {activeTitle === 2 && <Notes  data={data}  />}
-          {activeTitle === 3 && <Coaching data={data} />}
+          {activeTitle === 3 && <Coaching data={data?.transcriptId} />}
         </div>
       </div>
     </div>

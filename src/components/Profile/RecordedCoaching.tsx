@@ -119,14 +119,14 @@ const Emotion = ({ data }: { data: Emotion }) => {
         </h1>
       </div>
       <ChartContainer>
-        <Chart title={"Joy"} percent={"20%"} />
-        <Chart title={"Trust"} percent={"30%"} />
-        <Chart title={"Politeness"} percent={"50%"} />
-        <Chart title={"Satisfaction"} percent={"90%"} />
-        <Chart title={"Curiosity"} percent={"70%"} />
-        <Chart title={"Confidence"} percent={"60%"} />
-        <Chart title={"Empathy"} percent={"50%"} />
-        <Chart title={"Assertivenss"} percent={"50%"} />
+        <Chart title={"Joy"} percent={`${data.Joy}%`} />
+        <Chart title={"Trust"}  percent={`${data.Trust}%`} />
+        <Chart title={"Politeness"}  percent={`${data.Politeness}%`} />
+        <Chart title={"Satisfaction"} percent={`${data.Satisfaction}%`} />
+        <Chart title={"Curiosity"}  percent={`${data.Curiosity}%`} />
+        {/* <Chart title={"Confidence"}  percent={`${data.}%`} /> */}
+        {/* <Chart title={"Empathy"} percent={`${data.}%`} /> */}
+        <Chart title={"Assertivenss"}  percent={`${data.Assertiveness}%`} />
       </ChartContainer>
     </div>
   );
@@ -159,7 +159,6 @@ const Loader = () => {
 };
 
 const Coaching = ({ data }: any) => {
-  console.log(data.transcriptId);
   const [loading, setLoading] = React.useState(true);
   const [checked, setChecked] = React.useState(true);
   const [data1, setData] = useState<any>({});
@@ -169,7 +168,7 @@ const Coaching = ({ data }: any) => {
         .post(
           "https://testsalescrm.nextsolutions.in/api/indicator/getIndicatorValues",
           {
-            id: data.transcriptId,
+            id: data,
           }
         )
         .then((e) => {
