@@ -8,6 +8,7 @@ import CallInfo from "./AudioProfileDetails/uploadedCallInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/store/UI";
 import Recorded from "@/types/recorded-call";
+import Coaching from "./RecordedCoaching";
 
 const AudioProfileContainer = ({
   titles,
@@ -42,6 +43,7 @@ const AudioProfileContainer = ({
           )}
           {activeTitle === 1 && <Comments data={data} />}
           {activeTitle === 2 && <Notes data={data} />}
+          {activeTitle === 3 && <Coaching data={data?._id} />}
         </div>
       </div>
     </div>
