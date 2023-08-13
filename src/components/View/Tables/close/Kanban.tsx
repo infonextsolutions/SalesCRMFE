@@ -23,19 +23,17 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
     setLoading(true);
     const getItems = async () => {
       const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Close`
+        `https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Open`
       );
       // console.log(res, "only check here");
       const data = res.data.result;
       const filtered = data.filter(
         (e: Lead) =>
           e.companyId?.company_name.includes(search) ||
-          e.customerId?.contact?.includes(search) ||
+          e.customerId?.name.includes(search) ||
           e.potential_deal_size?.includes(search) ||
-          e.leadStatus?.includes(search) ||
-          e.leadStage?.includes(search) ||
-          e.customerId?.email?.includes(search) ||
-          e.companyId?.company_website_url?.includes(search)
+          e?.lead_title?.includes(search)||
+          e?.leadId?.includes(search)
       );
 
       // const filtered = data;
@@ -48,14 +46,20 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
     getItems();
     setLoading(false);
   }, [search]);
-  
+
   const Leads = items;
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
 
-  const stages = ["Enquiry", "interaction", "proposal", "win", "Lost", "Dead"];
-  const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WIN", "LOST", "DEAD"];
+  const stages = ["Lost", "Dead"];
+  const titles = [ "LOST", "DEAD"];
+  console.log(items, "please check here");
+  useEffect(() => {
+    items.map((e: any, i: any) => {
+      console.log(e.leadStage, i, "ccc");
+    });
+  }, [items]);
   return (
     <>
       <div className="px-[20px] mt-[10px] text-[#ffffff] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll">
@@ -83,15 +87,16 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
         )} */}
 
         {stages.map((col, i) => {
-          console.log(items[0]);
-          const res = items;
-
-          if (res.length) {
+          const toBeFilter = items;
+          const res = items.filter((obj: any) => {
+            return obj.leadStage.includes(stages[i]);
+          });
+          if (res.length || col==="Dead") {
             return (
               <div className="flex gap-[20px]" key={i}>
                 <div className="w-[270px] shrink-0 ">
                   <div className="leadName flex mb-[10px]">
-                    <div className="w-[76%] bg-renal-blue h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
+                    <div className="w-[100%] bg-renal-blue h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
                       <div className="enq-header font-medium flex items-center ml-[10px] text-[13px] flex gap-[8px] items-center">
                         <p className="">{titles[i]}</p>
                         <div className="text-[10px] h-[19px] justify-center w-[20px] font-medium text-[#fff] flex items-center bg-slate-400 px-[4px] h-[13px] rounded-[4px]">
@@ -102,7 +107,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
                         ...
                       </a>
                     </div>
-                    <div className="pl-[30px] h-[45px] bg-renal-blue rounded-xl flex items-center justify-center cursor-pointer ml-[15px] pr-[20px] relative p-[5px]">
+                    {/* <div className="pl-[30px] h-[45px] bg-renal-blue rounded-xl flex items-center justify-center cursor-pointer ml-[15px] pr-[20px] relative p-[5px]">
                       {
                         <div className="absolute left-3  w-[28px]">
                           <div className={`w-[100%] p-[3px] rounded-md }`}>
@@ -119,9 +124,10 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
                           </div>
                         </div>
                       }
-                    </div>
+                    </div> */}
                   </div>
                   {res.map((Item: any, i: any) => {
+                    console.log(Item,"please checkk-2314211")
                     const item = {
                       data: {
                         companyName: "ABC Corp",

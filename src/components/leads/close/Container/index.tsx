@@ -6,10 +6,10 @@ import Search from "../../genUtils/Search";
 // import KanbanContainer from "@/components/View/Kanban";
 import { useSelector } from "react-redux";
 import Spinner from "@/components/loader/spinner";
-import KanbanTable from "@/components/View/Tables/open/Kanban";
+import KanbanTable from "@/components/View/Tables/close/Kanban";
 
 const LeadsTable = React.lazy(
-  () => import("@/components/View/Tables/open/LeadsSearch")
+  () => import("@/components/View/Tables/close/LeadsSearch")
 );
 const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
@@ -41,7 +41,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
             { title: "Active/InActive Lead", Icon: "CSV" },
           ]}
         /> */}
-        {view && (
+        {/* {view && (
           <ButtonDropDown
             light={false}
             text={"Add Stage"}
@@ -57,7 +57,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
               { title: "Active/InActive Lead", Icon: "CSV" },
             ]}
           />
-        )}
+        )} */}
       </div>
       {!view ? (
         <Suspense fallback={<Spinner />}>

@@ -25,7 +25,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     const res = await axios.get(
       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Close`
     );
-    const data = res.data.result; 
+    const data = res.data.result;
     return data;
   };
   const [loading, setLoading] = React.useState(false);
@@ -44,17 +44,15 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       if (search.length) {
         setpageNumber(0);
         const allItems = await getallItems(pageNumber);
+        console.log(allItems);
         setItems(allItems);
       }
       const filtered = data.filter(
         (e: Lead) =>
-          e.companyId?.company_name.includes(search) ||
-          e.customerId?.contact?.includes(search) ||
-          e.potential_deal_size?.includes(search) ||
-          e.leadStatus?.includes(search) ||
-          e.leadStage?.includes(search) ||
-          e.customerId?.email?.includes(search) ||
-          e.companyId?.company_website_url?.includes(search)
+          e.leadId?.includes(search) ||
+          e.lead_title?.includes(search) ||
+          e.companyId.company_name?.includes(search) ||
+          e.customer_name?.includes(search)
       );
 
       // const filtered = data;
@@ -71,19 +69,17 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   }, [limit, pageNumber, search]);
 
   const fetchItems = async (current: any) => {
+  
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
+      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}?leadStatus=Close`
     );
     const data = res.data.result;
     const filtered = data.filter(
       (e: Lead) =>
-        e.companyId?.company_name.includes(search) ||
-        e.customerId?.contact?.includes(search) ||
-        e.potential_deal_size?.includes(search) ||
-        e.leadStatus?.includes(search) ||
-        e.leadStage?.includes(search) ||
-        e.customerId?.email?.includes(search) ||
-        e.companyId?.company_website_url?.includes(search)
+        e.leadId?.includes(search) ||
+        e.lead_title?.includes(search) ||
+        e.companyId.company_name?.includes(search) ||
+        e.customer_name?.includes(search)
     );
     settotalLeads(filtered.length);
     return filtered;
@@ -119,8 +115,9 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     setLoading(false);
   };
   const Leads = items;
-  console.log(" close" ,Leads);
-  console.log(`limit is ${limit}`);
+  // console.log("allitems ",Leads)
+  // console.log(Leads);
+  // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
 
   function sortArray(arr: any) {
@@ -244,6 +241,8 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
         {loading ? (
           <Spinner />
         ) : (
+          // ) : (
+
           Leads != null &&
           Leads.map((item: Lead, ind: any) => {
             return (
@@ -454,5 +453,4 @@ interface TableProps {
   [key: string]: any;
   icon?: String;
   search: String | any;
-  owners:any
 }
