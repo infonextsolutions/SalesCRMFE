@@ -723,7 +723,7 @@ const LeadContainer = ({
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
           </div>  */}
 
-          <ActivityHistory width={180} left={0} random={num} />
+          <ActivityHistory width={180} left={0}  data={LeadData1} random={num} />
 
           {/* activity history ends here*/}
 
