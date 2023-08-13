@@ -456,9 +456,11 @@ const Questionnaire = ({ data, data1 }: any) => {
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<
     number | null
   >(null);
+
   const [finalQuestionList, setFinalQuestionList] = useState<any[]>(
     data?.questionnaire ? data?.questionnaire : []
   );
+
   const [questionList, setQuestionList] = useState<any[]>(
     data?.questionnaire
       ? data?.questionnaire
@@ -471,6 +473,8 @@ const Questionnaire = ({ data, data1 }: any) => {
           },
         ]
   );
+  console.log(finalQuestionList, questionList, 214141);
+
   const [title, setTitle] = useState("");
   const [finalTitle, setFinalTitle] = useState("");
 
@@ -546,12 +550,14 @@ const Questionnaire = ({ data, data1 }: any) => {
       });
     }
     if (!flag) {
+      console.log(questionList, 3141, title);
       axios
         .post(
           "https://testsalescrm.nextsolutions.in/api/v2/active-call/questionnaire",
           {
             id: data._id,
             questionnaire: questionList,
+            title: title,
           }
         )
         .then((e) => {
@@ -562,8 +568,8 @@ const Questionnaire = ({ data, data1 }: any) => {
               .get(
                 `https://testsalescrm.nextsolutions.in/api/active-call/find-by-id?id=${data._id}`
               )
-              .then((ev:any) => {
-                console.log(ev?.data?.result?.questionnaire,12916498187)
+              .then((ev: any) => {
+                console.log(ev?.data?.result?.questionnaire, 12916498187);
                 setFinalQuestionList([...ev?.data?.result?.questionnaire]);
                 dispatch(
                   setSuccess({
