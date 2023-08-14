@@ -92,7 +92,7 @@ const ButtonDropDown = ({
         <></>
       )}
       {icon && (
-        <div className="absolute left-3  w-[28px]">
+        <div className="absolute left-[3]  w-[28px]">
           <div className={`w-[100%] p-[3px] rounded-md }`}>
             <Image
               src={getBasicIcon(icon)}

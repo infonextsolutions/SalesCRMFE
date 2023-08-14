@@ -28,15 +28,15 @@ const menuOptions = [
     ],
     icon: "Phone",
   },
-  {
-    title: "Team",
-    route: "team",
-    list: [
-      { title: "Team Performence", route: "team-performence" },
-      // { title: "Coaching", route: "coaching" },
-    ],
-    icon: "Tasks",
-  },
+  // {
+  //   title: "Team",
+  //   route: "team",
+  //   list: [
+  //     { title: "Team Performence", route: "team-performence" },
+  //     // { title: "Coaching", route: "coaching" },
+  //   ],
+  //   icon: "Tasks",
+  // },
   {
     title: "Indicator",
     route: "indicator",
