@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Table from "../table/basic";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Addvalue from "./addValue";
+import AddCategory from "./addCategory";
 
 const indicator_type = [
   {
@@ -82,6 +83,19 @@ const IndicatorContainer = () => {
               setBool(false);
               setTimeout(() => {
                 setAddvalue(false);
+                setBool(true);
+              }, 500);
+            }}
+          />
+        </Backdrop>
+      )}
+      {addCategory && (
+        <Backdrop bool={bool}>
+          <AddCategory
+            cancel={() => {
+              setBool(false);
+              setTimeout(() => {
+                setAddCategory(false);
                 setBool(true);
               }, 500);
             }}

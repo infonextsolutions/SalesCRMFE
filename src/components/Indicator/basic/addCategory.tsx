@@ -60,7 +60,7 @@ const AddText = ({ title, place, change }: any) => {
   );
 };
 
-const Addvalue = ({ cancel }: any) => {
+const AddCategory = ({ cancel }: any) => {
   const [data, setData] = useState({
     indicator_type: "",
     indicator_category: "",
@@ -209,4 +209,4 @@ const Addvalue = ({ cancel }: any) => {
   );
 };
 
-export default Addvalue;
+export default AddCategory;
