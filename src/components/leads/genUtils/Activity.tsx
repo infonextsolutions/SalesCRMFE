@@ -181,9 +181,9 @@ const Single = ({ item, i, data }: any) => {
             {item?.type === "email"
               ? `Email sent to ${owners}`
               : item?.callId
-              ? "Phone"
+              ? `Call setup with ${owners}`
               : item?.type === "note"
-              ? "Tasks"
+              ? `Note added by ${owners}`
               : ""}
           </p>
           <p className="text-[#000] text-[9px] w-[100%] font-medium">{formatDate(item.createdAt)}</p>
