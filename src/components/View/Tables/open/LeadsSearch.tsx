@@ -49,7 +49,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       }
       const filtered = data.filter(
         (e: Lead) =>
-          e.leadId?.includes(search) ||
+          e?.leadId?.includes(search) ||
           e.lead_title?.includes(search) ||
           e.companyId.company_name?.includes(search) ||
           e.customer_name?.includes(search)
@@ -76,7 +76,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     const data = res.data.result;
     const filtered = data.filter(
       (e: Lead) =>
-        e.leadId?.includes(search) ||
+        e?.leadId?.includes(search) ||
         e.lead_title?.includes(search) ||
         e.companyId.company_name?.includes(search) ||
         e.customer_name?.includes(search)
