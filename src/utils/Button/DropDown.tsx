@@ -59,7 +59,7 @@ const DropItem = ({ item, value, onClick, i }: any) => {
 const DropDown = ({ list, direction, value, onClick, close }: any) => {
   return (
     <div
-      className={`px-[8px] pt-[8px] pb-[3px] flex flex-col min-h-[30px] rounded-[10px] bg-white absolute w-[100%] drop-shadow-2xl z-10 right-0 ${
+      className={`px-[8px] pt-[8px] pb-[3px] flex flex-col min-h-[30px] rounded-[10px] bg-white absolute  drop-shadow-2xl z-10 right-0 ${
         direction ? "bottom-[50px]" : "top-[50px]"
       }
       max-h-[200px]
