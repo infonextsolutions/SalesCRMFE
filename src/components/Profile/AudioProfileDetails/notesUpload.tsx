@@ -23,7 +23,7 @@ const Note = ({ title, content, date }: any) => {
 };
 
 const Notes = ({ data, refresh }: any) => {
-  const [list, setList] = useState<any>([]);
+  const [list, setList] = useState<any>(data?.notes ? data.notes : []);
 
   console.log(data.notes, "please ch-11", data);
 
@@ -49,45 +49,46 @@ const Notes = ({ data, refresh }: any) => {
   const cancelNotes = (e: any) => {
     if (e) {
       // setList([...list, e]);
-      const url = "https://testsalescrm.nextsolutions.in/api/calling/notes";
+      const url =
+        "https://testsalescrm.nextsolutions.in/api/recording/notes/addManual";
       const { title, content } = e;
       console.log(e, "please ch-11");
-      setList([...list,e])
-    //   axios
-    //     .post(url, {
-    //       title: title,
-    //       content: content,
-    //       callId: data._id,
-    //     })
-    //     .then((e) => {
-    //       if (containerRef.current) {
-    //         containerRef.current.scrollTop = 0; // Set scrollTop to 0 to scroll to the top
-    //       }
-    //       const iso = new Date().toISOString();
-    //       setList([
-    //         ...list,
-    //         {
-    //           title: title,
-    //           content: content,
-    //           updatedAt: iso,
-    //         },
-    //       ]);
-    //       dispatch(
-    //         setSuccess({
-    //           show: true,
-    //           success: "Note Added Successfully!",
-    //         })
-    //       );
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //       dispatch(
-    //         setError({
-    //           show: true,
-    //           error: "Error Occured!",
-    //         })
-    //       );
-    //     });
+      setList([...list, e]);
+      axios
+        .post(url, {
+          title: title,
+          content: content,
+          recordingId: data._id,
+        })
+        .then((e) => {
+          if (containerRef.current) {
+            containerRef.current.scrollTop = 0; // Set scrollTop to 0 to scroll to the top
+          }
+          const iso = new Date().toISOString();
+          setList([
+            ...list,
+            {
+              title: title,
+              content: content,
+              updatedAt: iso,
+            },
+          ]);
+          dispatch(
+            setSuccess({
+              show: true,
+              success: "Note Added Successfully!",
+            })
+          );
+        })
+        .catch((e) => {
+          console.log(e);
+          dispatch(
+            setError({
+              show: true,
+              error: "Error Occured!",
+            })
+          );
+        });
     }
     setBool(false);
     setTimeout(() => {

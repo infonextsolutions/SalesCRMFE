@@ -166,7 +166,7 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
 
 const Comments = ({ data }: any) => {
   const [text, setText] = React.useState("");
-  const [list, setList] = React.useState<any>([]);
+  const [list, setList] = React.useState<any>(data?.comments?data.comments:[]);
   console.log(list, "2131");
   const [emoji, setEmoji] = useState(false);
   function getCurrentTimeInHoursAndMinutes() {
@@ -203,15 +203,17 @@ const Comments = ({ data }: any) => {
   console.log(data, "8971241");
 
   const UpdateCalls = () => {
-    // setTimeout(() => {
-    //   const urri = `https://testsalescrm.nextsolutions.in/api/calling/find-by-id?id=${data._id}`;
-    //   axios
-    //     .get(urri)
-    //     .then((e) => {
-    //       console.log(e.data.result.comments, "314141");
-    //     })
-    //     .catch((e) => {});
-    // }, 1000);
+    setTimeout(() => {
+      const urri = `https://testsalescrm.nextsolutions.in/api/recording/getManualRecording`;
+      axios
+        .post(urri, {
+          transId: data._id,
+        })
+        .then((e) => {
+          console.log(e.data.result.comments, "314141");
+        })
+        .catch((e) => {});
+    }, 1000);
   };
 
   const dispatch = useAppDispatch();
@@ -304,34 +306,33 @@ const Comments = ({ data }: any) => {
                   //     },
                 ],
               };
-              // setList([...list, letsSee]);
+              setList([...list, letsSee]);
 
-
-            //   axios
-            //     .post(
-            //       "https://testsalescrm.nextsolutions.in/api/recording/addAndUpdateComments",
-            //       {
-            //         callId: data._id,
-            //         comments: [...list, letsSee],
-            //       }
-            //     )
-            //     .then((e) => {
-            //       UpdateCalls();
-            //       dispatch(
-            //         setSuccess({
-            //           show: true,
-            //           success: "comment Added Successfully!",
-            //         })
-            //       );
-            //     })
-            //     .catch(() => {
-            //       dispatch(
-            //         setError({
-            //           show: true,
-            //           error: "Error Occured!",
-            //         })
-            //       );
-            //     });
+              axios
+                .post(
+                  "https://testsalescrm.nextsolutions.in/api/recording/comments/addManual",
+                  {
+                    recordingId: data._id,
+                    comments: [...list, letsSee],
+                  }
+                )
+                .then((e) => {
+                  UpdateCalls();
+                  dispatch(
+                    setSuccess({
+                      show: true,
+                      success: "comment Added Successfully!",
+                    })
+                  );
+                })
+                .catch(() => {
+                  dispatch(
+                    setError({
+                      show: true,
+                      error: "Error Occured!",
+                    })
+                  );
+                });
               setText("");
             }
           }}
@@ -355,31 +356,31 @@ const Comments = ({ data }: any) => {
                   const finalList = list;
                   finalList[i].reply.push(e);
                   console.log(finalList, "24111421");
-                //   axios
-                //     .post(
-                //       "https://testsalescrm.nextsolutions.in/api/recording/addAndUpdateComments",
-                //       {
-                //         callId: data._id,
-                //         comments: finalList,
-                //       }
-                //     )
-                //     .then((e) => {
-                //       UpdateCalls();
-                //       dispatch(
-                //         setSuccess({
-                //           show: true,
-                //           success: "Reply added Successfully!",
-                //         })
-                //       );
-                //     })
-                //     .catch(() => {
-                //       dispatch(
-                //         setError({
-                //           show: true,
-                //           error: "Error Occured!",
-                //         })
-                //       );
-                //     });
+                    axios
+                      .post(
+                        "https://testsalescrm.nextsolutions.in/api/recording/comments/addManual",
+                        {
+                          recordingId: data._id,
+                          comments: finalList,
+                        }
+                      )
+                      .then((e) => {
+                        UpdateCalls();
+                        dispatch(
+                          setSuccess({
+                            show: true,
+                            success: "Reply added Successfully!",
+                          })
+                        );
+                      })
+                      .catch(() => {
+                        dispatch(
+                          setError({
+                            show: true,
+                            error: "Error Occured!",
+                          })
+                        );
+                      });
                 }}
               />
             );
