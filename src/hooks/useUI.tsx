@@ -8,10 +8,22 @@ function useUI() {
   if (auth._id === "2") {
     menuOptions = [
       {
+        title: "Dashboard",
+        route: "dashboard",
+        icon: "Grid",
+        list: [],
+      },
+      {
         title: "Calling",
         route: "calls",
         list: [{ title: "Upload Calls", route: "upload-calls" }],
         icon: "Phone",
+      },
+      {
+        title: "Indicator",
+        route: "indicator",
+        list: [{ title: "Indicator-basic", route: "basic" }],
+        icon: "Zap",
       },
     ];
   }
