@@ -7,7 +7,7 @@ import Controls from "./Controls";
 import ProgressBar from "./ProgressBar";
 import TopBar from "./TopBar";
 
-const AudioPlayer = ({src}) => {
+const AudioPlayer = ({ src, check }) => {
   // states
   const [trackIndex, setTrackIndex] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
@@ -30,7 +30,12 @@ const AudioPlayer = ({src}) => {
 
   return (
     <>
-      <div className="audio-player relative w-[100%] mt-[20px] min-h-[100px] flex flex-col justify-center">
+      <div
+        style={{
+          backgroundColor: check ? "" : "#fff",
+        }}
+        className=" relative w-[100%] mt-[20px] min-h-[100px] flex flex-col justify-center"
+      >
         <div className="inner w-[100%]">
           <p className="text-[14px] pt-[10px] mb-[15px] font-medium tracking-wide text-[#000]">
             Call Player
