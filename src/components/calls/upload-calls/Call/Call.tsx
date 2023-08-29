@@ -8,6 +8,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Lead from "@/types/Leads";
 import axios from "axios";
+import AudioPlayer from "@/components/upload-calls/audio/components/AudioPlayer";
 
 const example = {
   _id: "6457d6b590467877fd40291c",
@@ -377,46 +378,15 @@ const ExpandableRow = ({
   callMatrics,
   engagingQuestions,
   height,
+  CallData,
 }: any) => {
+  console.log(CallData?.audio_url, 213401274214981);
   return (
     <div
-      className="w-[100%] h-[100%] flex px-[110px] py-[10px] duration-300"
+      className="w-[100%] h-[100%] flex px-[40px] py-[10px] duration-300"
       style={{ height: height }}
     >
-      <div className="w-[300px]">
-        <p className="text-[16px] text-[#000] font-medium">Call Description</p>
-        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
-          {CallDesc}
-        </p>
-      </div>
-      <div className="w-[180px] ml-[50px]">
-        <p className="text-[16px] text-[#000] font-medium">Call Metrics</p>
-        {callMatrics.map((item: any, i: any) => {
-          return (
-            <div className="flex justify-between items-center mt-[3px]" key={i}>
-              <p className="text-[#000] font-medium mt-[2px] text-[13px] tracking-wide">
-                {item.title}
-              </p>
-              <p
-                key={i}
-                className="text-[#8A9099] font-medium mt-[2px] text-[13px] tracking-wide"
-              >
-                {item.data}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="flex h-[20px]  justify-between items-center w-[200px] mt-[40px] ml-[60px]">
-        <p className="text-[#000] font-medium mt-[2px] text-[13px] tracking-wide">
-          Engaging Questions
-        </p>
-        <p className="text-[#8A9099] font-medium mt-[2px] text-[13px] tracking-wide">
-          {engagingQuestions}
-        </p>
-      </div>
-      <CallPlayer />
+      <AudioPlayer src={CallData?.audio_url} />
     </div>
   );
 };
@@ -567,6 +537,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       >
         <ExpandableRow
           height={detailShow ? 150 : 0}
+          CallData={CallData}
           CallDesc={
             "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
           }
