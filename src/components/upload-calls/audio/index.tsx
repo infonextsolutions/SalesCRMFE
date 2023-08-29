@@ -549,7 +549,7 @@ const Audio = ({ data }: props) => {
       </div> */}
       {/* <CallPlayer /> */}
 
-      <AudioPlayer src={data.audio_url} />
+      <AudioPlayer check={false} src={data.audio_url} />
       <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
         <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
           call data
