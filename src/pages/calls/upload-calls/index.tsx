@@ -9,6 +9,10 @@ import * as XLSX from "xlsx";
 import { useRouter } from "next/router";
 import Backdrop from "@/components/View/Backdrop/Center";
 import UploadCall from "@/components/View/uploadCall/index";
+import { setLoggedInStatus, setUser1 } from "@/store/auth";
+import {  useSelector } from "react-redux";
+import { useAppDispatch } from "@/store/store";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -88,6 +92,61 @@ const Calls = ({ data }: any) => {
   const [upload, setUpload] = useState(false);
   const [bool, setBool] = useState(true);
   console.log(data, "please");
+
+  const state = useSelector((state: any) => state.auth);
+  console.log(data)
+  const dispatch = useAppDispatch();
+
+  const [logged] = useLocalStorage("logged", "loading");
+  const [id] = useLocalStorage("user-id", "not-loaded");
+  const [name] = useLocalStorage("user-name", "not-loaded");
+  const [role] = useLocalStorage("user-role", "not-loaded");
+
+  React.useEffect(() => {
+    const doACall = async () => {
+      // const res = axios.post(
+      //   `https://${ExotelKey}:${ExotelToken}@api.exotel.com/v3/accounts/westoryboard1/calls`,
+      //   {
+      //     from: {
+      //       contact_uri: "+9199XXXXXXX",
+      //       state_management: "true",
+      //     },
+      //   }
+      // );
+    };
+    // doACall();
+  }, []);
+
+  React.useEffect(() => {
+    if (!state.isLoggedIn) {
+      if (logged === "loading" || logged === "loggedIn") {
+        if (id === null || name === null || role === null) {
+          router.push("/login");
+        }
+        if (id && name && role) {
+          if (
+            id !== "not-loaded" &&
+            name !== "not-loaded" &&
+            role !== "not-loaded"
+          ) {
+            dispatch(setUser1({ _id: id, User: name, Role: role }));
+            dispatch(setLoggedInStatus(true));
+          }
+        }
+      } else if (logged === null) {
+        router.push("/login");
+      }
+    }
+  }, [id, name, role, logged]);
+
+  React.useEffect(() => {
+    if (!state.isLoggedIn) {
+      if (logged === null) {
+        router.push("/login");
+      }
+    }
+  }, [state.isLoggedIn, logged]);
+
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}

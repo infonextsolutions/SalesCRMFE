@@ -316,9 +316,10 @@ const ActiveCall = ({ cancel }: any) => {
     console.log(data, 214121);
     const formdate = new FormData();
     formdate.append("callTitle", data.callTitle);
-    formdate.append("file", data.callUrl);
+    formdate.append("files", data.callUrl);
     axios
       .post(
+        // "https://testsalescrm.nextsolutions.in/api/recording/createManualRecording",
         "https://testsalescrm.nextsolutions.in/api/recording/createManualRecording",
         formdate
       )

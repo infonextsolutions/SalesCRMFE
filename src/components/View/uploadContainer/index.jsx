@@ -71,8 +71,8 @@ const UploadAudio = ({ onChange }) => {
   const handleDrop = function (e) {
     console.log(e[0], "please check here");
     if (isAudioFile(e[0])) {
-      setFile(e[0]);
-      onChange(e[0]);
+      setFile(e);
+      onChange(e);
       setError({
         show: true,
         error: (
