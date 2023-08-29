@@ -378,15 +378,18 @@ const ExpandableRow = ({
   callMatrics,
   engagingQuestions,
   height,
-  CallData,
+  CallData
 }: any) => {
-  console.log(CallData?.audio_url, 213401274214981);
+  console.log(CallData?.audio_url,213401274214981)
   return (
     <div
       className="w-[100%] h-[100%] flex px-[40px] py-[10px] duration-300"
       style={{ height: height }}
     >
-      <AudioPlayer src={CallData?.audio_url} />
+      <div className="w-[700px]" >
+
+      <AudioPlayer check={true} src={CallData?.audio_url} />
+      </div>
     </div>
   );
 };
