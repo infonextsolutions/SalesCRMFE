@@ -8,6 +8,10 @@ import { useSelector } from "react-redux";
 import Backdrop from "@/components/View/Backdrop/Center";
 import FullCall from "@/components/View/full-call";
 import CallSnippet from "@/components/View/call-snippet";
+import { useAppDispatch } from "@/store/store";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useRouter } from "next/router";
+import { setLoggedInStatus, setUser1 } from "@/store/auth";
 //Manya will make this page
 
 const CallProfile = ({ data, data1 }: any) => {
@@ -46,6 +50,65 @@ const CallProfile = ({ data, data1 }: any) => {
       showSnippet();
     }
   };
+
+
+  console.log(data, "please");
+
+
+  const state1 = useSelector((state: any) => state.auth);
+  console.log(data)
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const [logged] = useLocalStorage("logged", "loading");
+  const [id] = useLocalStorage("user-id", "not-loaded");
+  const [name] = useLocalStorage("user-name", "not-loaded");
+  const [role] = useLocalStorage("user-role", "not-loaded");
+
+  React.useEffect(() => {
+    const doACall = async () => {
+      // const res = axios.post(
+      //   `https://${ExotelKey}:${ExotelToken}@api.exotel.com/v3/accounts/westoryboard1/calls`,
+      //   {
+      //     from: {
+      //       contact_uri: "+9199XXXXXXX",
+      //       state_management: "true",
+      //     },
+      //   }
+      // );
+    };
+    // doACall();
+  }, []);
+
+  React.useEffect(() => {
+    if (!state1.isLoggedIn) {
+      if (logged === "loading" || logged === "loggedIn") {
+        if (id === null || name === null || role === null) {
+          router.push("/login");
+        }
+        if (id && name && role) {
+          if (
+            id !== "not-loaded" &&
+            name !== "not-loaded" &&
+            role !== "not-loaded"
+          ) {
+            dispatch(setUser1({ _id: id, User: name, Role: role }));
+            dispatch(setLoggedInStatus(true));
+          }
+        }
+      } else if (logged === null) {
+        router.push("/login");
+      }
+    }
+  }, [id, name, role, logged]);
+
+  React.useEffect(() => {
+    if (!state.isLoggedIn) {
+      if (logged === null) {
+        router.push("/login");
+      }
+    }
+  }, [state.isLoggedIn, logged]);
 
   console.log(data, "here is audiewgebaeo");
 

@@ -14,7 +14,6 @@ const SignupSchema = Yup.object().shape({
   pass: Yup.string().required("No password provided."),
 });
 
-
 const AddText = ({ top, id, title, width, change }: any) => {
   return (
     <div
@@ -106,6 +105,11 @@ const Login = () => {
       dispatch(setLoggedInStatus(true));
       setLocalData(1, user, "manager");
       router.push("/sales/open");
+    } else if (user === "User1234@sales365.com" && pass === "Password@123!") {
+      dispatch(setUser1({ _id: 2, User: user, Role: "Client" }));
+      dispatch(setLoggedInStatus(true));
+      setLocalData(2, user, "Client");
+      router.push("/calls/upload-calls");
     } else {
       setInvalid(true);
     }
@@ -156,7 +160,6 @@ const Login = () => {
                       onBlur={handleBlur("user")}
                       onChange={handleChange("user")}
                       className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-
                       // className="border-b-[2px] text-base font-medium px-2 py-2 bg-white text-black outline-none focus:ring-0 focus:border-gray-600"
                       placeholder="Enter Username"
                     />
@@ -179,10 +182,9 @@ const Login = () => {
                           placeholder="Enter Password"
                           type={show}
                           value={values.pass}
-                          //         className="border-b-[2px] font-medium text-base px-2 py-2 bg-white text-black 
+                          //         className="border-b-[2px] font-medium text-base px-2 py-2 bg-white text-black
                           // focus:outline-none focus:ring-0 focus:border-gray-600 w-full"
                           className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-
                           id="password"
                           onChange={handleChange("pass")}
                           onBlur={handleBlur("pass")}
@@ -209,7 +211,7 @@ const Login = () => {
                               width={25}
                               height={25}
                               onClick={() => {
-                                setShow("text")
+                                setShow("text");
                               }}
                             />
                           )}
@@ -235,7 +237,7 @@ const Login = () => {
                               width={25}
                               height={25}
                               onClick={() => {
-                                setShow("password")
+                                setShow("password");
                               }}
                             />
                           )}
@@ -254,13 +256,16 @@ const Login = () => {
                     )}
                     <div className="mt-[25px] flex justify-between ">
                       <div className="flex items-center">
-                        <input type="checkbox" className="form-checkbox h-3 w-3 mr-2 dark:bg-white " />
-                        <p className=" text-base text-[#000]  ">
-                          Remember Me
-                        </p>
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-3 w-3 mr-2 dark:bg-white "
+                        />
+                        <p className=" text-base text-[#000]  ">Remember Me</p>
                       </div>
                       <div>
-                        <a href="#" className="text-base text-[#304FFD]  ">forgot password ?</a>
+                        <a href="#" className="text-base text-[#304FFD]  ">
+                          forgot password ?
+                        </a>
                       </div>
                     </div>
                     <button
