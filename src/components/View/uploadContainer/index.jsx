@@ -79,6 +79,19 @@ const UploadAudio = ({ onChange }) => {
           <p className="text-[14px] font-medium  text-center">
             File Recieved
             <br />
+            {Array.isArray(e) && (
+              <>
+                {e.length > 0 &&
+                  e.map((item, i) => {
+                    return (
+                      <span key={i} className="text-[#000]">
+                        {item.name}
+                        {","}
+                      </span>
+                    );
+                  })}
+              </>
+            )}
             <span className="text-renal-blue underline cursor-pointer">
               Browse
             </span>
