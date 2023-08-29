@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { setMenuOptions } from "@/store/UI";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string().email("Invalid email").required("Required"),
@@ -109,6 +110,27 @@ const Login = () => {
       dispatch(setUser1({ _id: 2, User: user, Role: "Client" }));
       dispatch(setLoggedInStatus(true));
       setLocalData(2, user, "Client");
+      const sides = [
+        {
+          title: "Dashboard",
+          route: "dashboard",
+          icon: "Grid",
+          list: [],
+        },
+        {
+          title: "Calling",
+          route: "calls",
+          list: [{ title: "Upload Calls", route: "upload-calls" }],
+          icon: "Phone",
+        },
+        {
+          title: "Indicator",
+          route: "indicator",
+          list: [{ title: "Indicator-basic", route: "basic" }],
+          icon: "Zap",
+        },
+      ];
+      dispatch(setMenuOptions(sides));
       router.push("/calls/upload-calls");
     } else {
       setInvalid(true);

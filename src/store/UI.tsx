@@ -40,9 +40,7 @@ const menuOptions = [
   {
     title: "Indicator",
     route: "indicator",
-    list: [
-      { title: "Indicator-basic", route: "basic" },
-    ],
+    list: [{ title: "Indicator-basic", route: "basic" }],
     icon: "Zap",
   },
 ];
@@ -52,7 +50,7 @@ const UISlice = createSlice({
   initialState: {
     menuOpen: false,
     menuOptions: menuOptions,
-    current:0
+    current: 0,
   },
   reducers: {
     openMenu: (state) => {
@@ -64,12 +62,15 @@ const UISlice = createSlice({
     triggerMenu: (state) => {
       state.menuOpen = !state.menuOpen;
     },
-    setCurrent:(state,action)=>{
-        state.current=action.payload;
-    }
+    setCurrent: (state, action) => {
+      state.current = action.payload;
+    },
+    setMenuOptions: (state, action) => {
+      state.menuOptions = action.payload;
+    },
   },
 });
 
-export const { openMenu, closeMenu, triggerMenu ,setCurrent} = UISlice.actions;
+export const { openMenu, closeMenu, triggerMenu, setCurrent ,setMenuOptions} = UISlice.actions;
 
 export default UISlice.reducer;
