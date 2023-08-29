@@ -316,7 +316,12 @@ const ActiveCall = ({ cancel }: any) => {
     console.log(data, 214121);
     const formdate = new FormData();
     formdate.append("callTitle", data.callTitle);
-    formdate.append("files", data.callUrl);
+    if (Array.isArray(data.callUrl)) {
+      for (let i = 0; i < data.callUrl.length; i++) {
+        const element = data.callUrl[i];
+        formdate.append("files", data.callUrl[i]);
+      }
+    }
     axios
       .post(
         // "https://testsalescrm.nextsolutions.in/api/recording/createManualRecording",
@@ -384,7 +389,7 @@ const ActiveCall = ({ cancel }: any) => {
       <div className="w-[100%] flex justify-end mt-[20px]">
         {loading ? (
           <div className="w-[110px] h-[40px] rounded-2xl flex items-center justify-center bg-renal-blue">
-            <Loader/>
+            <Loader />
           </div>
         ) : (
           <SimpleButton
