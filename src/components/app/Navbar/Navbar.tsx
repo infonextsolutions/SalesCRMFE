@@ -6,12 +6,12 @@ import Image from "next/image";
 import ButtonDropDown from "@/utils/Button/Button";
 import { logout, setLoggedInStatus } from "@/store/auth";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
-
   const dispatch = useAppDispatch();
   const state = useSelector((state: any) => state.auth);
-
+  const router = useRouter();
   return (
     <div className="w-full h-[60px] border-b-[1px] border-[#eaebec]  bg-white flex items-center justify-between">
       <Image
@@ -75,6 +75,7 @@ const Navbar = () => {
             click={() => {
               dispatch(logout());
               dispatch(setLoggedInStatus(false));
+              router.replace("/login");
               localStorage.clear();
             }}
             text={""}

@@ -475,6 +475,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       return null;
     }
   }
+  function formatSeconds(seconds:any) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+  
+    // Use string interpolation to format the result
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  }
+  
   return (
     <>
       <div className="flex">
@@ -509,7 +517,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={200}
             left={10}
-            text={CallData.audio_duration}
+            text={formatSeconds(CallData.audio_duration)}
             color={"#000"}
           />
           <CallItem
