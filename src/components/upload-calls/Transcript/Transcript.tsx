@@ -177,30 +177,34 @@ const Transcript = ({
       />
       <div className="w-full px-[22px] mt-[30px] bg-[#ccc] min-h-[30vh]">
         <div className="w-[100%] h-[400px] hide-scrollbar bg-white px-[30px] py-[26px] overflow-y-auto">
-          {Arrr.map((item: any, i: any) => {
-            return (
-              <React.Fragment key={i}>
-                <div className="flex  my-[8px] ">
-                  <p
-                    className="text-[#304FFD] shrink-0 w-[100px] font-medium text-[15px] mr-[30px] tracking-wide"
-                    style={{
-                      color: item.title === "A" ? "#304FFD" : "#FF965D",
-                    }}
-                    dangerouslySetInnerHTML={{
-                      // __html: `00:05 ${item.title}:`,
-                      __html: `${convertMilliseconds(item.start)} ${
-                        item.title
-                      }:`,
-                    }}
-                  ></p>
-                  <p
-                    className=" text-black tracking-wide font-medium text-[15px]"
-                    dangerouslySetInnerHTML={{ __html: item.message }}
-                  ></p>
-                </div>
-              </React.Fragment>
-            );
-          })}
+          {utterances === null ? (
+            <p className="text-black text-center font-medium mt-[10px]"  >Please Try again after a few moments</p>
+          ) : (
+            Arrr.map((item: any, i: any) => {
+              return (
+                <React.Fragment key={i}>
+                  <div className="flex  my-[8px] ">
+                    <p
+                      className="text-[#304FFD] shrink-0 w-[100px] font-medium text-[15px] mr-[30px] tracking-wide"
+                      style={{
+                        color: item.title === "A" ? "#304FFD" : "#FF965D",
+                      }}
+                      dangerouslySetInnerHTML={{
+                        // __html: `00:05 ${item.title}:`,
+                        __html: `${convertMilliseconds(item.start)} ${
+                          item.title
+                        }:`,
+                      }}
+                    ></p>
+                    <p
+                      className=" text-black tracking-wide font-medium text-[15px]"
+                      dangerouslySetInnerHTML={{ __html: item.message }}
+                    ></p>
+                  </div>
+                </React.Fragment>
+              );
+            })
+          )}
         </div>
       </div>
     </div>
