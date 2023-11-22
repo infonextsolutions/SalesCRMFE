@@ -4,7 +4,7 @@ import { create } from "domain";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const DropItems = ({ title, list, top,setEventType }: any) => {
+const DropItems = ({ title, list, top, setEventType }: any) => {
   return (
     <div
       className="w-[100%]"
@@ -18,16 +18,18 @@ const DropItems = ({ title, list, top,setEventType }: any) => {
 
       <select
         className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
-        onChange={(e)=>setEventType(e.target.value)}
+        onChange={(e) => setEventType(e.target.value)}
       >
-        
-      {list.map((item: any, i: any) => (
-          
-            <option className="text-[#3F434A] " key={i} value={item.value} selected={item.selected}>
-              {item.title}
-            </option>
-          )
-        )} 
+        {list.map((item: any, i: any) => (
+          <option
+            className="text-[#3F434A] "
+            key={i}
+            value={item.value}
+            selected={item.selected}
+          >
+            {item.title}
+          </option>
+        ))}
       </select>
     </div>
   );
@@ -73,55 +75,61 @@ const AddTextArea = ({ top, title, width }: any) => {
     </div>
   );
 };
-const AddMember = ({title}:any) =>{
-  const [members,setMembers] = React.useState<string[]>([]);
-  const [value,setValue] = React.useState("")
-  const addMember = (e:any) =>{ 
-    if(e.keyCode === 13 && value){
+const AddMember = ({ title }: any) => {
+  const [members, setMembers] = React.useState<string[]>([]);
+  const [value, setValue] = React.useState("");
+  const addMember = (e: any) => {
+    if (e.keyCode === 13 && value) {
       setMembers([...members, value]);
       setValue("");
-    } 
-  }
+    }
+  };
 
-  const removeMemberHandler = (removeMember:any) =>{
-    const newMembers = members.filter((member)=> member !==removeMember);
+  const removeMemberHandler = (removeMember: any) => {
+    const newMembers = members.filter((member) => member !== removeMember);
     setMembers(newMembers);
+  };
+  return (
+    <>
+      <p className="text-[14px] font-medium mt-[20px] tracking-wide text-[#8a9099]">
+        {title}
+      </p>
+      <div className=" text-gray-700 flex flex-wrap border border-[#e8e9eb] mt-[10px] rounded-[13px] tracking-wide text-[14px] font-medium px-[14px] h-auto ">
+        <ul className="flex flex-wrap my-[3px] gap-2">
+          {members.length >= 1 &&
+            members.map((member, i) => (
+              <li
+                key={i}
+                className="flex items-center gap-1 px-2 bg-gray-200 rounded-md"
+              >
+                {member}
 
-  }
-  return(<>
-  <p className="text-[14px] font-medium mt-[20px] tracking-wide text-[#8a9099]">
-  {title} 
-  </p>
-  <div className=" text-gray-700 flex flex-wrap border border-[#e8e9eb] mt-[10px] rounded-[13px] tracking-wide text-[14px] font-medium px-[14px] h-auto ">
-      <ul className="flex flex-wrap my-[3px] gap-2">
-      {
-        members.length >=1 && members.map((member,i)=>(
-      <li key={i} className="flex items-center gap-1 px-2 bg-gray-200 rounded-md">{member}
-       
-         <div
-        className="cursor-pointer"
-        onClick={()=>removeMemberHandler(member)}
-      >
-        <Image
-          className="w-[12px] h-[12px]"
-          src={getBasicIcon("Cross")}
-          width={10}
-          height={10}
-          alt=""
+                <div
+                  className="cursor-pointer"
+                  onClick={() => removeMemberHandler(member)}
+                >
+                  <Image
+                    className="w-[12px] h-[12px]"
+                    src={getBasicIcon("Cross")}
+                    width={10}
+                    height={10}
+                    alt=""
+                  />
+                </div>
+              </li>
+            ))}
+        </ul>
+        <input
+          type="text"
+          className=" bg-white text-[#3f434a] rounded-[13px] tracking-wide text-[14px] font-medium px-[14px] h-[35px] outline-none"
+          onKeyUp={addMember}
+          onChange={(e) => setValue(e.target.value)}
+          value={value}
         />
-      </div> 
-       
-        </li>
-        ))
-      }
-        
-      </ul>
-    <input type="text"  className=" bg-white text-[#3f434a] rounded-[13px] tracking-wide text-[14px] font-medium px-[14px] h-[35px] outline-none"
-      onKeyUp={addMember} onChange={(e)=>setValue(e.target.value)} value={value}/>
-  </div>
- </> )
-
-}
+      </div>
+    </>
+  );
+};
 
 const Time = () => {
   const [show, setShow] = useState(false);
@@ -326,13 +334,13 @@ const AllDay = () => {
 };
 
 const Events = ({ cancel }: any) => {
-  const [eventType , setEventType] = useState("");
-  const submit =() =>{
-    const body = {}
+  const [eventType, setEventType] = useState("");
+  const submit = () => {
+    const body = {};
     //  need api integration
 
     cancel();
-    };
+  };
   return (
     <div className="hide-scrollbar w-[100%]  px-[40px] py-[30px] h-[100%] overflow-y-auto relative ">
       <div
@@ -376,17 +384,16 @@ const Events = ({ cancel }: any) => {
             selected: false,
           },
         ]}
-      /> 
+      />
       <AddText title={"Title"} top={20} />
       <AddTextArea title={"Description"} top={20} />
       <DateContainer />
       <AllDay />
-     {
-       eventType === "Meeting" && <AddMember title={"Members"}/>
-     }
-     <DropItems
+      {eventType === "Meeting" && <AddMember title={"Members"} />}
+      <DropItems
         title={"Outcome"}
         top={20}
+        setEventType={setEventType}
         list={[
           {
             title: "Choose Outcome",
@@ -406,9 +413,15 @@ const Events = ({ cancel }: any) => {
         ]}
       />
       <div className=" flex justify-end mt-[30px] w-[100%]">
-        <SimpleButton theme={1} text={"Create"} left={20} right={0} click={() => {
-              submit();
-            }}/>
+        <SimpleButton
+          theme={1}
+          text={"Create"}
+          left={20}
+          right={0}
+          click={() => {
+            submit();
+          }}
+        />
       </div>
     </div>
   );
