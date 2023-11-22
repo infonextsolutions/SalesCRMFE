@@ -1,5 +1,6 @@
 import ButtonDropDown from "@/utils/Button/Button";
-import React from "react";
+import DatePicker from "@/utils/Button/DatePicker";
+import React, { useState } from "react";
 
 const Chart = ({ title, percent }: any) => {
   return (
@@ -35,6 +36,8 @@ const ChartContainer = ({ children }: any) => {
 };
 
 const Selling = ({ selling }: { selling: Result }) => {
+  const [startDate, setStartDate] = useState("2023-07-19");
+  const [endDate, setEndDate] = useState("2023-07-26");
   return (
     <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
       <div className="w-[100%] flex items-center justify-between">
@@ -42,14 +45,11 @@ const Selling = ({ selling }: { selling: Result }) => {
           Selling Skills
         </h1>
         <div className="flex">
-          <ButtonDropDown
-            light={true}
-            text={"19 Aug – 25 Aug"}
-            icon={"Calendar"}
-            border={true}
-            id={1}
-            dropdown={true}
-            list={[]}
+          <DatePicker
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
           />
           <ButtonDropDown
             light={true}
@@ -62,13 +62,28 @@ const Selling = ({ selling }: { selling: Result }) => {
         </div>
       </div>
       <ChartContainer>
-        <Chart title={"Consultative Selling"} percent={`${selling.consultative_selling}%`} />
+        <Chart
+          title={"Consultative Selling"}
+          percent={`${selling.consultative_selling}%`}
+        />
         <Chart title={"Empathy"} percent={`${selling.empathy}%`} />
-        <Chart title={"Listening Skills"} percent={`${selling.listening_skills}%`} />
+        <Chart
+          title={"Listening Skills"}
+          percent={`${selling.listening_skills}%`}
+        />
         <Chart title={"Confidence"} percent={`${selling.confidence}%`} />
-        <Chart title={"Urgency Creation"} percent={`${selling.urgency_creation}%`} />
-        <Chart title={"Positive Energy"} percent={`${selling.positive_energy}%`} />
-        <Chart title={"Rapport Building"} percent={`${selling.report_building}%`} />
+        <Chart
+          title={"Urgency Creation"}
+          percent={`${selling.urgency_creation}%`}
+        />
+        <Chart
+          title={"Positive Energy"}
+          percent={`${selling.positive_energy}%`}
+        />
+        <Chart
+          title={"Rapport Building"}
+          percent={`${selling.report_building}%`}
+        />
         <Chart title={"Politeness"} percent={`${selling.politeness}%`} />
       </ChartContainer>
     </div>

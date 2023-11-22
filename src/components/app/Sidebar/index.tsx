@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useUI from "@/hooks/useUI";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SideItem from "./SideItem";
 import Logo from "./SidebarLogo";
+import { useDispatch } from "react-redux";
+import { setLoggedInStatus } from "@/store/auth";
 
 const Loader = () => {
   return (
@@ -32,6 +34,10 @@ const Loader = () => {
 
 const Sidebar = () => {
   const { menuOpen, menuOptions, loading } = useUI();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setLoggedInStatus(true));
+  });
 
   return (
     <div
@@ -40,7 +46,7 @@ const Sidebar = () => {
       }`}
     >
       <Logo />
-      {loading && ( 
+      {loading && (
         <>
           {menuOptions.map((item: any, i: any) => {
             return (
