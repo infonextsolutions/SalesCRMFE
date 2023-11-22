@@ -1,5 +1,6 @@
 import ButtonDropDown from "@/utils/Button/Button";
-import React from "react";
+import DatePicker from "@/utils/Button/DatePicker";
+import React, { useState } from "react";
 
 const Chart = ({ title, percent }: any) => {
   return (
@@ -35,22 +36,20 @@ const ChartContainer = ({ children }: any) => {
 };
 
 const ScriptBuilding = ({ script }: { script: Root }) => {
-  console.log(script);
+  const [startDate, setStartDate] = useState("2023-07-19");
+  const [endDate, setEndDate] = useState("2023-07-26");
   return (
-    <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <div className="w-[800px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Script Building Blocks
         </h1>
         <div className="flex">
-          <ButtonDropDown
-            light={true}
-            text={"19 Aug – 25 Aug"}
-            icon={"Calendar"}
-            border={true}
-            id={1}
-            dropdown={true}
-            list={[]}
+          <DatePicker
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
           />
           <ButtonDropDown
             light={true}

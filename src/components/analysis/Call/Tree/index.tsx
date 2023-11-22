@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import ButtonDropDown from "@/utils/Button/Button";
 import Charts from "./treemap";
+import DatePicker from "@/utils/Button/DatePicker";
 
 const TreeMap = ({ data1 }: any) => {
-  console.log(data1,"please")
+  const [startDate, setStartDate] = useState("2023-07-19");
+  const [endDate, setEndDate] = useState("2023-07-26");
+  console.log(data1, "please");
   return (
     <div className="w-[100%] overflow-hidden bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] mt-[50px] mb-[50px]">
       <div className="w-[100%] flex items-center justify-between overflow-hidden">
@@ -11,14 +14,11 @@ const TreeMap = ({ data1 }: any) => {
           Pitch Analysis
         </h1>
         <div className="flex">
-          <ButtonDropDown
-            light={true}
-            text={"19 Aug – 25 Aug"}
-            icon={"Calendar"}
-            border={true}
-            id={1}
-            dropdown={true}
-            list={[]}
+          <DatePicker
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
           />
           <ButtonDropDown
             light={true}
