@@ -5,6 +5,7 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const DropItems = ({ title, list, top, change }: any) => {
   return (
@@ -413,6 +414,7 @@ const ActiveCall = ({
         };
       })
     : [];
+  const state = useSelector((state: any) => state.auth);
 
   return (
     <div className="w-[100%] h-[100%] py-[30px] pl-[40px] pr-[40px]  relative">
@@ -464,7 +466,11 @@ const ActiveCall = ({
             val: 0,
             selected: true,
           },
-          
+          {
+            title: `${state?.user.name.split("@")[0]}`,
+            val: 0,
+            selected: true,
+          },
           ...list,
         ]}
         change={(e: any) => {
