@@ -16,8 +16,21 @@ function useUI() {
       {
         title: "Calling",
         route: "calls",
-        list: [{ title: "Upload Calls", route: "upload-calls" }],
+        list: [
+          { title: "Upload Calls", route: "upload-calls" },
+          { title: "Active Calls", route: "active-calls" },
+          { title: "Recorded Calls", route: "recorded-calls" },
+        ],
         icon: "Phone",
+      },
+      {
+        title: "Sales",
+        route: "sales",
+        list: [
+          { title: "Open Sales", route: "open" },
+          { title: "Closed Sales", route: "closed" },
+        ],
+        icon: "Zap",
       },
       {
         title: "Indicator",
