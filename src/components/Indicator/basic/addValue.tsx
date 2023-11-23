@@ -62,18 +62,13 @@ const AddText = ({ title, place, change }: any) => {
 
 const Addvalue = ({ cancel }: any) => {
   const [data, setData] = useState({
-    indicator_type: "",
-    indicator_category: "",
     indicator_value: "",
     alternatives: "",
-    comparision_type: "",
-    time_restriction: "",
-    speaker: "",
   });
   return (
     <div className="w-[100%] h-[100%] py-[10px] pl-[30px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium mb-[24px] tracking-[1px]">
-        Add Indicator category
+        New Indicator value
       </h1>
       <div
         className="w-[30px] h-[30px] cursor-pointer rounded-xl absolute top-[20px] right-[30px] flex items-center justify-center bg-[#f8f8f8]"
@@ -89,113 +84,20 @@ const Addvalue = ({ cancel }: any) => {
           alt=""
         />
       </div>
-      <div className="w-[100%] mb-[10px] justify-between flex ">
-        <div className="w-[63%]">
-          <DropItems
-            title="Indicator Type"
-            top={20}
-            list={[
-              {
-                title: "Choose Indicator type",
-                val: 0,
-                selected: true,
-              },
-            ]}
-            change={(e: any) => {
-              setData({ ...data, indicator_type: e });
-            }}
-          />
-          <DropItems
-            title="Indicator Category"
-            top={10}
-            list={[
-              {
-                title: "Choose Category type",
-                val: 0,
-                selected: true,
-              },
-            ]}
-            change={(e: any) => {
-              setData({ ...data, indicator_category: e });
-            }}
-          />
-          <DropItems
-            title="Indicator Value"
-            top={10}
-            list={[
-              {
-                title: "Choose Indicator Value",
-                val: 0,
-                selected: true,
-              },
-            ]}
-            change={(e: any) => {
-              setData({ ...data, indicator_value: e });
-            }}
-          />
-        </div>
-        <div className="w-[35%] flex items-end">
-          <SimpleButton
-            theme={1}
-            click={() => {}}
-            width={"100%"}
-            text={"More Alternatives"}
-            left={20}
-            right={0}
-          />
-        </div>
-      </div>
       <AddText
-        title="Alternatives"
-        place={""}
+        title="Add New Indicator Value"
+        place={"Indicator Value Name"}
+        change={(e: any) => {
+          setData({ ...data, indicator_value: e });
+        }}
+      />
+      <AddText
+        title="Alternative Values For The Indicator Value"
+        place={"Enter Comma Seperated Values"}
         change={(e: any) => {
           setData({ ...data, alternatives: e });
         }}
       />
-      <div className="w-[63%]">
-        <DropItems
-          title="Comparision Type"
-          top={10}
-          list={[
-            {
-              title: "Choose Comparision Type",
-              val: 0,
-              selected: true,
-            },
-          ]}
-          change={(e: any) => {
-            setData({ ...data, comparision_type: e });
-          }}
-        />
-        <DropItems
-          title="Time Restriction"
-          top={10}
-          list={[
-            {
-              title: "Choose Time Restriction",
-              val: 0,
-              selected: true,
-            },
-          ]}
-          change={(e: any) => {
-            setData({ ...data, time_restriction: e });
-          }}
-        />
-        <DropItems
-          title="Speaker"
-          top={10}
-          list={[
-            {
-              title: "Choose Speaker",
-              val: 0,
-              selected: true,
-            },
-          ]}
-          change={(e: any) => {
-            setData({ ...data, speaker: e });
-          }}
-        />
-      </div>
       <div className="w-[100%] flex justify-end">
         <SimpleButton
           theme={1}
