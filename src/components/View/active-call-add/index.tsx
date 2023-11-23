@@ -469,7 +469,7 @@ const ActiveCall = ({
           {
             title: `${state?.user.name.split("@")[0]}`,
             val: 0,
-            selected: true,
+            selected: false,
           },
           ...list,
         ]}
@@ -478,13 +478,18 @@ const ActiveCall = ({
         }}
       />
       <DropItems
-        title="Call  Participants"
+        title="Call Participants"
         top={20}
         list={[
           {
             title: "Choose Participants",
             val: 0,
             selected: true,
+          },
+          {
+            title: "Client ABC",
+            val: 0,
+            selected: false,
           },
           ...list,
         ]}
