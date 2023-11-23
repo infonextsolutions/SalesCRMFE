@@ -66,6 +66,7 @@ const AddCategory = ({ cancel }: any) => {
     indicator_category: "",
     indicator_value: "",
     alternatives: "",
+    moreAlternatives: "",
     comparision_type: "",
     time_restriction: "",
     speaker: "",
@@ -662,9 +663,629 @@ const AddCategory = ({ cancel }: any) => {
           {/* <DropItems
             title="More Alternatives"
             top={10}
-            list={[]}
+            list={
+              data?.indicator_type === "Introduction" &&
+              data?.indicator_category === "Greetings" &&
+              data?.indicator_value === "Hi"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Hello",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Hey",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Hello there",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Introduction" &&
+                  data?.indicator_category === "Name" &&
+                  data?.indicator_value === "My Name is"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "I am",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "This is",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Introduction" &&
+                  data?.indicator_category === "Title and Roles" &&
+                  data?.indicator_value === "Sales"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Sales Representative",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Sales Rep",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Sales Executive",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Introduction" &&
+                  data?.indicator_category === "Title and Roles" &&
+                  data?.indicator_value === "Account"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Account Executive",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Account Manager",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Introduction" &&
+                  data?.indicator_category === "Responsibilities" &&
+                  data?.indicator_value === "Hi"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Responsibiltiy",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Agenda Setting" &&
+                  data?.indicator_category === "Agenda Setup for the meeting" &&
+                  data?.indicator_value === "The reason for my call today is"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "I'm reaching out today to discuss",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "I wanted to connect with you about",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "My purpose in calling is to talk about",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Agenda Setting" &&
+                  data?.indicator_category === "Rapport Building" &&
+                  data?.indicator_value === "Have I caught you at a good time?"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Is now a convenient moment for us to chat?",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Do you have a few moments to discuss?",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Is this a suitable time for us to talk?",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title:
+                        "Would you prefer to speak now or should I schedule a better time?",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Company Introduction" &&
+                  data?.indicator_category === "Company Offerings / Services" &&
+                  data?.indicator_value === "Solutions"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "We specialize in providing",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Core offerings",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Specialized services",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Flagship solutions",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Range of services",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Tailored offerings for your need",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Company Introduction" &&
+                  data?.indicator_category ===
+                    "Company Stats - Revenue / Global Presence / Employee Strength" &&
+                  data?.indicator_value === "Shared about achievements"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Achieved",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Global presence in",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Expanded operations to",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Strong presence in",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Product / Service" &&
+                  data?.indicator_category === "Product Demo/ Information" &&
+                  data?.indicator_value === "Let me show you"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "I'd like to demonstrate",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "how it works",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "walkthrough",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "a live demo",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Allow me to present",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Product / Service" &&
+                  data?.indicator_category === "Product Demo/ Information" &&
+                  data?.indicator_value === "Features"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Key Features",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Benefits",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Unique selling point",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "use case",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "what sets it apart",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Probing" &&
+                  data?.indicator_category === "Challenges and Pain Points" &&
+                  data?.indicator_value ===
+                    "What difficulties are you currently facing"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "What pain points do you have ",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Can you tell me about your challenges",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Whats been causing issues",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Are there any pain points in your current setup",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Probing" &&
+                  data?.indicator_category ===
+                    "Ongoing and upcoming projects or initiatives" &&
+                  data?.indicator_value ===
+                    "What projects are you currently working on"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Can you share your ongoing initiatives",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Any upcoming projects ",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Your current initiatives",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Probing" &&
+                  data?.indicator_category ===
+                    "Current vendors/ service providers" &&
+                  data?.indicator_value === "your current service providers"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Are you working with any vendors currently",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "your existing partners",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "What companies are you currenlty outsourcing to",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Probing" &&
+                  data?.indicator_category ===
+                    "Current Platforms or tools being used" &&
+                  data?.indicator_value ===
+                    "What platforms/tools are you using right now?"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Tools that you are currently utilizing",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title:
+                        "tell me about the software you're using in your operations",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "what tech solutions do you currently employ",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Next Steps Discussion" &&
+                  data?.indicator_category ===
+                    "Follow-up conversations/ next steps" &&
+                  data?.indicator_value === "Next discussion"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Moving forward",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Next Steps",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Continuing our conversation",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Next Steps Discussion" &&
+                  data?.indicator_category === "Follow-up Date and Time" &&
+                  data?.indicator_value === "Reconnet"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "when can we reconnect",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "can we schedule our next talk",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "choosing a follow-up date",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "what time works for you",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Next Steps Discussion" &&
+                  data?.indicator_category === "Proposed POC" &&
+                  data?.indicator_value ===
+                    "I will be your main point of contact"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "you can reach out to me directly",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "I'm your designated contact",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Feel free to contact me anytime",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "I will be your go to person",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Next Steps Discussion" &&
+                  data?.indicator_category === "Decision Maker" &&
+                  data?.indicator_value === "decision making"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "Who will be the decision maker",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Who will be making the final call",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Let's involve the decision maker",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Is there someone else from your side",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Objection Handling" &&
+                  data?.indicator_category === "Addressing Objections" &&
+                  data?.indicator_value === "I understand your concern"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "That's a valid point",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "I hear what you are saying",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "I appreciate your feedback",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "Let me address that",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "I'm here to clarify",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Objection Handling" &&
+                  data?.indicator_category ===
+                    "Providing Explanations and References" &&
+                  data?.indicator_value === "Let me explain how our solution"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "here's how others have tackeled this issue",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "our case study demonstrate",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : data?.indicator_type === "Objection Handling" &&
+                  data?.indicator_category ===
+                    "Offering Solutions to overcome objections" &&
+                  data?.indicator_value === "to approach this problem"
+                ? [
+                    {
+                      title: "Choose Alternative Value",
+                      val: 0,
+                      selected: true,
+                    },
+                    {
+                      title: "One way to solve this problem",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "whatif we",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "how about considering",
+                      val: 0,
+                      selected: false,
+                    },
+                    {
+                      title: "A potential solution might be",
+                      val: 0,
+                      selected: false,
+                    },
+                  ]
+                : []
+            }
             change={(e: any) => {
-              setData({ ...data, alternatives: e });
+              setData({ ...data, moreAlternatives: e });
             }}
           /> */}
           <SimpleButton
