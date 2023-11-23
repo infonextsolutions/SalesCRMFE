@@ -4,6 +4,8 @@ import axios from "axios";
 import { create } from "domain";
 import Image from "next/image";
 import React, { useState } from "react";
+import { setError, setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 
 const DropItems = ({ title, list, top, setEventType }: any) => {
   return (
@@ -403,6 +405,7 @@ const Events = ({ cancel }: any) => {
   const [eventToTime, setEventToTime] = useState("");
   const [eventToDate, setEventToDate] = useState("");
   const [eventType, setEventType] = useState("");
+  const dispatch = useAppDispatch();
   const submit = () => {
     // console.log("eventtitle", eventType);
     // console.log("eventtitle", eventTitle);
@@ -417,12 +420,12 @@ const Events = ({ cancel }: any) => {
       type: eventType,
       title: eventTitle,
       description: eventDescription,
-      datetime: {
-        fromTime: eventFromTime,
-        fromDate: eventFromDate,
-        toTime: eventToTime,
-        toDate: eventToDate,
-      },
+      // datetime: {
+      //   fromTime: eventFromTime,
+      //   fromDate: eventFromDate,
+      //   toTime: eventToTime,
+      //   toDate: eventToDate,
+      // },
       allday: eventAllday,
       outcome: eventOutcome,
     };
@@ -434,15 +437,21 @@ const Events = ({ cancel }: any) => {
         finalPayload
       )
       .then((e: any) => {
-        console.log("payload", finalPayload);
-
-        console.log("added event");
-
         cancel();
+        dispatch(
+          setSuccess({
+            show: true,
+            success: "Event Added Successfully!",
+          })
+        );
       })
       .catch((e) => {
-        console.log(e);
-        console.log("paylaod", finalPayload);
+        dispatch(
+          setError({
+            show: true,
+            error: "Error Occured!",
+          })
+        );
       });
     const body = {};
     //  need api integration

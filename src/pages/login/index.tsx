@@ -120,8 +120,22 @@ const Login = () => {
         {
           title: "Calling",
           route: "calls",
-          list: [{ title: "Upload Calls", route: "upload-calls" }],
+          list: [
+            { title: "Upload Calls", route: "upload-calls" },
+            { title: "Active Calls", route: "active-calls" },
+            { title: "Recorded Calls", route: "recorded-calls" },
+          ],
+
           icon: "Phone",
+        },
+        {
+          title: "Sales",
+          route: "sales",
+          list: [
+            { title: "Open", route: "open" },
+            { title: "Closed", route: "closed" },
+          ],
+          icon: "Sort",
         },
         {
           title: "Indicator",

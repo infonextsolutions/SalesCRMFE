@@ -348,7 +348,7 @@ const ActiveCall = ({ cancel }: any) => {
         setLoading(false);
       });
   };
-  
+
   return (
     <div className="w-[100%] h-[100%] py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium mb-[24px] tracking-[1px]">
