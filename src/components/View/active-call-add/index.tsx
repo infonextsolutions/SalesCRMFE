@@ -469,7 +469,7 @@ const ActiveCall = ({
           {
             title: `${state?.user.name.split("@")[0]}`,
             val: 0,
-            selected: true,
+            selected: false,
           },
           ...list,
         ]}
@@ -485,6 +485,11 @@ const ActiveCall = ({
             title: "Choose Participants",
             val: 0,
             selected: true,
+          },
+          {
+            title: "Client ABC",
+            val: 0,
+            selected: false,
           },
           ...list,
         ]}
