@@ -394,7 +394,7 @@ const AllDay = ({ setEventAllday }: any) => {
   );
 };
 
-const Events = ({ cancel }: any) => {
+const Events = ({ cancel, leadid }: any) => {
   // const [eventType1, setEventType1] = useState("");
   const [eventTitle, setEventTitle] = useState("");
   const [eventDescription, setEventDescription] = useState("");
