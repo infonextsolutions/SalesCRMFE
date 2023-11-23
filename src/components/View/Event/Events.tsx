@@ -17,7 +17,7 @@ const DropItems = ({ title, list, top, setEventType }: any) => {
       </p>
 
       <select
-        className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
+        className=" border border-gray-300 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
         onChange={(e) => setEventType(e.target.value)}
       >
         {list.map((item: any, i: any) => (
@@ -35,7 +35,7 @@ const DropItems = ({ title, list, top, setEventType }: any) => {
   );
 };
 
-const AddText = ({ top, title, width }: any) => {
+const AddText = ({ top, title, width, change }: any) => {
   return (
     <div
       className="w-[100%] "
@@ -49,13 +49,16 @@ const AddText = ({ top, title, width }: any) => {
       </p>
       <input
         type="text"
-        className="outline-none w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+        className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+        onChange={(e: any) => {
+          change(e.target.value);
+        }}
       />
     </div>
   );
 };
 
-const AddTextArea = ({ top, title, width }: any) => {
+const AddTextArea = ({ top, title, width, change }: any) => {
   return (
     <div
       className="w-[100%] "
@@ -71,6 +74,10 @@ const AddTextArea = ({ top, title, width }: any) => {
         name=""
         className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[140px] outline-none"
         id=""
+        onChange={(e: any) => {
+          change(e.target.value);
+          console.log(e.target.value);
+        }}
       ></textarea>
     </div>
   );
@@ -131,7 +138,7 @@ const AddMember = ({ title }: any) => {
   );
 };
 
-const Time = () => {
+const Time = ({ id, setEventToTime, setEventFromTime }: any) => {
   const [show, setShow] = useState(false);
   const [hover, setHover] = useState(false);
 
@@ -212,7 +219,7 @@ const Time = () => {
         onMouseLeave={() => {
           setHover(false);
         }}
-        className="text-gray-900 h-[100%] cursor-pointer tracking-wider text-sm rounded-2xl text-[#3F434A] flex items-center justify-center font-medium px-[5px] w-full p-0 bg-white"
+        className="h-[100%] cursor-pointer tracking-wider text-sm rounded-2xl text-[#3F434A] flex items-center justify-center font-medium px-[5px] w-full p-0 bg-white"
       >
         {arr[selected]}
       </div>
@@ -250,6 +257,7 @@ const Time = () => {
                   }}
                   onClick={() => {
                     setSelected(i);
+                    id == 1 ? setEventFromTime(arr[i]) : setEventToTime(arr[i]);
                     setShow(false);
                   }}
                 >
@@ -264,7 +272,7 @@ const Time = () => {
   );
 };
 
-const Date = () => {
+const Date = ({ id, setEventFromDate, setEventToDate }: any) => {
   return (
     <div className="w-[58%] h-[100%] cursor-pointer">
       <div className="w-[100%] h-[100%] overflow-hidden relative py-[7px] pl-[10px] px-[3px] flex items-center justify-center">
@@ -273,6 +281,13 @@ const Date = () => {
           className="bg-[#fff] pl-[3px] w-[100%] outline-none font-medium text-[#000] text-[14px] cursor-pointer"
           name=""
           id=""
+          onChange={(e) => {
+            console.log(e.target.value);
+            id == 1
+              ? setEventFromDate(e.target.value)
+              : setEventToDate(e.target.value);
+            // dateFunc(e.target.value);
+          }}
         />
         <Image
           src={getBasicIcon("Arrow-Down 2")}
@@ -289,42 +304,87 @@ const Date = () => {
   );
 };
 
-const DateTime = () => {
+const DateTime = ({
+  id,
+  setEventToDate,
+  setEventFromDate,
+  setEventFromTime,
+  setEventToTime,
+}: any) => {
   return (
     <div className="w-[45%] border-[#ccc] flex  border-[1px] rounded-2xl h-[44px] ">
-      <Time />
+      <Time
+        id={id}
+        setEventFromTime={setEventFromTime}
+        setEventToTime={setEventToTime}
+      />
 
-      <Date />
+      <Date
+        id={id}
+        setEventFromDate={setEventFromDate}
+        setEventToDate={setEventToDate}
+      />
     </div>
   );
 };
 
-const DateContainer = () => {
+const DateContainer = ({
+  setEventFromTime,
+  setEventFromDate,
+  setEventToDate,
+  setEventToTime,
+}: any) => {
   return (
     <div className="mt-[15px]">
       <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
         Time and Date{" "}
       </p>
       <div className="w-[100%] mt-[18px] flex justify-between items-center">
-        <DateTime />
+        <DateTime
+          id={1}
+          setEventFromTime={setEventFromTime}
+          setEventFromDate={setEventFromDate}
+          setEventToDate={setEventToDate}
+          setEventToTime={setEventToTime}
+          // timeFunc={setEventFromTime}
+          // dateFunc={setEventFromDate}
+        />
         <div className="w-[30px] h-[1px] bg-[#ccc]" />
-        <DateTime />
+        <DateTime
+          id={2}
+          setEventFromTime={setEventFromTime}
+          setEventFromDate={setEventFromDate}
+          setEventToDate={setEventToDate}
+          setEventToTime={setEventToTime}
+          // timeFunc={setEventToTime}
+          // dateFunc={setEventToTime}
+        />
       </div>
     </div>
   );
 };
 
-const AllDay = () => {
+const AllDay = ({ setEventAllday }: any) => {
   return (
     <div className="w-[100%] flex items-center h-[40px] mt-[30px]">
       <div className={`flex items-center mr-[70px]  h-[20px] shrink-0 `}>
-        <input type="checkbox" className="checkbox mr-[8px]" />
+        <input
+          type="checkbox"
+          onClick={() => setEventAllday("allday")}
+          value="allday"
+          className="checkbox mr-[8px]"
+        />
         <p className="text-[14px] font-medium tracking-wide text-[#000]">
           All Day
         </p>
       </div>
       <div className={`flex items-center  h-[20px] shrink-0 `}>
-        <input type="checkbox" className="checkbox mr-[8px]" />
+        <input
+          type="checkbox"
+          onClick={() => setEventAllday("repeat")}
+          value="repeat"
+          className="checkbox mr-[8px]"
+        />
         <p className="text-[14px] font-medium tracking-wide text-[#000]">
           Repeat
         </p>
@@ -334,8 +394,27 @@ const AllDay = () => {
 };
 
 const Events = ({ cancel }: any) => {
+  // const [eventType1, setEventType1] = useState("");
+  const [eventTitle, setEventTitle] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [eventOutcome, setEventOutcome] = useState("");
+  const [eventAllday, setEventAllday] = useState("");
+  const [eventFromTime, setEventFromTime] = useState("");
+  const [eventFromDate, setEventFromDate] = useState("");
+  const [eventToTime, setEventToTime] = useState("");
+  const [eventToDate, setEventToDate] = useState("");
   const [eventType, setEventType] = useState("");
   const submit = () => {
+    // console.log("eventtitle", eventType);
+    // console.log("eventtitle", eventTitle);
+    // console.log("eventtitle", eventDescription);
+    // console.log("eventFromTime", eventFromTime);
+    // console.log("eventFromDate", eventFromDate);
+    // console.log("eventToTime", eventToTime);
+    // console.log("eventToDate", eventToDate);
+    // console.log("eventtitle", eventAllday);
+    // console.log("eventtitle", eventOutcome);
+
     const body = {};
     //  need api integration
 
@@ -385,15 +464,32 @@ const Events = ({ cancel }: any) => {
           },
         ]}
       />
-      <AddText title={"Title"} top={20} />
-      <AddTextArea title={"Description"} top={20} />
-      <DateContainer />
-      <AllDay />
+      <AddText
+        title={"Title"}
+        top={20}
+        change={(e: any) => {
+          setEventTitle(e);
+        }}
+      />
+      <AddTextArea
+        title={"Description"}
+        top={20}
+        change={(e: any) => {
+          setEventDescription(e);
+        }}
+      />
+      <DateContainer
+        setEventFromTime={setEventFromTime}
+        setEventFromDate={setEventFromDate}
+        setEventToDate={setEventToDate}
+        setEventToTime={setEventToTime}
+      />
+      <AllDay setEventAllday={setEventAllday} />
       {eventType === "Meeting" && <AddMember title={"Members"} />}
       <DropItems
         title={"Outcome"}
         top={20}
-        setEventType={setEventType}
+        setEventType={setEventOutcome}
         list={[
           {
             title: "Choose Outcome",
