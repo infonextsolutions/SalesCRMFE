@@ -364,7 +364,7 @@ const LeadContainer = ({
   const [detailShow, setDetailShow] = useState(false);
   const [call, setCall] = React.useState(false);
 
-  const num= Math.floor(Math.random() * 4);
+  const num = Math.floor(Math.random() * 4);
 
   const showNotes = () => {
     setNotes(true);
@@ -391,7 +391,7 @@ const LeadContainer = ({
       setEvents(false);
       setBool(true);
     }, 500);
-  }; 
+  };
 
   const cancelEmails = () => {
     setBool(false);
@@ -446,7 +446,6 @@ const LeadContainer = ({
       showCall();
     }
   };
-
 
   const [w, setW] = useState(0);
   const wRef: any = useRef();
@@ -547,9 +546,19 @@ const LeadContainer = ({
           <LeadItem width={150} left={20} text={"Anil L, Paul G, Rekha"} />
           <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
           <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
-          <LeadItem width={130} left={10} textLeft={10} text={LeadData?.owners[0]?.name} />
+          <LeadItem
+            width={130}
+            left={10}
+            textLeft={10}
+            text={LeadData?.owners[0]?.name}
+          />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
-          <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} />
+          <LeadItem
+            width={150}
+            left={10}
+            textLeft={10}
+            text={company.company_product_category}
+          />
 
           {/* activity history starts here*/}
           {/* <div
@@ -578,7 +587,7 @@ const LeadContainer = ({
             <MidPath />
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
           </div> */}
-            <ActivityHistory width={180} left={10} random={num}/>
+          <ActivityHistory width={180} left={10} random={num} />
           {/* activity history ends here*/}
           <LeadItemMultiple
             width={130}
@@ -639,15 +648,11 @@ const LeadContainer = ({
             // leadDesc={
             //   "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
             // }
-            leadDesc={
-              LeadData.lead_description
-            }
+            leadDesc={LeadData.lead_description}
             // companyDesc={
             //   "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
             // }
-            companyDesc={
-              LeadData.companyId.company_description
-            }
+            companyDesc={LeadData.companyId.company_description}
             companyWebsite={LeadData.companyId.company_website_url}
             // LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
             LeadOwners={LeadData.owners}
@@ -686,14 +691,16 @@ const LeadContainer = ({
       )}
       {events && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Events cancel={cancelEvents} />
+          <Events cancel={cancelEvents} leadid={id} />
         </Backdrop>
       )}
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage refresh={(e)=>{
-            
-          }} cancel={cancelEmails} data={LeadData} />
+          <EmailPage
+            refresh={(e) => {}}
+            cancel={cancelEmails}
+            data={LeadData}
+          />
         </Backdrop>
       )}
       {notes1 && (
@@ -708,7 +715,13 @@ const LeadContainer = ({
       )}
       {call && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <ActiveCall cancel={cancelCall} id={LeadData._id} companyId={LeadData.companyId._id} lead={LeadData} customerId={LeadData.customerId._id} />
+          <ActiveCall
+            cancel={cancelCall}
+            id={LeadData._id}
+            companyId={LeadData.companyId._id}
+            lead={LeadData}
+            customerId={LeadData.customerId._id}
+          />
         </Backdrop>
       )}
     </>

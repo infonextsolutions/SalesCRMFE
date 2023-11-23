@@ -1,6 +1,6 @@
 import ButtonDropDown from "@/utils/Button/Button";
 import DatePicker from "@/utils/Button/DatePicker";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Chart = ({ title, percent }: any) => {
   return (
@@ -35,9 +35,18 @@ const ChartContainer = ({ children }: any) => {
   );
 };
 
-const ScriptBuilding = ({ script }: { script: Root }) => {
+const ScriptBuilding = ({
+  script,
+  getScriptData,
+}: {
+  script: Root;
+  getScriptData: any;
+}) => {
   const [startDate, setStartDate] = useState("2023-07-19");
   const [endDate, setEndDate] = useState("2023-07-26");
+  useEffect(() => {
+    getScriptData([startDate, endDate]);
+  }, [startDate, endDate]);
   return (
     <div className="w-[800px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <div className="w-[100%] flex items-center justify-between">

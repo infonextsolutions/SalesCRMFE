@@ -4,16 +4,22 @@ import Selling from "./Charts/Selling";
 import Emotion from "./Charts/Emotion";
 import TreeMap from "./Tree";
 
-const CallAnalysis = ({ script,emotion,tree }: any) => {
-  console.log(tree)
+const CallAnalysis = ({
+  script,
+  emotion,
+  tree,
+  getPitchData,
+  getScriptData,
+  getSellingData,
+}: any) => {
   return (
     <div className="w-[100%] mt-[20px] min-h-[100vh] overflow-x-auto custom-scroll">
       <div className="w-[100%] flex mb-[50px]">
-        <ScriptBuilding script={script} />
-        <Selling  selling={emotion} />
+        <ScriptBuilding getScriptData={getScriptData} script={script} />
+        <Selling getSellingData={getSellingData} selling={emotion} />
       </div>
       {/* <Emotion /> */}
-      <TreeMap data1={tree} />
+      <TreeMap getPitchData={getPitchData} data1={tree} />
     </div>
   );
 };
