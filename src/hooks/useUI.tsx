@@ -27,10 +27,10 @@ function useUI() {
         title: "Sales",
         route: "sales",
         list: [
-          { title: "Open Sales", route: "open" },
-          { title: "Closed Sales", route: "closed" },
+          { title: "Open", route: "open" },
+          { title: "Closed", route: "closed" },
         ],
-        icon: "Zap",
+        icon: "Sort",
       },
       {
         title: "Indicator",

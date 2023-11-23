@@ -131,7 +131,7 @@ const Login = () => {
         },
       ];
       dispatch(setMenuOptions(sides));
-      router.push("/calls/upload-calls");
+      // router.push("/calls/upload-calls");
     } else {
       setInvalid(true);
     }

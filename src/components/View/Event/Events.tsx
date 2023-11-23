@@ -1,5 +1,6 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import axios from "axios";
 import { create } from "domain";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -76,7 +77,6 @@ const AddTextArea = ({ top, title, width, change }: any) => {
         id=""
         onChange={(e: any) => {
           change(e.target.value);
-          console.log(e.target.value);
         }}
       ></textarea>
     </div>
@@ -282,7 +282,6 @@ const Date = ({ id, setEventFromDate, setEventToDate }: any) => {
           name=""
           id=""
           onChange={(e) => {
-            console.log(e.target.value);
             id == 1
               ? setEventFromDate(e.target.value)
               : setEventToDate(e.target.value);
@@ -414,7 +413,37 @@ const Events = ({ cancel }: any) => {
     // console.log("eventToDate", eventToDate);
     // console.log("eventtitle", eventAllday);
     // console.log("eventtitle", eventOutcome);
+    const finalPayload = {
+      type: eventType,
+      title: eventTitle,
+      description: eventDescription,
+      datetime: {
+        fromTime: eventFromTime,
+        fromDate: eventFromDate,
+        toTime: eventToTime,
+        toDate: eventToDate,
+      },
+      allday: eventAllday,
+      outcome: eventOutcome,
+    };
+    console.log("asdsad", finalPayload);
 
+    axios
+      .post(
+        "https://testsalescrm.nextsolutions.in/api/event/create",
+        finalPayload
+      )
+      .then((e: any) => {
+        console.log("payload", finalPayload);
+
+        console.log("added event");
+
+        cancel();
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log("paylaod", finalPayload);
+      });
     const body = {};
     //  need api integration
 
