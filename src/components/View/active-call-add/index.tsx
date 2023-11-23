@@ -478,7 +478,7 @@ const ActiveCall = ({
         }}
       />
       <DropItems
-        title="Call  Participants"
+        title="Call Participants"
         top={20}
         list={[
           {
