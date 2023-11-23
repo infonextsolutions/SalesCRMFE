@@ -152,8 +152,9 @@ const Login = () => {
   };
 
   const state = useSelector((state: any) => state.auth);
+
   React.useEffect(() => {
-    if (state.isLoggedIn) {
+    if (localStorage.getItem("user-id")) {
       router.push("/sales/open");
     }
   });
