@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import useUI from "@/hooks/useUI";
 import { title } from "process";
 
-const Search = ({ change, title }: any) => {
+const Search = ({ change }: any) => {
   const ref: any = useRef();
   return (
     <>
@@ -72,7 +72,7 @@ const Navbar = ({ title, src }: any) => {
         />
         <div className="pr-9 flex justify-between gap-3">
           <Image
-            src={getBasicIcon(src)}
+            src={src ? getBasicIcon(src) : getBasicIcon("Grid")}
             className="ml-[20px] cursor-pointer"
             alt=""
             // fill={true}
