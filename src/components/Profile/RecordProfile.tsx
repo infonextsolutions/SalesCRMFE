@@ -63,7 +63,8 @@ const RecordProfile = ({
       setChecked(true);
     }
   });
-  console.log(data2, 55);
+  console.log(new Date(data1.createdAt).toDateString(), "arijit");
+  console.log(data2, "arijit");
   return (
     <div
       className={`w-[${
@@ -75,6 +76,34 @@ const RecordProfile = ({
           <p className="text-[40px] leading-[60px] font-medium">
             LIVE VIDEO MEETING
           </p>
+        </div>
+      )}
+      {data2?.companyId?.company_name && (
+        <div className="w-[70%] flex justify-around">
+          <div className="flex gap-2">
+            <Image
+              src={getBasicIcon("buildingIcon")}
+              style={{
+                zIndex: 10,
+              }}
+              alt=""
+              width={25}
+              height={25}
+            />
+            {info[0].data?.companyName}
+          </div>
+          <div className="flex gap-2">
+            <Image
+              src={getBasicIcon("Calendar")}
+              style={{
+                zIndex: 10,
+              }}
+              alt=""
+              width={25}
+              height={25}
+            />
+            {new Date(data1.createdAt).toDateString()}
+          </div>
         </div>
       )}
       <Navigator callback={CallBack} current={current} list={list} />
