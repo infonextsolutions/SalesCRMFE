@@ -24,7 +24,7 @@ const menuOptions = [
       { title: "Recorded Calls", route: "recorded-calls" },
       // { title: "Call Library", route: "call-library" },
       { title: "Active Calls", route: "active-calls" },
-      { title: "Upload Calls", route: "upload-calls" },
+      // { title: "Upload Calls", route: "upload-calls" },
     ],
     icon: "Phone",
   },
@@ -71,6 +71,7 @@ const UISlice = createSlice({
   },
 });
 
-export const { openMenu, closeMenu, triggerMenu, setCurrent ,setMenuOptions} = UISlice.actions;
+export const { openMenu, closeMenu, triggerMenu, setCurrent, setMenuOptions } =
+  UISlice.actions;
 
 export default UISlice.reducer;
