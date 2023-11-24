@@ -17,7 +17,7 @@ function useUI() {
         title: "Calling",
         route: "calls",
         list: [
-          { title: "Upload Calls", route: "upload-calls" },
+          // { title: "Upload Calls", route: "upload-calls" },
           { title: "Active Calls", route: "active-calls" },
           { title: "Recorded Calls", route: "recorded-calls" },
         ],
