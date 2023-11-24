@@ -67,7 +67,7 @@ export default function Open({ data }: any) {
 
   return (
     <>
-      <Navbar title="Sales > Closed" />
+      <Navbar title="Sales > Closed" src="salesIcon" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />

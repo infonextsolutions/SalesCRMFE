@@ -10,7 +10,7 @@ const CompanyProfile = ({ data }: any) => {
 
   return (
     <>
-      <Navbar title="Manage Leads" />
+      <Navbar title="Manage Leads" src="manageLeadsIcon" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
           title={`Manage Leads>${title}`}

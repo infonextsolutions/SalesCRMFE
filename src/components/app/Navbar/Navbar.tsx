@@ -44,7 +44,7 @@ const Search = ({ change, title }: any) => {
   );
 };
 
-const Navbar = ({ title }: any) => {
+const Navbar = ({ title, src }: any) => {
   const { menuOpen } = useUI();
   const [view, setView] = React.useState(false);
   const dispatch = useAppDispatch();
@@ -72,7 +72,7 @@ const Navbar = ({ title }: any) => {
         />
         <div className="pr-9 flex justify-between gap-3">
           <Image
-            src={getBasicIcon("Grid")}
+            src={getBasicIcon(src)}
             className="ml-[20px] cursor-pointer"
             alt=""
             // fill={true}

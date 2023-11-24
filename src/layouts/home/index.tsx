@@ -1,4 +1,3 @@
-import Navbar from "@/components/app/Navbar/Navbar";
 import Sidebar from "@/components/app/Sidebar/index";
 import { useRouter } from "next/router";
 import React from "react";
