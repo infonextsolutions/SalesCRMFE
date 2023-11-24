@@ -7,7 +7,6 @@ const HeaderCheckBox = ({ width, click }: any) => {
       style={{ width: width, flexShrink: "unset" }}
     >
       <input
-
         onChange={() => {
           click();
         }}
@@ -15,7 +14,7 @@ const HeaderCheckBox = ({ width, click }: any) => {
         className="checkbox"
       />
     </div>
-  )
+  );
 };
 
 const HeaderItem = ({ width, text, left, align, bold, color }: any) => {
@@ -42,14 +41,17 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
   return (
     <div className="flex">
       <div className=" pl-[10px] h-[40px] flex items-center grow border-[#ccc] border-b-[1px]  ">
-        <HeaderCheckBox width={30} click={() => {
-          selectAll();
-        }} />
+        <HeaderCheckBox
+          width={30}
+          click={() => {
+            selectAll();
+          }}
+        />
         <HeaderItem width={200} left={70} text={"CALL ID"} />
         <HeaderItem width={130} left={20} text={"CALL title"} />
         <HeaderItem width={200} left={10} text={"lead id"} />
         <HeaderItem width={220} left={-55} text={"lead title"} />
-        {/* <HeaderItem width={120} left={10} text={"Customer name"} /> */}
+        <HeaderItem width={120} left={10} text={"Company Name"} />
         <HeaderItem width={200} left={20} text={"participants"} />
         <HeaderItem width={100} left={20} text={"call owner"} />
         <HeaderItem width={130} left={20} text={"call date-time"} />
