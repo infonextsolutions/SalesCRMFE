@@ -28,7 +28,6 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
           width: width !== null ? width - 55 : "100%",
         }}
       >
-        <Navbar />
         {children}
       </div>
     </div>

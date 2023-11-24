@@ -1,3 +1,4 @@
+import Navbar from "@/components/app/Navbar/Navbar";
 import BigSpinner from "@/components/loader/BigSpinner";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
@@ -51,6 +52,7 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
 
   return (
     <>
+      <Navbar title="Dashboard" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />

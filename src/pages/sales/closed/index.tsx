@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
+import Navbar from "@/components/app/Navbar/Navbar";
 
 const SalesClose = React.lazy(() => import("@/views/sales/close"));
 
@@ -31,7 +32,7 @@ export default function Open({ data }: any) {
       //   }
       // );
     };
-    // doACall(); 
+    // doACall();
   }, []);
 
   React.useEffect(() => {
@@ -66,6 +67,7 @@ export default function Open({ data }: any) {
 
   return (
     <>
+      <Navbar title="Sales > Closed" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />
@@ -79,7 +81,7 @@ export default function Open({ data }: any) {
   );
 }
 
-export async function getServerSideProps({query, ...params }: any) {
+export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
     "https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Close"
   );

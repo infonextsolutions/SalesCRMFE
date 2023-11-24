@@ -6,13 +6,14 @@ import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
 import { ExotelKey, ExotelToken } from "@/utils/urlHelper";
+import Navbar from "@/components/app/Navbar/Navbar";
 
 const SalesOpen = React.lazy(() => import("@/views/sales/open"));
 
 export default function Open({ data }: any) {
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
-  console.log(data)
+  console.log(data);
   const dispatch = useDispatch();
 
   const [logged] = useLocalStorage("logged", "loading");
@@ -67,6 +68,7 @@ export default function Open({ data }: any) {
 
   return (
     <>
+      <Navbar title="Sales > Open" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />
