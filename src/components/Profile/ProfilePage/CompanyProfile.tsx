@@ -98,15 +98,15 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             }}
           />
           <div className="flex items-center justify-center flex-col">
-            <h2 className="text-[24px] whitespace-nowrap leading-7 tracking-wide text-[#000] capitalize -900 font-medium">
+            <h2 className="text-[20px] whitespace-nowrap leading-7 tracking-wide text-[#000] capitalize -900 font-medium">
               {data.result.companyId.company_name}
             </h2>
             <p className="block  py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
               {data.result.companyId.company_location}
             </p>
           </div>
-          <div className="w-[40px] h-[100%] flex items-center justify-center">
-            {/* <Image
+          <div className="w-[40px] relative bottom-4 h-[100%] flex items-center justify-center">
+            <Image
               src={getBasicIcon("Edit")}
               className={`cursor-pointer`}
               alt="Edit"
@@ -118,7 +118,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
               onClick={() => {
                 showEdit();
               }}
-            /> */}
+            />
           </div>
         </div>
       </div>

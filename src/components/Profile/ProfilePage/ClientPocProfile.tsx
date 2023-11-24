@@ -75,8 +75,8 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
                 {data.result.customerId.designation}
               </a>
             </div>
-            <div className="h-[120%] ml-auto ">
-              {/* <Image
+            <div className="h-[80%] ml-auto ">
+              <Image
                 src={getBasicIcon("Edit")}
                 className={`cursor-pointer`}
                 alt="Edit"
@@ -88,7 +88,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
                 onClick={() => {
                   showEdit();
                 }}
-              /> */}
+              />
             </div>
           </div>
         </div>
@@ -246,7 +246,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             }
             const random = random_number_between_1_and_7();
             return (
-              <li className="mb-[10px]" key={i} >
+              <li className="mb-[10px]" key={i}>
                 <div className="flex items-center gap-x-3 mr-3">
                   <Image
                     className="h-12 w-10 rounded-full ml-2"
