@@ -66,10 +66,15 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           const idss: any = String(convertDatetimeToCustomFormat(e.updatedAt));
           const leadid = e.leadId.length > 0 ? e.leadId[0].leadId : "-";
           const call_title: any = e;
-          const title=  call_title?.active_calls.length > 0
-          ? call_title?.active_calls[0].call_title
-          : ""
-          return idss.includes(search) || leadid.includes(search) ||title.includes(search)
+          const title =
+            call_title?.active_calls.length > 0
+              ? call_title?.active_calls[0].call_title
+              : "";
+          return (
+            idss.includes(search) ||
+            leadid.includes(search) ||
+            title.includes(search)
+          );
         });
 
         // const filtered = data;
@@ -266,7 +271,6 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
                 CallData={item}
                 last={Leads.length - 1 === i}
                 selectAll={selectAll}
-                
               />
             );
           })

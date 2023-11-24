@@ -6,6 +6,7 @@ import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
 import { ExotelKey, ExotelToken } from "@/utils/urlHelper";
+import Navbar from "@/components/app/Navbar/Navbar";
 
 const IndicatorBasic = React.lazy(() => import("@/views/indicator/basic"));
 
@@ -50,15 +51,18 @@ const Indicator = () => {
     }
   }, [state.isLoggedIn, logged]);
   return (
-    <Suspense fallback={<BigSpinner />}>
-      {!state.isLoggedIn || logged === null ? (
-        <BigSpinner />
-      ) : (
-        <Suspense fallback={<BigSpinner />}>
-          <IndicatorBasic />
-        </Suspense>
-      )}
-    </Suspense>
+    <>
+      <Navbar title="Indicator > Basic" />
+      <Suspense fallback={<BigSpinner />}>
+        {!state.isLoggedIn || logged === null ? (
+          <BigSpinner />
+        ) : (
+          <Suspense fallback={<BigSpinner />}>
+            <IndicatorBasic />
+          </Suspense>
+        )}
+      </Suspense>
+    </>
   );
 };
 

@@ -11,6 +11,7 @@ import EmailPage from "@/components/View/Email/index";
 import Notes from "@/components/View/Notes";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
+import Navbar from "@/components/app/Navbar/Navbar";
 
 const Profile = ({ data }: any) => {
   // console.log("data10", data);
@@ -24,12 +25,10 @@ const Profile = ({ data }: any) => {
       )
       .then((e) => {
         setData(e.data);
-      }).catch(()=>{
-
       })
+      .catch(() => {});
   };
-  const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS"
-];
+  const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS"];
 
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);
@@ -117,87 +116,89 @@ const Profile = ({ data }: any) => {
       showMessages();
     }
   };
- 
 
   return (
-    <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-      {notes && (
-        <Backdrop bool={bool}>
-          <Notes
-            cancel={cancelNotes}
-            update={UpdateData}
-            leadid={data.result._id}
-          />
-        </Backdrop>
-      )}
-      {events && (
-        <Backdrop bool={bool} pad={"50px 0"}>
-          <Events cancel={cancelEvents} />
-        </Backdrop>
-      )}
-      {emails && (
-        <Backdrop bool={bool} pad={"50px 0"}>
-          <EmailPage
-            refresh={(e) => {
-              UpdateData();
-            }}
-            cancel={cancelEmails}
-            data={data1.result}
-          />
-        </Backdrop>
-      )}
-      {messages && (
-        <Backdrop bool={bool} pad={"50px 0"}>
-          <Messages cancel={cancelMessages} />
-        </Backdrop>
-      )}
-      {call && (
-        <Backdrop bool={bool} pad={"50px 0"}>
-          <ActiveCall
-            cancel={cancelCall}
-            id={data1.result._id}
-            refresh={() => {
-              UpdateData();
-            }}
-            companyId={data1.result.companyId._id}
-            lead={data1.result}
-            customerId={data1.result.customerId._id}
-          />
-        </Backdrop>
-      )}
-      <Navigation
-        title={`Manage Leads>${data1.result.lead_title}`}
-        buttons={[
-          {
-            text: "Take Action",
-            dropdown: true,
-            id: 1,
-            icon: "Plus",
-            click: AddLead,
-            light: false,
-            list: [
-              { title: "Call", Icon: "Phone" },
-              { title: "Email", Icon: "Mail" },
-              { title: "Event", Icon: "Calendar" },
-              { title: "Add note", Icon: "Tasks" },
-              { title: "Message", Icon: "Chat" },
-            ],
-          },
-        ]}
-      />
-      <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-        <div className="w-[340px] min-h-[70vh] bg-white rounded-xl shrink-0 p-[20px]">
-          <ProfilePage updated={UpdateData} data1={data.result} />
-        </div>
-        <LeadProfileContainer
-          data={data1.result}
-          titles={titles}
-          current={0}
-          info={dummy.leadInfo}
+    <>
+      <Navbar title="Manage Leads" />
+      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+        {notes && (
+          <Backdrop bool={bool}>
+            <Notes
+              cancel={cancelNotes}
+              update={UpdateData}
+              leadid={data.result._id}
+            />
+          </Backdrop>
+        )}
+        {events && (
+          <Backdrop bool={bool} pad={"50px 0"}>
+            <Events cancel={cancelEvents} />
+          </Backdrop>
+        )}
+        {emails && (
+          <Backdrop bool={bool} pad={"50px 0"}>
+            <EmailPage
+              refresh={(e) => {
+                UpdateData();
+              }}
+              cancel={cancelEmails}
+              data={data1.result}
+            />
+          </Backdrop>
+        )}
+        {messages && (
+          <Backdrop bool={bool} pad={"50px 0"}>
+            <Messages cancel={cancelMessages} />
+          </Backdrop>
+        )}
+        {call && (
+          <Backdrop bool={bool} pad={"50px 0"}>
+            <ActiveCall
+              cancel={cancelCall}
+              id={data1.result._id}
+              refresh={() => {
+                UpdateData();
+              }}
+              companyId={data1.result.companyId._id}
+              lead={data1.result}
+              customerId={data1.result.customerId._id}
+            />
+          </Backdrop>
+        )}
+        <Navigation
+          title={`Manage Leads>${data1.result.lead_title}`}
+          buttons={[
+            {
+              text: "Take Action",
+              dropdown: true,
+              id: 1,
+              icon: "Plus",
+              click: AddLead,
+              light: false,
+              list: [
+                { title: "Call", Icon: "Phone" },
+                { title: "Email", Icon: "Mail" },
+                { title: "Event", Icon: "Calendar" },
+                { title: "Add note", Icon: "Tasks" },
+                { title: "Message", Icon: "Chat" },
+              ],
+            },
+          ]}
         />
+        <div className="w-[100%] flex gap-[25px] mb-[100px] ">
+          <div className="w-[340px] min-h-[70vh] bg-white rounded-xl shrink-0 p-[20px]">
+            <ProfilePage updated={UpdateData} data1={data.result} />
+          </div>
+          <LeadProfileContainer
+            data={data1.result}
+            titles={titles}
+            current={0}
+            info={dummy.leadInfo}
+          />
+        </div>
+        {/* write your code here for profile page manya! */}
       </div>
-      {/* write your code here for profile page manya! */}
-    </div>
+    </>
   );
 };
 

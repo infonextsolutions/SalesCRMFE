@@ -1,7 +1,7 @@
 import Navigation from "@/components/app/Navigation";
 import CallsContainer from "@/components/calls/active-calls/Container/Container";
 import DUMMY from "@/shared/dummy";
-import React, { useRef ,useEffect} from "react";
+import React, { useRef, useEffect } from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
 import { CSVLink } from "react-csv";
@@ -9,7 +9,7 @@ import * as XLSX from "xlsx";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { useRouter } from "next/router";
-
+import Navbar from "@/components/app/Navbar/Navbar";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -54,15 +54,15 @@ const Dummy = [
 const Calls = ({ data }: any) => {
   const ref: any = useRef();
 
-  console.log(data)
+  console.log(data);
 
   const router = useRouter();
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
-      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
       router.beforePopState(() => {
-        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
         return true;
       });
     };
@@ -70,7 +70,7 @@ const Calls = ({ data }: any) => {
     handleBeforeHistoryChange();
 
     return () => {
-      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
     };
   }, []);
 
@@ -111,7 +111,6 @@ const Calls = ({ data }: any) => {
     console.log("Exporting to PDF", data);
   };
 
-
   const addExport = (e: any, e1: any) => {
     if (e1 === 0) {
       exportXLSX();
@@ -121,35 +120,38 @@ const Calls = ({ data }: any) => {
   };
 
   return (
-    <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-      <Navigation
-        title={"Calls>Active Calls "}
-        buttons={[
-          {
-            text: "Export",
-            dropdown: true,
-            id: 1,
-            icon: "Download",
-            light: true,
-            click: addExport,
-            list: [
-              { title: "Excel", Icon: "Excel" },
-              { title: "PDF", Icon: "PDF" },
-              {
-                title: "CSV",
-                Icon: "CSV",
-                wrapper: (
-                  <CSVLink data={data.result} className="" ref={ref}>
-                    CSV
-                  </CSVLink>
-                ),
-              },
-            ],
-          },
-        ]}
-      />
-      <CallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
-    </div>
+    <>
+      <Navbar title="Calls > Active Calls" />
+      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+        <Navigation
+          title={"Calls>Active Calls "}
+          buttons={[
+            {
+              text: "Export",
+              dropdown: true,
+              id: 1,
+              icon: "Download",
+              light: true,
+              click: addExport,
+              list: [
+                { title: "Excel", Icon: "Excel" },
+                { title: "PDF", Icon: "PDF" },
+                {
+                  title: "CSV",
+                  Icon: "CSV",
+                  wrapper: (
+                    <CSVLink data={data.result} className="" ref={ref}>
+                      CSV
+                    </CSVLink>
+                  ),
+                },
+              ],
+            },
+          ]}
+        />
+        <CallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
+      </div>
+    </>
   );
 };
 

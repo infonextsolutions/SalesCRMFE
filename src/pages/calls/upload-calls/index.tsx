@@ -10,9 +10,10 @@ import { useRouter } from "next/router";
 import Backdrop from "@/components/View/Backdrop/Center";
 import UploadCall from "@/components/View/uploadCall/index";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/store/store";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import Navbar from "@/components/app/Navbar/Navbar";
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -94,7 +95,7 @@ const Calls = ({ data }: any) => {
   console.log(data, "please");
 
   const state = useSelector((state: any) => state.auth);
-  console.log(data)
+  console.log(data);
   const dispatch = useAppDispatch();
 
   const [logged] = useLocalStorage("logged", "loading");
@@ -148,67 +149,70 @@ const Calls = ({ data }: any) => {
   }, [state.isLoggedIn, logged]);
 
   return (
-    <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-      {/* <Navigation  /> */}
-      {upload && (
-        <Backdrop bool={bool}>
-          <UploadCall
-            cancel={() => {
-              setBool(false);
-              setTimeout(() => {
-                setUpload(false);
-                setBool(true);
-              }, 500);
-            }}
-          />
-        </Backdrop>
-      )}
-      <Navigation
-        title={"Calls>Upload Calls"}
-        buttons={[
-          {
-            text: "Upload Call",
-            dropdown: true,
-            id: 1,
-            icon: "Plus",
-            light: false,
-            list: [],
-            onClick1: async () => {
-              // const response = await axios.post(
-              //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
-              //   {
-              //     callTo: "7669481778",
-              //   }
-              // );
-              setUpload(true);
-            },
-          },
-          {
-            text: "Export",
-            dropdown: true,
-            id: 1,
-            icon: "Download",
-            light: true,
-            click: addExport,
-            list: [
-              // { title: "Print", Icon: "Printer" },
-              { title: "Excel", Icon: "Excel" },
-              // { title: "PDF", Icon: "PDF" },
-              {
-                title: "CSV",
-                Icon: "CSV",
-                wrapper: (
-                  <CSVLink data={data.result} className="" ref={ref}>
-                    CSV
-                  </CSVLink>
-                ),
+    <>
+      <Navbar title="Calls > Upload Calls" />
+      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+        {/* <Navigation  /> */}
+        {upload && (
+          <Backdrop bool={bool}>
+            <UploadCall
+              cancel={() => {
+                setBool(false);
+                setTimeout(() => {
+                  setUpload(false);
+                  setBool(true);
+                }, 500);
+              }}
+            />
+          </Backdrop>
+        )}
+        <Navigation
+          title={"Calls>Upload Calls"}
+          buttons={[
+            {
+              text: "Upload Call",
+              dropdown: true,
+              id: 1,
+              icon: "Plus",
+              light: false,
+              list: [],
+              onClick1: async () => {
+                // const response = await axios.post(
+                //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+                //   {
+                //     callTo: "7669481778",
+                //   }
+                // );
+                setUpload(true);
               },
-            ],
-          },
-        ]}
-      />
-      <CallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
-    </div>
+            },
+            {
+              text: "Export",
+              dropdown: true,
+              id: 1,
+              icon: "Download",
+              light: true,
+              click: addExport,
+              list: [
+                // { title: "Print", Icon: "Printer" },
+                { title: "Excel", Icon: "Excel" },
+                // { title: "PDF", Icon: "PDF" },
+                {
+                  title: "CSV",
+                  Icon: "CSV",
+                  wrapper: (
+                    <CSVLink data={data.result} className="" ref={ref}>
+                      CSV
+                    </CSVLink>
+                  ),
+                },
+              ],
+            },
+          ]}
+        />
+        <CallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
+      </div>
+    </>
   );
 };
 

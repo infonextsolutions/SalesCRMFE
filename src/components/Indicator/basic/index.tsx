@@ -147,10 +147,10 @@ const IndicatorContainer = () => {
             width={200}
             text={"Add Indicator"}
             click={(e1: any, e2: any) => {
-              console.log(e1, e2); 
-              if(e2===0){
+              console.log(e1, e2);
+              if (e2 === 0) {
                 setAddCategory(true);
-              }else if(e2===1){
+              } else if (e2 === 1) {
                 setAddvalue(true);
               }
             }}

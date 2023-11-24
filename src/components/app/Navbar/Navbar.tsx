@@ -8,8 +8,9 @@ import { logout, setLoggedInStatus } from "@/store/auth";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import useUI from "@/hooks/useUI";
+import { title } from "process";
 
-const Search = ({ change }: any) => {
+const Search = ({ change, title }: any) => {
   const ref: any = useRef();
   return (
     <>
@@ -43,21 +44,12 @@ const Search = ({ change }: any) => {
   );
 };
 
-const Navbar = () => {
+const Navbar = ({ title }: any) => {
   const { menuOpen } = useUI();
   const [view, setView] = React.useState(false);
   const dispatch = useAppDispatch();
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
-  const path = router.asPath.replace(/\//g, " ");
-
-  let words = path.split(" ");
-  let updatedWords = words.map((word) => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  });
-  let jkk = updatedWords.join(" ");
-
-  let newPath = jkk.replace(/\b(\w+)\s+(\w+)\b/g, "$1 > $2");
 
   const [search, setSearch] = useState("");
 
@@ -90,7 +82,7 @@ const Navbar = () => {
             width={20}
             height={40}
           />
-          <h1 className="text-lg font-semibold">{newPath}</h1>
+          <h1 className="text-lg font-semibold">{title}</h1>
         </div>
       </div>
       <div
