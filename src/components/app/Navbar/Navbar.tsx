@@ -63,7 +63,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full h-[60px] border-b-[1px] border-[#eaebec]  bg-white flex items-center justify-between">
-      <div className=" w-4/12 flex justify-between">
+      <div className=" w-4/12 flex ">
         <Image
           src={getBasicIcon("Menu")}
           className="ml-[20px] cursor-pointer"
