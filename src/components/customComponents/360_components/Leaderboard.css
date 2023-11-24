@@ -1,0 +1,221 @@
+.best-performer-heading {
+  display: flex;
+}
+
+.best-performer-list {
+  display: flex;
+  gap: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.img-user {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.parent-container {
+  display: flex;
+  gap: 4rem;
+}
+
+
+
+/* //css for sale pitch analysis */
+.conatinerCard{
+  height: 20vh;
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.pitch-container {
+  display: flex;
+  gap: 0.5rem;
+  height: 417px;
+  text-align: center;
+}
+
+.br-1 {
+  border-radius: 0.2rem;
+}
+
+.pitch-subcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  height: 100%;
+  font-size: 12px;
+  width: 205px;
+}
+
+.pitch-item1-color {
+  background-color: #ffcbc7;
+}
+
+.pitch-item1-box1 {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.pitch-item1-container-details {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.pitch-item1-box2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.pitch-item1-box3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2;
+}
+
+/* -------------- subcontainer 2*/
+
+.pitch-item2-color {
+  background-color: #c6deff;
+}
+
+.pitch-item2-box2 {
+  justify-content: space-between;
+  display: flex;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.pitch-item2-container-details {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.pitch-item2-box1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pitch-item2-box3 {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* subcontainer -3  */
+
+.pitch-item3-color {
+  background-color: #ffe3b0;
+}
+
+.pitch-item3-box1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pitch-item3-box2 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pitch-item3-box3 {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* subcontainer 4 */
+
+.pitch-item4-color {
+  background-color: #c7efc5;
+}
+
+.pitch-item4-box1 {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.pitch-item4-container-details {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.pitch-item4-box2,
+.pitch-item4-box3,
+.pitch-item4-box4 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* subcontainer 5 */
+
+.pitch-item5-color {
+  background-color: #fce2e4;
+}
+
+.pitch-item5-box1,
+.pitch-item5-box2,
+.pitch-item5-box3,
+.pitch-item5-box4 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* subcontainer 6 */
+
+.pitch-subcontainer6 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  height: 100%;
+  font-size: 12px;
+  width: 94px;
+}
+
+.pitch-item6-color {
+  background-color: #d9d9d9;
+}
+
+.pitch-item6-box1,
+.pitch-item6-box2,
+.pitch-item6-box3,
+.pitch-item6-box4 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
