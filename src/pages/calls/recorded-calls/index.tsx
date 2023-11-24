@@ -86,7 +86,7 @@ const Calls = ({ data }: any) => {
   console.log(data, "please");
   return (
     <>
-      <Navbar title="Calls > Recorded Calls" />
+      <Navbar title="Calls > Recorded Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
           title={"Calls>Recorded Calls"}

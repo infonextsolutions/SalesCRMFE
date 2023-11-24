@@ -150,7 +150,7 @@ const Calls = ({ data }: any) => {
 
   return (
     <>
-      <Navbar title="Calls > Upload Calls" />
+      <Navbar title="Calls > Upload Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         {/* <Navigation  /> */}
         {upload && (

@@ -19,7 +19,7 @@ const ClientProfile = ({ data }: any) => {
   const [ttitle, setTitle] = useState(data.result.customerId.name);
   return (
     <>
-      <Navbar title="Manage Leads" />
+      <Navbar title="Manage Leads" src="manageLeadsIcon" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
           title={`Manage Leads>${ttitle}`}

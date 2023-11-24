@@ -52,7 +52,7 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
 
   return (
     <>
-      <Navbar title="Dashboard" />
+      <Navbar title="Dashboard" src="Grid" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />
