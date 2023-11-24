@@ -500,7 +500,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     }
   };
 
-  console.log("lead data-1231", CallData);
+  console.log("lead data-1231", LeadData);
 
   React.useEffect(() => {
     if (checked) {
@@ -605,6 +605,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={LeadData?.lead_title}
             click={true}
             route={`/sales/open/${LeadData?._id}/lead-profile`}
+            color={"#000"}
+          />
+          <CallItem
+            width={220}
+            left={0}
+            text={LeadData?.companyId?.company_name}
+            click={true}
+            route={`/sales/open/${LeadData?._id}/company-profile`}
             color={"#000"}
           />
           {/* <CallItem

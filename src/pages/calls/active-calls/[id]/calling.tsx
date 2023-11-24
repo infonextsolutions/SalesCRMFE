@@ -8,10 +8,11 @@ import RecordProfile from "@/components/Profile/RecordProfile";
 import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import MakeCall from "@/components/View/makeCall/index";
+import Navbar from "@/components/app/Navbar/Navbar";
 //Manya will make this page
 
 const AudioProfile = ({ data, scripts }: any) => {
-  const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES", "QUESTIONNAIRE"];
+  const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES"];
 
   const [make, setCall] = useState(false);
   const [bool, setBool] = useState(true);
@@ -37,88 +38,91 @@ const AudioProfile = ({ data, scripts }: any) => {
     }
   };
 
-  console.log(data.result,scripts);
+  console.log(data.result, scripts);
 
   return (
-    <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-      {make && (
-        <Backdrop bool={bool}>
-          <MakeCall cancel={cancelCall} data={data.result} />
-        </Backdrop>
-      )}
-      <Navigation
-        title="Calls>Active Calls>Discussion on PX features"
-        buttons={[
-          // {
-          //   text: "Refresh",
-          //   dropdown: true,
-          //   id: 1,
-          //   light: false,
-          //   list: [],
-          //   onClick1: async () => {
-          //     const url =
-          //       "https://testsalescrm.nextsolutions.in/api/calling/call-status";
-          //     axios.post(url, {
-          //       sid: "8af470ce2b4befc3f0e8292d237e175b",
-          //     }).then((e)=>{
-          //       console.log(e.data);
-          //     })
-          //   },
-          // },
-          {
-            text: "Make Call",
-            dropdown: true,
-            id: 1,
-            light: false,
-            list: [],
-            onClick1: async () => {
-              // const response = await axios.post(
-              //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
-              //   {
-              //     callTo: "7669481778",
-              //   }
-              // );
-              setCall(true);
+    <>
+      <Navbar title="Calls > Active Calls" src="Phone" />
+      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+        {make && (
+          <Backdrop bool={bool}>
+            <MakeCall cancel={cancelCall} data={data.result} />
+          </Backdrop>
+        )}
+        <Navigation
+          title="Calls>Active Calls>Discussion on PX features"
+          buttons={[
+            // {
+            //   text: "Refresh",
+            //   dropdown: true,
+            //   id: 1,
+            //   light: false,
+            //   list: [],
+            //   onClick1: async () => {
+            //     const url =
+            //       "https://testsalescrm.nextsolutions.in/api/calling/call-status";
+            //     axios.post(url, {
+            //       sid: "8af470ce2b4befc3f0e8292d237e175b",
+            //     }).then((e)=>{
+            //       console.log(e.data);
+            //     })
+            //   },
+            // },
+            {
+              text: "Make Call",
+              dropdown: true,
+              id: 1,
+              light: false,
+              list: [],
+              onClick1: async () => {
+                // const response = await axios.post(
+                //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+                //   {
+                //     callTo: "7669481778",
+                //   }
+                // );
+                setCall(true);
+              },
             },
-          },
-          // {
-          //   text: "Take Action ",
-          //   click: takeAction,
-          //   dropdown: true,
-          //   id: 1,
-          //   icon: "Plus",
-          //   light: false,
-          //   list: [
-          //     { title: "Email", Icon: "Mail" },
-          //     { title: "Meeting", Icon: "Calendar" },
-          //     { title: "Notes", Icon: "Tasks" },
-          //     { title: "Message", Icon: "Chat" },
-          //   ],
-          // },
-        ]}
-      />
-      <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-        {/* <AudioProfileContainer
+            // {
+            //   text: "Take Action ",
+            //   click: takeAction,
+            //   dropdown: true,
+            //   id: 1,
+            //   icon: "Plus",
+            //   light: false,
+            //   list: [
+            //     { title: "Email", Icon: "Mail" },
+            //     { title: "Meeting", Icon: "Calendar" },
+            //     { title: "Notes", Icon: "Tasks" },
+            //     { title: "Message", Icon: "Chat" },
+            //   ],
+            // },
+          ]}
+        />
+        <div className="w-[100%] flex gap-[25px] mb-[100px] ">
+          {/* <AudioProfileContainer
           width={"50%"}
           titles={titles}
           check={false}
           current={0}
           info={dummy.audioCallDetails}
         /> */}
-        <RecordProfile
-          width={"50%"}
-          titles={titles}
-          check={false}
-          current={0}
-          info={dummy.audioCallDetails}
-          data1={data.result}
-        />
-        <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
-          <Script data={data.result} scripts={scripts} />
+          <RecordProfile
+            width={"50%"}
+            titles={titles}
+            check={false}
+            current={0}
+            info={dummy.audioCallDetails}
+            data1={data.result}
+          />
+          <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
+            <Script data={data.result} scripts={scripts} />
+          </div>
         </div>
+        {/* write your code here for profile page manya! */}
       </div>
-      {/* write your code here for profile page manya! */}
-    </div>
+    </>
   );
 };
 

@@ -405,11 +405,11 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     return "at " + hours + ":" + minutes;
   }
 
-
-  function isISOString(inputString:any) {
+  function isISOString(inputString: any) {
     // Define the regular expression pattern for ISO date and time representation
-    const isoPattern = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d{1,3})?)Z?$/;
-  
+    const isoPattern =
+      /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d{1,3})?)Z?$/;
+
     // Test the input string against the ISO pattern
     return isoPattern.test(inputString);
   }
@@ -452,6 +452,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={CallData?.leadId?.lead_title}
             color={"#000"}
           />
+          <CallItem
+            width={220}
+            left={40}
+            text={CallData?.companyId?.company_name}
+            click={true}
+            route={`/sales/open/${CallData?._id}/company-profile`}
+            color={"#000"}
+          />
           <div
             className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
             style={{ width: 200, marginLeft: 20 }}
@@ -480,8 +488,16 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={`${isISOString(CallData.call_start_time)?formatDateToCustomFormat(CallData.call_start_time):"-"}`}
-            bottomText={isISOString(CallData.call_start_time)?convertISOToTime(CallData.call_start_time):"-"}
+            upperText={`${
+              isISOString(CallData.call_start_time)
+                ? formatDateToCustomFormat(CallData.call_start_time)
+                : "-"
+            }`}
+            bottomText={
+              isISOString(CallData.call_start_time)
+                ? convertISOToTime(CallData.call_start_time)
+                : "-"
+            }
           />
           {/* <CallItem width={120} left={10} text={"30 min."} /> */}
         </div>
