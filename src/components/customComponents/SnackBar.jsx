@@ -1,6 +1,6 @@
 import React from 'react';
-import IconButton from "@mui/material/IconButton/IconButton.js";
-import Snackbar from "@mui/material/Snackbar/Snackbar.js";
+import { IconButton } from "@mui/material";
+import { Snackbar } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close.js';
 
 export default function SnackBar({

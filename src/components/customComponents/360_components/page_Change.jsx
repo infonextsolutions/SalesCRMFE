@@ -17,7 +17,7 @@ const Selected_page = ({ component }) => {
     <div className="dashboard">
       <div className="page-list">
         {component.Pageslist.map((page, index) => (
-          <button onClick={() => handlePageClick(page)}>{page.name}</button>
+          <button key={index} onClick={() => handlePageClick(page)}>{page.name}</button>
         ))}
       </div>
       {selectedPage &&

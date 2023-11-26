@@ -1,12 +1,13 @@
 
 
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link ,useNavigate} from "react-router-dom";
+import Link from "next/link";
 
 
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
 import CallIcon from '@mui/icons-material/Call';
+import { useRouter } from "next/navigation";
 
 
 
@@ -28,7 +29,7 @@ const Icon = ({ name }) => {
 
 const SidebarMenu = ({component}) => {
 
-  const navigate=useNavigate();
+  const navigate=useRouter();
   
  
   const [active, setActive] = useState("");
@@ -49,7 +50,7 @@ const SidebarMenu = ({component}) => {
       
     }
     else {
-      navigate("/");
+      navigate.push("/");
      
       
     }

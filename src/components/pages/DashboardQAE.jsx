@@ -1,7 +1,8 @@
 import { DASHBOARD_QAE } from "../../360_Json_files/QA_excutive/Dashboard_QA_Executive";
 import RenderComponent from "../customComponents/ComponentRenderer";
+import dynamic from 'next/dynamic'
 
-function DashBoard() {
+function Comp() {
   return (
     <>
       <div className="home-screen">
@@ -11,4 +12,6 @@ function DashBoard() {
   );
 }
 
-export default DashBoard;
+const DashBoardQAE = dynamic(() => Promise.resolve(Comp), { ssr: false })
+
+export default DashBoardQAE;

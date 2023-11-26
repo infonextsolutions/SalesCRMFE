@@ -1,5 +1,5 @@
 // import { Button } from '@mui/material';
-import MuiButton from "@mui/material/Button";
+import { Button as MuiButton } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckIcon from '@mui/icons-material/Check';
@@ -22,7 +22,7 @@ const DropSelect3 = ({
     const [searchResults, setSearchResults] = useState([]);
     const [options, setOptions] = useState(component.options);
 
-    
+
 
     useEffect(() => {
         if (component.fetchOptionsApi) {
@@ -118,20 +118,22 @@ const DropSelect3 = ({
                     )}
                     {
                         showSearchResults ? (
-                            searchResults?.map((option) => (
+                            searchResults?.map((option, index) => (
                                 <div
                                     className='dd_item'
                                     onClick={() => handleChange(option)}
+                                    key={index}
                                 >
                                     <span className='dd_item_label'>{option.label}</span>
                                     {selections.includes(option.value) && <CheckIcon className='dd_item_check' />}
                                 </div>
                             ))
                         ) : (
-                            options.map((option) => (
+                            options.map((option, index) => (
                                 <div
                                     className='dd_item'
                                     onClick={() => handleChange(option)}
+                                    key={index}
                                 >
                                     <span className='dd_item_label'>{option.label}</span>
                                     {selections.includes(option.value) && <CheckIcon className='dd_item_check' />}

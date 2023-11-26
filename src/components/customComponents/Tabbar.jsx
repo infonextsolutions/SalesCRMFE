@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from '@mui/material/Box/Box.js';
-import Tabs from '@mui/material/Tabs/Tabs.js';
-import Tab from '@mui/material/Tab/Tab.js';
-import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import { Tabs } from '@mui/material';
+import { Tab } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 function Tabbar({
     component,
@@ -11,12 +11,12 @@ function Tabbar({
     doNavigate,
     urlTemp
 }) {
-    const navigate = useNavigate();
+    const navigate = useRouter();
 
     const handleChange = (event, newValue) => {
         console.log('=========== HANDLE CHANGE : TAB ==========', newValue);
         if (doNavigate && urlTemp) {
-            navigate(urlTemp.replace('{TAB}', component?.tabs?.[newValue]?.key));
+            navigate.push(urlTemp.replace('{TAB}', component?.tabs?.[newValue]?.key));
         } else {
             handleTabChange(newValue);
         }

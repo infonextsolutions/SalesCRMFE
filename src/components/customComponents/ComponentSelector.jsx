@@ -32,10 +32,7 @@ import {
   LOGIN_REFRESH,
   BUTTON,
   SELECT2,
-  CHATBOT,
-  OTP_LOGIN,
   TABS,
-  LIST,
   ABOUT_HERO,
   CONTACT_US,
   CONTAINER_365,
@@ -58,21 +55,17 @@ import Footer from "./Footer.jsx";
 import Slider from "./Slider.jsx";
 import Heading from "./Heading.jsx";
 import ApiButton from "./ApiButton.jsx";
-import MenuState from "./MenuState.jsx";
 import DynamicHeading from "./DynamicHeading.jsx";
 import SelectButton from "./SelectButton.jsx";
 import AutoFetchApi from "./AutoFetchApi.jsx";
 import NavigateButton from "./NavigateButton.jsx";
 import SelectSlider from "./SelectSlider.jsx";
 import RenderComponent from "./ComponentRenderer.jsx";
-import DynamicCardContainer from "./DynamicCardContainer.jsx";
 import {
   resetFilterData,
   storeFilterData,
 } from "../../redux/slice/filterSlice.js";
 import { callApi } from "../../redux/utils/apiActions.js";
-import ScrollToTop from "./ScrollToTop.jsx";
-import DetailDataCard from "./DetailedDataCard.jsx";
 import Header from "./Header.jsx";
 import CustomToogleButton from "./CustomToogleButton.jsx";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress.js";
@@ -88,10 +81,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button.jsx";
 import DropSelect from "./DropSelect.jsx";
 import Tabbar from "./Tabbar.jsx";
-import { useLocation } from "react-router-dom";
 
-import OtpLogin from "./OtpLogin.jsx";
-import List from "./List.jsx";
 import AboutHero from "./AboutHero.jsx";
 import ContactForm from "./ContactForm.jsx";
 import Line from "./Line.jsx";
@@ -111,10 +101,10 @@ import EmotionalAnalysisComp from "./360_components/SRM_Bdm_Dashboard/Emotional_
 import TalkRatio from "./360_components/SRM_Bdm_Dashboard/Ratio_bar.jsx";
 import Interruptions from "./360_components/SRM_Bdm_Dashboard/Interruptions_Graph.jsx";
 import DropSelect3 from "./Drop_Select3.jsx";
+import dynamic from 'next/dynamic';
 
-const ComponentSelector = ({ component }) => {
+const Comp = ({ component }) => {
   const isMobile = window.innerWidth <= 768; // Adjust the breakpoint as per your needs
-  const location = useLocation();
   const dispatch = useDispatch();
   const sliceData = useSelector((state) => state[component.sliceName]);
   const apiStatus = useSelector((state) =>
@@ -334,7 +324,6 @@ const ComponentSelector = ({ component }) => {
           component={component}
           values={sliceData[component.name]}
           onSubmit={handleValueChange}
-          key={location.key}
         />
       )}
       {component.type === SELECT3 && (
@@ -342,7 +331,6 @@ const ComponentSelector = ({ component }) => {
           component={component}
           values={sliceData[component.name]}
           onSubmit={handleValueChange}
-          key={location.key}
         />
       )}
       {component.type === SLIDER && (
@@ -359,17 +347,6 @@ const ComponentSelector = ({ component }) => {
       {component.type === API_HEADING && (
         <DynamicHeading component={component} />
       )}
-      {component.type === LIST && <List component={component} />}
-      {component.type === DYNAMIC_CARD_CONTAINER && (
-        <DynamicCardContainer
-          component={component}
-          handleValueChange={handleValueChange}
-          onLoadMore={handleLoadMore}
-        />
-      )}
-      {component.type === DETAILED_VIEW && (
-        <DetailDataCard component={component} />
-      )}
       {component.type === NAVIGATE_BUTTON && (
         <NavigateButton component={component} />
       )}
@@ -377,8 +354,6 @@ const ComponentSelector = ({ component }) => {
       {component.type === PAGE_HEADER && (
         <Header component={component} isMobile={isMobile} />
       )}
-      {component.type === OTP_LOGIN && <OtpLogin />}
-      {component.type === HAMBURGER_MENU && <MenuState component={component} />}
       {component.type === TABS && <Tabbar component={component} />}
       {component.type === SELECT_SLIDER && (
         <SelectSlider
@@ -396,9 +371,6 @@ const ComponentSelector = ({ component }) => {
       )}
       {component.type === BUTTON && (
         <Button component={component} handleOnClick={handleValueChange} />
-      )}
-      {component.type === SCROLL_TO_TOP && (
-        <ScrollToTop component={component} />
       )}
       {/* {component.type === CHATBOT && (
         <Chatbot />
@@ -418,5 +390,8 @@ const ComponentSelector = ({ component }) => {
     </>
   );
 };
+
+const ComponentSelector = dynamic(() => Promise.resolve(Comp), { ssr: false })
+
 
 export default ComponentSelector;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BarChart } from "@mui/x-charts/BarChart";
+// import BarChart from "@mui/x-charts/BarChart";
 import { useSelector } from "react-redux";
 import { selectApiData } from "../../../redux/utils/selectors";
 import {useState} from "react";
@@ -56,13 +56,13 @@ const BarChartComp = ({component}) => {
   return (
     <>
     <h2>hedding</h2>
-    <BarChart
+    {/* <BarChart
       dataset={dataset}
       xAxis={[{ scaleType: "band", dataKey: "label" }]}
       series={[{ dataKey: "figures", color: "#FE5143" }]}
       layout="vertical"
       {...chartSetting}  
-    />
+    /> */}
 
     </>
   );

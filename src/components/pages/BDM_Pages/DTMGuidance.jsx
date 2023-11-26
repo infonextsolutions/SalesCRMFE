@@ -1,7 +1,8 @@
 import React from 'react'
 import RenderComponent from '../../customComponents/ComponentRenderer'
+import dynamic from 'next/dynamic'
 
-const DTMGuidance = () => {
+const Comp = () => {
     return (
         <>
             <div className='home-screen screen-wrapper'>
@@ -10,5 +11,7 @@ const DTMGuidance = () => {
         </>
     )
 }
+
+const DTMGuidance = dynamic(() => Promise.resolve(Comp), { ssr: false })
 
 export default DTMGuidance

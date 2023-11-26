@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { ADMIN_DASHBOARD_LOGIN, POST, SUCCESS } from "../utils/Const.js";
 import { selectApiData, selectApiStatus } from "../../redux/utils/selectors.js";
 import { API_ENDPOINTS } from "../../redux/utils/api.js";
@@ -8,9 +7,10 @@ import { callApi } from "../../redux/utils/apiActions.js";
 import { storeUserData } from "../../redux/slice/userSlice.js";
 import { storeParentData } from "../../redux/slice/parentSlice.js";
 import RenderComponent from "./ComponentRenderer.jsx";
+import { useRouter } from "next/navigation.js";
 
 const LoginRefresh = ({ component }) => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const loginStatus = useSelector((state) =>
     selectApiStatus(state, ADMIN_DASHBOARD_LOGIN)
   );
@@ -39,7 +39,7 @@ const LoginRefresh = ({ component }) => {
           dispatch(callApi(options));
         } catch (error) { }
       } else {
-        navigate("/login");
+        navigate.push("/login");
       }
     } else {
     }

@@ -1,4 +1,4 @@
-import { Container } from '@mui/material/index.js';
+import { Container } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -12,7 +12,7 @@ export default function PanelHeader({ component }) {
     };
 
     return (
-        <Container classes={classes} style={{width: "100%", textAlign: "center" }}>
+        <Container classes={classes} style={{ width: "100%", textAlign: "center" }}>
             <h1 className={mainHeaderClass}>{mainHeading}</h1>
             <div className={detailsClass} style={{ width: "100%", textAlign: "center" }}>
                 <span className={detailsChildClass}>{userProfile.companyName}</span>

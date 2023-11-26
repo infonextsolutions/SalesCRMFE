@@ -1,5 +1,5 @@
-import Pagination from "@mui/material/Pagination/Pagination.js";
-import Stack from "@mui/material/Stack/Stack.js";
+import {Pagination} from "@mui/material";
+import {Stack} from "@mui/material";
 
 export default function BasicPagination({
   totalPages,

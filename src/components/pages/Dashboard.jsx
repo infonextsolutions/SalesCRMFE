@@ -1,8 +1,8 @@
 import { DASH_BOARD } from "../../360_screenJson";
 import RenderComponent from "../customComponents/ComponentRenderer";
+import dynamic from 'next/dynamic'
 
-
-function DashBoard(){
+function Comp(){
 
 
     return(
@@ -16,5 +16,7 @@ function DashBoard(){
         
     )
 }
+
+const DashBoard = dynamic(() => Promise.resolve(Comp), { ssr: false })
 
 export default DashBoard;

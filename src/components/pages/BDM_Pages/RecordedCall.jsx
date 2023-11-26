@@ -1,13 +1,13 @@
 import { Recorded_calls_Call_Recordings } from "../../../360_Json_files/sdr_bdm/RecordedCalls";
 
 import RenderComponent from "../../customComponents/ComponentRenderer"
+import dynamic from 'next/dynamic'
 
 
 
 
 
-
-function RecordedCall(){
+function Comp(){
 
 
     return(
@@ -20,5 +20,7 @@ function RecordedCall(){
    
 )
 }
+
+const RecordedCall = dynamic(() => Promise.resolve(Comp), { ssr: false })
 
 export default RecordedCall;

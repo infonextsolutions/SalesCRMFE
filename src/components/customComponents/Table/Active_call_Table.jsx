@@ -10,6 +10,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
+import CallContainer from "@/components/calls/active-calls/Call/Call.tsx"
 
 const LeadsTable = ({ totalRecords, search }) => {
   const [pageCount, setpageCount] = useState(0);

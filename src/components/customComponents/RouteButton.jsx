@@ -1,9 +1,9 @@
 import React from "react";
-import ToggleButton from "@mui/material/ToggleButton/ToggleButton.js";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup/ToggleButtonGroup.js";
-import { useNavigate } from "react-router-dom";
+import { ToggleButton } from "@mui/material";
+import { ToggleButtonGroup } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { storeUserData } from "../../redux/slice/userSlice.js";
+import { useRouter } from "next/navigation.js";
 
 export default function CustomRouteButton({
   value,
@@ -11,7 +11,7 @@ export default function CustomRouteButton({
   handleValueChange,
   children
 }) {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile);
   return (
@@ -20,6 +20,7 @@ export default function CustomRouteButton({
         className={component.className}
         onClick={() => {
           if (component?.form) {
+            console.log('***************** ROUTEBUTTON : component?.form **************', component);
             dispatch(
               storeUserData({
                 ...user,
@@ -31,7 +32,11 @@ export default function CustomRouteButton({
             );
           }
           if (component?.route) {
-            navigate(component.route);
+            if (component?.route !== -1) {
+              navigate.push({ pathname: component.route, query: component.params });
+            } else {
+              navigate.back();
+            }
           }
         }}
         value={value && component.name}

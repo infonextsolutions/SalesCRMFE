@@ -1,6 +1,6 @@
 import React from "react";
-import ToggleButton from '@mui/material/ToggleButton/ToggleButton.js';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup/ToggleButtonGroup.js';
+import { ToggleButton } from '@mui/material';
+import { ToggleButtonGroup } from '@mui/material';
 
 export default function CustomToogleButton({ value, component, handleValueChange }) {
   return (

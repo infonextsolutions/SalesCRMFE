@@ -1,7 +1,8 @@
 import React from "react";
 import ComponentSelector from "./ComponentSelector.jsx";
+import dynamic from 'next/dynamic'
 
-export default function RenderComponent({ jsonToRender }) {
+function Comp({ jsonToRender }) {
   const renderComponent = (componentList) => {
     return componentList?.map((component) => {
       return (
@@ -12,4 +13,8 @@ export default function RenderComponent({ jsonToRender }) {
     });
   };
   return renderComponent(jsonToRender.children);
-}                                                                                                          
+}
+
+const RenderComponent = dynamic(() => Promise.resolve(page), { ssr: false })
+
+export default RenderComponent;

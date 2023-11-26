@@ -1,11 +1,11 @@
+import { useRouter } from "next/navigation";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 function NavigateButton({ component, ...props }) {
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const handleClick = () => {
-    navigate(component.navigate);
+    navigate.push(component.navigate);
   };
 
   return (

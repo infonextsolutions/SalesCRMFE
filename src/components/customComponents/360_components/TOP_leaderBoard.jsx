@@ -2,7 +2,6 @@ import React from "react";
 // import star from "../../../assets/star.svg";
 // import boy from "../../../assets/boy.png";
 // import girl from "../../../assets/girl.png";
-import "./Leaderboard.css";
 
 const Leaderboard = () => {
   const bestPerformers = [
@@ -28,8 +27,8 @@ const Leaderboard = () => {
             {/* <img src={boy} alt="" /> */}
             <p> Best Performers</p>
           </div>
-          {bestPerformers.map((ele) => (
-            <div className="best-performer-list">
+          {bestPerformers.map((ele, index) => (
+            <div className="best-performer-list" key={index}>
               {/* <img className="img-user" src={boy} alt="" /> */}
               <p> {ele}</p>
             </div>
@@ -41,8 +40,8 @@ const Leaderboard = () => {
             {/* <img src={star} alt="" /> */}
             <p>Needs Coaching</p>
           </div>
-          {needsCoaching.map((ele) => (
-            <div className="best-performer-list">
+          {needsCoaching.map((ele, index) => (
+            <div className="best-performer-list" key={index}>
               {/* <img className="img-user" src={boy} alt="" /> */}
               <p> {ele}</p>
             </div>

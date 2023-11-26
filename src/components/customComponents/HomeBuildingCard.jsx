@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
-import { Link, Rating } from "@mui/material/index.js";
+import { Link, Rating } from "@mui/material";
 
 const HomeBuildingCard = ({ reduxDataVar }) => {
   const dataVar = reduxDataVar;

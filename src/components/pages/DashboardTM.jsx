@@ -1,7 +1,8 @@
 import { DASHBOARD_TM } from "../../360_Json_files/Team_Manager/Team_Mangaer_Dashboard";
 import RenderComponent from "../customComponents/ComponentRenderer";
+import dynamic from 'next/dynamic'
 
-function DashboardTM() {
+function Comp() {
   return (
     <>
       <div className="home-screen">
@@ -10,5 +11,7 @@ function DashboardTM() {
     </>
   );
 }
+
+const DashboardTM = dynamic(() => Promise.resolve(Comp), { ssr: false })
 
 export default DashboardTM;

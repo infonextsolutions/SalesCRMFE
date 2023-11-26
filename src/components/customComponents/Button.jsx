@@ -1,4 +1,4 @@
-import MuiButton from "@mui/material/Button/Button.js";
+import { Button as MuiButton } from "@mui/material";
 
 export default function Button({ component, handleOnClick, children }) {
   return (

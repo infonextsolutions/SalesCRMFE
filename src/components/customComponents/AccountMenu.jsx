@@ -6,7 +6,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility.js';
 import CallIcon from '@mui/icons-material/Call.js';
 import RecommendIcon from '@mui/icons-material/Recommend.js';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle.js';
-import { Typography, Button } from '@mui/material/index.js';
+import { Typography, Button } from '@mui/material';
 
 const AccountMenu = ({ userProfile, onSignOut }) => {
     const [open, setOpen] = useState(false);
