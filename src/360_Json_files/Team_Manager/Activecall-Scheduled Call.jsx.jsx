@@ -95,6 +95,7 @@ export const Active_calls_Scheduled_Calls = {
       type: "PAGES_365",
       Pageslist: [
         {
+          type: CONTAINER,
           name: "Scheduled Calls",
           children: [
             ///FETCH DATA OF COLUMN
@@ -253,6 +254,7 @@ export const Active_calls_Scheduled_Calls = {
 
         //for   Scheduled meeting
         {
+          type: CONTAINER,
           name: "  Scheduled Meeting",
           children: [
             ///FETCH DATA OF COLUMN

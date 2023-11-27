@@ -16,6 +16,7 @@ import {
   GRAP_TALK_RATIO_365,
   GRAPH_INTERRUPTION_365,
   GRAPH_CALL_SENTIMENT_365,
+  CONTAINER,
 } from "../../components/utils/Const.js";
 
 import { API_ENDPOINTS } from "../../redux/utils/api.js";
@@ -71,12 +72,12 @@ export const DASHBOARD_QAE = {
   name: "dashBoard",
 
   children: [
-    // {
-    //   type: SIDE_MENU_365,
-    //   items: MENU_ITEMS,
-    //   className: "menu_comp",
-    //   text: "Menu",
-    // },
+    {
+      type: SIDE_MENU_365,
+      items: MENU_ITEMS,
+      className: "menu_comp",
+      text: "Menu",
+    },
     HEADER,
     {
       type: SELECT2,
@@ -98,6 +99,7 @@ export const DASHBOARD_QAE = {
       type: PAGES_365,
       Pageslist: [
         {
+          type: CONTAINER,
           name: "callreview",
           children: [
             {
@@ -178,6 +180,7 @@ export const DASHBOARD_QAE = {
           ],
         },
         {
+          type: CONTAINER,
           name: "communication",
           children: [
             {

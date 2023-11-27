@@ -83,6 +83,7 @@ export const Closed_Calls_Allocated_Call_Reviews = {
       type: "PAGES_365",
       Pageslist: [
         {
+          type: CONTAINER,
           name: "Reviews Closed_Allocated Call",
           children: [
             ///FETCH DATA OF COLUMN
@@ -247,6 +248,7 @@ export const Closed_Calls_Allocated_Call_Reviews = {
 
         //for  Closed Call - Feedback Requested Call Review
         {
+          type: CONTAINER,
           name: " Feedback Requested Call Review",
           children: [
             ///FETCH DATA OF COLUMN
