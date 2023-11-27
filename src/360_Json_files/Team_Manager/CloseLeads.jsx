@@ -124,8 +124,8 @@ export const Sales_Close_Leads = {
 
 
     {
-      type: "PAGE_365",
-      Pagelist: [
+      type: "PAGES_365",
+      Pageslist: [
         {
           name: "Close Leads",
           children: [

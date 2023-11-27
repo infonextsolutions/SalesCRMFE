@@ -50,7 +50,7 @@ const LoginRefresh = ({ component }) => {
       dispatch(storeUserData(userProfile1?.profile));
       dispatch(storeParentData(userProfile1?.parentUser));
     }
-    if (userProfile._id) {
+    if (userProfile?._id) {
       setCheck(true);
     }
   }, [loginStatus, userProfile]);

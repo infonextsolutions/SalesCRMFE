@@ -80,8 +80,8 @@ export const Closed_Calls_Allocated_Call_Reviews = {
 
 
     {
-      type: "PAGE_365",
-      Pagelist: [
+      type: "PAGES_365",
+      Pageslist: [
         {
           name: "Reviews Closed_Allocated Call",
           children: [

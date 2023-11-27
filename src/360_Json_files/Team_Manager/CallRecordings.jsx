@@ -83,8 +83,8 @@ export const Recorded_calls_Call_Recordings={
 
 
           {
-            type:"PAGE_365",
-           Pagelist:[
+            type:"PAGES_365",
+           Pageslist:[
             {
                 name:"Call Recordings",
                 children:[

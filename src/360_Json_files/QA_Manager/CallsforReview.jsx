@@ -82,8 +82,8 @@ export const Calls_for_Review_Allocated_Call_Review = {
 
 
     {
-      type: "PAGE_365",
-      Pagelist: [
+      type: "PAGES_365",
+      Pageslist: [
         {
           name: "Calls for Review-Allocated Call Reviews",
           children: [

@@ -1,7 +1,7 @@
 
 
 import * as React from "react";
-// import BarChart from "@mui/x-charts/BarChart";
+// import {BarChart} from "@mui/x-charts/BarChart";
 
 const uData = [40, 30, 98, 27, 18, 23, 34];
 const pData = [24, 13, 20, 39, 48, 38, 43];
