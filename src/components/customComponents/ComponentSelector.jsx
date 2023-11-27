@@ -49,6 +49,8 @@ import {
   GRAPH_INTERRUPTION_365,
   GRAP_TALK_RATIO_365,
   SELECT3,
+  CUSTOMTABLE,
+  MAINLAYOUT,
 } from "../utils/Const.js";
 import Banner from "./Banner.jsx";
 import Footer from "./Footer.jsx";
@@ -101,6 +103,8 @@ import EmotionalAnalysisComp from "./360_components/SRM_Bdm_Dashboard/Emotional_
 import TalkRatio from "./360_components/SRM_Bdm_Dashboard/Ratio_bar.jsx";
 import Interruptions from "./360_components/SRM_Bdm_Dashboard/Interruptions_Graph.jsx";
 import DropSelect3 from "./Drop_Select3.jsx";
+import CustomTable from "./360_components/CustomTable.jsx";
+import MainLayout from "./360_components/MainLayout.jsx";
 import dynamic from 'next/dynamic';
 
 const Comp = ({ component }) => {
@@ -258,7 +262,8 @@ const Comp = ({ component }) => {
         <SidebarMenu component={component} />
       )}
       {component.type === PAGES_365 && <Selected_page component={component} />}
-
+      {component.type === MAINLAYOUT && <MainLayout component={component} />}
+      {component.type === CUSTOMTABLE && <CustomTable component={component} />}
       {component.type === DYNAMIC_CARD_CONTAINER_365 && (
         <DealsCard component={component} />
       )}
