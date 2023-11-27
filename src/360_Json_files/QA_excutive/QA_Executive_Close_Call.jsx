@@ -17,7 +17,7 @@ const HEADER = {
       dataKey: "data_Key",
       label: "searchHere",
       name: "searchHere",
-      icon: "search ",
+      icon: "search",
       requiredErrorMessage: "",
       type: "TEXT_INPUT",
     },
