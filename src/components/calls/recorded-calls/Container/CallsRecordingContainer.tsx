@@ -15,6 +15,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   const [product, setProduct] = useState(" Product A");
   const [callOwner, setCallOwner] = useState("John");
   const [callType, setCallType] = useState("Product Demo");
+  const [callDisposition, setCallDisposition] = useState("Follow-up Required");
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
@@ -27,6 +28,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
       callOwner,
       callType,
       search,
+      callDisposition,
       date: {
         from: startDate,
         to: endDate,
@@ -63,7 +65,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="company"
               >
                 <option selected value="Open">
                   ABC Corp
@@ -75,7 +77,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setProduct(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="product"
               >
                 <option selected value="Open">
                   Product A
@@ -88,7 +90,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="callOwner"
               >
                 <option selected value="Open">
                   John
@@ -100,10 +102,22 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setCallType(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="callType"
               >
                 <option selected value="Open">
                   Product Demo
+                </option>
+              </select>
+            </div>
+            <div className="flex gap-4 items-center w-62 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <h2 className="font-medium">Call Dispostion</h2>
+              <select
+                onChange={(e) => setCallDisposition(e.target.value)}
+                className="text-red-500"
+                id="callDispostion"
+              >
+                <option selected value="Follow-up Required">
+                  Follow-up Required
                 </option>
               </select>
             </div>
