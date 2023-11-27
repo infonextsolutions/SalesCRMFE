@@ -92,8 +92,8 @@ export const Active_calls_Scheduled_Calls = {
 
 
     {
-      type: "PAGE_365",
-      Pagelist: [
+      type: "PAGES_365",
+      Pageslist: [
         {
           name: "Scheduled Calls",
           children: [

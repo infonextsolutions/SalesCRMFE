@@ -16,8 +16,8 @@ export default function AutoFetchApiPost({
     uurl =
       component.api +
       (component.userId ? "?userId=" : "?id=") +
-      userProfile._id +
-      (userProfile.role ? "&role=" + userProfile.role : "");
+      userProfile?._id +
+      (userProfile?.role ? "&role=" + userProfile?.role : "");
   }
 
   const doFetch = useCallback(() => {

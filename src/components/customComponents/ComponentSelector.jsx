@@ -131,7 +131,7 @@ const Comp = ({ component }) => {
     );
     const page =
       (component.paginatioName || component.name) !== "page"
-        ? sliceData.page
+        ? sliceData?.page
         : 0;
     let reqPayload = {};
     if (payload == null) {
@@ -316,20 +316,20 @@ const Comp = ({ component }) => {
         <SelectButton
           component={component}
           handleValueChange={handleValueChange}
-          value={sliceData[component.name]}
+          value={sliceData?.[component.name]}
         />
       )}
       {component.type === SELECT2 && (
         <DropSelect
           component={component}
-          values={sliceData[component.name]}
+          values={sliceData?.[component.name]}
           onSubmit={handleValueChange}
         />
       )}
       {component.type === SELECT3 && (
         <DropSelect3
           component={component}
-          values={sliceData[component.name]}
+          values={sliceData?.[component.name]}
           onSubmit={handleValueChange}
         />
       )}
@@ -337,7 +337,7 @@ const Comp = ({ component }) => {
         <Slider
           component={component}
           handleValueChange={handleValueChange}
-          value={sliceData[component.name]}
+          value={sliceData?.[component.name]}
         />
       )}
       {component.type === API_BUTTON && (

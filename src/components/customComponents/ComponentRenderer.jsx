@@ -15,6 +15,6 @@ function Comp({ jsonToRender }) {
   return renderComponent(jsonToRender.children);
 }
 
-const RenderComponent = dynamic(() => Promise.resolve(page), { ssr: false })
+const RenderComponent = dynamic(() => Promise.resolve(Comp), { ssr: false })
 
 export default RenderComponent;

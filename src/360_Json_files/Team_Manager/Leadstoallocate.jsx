@@ -124,8 +124,8 @@ export const Sales_Leads_To_Allocate={
 
 
           {
-            type:"PAGE_365",
-           Pagelist:[
+            type:"PAGES_365",
+           Pageslist:[
             {
                 name:"Leads To Allocate ",
                 children:[
