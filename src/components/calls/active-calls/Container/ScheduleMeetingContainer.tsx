@@ -1,5 +1,4 @@
 import Kanban from "@/components/View/Kanban";
-import CallsTable from "@/components/View/Tables/calls/recorded-calls/Calls";
 import ButtonDropDown from "@/utils/Button/Button";
 import React, { Suspense, useEffect, useState } from "react";
 import Search from "../Search/Search";
@@ -7,18 +6,23 @@ import Spinner from "@/components/loader/spinner";
 import DatePicker from "@/utils/Button/DatePicker";
 import axios from "axios";
 
-const CallsContainer = ({ dummy1, data }: LeadContainerProps) => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+const CallsTable = React.lazy(
+  () => import("@/components/View/Tables/calls/active-calls/Calls")
+);
+
+const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
   const [search, setSearch] = useState("");
-  const [companyName, setCompanyName] = useState("ABC Corp");
-  const [product, setProduct] = useState(" Product A");
-  const [callOwner, setCallOwner] = useState("John");
-  const [callType, setCallType] = useState("Product Demo");
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
   };
+
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [companyName, setCompanyName] = useState("ABC Corp");
+  const [product, setProduct] = useState(" Product A");
+  const [callOwner, setCallOwner] = useState("John");
+  const [callType, setCallType] = useState("Product Demo");
 
   const getData = async () => {
     const payload = {
@@ -40,12 +44,12 @@ const CallsContainer = ({ dummy1, data }: LeadContainerProps) => {
     dummy1 = { ...response.data };
   };
 
-  useEffect(() => {
-    getData();
-  }, [product, companyName, callOwner, callType, startDate, endDate, search]);
+  // useEffect(() => {
+  //   getData();
+  // }, [product, companyName, callOwner, callType, startDate, endDate, search]);
 
   return (
-    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] relative mb-[40px]">
+    <div className="pr-[10px] w-[100%] bg-white min-h-[70vh] rounded-[18px] overflow-hidden mb-[40px]">
       <div className="w-[100%] h-[120px] flex items-center  px-[8px]">
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex gap-5">
@@ -125,10 +129,10 @@ const CallsContainer = ({ dummy1, data }: LeadContainerProps) => {
   );
 };
 
-export default CallsContainer;
+export default ScheduleMeetingContainer;
 
 interface LeadContainerProps {
   dummy1: any;
-  dummy2?: any;
-  data?: any;
+  dummy2: any;
+  data: any;
 }
