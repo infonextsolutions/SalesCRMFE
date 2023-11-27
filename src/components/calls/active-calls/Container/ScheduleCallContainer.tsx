@@ -67,9 +67,9 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="company"
               >
-                <option selected value="Open">
+                <option selected value="ABC Corp">
                   ABC Corp
                 </option>
               </select>
@@ -79,9 +79,9 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setProduct(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="product"
               >
-                <option selected value="Open">
+                <option selected value="Product A">
                   Product A
                 </option>
                 <option value="Close">Product B</option>
@@ -92,9 +92,9 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="callOwner"
               >
-                <option selected value="Open">
+                <option selected value="John">
                   John
                 </option>
               </select>
@@ -104,9 +104,9 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setCallType(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="callType"
               >
-                <option selected value="Open">
+                <option selected value="Product Demo">
                   Product Demo
                 </option>
               </select>

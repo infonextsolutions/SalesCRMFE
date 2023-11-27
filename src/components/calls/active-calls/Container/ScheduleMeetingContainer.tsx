@@ -23,6 +23,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
   const [product, setProduct] = useState(" Product A");
   const [callOwner, setCallOwner] = useState("John");
   const [callType, setCallType] = useState("Product Demo");
+  const [location, setLocation] = useState("zoom");
 
   const getData = async () => {
     const payload = {
@@ -31,6 +32,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
       callOwner,
       callType,
       search,
+      location,
       date: {
         from: startDate,
         to: endDate,
@@ -67,9 +69,9 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
                 className="text-red-500"
-                id="countries"
+                id="company"
               >
-                <option selected value="Open">
+                <option selected value="ABC Corp">
                   ABC Corp
                 </option>
               </select>
@@ -81,34 +83,47 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="Open">
+                <option selected value="Product A">
                   Product A
                 </option>
                 <option value="Close">Product B</option>
               </select>
             </div>
             <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <h2 className="font-medium">Call Owner</h2>
+              <h2 className="font-medium">Meeting Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="Open">
+                <option selected value="john">
                   John
                 </option>
               </select>
             </div>
             <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <h2 className="font-medium">Call Type</h2>
+              <h2 className="font-medium">Meeting Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="Open">
+                <option selected value="Product Demo">
                   Product Demo
                 </option>
+              </select>
+            </div>
+            <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <h2 className="font-medium">Location</h2>
+              <select
+                onChange={(e) => setCallType(e.target.value)}
+                className="text-red-500"
+                id="location"
+              >
+                <option selected value="zoom">
+                  Zoom
+                </option>
+                <option value="meet">Google Meet</option>
               </select>
             </div>
           </div>
