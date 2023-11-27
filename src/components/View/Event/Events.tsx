@@ -405,29 +405,48 @@ const Events = ({ cancel, leadid }: any) => {
   const [eventToTime, setEventToTime] = useState("");
   const [eventToDate, setEventToDate] = useState("");
   const [eventType, setEventType] = useState("");
+  const [eventLocation, setEventLocation] = useState("");
+  const [eventCallParticipants, setCallParticipants] = useState("");
+  const [eventNotifyBefore, setEventNotifyBefore] = useState("");
+  const [timeDifference, setTimeDifference] = useState("");
+  const [eventInvites, setEventInvites] = useState("");
+
   const dispatch = useAppDispatch();
+
+  const calculateTimeDifference = ({ fromTime, toTime }: any) => {
+    const [fromHours, fromMinutes] = fromTime.split(":").map(Number);
+    const [toHours, toMinutes] = toTime.split(":").map(Number);
+
+    const fromInMinutes = fromHours * 60 + fromMinutes;
+    const toInMinutes = toHours * 60 + toMinutes;
+
+    return toInMinutes - fromInMinutes;
+  };
+
   const submit = () => {
-    // console.log("eventtitle", eventType);
-    // console.log("eventtitle", eventTitle);
-    // console.log("eventtitle", eventDescription);
-    // console.log("eventFromTime", eventFromTime);
-    // console.log("eventFromDate", eventFromDate);
-    // console.log("eventToTime", eventToTime);
-    // console.log("eventToDate", eventToDate);
-    // console.log("eventtitle", eventAllday);
-    // console.log("eventtitle", eventOutcome);
+    const timeDifference = calculateTimeDifference({
+      fromTime: eventFromTime,
+      toTime: eventToTime,
+    });
+    setTimeDifference(timeDifference.toString());
+
     const finalPayload = {
       type: eventType,
       title: eventTitle,
       description: eventDescription,
-      // datetime: {
-      //   fromTime: eventFromTime,
-      //   fromDate: eventFromDate,
-      //   toTime: eventToTime,
-      //   toDate: eventToDate,
-      // },
-      allday: eventAllday,
-      outcome: eventOutcome,
+      datetime: {
+        fromTime: eventFromTime,
+        fromDate: eventFromDate,
+        toTime: eventToTime,
+        toDate: eventToDate,
+      },
+      duration: timeDifference,
+      location: eventLocation,
+      leadid: leadid,
+      callParticipant: eventCallParticipants,
+      // companyName: "ABC",
+      invite: eventInvites,
+      notifyBefore: eventNotifyBefore,
     };
     console.log("asdsad", finalPayload);
 
@@ -476,7 +495,7 @@ const Events = ({ cancel, leadid }: any) => {
       </div>
       <h1 className="text-[30px] text-[#000] tracking-md">New Event</h1>
       <DropItems
-        title={"Type"}
+        title={"Meeting Type"}
         top={20}
         setEventType={setEventType}
         list={[
@@ -486,17 +505,37 @@ const Events = ({ cancel, leadid }: any) => {
             selected: true,
           },
           {
-            title: "Task",
+            title: "Discovery Meeting",
             val: 0,
             selected: false,
           },
           {
-            title: "Meeting",
+            title: "Product Demo Meeting",
             val: 0,
             selected: false,
           },
           {
-            title: "Reminder",
+            title: "Solution Design Meeting",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Consultation Meeting",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Pricing Discussion Meeting",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Negotiation Meeting",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Follow-Up Meeting",
             val: 0,
             selected: false,
           },
@@ -516,31 +555,82 @@ const Events = ({ cancel, leadid }: any) => {
           setEventDescription(e);
         }}
       />
+
       <DateContainer
         setEventFromTime={setEventFromTime}
         setEventFromDate={setEventFromDate}
         setEventToDate={setEventToDate}
         setEventToTime={setEventToTime}
       />
-      <AllDay setEventAllday={setEventAllday} />
-      {eventType === "Meeting" && <AddMember title={"Members"} />}
+
+      {timeDifference.length > 0 ? <p>{timeDifference} minutes</p> : <></>}
       <DropItems
-        title={"Outcome"}
+        title={"Location"}
         top={20}
-        setEventType={setEventOutcome}
+        setEventType={setEventLocation}
         list={[
           {
-            title: "Choose Outcome",
+            title: "Choose Location",
             val: 0,
             selected: true,
           },
           {
-            title: "Dummy1",
+            title: "Zoom",
             val: 0,
             selected: false,
           },
           {
-            title: "Dummy2",
+            title: "Google Meet",
+            val: 0,
+            selected: false,
+          },
+        ]}
+      />
+      <DropItems
+        title={"Call Participants"}
+        top={20}
+        setEventType={setCallParticipants}
+        list={[
+          {
+            title: "Choose Call Participants",
+            val: 0,
+            selected: true,
+          },
+          {
+            title: "Participant ABC",
+            val: 0,
+            selected: false,
+          },
+        ]}
+      />
+
+      {/* <AllDay setEventAllday={setEventAllday} /> */}
+      {/* {eventType === "Meeting" && <AddMember title={"Members"} />} */}
+
+      <AddTextArea
+        title={"Invite By Email Address"}
+        top={20}
+        change={(e: any) => {
+          setEventInvites(e);
+        }}
+      />
+      <DropItems
+        title={"Notify Me Before"}
+        top={20}
+        setEventType={setEventNotifyBefore}
+        list={[
+          {
+            title: "Notify me before",
+            val: 0,
+            selected: true,
+          },
+          {
+            title: "15 minutes",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "30 minutes",
             val: 0,
             selected: false,
           },
