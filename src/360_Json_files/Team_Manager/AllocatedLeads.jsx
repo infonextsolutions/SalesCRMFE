@@ -127,6 +127,7 @@ export const Sales_Allocated_Leads={
             type:"PAGES_365",
            Pageslist:[
             {
+          type: CONTAINER,
                 name:"Allocated Leads",
                 children:[
                   ///FETCH DATA OF COLUMN

@@ -1,3 +1,5 @@
+import { CONTAINER } from "../../components/utils/Const";
+
 const HEADER = {
   type: CONTAINER_365,
   className: "homeHeader",
@@ -80,6 +82,7 @@ export const Team_Manger_Team = {
       type: PAGES_365,
       Pageslist: [
         {
+          type: CONTAINER,
           name: "Activity",
           children: [
             {
@@ -149,12 +152,14 @@ export const Team_Manger_Team = {
           ],
         },
         {
+          type: CONTAINER,
           name: "interation",
           children: [
             {
               type: PAGES_365,
-              PagesList: [
+              Pageslist: [
                 {
+          type: CONTAINER,
                   name: "Team Trends",
                   children: [
                     {
@@ -315,6 +320,7 @@ export const Team_Manger_Team = {
               type: PAGES_365,
               Pageslist:  [
                 {
+          type: CONTAINER,
                   name: "Overall Talking Points Duration",
                   children: [
                     {
@@ -887,6 +893,7 @@ export const Team_Manger_Team = {
               type: PAGES_365,
               Pageslist: [
                 {
+          type: CONTAINER,
                   name: "Overall Indicators Use",
                   children: [
                     {
@@ -926,6 +933,7 @@ export const Team_Manger_Team = {
                   ],
                 },
                 {
+          type: CONTAINER,
                   name: "Particular Indicators Use",
                   children: [
                     {
@@ -974,6 +982,7 @@ export const Team_Manger_Team = {
                   ],
                 },
                 {
+          type: CONTAINER,
                   name: "Teams Discussion",
                   children: [
                     {
@@ -1013,6 +1022,7 @@ export const Team_Manger_Team = {
                   ],
                 },
                 {
+          type: CONTAINER,
                   name: "Individual Discussion",
                   children: [
                     {

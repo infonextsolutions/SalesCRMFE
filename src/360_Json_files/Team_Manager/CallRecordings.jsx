@@ -86,6 +86,7 @@ export const Recorded_calls_Call_Recordings={
             type:"PAGES_365",
            Pageslist:[
             {
+          type: CONTAINER,
                 name:"Call Recordings",
                 children:[
                   ///FETCH DATA OF COLUMN
@@ -266,6 +267,7 @@ export const Recorded_calls_Call_Recordings={
             },
              //for meeting recordings
             {
+          type: CONTAINER,
               name:" Meeting Recordings",
               children:[
                 ///FETCH DATA OF COLUMN

@@ -16,6 +16,7 @@ import {
   GRAP_TALK_RATIO_365,
   GRAPH_INTERRUPTION_365,
   GRAPH_CALL_SENTIMENT_365,
+  CONTAINER,
 } from "../../components/utils/Const.js";
 
 import { API_ENDPOINTS } from "../../redux/utils/api.js";
@@ -98,6 +99,7 @@ export const DASHBOARD_TM = {
       type: PAGES_365,
       Pageslist: [
         {
+          type: CONTAINER,
           name: "salesPerformance",
           children: [
             {
@@ -173,6 +175,7 @@ export const DASHBOARD_TM = {
         },
 
         {
+          type: CONTAINER,
           name: "commmunication_Interaction",
           children: [
             {
@@ -237,6 +240,7 @@ export const DASHBOARD_TM = {
         },
 
         {
+          type: CONTAINER,
           name: "engagement_Reports",
           children: [
             // //FOR UI

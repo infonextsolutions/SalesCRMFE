@@ -16,6 +16,7 @@ import {
   GRAP_TALK_RATIO_365,
   GRAPH_INTERRUPTION_365,
   GRAPH_CALL_SENTIMENT_365,
+  CONTAINER,
 } from "../../components/utils/Const.js";
 
 import { API_ENDPOINTS } from "../../redux/utils/api.js";
@@ -98,6 +99,7 @@ export const DASHBOARD_QAM = {
       type: PAGES_365,
       Pageslist: [
         {
+          type: CONTAINER,
           name: "callreview",
           children: [
             {
@@ -178,6 +180,7 @@ export const DASHBOARD_QAM = {
           ],
         },
         {
+          type: CONTAINER,
           name: "communication",
           children: [
             {

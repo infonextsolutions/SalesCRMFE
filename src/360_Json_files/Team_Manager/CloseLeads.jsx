@@ -127,6 +127,7 @@ export const Sales_Close_Leads = {
       type: "PAGES_365",
       Pageslist: [
         {
+          type: CONTAINER,
           name: "Close Leads",
           children: [
             ///FETCH DATA OF COLUMN
