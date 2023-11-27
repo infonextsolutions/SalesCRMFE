@@ -134,11 +134,11 @@ export const Calls_for_Review_Allocated_Call_Review = {
               className: "btn refresh_btn standalone_btn",
             },
             {
+              type: "click",
               name: "Download",
               label: "Download",
               icon: " download",
               dataKey: "",
-              type: "click",
               isRequired: " True",
               requiredErrorMessage: ".",
             },

@@ -1,60 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ADMIN_DASHBOARD_LOGIN, POST, SUCCESS } from "../utils/Const.js";
-import { selectApiData, selectApiStatus } from "../../redux/utils/selectors.js";
-import { API_ENDPOINTS } from "../../redux/utils/api.js";
-import { callApi } from "../../redux/utils/apiActions.js";
-import { storeUserData } from "../../redux/slice/userSlice.js";
-import { storeParentData } from "../../redux/slice/parentSlice.js";
 import RenderComponent from "./ComponentRenderer.jsx";
 import { useRouter } from "next/navigation.js";
+import { setLoggedInStatus, setUser1 } from "@/store/auth";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const LoginRefresh = ({ component }) => {
-  const navigate = useRouter();
-  const loginStatus = useSelector((state) =>
-    selectApiStatus(state, ADMIN_DASHBOARD_LOGIN)
-  );
-  const userProfile = useSelector((state) => state.profile);
-  const userProfile1 = useSelector((state) =>
-    selectApiData(state, ADMIN_DASHBOARD_LOGIN)
-  );
+  const router = useRouter();
+  const state = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  const [logged] = useLocalStorage("logged", "loading");
+  const [id] = useLocalStorage("user-id", "not-loaded");
+  const [name] = useLocalStorage("user-name", "not-loaded");
+  const [role] = useLocalStorage("user-role", "not-loaded");
 
   const [check, setCheck] = useState(false);
   useEffect(() => {
-    if (!loginStatus) {
-      const email = localStorage.getItem("email");
-      const password = localStorage.getItem("password");
-      if (email && password) {
-        try {
-          const options = {
-            url: API_ENDPOINTS[ADMIN_DASHBOARD_LOGIN],
-            method: POST,
-            headers: { "Content-Type": "application/json" },
-            data: {
-              email: email,
-              password: password,
-            },
-          };
-          dispatch(callApi(options));
-        } catch (error) { }
-      } else {
-        navigate.push("/login");
+    if (!state.isLoggedIn) {
+      if (logged === "loading" || logged === "loggedIn") {
+        if (id === null || name === null || role === null) {
+          router.push("/login");
+        }
+        if (id && name && role) {
+          if (
+            id !== "not-loaded" &&
+            name !== "not-loaded" &&
+            role !== "not-loaded"
+          ) {
+            dispatch(setUser1({ _id: id, User: name, Role: role }));
+            dispatch(setLoggedInStatus(true));
+          }
+        }
+      } else if (logged === null) {
+        router.push("/login");
       }
-    } else {
     }
-  }, [loginStatus]);
+  }, [id, name, role, logged]);
 
   useEffect(() => {
-    if (loginStatus === SUCCESS) {
-      dispatch(storeUserData(userProfile1?.profile));
-      dispatch(storeParentData(userProfile1?.parentUser));
+    if (!state.isLoggedIn) {
+      if (logged === null) {
+        router.push("/login");
+      }
     }
-    if (userProfile?._id) {
-      setCheck(true);
-    }
-  }, [loginStatus, userProfile]);
-  return <>{check && <RenderComponent jsonToRender={component} />}</>;
+  }, [state.isLoggedIn, logged]);
+  return <>{<RenderComponent jsonToRender={component} />}</>;
 };
 
 export default LoginRefresh;
