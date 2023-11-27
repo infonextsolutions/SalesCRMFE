@@ -1,13 +1,14 @@
 import Navigation from "@/components/app/Navigation";
-import CallsContainer from "@/components/calls/recorded-calls/Container/Container";
 import DUMMY from "@/shared/dummy";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 import { useRouter } from "next/router";
 import Navbar from "@/components/app/Navbar/Navbar";
+import CallsRecordingContainer from "@/components/calls/recorded-calls/Container/CallsRecordingContainer";
+import MeetingRecordingContainer from "@/components/calls/recorded-calls/Container/MeetingRecordingContainer";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -48,6 +49,9 @@ const Dummy = [
 ];
 
 const Calls = ({ data }: any) => {
+  const [recodedCalls, setRecordedCalls] = useState(true);
+  const [recodedMeeting, setRecodedMeeting] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -83,13 +87,28 @@ const Calls = ({ data }: any) => {
     }
   };
 
-  console.log(data, "please");
+  const gotoCallRecording = () => {
+    setRecordedCalls(true);
+    setRecodedMeeting(false);
+  };
+
+  const gotoMeetingRecording = () => {
+    setRecordedCalls(false);
+    setRecodedMeeting(true);
+  };
+
   return (
     <>
       <Navbar title="Calls > Recorded Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
-          title={"Calls>Recorded Calls"}
+          title={
+            recodedCalls
+              ? "Calls>Recorded Calls>Call Recordings"
+              : recodedMeeting
+              ? "Calls>Recorded Calls>Meeting Recordings"
+              : ""
+          }
           buttons={[
             {
               text: "Export",
@@ -115,7 +134,39 @@ const Calls = ({ data }: any) => {
             },
           ]}
         />
-        <CallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
+
+        <div className="flex justify-around pb-5">
+          <button
+            onClick={gotoCallRecording}
+            className={
+              recodedCalls
+                ? "text-blue-700 font-bold text-lg pb-2 border-b-4 border-blue-700"
+                : "text-black font-bold text-lg"
+            }
+          >
+            Call Recordings
+          </button>
+          <button
+            onClick={gotoMeetingRecording}
+            className={
+              recodedMeeting
+                ? "text-blue-700 font-bold text-lg pb-2 border-b-4 border-blue-700"
+                : "text-black font-bold text-lg"
+            }
+          >
+            Metting Recordings
+          </button>
+        </div>
+        {recodedCalls && (
+          <CallsRecordingContainer data={data} dummy1={DUMMY} dummy2={dummy} />
+        )}
+        {recodedMeeting && (
+          <MeetingRecordingContainer
+            data={data}
+            dummy1={DUMMY}
+            dummy2={dummy}
+          />
+        )}
       </div>
     </>
   );

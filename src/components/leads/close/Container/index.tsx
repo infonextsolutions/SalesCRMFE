@@ -49,9 +49,9 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     records = { ...response.data };
   };
 
-  useEffect(() => {
-    getData();
-  }, [status, stage, product, leadSource, startDate, endDate, search]);
+  // useEffect(() => {
+  //   getData();
+  // }, [status, stage, product, leadSource, startDate, endDate, search]);
 
   return (
     <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] relative mb-[40px]">

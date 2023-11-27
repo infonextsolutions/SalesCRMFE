@@ -1,7 +1,7 @@
 import Navigation from "@/components/app/Navigation";
-import CallsContainer from "@/components/calls/active-calls/Container/Container";
+import CallsContainer from "@/components/calls/active-calls/Container/ScheduleCallContainer";
 import DUMMY from "@/shared/dummy";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
 import { CSVLink } from "react-csv";
@@ -10,6 +10,8 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { useRouter } from "next/router";
 import Navbar from "@/components/app/Navbar/Navbar";
+import ScheduleCallsContainer from "@/components/calls/active-calls/Container/ScheduleCallContainer";
+import ScheduleMeetingContainer from "@/components/calls/active-calls/Container/ScheduleMeetingContainer";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -52,6 +54,8 @@ const Dummy = [
 ];
 
 const Calls = ({ data }: any) => {
+  const [scheduleCalls, setScheduleCalls] = useState(true);
+  const [scheduleMeeting, setScheduleMeeting] = useState(false);
   const ref: any = useRef();
 
   console.log(data);
@@ -119,12 +123,28 @@ const Calls = ({ data }: any) => {
     }
   };
 
+  const gotoScheduleCall = () => {
+    setScheduleCalls(true);
+    setScheduleMeeting(false);
+  };
+
+  const gotoScheduleMeeting = () => {
+    setScheduleCalls(false);
+    setScheduleMeeting(true);
+  };
+
   return (
     <>
-      <Navbar title="Calls > Active Calls" src="Phone" />
+      <Navbar title={"Calls > Active Calls"} src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
-          title={"Calls>Active Calls "}
+          title={
+            scheduleCalls
+              ? "Calls > Active calls > Schedule Calls"
+              : scheduleMeeting
+              ? "Calls > Active calls > Schedule Meeting"
+              : ""
+          }
           buttons={[
             {
               text: "Export",
@@ -149,7 +169,34 @@ const Calls = ({ data }: any) => {
             },
           ]}
         />
-        <CallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
+        <div className="flex justify-around pb-5">
+          <button
+            onClick={gotoScheduleCall}
+            className={
+              scheduleCalls
+                ? "text-blue-700 font-bold text-lg pb-2 border-b-4 border-blue-700"
+                : "text-black font-bold text-lg"
+            }
+          >
+            Schedule Call
+          </button>
+          <button
+            onClick={gotoScheduleMeeting}
+            className={
+              scheduleMeeting
+                ? "text-blue-700 font-bold text-lg pb-2 border-b-4 border-blue-700"
+                : "text-black font-bold text-lg"
+            }
+          >
+            Schedule Metting
+          </button>
+        </div>
+        {scheduleCalls && (
+          <ScheduleCallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
+        )}
+        {scheduleMeeting && (
+          <ScheduleMeetingContainer data={data} dummy1={DUMMY} dummy2={dummy} />
+        )}
       </div>
     </>
   );
