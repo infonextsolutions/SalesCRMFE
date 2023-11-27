@@ -82,9 +82,6 @@ const CallProfile = ({ data, data1 }: any) => {
           ]}
         />
         <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-          <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
-            <Audio data={data.result} data1={data1.result} />
-          </div>
           <AudioProfileContainer
             data={data.result}
             width={"50%"}
@@ -94,6 +91,9 @@ const CallProfile = ({ data, data1 }: any) => {
             data1={data1.result}
             info={dummy.audioCallDetails}
           />
+          <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
+            <Audio data={data.result} data1={data1.result} />
+          </div>
         </div>
         {/* write your code here for profile page manya! */}
       </div>
