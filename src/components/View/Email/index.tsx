@@ -100,7 +100,7 @@ const Toolbar = ({
         <Image
           src={getBasicIcon("Arrow Down 3")}
           width={20}
-          className=" cursor-pointer"
+          className="cursor-pointer "
           height={20}
           alt=""
         />
@@ -264,13 +264,18 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
   );
 };
 
+//condition to check refresh is present or not 
+
+
+
+
 const EmailPage = ({
   cancel,
   data,
   refresh,
 }: {
   cancel: () => void;
-  data: any;
+  data?: any;
   refresh: (e: any) => any;
 }) => {
   const [sender, setSender] = useState<any>("");

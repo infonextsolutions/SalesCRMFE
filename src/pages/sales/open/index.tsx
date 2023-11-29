@@ -1,4 +1,4 @@
-import axios from "axios";
+ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { Suspense, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
