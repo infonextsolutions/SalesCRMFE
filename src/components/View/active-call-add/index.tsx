@@ -63,6 +63,24 @@ const AddText = ({ title, place, change }: any) => {
     </div>
   );
 };
+const DisabledAddText = ({ title, place }: any) => {
+  return (
+    <div className="w-[100%] mb-[15px]">
+      <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
+        {title}
+      </p>
+      <input
+        disabled
+        className="cursor-not-allowed w-[100%] h-[41px] rounded-[14px] bg-[#D9D9D954] text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
+        type="text"
+        name=""
+        placeholder={place}
+        value={place}
+        id=""
+      />
+    </div>
+  );
+};
 
 const TextBox = ({ title, place, change }: any) => {
   return (
@@ -282,6 +300,7 @@ const ActiveCall = ({
   id,
   companyId,
   customerId,
+  companyName,
   refresh,
   lead,
 }: any) => {
@@ -292,13 +311,19 @@ const ActiveCall = ({
   }
   const [data, setData] = React.useState<any>({
     callId: generateUniqueId(),
-    call_title: "Shraddha P.",
-    call_desc: "desc",
+    call_title: "",
+    call_desc: "",
     leadId: id,
     companyId: companyId,
     customerId: customerId,
-    call_date: Date,
+    call_date: "",
     call_start_time: getCurrentTimeInHours(),
+    company_name: companyName,
+    call_type: "",
+    call_new_participant_number: "",
+    call_new_participant_title: "",
+    call_new_participant_name: "",
+    call_new_participant_designation: "",
   });
 
   function getCurrentTimeInHours() {
@@ -353,14 +378,17 @@ const ActiveCall = ({
   const submit = () => {
     // console.log("Caling data",data)
     let timee = null;
-    if (date.date) {
-      timee = combineDateTimeStrings(date.time, date.date);
-    }
+    // if (date.date) {
+    //   timee = combineDateTimeStrings(date.time, date.date);
+    // }
     console.log(
+      "asddafdfa",
       {
         ...data,
-        call_date: Date,
-        call_start_time: timee ? timee : getCurrentTimeInHours(),
+
+        call_date: date.date,
+        call_start_time: date.time,
+        // call_start_time:  timee ? timee : getCurrentTimeInHours(),
         participants: data?.participants,
         owner: data?.owner,
       },
@@ -369,12 +397,14 @@ const ActiveCall = ({
     );
 
     const finalPayload = {
-      call_date: Date,
-      call_start_time: timee ? timee : getCurrentTimeInHours(),
+      call_date: date.date,
+      call_start_time: date.time,
+      // call_start_time: timee ? timee : getCurrentTimeInHours(),
       participants: date?.participants,
       owner: date?.owner,
       ...data,
     };
+    console.log("payload", finalPayload);
 
     axios
       .post(
@@ -415,6 +445,7 @@ const ActiveCall = ({
       })
     : [];
   const state = useSelector((state: any) => state.auth);
+  const loggedInUser = localStorage.getItem("user-name")?.split("@")[0];
 
   return (
     <div className="w-[100%] h-[100%] py-[30px] pl-[40px] pr-[40px]  relative">
@@ -442,6 +473,7 @@ const ActiveCall = ({
           setData({ ...data, });
         }}
       /> */}
+      <DisabledAddText title="Company Name" place={companyName} />
       <AddText
         title="Call Title"
         place={"Call Title"}
@@ -449,25 +481,76 @@ const ActiveCall = ({
           setData({ ...data, call_title: e });
         }}
       />
-      <TextBox
+      <AddText
         title="Call Description"
         place="Description"
         change={(e: any) => {
           setData({ ...data, call_desc: e });
         }}
       />
-      <DateContainer date={date} setDate={setDateData} />
       <DropItems
-        title="Call Owner"
+        title="Call Type"
         top={20}
         list={[
           {
-            title: "Choose Owner",
+            title: "Call Type",
             val: 0,
             selected: true,
           },
           {
-            title: `${state?.user.name.split("@")[0]}`,
+            title: "Discovery",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Product Demo",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Solution Design",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Consultation",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Pricing Discussion",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Negotiation",
+            val: 0,
+            selected: false,
+          },
+          {
+            title: "Follow-up",
+            val: 0,
+            selected: false,
+          },
+          ...list,
+        ]}
+        change={(e: any) => {
+          setData({ ...data, call_type: e });
+        }}
+      />
+      <DateContainer date={date} setDate={setDateData} />
+      <DropItems
+        title="Allocate Call Owner"
+        top={20}
+        list={[
+          {
+            title: "Choose Call Owner",
+            val: 0,
+            selected: true,
+          },
+          {
+            // title: `${state?.user.name.split("@")[0]}`,
+            title: loggedInUser,
             val: 0,
             selected: false,
           },
@@ -477,6 +560,7 @@ const ActiveCall = ({
           setData({ ...data, owner: e });
         }}
       />
+
       <DropItems
         title="Call Participants"
         top={20}
@@ -497,6 +581,57 @@ const ActiveCall = ({
           setData({ ...data, participants: e });
         }}
       />
+      <div>
+        <p className="font-semibold my-2">Call New Participant</p>
+        <AddText
+          title="Landline/Mobile Number"
+          change={(e: any) => {
+            setData({ ...data, call_new_participant_number: e });
+          }}
+        />
+        <DropItems
+          title="Title"
+          top={20}
+          list={[
+            {
+              title: "Choose Title",
+              val: 0,
+              selected: true,
+            },
+            {
+              title: "Mr",
+              val: 0,
+              selected: false,
+            },
+            {
+              title: "Mrs",
+              val: 0,
+              selected: false,
+            },
+            {
+              title: "Miss",
+              val: 0,
+              selected: false,
+            },
+            ...list,
+          ]}
+          change={(e: any) => {
+            setData({ ...data, call_new_participant_title: e });
+          }}
+        />
+        <AddText
+          title="Name"
+          change={(e: any) => {
+            setData({ ...data, call_new_participant_name: e });
+          }}
+        />
+        <AddText
+          title="Designation"
+          change={(e: any) => {
+            setData({ ...data, call_new_participant_designation: e });
+          }}
+        />
+      </div>
       <div className="w-[100%] flex justify-end mt-[20px]">
         <SimpleButton
           theme={1}
