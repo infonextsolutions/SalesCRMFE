@@ -48,7 +48,7 @@ const AddLead = ({ cancel }: any) => {
     setShowMoreContactButton2(false);
   };
   const goToNextPage = () => {
-    if (currentPage < 4) {
+    if (currentPage < 3) {
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };

@@ -43,8 +43,9 @@ const FormEditContainer = ({
                 </h1>
                 <Formik
                   initialValues={{
+                    ...data,
+                    ...data.companyId,
                     lead_title: data?.lead_title,
-                    company_name: data?.companyId.company_name,
                     company_location: data.companyId.company_location,
                     linkedInurl: data?.companyId.linkedin_url,
                     Twitter: data?.companyId.twitter_url,
@@ -99,180 +100,197 @@ const FormEditContainer = ({
                 >
                   {({ handleSubmit }) => (
                     <Form className="custom-scroll-black w-[100%] flex justify-between pr-[20px] pb-[50px]">
-                      <div className="w-[55%]">
-                        <div className="flex mt-[10px] items-center justify-between">
-                          <div className="w-[48%]">
-                            <label
-                              className="font-medium"
-                              htmlFor="company_name"
-                            >
-                              Company Name
-                            </label>
-                            <Field
-                              type="text"
-                              name="company_name"
-                              id="company_name"
-                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                              placeholder="Company name"
-                            />
-                          </div>
-                          <div className="w-[48%]">
-                            <label
-                              className="font-medium"
-                              htmlFor="company_location"
-                            >
-                              Company Location
-                            </label>
-                            <Field
-                              type="text"
-                              name="company_location"
-                              id="company_location"
-                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                              placeholder="Company location"
-                            />
-                          </div>
-                        </div>
-                        <div className="mt-6">
-                          <label className="font-medium" htmlFor="linkedInurl">
-                            LinkedIn URL
+                      <div className="flex flex-col w-[100%] gap-4">
+                        <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="lead_title">
+                            Lead Title
                           </label>
                           <Field
                             type="text"
-                            name="linkedInurl"
-                            id="linkedInurl"
+                            name="lead_title"
+                            id="lead_title"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="LinkedIn"
+                            placeholder="Lead title"
                           />
                         </div>
-                        <div className="mt-6">
-                          <label className="font-medium" htmlFor="Twitter">
-                            Twitter
+                        <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="lead_title">
+                            Lead Description
                           </label>
                           <Field
                             type="text"
-                            name="Twitter"
-                            id="Twitter"
+                            name="lead_description"
+                            id="lead_description"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Twitter"
+                            placeholder="Lead Description"
                           />
                         </div>
-                        <div className="mt-6">
-                          <label className="font-medium" htmlFor="website_url">
-                            Website URL
+                        <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="lead_title">
+                            Company Name
                           </label>
                           <Field
                             type="text"
-                            name="website_url"
-                            id="website_url"
+                            name="company_Name"
+                            id="company_Name"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Website URL"
+                            placeholder="Company Name"
                           />
                         </div>
-                        <div className="mt-6">
-                          <label
-                            className="font-medium"
-                            htmlFor="industry_type"
-                          >
-                            Industry Type
-                          </label>
-                          <Field
-                            type="text"
+                        <div className="flex flex-col gap-2">
+                          <h2 className="font-medium">Industry Type</h2>
+                          <select
+                            className="flex items-center w-[100%] justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            id="industry_Type"
                             name="industry_type"
-                            id="industry_type"
-                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Industry Type"
-                          />
+                          >
+                            <option selected value="">
+                              -- Select Industry Type --
+                            </option>
+                            <option value="IT1">IT1</option>
+                            <option value="IT2">IT2</option>
+                          </select>
                         </div>
-                      </div>
-                      <div className="w-[40%]">
-                        {/* <div className="flex items-start justify-center">
-                          <div className="flex flex-col items-center relative">
-                            <div className="font-medium">Company Logo</div>
-
-                            <div
-                              className="h-20 mt-[25px] w-20 rounded-full"
-                              style={{ backgroundColor: "#304FFD" }}
-                            ></div>
-                            <div className="absolute top-[12px] right-[-10px]">
-                              <label htmlFor="logoInput">
-                                <Image
-                                  src={getBasicIcon("Edit")}
-                                  className="w-5 h-5 cursor-pointer mt-3 mr-3"
-                                  alt=""
-                                  width={12}
-                                  height={12}
-                                />
-                              </label>
-                              <input
-                                type="file"
-                                id="logoInput"
-                                className="hidden"
-                                accept="image/*"
-                                // onChange={handleLogoChange}
-                              />
-                            </div>
-                          </div>
-                        </div> */}
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col gap-2">
+                          <h2 className="font-medium">Country</h2>
+                          <select
+                            className="flex items-center w-[100%] justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            id="company_Country"
+                            name="company_Country"
+                          >
+                            <option selected value="">
+                              -- Select Country --
+                            </option>
+                            <option value="Indian">Indian</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="Srilanka">Srilanka</option>
+                            <option value="England">England</option>
+                            <option value="Australia">Australia</option>
+                          </select>
+                        </div>
+                        <div className="w-[100%] py-2 flex items-center justify-between gap-4">
                           <div className="w-[100%]">
-                            <label className="font-medium" htmlFor="lead_title">
-                              Lead Title
-                            </label>
-                            <Field
-                              type="text"
-                              name="lead_title"
-                              id="lead_title"
-                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                              placeholder="Lead title"
-                            />
+                            <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+                              State*
+                            </p>
+                            <select
+                              id="company_State"
+                              name="company_State"
+                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            >
+                              <option value="" selected>
+                                -- Select a State --
+                              </option>
+                              <option value="Delhi">Delhi</option>
+                              <option value="UttarPradesh">UttarPradesh</option>
+                              <option value="Goa">Goa</option>
+                              <option value="Rajastha">Rajasthan</option>
+                              <option value="kerela">Kerela</option>
+                            </select>
+                          </div>
+                          <div className="w-[100%]">
+                            <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+                              City*
+                            </p>
+                            <select
+                              id="company_City"
+                              name="company_City"
+                              className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            >
+                              <option value="" selected>
+                                -- Select a City --
+                              </option>
+                              <option value="Delhi">Delhi</option>
+                              <option value="Mumbai">Mumbai</option>
+                              <option value="Kolkata">Kolkata</option>
+                              <option value="Chennai">Chennai</option>
+                              <option value="Bengalore">Bengalore</option>
+                            </select>
                           </div>
                         </div>
-                        <div className="mt-6">
-                          <label className="font-medium" htmlFor="lead_owner">
-                            Lead Owner
+                        <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="lead_title">
+                            Company Description
                           </label>
                           <Field
                             type="text"
-                            name="lead_owner"
-                            id="lead_owner"
+                            name="company_description"
+                            id="company_description"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Lead Owner"
+                            placeholder="Company Description"
                           />
                         </div>
-                        <div className="mt-6">
-                          <label className="font-medium" htmlFor="Stage">
-                            Lead Stage
+                        <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="lead_title">
+                            Company Website
                           </label>
                           <Field
                             type="text"
-                            name="Stage"
-                            id="Stage"
+                            name="website_link"
+                            id="website_link"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Lead Stage"
+                            placeholder="Company Website"
                           />
                         </div>
-                        <div className="mt-6">
-                          <label className="font-medium" htmlFor="Status">
-                            Lead Status
+
+                        <div className="w-[100%] my-4">
+                          <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+                            Social Media 1
+                          </p>
+                          <select
+                            id="company_socialMedia1"
+                            name="company_socialMedia1"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                          >
+                            <option value="" selected>
+                              -- Select a Social Media --
+                            </option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="Twitter">Twitter</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Whatsapp">Whatsapp</option>
+                          </select>
+                        </div>
+                        <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="lead_title">
+                            Social Media 1 URL
                           </label>
                           <Field
                             type="text"
-                            name="Status"
-                            id="Status"
+                            name="company_socialMedia1Url"
+                            id="company_socialMedia1Url"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Lead Status"
+                            placeholder=" Social Media 1 URL"
                           />
                         </div>
-                        <div className="mt-6">
-                          <label className="font-medium" htmlFor="Source">
-                            Source
+                        <div className="w-[100%] my-4">
+                          <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
+                            Social Media 2
+                          </p>
+                          <select
+                            id="company_socialMedia2"
+                            name="company_socialMedia2"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                          >
+                            <option value="" selected>
+                              -- Select a Social Media --
+                            </option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="Twitter">Twitter</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Whatsapp">Whatsapp</option>
+                          </select>
+                        </div>
+                        <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="lead_title">
+                            Social Media 2 URL
                           </label>
                           <Field
                             type="text"
-                            name="Source"
-                            id="Source"
+                            name="company_socialMedia2Url"
+                            id="company_socialMedia2Url"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            placeholder="Source"
+                            placeholder=" Social Media 2 URL"
                           />
                         </div>
                       </div>
@@ -382,16 +400,13 @@ const FormEditContainer = ({
                 {({ handleSubmit }) => (
                   <Form>
                     <div className="mb-4">
-                      <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] mt-[10px] tracking-[1px]">
-                        Primary Client POC
-                      </h2>
-                      <div className="flex">
+                      <div className="flex gap-5">
                         <div className="mb-4 flex-grow">
                           <label
                             htmlFor="primaryClientName"
                             className="block font-medium mb-2 text-[#8a9099]"
                           >
-                            Primary Client Name
+                            Primary Client POC Name
                           </label>
                           <Field
                             type="text"
@@ -400,25 +415,13 @@ const FormEditContainer = ({
                             className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           />
                         </div>
-                        <div className="mb-4 flex-grow"></div>{" "}
-                        {/* Add spacing here */}
                         <div className="mb-4 flex-grow">
                           <label
                             htmlFor="primaryClientDesignation"
                             className="block font-medium mb-2 text-[#8a9099]"
                           >
-                            Primary Client Designation
+                            Primary Client POC Designation
                           </label>
-                          {/* <Field
-                          as="select"
-                          id="primaryClientDesignation"
-                          name="primaryClientDesignation"
-                          className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        >
-                          <option value="">Select Designation</option>
-                          <option value="designation1">Designation 1</option>
-                          <option value="designation2">Designation 2</option>
-                        </Field> */}
                           <Field
                             type="text"
                             id="primaryClientDesignation"
@@ -426,31 +429,10 @@ const FormEditContainer = ({
                             className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           />
                         </div>
-                        <div className="mb-4 flex-grow"></div>{" "}
-                        {/* Add spacing here */}
-                        <div className="mb-4 flex-grow">
-                          <label
-                            htmlFor="gender"
-                            className="block font-medium mb-2 text-[#8a9099]"
-                          >
-                            Gender
-                          </label>
-                          <Field
-                            as="select"
-                            id="gender"
-                            name="gender"
-                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            {/* Add more options as needed */}
-                          </Field>
-                        </div>
                       </div>
                     </div>
-                    <div className="mb-4 flex">
-                      <div className="mr-4">
+                    <div className="mb-4 flex gap-5">
+                      <div className="flex-grow">
                         <label
                           htmlFor="phone"
                           className="block font-medium mb-2 text-[#8a9099]"
@@ -464,7 +446,7 @@ const FormEditContainer = ({
                           className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                         />
                       </div>
-                      <div className="mr-4">
+                      <div className="flex-grow">
                         <label
                           htmlFor="email"
                           className="block font-medium mb-2 text-[#8a9099]"
@@ -478,43 +460,34 @@ const FormEditContainer = ({
                           className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                         />
                       </div>
-                      <div className="mr-4">
-                        <label
-                          htmlFor="linkedin"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          LinkedIn
-                        </label>
-                        <Field
-                          type="text"
-                          id="linkedin"
-                          name="linkedin"
-                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
-                      </div>
-                      <div>
-                        {/* <div> */}
-                        <label
-                          htmlFor="twitter"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Twitter
-                        </label>
-                        <Field
-                          type="text"
-                          id="twitter"
-                          name="twitter"
-                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
-                      </div>
+                    </div>
+                    <div className="w-1/2">
+                      <label
+                        htmlFor="gender"
+                        className="block font-medium mb-2 text-[#8a9099]"
+                      >
+                        Gender
+                      </label>
+                      <Field
+                        as="select"
+                        id="gender"
+                        name="gender"
+                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                      >
+                        <option value="" selected>
+                          Select Gender
+                        </option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </Field>
                     </div>
 
-                    <div className="mb-4">
+                    <div className="my-4 ">
                       <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] tracking-[1px]">
-                        More Contact Information - 1 Details
+                        More Contact Information - 1
                       </h2>
-                      <div className="mb-4 flex">
-                        <div className="mr-4">
+                      <div className="mb-4 flex gap-5">
+                        <div className="flex-grow">
                           <label
                             htmlFor="moreContactInfoName"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -528,7 +501,7 @@ const FormEditContainer = ({
                             className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           />
                         </div>
-                        <div className="mr-4">
+                        <div className="flex-grow">
                           <label
                             htmlFor="moreContactInfoDesignation"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -536,40 +509,16 @@ const FormEditContainer = ({
                             Designation
                           </label>
                           <Field
-                            as="select"
+                            type="text"
                             id="moreContactInfoDesignation"
                             name="moreContactInfoDesignation"
                             className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="">Select Designation</option>
-                            <option value="Sales Manager">Sales Manager</option>
-                            <option value="Product Manager">
-                              Product Manager
-                            </option>
-                          </Field>
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="moreContactInfoGender"
-                            className="block font-medium mb-2 text-[#8a9099]"
-                          >
-                            Gender
-                          </label>
-                          <Field
-                            as="select"
-                            id="moreContactInfoGender"
-                            name="moreContactInfoGender"
-                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                          </Field>
+                          />
                         </div>
                       </div>
 
-                      <div className="mb-4 flex">
-                        <div className="mr-4">
+                      <div className="mb-4 flex gap-5">
+                        <div className="flex-grow">
                           <label
                             htmlFor="moreContactInfoPhone"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -583,7 +532,7 @@ const FormEditContainer = ({
                             className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           />
                         </div>
-                        <div>
+                        <div className="flex-grow">
                           <label
                             htmlFor="moreContactInfoEmail"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -598,13 +547,34 @@ const FormEditContainer = ({
                           />
                         </div>
                       </div>
+
+                      <div className="w-1/2">
+                        <label
+                          htmlFor="gender"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Gender
+                        </label>
+                        <Field
+                          as="select"
+                          id="gender"
+                          name="gender"
+                          className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        >
+                          <option value="" selected>
+                            Select Gender
+                          </option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </Field>
+                      </div>
                     </div>
                     <div className="mb-4">
                       <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] tracking-[1px]">
-                        More Contact Information - 2 Details
+                        More Contact Information - 2
                       </h2>
-                      <div className="mb-4 flex">
-                        <div className="mr-4">
+                      <div className="mb-4 flex gap-5">
+                        <div className="flex-grow">
                           <label
                             htmlFor="moreContactInfoName"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -613,12 +583,12 @@ const FormEditContainer = ({
                           </label>
                           <Field
                             type="text"
-                            id="moreContactInfoName1"
-                            name="moreContactInfoName1"
+                            id="moreContactInfoName"
+                            name="moreContactInfoName"
                             className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           />
                         </div>
-                        <div className="mr-4">
+                        <div className="flex-grow">
                           <label
                             htmlFor="moreContactInfoDesignation"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -626,40 +596,16 @@ const FormEditContainer = ({
                             Designation
                           </label>
                           <Field
-                            as="select"
-                            id="moreContactInfoDesignation1"
-                            name="moreContactInfoDesignation1"
+                            type="text"
+                            id="moreContactInfoDesignation"
+                            name="moreContactInfoDesignation"
                             className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="">Select Designation</option>
-                            <option value="Sales Manager">Sales Manager</option>
-                            <option value="Product Manager">
-                              Product Manager
-                            </option>
-                          </Field>
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="moreContactInfoGender"
-                            className="block font-medium mb-2 text-[#8a9099]"
-                          >
-                            Gender
-                          </label>
-                          <Field
-                            as="select"
-                            id="moreContactInfoGender1"
-                            name="moreContactInfoGender1"
-                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                          </Field>
+                          />
                         </div>
                       </div>
 
-                      <div className="mb-4 flex">
-                        <div className="mr-4">
+                      <div className="mb-4 flex gap-5">
+                        <div className="flex-grow">
                           <label
                             htmlFor="moreContactInfoPhone"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -668,12 +614,12 @@ const FormEditContainer = ({
                           </label>
                           <Field
                             type="text"
-                            id="moreContactInfoPhone1"
-                            name="moreContactInfoPhone1"
+                            id="moreContactInfoPhone"
+                            name="moreContactInfoPhone"
                             className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           />
                         </div>
-                        <div>
+                        <div className="flex-grow">
                           <label
                             htmlFor="moreContactInfoEmail"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -682,11 +628,32 @@ const FormEditContainer = ({
                           </label>
                           <Field
                             type="email"
-                            id="moreContactInfoEmail1"
-                            name="moreContactInfoEmail1"
+                            id="moreContactInfoEmail"
+                            name="moreContactInfoEmail"
                             className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           />
                         </div>
+                      </div>
+
+                      <div className="w-1/2">
+                        <label
+                          htmlFor="gender"
+                          className="block font-medium mb-2 text-[#8a9099]"
+                        >
+                          Gender
+                        </label>
+                        <Field
+                          as="select"
+                          id="gender"
+                          name="gender"
+                          className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                        >
+                          <option value="" selected>
+                            Select Gender
+                          </option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </Field>
                       </div>
                     </div>
                     <div className="mt-16 ">
@@ -769,138 +736,200 @@ const FormEditContainer = ({
                 }}
               >
                 {({ handleSubmit }) => (
-                  <Form className="grid grid-cols-2 gap-4">
-                    <div className="col-span-1">
-                      {/* <div className="mb-4">
-                      <label
-                        htmlFor="leadUpdatedOn"
-                        className="block font-medium mb-2 text-[#8a9099]"
-                      >
-                        Lead Updated On
-                      </label>
-                      <Field
-                        type="date"
-                        id="leadUpdatedOn"
-                        name="leadUpdatedOn"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      />
-                    </div> */}
-                      <div className="mb-4">
-                        <label
-                          htmlFor="inquiryType"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Inquiry Type
-                        </label>
-                        {/* <Field
-                        as="select"
-                        id="inquiryType"
-                        name="inquiryType"
-                        className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                      >
-                        <option value="">Select Inquiry Type</option>
-                        <option value="type1">Type 1</option>
-                        <option value="type2">Type 2</option>
-                      </Field> */}
-                        <Field
-                          type="text"
-                          id="inquiryType"
-                          name="inquiryType"
-                          className="w-full font-medium bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
+                  <Form className="">
+                    <div className="mb-4">
+                      <div className="flex gap-5">
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor=""
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Lead Owner
+                          </label>
+                          <Field
+                            as="select"
+                            id=""
+                            name=""
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Lead Owner --
+                            </option>
+                            <option value="LO1">LO1</option>
+                            <option value="LO2">LO2</option>
+                            <option value="LO3">LO3</option>
+                          </Field>
+                        </div>
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor=""
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Lead Manager
+                          </label>
+                          <Field
+                            as="select"
+                            id=""
+                            name=""
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Lead Manager --
+                            </option>
+                            <option value="LM1">LM1</option>
+                            <option value="LM2">LM2</option>
+                            <option value="LM3">LM3</option>
+                          </Field>
+                        </div>
                       </div>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="productService"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Product/Service
-                        </label>
-                        <Field
-                          type="text"
-                          id="productService"
-                          name="productService"
-                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        ></Field>
+                      <div className="flex gap-5">
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor="primaryClientName"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Lead Status
+                          </label>
+                          <Field
+                            as="select"
+                            id="primaryClientName"
+                            name="primaryClientName"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Lead Status --
+                            </option>
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                          </Field>
+                        </div>
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor="primaryClientDesignation"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Lead Stage
+                          </label>
+                          <Field
+                            as="select"
+                            id="primaryClientDesignation"
+                            name="primaryClientDesignation"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Lead Stage --
+                            </option>
+                            <option value="Enquiry">Enquiry</option>
+                            <option value="Open">Open</option>
+                            <option value="Lost">Lost</option>
+                            <option value="Dead">Dead</option>
+                          </Field>
+                        </div>
                       </div>
-                      <div className="mb-4">
+                      <div className="mb-4 flex-grow w-1/2">
                         <label
-                          htmlFor="dealSize"
+                          htmlFor=""
                           className="block font-medium mb-2 text-[#8a9099]"
                         >
-                          Deal Size
-                        </label>
-                        <Field
-                          type="number"
-                          id="dealSize"
-                          name="dealSize"
-                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="interestedProductService"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Interested Product/Service
+                          Lead Source
                         </label>
                         <Field
                           as="select"
-                          id="interestedProductService"
-                          name="interestedProductService"
+                          id=""
+                          name=""
                           className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                         >
-                          <option value="">
-                            Select Interested Product/Service
+                          <option value="" selected>
+                            -- Select Lead Source --
                           </option>
-                          <option value="product1">Product 1</option>
-                          <option value="product2">Product 2</option>
-                          {/* Add more options as needed */}
+                          <option value="LS1">LS1</option>
+                          <option value="LS2">LS2</option>
+                          <option value="LS3">LS3</option>
                         </Field>
                       </div>
-                    </div>
-                    <div className="col-span-1">
-                      <div className="mb-4">
-                        <label
-                          htmlFor="existingBudget"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Existing Budget
-                        </label>
-                        <Field
-                          type="number"
-                          id="existingBudget"
-                          name="existingBudget"
-                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        />
+                      <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
+                        More Information
+                      </h1>
+                      <div className="flex gap-5">
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor=""
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Lead Last Updated On
+                          </label>
+                          <Field
+                            type="text"
+                            id=""
+                            name=""
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          />
+                        </div>
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor=""
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Lead Created By
+                          </label>
+                          <Field
+                            as="select"
+                            id=""
+                            name=""
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select --
+                            </option>
+                            <option value="LM1">LM1</option>
+                            <option value="LM2">LM2</option>
+                            <option value="LM3">LM3</option>
+                          </Field>
+                        </div>
                       </div>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="winProbability"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Win Probability
-                        </label>
-                        <Field
-                          type="text"
-                          id="winProbability"
-                          name="winProbability"
-                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        ></Field>
-                      </div>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="leadCreatedBy"
-                          className="block font-medium mb-2 text-[#8a9099]"
-                        >
-                          Lead Created By
-                        </label>
-                        <Field
-                          type="text"
-                          id="leadCreatedBy"
-                          name="leadCreatedBy"
-                          className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                        ></Field>
+                      <div className="flex gap-5">
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor="primaryClientName"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Product/Service
+                          </label>
+                          <Field
+                            as="select"
+                            id="primaryClientName"
+                            name="primaryClientName"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Product/Service --
+                            </option>
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                          </Field>
+                        </div>
+                        <div className="mb-4 flex-grow">
+                          <label
+                            htmlFor="primaryClientDesignation"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Past Product/Service Interactions
+                          </label>
+                          <Field
+                            as="select"
+                            id="primaryClientDesignation"
+                            name="primaryClientDesignation"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Past Product/Service Interactions --
+                            </option>
+                            <option value="Enquiry">Enquiry</option>
+                            <option value="Open">Open</option>
+                            <option value="Lost">Lost</option>
+                            <option value="Dead">Dead</option>
+                          </Field>
+                        </div>
                       </div>
                     </div>
                     <div className="mt-16 ">

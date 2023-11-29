@@ -19,7 +19,6 @@ const LeadProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  console.log(data,"please checkk here")
   return (
     <div
       className={`w-[${
@@ -43,52 +42,75 @@ const LeadProfileContainer = ({
                   }}
                 />
               </div> */}
-              <div className="">
-                {/* <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Last Activity
-                </p>
-                <p className="text-[#595F69]">
-                  {info[activeTitle].data.lastActivity}
-                </p> */}
-                <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Enquiry type
-                </p>
-                <p className="text-[#595F69]">{data.inquiry}</p>
-                <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Product/Service Type
-                </p>
-                <p className="text-[#595F69]">
-                  {data.companyId.company_product_category}
-                </p>
-                <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Potential Deal Size
-                </p>
-                <p className="text-[#595F69]">{data.potential_deal_size}</p>
-                <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Existing Budget
-                </p>
-                <p className="text-[#595F69]">{data.existing_budget}</p>
-                <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Win Probability
-                </p>
-                <p className="text-[#595F69]">{data.win_probability}</p>
-                {/* <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Next Action
-                </p>
-                <p className="text-[#595F69]">
-                  {info[activeTitle].data.nextAction}
-                </p> */}
-                {/* <p className="mt-[20px] text-[#3F434A] font-medium">
-                  Interested Product/Service Type
-                </p>
-                <p className="text-[#595F69]">
-                  {info[activeTitle].data.interestedProductType}
-                </p> */}
+              <h2 className="text-4xl font-semibold">
+                Lead-{data.lead_title}
+                {""} Info
+              </h2>
+              <div className="pr-20">
+                <div className="flex items-center mt-4 justify-between">
+                  <p className="text-[#3F434A] text-lg">Last Activity</p>
+                  <p className=" text-[#595F69] text-lg font-medium">
+                    {info[activeTitle].data.lastActivity}
+                  </p>
+                </div>
+                <div className="flex items-center mt-4 justify-between">
+                  <p className="text-[#3F434A] text-lg">
+                    Product/ Service Type
+                  </p>
+                  <p className="text-[#595F69] text-lg font-medium">
+                    {info[activeTitle].data.productType}
+                  </p>
+                </div>
+                <div className="flex items-center mt-4 justify-between">
+                  <p className="text-[#3F434A] text-lg">
+                    Last Call Disposition
+                  </p>
+                  <p className="text-[#595F69] text-lg font-medium">
+                    {/* {info[activeTitle].data.lastActivity} */}
+                  </p>
+                </div>
+                <div className="flex items-center mt-4 justify-between">
+                  <p className="text-[#3F434A] text-lg">Next Action</p>
+                  <p className="text-[#595F69] text-lg font-medium">
+                    {info[activeTitle].data.nextAction}
+                  </p>
+                </div>
+                <div className="flex items-center mt-4 justify-between">
+                  <p className="text-[#3F434A] text-lg">
+                    Interested Product/Service Type
+                  </p>
+                  <p className="text-[#595F69] text-lg font-medium">
+                    {info[0].data.interestedProductType}
+                  </p>
+                </div>
               </div>
+
+              <h2 className="text-2xl font-semibold mt-5">Lead Description</h2>
+              <p className="mt-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+              <h2 className="text-2xl font-semibold mt-5">
+                Company Description
+              </h2>
+              <p className="mt-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
             </>
           )}
           {activeTitle === 1 && <ActivityHistory data1={data} data={data} />}
-          {activeTitle === 2 && <Attachements  data={data} />}
+          {activeTitle === 2 && <Attachements data={data} />}
         </div>
       </div>
     </div>

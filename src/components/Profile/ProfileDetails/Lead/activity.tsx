@@ -6,6 +6,7 @@ import { LeadId } from "@/types/leadId";
 
 const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
   const history = data.activityId?.history ? data.activityId?.history : [];
+  const notes = history.filter((item: any) => item.type == "note");
 
   function formatDateAndTime(dateString: any) {
     // Create a Date object from the given date string (UTC time)
@@ -52,28 +53,29 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
 
     return { date: formattedDate, time: formattedTime };
   }
+
   return (
     <div className="bg-[#ffffff] my-[50px] w-[100%]">
       <h2 className="text-[#3F434A] text-2xl font-medium">Activity History</h2>
       <div className="mt-[10px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5 w-[100%]">
-        <div className="flex text-[14px] mt-[30px] w-[100%] text-[#8A9099] leading-[21px] items-center">
+        <div className="flex text-[14px] mt-[30px] w-[100%] text-[#8A9099] leading-[21px] items-center justify-between">
           <p className="text-[#8A9099] font-medium w-[19%]">Date and Time</p>
           <p className=" font-medium text-[#8A9099] w-[17.5%]">Activity Type</p>
           <p className="font-medium text-[#8A9099] w-[21%]">Partcipants</p>
           <p className="font-medium text-[#8A9099] w-[19%]">Outcome</p>
-          <p className="font-medium text-[#8A9099] w-[17.5%]">
+          <p className="font-medium text-[#8A9099] w-[20%]">
             Title and Description
           </p>
         </div>
 
-        <div className="w-[100%] flex flex-col-reverse" >
+        <div className="w-[100%] flex flex-col-reverse">
           {history.map((item: any, i: any) => {
-            console.log(item, "plae");
+            // console.log(item, "plae");
             const date = formatDateAndTime(item.createdAt);
-            console.log(date, "pleas1");
+            // console.log(date, "pleas1");
             return (
               <>
-                <div className="text-[14px] pl-[10px] mb-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+                <div className="text-[14px] pl-[10px] mb-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl justify-between">
                   <div className="w-[19%]">
                     <p className="text-[#3F434A] font-medium">{date.date}</p>
                     <p className="text-[#3F434A] font-medium">{date.time}</p>
@@ -99,10 +101,7 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
                     />
                   </div>
                   <div className="w-[21%]">
-                    <p>{data1.customerId.name}</p>
-                    <p className="text-gray-500  font-semibold text-xs">
-                      {data1.customerId.designation}
-                    </p>
+                    <p>-</p>
                   </div>
                   <div className="w-[19%]">
                     <p>-</p>
@@ -121,10 +120,10 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
                       </>
                     ) : (
                       <>
-                        <p className="text-gray-500  font-semibold text-xs">
+                        <p className="text-gray-500  font-bold text-lg">
                           {item.title}
                         </p>
-                        <p className="text-[#8A9099] font-small text-xs">
+                        <p className="text-[#8A9099] font-small text-sm">
                           {item.content}
                         </p>
                       </>
@@ -147,6 +146,24 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
             );
           })}
         </div>
+      </div>
+
+      <div className="mt-16 flex flex-col gap-4 ">
+        {notes.length > 0 && <h2 className="text-2xl font-bold">Notes</h2>}
+        {notes.map((item: any) => (
+          <>
+            <div className="w-[100%] h-[20vh] rounded-md border-black border border-solid p-5">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-semibold">{item.title}</h2>
+                <div className="flex gap-4">
+                  <h2>{item.createdAt.split("T")[0]}</h2>
+                  <h2>{item.createdAt.split("T")[1].substring(0, 5)}</h2>
+                </div>
+              </div>
+              <h2 className="text-sm mt-2">{item.content}</h2>
+            </div>
+          </>
+        ))}
       </div>
 
       {/* <div className="mt-[10px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5 w-[100%]">
