@@ -5,10 +5,11 @@ import Logo from "@/components/app/Sidebar/SidebarLogo";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useRouter } from "next/router";
-import { Formik } from "formik";
+import { Formik, setIn } from "formik";
 import * as Yup from "yup";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setMenuOptions } from "@/store/UI";
+import axios from "axios";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string().email("Invalid email").required("Required"),
@@ -81,74 +82,98 @@ const Login = () => {
 
   const submit = ({ user, pass }: any) => {
     setInvalid(false);
+    const finalPayload = {
+      email: user,
+      password: pass,
+    };
+    axios
+      .post(
+        "https://testsalescrm.nextsolutions.in/api/master-users/signin",
+        finalPayload
+      )
+      .then((res) => {
+        console.log("user login", res.data);
+        dispatch(
+          setUser1({ _id: res.data?._id, User: res.data?.name, Role: "BDM" })
+        );
+        dispatch(setLoggedInStatus(true));
+        setLocalData(1, res.data?.name, "BDM");
+        router.push("/sales/open");
+      })
+      .catch((err) => {
+        setInvalid(true);
+        console.log(err);
+      });
     // console.log(user, pass);
     // e.preventDefault();
-    if (user === "Admin@gmail.com" && pass === "Password@123!") {
-      dispatch(setUser1({ _id: 1, User: user, Role: "admin" }));
-      dispatch(setLoggedInStatus(true));
-      setLocalData(1, user, "admin");
-      router.push("/sales/open");
-    } else if (user === "Sales@gmail.com" && pass === "Password@123!") {
-      dispatch(setUser1({ _id: 1, User: user, Role: "sales-repo" }));
-      dispatch(setLoggedInStatus(true));
-      setLocalData(1, user, "sales-repo");
-      router.push("/sales/open");
-    } else if (
-      user === "Satvinder.s@westoryboard.com" &&
-      pass === "Password@123!"
-    ) {
-      dispatch(setUser1({ _id: 1, User: user, Role: "admin" }));
-      dispatch(setLoggedInStatus(true));
-      setLocalData(1, user, "admin");
-      router.push("/sales/open");
-    } else if (user === "Manager@gmail.com" && pass === "Password@123!") {
-      dispatch(setUser1({ _id: 1, User: user, Role: "manager" }));
-      dispatch(setLoggedInStatus(true));
-      setLocalData(1, user, "manager");
-      router.push("/sales/open");
-    } else if (user === "User1234@sales365.com" && pass === "Password@123!") {
-      dispatch(setUser1({ _id: 2, User: user, Role: "Client" }));
-      dispatch(setLoggedInStatus(true));
-      setLocalData(2, user, "Client");
-      const sides = [
-        {
-          title: "Dashboard",
-          route: "dashboard",
-          icon: "Grid",
-          list: [],
-        },
-        {
-          title: "Calling",
-          route: "calls",
-          list: [
-            // { title: "Upload Calls", route: "upload-calls" },
-            { title: "Active Calls", route: "active-calls" },
-            { title: "Recorded Calls", route: "recorded-calls" },
-          ],
+    // api implemented
 
-          icon: "Phone",
-        },
-        {
-          title: "Sales",
-          route: "sales",
-          list: [
-            { title: "Open", route: "open" },
-            { title: "Closed", route: "closed" },
-          ],
-          icon: "Sort",
-        },
-        {
-          title: "Indicator",
-          route: "indicator",
-          list: [{ title: "Indicator-basic", route: "basic" }],
-          icon: "Zap",
-        },
-      ];
-      dispatch(setMenuOptions(sides));
-      // router.push("/calls/upload-calls");
-    } else {
-      setInvalid(true);
-    }
+    // if (user === "Admin@gmail.com" && pass === "Password@123!") {
+    //   dispatch(setUser1({ _id: 1, User: user, Role: "admin" }));
+    //   dispatch(setLoggedInStatus(true));
+    //   setLocalData(1, user, "admin");
+    //   router.push("/sales/open");
+    // } else if (user === "Sales@gmail.com" && pass === "Password@123!") {
+    //   dispatch(setUser1({ _id: 1, User: user, Role: "sales-repo" }));
+    //   dispatch(setLoggedInStatus(true));
+    //   setLocalData(1, user, "sales-repo");
+    //   router.push("/sales/open");
+    // } else if (
+    //   user === "Satvinder.s@westoryboard.com" &&
+    //   pass === "Password@123!"
+    // ) {
+    //   dispatch(setUser1({ _id: 1, User: user, Role: "admin" }));
+    //   dispatch(setLoggedInStatus(true));
+    //   setLocalData(1, user, "admin");
+    //   router.push("/sales/open");
+    // } else if (user === "Manager@gmail.com" && pass === "Password@123!") {
+    //   dispatch(setUser1({ _id: 1, User: user, Role: "manager" }));
+    //   dispatch(setLoggedInStatus(true));
+    //   setLocalData(1, user, "manager");
+    //   router.push("/sales/open");
+    // } else if (user === "User1234@sales365.com" && pass === "Password@123!") {
+    //   dispatch(setUser1({ _id: 2, User: user, Role: "Client" }));
+    //   dispatch(setLoggedInStatus(true));
+    //   setLocalData(2, user, "Client");
+    //   const sides = [
+    //     {
+    //       title: "Dashboard",
+    //       route: "dashboard",
+    //       icon: "Grid",
+    //       list: [],
+    //     },
+    //     {
+    //       title: "Calling",
+    //       route: "calls",
+    //       list: [
+    //         // { title: "Upload Calls", route: "upload-calls" },
+    //         { title: "Active Calls", route: "active-calls" },
+    //         { title: "Recorded Calls", route: "recorded-calls" },
+    //       ],
+
+    //       icon: "Phone",
+    //     },
+    //     {
+    //       title: "Sales",
+    //       route: "sales",
+    //       list: [
+    //         { title: "Open", route: "open" },
+    //         { title: "Closed", route: "closed" },
+    //       ],
+    //       icon: "Sort",
+    //     },
+    //     {
+    //       title: "Indicator",
+    //       route: "indicator",
+    //       list: [{ title: "Indicator-basic", route: "basic" }],
+    //       icon: "Zap",
+    //     },
+    //   ];
+    //   dispatch(setMenuOptions(sides));
+    //   // router.push("/calls/upload-calls");
+    // } else {
+    //   setInvalid(true);
+    // }
   };
 
   const state = useSelector((state: any) => state.auth);
