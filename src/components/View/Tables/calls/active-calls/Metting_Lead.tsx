@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Suspense } from "react";
-import Header from "@/components/calls/active-calls/Header/Header";
+import Header from "@/components/calls/active-calls/Header/Metting_header";
 import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import {
@@ -11,10 +11,10 @@ import {
 import axios from "axios"; 
 import Spinner from "@/components/loader/spinner";
 import { ActiveCall } from "@/types/active-call";
-import CallContainer from "@/components/calls/active-calls/Call/Call";
+import CallContainer from "@/components/calls/active-calls/Call/Metting_Call";
 import { data } from "@/components/analysis/Call/Tree/data";
 
-const LeadsTable = ({ totalRecords, search }: TableProps) => {
+const Metting_LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -24,7 +24,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/active-call/find-all?limit=${limit}&page=${current}`
+      `https://testsalescrm.nextsolutions.in/api/event/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
     return data;
@@ -51,7 +51,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://testsalescrm.nextsolutions.in/api/active-call/find-all`
+          `https://testsalescrm.nextsolutions.in/api/event/find-all`
         );
         // console.log(res, "only check here");
         const data = res.data.result;
@@ -91,7 +91,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const fetchItems = async (current: any) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/active-call/find-all?limit=${limit}&page=${current}`
+      `https://testsalescrm.nextsolutions.in/api/event/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
     const filtered = data.filter(
@@ -465,7 +465,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   );
 };
 
-export default LeadsTable;
+export default Metting_LeadsTable;
 
 interface TableProps {
   totalRecords: Number;

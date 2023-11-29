@@ -7,7 +7,7 @@ import DatePicker from "@/utils/Button/DatePicker";
 import axios from "axios";
 
 const CallsTable = React.lazy(
-  () => import("@/components/View/Tables/calls/active-calls/Calls")
+  () => import("@/components/View/Tables/calls/active-calls/Metting_Lead")
 );
 
 const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
@@ -139,7 +139,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
       </div>
       <Suspense fallback={<Spinner />}>
         <CallsTable totalRecords={dummy1.totalRecords} search={search} />
-      </Suspense>
+      </Suspense> 
     </div>
   );
 };
