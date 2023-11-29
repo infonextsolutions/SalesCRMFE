@@ -691,7 +691,12 @@ const LeadContainer = ({
       )}
       {events && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Events cancel={cancelEvents} leadid={id} />
+          <Events
+            cancel={cancelEvents}
+            leadid={id}
+            companyId={LeadData.companyId._id}
+            companyName={LeadData.companyId.company_name}
+          />
         </Backdrop>
       )}
       {emails && (
@@ -710,7 +715,12 @@ const LeadContainer = ({
       )}
       {messages && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Messages cancel={cancelMessages} />
+          <Messages
+            cancel={cancelMessages}
+            id={LeadData._id}
+            companyId={LeadData.companyId._id}
+            companyName={LeadData.companyId.company_name}
+          />
         </Backdrop>
       )}
       {call && (
@@ -721,6 +731,7 @@ const LeadContainer = ({
             companyId={LeadData.companyId._id}
             lead={LeadData}
             customerId={LeadData.customerId._id}
+            companyName={LeadData.companyId.company_name}
           />
         </Backdrop>
       )}

@@ -61,6 +61,25 @@ const AddText = ({ top, title, width, change }: any) => {
   );
 };
 
+const DisabledAddText = ({ title, place }: any) => {
+  return (
+    <div className="w-[100%] mb-[15px]">
+      <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
+        {title}
+      </p>
+      <input
+        disabled
+        className="cursor-not-allowed w-[100%] h-[41px] rounded-[14px] bg-[#D9D9D954] text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
+        type="text"
+        name=""
+        placeholder={place}
+        value={place}
+        id=""
+      />
+    </div>
+  );
+};
+
 const AddTextArea = ({ top, title, width, change }: any) => {
   return (
     <div
@@ -394,7 +413,7 @@ const AllDay = ({ setEventAllday }: any) => {
   );
 };
 
-const Events = ({ cancel, leadid }: any) => {
+const Events = ({ cancel, leadid, companyId, companyName }: any) => {
   // const [eventType1, setEventType1] = useState("");
   const [eventTitle, setEventTitle] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -410,7 +429,7 @@ const Events = ({ cancel, leadid }: any) => {
   const [eventNotifyBefore, setEventNotifyBefore] = useState("");
   const [timeDifference, setTimeDifference] = useState("");
   const [eventInvites, setEventInvites] = useState("");
-
+  const [allocatedCallOwner, setAllocateCallOwner] = useState("");
   const dispatch = useAppDispatch();
 
   const calculateTimeDifference = ({ fromTime, toTime }: any) => {
@@ -429,6 +448,7 @@ const Events = ({ cancel, leadid }: any) => {
       toTime: eventToTime,
     });
     setTimeDifference(timeDifference.toString());
+    const emailInvites = eventInvites.split(",");
 
     const finalPayload = {
       type: eventType,
@@ -445,7 +465,7 @@ const Events = ({ cancel, leadid }: any) => {
       leadid: leadid,
       callParticipant: eventCallParticipants,
       // companyName: "ABC",
-      invite: eventInvites,
+      invite: emailInvites,
       notifyBefore: eventNotifyBefore,
     };
     console.log("asdsad", finalPayload);
@@ -477,6 +497,8 @@ const Events = ({ cancel, leadid }: any) => {
 
     cancel();
   };
+
+  const loggedInUser = localStorage.getItem("user-name")?.split("@")[0];
   return (
     <div className="hide-scrollbar w-[100%]  px-[40px] py-[30px] h-[100%] overflow-y-auto relative ">
       <div
@@ -493,7 +515,8 @@ const Events = ({ cancel, leadid }: any) => {
           alt=""
         />
       </div>
-      <h1 className="text-[30px] text-[#000] tracking-md">New Event</h1>
+      <h1 className="text-[30px] text-[#000] tracking-md">New Meeting</h1>
+      <DisabledAddText title="Company Name" place={companyName} />
       <DropItems
         title={"Meeting Type"}
         top={20}
@@ -556,6 +579,24 @@ const Events = ({ cancel, leadid }: any) => {
         }}
       />
 
+      <DropItems
+        title={"Allocated Call Owner"}
+        top={20}
+        setEventType={setAllocateCallOwner}
+        list={[
+          {
+            title: "Choose Call Owner",
+            val: 0,
+            selected: true,
+          },
+          {
+            title: loggedInUser,
+            val: 0,
+            selected: false,
+          },
+        ]}
+      />
+
       <DateContainer
         setEventFromTime={setEventFromTime}
         setEventFromDate={setEventFromDate}
@@ -564,6 +605,7 @@ const Events = ({ cancel, leadid }: any) => {
       />
 
       {timeDifference.length > 0 ? <p>{timeDifference} minutes</p> : <></>}
+
       <DropItems
         title={"Location"}
         top={20}
