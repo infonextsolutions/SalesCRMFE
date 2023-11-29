@@ -334,8 +334,9 @@ const ActiveCall = ({
 
   const [date, setDateData] = useState<any>({
     time: "",
-    date: null,
+    date: "",
   });
+  console.log(date, "kewddgwkegwe");
 
   function combineDateTimeStrings(timeString: any, dateString: any) {
     // Check if the time string is empty
@@ -381,28 +382,26 @@ const ActiveCall = ({
     // if (date.date) {
     //   timee = combineDateTimeStrings(date.time, date.date);
     // }
-    console.log(
-      "asddafdfa",
-      {
-        ...data,
+    // console.log(
+    //   "asddafdfa",
+    //   {
+    //     ...data,
 
-        call_date: date.date,
-        call_start_time: date.time,
-        // call_start_time:  timee ? timee : getCurrentTimeInHours(),
-        participants: data?.participants,
-        owner: data?.owner,
-      },
-      "ch1231",
-      date
-    );
+    //     call_date: date.date,
+    //     call_start_time: date.time,
+    //     // call_start_time:  timee ? timee : getCurrentTimeInHours(),
+    //     participants: data?.participants,
+    //     owner: data?.owner,
+    //   },
+    //   "ch1231",
+    //   date
+    // );
 
     const finalPayload = {
+      ...data,
       call_date: date.date,
       call_start_time: date.time,
       // call_start_time: timee ? timee : getCurrentTimeInHours(),
-      participants: date?.participants,
-      owner: date?.owner,
-      ...data,
     };
     console.log("payload", finalPayload);
 
