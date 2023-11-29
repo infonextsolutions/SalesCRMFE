@@ -1,7 +1,10 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useAppDispatch } from "@/store/store";
+import { setError, setSuccess } from "@/store/ai";
 
 const DropItems = ({ title, list, top, setEventType }: any) => {
   return (
@@ -78,7 +81,7 @@ const Messages = ({ cancel, companyId, companyName, id }: any) => {
   const [smsReceiver, setSmsReceiver] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [messageDescription, setMessageDescription] = useState("");
-
+  const dispatch = useAppDispatch();
   const submit = () => {
     const finalPayload = {
       company_id: companyId,
@@ -86,6 +89,28 @@ const Messages = ({ cancel, companyId, companyName, id }: any) => {
       contact_number: contactNumber,
       message_description: messageDescription,
     };
+
+    // axios
+    //   .post("", finalPayload)
+    //   .then((e: any) => {
+    //     cancel();
+    //     dispatch(
+    //       setSuccess({
+    //         show: true,
+    //         success: "Event Added Successfully!",
+    //       })
+    //     );
+    //   })
+    //   .catch((e) => {
+    //     dispatch(
+    //       setError({
+    //         show: true,
+    //         error: "Error Occured!",
+    //       })
+    //     );
+    //   });
+
+    // cancel();
   };
 
   const DisabledAddText = ({ title, place }: any) => {

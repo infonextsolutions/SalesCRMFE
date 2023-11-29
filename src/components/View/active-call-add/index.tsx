@@ -312,13 +312,13 @@ const ActiveCall = ({
   const [data, setData] = React.useState<any>({
     callId: generateUniqueId(),
     call_title: "",
-    call_desc: "",
+    call_discription: "",
     leadId: id,
     companyId: companyId,
     customerId: customerId,
     call_date: "",
     call_start_time: getCurrentTimeInHours(),
-    company_name: companyName,
+    // company_name: companyName,
     call_type: "",
     call_new_participant_number: "",
     call_new_participant_title: "",
@@ -484,7 +484,7 @@ const ActiveCall = ({
         title="Call Description"
         place="Description"
         change={(e: any) => {
-          setData({ ...data, call_desc: e });
+          setData({ ...data, call_discription: e });
         }}
       />
       <DropItems
