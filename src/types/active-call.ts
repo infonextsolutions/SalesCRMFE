@@ -10,6 +10,13 @@ export interface ActiveCall {
     createdAt: string;
     updatedAt: string;
     __v: number;
+    Metting_ID:number;
+    description:string;
+    title:string;
+    callParticipant:string;
+    type:string;
+    duration:string;
+    location:string;
   }
   
   export interface LeadId {
@@ -31,6 +38,9 @@ export interface ActiveCall {
     leadId: string;
     owners: string[];
     __v: number;
+    Product_services:string;
+    date_time:string;
+
   }
   
   export interface Note {
