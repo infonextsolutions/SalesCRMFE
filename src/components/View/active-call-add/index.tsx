@@ -18,10 +18,13 @@ const DropItems = ({ title, list, top, change }: any) => {
       <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
         {title}
       </p>
+
       <select
         id="countries"
         onChange={(e: any) => {
-          change(e.target.value);
+          title === "Call Participants"
+            ? change("6457d2a3c7275bff6e607e8e")
+            : change(e.target.value);
         }}
         className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
       >
@@ -396,15 +399,18 @@ const ActiveCall = ({
     //   "ch1231",
     //   date
     // );
+    // const owner = localStorage.getItem("")
+
+    const ownerId = localStorage.getItem("user-id");
 
     const finalPayload = {
       ...data,
+      owner: ownerId,
       call_date: date.date,
       call_start_time: date.time,
       // call_start_time: timee ? timee : getCurrentTimeInHours(),
     };
     console.log("payload", finalPayload);
-
     axios
       .post(
         "https://testsalescrm.nextsolutions.in/api/active-call/create",
@@ -571,7 +577,7 @@ const ActiveCall = ({
           },
           {
             title: "Client ABC",
-            val: 0,
+            val: "6457d2a3c7275bff6e607e8e",
             selected: false,
           },
           ...list,

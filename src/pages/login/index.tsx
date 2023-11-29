@@ -83,7 +83,7 @@ const Login = () => {
   const submit = ({ user, pass }: any) => {
     setInvalid(false);
     const finalPayload = {
-      email: user,
+      email: user.toLowerCase(),
       password: pass,
     };
     axios
@@ -97,7 +97,7 @@ const Login = () => {
           setUser1({ _id: res.data?._id, User: res.data?.name, Role: "BDM" })
         );
         dispatch(setLoggedInStatus(true));
-        setLocalData(1, res.data?.name, "BDM");
+        setLocalData(res.data?._id, res.data?.name, "BDM");
         router.push("/sales/open");
       })
       .catch((err) => {
