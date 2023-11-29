@@ -880,7 +880,12 @@ const LeadContainer = ({
       )}
       {messages && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Messages cancel={cancelMessages} />
+          <Messages
+            cancel={cancelMessages}
+            id={LeadData._id}
+            companyId={LeadData.companyId._id}
+            companyName={LeadData.companyId.company_name}
+          />
         </Backdrop>
       )}
       {call && (
