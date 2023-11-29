@@ -14,6 +14,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
+
 const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);

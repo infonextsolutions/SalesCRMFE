@@ -5,9 +5,9 @@ import React, { useRef, useState } from "react";
 import Filter from "./Filter";
 
 const Search = ({ change, view }: any) => {
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const ref: any = useRef();
-  const [bounding, setBounding] = useState({ left: 0, top: 0 });
+  // const [bounding, setBounding] = useState({ left: 0, top: 0 });
   return (
     <>
       <div
@@ -35,7 +35,7 @@ const Search = ({ change, view }: any) => {
             placeholder="Search Lead..."
           />
         </div>
-        <div
+        {/* <div
           className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer "
           onClick={() => {
             const box = ref.current.getBoundingClientRect();
@@ -54,9 +54,9 @@ const Search = ({ change, view }: any) => {
               objectFit: "contain",
             }}
           />
-        </div>
+        </div> */}
       </div>
-      {show && (
+      {/* {show && (
         <Filter
           top={bounding.top}
           left={bounding.left}
@@ -64,7 +64,7 @@ const Search = ({ change, view }: any) => {
             setShow(false);
           }}
         />
-      )}
+      )} */}
     </>
   );
 };
