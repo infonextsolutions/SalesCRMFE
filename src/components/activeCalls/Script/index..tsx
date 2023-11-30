@@ -17,9 +17,10 @@ const ScriptDoc = ({
   refresh,
   check,
   id,
+  handleScriptClick,
 }: any) => {
   return (
-    <div className="w-[100%] mt-[20px]">
+    <div className="w-[100%] mt-[20px]" onClick={handleScriptClick}>
       <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
         {title}
       </p>
@@ -66,7 +67,9 @@ const ScriptDoc = ({
             alt=""
             onClick={(e) => {
               axios
-                .delete(`https://testsalescrm.nextsolutions.in/api/call-script/delete-by-id?id=${id}`)
+                .delete(
+                  `https://testsalescrm.nextsolutions.in/api/call-script/delete-by-id?id=${id}`
+                )
                 .then((e) => {
                   console.log(e, "huqbfq");
                   refresh();
@@ -107,10 +110,12 @@ const ScriptList = ({
   data,
   moredata,
   refresh,
+  handleScriptClick,
 }: {
   data: any;
   moredata: ActiveCall;
   refresh: () => void;
+  handleScriptClick: (content: any) => void;
 }) => {
   const [activeTitle, setActiveTitle] = React.useState(0);
   function CallBack(childData: any) {
@@ -174,7 +179,7 @@ const ScriptList = ({
     // Format the date and time as desired
     return `${day} ${month} ${year}, ${timeStr}`;
   }
-  
+
   function getTitleFromURL(url: any) {
     const parts = url.split("/");
     const title = parts[parts.length - 1];
@@ -225,6 +230,31 @@ const ScriptList = ({
     }
   }
 
+  const mockData = [
+    {
+      fileUrl: "https://example.com/example-url-1.pdf",
+      createdAt: "2023-11-30T10:00:00Z",
+      title: "Sample Report",
+      size: "5.8 MB",
+      id: "1",
+    },
+    {
+      fileUrl: "https://example.com/example-url-2.pdf",
+      createdAt: "2023-11-29T09:30:00Z",
+      title: "User Manual",
+      size: "3.2 MB",
+      id: "2",
+    },
+    {
+      fileUrl: "https://example.com/example-url-3.pdf",
+      createdAt: "2023-11-28T08:15:00Z",
+      title: "Product Brochure",
+      size: "1.1 MB",
+      id: "3",
+    },
+    // Add more mock objects as needed
+  ];
+
   return (
     <>
       {uploads && (
@@ -262,7 +292,7 @@ const ScriptList = ({
             </p>
           </button>
         </div>
-        {data.map((item: any, i: any) => {
+        {mockData.map((item: any, i: any) => {
           console.log(item, "please checck here", i);
           return (
             <ScriptDoc
@@ -275,6 +305,7 @@ const ScriptList = ({
               file={item.fileUrl}
               refresh={refresh}
               data={convertDatetime(item.createdAt)}
+              handleScriptClick={() => handleScriptClick(i)}
             />
           );
         })}
@@ -285,6 +316,7 @@ const ScriptList = ({
 
 const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   console.log(scripts);
+  console.log(data._id);
 
   const [activeTitle, setActiveTitle] = React.useState(0);
 
@@ -308,6 +340,16 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
+  //for dumy data
+
+  const [clickedContent, setClickedContent] = useState<any>(null);
+
+  const handleScriptClick = (content: any) => {
+    console.log(content);
+    setSelected(true);
+    setClickedContent(content);
+  };
+
   return (
     <div className="w-full p-[30px]">
       {selected && (
@@ -316,25 +358,64 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
           {activeTitle === 0 && (
             <div className="w-full h-[900px] bg-[#ccc] p-[30px]">
               <div className="w-full h-full bg-white px-[30px] py-[60px]">
-                <p className="text-black font-medium uppercase text-[14px] tracking-wider">
-                  Lorem ipsum dolor sit amet. Qui totam sunt et rerum galisum
-                  est aspernatur voluptatem quo eligendi repellat aut tempora
-                  quis ut similique facilis. Ut soluta autem eum debitis cumque
-                  id maxime dicta qui cupiditate fugiat. Et porro totam in quia
-                  debitis ut doloremque fugit. Aut tempore commodi eum beatae
-                  quia est tempora molestias sit nobis incidunt et corporis
-                  animi est quia quia. Qui quia repellat et dolores accusantium
-                  in rerum cupiditate est molestias explicabo. Et quia voluptate
-                  qui quam provident ad odio saepe. Eum tempora quia sit eveniet
-                  ipsam. Eum temporibus voluptatem id magni delectus qui earum
-                  accusantium. Aut minima
-                </p>
+                {clickedContent == 0 && (
+                  <p className="text-black font-medium uppercase text-[14px] tracking-wider">
+                    Emma: Did you catch that game last night? Michael: Yeah,
+                    what a match! That last-minute goal was unbelievable. Emma:
+                    Right? I couldn't believe they pulled it off. The energy in
+                    the stadium must've been insane. Michael: Totally! Wish I
+                    could've been there. But watching it on TV was thrilling
+                    enough. Emma: Absolutely. Hey, have you tried that new
+                    Italian place that opened up downtown? Michael: Not yet. Is
+                    it any good? Emma: Oh, it's fantastic! Their pasta dishes
+                    are out of this world. Michael: I'll have to check it out
+                    then. I've been craving some good pasta. [The sound of a
+                    phone ringing interrupts their conversation] Emma: Sorry, I
+                    need to take this. It's my boss. I'll catch up with you
+                    later? Michael: No worries. Yeah, let's plan something soon.
+                    It's been too long. Emma: Definitely. Talk to you later!
+                  </p>
+                )}
+                {clickedContent == 1 && (
+                  <p className="text-black font-medium uppercase text-[14px] tracking-wider">
+                    Sophie: Have you seen that new exhibit at the art museum?
+                    Daniel: Not yet. I heard it's impressive, though. Sophie: It
+                    really is. The abstract pieces are mind-blowing. Daniel:
+                    I'll have to swing by sometime this week. Sophie: You
+                    should! Oh, by the way, have you tried the new café on Pine
+                    Street? Daniel: No, not yet. Is it any good? Sophie:
+                    Absolutely! Their pastries are divine. [The doorbell chimes
+                    as someone enters the café] Daniel: Sorry, I think that's
+                    for me. I'll catch up with you later? Sophie: Sure thing!
+                    Let's plan for that museum visit soon. Daniel: Definitely.
+                    See you later, Sophie!
+                  </p>
+                )}
+                {clickedContent == 2 && (
+                  <p className="text-black font-medium uppercase text-[14px] tracking-wider">
+                    Olivia: Did you finish reading that book I lent you? Liam:
+                    Not yet. It's quite engaging, though. Olivia: Right? The
+                    plot twists are unexpected. Liam: I can't wait to see how it
+                    ends. Olivia: Hey, have you heard about the new sushi place
+                    downtown? Liam: Yeah, I've been meaning to check it out. Is
+                    it worth a visit? Olivia: Absolutely! Their sashimi is
+                    top-notch. [Liam's phone buzzes with a notification] Liam:
+                    Sorry, I have to take care of this. I'll catch up with you
+                    later? Olivia: No problem. Let's plan that sushi night soon.
+                    Liam: Definitely. Talk to you later, Olivia!
+                  </p>
+                )}
               </div>
             </div>
           )}
         </>
       )}
-      <ScriptList refresh={refresh} data={currScripts} moredata={data} />
+      <ScriptList
+        refresh={refresh}
+        data={currScripts}
+        moredata={data}
+        handleScriptClick={handleScriptClick}
+      />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import axios from "axios";
 import Navbar from "@/components/app/Navbar/Navbar";
 
 const CompanyProfile = ({ data }: any) => {
-  const [title, setTitle] = React.useState(data.result.companyId.company_name);
+  const [title, setTitle] = React.useState(data?.result?.companyId?.company_name);
 
   return (
     <>

@@ -89,6 +89,8 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
             userId: owners,
           });
 
+
+
           const formData = new FormData();
           formData.append("userId", owners);
           formData.append("leadId", leadId);
@@ -96,22 +98,26 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
           formData.append("file", file);
           formData.append("activeCallId", id);
 
-          const res = await axios
-            .post(
-              `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
-              formData
-            )
-            .then((e) => {
-              refresh();
-              dispatch(
-                setSuccess({
-                  show: true,
-                  success: "Note Added Successfully!",
-                })
-              );
-              cancel();
-            });
-          console.log(res.data);
+          console.log(formData);
+
+          //api need to work on o
+
+          // const res = await axios
+          //   .post(
+          //     `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
+          //     formData
+          //   )
+          //   .then((e) => {
+          //     refresh();
+          //     dispatch(
+          //       setSuccess({
+          //         show: true,
+          //         success: "Note Added Successfully!",
+          //       })
+          //     );
+          //     cancel();
+          //   });
+          // console.log(res.data);
         }
       } catch (error) {
         console.log(error);

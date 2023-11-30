@@ -346,6 +346,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
+  console.log(pathname);
+
   const [w, setW] = useState(0);
   const wRef: any = useRef();
   React.useEffect(() => {
