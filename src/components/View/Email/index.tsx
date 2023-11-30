@@ -9,6 +9,57 @@ import { Root } from "../EditLead/FormEditContainer";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 
+const DropItems = ({ title, list, top, setEventType }: any) => {
+  return (
+    <div
+      className="w-[100%] my-6"
+      style={{
+        marginTop: top,
+      }}
+    >
+      <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
+        {title}
+      </p>
+
+      <select
+        className=" border border-gray-300 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
+        onChange={(e) => {
+          setEventType(e.target.value);
+        }}
+      >
+        {list.map((item: any, i: any) => (
+          <option
+            className="text-[#3F434A] "
+            key={i}
+            value={item.val}
+            selected={item.selected}
+          >
+            {item.title}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+const DisabledAddText = ({ title, place }: any) => {
+  return (
+    <div className="w-[100%] mb-[15px]">
+      <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
+        {title}
+      </p>
+      <input
+        disabled
+        className="cursor-not-allowed w-[100%] h-[41px] rounded-[14px] bg-[#D9D9D954] text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
+        type="text"
+        name=""
+        placeholder={place}
+        value={place}
+        id=""
+      />
+    </div>
+  );
+};
 const AddText = ({ title, place }: any) => {
   return (
     <div className="w-[100%] mb-[15px]">
@@ -41,7 +92,26 @@ const Senders = () => {
   );
 };
 
-const SendersDetails = ({ change }: any) => {
+// const SendersDetails = ({ change }: any) => {
+//   return (
+//     <div className="w-[100%] px-[15px] h-[42px] items-center bg-[#fff] flex justify-between">
+//       <div className="flex items-center">
+//         <p className="text-[14px] tracking-wide font-medium text-[#3F434A]">
+//           To:
+//         </p>
+//         {/* <Senders /> */}
+//       </div>
+//       <input
+//         type="text"
+//         onChange={(e) => {
+//           change(e.target.value);
+//         }}
+//         className="w-[100%] h-[100%] bg-[#fff] px-[10px] text-[14px] font-medium outline-none text-[#000]"
+//       />
+//     </div>
+//   );
+// };
+const SendersDetails = ({ receiver, change }: any) => {
   return (
     <div className="w-[100%] px-[15px] h-[42px] items-center bg-[#fff] flex justify-between">
       <div className="flex items-center">
@@ -53,7 +123,7 @@ const SendersDetails = ({ change }: any) => {
       <input
         type="text"
         onChange={(e) => {
-          change(e.target.value);
+          change(receiver);
         }}
         className="w-[100%] h-[100%] bg-[#fff] px-[10px] text-[14px] font-medium outline-none text-[#000]"
       />
@@ -226,15 +296,27 @@ const EmailLayout = ({ content }: any) => {
     </div>
   );
 };
-const SendEmail = ({ change, title, content, clicked }: any) => {
+const SendEmail = ({ receiver, change, title, content, clicked }: any) => {
   return (
     <>
       <div className=" w-[100%] rounded-xl items-center border-[1px] ">
-        <SendersDetails
+        <div className="w-[100%] items-center ml-4 py-2 ">
+          <span className="text-[14px] tracking-wide font-medium text-[#3F434A]">
+            To:
+          </span>
+
+          <span className="w-[100%] h-[100%] bg-[#fff] px-[10px] text-[14px] font-medium outline-none text-[#000]">
+            {receiver}
+          </span>
+        </div>
+
+        {/* <SendersDetails
+          receiver={receiver}
           change={(e: any) => {
             change(e);
           }}
-        />
+        /> */}
+
         {/* <Toolbar setIsBold={setIsBold} isBold={isBold} setIsItalic={setIsItalic} isItalic={isItalic} isUnderline={isUnderline} setIsUnderline={setIsUnderline}/>
         <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} /> */}
 
@@ -264,10 +346,7 @@ const SendEmail = ({ change, title, content, clicked }: any) => {
   );
 };
 
-//condition to check refresh is present or not 
-
-
-
+//condition to check refresh is present or not
 
 const EmailPage = ({
   cancel,
@@ -278,10 +357,28 @@ const EmailPage = ({
   data?: any;
   refresh: (e: any) => any;
 }) => {
-  const [sender, setSender] = useState<any>("");
+  // const [receiver, setReceiver] = useState<any>("");
+  const [receiver, setReceiver] = useState<any>("");
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
-
+  const [sendTo, setSendTo] = useState<any>("");
+  const emailList = [
+    {
+      title: "Client 1",
+      val: "client1@email.com",
+      selected: false,
+    },
+    {
+      title: "Client 2",
+      val: "client2@email.com",
+      selected: false,
+    },
+    {
+      title: "Client 3",
+      val: "client3@email.com",
+      selected: false,
+    },
+  ];
   const dispatch = useAppDispatch();
   const submit = (e1: any, e2: any, e3: any) => {
     const payload = {
@@ -299,11 +396,13 @@ const EmailPage = ({
       subject: e2,
       content: e3,
     };
+    console.log("newww", payload);
+
     axios
       .post(url, payload)
       .then((e) => {
         cancel();
-        refresh({selected:1});
+        refresh({ selected: 1 });
         dispatch(
           setSuccess({ show: true, success: "Email Sent Successfully!" })
         );
@@ -316,7 +415,7 @@ const EmailPage = ({
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
-        Send Email
+        New Email
       </h1>
       <div
         className="w-[30px] h-[30px] cursor-pointer rounded-xl absolute top-[30px] right-[30px] flex items-center justify-center bg-[#f8f8f8]"
@@ -332,12 +431,55 @@ const EmailPage = ({
           alt=""
         />
       </div>
-      <AddText title="Company Name*" place={"Company Name"} />
-      <AddText title="Client POC*" place={"Client Name"} />
+      <DisabledAddText
+        title="Company Name*"
+        place={data?.companyId?.company_name}
+      />
+      <DropItems
+        title={"Send Email To"}
+        top={20}
+        setEventType={setReceiver}
+        list={[
+          {
+            title: "Send Email To",
+            val: 0,
+            selected: true,
+          },
+          ...emailList,
+        ]}
+      />
+      {/* <DropItems
+        title={"Send Email To"}
+        top={20}
+        // setEventType={setAllocateCallOwner}
+        list={[
+          {
+            title: "Send Email To",
+            val: 0,
+            selected: true,
+          },
+          {
+            emailList.map((item) => (
+              {
+                title: item.name,
+                val: item.email,
+                selected: false
+              }
+            ) )
+          },
+          {
+            title: "Client ABC",
+            val: 0,
+            selected: false,
+          },
+        ]}
+      /> */}
+      {/* <AddText title="Send Email To" place={"Client Name"} /> */}
       <SendEmail
         change={(e: any) => {
-          setSender(e);
+          setReceiver(e);
         }}
+        receiver={receiver}
         title={(e: any) => {
           setTitle(e);
         }}
@@ -345,7 +487,7 @@ const EmailPage = ({
           setContent(e);
         }}
         clicked={() => {
-          submit(sender, title, content);
+          submit(receiver, title, content);
         }}
       />
     </div>
