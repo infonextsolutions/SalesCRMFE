@@ -413,7 +413,13 @@ const AllDay = ({ setEventAllday }: any) => {
   );
 };
 
-const Events = ({ cancel, leadid, companyId, companyName }: any) => {
+const Events = ({
+  cancel,
+  leadid,
+  companyId,
+  companyName,
+  clientPOCName,
+}: any) => {
   // const [eventType1, setEventType1] = useState("");
   const [eventTitle, setEventTitle] = useState("");
   const [eventDescription, setEventDescription] = useState("");
@@ -639,7 +645,7 @@ const Events = ({ cancel, leadid, companyId, companyName }: any) => {
             selected: true,
           },
           {
-            title: "Participant ABC",
+            title: clientPOCName,
             val: 0,
             selected: false,
           },
