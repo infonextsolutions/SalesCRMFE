@@ -7,7 +7,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const DropItems = ({ title, list, top, change }: any) => {
+const DropItems = ({ title, list, top, change, customerId }: any) => {
   return (
     <div
       className="w-[100%]"
@@ -23,7 +23,7 @@ const DropItems = ({ title, list, top, change }: any) => {
         id="countries"
         onChange={(e: any) => {
           title === "Call Participants"
-            ? change("6457d2a3c7275bff6e607e8e")
+            ? change(customerId)
             : change(e.target.value);
         }}
         className=" border border-gray-300 text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
@@ -306,6 +306,7 @@ const ActiveCall = ({
   companyName,
   refresh,
   lead,
+  clientPOCName,
 }: any) => {
   function generateUniqueId() {
     const timestamp: any = Date.now().toString(36); // Convert timestamp to base36 string
@@ -569,6 +570,7 @@ const ActiveCall = ({
       <DropItems
         title="Call Participants"
         top={20}
+        customerId={customerId}
         list={[
           {
             title: "Choose Participants",
@@ -576,8 +578,8 @@ const ActiveCall = ({
             selected: true,
           },
           {
-            title: "Client ABC",
-            val: "6457d2a3c7275bff6e607e8e",
+            title: clientPOCName,
+            val: "0",
             selected: false,
           },
           ...list,
@@ -586,6 +588,7 @@ const ActiveCall = ({
           setData({ ...data, participants: e });
         }}
       />
+
       <div>
         <p className="font-semibold my-2">Call New Participant</p>
         <AddText

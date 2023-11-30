@@ -730,8 +730,9 @@ const LeadContainer = ({
             id={LeadData._id}
             companyId={LeadData.companyId._id}
             lead={LeadData}
-            customerId={LeadData.customerId._id}
             companyName={LeadData.companyId.company_name}
+            customerId={LeadData.customerId._id}
+            clientPOCName={LeadData.customerId.name}
           />
         </Backdrop>
       )}
