@@ -47,6 +47,46 @@ const DropItems = ({ title, list, top, change, customerId }: any) => {
   );
 };
 
+const DropItemsNew = ({ title, list, top, change, customerId }: any) => {
+  return (
+    <div
+      className="w-[100%] flex items-center gap-1"
+      // style={{
+      //   marginTop: top,
+      // }}
+    >
+      <p className="block text-sm font-medium text-[#8a9099] tracking-wide">
+        {title}
+      </p>
+
+      <select
+        id="countries"
+        onChange={(e: any) => {
+          title === "Call Participants"
+            ? change(customerId)
+            : change(e.target.value);
+        }}
+        className=" border border-gray-300 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-[100px] p-2 bg-white"
+      >
+        {list.map((item: any, i: any) => {
+          return (
+            <option
+              key={i}
+              onClick={() => {
+                change(item.value);
+              }}
+              value={item.value}
+              selected={item.selected}
+            >
+              {item.title}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
+
 const AddText = ({ title, place, change }: any) => {
   return (
     <div className="w-[100%] mb-[15px]">
@@ -57,7 +97,27 @@ const AddText = ({ title, place, change }: any) => {
         onChange={(e: any) => {
           change(e.target.value);
         }}
-        className="w-[100%] h-[41px] rounded-[14px] bg-[#D9D9D954] text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
+        // className="w-[100%] h-[41px] rounded-[14px]  text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
+        className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+        type="text"
+        name=""
+        placeholder={place}
+        id=""
+      />
+    </div>
+  );
+};
+
+const AddTextNew = ({ title, place, change }: any) => {
+  return (
+    <div className="w-[100%] gap-4  flex items-center ">
+      <p className=" text-[#8A9099] font-medium tracking-wide ">{title}</p>
+      <input
+        onChange={(e: any) => {
+          change(e.target.value);
+        }}
+        // className="w-[100%] h-[41px] rounded-[14px]  text-[#3F434A] px-[14px] outline-none text-[14px] font-medium tracking-wide"
+        className="w-[100%] flex-1 bg-white text-[#3f434a] border-[#e8e9eb] border-[2px]  rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
         type="text"
         name=""
         placeholder={place}
@@ -589,51 +649,53 @@ const ActiveCall = ({
         }}
       />
 
-      <div>
-        <p className="font-semibold my-2">Call New Participant</p>
-        <AddText
+      <div className="flex flex-col gap-4">
+        <p className="font-semibold mt-4">Call New Participant</p>
+        <AddTextNew
           title="Landline/Mobile Number"
           change={(e: any) => {
             setData({ ...data, call_new_participant_number: e });
           }}
         />
-        <DropItems
-          title="Title"
-          top={20}
-          list={[
-            {
-              title: "Choose Title",
-              val: 0,
-              selected: true,
-            },
-            {
-              title: "Mr",
-              val: 0,
-              selected: false,
-            },
-            {
-              title: "Mrs",
-              val: 0,
-              selected: false,
-            },
-            {
-              title: "Miss",
-              val: 0,
-              selected: false,
-            },
-            ...list,
-          ]}
-          change={(e: any) => {
-            setData({ ...data, call_new_participant_title: e });
-          }}
-        />
-        <AddText
-          title="Name"
-          change={(e: any) => {
-            setData({ ...data, call_new_participant_name: e });
-          }}
-        />
-        <AddText
+        <div className="flex items-center">
+          <DropItemsNew
+            title="Title"
+            top={20}
+            list={[
+              {
+                title: "Choose",
+                val: 0,
+                selected: true,
+              },
+              {
+                title: "Mr",
+                val: 0,
+                selected: false,
+              },
+              {
+                title: "Mrs",
+                val: 0,
+                selected: false,
+              },
+              {
+                title: "Miss",
+                val: 0,
+                selected: false,
+              },
+              ...list,
+            ]}
+            change={(e: any) => {
+              setData({ ...data, call_new_participant_title: e });
+            }}
+          />
+          <AddTextNew
+            title="Name"
+            change={(e: any) => {
+              setData({ ...data, call_new_participant_name: e });
+            }}
+          />
+        </div>
+        <AddTextNew
           title="Designation"
           change={(e: any) => {
             setData({ ...data, call_new_participant_designation: e });
