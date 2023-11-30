@@ -121,9 +121,15 @@ const AddLead = ({ cancel }: any) => {
               <option value="" selected>
                 -- Select Lead Source --
               </option>
-              <option value="LS1">LS1</option>
-              <option value="LS2">LS2</option>
-              <option value="LS3">LS3</option>
+              <option value="Website">Website</option>
+              <option value="Referrals">Referrals</option>
+              <option value="Social Media">Social Media</option>
+              <option value="Email Marketing">Email Marketing</option>
+              <option value="Paid Advertising">Paid Advertising</option>
+              <option value="Events">Events</option>
+              <option value="Offline Channels">Offline Channels</option>
+              <option value="Content Marketing">Content Marketing</option>
+              <option value="Partnerships">Partnerships</option>
             </select>
           </div>
           <div className="w-[100%] my-4">
@@ -143,9 +149,8 @@ const AddLead = ({ cancel }: any) => {
               <option value="" selected>
                 -- Select Lead Owner --
               </option>
-              <option value="LO1">LO1</option>
-              <option value="LO2">LO2</option>
-              <option value="LO3">LO3</option>
+              <option value="Ramesh">Ramesh</option>
+              <option value="Riya">Riya</option>
             </select>
           </div>
           <div className="w-[100%] my-4">
@@ -165,9 +170,7 @@ const AddLead = ({ cancel }: any) => {
               <option value="" selected>
                 -- Select Lead Manager --
               </option>
-              <option value="LM1">LM1</option>
-              <option value="LM2">LM2</option>
-              <option value="LM3">LM3</option>
+              <option value="Rohan Sharma">Rohan Sharma</option>
             </select>
           </div>
 
@@ -213,7 +216,7 @@ const AddLead = ({ cancel }: any) => {
                   -- Select Lead Status --
                 </option>
                 <option value="Open">Open</option>
-                <option value="Closed">Closed</option>
+                <option value="Close">Close</option>
               </select>
             </div>
             <div className="w-[100%]">
@@ -232,10 +235,19 @@ const AddLead = ({ cancel }: any) => {
                 <option value="" selected>
                   -- Select Lead Stage --
                 </option>
-                <option value="Enquiry">Enquiry</option>
-                <option value="Open">Open</option>
-                <option value="Lost">Lost</option>
-                <option value="Dead">Dead</option>
+                {leadData.leadStatus == "Open" ? (
+                  <>
+                    <option value="Enquiry">Enquiry</option>
+                    <option value="Interaction">Interaction</option>
+                    <option value="Proposal">Proposal</option>
+                  </>
+                ) : leadData.leadStatus == "Close" ? (
+                  <>
+                    <option value="Win">Win</option>
+                    <option value="Lost">Lost</option>
+                    <option value="Dead">Dead</option>
+                  </>
+                ) : null}
               </select>
             </div>
           </div>
@@ -270,12 +282,16 @@ const AddLead = ({ cancel }: any) => {
                 });
               }}
             >
+              {/*      */}
               <option value="" selected>
                 -- Select Industry Type --
               </option>
-              <option value="I1">I1</option>
-              <option value="I2">I2</option>
-              <option value="I3">I3</option>
+              <option value="Technology">Technology</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Finance">Finance</option>
+              <option value="Education">Education</option>
+              <option value="Hospitality">Hospitality</option>
+              <option value=" Real Estate"> Real Estate</option>
             </select>
           </div>
           <AddText
@@ -313,10 +329,9 @@ const AddLead = ({ cancel }: any) => {
                 });
               }}
             >
-              <option value="" selected>
-                -- Select a Country --
+              <option selected value="Indian">
+                Indian
               </option>
-              <option value="Indian">Indian</option>
               <option value="Pakistan">Pakistan</option>
               <option value="Srilanka">Srilanka</option>
               <option value="England">England</option>
@@ -402,10 +417,8 @@ const AddLead = ({ cancel }: any) => {
               <option value="" selected>
                 -- Select a Social Media --
               </option>
-              <option value="Facebook">Facebook</option>
+              <option value="Linkedin">Linkedin</option>
               <option value="Twitter">Twitter</option>
-              <option value="Instagram">Instagram</option>
-              <option value="Whatsapp">Whatsapp</option>
             </select>
           </div>
 
@@ -436,10 +449,11 @@ const AddLead = ({ cancel }: any) => {
               <option value="" selected>
                 -- Select a Social Media --
               </option>
-              <option value="Facebook">Facebook</option>
-              <option value="Twitter">Twitter</option>
-              <option value="Instagram">Instagram</option>
-              <option value="Whatsapp">Whatsapp</option>
+              {companyData.company_socialMedia1 == "Linkedin" ? (
+                <option value="Twitter">Twitter</option>
+              ) : companyData.company_socialMedia1 == "Twitter" ? (
+                <option value="Linkedin">Linkedin</option>
+              ) : null}
             </select>
           </div>
 
@@ -522,6 +536,7 @@ const AddLead = ({ cancel }: any) => {
               </option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
@@ -667,6 +682,7 @@ const AddLead = ({ cancel }: any) => {
                   </option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
 
@@ -813,6 +829,7 @@ const AddLead = ({ cancel }: any) => {
                   </option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
 
