@@ -345,8 +345,6 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
 const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
-  const [callTime, setCallTime] = useState("");
-  const [callDate, setCallDate] = useState("");
   const [w, setW] = useState(0);
   const wRef: any = useRef();
   React.useEffect(() => {
@@ -415,56 +413,34 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     return isoPattern.test(inputString);
   }
 
-  const CallTimeData = {
-    call_start_time: CallData.call_start_time,
-    call_date: CallData.call_date,
-  };
+  const initialDate = new Date(CallData.call_date);
 
-  // Formatting the date
-  const startDate = new Date(CallTimeData.call_date);
-  const formattedStartDate = startDate
-    .toLocaleDateString("en-IN", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-    .split(" ")
-    .join(" ");
+  // Get day, month, and year components from the Date object
+  const day = initialDate.getDate();
+  const month = initialDate.toLocaleString("default", { month: "long" });
+  const year = initialDate.getFullYear();
 
-  // Formatting the time
-  const timeComponents = CallTimeData.call_start_time.split(":");
-  let formattedTime = "";
+  // Construct the desired date format
+  const convertedDateStr = `${day} ${month} ${year}`;
 
-  if (timeComponents.length === 1) {
-    const hours = parseInt(timeComponents[0], 10);
-    formattedTime = `${
-      hours >= 12
-        ? hours === 12
-          ? hours
-          : hours - 12
-        : hours === 0
-        ? 12
-        : hours
-    } ${hours >= 12 ? "PM" : "AM"}`;
-  } else if (timeComponents.length === 2) {
-    const hours = parseInt(timeComponents[0], 10);
-    const minutes = parseInt(timeComponents[1], 10);
-    formattedTime = `${
-      hours >= 12
-        ? hours === 12
-          ? hours
-          : hours - 12
-        : hours === 0
-        ? 12
-        : hours
-    }:${minutes.toString().padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"}`;
-  } else {
-    formattedTime = "Invalid time format";
-  }
-  setCallDate(formattedStartDate);
-  setCallTime(formattedTime);
-  console.log("Formatted date:", formattedStartDate);
-  console.log("Formatted time:", formattedTime);
+  const initialTime = CallData.call_start_time;
+
+  // Splitting the time string into hours and minutes
+  const [hours, minutes] = initialTime.split(":");
+
+  // Convert hours to a number
+  const parsedHours = parseInt(hours, 10);
+
+  // Determine if it's AM or PM based on the hours
+  const period = parsedHours >= 12 ? "pm" : "am";
+
+  // Convert hours to 12-hour format
+  const twelveHourFormat = parsedHours % 12 || 12; // Convert 0 to 12 for midnight
+
+  // Construct the formatted time string
+  const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${
+    minutes != undefined ? minutes : ""
+  } ${period}`;
 
   return (
     <>
@@ -549,18 +525,19 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={owners ? owners.name : ""}
             color={"#000"}
           />
-          <CallItem width={100} left={0} text={callDate} color={"#000"} />
+          {/* <CallItem
+            width={200}
+            left={20}
+            text={convertedDateStr}
+            color={"#000"}
+          /> */}
           <CallItemMultiple
             width={130}
-            left={60}
-            upperText={`${
-              isISOString(CallData.call_start_time)
-                ? formatDateToCustomFormat(CallData.call_start_time)
-                : "-"
-            }`}
+            left={20}
+            upperText={CallData?.call_date ? convertedDateStr : "-"}
             bottomText={
-              isISOString(CallData.call_start_time)
-                ? convertISOToTime(CallData.call_start_time)
+              CallData?.call_date && CallData.call_start_time
+                ? formattedTime
                 : "-"
             }
           />
