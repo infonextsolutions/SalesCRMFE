@@ -296,7 +296,7 @@ const ScriptList = ({
         <Navigator callback={CallBack} current={0} list={list} />
         <div className="flex mt-[20px]">
           <button
-            className="ml-[400px] ml-auto flex bg-renal-blue pl-[18px] rounded-xl pr-[18px] py-[10px]"
+            className=" ml-auto flex bg-renal-blue pl-[18px] rounded-xl pr-[18px] py-[10px]"
             onClick={() => {
               showUploads();
             }}
