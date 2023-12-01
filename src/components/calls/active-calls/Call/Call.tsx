@@ -516,7 +516,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={90}
             left={20}
-            text={CallData?.participants?.name}
+            text={CallData.participants.name ?? ""}
             color={"#000"}
           />
           <CallItem

@@ -11,7 +11,9 @@ export interface ActiveCall {
   updatedAt: string;
   __v: number;
   Metting_ID: number;
-  participants: string;
+  participants: {
+    name : string
+  };
   description: string;
   title: string;
   callParticipant: string;
