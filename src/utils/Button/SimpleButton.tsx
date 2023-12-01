@@ -8,7 +8,7 @@ const SimpleButton = ({
   width,
   height,
   click,
-  type
+  type,
 }: ButtonProps) => {
   const Theme =
     theme === 1
@@ -25,7 +25,7 @@ const SimpleButton = ({
       }px] flex items-center justify-center cursor-pointer`}
       onClick={click}
       style={{
-        width: width ? width : 110,
+        width: width ? width : 140,
         height: height ? height : 40,
       }}
     >
@@ -55,6 +55,6 @@ interface ButtonProps {
   left?: Number;
   right?: Number;
   border?: Boolean;
-  type?:string;
+  type?: string;
   click?: () => void;
 }

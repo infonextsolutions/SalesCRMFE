@@ -460,7 +460,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             route={`/sales/open/${CallData?._id}/company-profile`}
             color={"#000"}
           />
-          <div
+          {/* <div
             className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
             style={{ width: 200, marginLeft: 20 }}
             ref={ref}
@@ -483,8 +483,20 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
                 {owners ? owners.name : ""}
               </span>
             </p>
-          </div>
-          <CallItem width={100} left={20} text={owners ? owners.name : ""} />
+          </div> */}
+          {/* use this for call owner */}
+          {/* <CallItem
+            width={100}
+            left={20}
+            text={CallData?.participants?.name}
+            color={"#000"}
+          /> */}
+          <CallItem
+            width={100}
+            left={20}
+            text={owners ? owners.name : ""}
+            color={"#000"}
+          />
           <CallItemMultiple
             width={130}
             left={20}

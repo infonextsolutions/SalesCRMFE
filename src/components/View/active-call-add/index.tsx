@@ -688,6 +688,7 @@ const ActiveCall = ({
               setData({ ...data, call_new_participant_title: e });
             }}
           />
+
           <AddTextNew
             title="Name"
             change={(e: any) => {
@@ -703,10 +704,11 @@ const ActiveCall = ({
         />
       </div>
       <div className="w-[100%] flex justify-end mt-[20px]">
+        <SimpleButton theme={2} text={"Call Now"} left={20} right={0} />
         <SimpleButton
           theme={1}
           click={submit}
-          text={"Send"}
+          text={"Schedule Call"}
           left={20}
           right={0}
         />
