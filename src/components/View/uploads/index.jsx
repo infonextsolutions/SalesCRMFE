@@ -92,7 +92,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
 
 
           const formData = new FormData();
-          formData.append("userId", owners);
+          // formData.append("userId", owners);
           formData.append("leadId", leadId);
           formData.append("title", "file-1");
           formData.append("file", file);
@@ -100,24 +100,24 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
 
           console.log(formData);
 
-          //api need to work on o
+         
 
-          // const res = await axios
-          //   .post(
-          //     `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
-          //     formData
-          //   )
-          //   .then((e) => {
-          //     refresh();
-          //     dispatch(
-          //       setSuccess({
-          //         show: true,
-          //         success: "Note Added Successfully!",
-          //       })
-          //     );
-          //     cancel();
-          //   });
-          // console.log(res.data);
+          const res = await axios
+            .post(
+              `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
+              formData
+            )
+            .then((e) => {
+              refresh();
+              dispatch(
+                setSuccess({
+                  show: true,
+                  success: "Note Added Successfully!",
+                })
+              );
+              cancel();
+            });
+          console.log(res.data);
         }
       } catch (error) {
         console.log(error);
@@ -156,6 +156,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
               // accept="application/pdf"
               ref={inputRef}
               {...getInputProps()}
+              onChange={handleChange}
             />
             <label
               id="label-file-upload"
@@ -172,7 +173,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
                 />
                 <p className="text-[#000] mt-[30px] ">
                   Drop or{" "}
-                  <span className="text-renal-blue underline cursor-pointer">
+                  <span className="underline cursor-pointer text-renal-blue">
                     Browse
                   </span>{" "}
                   to upload your file.

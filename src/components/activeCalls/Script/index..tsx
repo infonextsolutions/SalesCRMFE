@@ -17,10 +17,26 @@ const ScriptDoc = ({
   refresh,
   check,
   id,
-  handleScriptClick,
+  onSelectFile,
 }: any) => {
+
+  
+  //fetch file data from a
+  const fetchAdditionalData = async (fileUrl: string) => {
+    try {
+      const response = await axios.get(fileUrl, {
+        responseType: "arraybuffer",
+      });
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      return blob;
+    } catch (error) {
+      console.error("Error fetching additional data:", error);
+      return null;
+    }
+  };
+
   return (
-    <div className="w-[100%] mt-[20px]" onClick={handleScriptClick}>
+    <div className="w-[100%] mt-[20px]">
       <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
         {title}
       </p>
@@ -39,6 +55,14 @@ const ScriptDoc = ({
           }
           width={55}
           height={40}
+          onClick={async () => {
+            try {
+              const additionalData = await fetchAdditionalData(file);
+              onSelectFile(additionalData); // Pass fetched data to parent component
+            } catch (error) {
+              console.error("Error fetching additional data:", error);
+            }
+          }}
         />
         <div className="ml-[10px]">
           <p className="text-[12px] text-[#3F434A] font-medium ">{docName}</p>
@@ -110,12 +134,12 @@ const ScriptList = ({
   data,
   moredata,
   refresh,
-  handleScriptClick,
+  onSelectFile,
 }: {
   data: any;
   moredata: ActiveCall;
   refresh: () => void;
-  handleScriptClick: (content: any) => void;
+  onSelectFile: (additionalData: any) => void;
 }) => {
   const [activeTitle, setActiveTitle] = React.useState(0);
   function CallBack(childData: any) {
@@ -292,7 +316,7 @@ const ScriptList = ({
             </p>
           </button>
         </div>
-        {mockData.map((item: any, i: any) => {
+        {data.map((item: any, i: any) => {
           console.log(item, "please checck here", i);
           return (
             <ScriptDoc
@@ -305,7 +329,7 @@ const ScriptList = ({
               file={item.fileUrl}
               refresh={refresh}
               data={convertDatetime(item.createdAt)}
-              handleScriptClick={() => handleScriptClick(i)}
+              onSelectFile={onSelectFile}
             />
           );
         })}
@@ -337,17 +361,18 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
       .catch((e) => {});
   };
 
+  console.log(scripts);
+
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  //for dumy data
+  //for etchinf data in script section
 
-  const [clickedContent, setClickedContent] = useState<any>(null);
-
-  const handleScriptClick = (content: any) => {
-    console.log(content);
+  const [selectedFileData, setSelectedFileData] = useState<any>(null);
+  // Function to handle file selection and set data
+  const handleFileSelect = async (additionalData: any) => {
+    setSelectedFileData(additionalData);
     setSelected(true);
-    setClickedContent(content);
   };
 
   return (
@@ -358,53 +383,28 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
           {activeTitle === 0 && (
             <div className="w-full h-[900px] bg-[#ccc] p-[30px]">
               <div className="w-full h-full bg-white px-[30px] py-[60px]">
-                {clickedContent == 0 && (
-                  <p className="text-black font-medium uppercase text-[14px] tracking-wider">
-                    Emma: Did you catch that game last night? Michael: Yeah,
-                    what a match! That last-minute goal was unbelievable. Emma:
-                    Right? I couldn't believe they pulled it off. The energy in
-                    the stadium must've been insane. Michael: Totally! Wish I
-                    could've been there. But watching it on TV was thrilling
-                    enough. Emma: Absolutely. Hey, have you tried that new
-                    Italian place that opened up downtown? Michael: Not yet. Is
-                    it any good? Emma: Oh, it's fantastic! Their pasta dishes
-                    are out of this world. Michael: I'll have to check it out
-                    then. I've been craving some good pasta. [The sound of a
-                    phone ringing interrupts their conversation] Emma: Sorry, I
-                    need to take this. It's my boss. I'll catch up with you
-                    later? Michael: No worries. Yeah, let's plan something soon.
-                    It's been too long. Emma: Definitely. Talk to you later!
-                  </p>
-                )}
-                {clickedContent == 1 && (
-                  <p className="text-black font-medium uppercase text-[14px] tracking-wider">
-                    Sophie: Have you seen that new exhibit at the art museum?
-                    Daniel: Not yet. I heard it's impressive, though. Sophie: It
-                    really is. The abstract pieces are mind-blowing. Daniel:
-                    I'll have to swing by sometime this week. Sophie: You
-                    should! Oh, by the way, have you tried the new café on Pine
-                    Street? Daniel: No, not yet. Is it any good? Sophie:
-                    Absolutely! Their pastries are divine. [The doorbell chimes
-                    as someone enters the café] Daniel: Sorry, I think that's
-                    for me. I'll catch up with you later? Sophie: Sure thing!
-                    Let's plan for that museum visit soon. Daniel: Definitely.
-                    See you later, Sophie!
-                  </p>
-                )}
-                {clickedContent == 2 && (
-                  <p className="text-black font-medium uppercase text-[14px] tracking-wider">
-                    Olivia: Did you finish reading that book I lent you? Liam:
-                    Not yet. It's quite engaging, though. Olivia: Right? The
-                    plot twists are unexpected. Liam: I can't wait to see how it
-                    ends. Olivia: Hey, have you heard about the new sushi place
-                    downtown? Liam: Yeah, I've been meaning to check it out. Is
-                    it worth a visit? Olivia: Absolutely! Their sashimi is
-                    top-notch. [Liam's phone buzzes with a notification] Liam:
-                    Sorry, I have to take care of this. I'll catch up with you
-                    later? Olivia: No problem. Let's plan that sushi night soon.
-                    Liam: Definitely. Talk to you later, Olivia!
-                  </p>
-                )}
+                <p className="text-black font-medium uppercase text-[14px] tracking-wider">
+                 {` **Alice**: Hi Bob, how are you doing today? **Bob**: Hello
+                  Alice! I'm doing well, thank you. How about you? **Alice**:
+                  I'm good too, thanks for asking. Did you get a chance to check
+                  out that new movie that released last week? **Bob**: Yes,
+                  Alice, I did. It was an interesting movie. I really enjoyed
+                  the plot twists. **Alice**: That's great to hear, Bob. I
+                  haven't watched it yet. Would you recommend it? **Bob**:
+                  Absolutely, Alice. It's a must-watch. The storyline is
+                  compelling and the performances are outstanding. **Alice**:
+                  Sounds exciting, Bob. I'll definitely watch it over the
+                  weekend. **Bob**: That's a good plan, Alice. Let me know what
+                  you think of it. **Alice**: Sure, Bob. I'll share my thoughts
+                  with you after I watch it. **Bob**: Looking forward to it,
+                  Alice. By the way, have you tried the new Italian restaurant
+                  in town? **Alice**: Not yet, Bob. Is it good? **Bob**: Yes,
+                  Alice. The food is delicious and the ambiance is great. You
+                  should try it. **Alice**: Thanks for the recommendation, Bob.
+                  I'll check it out soon. **Bob**: You're welcome, Alice. I hope
+                  you'll like it. **Alice**: I'm sure I will, Bob. Thanks again.
+                  Talk to you later.`}
+                </p>
               </div>
             </div>
           )}
@@ -414,7 +414,7 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
         refresh={refresh}
         data={currScripts}
         moredata={data}
-        handleScriptClick={handleScriptClick}
+        onSelectFile={handleFileSelect}
       />
     </div>
   );
