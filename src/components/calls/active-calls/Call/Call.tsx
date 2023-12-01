@@ -345,7 +345,6 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
 const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
-
   const [w, setW] = useState(0);
   const wRef: any = useRef();
   React.useEffect(() => {
@@ -353,7 +352,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log("calldataactive:", CallData);
+  // console.log("calldataactive:", CallData);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
@@ -414,6 +413,35 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     return isoPattern.test(inputString);
   }
 
+  const initialDate = new Date(CallData.call_date);
+
+  // Get day, month, and year components from the Date object
+  const day = initialDate.getDate();
+  const month = initialDate.toLocaleString("default", { month: "long" });
+  const year = initialDate.getFullYear();
+
+  // Construct the desired date format
+  const convertedDateStr = `${day} ${month} ${year}`;
+
+  const initialTime = CallData.call_start_time;
+
+  // Splitting the time string into hours and minutes
+  const [hours, minutes] = initialTime.split(":");
+
+  // Convert hours to a number
+  const parsedHours = parseInt(hours, 10);
+
+  // Determine if it's AM or PM based on the hours
+  const period = parsedHours >= 12 ? "pm" : "am";
+
+  // Convert hours to 12-hour format
+  const twelveHourFormat = parsedHours % 12 || 12; // Convert 0 to 12 for midnight
+
+  // Construct the formatted time string
+  const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${
+    minutes != undefined ? minutes : ""
+  } ${period}`;
+
   return (
     <>
       <div className="flex">
@@ -439,7 +467,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             click={true}
           />
           <CallItem
-            width={200}
+            width={100}
             left={10}
             text={CallData.leadId?.leadId}
             click={true}
@@ -448,19 +476,19 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           />
           <CallItem
             width={120}
-            left={10}
+            left={20}
             text={CallData?.leadId?.lead_title}
             color={"#000"}
           />
           <CallItem
-            width={220}
+            width={120}
             left={40}
             text={CallData?.companyId?.company_name}
             click={true}
             route={`/sales/open/${CallData?._id}/company-profile`}
             color={"#000"}
           />
-          <div
+          {/* <div
             className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
             style={{ width: 200, marginLeft: 20 }}
             ref={ref}
@@ -483,22 +511,37 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
                 {owners ? owners.name : ""}
               </span>
             </p>
-          </div>
-          <CallItem width={100} left={20} text={owners ? owners.name : ""} />
+          </div> */}
+          <CallItem
+            width={90}
+            left={0}
+            text={CallData?.customerId?.name}
+            color={"#000"}
+          />
+          <CallItem
+            width={100}
+            left={0}
+            text={owners ? owners.name : ""}
+            color={"#000"}
+          />
+
+          <CallItem
+            width={100}
+            left={20}
+            text={CallData.call_type}
+            color={"#000"}
+          />
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={`${
-              isISOString(CallData.call_start_time)
-                ? formatDateToCustomFormat(CallData.call_start_time)
-                : "-"
-            }`}
+            upperText={CallData?.call_date ? convertedDateStr : "-"}
             bottomText={
-              isISOString(CallData.call_start_time)
-                ? convertISOToTime(CallData.call_start_time)
+              CallData?.call_date && CallData.call_start_time
+                ? formattedTime
                 : "-"
             }
           />
+
           {/* <CallItem width={120} left={10} text={"30 min."} /> */}
         </div>
       </div>
