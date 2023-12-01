@@ -467,7 +467,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             click={true}
           />
           <CallItem
-            width={200}
+            width={100}
             left={10}
             text={CallData.leadId?.leadId}
             click={true}
@@ -476,7 +476,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           />
           <CallItem
             width={120}
-            left={10}
+            left={20}
             text={CallData?.leadId?.lead_title}
             color={"#000"}
           />
@@ -512,11 +512,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               </span>
             </p>
           </div> */}
-          {/* use this for call owner */}
           <CallItem
             width={90}
-            left={20}
-            text={CallData?.participants?.name}
+            left={0}
+            text={CallData?.customerId?.name}
             color={"#000"}
           />
           <CallItem
@@ -525,12 +524,13 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={owners ? owners.name : ""}
             color={"#000"}
           />
-          {/* <CallItem
-            width={200}
+
+          <CallItem
+            width={100}
             left={20}
-            text={convertedDateStr}
+            text={CallData.call_type}
             color={"#000"}
-          /> */}
+          />
           <CallItemMultiple
             width={130}
             left={20}
@@ -541,6 +541,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
                 : "-"
             }
           />
+
           {/* <CallItem width={120} left={10} text={"30 min."} /> */}
         </div>
       </div>

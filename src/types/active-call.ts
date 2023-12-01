@@ -11,13 +11,16 @@ export interface ActiveCall {
   updatedAt: string;
   __v: number;
   Metting_ID: number;
-  participants: string;
+  participants: {
+    name: string;
+  };
   description: string;
   title: string;
   callParticipant: string;
   type: string;
   duration: string;
   location: string;
+  call_type: string;
 }
 
 export interface LeadId {
