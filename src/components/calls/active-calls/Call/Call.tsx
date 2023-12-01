@@ -453,7 +453,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             color={"#000"}
           />
           <CallItem
-            width={220}
+            width={120}
             left={40}
             text={CallData?.companyId?.company_name}
             click={true}
@@ -485,21 +485,21 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             </p>
           </div> */}
           {/* use this for call owner */}
-          {/* <CallItem
-            width={100}
+          <CallItem
+            width={90}
             left={20}
             text={CallData?.participants?.name}
             color={"#000"}
-          /> */}
+          />
           <CallItem
             width={100}
-            left={20}
+            left={0}
             text={owners ? owners.name : ""}
             color={"#000"}
           />
           <CallItemMultiple
             width={130}
-            left={20}
+            left={60}
             upperText={`${
               isISOString(CallData.call_start_time)
                 ? formatDateToCustomFormat(CallData.call_start_time)
