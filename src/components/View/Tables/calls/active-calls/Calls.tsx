@@ -8,7 +8,7 @@ import {
   LeftDoubleArrow,
   RightArrow,
 } from "@/utils/AssetsHelper";
-import axios from "axios"; 
+import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import { ActiveCall } from "@/types/active-call";
 import CallContainer from "@/components/calls/active-calls/Call/Call";
@@ -61,7 +61,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           const allItems = await getallItems(pageNumber);
           setItems(allItems);
         }
-        console.log("data: I am here", data);
+        // console.log("data: I am here", data);
         const filtered = data.filter((e: ActiveCall) => {
           const idss: any = String(convertDatetimeToCustomFormat(e.updatedAt));
           const leadid = e.leadId?.leadId;
