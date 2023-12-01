@@ -89,12 +89,18 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
             userId: owners,
           });
 
+
+
           const formData = new FormData();
-          formData.append("userId", owners);
+          // formData.append("userId", owners);
           formData.append("leadId", leadId);
           formData.append("title", "file-1");
           formData.append("file", file);
           formData.append("activeCallId", id);
+
+          console.log(formData);
+
+         
 
           const res = await axios
             .post(
@@ -150,6 +156,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
               // accept="application/pdf"
               ref={inputRef}
               {...getInputProps()}
+              onChange={handleChange}
             />
             <label
               id="label-file-upload"
@@ -166,7 +173,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
                 />
                 <p className="text-[#000] mt-[30px] ">
                   Drop or{" "}
-                  <span className="text-renal-blue underline cursor-pointer">
+                  <span className="underline cursor-pointer text-renal-blue">
                     Browse
                   </span>{" "}
                   to upload your file.

@@ -17,7 +17,24 @@ const ScriptDoc = ({
   refresh,
   check,
   id,
+  onSelectFile,
 }: any) => {
+
+  
+  //fetch file data from a
+  const fetchAdditionalData = async (fileUrl: string) => {
+    try {
+      const response = await axios.get(fileUrl, {
+        responseType: "arraybuffer",
+      });
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      return blob;
+    } catch (error) {
+      console.error("Error fetching additional data:", error);
+      return null;
+    }
+  };
+
   return (
     <div className="w-[100%] mt-[20px]">
       <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
@@ -38,6 +55,14 @@ const ScriptDoc = ({
           }
           width={55}
           height={40}
+          onClick={async () => {
+            try {
+              const additionalData = await fetchAdditionalData(file);
+              onSelectFile(additionalData); // Pass fetched data to parent component
+            } catch (error) {
+              console.error("Error fetching additional data:", error);
+            }
+          }}
         />
         <div className="ml-[10px]">
           <p className="text-[12px] text-[#3F434A] font-medium ">{docName}</p>
@@ -66,7 +91,9 @@ const ScriptDoc = ({
             alt=""
             onClick={(e) => {
               axios
-                .delete(`https://testsalescrm.nextsolutions.in/api/call-script/delete-by-id?id=${id}`)
+                .delete(
+                  `https://testsalescrm.nextsolutions.in/api/call-script/delete-by-id?id=${id}`
+                )
                 .then((e) => {
                   console.log(e, "huqbfq");
                   refresh();
@@ -107,10 +134,12 @@ const ScriptList = ({
   data,
   moredata,
   refresh,
+  onSelectFile,
 }: {
   data: any;
   moredata: ActiveCall;
   refresh: () => void;
+  onSelectFile: (additionalData: any) => void;
 }) => {
   const [activeTitle, setActiveTitle] = React.useState(0);
   function CallBack(childData: any) {
@@ -174,7 +203,7 @@ const ScriptList = ({
     // Format the date and time as desired
     return `${day} ${month} ${year}, ${timeStr}`;
   }
-  
+
   function getTitleFromURL(url: any) {
     const parts = url.split("/");
     const title = parts[parts.length - 1];
@@ -224,6 +253,31 @@ const ScriptList = ({
       return 3; // Anything else
     }
   }
+
+  const mockData = [
+    {
+      fileUrl: "https://example.com/example-url-1.pdf",
+      createdAt: "2023-11-30T10:00:00Z",
+      title: "Sample Report",
+      size: "5.8 MB",
+      id: "1",
+    },
+    {
+      fileUrl: "https://example.com/example-url-2.pdf",
+      createdAt: "2023-11-29T09:30:00Z",
+      title: "User Manual",
+      size: "3.2 MB",
+      id: "2",
+    },
+    {
+      fileUrl: "https://example.com/example-url-3.pdf",
+      createdAt: "2023-11-28T08:15:00Z",
+      title: "Product Brochure",
+      size: "1.1 MB",
+      id: "3",
+    },
+    // Add more mock objects as needed
+  ];
 
   return (
     <>
@@ -275,6 +329,7 @@ const ScriptList = ({
               file={item.fileUrl}
               refresh={refresh}
               data={convertDatetime(item.createdAt)}
+              onSelectFile={onSelectFile}
             />
           );
         })}
@@ -285,6 +340,7 @@ const ScriptList = ({
 
 const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   console.log(scripts);
+  console.log(data._id);
 
   const [activeTitle, setActiveTitle] = React.useState(0);
 
@@ -305,8 +361,19 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
       .catch((e) => {});
   };
 
+  console.log(scripts);
+
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
+
+  //for etchinf data in script section
+
+  const [selectedFileData, setSelectedFileData] = useState<any>(null);
+  // Function to handle file selection and set data
+  const handleFileSelect = async (additionalData: any) => {
+    setSelectedFileData(additionalData);
+    setSelected(true);
+  };
 
   return (
     <div className="w-full p-[30px]">
@@ -317,24 +384,38 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
             <div className="w-full h-[900px] bg-[#ccc] p-[30px]">
               <div className="w-full h-full bg-white px-[30px] py-[60px]">
                 <p className="text-black font-medium uppercase text-[14px] tracking-wider">
-                  Lorem ipsum dolor sit amet. Qui totam sunt et rerum galisum
-                  est aspernatur voluptatem quo eligendi repellat aut tempora
-                  quis ut similique facilis. Ut soluta autem eum debitis cumque
-                  id maxime dicta qui cupiditate fugiat. Et porro totam in quia
-                  debitis ut doloremque fugit. Aut tempore commodi eum beatae
-                  quia est tempora molestias sit nobis incidunt et corporis
-                  animi est quia quia. Qui quia repellat et dolores accusantium
-                  in rerum cupiditate est molestias explicabo. Et quia voluptate
-                  qui quam provident ad odio saepe. Eum tempora quia sit eveniet
-                  ipsam. Eum temporibus voluptatem id magni delectus qui earum
-                  accusantium. Aut minima
+                 {` **Alice**: Hi Bob, how are you doing today? **Bob**: Hello
+                  Alice! I'm doing well, thank you. How about you? **Alice**:
+                  I'm good too, thanks for asking. Did you get a chance to check
+                  out that new movie that released last week? **Bob**: Yes,
+                  Alice, I did. It was an interesting movie. I really enjoyed
+                  the plot twists. **Alice**: That's great to hear, Bob. I
+                  haven't watched it yet. Would you recommend it? **Bob**:
+                  Absolutely, Alice. It's a must-watch. The storyline is
+                  compelling and the performances are outstanding. **Alice**:
+                  Sounds exciting, Bob. I'll definitely watch it over the
+                  weekend. **Bob**: That's a good plan, Alice. Let me know what
+                  you think of it. **Alice**: Sure, Bob. I'll share my thoughts
+                  with you after I watch it. **Bob**: Looking forward to it,
+                  Alice. By the way, have you tried the new Italian restaurant
+                  in town? **Alice**: Not yet, Bob. Is it good? **Bob**: Yes,
+                  Alice. The food is delicious and the ambiance is great. You
+                  should try it. **Alice**: Thanks for the recommendation, Bob.
+                  I'll check it out soon. **Bob**: You're welcome, Alice. I hope
+                  you'll like it. **Alice**: I'm sure I will, Bob. Thanks again.
+                  Talk to you later.`}
                 </p>
               </div>
             </div>
           )}
         </>
       )}
-      <ScriptList refresh={refresh} data={currScripts} moredata={data} />
+      <ScriptList
+        refresh={refresh}
+        data={currScripts}
+        moredata={data}
+        onSelectFile={handleFileSelect}
+      />
     </div>
   );
 };
