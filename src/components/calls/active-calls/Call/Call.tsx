@@ -345,7 +345,8 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
 const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
-
+  const [callTime, setCallTime] = useState("");
+  const [callDate, setCallDate] = useState("");
   const [w, setW] = useState(0);
   const wRef: any = useRef();
   React.useEffect(() => {
@@ -353,7 +354,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log("calldataactive:", CallData);
+  // console.log("calldataactive:", CallData);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
@@ -413,6 +414,57 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     // Test the input string against the ISO pattern
     return isoPattern.test(inputString);
   }
+
+  const CallTimeData = {
+    call_start_time: CallData.call_start_time,
+    call_date: CallData.call_date,
+  };
+
+  // Formatting the date
+  const startDate = new Date(CallTimeData.call_date);
+  const formattedStartDate = startDate
+    .toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .split(" ")
+    .join(" ");
+
+  // Formatting the time
+  const timeComponents = CallTimeData.call_start_time.split(":");
+  let formattedTime = "";
+
+  if (timeComponents.length === 1) {
+    const hours = parseInt(timeComponents[0], 10);
+    formattedTime = `${
+      hours >= 12
+        ? hours === 12
+          ? hours
+          : hours - 12
+        : hours === 0
+        ? 12
+        : hours
+    } ${hours >= 12 ? "PM" : "AM"}`;
+  } else if (timeComponents.length === 2) {
+    const hours = parseInt(timeComponents[0], 10);
+    const minutes = parseInt(timeComponents[1], 10);
+    formattedTime = `${
+      hours >= 12
+        ? hours === 12
+          ? hours
+          : hours - 12
+        : hours === 0
+        ? 12
+        : hours
+    }:${minutes.toString().padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"}`;
+  } else {
+    formattedTime = "Invalid time format";
+  }
+  setCallDate(formattedStartDate);
+  setCallTime(formattedTime);
+  console.log("Formatted date:", formattedStartDate);
+  console.log("Formatted time:", formattedTime);
 
   return (
     <>
@@ -497,6 +549,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={owners ? owners.name : ""}
             color={"#000"}
           />
+          <CallItem width={100} left={0} text={callDate} color={"#000"} />
           <CallItemMultiple
             width={130}
             left={60}
