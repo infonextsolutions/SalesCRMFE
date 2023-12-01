@@ -451,7 +451,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
         >
           <CallBox width={30} bool={selectAll} />
           <CallItem
-            width={200}
+            width={100}
             left={20}
             // text={CallData.callId}
             text={convertDatetimeToCustomFormat(CallData.updatedAt)}
@@ -461,7 +461,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           />
           <CallItem
             width={130}
-            left={20}
+            left={25}
             color={"#000"}
             text={CallData.call_title}
             click={true}
@@ -475,14 +475,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             color={"#000"}
           />
           <CallItem
-            width={120}
-            left={20}
+            width={140}
+            left={0}
             text={CallData?.leadId?.lead_title}
             color={"#000"}
           />
           <CallItem
             width={120}
-            left={40}
+            left={20}
             text={CallData?.companyId?.company_name}
             click={true}
             route={`/sales/open/${CallData?._id}/company-profile`}
@@ -513,8 +513,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             </p>
           </div> */}
           <CallItem
-            width={90}
-            left={0}
+            width={110}
+            left={20}
             text={CallData?.customerId?.name}
             color={"#000"}
           />
@@ -527,7 +527,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
 
           <CallItem
             width={100}
-            left={20}
+            left={30}
             text={CallData.call_type}
             color={"#000"}
           />
