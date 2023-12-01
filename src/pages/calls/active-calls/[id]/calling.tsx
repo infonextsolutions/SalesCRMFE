@@ -9,6 +9,8 @@ import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import MakeCall from "@/components/View/makeCall/index";
 import Navbar from "@/components/app/Navbar/Navbar";
+import { setError, setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 //Manya will make this page
 
 const AudioProfile = ({ data, scripts }: any) => {
@@ -16,11 +18,14 @@ const AudioProfile = ({ data, scripts }: any) => {
 
   const [make, setCall] = useState(false);
   const [bool, setBool] = useState(true);
-
+  const [audioFile, setAudioFile] = useState(null);
+  const [uploadModalStatus, setUploadModalStatus] = useState(false);
+  const dispatch = useAppDispatch();
   const cancelCall = () => {
     setBool(false);
     setTimeout(() => {
       setCall(false);
+      setUploadModalStatus(false);
       setBool(true);
     }, 500);
   };
@@ -38,8 +43,91 @@ const AudioProfile = ({ data, scripts }: any) => {
     }
   };
 
-  console.log(data.result, scripts);
+  // console.log(data.result, scripts);
+  console.log("asdasdasd", data.result);
+  const handleFileChange = (event: any) => {
+    setAudioFile(event.target.files[0]);
+  };
+  const handleSubmit = () => {
+    if (!audioFile) {
+      setUploadModalStatus(false);
+      return;
+    }
 
+    const formData = new FormData();
+
+    const payload = {
+      call_title: data.result?.call_title,
+      leadId: data.result?.leadId?._id,
+      companyId: data.result?.companyId?._id,
+      customerId: data.result?.customerId?._id,
+      call_start_time: data.result?.call_start_time,
+      call_discription: data.result?.call_discription,
+      call_type: data.result?.call_type,
+      call_date: data.result?.call_date,
+      owner: data.result?.owner?._id,
+      participants: data.result?.customerId?._id,
+      call_new_participant_number: data.result?.call_new_participant_number,
+      call_new_participant_title: data.result?.call_new_participant_title,
+      call_new_participant_name: data.result?.call_new_participant_name,
+      call_new_participant_designation:
+        data.result?.call_new_participant_designation,
+      callId: data.result?.callId,
+      file: audioFile,
+    };
+    formData.append("call_title", data.result?.call_title);
+    formData.append("leadId", data.result?.leadId?._id);
+    formData.append("companyId", data.result?.companyId?._id);
+    formData.append("customerId", data.result?.customerId?._id);
+    formData.append("call_start_time", data.result?.call_start_time);
+    formData.append("call_discription", data.result?.call_discription);
+    formData.append("call_type", data.result?.call_type);
+    formData.append("call_date", data.result?.call_date);
+    formData.append("owner", data.result?.owner?._id);
+    formData.append("participants", data.result?.customerId?._id);
+    formData.append(
+      "call_new_participant_number",
+      data.result?.call_new_participant_number
+    );
+    formData.append(
+      "call_new_participant_title",
+      data.result?.call_new_participant_title
+    );
+    formData.append(
+      "call_new_participant_name",
+      data.result?.call_new_participant_name
+    );
+    formData.append(
+      "call_new_participant_designation",
+      data.result?.call_new_participant_designation
+    );
+    formData.append("callId", data.result?.callId);
+    formData.append("file", audioFile);
+    console.log(payload);
+    // return;
+    axios
+      .post(
+        "https://testsalescrm.nextsolutions.in/api/active-call/create",
+        formData
+      )
+      .then((e: any) => {
+        setUploadModalStatus(false);
+        dispatch(
+          setSuccess({
+            show: true,
+            success: "Event Added Successfully!",
+          })
+        );
+      })
+      .catch((e) => {
+        dispatch(
+          setError({
+            show: true,
+            error: "Error Occured!",
+          })
+        );
+      });
+  };
   return (
     <>
       <Navbar title="Calls > Active Calls" src="Phone" />
@@ -47,6 +135,38 @@ const AudioProfile = ({ data, scripts }: any) => {
         {make && (
           <Backdrop bool={bool}>
             <MakeCall cancel={cancelCall} data={data.result} />
+          </Backdrop>
+        )}
+        {uploadModalStatus && (
+          <Backdrop bool={bool}>
+            {/* <MakeCall cancel={cancelCall} data={data.result} /> */}
+            <div>
+              <h1 className="mx-auto text-center mt-4 text-3xl font-semibold">
+                Upload A Call
+              </h1>
+              <div className="flex items-center justify-center h-[350px]">
+                <input
+                  type="file"
+                  accept="audio/*"
+                  onChange={handleFileChange}
+                />
+              </div>
+
+              <div className="flex gap-4 justify-end mr-4">
+                <button
+                  onClick={() => setUploadModalStatus(false)}
+                  className="bg-[#F5F5F5]  text-black px-[20px] py-[10px] rounded-xl font-medium text-[14px]"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSubmit}
+                  className="bg-renal-blue hover:bg-[#350dff] text-white px-[40px] py-[10px] rounded-xl font-medium text-[14px]"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
           </Backdrop>
         )}
         <Navigation
@@ -69,6 +189,16 @@ const AudioProfile = ({ data, scripts }: any) => {
             //   },
             // },
             {
+              text: "Upload Call",
+              dropdown: true,
+              id: 2,
+              light: false,
+              list: [],
+              onClick1: async () => {
+                setUploadModalStatus(true);
+              },
+            },
+            {
               text: "Make Call",
               dropdown: true,
               id: 1,
@@ -84,6 +214,7 @@ const AudioProfile = ({ data, scripts }: any) => {
                 setCall(true);
               },
             },
+
             // {
             //   text: "Take Action ",
             //   click: takeAction,
@@ -100,6 +231,7 @@ const AudioProfile = ({ data, scripts }: any) => {
             // },
           ]}
         />
+
         <div className="w-[100%] flex gap-[25px] mb-[100px] ">
           {/* <AudioProfileContainer
           width={"50%"}
@@ -134,7 +266,7 @@ export async function getServerSideProps({ query, params }: any) {
     `https://testsalescrm.nextsolutions.in/api/active-call/find-by-id?id=${params.id}`
   );
   const another = await axios.get(
-    `https://testsalescrm.nextsolutions.in/api/call-script/active-call?activeCallId=${response.data.result._id}`
+    `https://testsalescrm.nextsolutions.in/api/call-script/active-call?activeCallId=${response?.data?.result?._id}`
   );
   console.log(another);
   return {
