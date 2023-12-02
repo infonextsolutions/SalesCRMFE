@@ -1,5 +1,5 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import Backdrop from "@/components/View/Backdrop/Center";
@@ -9,6 +9,7 @@ import Events from "@/components/View/Event/Events";
 import EmailPage from "../View/Email/index";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
+import axios from "axios";
 
 const QuickActions = ({
   width,
@@ -93,7 +94,7 @@ const QuickActions = ({
   );
 };
 
-const Deals = () => {
+const Deals = ({ data }: any) => {
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);
   const [notes1, setNotes1] = React.useState(false);
@@ -102,6 +103,10 @@ const Deals = () => {
   const [bool, setBool] = React.useState(true);
   const [call, setCall] = React.useState(false);
   // const [detailShow, setDetailShow] = useState(false);
+  
+  
+
+  console.log(data.result._id);
 
   const showNotes = () => {
     setNotes(true);
@@ -183,6 +188,27 @@ const Deals = () => {
       showCall();
     }
   };
+  
+  const [openDeals, setOpenDeals] = useState<any>(null);
+  const [closedDeals, setClosedDeals] = useState<any>(null);
+  const [interest, setInterest] = useState<any>(null);
+
+
+  useEffect(() => {
+axios.get(`https://testsalescrm.nextsolutions.in/api/leads/getDeals?userId=${data.result._id}`)
+      .then(response => {
+        const data = response.data;
+        setOpenDeals(data.openDeals);
+        setClosedDeals(data.closeDeals);
+        setInterest(data.intrest);
+        
+      })
+      .catch(error => console.error('Error fetching data: ', error));
+  }, []);
+
+ 
+
+  
   return (
     <>
       <Navigator
@@ -190,7 +216,9 @@ const Deals = () => {
         current={0}
         list={[{ id: 0, title: "Deals" }]}
       />
-      <div className="bg-[#ffffff] my-[40px] overflow-hidden">
+
+      
+     <div className="bg-[#ffffff] my-[40px] overflow-hidden">
         <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
           Open Deals
         </h5>
@@ -202,20 +230,21 @@ const Deals = () => {
           <p className="w-[25%]">Last Activity</p>
           <p>Activity History</p>
         </div>
-        <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
+        
+        { openDeals && openDeals.map((deal:any, index:number)=>(<div key={index} className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
           <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
             <div className="w-[15%]">
-              <p className="text-[#3F434A]">12XX34</p>
+              <p className="text-[#3F434A]">{deal?.leadData?.leadId}</p>
             </div>
             <div className="w-[18%]">
-              <p>Product A</p>
+              <p>{(deal?.leadData?.Product)? (deal?.leadData?.Product): "product A" } </p>
             </div>
             <div className="w-[15%]">
-              <p>Won</p>
+              <p>{(deal?.leadData?.leadStage)? (deal?.leadData?.leadStage): "Won" }</p>
             </div>
             <div className="w-[22%]">
-              <p>Email Sent</p>
-              <p>23 Jan 2023</p>
+              <p>{(deal?.lastActivity?.subject)? (deal?.leadData?.subject): "Email Sent" }</p>
+              <p>{(deal?.lastActivity?.createdAt)? (deal?.leadData?.createdAt): "23 Jan 2023" }</p>
             </div>
             <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
               <QuickActions
@@ -302,11 +331,15 @@ const Deals = () => {
               />
             </Backdrop>
           )}
-        </div>
+        </div>))}
       </div>
-      <div className="bg-[#ffffff] my-[40px] overflow-hidden">
+
+    {/* ?close deals */}
+
+    
+    <div className="bg-[#ffffff] my-[40px] overflow-hidden">
         <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
-          close Deals
+          Close Deals
         </h5>
         <p className="text-center text-[#000]">-</p>
         <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
@@ -316,20 +349,21 @@ const Deals = () => {
           <p className="w-[25%]">Last Activity</p>
           <p>Activity History</p>
         </div>
-        <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
+        
+        { closedDeals && closedDeals.map((deal:any,index:number)=>(<div key={index} className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
           <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
             <div className="w-[15%]">
-              <p className="text-[#3F434A]">12XX34</p>
+              <p className="text-[#3F434A]">{deal?.leadData?.leadId}</p>
             </div>
             <div className="w-[18%]">
-              <p>Product A</p>
+              <p>{(deal?.leadData?.Product)? (deal?.leadData?.Product): "product A" } </p>
             </div>
             <div className="w-[15%]">
-              <p>Won</p>
+              <p>{(deal?.leadData?.leadStage)? (deal?.leadData?.leadStage): "close" }</p>
             </div>
             <div className="w-[22%]">
-              <p>Email Sent</p>
-              <p>23 Jan 2023</p>
+              <p>{(deal?.lastActivity?.subject)? (deal?.leadData?.subject): "Email Sent" }</p>
+              <p>{(deal?.lastActivity?.createdAt)? (deal?.leadData?.createdAt): "23 Jan 2023" }</p>
             </div>
             <div className="flex items-start gap-[5px] w-[220px] text-[#3F434A]">
               <QuickActions
@@ -416,8 +450,11 @@ const Deals = () => {
               />
             </Backdrop>
           )}
-        </div>
+        </div>))}
       </div>
+
+
+      
     
       <div className="bg-[#ffffff] my-[50px] mt-[80px]">
         <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
@@ -429,13 +466,15 @@ const Deals = () => {
           <p className="w-[22%]">Lead Id</p>
           <p>Last Activity</p>
         </div>
-        <div className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
+
+        
+        { interest && interest.map((deal:any,index:number )=>( <div key={index} className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5">
           <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
             <div className="w-[22%]">
-              <p className="ml-2">Product A</p>
+              <p className="ml-2">{deal?.companyData?.company_product_category}</p>
             </div>
             <div className="w-[22%]">
-              <p>12XX34</p>
+              <p>{deal?.leadData?.leadId}</p>
             </div>
             <div className="w-[15%]">
               <p>Email Sent</p>
@@ -454,55 +493,9 @@ const Deals = () => {
               />
             </div>
           </div>
-          <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-            <div className="w-[22%]">
-              <p className="ml-2">Product A</p>
-            </div>
-            <div className="w-[22%]">
-              <p>12XX34</p>
-            </div>
-            <div className="w-[15%]">
-              <p>Email Sent</p>
-              <p>23 Jan 2023</p>
-            </div>
-            <div className="w-[45%] flex justify-end">
-              <Image
-                src={getBasicIcon("More")}
-                className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
-                alt=""
-                width={19}
-                height={19}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-            </div>
-          </div>
-          <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
-            <div className="w-[22%]">
-              <p className="ml-2">Product A</p>
-            </div>
-            <div className="w-[22%]">
-              <p>12XX34</p>
-            </div>
-            <div className="w-[15%]">
-              <p>Email Sent</p>
-              <p>23 Jan 2023</p>
-            </div>
-            <div className="w-[45%] flex justify-end">
-              <Image
-                src={getBasicIcon("More")}
-                className={`w-[19px] rotate-90 cursor-pointer opacity-80`}
-                alt=""
-                width={19}
-                height={19}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-            </div>
-          </div>
-        </div>
+         
+         
+        </div>))}
       </div>
     </>
   );

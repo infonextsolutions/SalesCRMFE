@@ -52,7 +52,7 @@ const ClientProfile = ({ data }: any) => {
             />
           </div>
           <div className="bg-white rounded-xl w-[100%] px-[25px]">
-            <Deals />
+            <Deals data={data} />
           </div>
         </div>
         {/* write your code here for profile page manya! */}
