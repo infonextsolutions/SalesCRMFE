@@ -703,7 +703,7 @@ const LeadContainer = ({
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <EmailPage
-            refresh={(e) => {}}
+            refresh={(e: any) => {}}
             cancel={cancelEmails}
             data={LeadData}
           />
