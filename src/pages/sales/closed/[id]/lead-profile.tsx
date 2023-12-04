@@ -143,6 +143,7 @@ const Profile = ({ data }: any) => {
               }}
               cancel={cancelEmails}
               data={data1.result}
+              leadIdResult={data.result._id}
             />
           </Backdrop>
         )}
