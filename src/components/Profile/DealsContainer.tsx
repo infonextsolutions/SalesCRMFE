@@ -105,7 +105,6 @@ const Deals = ({ data }: any) => {
   // const [detailShow, setDetailShow] = useState(false);
   
   
-
   console.log(data?.result?._id);
 
   const showNotes = () => {

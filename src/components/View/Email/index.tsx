@@ -3,7 +3,7 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import "quill/dist/quill.snow.css";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
 import { Root } from "../EditLead/FormEditContainer";
 import { useAppDispatch } from "@/store/store";
@@ -351,8 +351,10 @@ const SendEmail = ({ receiver, change, title, content, clicked }: any) => {
 const EmailPage = ({
   cancel,
   data,
+  leadIdResult,
   refresh,
 }: {
+  leadIdResult: any;
   cancel: () => void;
   data?: any;
   refresh: (e: any) => any;
@@ -362,6 +364,7 @@ const EmailPage = ({
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
   const [sendTo, setSendTo] = useState<any>("");
+  const [newEmailList, setNewEmailList] = useState<any>([{}]);
   const emailList = [
     {
       title: "Client 1",
@@ -412,6 +415,49 @@ const EmailPage = ({
       });
   };
 
+  useEffect(() => {
+    console.log("resuulllttt", data._id);
+    if (data && data.customerId) {
+      const { name, email, contacts } = data.customerId;
+
+      const updatedEmailList = []; // Create an empty array to store new values
+
+      // Add customer ID's name and email to updatedEmailList
+      updatedEmailList.push({
+        title: name,
+        val: email,
+        selected: false,
+      });
+
+      // Loop through contacts and add their name and email to updatedEmailList
+      contacts.forEach((contact: any) => {
+        const { name, email } = contact;
+        if (name !== "" && email !== "") {
+          updatedEmailList.push({
+            title: name,
+            val: email,
+            selected: false,
+          });
+        }
+      });
+
+      // Update the state with the new email list
+      setNewEmailList(updatedEmailList);
+      console.log("asdasdasdasd", updatedEmailList);
+    }
+
+    axios
+      .get(
+        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data._id}`
+      )
+      .then((res) => {
+        console.log("new result is", res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [data]);
+
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
       <h1 className="text-[#3f434a] text-[31px] font-medium  mb-[24px] tracking-[1px]">
@@ -445,7 +491,8 @@ const EmailPage = ({
             val: 0,
             selected: true,
           },
-          ...emailList,
+          ...newEmailList,
+          // ...emailList,
         ]}
       />
       {/* <DropItems
