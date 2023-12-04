@@ -299,7 +299,7 @@ axios.get(`https://testsalescrm.nextsolutions.in/api/leads/getDeals?userId=${dat
             <Backdrop bool={bool} pad={"50px 0"}>
               <EmailPage
                 // refresh={UpdateData}
-                //  data={LeadData}
+                 data={data?.leadData}
                 cancel={cancelEmails}
                 refresh={function (e: any) {
                   // throw new Error("Function not implemented.");

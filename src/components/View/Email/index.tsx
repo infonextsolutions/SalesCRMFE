@@ -351,13 +351,11 @@ const SendEmail = ({ receiver, change, title, content, clicked }: any) => {
 const EmailPage = ({
   cancel,
   data,
-  leadIdResult,
   refresh,
 }: {
-  leadIdResult: any;
-  cancel: () => void;
+  cancel?: any;
   data?: any;
-  refresh: (e: any) => any;
+  refresh?: any;
 }) => {
   // const [receiver, setReceiver] = useState<any>("");
   const [receiver, setReceiver] = useState<any>("");
@@ -387,7 +385,7 @@ const EmailPage = ({
     const payload = {
       _id: data._id,
       leadId: data._id,
-      companyName: data.companyId.company_name,
+      companyName: data.companyId?.company_name,
       clientPoc: "",
       email: e1,
       subject: e2,
