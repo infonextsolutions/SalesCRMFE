@@ -63,8 +63,8 @@ const AddText = ({ top, title, width, change }: any) => {
   );
 };
 
-const EditLead = ({ cancel, data,update }: { cancel: any; data: any;update:()=>void}) => {
-  const titles = ["LEAD INFO", "CONTACT INFO" , "DEAL INFO"];
+const EditLead = ({ cancel, data, update, title }: { cancel: any; data: any; update: () => void; title?: any }) => {
+  const titles = ["LEAD INFO", "CONTACT INFO", "DEAL INFO"];
   const [content, setContent] = useState<any>({});
   const router = useRouter();
   console.log('============================== DATA ============================', data);
@@ -135,6 +135,7 @@ const EditLead = ({ cancel, data,update }: { cancel: any; data: any;update:()=>v
         current={0}
         cancel={cancel}
         // info={dummy.leadInfo}
+        title={title}
       />
     </>
   );
