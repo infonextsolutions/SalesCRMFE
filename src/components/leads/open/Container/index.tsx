@@ -9,6 +9,7 @@ import Spinner from "@/components/loader/spinner";
 import KanbanTable from "@/components/View/Tables/open/Kanban";
 import DatePicker from "@/utils/Button/DatePicker";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const LeadsTable = React.lazy(
   () => import("@/components/View/Tables/open/LeadsSearch")
@@ -17,10 +18,11 @@ const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
 
 const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
+  const router = useRouter();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("Open");
+  const [status, setStatus] = useState(window.location.pathname.split("/").pop() === 'open' ? "open" : "close");
   const [stage, setStage] = useState("Enquiry");
   const [product, setProduct] = useState(" Product A");
   const [leadSource, setLeadSource] = useState("Website");
@@ -71,14 +73,17 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
             <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Status</h2>
               <select
-                onChange={(e) => setStatus(e.target.value)}
+                onChange={(e) => {
+                  setStatus(e.target.value);
+                  router.push(`/sales/${e.target.value === "open" ? "open" : "closed"}`)
+                }}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="Open">
+                <option selected value="open">
                   Open
                 </option>
-                <option value="Close">Close</option>
+                <option value="close">Close</option>
               </select>
             </div>
             <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
