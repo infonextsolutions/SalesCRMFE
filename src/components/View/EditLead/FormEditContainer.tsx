@@ -328,23 +328,6 @@ const FormEditContainer = ({
                 </h1>
                 <Formik
                   initialValues={{
-                    // primaryClientName: data.customerId.name,
-                    // primaryClientDesignation: data.customerId.designation,
-                    // gender: data.customerId.gender,
-                    // phone: data.customerId.contact,
-                    // email: data.customerId.email,
-                    // linkedin: "",
-                    // twitter: "",
-                    // moreContactInfoName: "",
-                    // moreContactInfoDesignation: "",
-                    // moreContactInfoGender: "",
-                    // moreContactInfoPhone: "",
-                    // moreContactInfoEmail: "",
-                    // moreContactInfoName1: "",
-                    // moreContactInfoDesignation1: "",
-                    // moreContactInfoGender1: "",
-                    // moreContactInfoPhone1: "",
-                    // moreContactInfoEmail1: "",
                     company_name: data?.companyId?.company_name,
                     industry_type: data?.companyId?.company_product_category,
                     company_location: data.companyId.company_location,
@@ -379,30 +362,6 @@ const FormEditContainer = ({
                           company_socialMedia2: values?.company_socialMedia2,
                           company_socialMedia2Url: values?.company_socialMedia2Url,
                         }
-                        // customerId: {
-                        //   name: values.primaryClientName,
-                        //   _id: data.customerId._id,
-                        //   designation: values.primaryClientDesignation,
-                        //   gender: values.gender,
-                        //   contact: values.phone,
-                        //   email: values.email,
-                        //   contacts: [
-                        //     {
-                        //       name: values.moreContactInfoName,
-                        //       designation: values.moreContactInfoDesignation,
-                        //       gender: values.moreContactInfoGender,
-                        //       contact: values.moreContactInfoPhone,
-                        //       email: values.moreContactInfoEmail,
-                        //     },
-                        //     {
-                        //       name: values.moreContactInfoName1,
-                        //       designation: values.moreContactInfoDesignation1,
-                        //       gender: values.moreContactInfoGender1,
-                        //       contact: values.moreContactInfoPhone1,
-                        //       email: values.moreContactInfoEmail1,
-                        //     },
-                        //   ],
-                        // },
                       };
                       const response = await axios.put(
                         "https://testsalescrm.nextsolutions.in/api/leads/update",
@@ -650,26 +609,41 @@ const FormEditContainer = ({
                 <Formik
                   initialValues={{
                     // leadUpdatedOn: "",
-                    inquiryType: data.inquiry,
-                    productService: data.companyId.company_product_category,
-                    dealSize: data.potential_deal_size,
-                    existingBudget: data.existing_budget,
-                    winProbability: data.win_probability,
-                    leadCreatedBy: data.created_by,
+                    // inquiryType: data.inquiry,
+                    // productService: data.companyId.company_product_category,
+                    // dealSize: data.potential_deal_size,
+                    // existingBudget: data.existing_budget,
+                    // winProbability: data.win_probability,
+                    // leadCreatedBy: data.created_by,
                     // interestedProductService: "",
+
+                    name: data.customerId.name,
+                    designation: data.customerId.designation,
+                    phone: data.customerId.contact,
+                    email: data.customerId.email,
+                    gender: data.customerId.gender,
+                    customer_socialMedia1: data?.customerId?.customer_socialMedia1,
+                    customer_socialMedia1Url: data?.customerId?.customer_socialMedia1Url,
+                    customer_socialMedia2: data?.customerId?.customer_socialMedia2,
+                    customer_socialMedia2Url: data?.customerId?.customer_socialMedia2Url,
                   }}
                   onSubmit={async (values) => {
+                    console.log('>>>>>>>>>>>>>>>>>>>>>>> EDIT CLIENT : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>', values)
                     try {
                       const val = {
-                        _id: data._id,
-                        inquiry: values.inquiryType,
-                        potential_deal_size: values.dealSize,
-                        existing_budget: values.existingBudget,
-                        win_probability: values.winProbability,
-                        created_by: values.leadCreatedBy,
-                        companyId: {
-                          _id: data.companyId._id,
-                          company_product_category: values.productService,
+                        ...data,
+                        customerId: {
+                          ...data.customerId,
+                          _id: data.customerId._id,
+                          name: values.name,
+                          designation: values.designation,
+                          gender: values.gender,
+                          contact: values.phone,
+                          email: values.email,
+                          customer_socialMedia1: values?.customer_socialMedia1,
+                          customer_socialMedia1Url: values?.customer_socialMedia1Url,
+                          customer_socialMedia2: values?.customer_socialMedia2,
+                          customer_socialMedia2Url: values?.customer_socialMedia2Url,
                         },
                       };
                       const response = await axios.put(
@@ -1204,7 +1178,11 @@ export interface CustomerId {
   companyId: string;
   createdAt: string;
   updatedAt: string;
-  gender: string;
+  gender?: string;
+  customer_socialMedia1?: string;
+  customer_socialMedia1Url?: string;
+  customer_socialMedia2?: string;
+  customer_socialMedia2Url?: string;
   __v: number;
 }
 
