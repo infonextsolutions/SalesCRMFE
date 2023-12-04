@@ -123,7 +123,7 @@ const ProfilePage = ({ data1, updated }: any) => {
     <>
       {edit && (
         <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
-          <EditLead cancel={cancelEdit} update={UpdateData} data={data} />
+          <EditLead cancel={cancelEdit} update={UpdateData} data={data} title={"Edit Lead"} />
         </Backdrop>
       )}
       <div className="">
