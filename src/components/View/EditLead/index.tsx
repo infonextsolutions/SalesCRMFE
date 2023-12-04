@@ -65,6 +65,7 @@ const AddText = ({ top, title, width, change }: any) => {
 const EditLead = ({ cancel, data,update }: { cancel: any; data: any;update:()=>void}) => {
   const titles = ["LEAD INFO", "CONTACT INFO" , "DEAL INFO"];
   const [content, setContent] = useState<any>({});
+  console.log('=================================================== DATA ================================================', data);
   //   companyId:data.companyId._id,34
   //   company_name,
   //   company_website_url,
@@ -115,7 +116,8 @@ const EditLead = ({ cancel, data,update }: { cancel: any; data: any;update:()=>v
         id: data._id,
         lead_title: content.lead_title,
         companyId: data.companyId._id,
-        customerId: data.companyId._id,
+        customerId: data.customerId._id,
+
       })
       .then((e: any) => {
         console.log(e);

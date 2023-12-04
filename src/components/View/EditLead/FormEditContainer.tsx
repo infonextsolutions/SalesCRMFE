@@ -24,15 +24,15 @@ const FormEditContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  console.log(data, "here is form data");
+  console.log(data, "+++++++++++++++++++++++ here is form data ++++++++++++++++++++++++");
   const dispatch = useAppDispatch();
   return (
     <div
-      className={`w-[${
-        width ? width : "100%"
-      }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
+      className={`w-[${width ? width : "100%"
+        }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
     >
-      <Navigator callback={CallBack} current={current} list={list} />
+      {/* <Navigator callback={CallBack} current={current} list={list} /> */}
+      <h1 className="w-[100%] text-[#3F434A] text-center pt-[10px] font-medium text-3xl">Edit Lead</h1>
       <div className="flex justify-between pl-[20px] relative ">
         <div className="text-black text-[14px] overflow-auto leading-[21px] mt-[10px] w-[100%] tracking-wide  ">
           {activeTitle === 0 && (
@@ -46,37 +46,61 @@ const FormEditContainer = ({
                     ...data,
                     ...data.companyId,
                     lead_title: data?.lead_title,
-                    company_location: data.companyId.company_location,
-                    linkedInurl: data?.companyId.linkedin_url,
-                    Twitter: data?.companyId.twitter_url,
-                    website_url: data.companyId.company_website_url,
+                    lead_description: data?.lead_description,
+                    lead_manager: data?.customerId?.name,
+                    // company_name: data?.companyId?.company_name,
+                    // company_location: data.companyId.company_location,
+                    // company_description: data?.companyId?.company_description,
+                    // linkedInurl: data?.companyId.linkedin_url,
+                    // Twitter: data?.companyId.twitter_url,
+                    // website_url: data.companyId.company_website_url,
                     industry_type: data.companyId.company_product_category,
-                    lead_owner:
-                      data.owners.length > 0 ? data.owners[0].name : "",
+                    lead_owner: data.owners.length > 0 ? data.owners[0].name : "",
                     Stage: data?.leadStage,
                     Status: data?.leadStatus,
                     Source: data?.source,
+                    // company_socialMedia1: data?.company_socialMedia1,
+                    // company_socialMedia1Url: data?.company_socialMedia1Url,
+                    // company_socialMedia2: data?.company_socialMedia2,
+                    // company_socialMedia2Url: data?.company_socialMedia2Url,
+                    inquiryType: data.inquiry,
+                    productService: data.companyId.company_product_category,
+                    dealSize: data.potential_deal_size,
+                    existingBudget: data.existing_budget,
+                    winProbability: data.win_probability,
+                    leadCreatedBy: data.created_by,
                   }}
                   onSubmit={async (values) => {
+                    console.log('>>>>>>>>>>>>>>>>>>>>>>> ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>', values)
                     try {
                       const val = {
-                        lead_title: values.lead_title,
                         _id: data._id,
+                        lead_title: values.lead_title,
+                        lead_description: data?.lead_description,
                         companyId: {
                           _id: data.companyId._id,
-                          company_name: values.company_name,
-                          company_location: values.company_location,
-                          company_website_url: values.website_url,
                           company_product_category: values.industry_type,
-                          linkedin_url: values.linkedInurl,
-                          twitter_url: values.Twitter,
+                          // company_name: values.company_name,
+                          // company_location: values.company_location,
+                          // company_description: values.company_description,
+                          // company_website_url: values.website_url,
+                          // linkedin_url: values.linkedInurl,
+                          // twitter_url: values.Twitter,
                         },
-                        linkedInurl: values.linkedInurl,
-                        Twitter: values.Twitter,
-                        lead_owner: values.lead_owner,
+                        customerId: {
+                          _id: data.customerId._id,
+                          name: values.lead_manager
+                        },
+                        // linkedInurl: values.linkedInurl,
+                        // Twitter: values.Twitter,
+                        owners: [values.lead_owner],
                         leadStage: values.Stage,
                         leadStatus: values.Status,
                         source: values.Source,
+                        // company_socialMedia1: data?.company_socialMedia1,
+                        // company_socialMedia1Url: data?.company_socialMedia1Url,
+                        // company_socialMedia2: data?.company_socialMedia2,
+                        // company_socialMedia2Url: data?.company_socialMedia2Url,
                       };
                       update();
                       const response = await axios.put(
@@ -102,8 +126,8 @@ const FormEditContainer = ({
                     <Form className="custom-scroll-black w-[100%] flex justify-between pr-[20px] pb-[50px]">
                       <div className="flex flex-col w-[100%] gap-4">
                         <div className="w-[100%]">
-                          <label className="font-medium" htmlFor="lead_title">
-                            Lead Title
+                          <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
+                            Lead Title*
                           </label>
                           <Field
                             type="text"
@@ -114,8 +138,8 @@ const FormEditContainer = ({
                           />
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium" htmlFor="lead_title">
-                            Lead Description
+                          <label className="font-medium text-[#8a9099]" htmlFor="lead_description">
+                            Lead Description*
                           </label>
                           <Field
                             type="text"
@@ -126,18 +150,177 @@ const FormEditContainer = ({
                           />
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium" htmlFor="lead_title">
+                          <label
+                            htmlFor=""
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Lead Source*
+                          </label>
+                          <Field
+                            as="select"
+                            id="Source"
+                            name="Source"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Lead Source --
+                            </option>
+                            <option value="Website">Website</option>
+                            <option value="Referrals">Referrals</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Email Marketing">Email Marketing</option>
+                            <option value="Paid Advertising">Paid Advertising</option>
+                            <option value="Events">Events</option>
+                            <option value="Offline Channels">Offline Channels</option>
+                            <option value="Content Marketing">Content Marketing</option>
+                            <option value="Partnerships">Partnerships</option>
+                          </Field>
+                        </div>
+                        <div className="w-[100%]">
+                          <label
+                            htmlFor=""
+                            className="font-medium text-[#8a9099]"
+                          >
+                            Lead Owner*
+                          </label>
+                          <Field
+                            as="select"
+                            id="lead_owner"
+                            name="lead_owner"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Lead Owner --
+                            </option>
+                            <option value="507f1f77bcf86cd799439011">LO1</option>
+                            <option value="507f191e810c19729de860ea">LO2</option>
+                            <option value="00000020f51bb4362eee2a4d">LO3</option>
+                          </Field>
+                        </div>
+                        <div className="w-[100%]">
+                          <label
+                            htmlFor="lead_manager"
+                            className="font-medium text-[#8a9099]"
+                          >
+                            Lead Manager*
+                          </label>
+                          <Field
+                            as="select"
+                            id="lead_manager"
+                            name="lead_manager"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Lead Manager --
+                            </option>
+                            <option value="LM1">LM1</option>
+                            <option value="LM2">LM2</option>
+                            <option value="LM3">LM3</option>
+                          </Field>
+                        </div>
+                        <div className="w-[100%]">
+                          <label
+                            htmlFor="industry_type"
+                            className="block font-medium mb-2 text-[#8a9099]"
+                          >
+                            Product/Service*
+                          </label>
+                          <Field
+                            as="select"
+                            id="industry_type"
+                            name="industry_type"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                          >
+                            <option value="" selected>
+                              -- Select Product/Service --
+                            </option>
+                            <option value="P1">P1</option>
+                            <option value="P2">P2</option>
+                            <option value="P2">P3</option>
+                            <option value="Product A">Product A</option>
+                            <option value="Product B">Product B</option>
+                            <option value="Product C">Product C</option>
+                            <option value="Product D">Product D</option>
+                          </Field>
+                        </div>
+                        <div className="flex gap-5">
+                          <div className="mb-4 flex-grow">
+                            <label
+                              htmlFor="Status"
+                              className="block font-medium mb-2 text-[#8a9099]"
+                            >
+                              Lead Status*
+                            </label>
+                            <Field
+                              as="select"
+                              id="Status"
+                              name="Status"
+                              className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                            >
+                              <option value="" selected>
+                                -- Select Lead Status --
+                              </option>
+                              <option value="open">Open</option>
+                              <option value="close">Closed</option>
+                            </Field>
+                          </div>
+                          <div className="mb-4 flex-grow">
+                            <label
+                              htmlFor="Stage"
+                              className="block font-medium mb-2 text-[#8a9099]"
+                            >
+                              Lead Stage*
+                            </label>
+                            <Field
+                              as="select"
+                              id="Stage"
+                              name="Stage"
+                              className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                            >
+                              <option value="" selected>
+                                -- Select Lead Stage --
+                              </option>
+                              {(data.leadStatus === "open" || data.leadStatus === "Open") ? (
+                                <>
+                                  <option value="Enquiry">Enquiry</option>
+                                  <option value="Interaction">Interaction</option>
+                                  <option value="Proposal">Proposal</option>
+                                </>
+                              ) : (data.leadStatus === "close" || data.leadStatus === "Close") ? (
+                                <>
+                                  <option value="Win">Win</option>
+                                  <option value="Lost">Lost</option>
+                                  <option value="Dead">Dead</option>
+                                </>
+                              ) : null}
+                            </Field>
+                          </div>
+                        </div>
+                        {/* <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="company_name">
                             Company Name
                           </label>
                           <Field
                             type="text"
-                            name="company_Name"
-                            id="company_Name"
+                            name="company_name"
+                            id="company_name"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Company Name"
                           />
-                        </div>
-                        <div className="flex flex-col gap-2">
+                        </div> */}
+                        {/* <div className="w-[100%]">
+                          <label className="font-medium" htmlFor="company_location">
+                            Company Location
+                          </label>
+                          <Field
+                            type="text"
+                            name="company_location"
+                            id="company_location"
+                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                            placeholder="Company Location"
+                          />
+                        </div> */}
+                        {/* <div className="flex flex-col gap-2">
                           <h2 className="font-medium">Industry Type</h2>
                           <select
                             className="flex items-center w-[100%] justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -150,13 +333,13 @@ const FormEditContainer = ({
                             <option value="IT1">IT1</option>
                             <option value="IT2">IT2</option>
                           </select>
-                        </div>
-                        <div className="flex flex-col gap-2">
+                        </div> */}
+                        {/* <div className="flex flex-col gap-2">
                           <h2 className="font-medium">Country</h2>
                           <select
                             className="flex items-center w-[100%] justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            id="company_Country"
-                            name="company_Country"
+                            id="company_country"
+                            name="company_country"
                           >
                             <option selected value="">
                               -- Select Country --
@@ -167,15 +350,15 @@ const FormEditContainer = ({
                             <option value="England">England</option>
                             <option value="Australia">Australia</option>
                           </select>
-                        </div>
-                        <div className="w-[100%] py-2 flex items-center justify-between gap-4">
+                        </div> */}
+                        {/* <div className="w-[100%] py-2 flex items-center justify-between gap-4">
                           <div className="w-[100%]">
                             <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                               State*
                             </p>
                             <select
-                              id="company_State"
-                              name="company_State"
+                              id="company_state"
+                              name="company_state"
                               className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             >
                               <option value="" selected>
@@ -193,8 +376,8 @@ const FormEditContainer = ({
                               City*
                             </p>
                             <select
-                              id="company_City"
-                              name="company_City"
+                              id="company_city"
+                              name="company_city"
                               className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             >
                               <option value="" selected>
@@ -207,8 +390,8 @@ const FormEditContainer = ({
                               <option value="Bengalore">Bengalore</option>
                             </select>
                           </div>
-                        </div>
-                        <div className="w-[100%]">
+                        </div> */}
+                        {/* <div className="w-[100%]">
                           <label className="font-medium" htmlFor="lead_title">
                             Company Description
                           </label>
@@ -219,21 +402,21 @@ const FormEditContainer = ({
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Company Description"
                           />
-                        </div>
-                        <div className="w-[100%]">
+                        </div> */}
+                        {/* <div className="w-[100%]">
                           <label className="font-medium" htmlFor="lead_title">
                             Company Website
                           </label>
                           <Field
                             type="text"
-                            name="website_link"
-                            id="website_link"
+                            name="website_url"
+                            id="website_url"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Company Website"
                           />
-                        </div>
+                        </div> */}
 
-                        <div className="w-[100%] my-4">
+                        {/* <div className="w-[100%] my-4">
                           <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                             Social Media 1
                           </p>
@@ -250,8 +433,8 @@ const FormEditContainer = ({
                             <option value="Instagram">Instagram</option>
                             <option value="Whatsapp">Whatsapp</option>
                           </select>
-                        </div>
-                        <div className="w-[100%]">
+                        </div> */}
+                        {/* <div className="w-[100%]">
                           <label className="font-medium" htmlFor="lead_title">
                             Social Media 1 URL
                           </label>
@@ -262,8 +445,8 @@ const FormEditContainer = ({
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder=" Social Media 1 URL"
                           />
-                        </div>
-                        <div className="w-[100%] my-4">
+                        </div> */}
+                        {/* <div className="w-[100%] my-4">
                           <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                             Social Media 2
                           </p>
@@ -280,8 +463,8 @@ const FormEditContainer = ({
                             <option value="Instagram">Instagram</option>
                             <option value="Whatsapp">Whatsapp</option>
                           </select>
-                        </div>
-                        <div className="w-[100%]">
+                        </div> */}
+                        {/* <div className="w-[100%]">
                           <label className="font-medium" htmlFor="lead_title">
                             Social Media 2 URL
                           </label>
@@ -292,7 +475,7 @@ const FormEditContainer = ({
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder=" Social Media 2 URL"
                           />
-                        </div>
+                        </div> */}
                       </div>
                       <div className="absolute right-[160px] bottom-[20px] mt-[130px] flex ">
                         <SimpleButton
@@ -324,7 +507,7 @@ const FormEditContainer = ({
             </>
           )}
 
-          {activeTitle === 1 && (
+          {/* {activeTitle === 1 && (
             <>
               <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
                 Contact Information
@@ -685,7 +868,7 @@ const FormEditContainer = ({
                 )}
               </Formik>
             </>
-          )}
+          )} */}
           {activeTitle === 2 && (
             <>
               <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
@@ -888,7 +1071,7 @@ const FormEditContainer = ({
                         </div>
                       </div>
                       <div className="flex gap-5">
-                        <div className="mb-4 flex-grow">
+                        {/* <div className="mb-4 flex-grow">
                           <label
                             htmlFor="primaryClientName"
                             className="block font-medium mb-2 text-[#8a9099]"
@@ -907,7 +1090,7 @@ const FormEditContainer = ({
                             <option value="Open">Open</option>
                             <option value="Closed">Closed</option>
                           </Field>
-                        </div>
+                        </div> */}
                         <div className="mb-4 flex-grow">
                           <label
                             htmlFor="primaryClientDesignation"
@@ -1002,6 +1185,10 @@ export interface Root {
   createdAt: string;
   scriptId: string;
   callId: string;
+  company_socialMedia1?: string;
+  company_socialMedia2?: string;
+  company_socialMedia1Url?: string;
+  company_socialMedia2Url?: string;
 }
 
 export interface CompanyId {

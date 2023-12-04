@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setMenuOptions } from "@/store/UI";
 import axios from "axios";
+import Link from "next/link";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string().email("Invalid email").required("Required"),
@@ -325,9 +326,9 @@ const Login = () => {
                         <p className=" text-base text-[#000]  ">Remember Me</p>
                       </div>
                       <div>
-                        <a href="#" className="text-base text-[#304FFD]  ">
+                        <Link href="/forgot-password" className="text-base text-[#304FFD]  ">
                           forgot password ?
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <button

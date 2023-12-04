@@ -183,7 +183,7 @@ export const Sales_Allocated_Leads={
                     sliceName: "filter",
                     name: "Lead Status",
                     isRequired: "True",
-                    defaultValue: { label: "Open", value: "Open" },
+                    defaultValue: { label: "Open", value: "open" },
                     options: [{ label: "Closed", value: "Closed" }],
                     onClickApi: API_ENDPOINTS,
                     onClickApiMethod: POST,
