@@ -27,7 +27,7 @@ const FormEditContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  console.log(data, "+++++++++++++++++++++++ here is form data ++++++++++++++++++++++++");
+  console.log("+++++++++++++++++++++++ here is form data ++++++++++++++++++++++++", data);
   const dispatch = useAppDispatch();
   return (
     <div
@@ -51,21 +51,11 @@ const FormEditContainer = ({
                     lead_title: data?.lead_title,
                     lead_description: data?.lead_description,
                     lead_manager: data?.customerId?.name,
-                    // company_name: data?.companyId?.company_name,
-                    // company_location: data.companyId.company_location,
-                    // company_description: data?.companyId?.company_description,
-                    // linkedInurl: data?.companyId.linkedin_url,
-                    // Twitter: data?.companyId.twitter_url,
-                    // website_url: data.companyId.company_website_url,
                     industry_type: data.companyId.company_product_category,
                     lead_owner: data.owners.length > 0 ? data.owners[0].name : "",
                     Stage: data?.leadStage,
                     Status: data?.leadStatus,
                     Source: data?.source,
-                    // company_socialMedia1: data?.company_socialMedia1,
-                    // company_socialMedia1Url: data?.company_socialMedia1Url,
-                    // company_socialMedia2: data?.company_socialMedia2,
-                    // company_socialMedia2Url: data?.company_socialMedia2Url,
                     inquiryType: data.inquiry,
                     productService: data.companyId.company_product_category,
                     dealSize: data.potential_deal_size,
@@ -74,7 +64,7 @@ const FormEditContainer = ({
                     leadCreatedBy: data.created_by,
                   }}
                   onSubmit={async (values) => {
-                    console.log('>>>>>>>>>>>>>>>>>>>>>>> ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>', values)
+                    console.log('>>>>>>>>>>>>>>>>>>>>>>> EIDT LEAD : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>', values)
                     try {
                       const val = {
                         _id: data._id,
@@ -338,52 +328,81 @@ const FormEditContainer = ({
                 </h1>
                 <Formik
                   initialValues={{
-                    primaryClientName: data.customerId.name,
-                    primaryClientDesignation: data.customerId.designation,
-                    gender: data.customerId.gender,
-                    phone: data.customerId.contact,
-                    email: data.customerId.email,
-                    linkedin: "",
-                    twitter: "",
-                    moreContactInfoName: "",
-                    moreContactInfoDesignation: "",
-                    moreContactInfoGender: "",
-                    moreContactInfoPhone: "",
-                    moreContactInfoEmail: "",
-                    moreContactInfoName1: "",
-                    moreContactInfoDesignation1: "",
-                    moreContactInfoGender1: "",
-                    moreContactInfoPhone1: "",
-                    moreContactInfoEmail1: "",
+                    // primaryClientName: data.customerId.name,
+                    // primaryClientDesignation: data.customerId.designation,
+                    // gender: data.customerId.gender,
+                    // phone: data.customerId.contact,
+                    // email: data.customerId.email,
+                    // linkedin: "",
+                    // twitter: "",
+                    // moreContactInfoName: "",
+                    // moreContactInfoDesignation: "",
+                    // moreContactInfoGender: "",
+                    // moreContactInfoPhone: "",
+                    // moreContactInfoEmail: "",
+                    // moreContactInfoName1: "",
+                    // moreContactInfoDesignation1: "",
+                    // moreContactInfoGender1: "",
+                    // moreContactInfoPhone1: "",
+                    // moreContactInfoEmail1: "",
+                    company_name: data?.companyId?.company_name,
+                    industry_type: data?.companyId?.company_product_category,
+                    company_location: data.companyId.company_location,
+                    company_description: data?.companyId?.company_description,
+                    country: data?.companyId?.company_country,
+                    state: data?.companyId?.company_state,
+                    city: data?.companyId?.company_city,
+                    website_url: data?.companyId?.company_website_url,
+                    company_socialMedia1: data?.companyId?.company_socialMedia1,
+                    company_socialMedia1Url: data?.companyId?.company_socialMedia1Url,
+                    company_socialMedia2: data?.companyId?.company_socialMedia2,
+                    company_socialMedia2Url: data?.companyId?.company_socialMedia2Url,
                   }}
                   onSubmit={async (values) => {
+                    console.log('>>>>>>>>>>>>>>>>>>>>>>> EDIT COMPANY : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>', values)
                     try {
                       const val = {
                         _id: data._id,
-                        customerId: {
-                          name: values.primaryClientName,
-                          _id: data.customerId._id,
-                          designation: values.primaryClientDesignation,
-                          gender: values.gender,
-                          contact: values.phone,
-                          email: values.email,
-                          contacts: [
-                            {
-                              name: values.moreContactInfoName,
-                              designation: values.moreContactInfoDesignation,
-                              gender: values.moreContactInfoGender,
-                              contact: values.moreContactInfoPhone,
-                              email: values.moreContactInfoEmail,
-                            },
-                            {
-                              name: values.moreContactInfoName1,
-                              designation: values.moreContactInfoDesignation1,
-                              gender: values.moreContactInfoGender1,
-                              contact: values.moreContactInfoPhone1,
-                              email: values.moreContactInfoEmail1,
-                            },
-                          ],
-                        },
+                        companyId: {
+                          ...data.companyId,
+                          _id: data.companyId._id,
+                          company_name: values?.company_name,
+                          company_product_category: values?.industry_type,
+                          company_location: values?.company_location,
+                          company_description: values?.company_description,
+                          company_country: values?.country,
+                          company_state: values?.state,
+                          company_city: values?.city,
+                          company_website_url: values?.website_url,
+                          company_socialMedia1: values?.company_socialMedia1,
+                          company_socialMedia1Url: values?.company_socialMedia1Url,
+                          company_socialMedia2: values?.company_socialMedia2,
+                          company_socialMedia2Url: values?.company_socialMedia2Url,
+                        }
+                        // customerId: {
+                        //   name: values.primaryClientName,
+                        //   _id: data.customerId._id,
+                        //   designation: values.primaryClientDesignation,
+                        //   gender: values.gender,
+                        //   contact: values.phone,
+                        //   email: values.email,
+                        //   contacts: [
+                        //     {
+                        //       name: values.moreContactInfoName,
+                        //       designation: values.moreContactInfoDesignation,
+                        //       gender: values.moreContactInfoGender,
+                        //       contact: values.moreContactInfoPhone,
+                        //       email: values.moreContactInfoEmail,
+                        //     },
+                        //     {
+                        //       name: values.moreContactInfoName1,
+                        //       designation: values.moreContactInfoDesignation1,
+                        //       gender: values.moreContactInfoGender1,
+                        //       contact: values.moreContactInfoPhone1,
+                        //       email: values.moreContactInfoEmail1,
+                        //     },
+                        //   ],
+                        // },
                       };
                       const response = await axios.put(
                         "https://testsalescrm.nextsolutions.in/api/leads/update",
@@ -423,7 +442,7 @@ const FormEditContainer = ({
                           <h2 className="font-medium text-[#8a9099]">Industry Type</h2>
                           <select
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-                            id="industry_Type"
+                            id="industry_type"
                             name="industry_type"
                           >
                             <option selected value="">
@@ -431,6 +450,11 @@ const FormEditContainer = ({
                             </option>
                             <option value="IT1">IT1</option>
                             <option value="IT2">IT2</option>
+                            <option value="IT3">IT3</option>
+                            <option value="Product A">Product A</option>
+                            <option value="Product B">Product B</option>
+                            <option value="Product C">Product C</option>
+                            <option value="Product D">Product D</option>
                           </select>
                         </div>
                         <div className="w-[100%]">
@@ -447,7 +471,7 @@ const FormEditContainer = ({
                         </div>
                         <div className="w-[100%]">
                           <label className="font-medium text-[#8a9099]" htmlFor="company_location">
-                            Company Location
+                            Company Address
                           </label>
                           <Field
                             type="text"
@@ -467,7 +491,7 @@ const FormEditContainer = ({
                             <option selected value="">
                               -- Select Country --
                             </option>
-                            <option value="Indian">Indian</option>
+                            <option value="Indian">India</option>
                             <option value="Pakistan">Pakistan</option>
                             <option value="Srilanka">Srilanka</option>
                             <option value="England">England</option>
@@ -1146,10 +1170,6 @@ export interface Root {
   createdAt: string;
   scriptId: string;
   callId: string;
-  company_socialMedia1?: string;
-  company_socialMedia2?: string;
-  company_socialMedia1Url?: string;
-  company_socialMedia2Url?: string;
 }
 
 export interface CompanyId {
@@ -1158,12 +1178,19 @@ export interface CompanyId {
   company_website_url: string;
   company_icon: string;
   company_location: string;
+  company_country?: string;
+  company_state?: string;
+  company_city?: string;
   company_product_category: string;
   company_description: string;
   createdAt: string;
   updatedAt: string;
   linkedin_url: string;
   twitter_url: string;
+  company_socialMedia1?: string;
+  company_socialMedia2?: string;
+  company_socialMedia1Url?: string;
+  company_socialMedia2Url?: string;
   __v: number;
 }
 
