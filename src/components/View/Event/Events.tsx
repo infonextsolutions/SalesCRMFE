@@ -366,8 +366,8 @@ const DateContainer = ({
           setEventFromDate={setEventFromDate}
           setEventToDate={setEventToDate}
           setEventToTime={setEventToTime}
-          // timeFunc={setEventFromTime}
-          // dateFunc={setEventFromDate}
+        // timeFunc={setEventFromTime}
+        // dateFunc={setEventFromDate}
         />
         <div className="w-[30px] h-[1px] bg-[#ccc]" />
         <DateTime
@@ -376,8 +376,8 @@ const DateContainer = ({
           setEventFromDate={setEventFromDate}
           setEventToDate={setEventToDate}
           setEventToTime={setEventToTime}
-          // timeFunc={setEventToTime}
-          // dateFunc={setEventToTime}
+        // timeFunc={setEventToTime}
+        // dateFunc={setEventToTime}
         />
       </div>
     </div>
@@ -419,7 +419,13 @@ const Events = ({
   companyId,
   companyName,
   clientPOCName,
-}: any) => {
+}: {
+  cancel?: any,
+  leadid?: any,
+  companyId?: any,
+  companyName?: any,
+  clientPOCName?: any
+}) => {
   // const [eventType1, setEventType1] = useState("");
   const [eventTitle, setEventTitle] = useState("");
   const [eventDescription, setEventDescription] = useState("");

@@ -2,7 +2,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import React from "react";
 
-const Notes1 = ({ cancel,note }: any) => {
+const Notes1 = ({ cancel,note }: {cancel?: any, note?: any}) => {
 
   const Note = note.length==0 ? {}:note[note.length-1] ;
   return (

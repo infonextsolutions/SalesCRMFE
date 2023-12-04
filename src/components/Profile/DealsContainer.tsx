@@ -105,8 +105,7 @@ const Deals = ({ data }: any) => {
   // const [detailShow, setDetailShow] = useState(false);
   
   
-
-  console.log(data?.result._id);
+  console.log(data?.result?._id);
 
   const showNotes = () => {
     setNotes(true);
@@ -195,12 +194,12 @@ const Deals = ({ data }: any) => {
 
 
   useEffect(() => {
-axios.get(`https://testsalescrm.nextsolutions.in/api/leads/getDeals?userId=${data?.result._id}`)
+axios.get(`https://testsalescrm.nextsolutions.in/api/leads/getDeals?userId=${data?.result?._id}`)
       .then(response => {
-        const data = response.data;
-        setOpenDeals(data.openDeals);
-        setClosedDeals(data.closeDeals);
-        setInterest(data.intrest);
+        const data = response?.data;
+        setOpenDeals(data?.openDeals);
+        setClosedDeals(data?.closeDeals);
+        setInterest(data?.intrest);
         
       })
       .catch(error => console.error('Error fetching data: ', error));
@@ -303,7 +302,7 @@ axios.get(`https://testsalescrm.nextsolutions.in/api/leads/getDeals?userId=${dat
                 //  data={LeadData}
                 cancel={cancelEmails}
                 refresh={function (e: any) {
-                  throw new Error("Function not implemented.");
+                  // throw new Error("Function not implemented.");
                 }}
               />
             </Backdrop>

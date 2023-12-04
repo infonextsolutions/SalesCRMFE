@@ -5,6 +5,7 @@ import { LeadId } from "@/types/leadId";
 import Navigation from "@/components/app/Navigation";
 // import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
 import FormEditContainer from "./FormEditContainer";
+import { useRouter } from "next/router";
 // FormEditContainer
 
 const AddDropDown = ({ top, title, width, list, change }: any) => {
@@ -65,7 +66,8 @@ const AddText = ({ top, title, width, change }: any) => {
 const EditLead = ({ cancel, data,update }: { cancel: any; data: any;update:()=>void}) => {
   const titles = ["LEAD INFO", "CONTACT INFO" , "DEAL INFO"];
   const [content, setContent] = useState<any>({});
-  console.log('=================================================== DATA ================================================', data);
+  const router = useRouter();
+  console.log('============================== DATA ============================', data);
   //   companyId:data.companyId._id,34
   //   company_name,
   //   company_website_url,

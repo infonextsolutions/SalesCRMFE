@@ -18,7 +18,9 @@ const FormEditContainer = ({
   width,
   cancel,
 }: FormEditContainerProps) => {
-  const [activeTitle, setActiveTitle] = useState(0);
+  const [activeTitle, setActiveTitle] = useState(window.location.pathname.split("/").pop());
+  console.log('------------------------ active Title --------------------', activeTitle);
+  // company-profile lead-profile client-profile
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
@@ -35,7 +37,7 @@ const FormEditContainer = ({
       <h1 className="w-[100%] text-[#3F434A] text-center pt-[10px] font-medium text-3xl">Edit Lead</h1>
       <div className="flex justify-between pl-[20px] relative ">
         <div className="text-black text-[14px] overflow-auto leading-[21px] mt-[10px] w-[100%] tracking-wide  ">
-          {activeTitle === 0 && (
+          {activeTitle === "lead-profile" && (
             <>
               <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
                 <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
@@ -507,7 +509,7 @@ const FormEditContainer = ({
             </>
           )}
 
-          {/* {activeTitle === 1 && (
+          {activeTitle === "company-profile" && (
             <>
               <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
                 Contact Information
@@ -868,8 +870,8 @@ const FormEditContainer = ({
                 )}
               </Formik>
             </>
-          )} */}
-          {activeTitle === 2 && (
+          )}
+          {activeTitle === "client-poc-profile" && (
             <>
               <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
                 Deal Information
