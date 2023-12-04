@@ -138,7 +138,7 @@ const Profile = ({ data }: any) => {
         {emails && (
           <Backdrop bool={bool} pad={"50px 0"}>
             <EmailPage
-              refresh={(e) => {
+              refresh={(e: any) => {
                 UpdateData();
               }}
               cancel={cancelEmails}
