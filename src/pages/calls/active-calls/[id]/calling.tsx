@@ -105,6 +105,7 @@ const AudioProfile = ({ data, scripts }: any) => {
     formData.append("leadId", data.result?.leadId?._id);
     formData.append("activeCallId", data.result?._id);
     formData.append("file", audioFile);
+    console.log("audioFile");
     axios
       .post(
         "https://testsalescrm.nextsolutions.in/api/recording/add-rc",
