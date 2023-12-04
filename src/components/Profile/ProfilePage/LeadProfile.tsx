@@ -170,19 +170,25 @@ const ProfilePage = ({ data1, updated }: any) => {
         </h3>
         <ul className="mt-2 mb-10 ml-[1px]">
           <li className="px-2 mt-4">
-            <strong className="text-[12px]  mr-1 text-[#000] font-bold -500">
-              COMPANY NAME
+            <strong className="text-[16px]  mr-1 text-[#000] font-medium -500">
+              Company Name
             </strong>
             <p className="block text-black">{data.companyId.company_name}</p>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-sm mr-1 text-[#000] -500">
-              WEBSITE LINK
+            <strong className="text-[16px]  mr-1 text-[#000] font-medium -500">
+              Company Location
+            </strong>
+            <p className="block text-black">{data.companyId.company_location}</p>
+          </li>
+          <li className="px-2 mt-4">
+            <strong className="font-medium text-[16px] mr-1 text-[#000] -500">
+              Website Link
             </strong>
             <span className="block text-black">
               {/* made website link to be open in new tab  */}
               <p>
-                {/* <a href={extractDomain(data.companyId.company_website_url)} target="_blank">{(data.companyId.company_website_url)}
+                {/* <a href={data.companyId.company_website_url} target="_blank">{(data.companyId.company_website_url)}
               </a> */}
 
                 <button
@@ -199,16 +205,16 @@ const ProfilePage = ({ data1, updated }: any) => {
             </span>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-sm mr-1 text-[#000] -500">
-              INDUSTRY TYPE
+            <strong className="font-medium text-[16px] mr-1 text-[#000] -500">
+              Industry Type
             </strong>
             <a href="industry:" className="block text-black">
-              -
+              {data?.companyId?.company_product_category}
             </a>
           </li>
           <li className="px-2 mt-4">
-            <strong className="font-medium text-sm mr-1 text-[#000] -500">
-              SOCIAL MEDIA
+            <strong className="font-medium text-[16px] mr-1 text-[#000] -500">
+              Social Media
             </strong>
             <div className="flex mt-[5px]">
               {data?.companyId.twitter_url &&

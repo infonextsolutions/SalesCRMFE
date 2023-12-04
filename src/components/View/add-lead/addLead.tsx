@@ -215,8 +215,8 @@ const AddLead = ({ cancel }: any) => {
                 <option value="" selected>
                   -- Select Lead Status --
                 </option>
-                <option value="Open">Open</option>
-                <option value="Close">Close</option>
+                <option value="open">Open</option>
+                <option value="close">Close</option>
               </select>
             </div>
             <div className="w-[100%]">
@@ -235,13 +235,13 @@ const AddLead = ({ cancel }: any) => {
                 <option value="" selected>
                   -- Select Lead Stage --
                 </option>
-                {leadData.leadStatus == "Open" ? (
+                {leadData.leadStatus == "open" ? (
                   <>
                     <option value="Enquiry">Enquiry</option>
                     <option value="Interaction">Interaction</option>
                     <option value="Proposal">Proposal</option>
                   </>
-                ) : leadData.leadStatus == "Close" ? (
+                ) : leadData.leadStatus == "close" ? (
                   <>
                     <option value="Win">Win</option>
                     <option value="Lost">Lost</option>
