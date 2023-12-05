@@ -99,7 +99,7 @@ const Calls = ({ data }: any) => {
 
   return (
     <>
-      <Navbar title="Calls > Recorded Calls" src="Phone" />
+      <Navbar mainTitle="Calls" title="Recorded Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
           title={
@@ -116,6 +116,7 @@ const Calls = ({ data }: any) => {
               id: 1,
               icon: "Download",
               light: true,
+              dark: false,
               click: addExport,
               list: [
                 // { title: "Print", Icon: "Printer" },
@@ -134,14 +135,13 @@ const Calls = ({ data }: any) => {
             },
           ]}
         />
-
         <div className="flex justify-around pb-5">
           <button
             onClick={gotoCallRecording}
             className={
               recodedCalls
-                ? "text-blue-700 font-bold text-lg pb-2 border-b-4 border-blue-700"
-                : "text-black font-bold text-lg"
+                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
+                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
             }
           >
             Call Recordings
@@ -150,13 +150,14 @@ const Calls = ({ data }: any) => {
             onClick={gotoMeetingRecording}
             className={
               recodedMeeting
-                ? "text-blue-700 font-bold text-lg pb-2 border-b-4 border-blue-700"
-                : "text-black font-bold text-lg"
+                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
+                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
             }
           >
             Metting Recordings
           </button>
         </div>
+        <hr className="border-t-2 border-gray-300 mb-4" />
         {recodedCalls && (
           <CallsRecordingContainer data={data} dummy1={DUMMY} dummy2={dummy} />
         )}

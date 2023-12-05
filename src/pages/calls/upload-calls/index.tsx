@@ -150,7 +150,7 @@ const Calls = ({ data }: any) => {
 
   return (
     <>
-      <Navbar title="Calls > Upload Calls" src="Phone" />
+      <Navbar mainTitle="Calls" title="Upload Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         {/* <Navigation  /> */}
         {upload && (
@@ -175,6 +175,7 @@ const Calls = ({ data }: any) => {
               id: 1,
               icon: "Plus",
               light: false,
+              dark: false,
               list: [],
               onClick1: async () => {
                 // const response = await axios.post(
@@ -192,6 +193,7 @@ const Calls = ({ data }: any) => {
               id: 1,
               icon: "Download",
               light: true,
+              dark: false,
               click: addExport,
               list: [
                 // { title: "Print", Icon: "Printer" },

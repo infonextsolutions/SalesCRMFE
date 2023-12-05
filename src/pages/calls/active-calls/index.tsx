@@ -152,6 +152,7 @@ const Calls = ({ data }: any) => {
               id: 1,
               icon: "Download",
               light: true,
+              dark: false,
               click: addExport,
               list: [
                 { title: "Excel", Icon: "Excel" },
@@ -174,9 +175,10 @@ const Calls = ({ data }: any) => {
             onClick={gotoScheduleCall}
             className={
               scheduleCalls
-                ? "text-blue-700 font-bold text-lg pb-2 border-b-4 border-blue-700"
-                : "text-black font-bold text-lg"
+                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
+                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
             }
+            type="button"
           >
             Schedule Call
           </button>
@@ -184,13 +186,14 @@ const Calls = ({ data }: any) => {
             onClick={gotoScheduleMeeting}
             className={
               scheduleMeeting
-                ? "text-blue-700 font-bold text-lg pb-2 border-b-4 border-blue-700"
-                : "text-black font-bold text-lg"
+                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
+                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
             }
           >
             Schedule Metting
           </button>
         </div>
+        <hr className="border-t-2 border-gray-300 mb-4" />
         {scheduleCalls && (
           <ScheduleCallsContainer data={data} dummy1={DUMMY} dummy2={dummy} />
         )}

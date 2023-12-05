@@ -300,7 +300,7 @@ export default Asset;
 //               <Image
 //                 src={getBasicIcon("Arrow-Right 2")}
 //                 className={`${
-//                   pageNumber != 0 ? "svg-blue" : ""
+//                   pageNumber != 0 ? ""bg-black"" : ""
 //                 } rotate-180 translate-x-[6px]`}
 //                 alt=""
 //                 width={18}
@@ -309,7 +309,7 @@ export default Asset;
 //               <Image
 //                 src={getBasicIcon("Arrow-Right 2")}
 //                 className={`${
-//                   pageNumber != 0 ? "svg-blue" : ""
+//                   pageNumber != 0 ? ""bg-black"" : ""
 //                 } rotate-180 translate-x-[-6px]`}
 //                 alt=""
 //                 width={18}
@@ -320,7 +320,7 @@ export default Asset;
 //               previousLabel={
 //                 <Image
 //                   src={getBasicIcon("Arrow-Right 2")}
-//                   className={`${pageNumber != 0 ? "svg-blue" : ""} rotate-180`}
+//                   className={`${pageNumber != 0 ? ""bg-black"" : ""} rotate-180`}
 //                   alt=""
 //                   width={20}
 //                   height={20}
@@ -332,7 +332,7 @@ export default Asset;
 //               nextLabel={
 //                 <Image
 //                   src={getBasicIcon("Arrow-Right 2")}
-//                   className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""}`}
+//                   className={`${pageNumber != pageCount - 1 ? ""bg-black"" : ""}`}
 //                   alt=""
 //                   width={16}
 //                   height={16}
@@ -379,7 +379,7 @@ export default Asset;
 //               <Image
 //                 src={getBasicIcon("Arrow-Right 2")}
 //                 className={`${
-//                   pageNumber != pageCount - 1 ? "svg-blue" : ""
+//                   pageNumber != pageCount - 1 ? ""bg-black"" : ""
 //                 } translate-x-[6px]`}
 //                 alt=""
 //                 width={18}
@@ -388,7 +388,7 @@ export default Asset;
 //               <Image
 //                 src={getBasicIcon("Arrow-Right 2")}
 //                 className={`${
-//                   pageNumber != pageCount - 1 ? "svg-blue" : ""
+//                   pageNumber != pageCount - 1 ? ""bg-black"" : ""
 //                 } translate-x-[-6px]`}
 //                 alt=""
 //                 width={18}

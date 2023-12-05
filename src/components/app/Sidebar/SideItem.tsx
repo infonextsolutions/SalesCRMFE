@@ -43,16 +43,12 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           />
           <div
             className={` bg-[#e8e9eb] h-[40px] absolute duration-100 z-10 ease-out
-                ${
-                  open
-                    ? "left-0  w-[7.5px] border-l-[4px] border-[#304ffd]"
-                    : " w-[0]"
-                }
+                ${open ? "left-0  w-[7.5px] border-l-[4px]" : " w-[0]"}
               `}
           />
         </>
       )}
-      <div className={`flex items-center h-[40px] shrink-0 z-30`}>
+      <div className={` flex items-center h-[40px] shrink-0 z-30`}>
         <Image
           src={img}
           alt=""
@@ -69,7 +65,9 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           }}
         />
         <p
-          className="tracking-wider text-[#3F434A] ml-[0px] font-medium text-[14px] poppins"
+          className={`tracking-wider ${
+            check ? "text-[#3F434A]" : "text-white"
+          }  ml-[0px] font-medium text-[14px] poppins`}
           onClick={() => {
             // console.log(currentRoute);
             push(currentRoute);
@@ -123,7 +121,9 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
                     }}
                   />
                   <p
-                    className="tracking-wider text-[#3F434A] font-medium text-[14px] poppins whitespace-nowrap"
+                    className={`tracking-wider ${
+                      curr1 ? "text-[#3F434A]" : "text-white"
+                    } font-medium text-[14px] poppins whitespace-nowrap`}
                     onClick={() => {
                       push(`/${route}/${list[i].route}`);
                     }}

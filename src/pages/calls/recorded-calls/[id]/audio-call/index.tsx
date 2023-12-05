@@ -52,7 +52,7 @@ const CallProfile = ({ data, data1 }: any) => {
 
   return (
     <>
-      <Navbar title="Calls > Recorded Calls" src="Phone" />
+      <Navbar mainTitle="Calls" title="Recorded Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         {fullCall && (
           <Backdrop bool={bool} width={"60%"} pad={"50px 0"}>
@@ -73,6 +73,7 @@ const CallProfile = ({ data, data1 }: any) => {
               id: 1,
               icon: "Share",
               light: false,
+              dark: false,
               click: addCall,
               list: [
                 { title: "Full Call", Icon: "Phone" },

@@ -120,6 +120,7 @@ const IndicatorContainer = () => {
             id={1}
             dropdown={true}
             list={indicator_type}
+            dark={false}
           />
         </div>
         <div className="w-[260px] mt-[18px] relative">
@@ -128,6 +129,7 @@ const IndicatorContainer = () => {
           </p>
           <ButtonDropDown
             light={true}
+            dark={false}
             height={39}
             click={(e1: any, e2: any) => {
               console.log(e1, e2);
@@ -143,6 +145,7 @@ const IndicatorContainer = () => {
         <div className="w-[180px] absolute top-[30px] right-[80px]">
           <ButtonDropDown
             light={false}
+            dark={false}
             height={43}
             width={200}
             text={"Add Indicator"}

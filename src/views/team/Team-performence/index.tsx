@@ -3,18 +3,16 @@ import Performence from "@/components/team/Container/Performence";
 import Filter from "@/components/team/genUtils/Filter";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React,{useEffect} from "react";
-
+import React, { useEffect } from "react";
 
 const TeamsPerformence = ({ data }: any) => {
-
   const router = useRouter();
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
-      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
       router.beforePopState(() => {
-        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
         return true;
       });
     };
@@ -22,10 +20,9 @@ const TeamsPerformence = ({ data }: any) => {
     handleBeforeHistoryChange();
 
     return () => {
-      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
     };
   }, []);
-
 
   const [filter, setFilter] = React.useState<any>(null);
   const [currData, setData] = React.useState(data);
@@ -40,6 +37,7 @@ const TeamsPerformence = ({ data }: any) => {
             dropdown: true,
             id: 0,
             light: true,
+            dark: false,
             list: [
               {
                 title: "My Team",
@@ -68,6 +66,7 @@ const TeamsPerformence = ({ data }: any) => {
             dropdown: true,
             id: 1,
             light: true,
+            dark: false,
             click: (e1, e2) => {
               if (e2 === 0) {
                 setFilter(0);
@@ -88,7 +87,11 @@ const TeamsPerformence = ({ data }: any) => {
           },
         ]}
       />
-      <Performence records={currData.totalRecords} charts={currData} filter={filter} />
+      <Performence
+        records={currData.totalRecords}
+        charts={currData}
+        filter={filter}
+      />
     </div>
   );
 };

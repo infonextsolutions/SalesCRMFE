@@ -23,6 +23,7 @@ const TreeMap = ({ data1, getPitchData }: any) => {
             setEndDate={setEndDate}
           />
           <ButtonDropDown
+            dark={false}
             light={true}
             text={"Team A"}
             border={true}

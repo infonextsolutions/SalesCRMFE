@@ -1,4 +1,4 @@
-import React, { useRef, useState,useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/close/Container";
@@ -8,7 +8,6 @@ import AddLeadForm from "@/components/View/add-lead/addLead";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 import { useRouter } from "next/router";
-
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -56,9 +55,9 @@ const SalesClose = ({ data }: any) => {
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
-      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
       router.beforePopState(() => {
-        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
         return true;
       });
     };
@@ -66,10 +65,9 @@ const SalesClose = ({ data }: any) => {
     handleBeforeHistoryChange();
 
     return () => {
-      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
     };
   }, []);
-
 
   const viewButtinClick = (prev: Number, current: Number) => {
     // console.log(prev,current);
@@ -126,7 +124,7 @@ const SalesClose = ({ data }: any) => {
 
   const addExport = (e: any, e1: any) => {
     if (e1 === 0) {
-      exportXLSX()
+      exportXLSX();
     }
   };
 
@@ -144,7 +142,7 @@ const SalesClose = ({ data }: any) => {
         </Backdrop>
       )}
       <Navigation
-        title={"Sales>Close>Manage Leads"}
+        title={""}
         buttons={[
           {
             text: "View",
@@ -152,6 +150,7 @@ const SalesClose = ({ data }: any) => {
             id: 0,
             click: viewButtinClick,
             light: false,
+            dark: true,
             list: [
               {
                 title: "Table View",
@@ -171,6 +170,7 @@ const SalesClose = ({ data }: any) => {
             icon: "Plus",
             click: AddLead,
             light: false,
+            dark: false,
             list: [
               { title: "Using Form", Icon: "Text" },
               { title: "Import Leads", Icon: "Download" },
@@ -182,6 +182,7 @@ const SalesClose = ({ data }: any) => {
             id: 1,
             icon: "Download",
             light: true,
+            dark: false,
             click: addExport,
             list: [
               // { title: "Print", Icon: "Printer" },

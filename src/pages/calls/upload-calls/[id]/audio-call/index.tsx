@@ -51,12 +51,10 @@ const CallProfile = ({ data, data1 }: any) => {
     }
   };
 
-
   console.log(data, "please");
 
-
   const state1 = useSelector((state: any) => state.auth);
-  console.log(data)
+  console.log(data);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -133,6 +131,7 @@ const CallProfile = ({ data, data1 }: any) => {
             id: 1,
             icon: "Share",
             light: false,
+            dark: false,
             click: addCall,
             list: [
               { title: "Full Call", Icon: "Phone" },

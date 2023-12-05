@@ -9,6 +9,7 @@ const ButtonDropDown = ({
   icon,
   border,
   light,
+  dark,
   height,
   tight,
   list,
@@ -53,7 +54,11 @@ const ButtonDropDown = ({
       className={`${icon ? "pl-[32px]" : ""} ${
         border ? "border-[1px] border-[#ccc]" : ""
       } ${
-        light ? "bg-white hover:bg-gray-200" : "bg-renal-blue hover:bg-[#350dff]"
+        light
+          ? "bg-white hover:bg-gray-200"
+          : dark
+          ? "bg-[#757372] hover:bg-[#757372"
+          : "bg-text-red hover:bg-text-red"
       } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px]  p-[10px] relative`}
       onMouseOver={() => {
         setMouseOver(true);
@@ -107,7 +112,7 @@ const ButtonDropDown = ({
           </div>
         </div>
       )}
-      {text.length>0 && (
+      {text.length > 0 && (
         <p
           className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
             tight ? "pl-[4px] pr-[4px]" : "pl-[20px] pr-[10px]"
@@ -124,7 +129,7 @@ const ButtonDropDown = ({
         >
           <div
             className={`w-[100%] ${tight ? "p-[1px]" : "p-[3px]"} rounded-md ${
-              clicked && (light ? "bg-[#eeeeee]" : "bg-[#263fca]")
+              clicked && (light ? "bg-[#eeeeee]" : "")
             } `}
           >
             <Image
@@ -153,6 +158,7 @@ export interface ButtonProps {
   text: String;
   id: Number;
   light: Boolean;
+  dark: Boolean;
   height?: Number;
   border?: Boolean;
   onClick1?: any;

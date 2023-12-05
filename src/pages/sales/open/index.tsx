@@ -1,4 +1,4 @@
- import axios from "axios";
+import axios from "axios";
 import { useRouter } from "next/router";
 import React, { Suspense, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,7 +68,7 @@ export default function Open({ data }: any) {
 
   return (
     <>
-      <Navbar title="Sales > Open" src="salesIcon" />
+      <Navbar mainTitle="Sales" title="open Leads" src="salesIcon" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />

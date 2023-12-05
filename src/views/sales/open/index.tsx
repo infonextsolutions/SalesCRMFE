@@ -1,4 +1,4 @@
-import React, { useRef, useState,useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/open/Container";
@@ -77,11 +77,11 @@ const SalesOpen = ({ data }: props) => {
     };
 
     // Add event listener to handle popstate (browser back button)
-    window.addEventListener('popstate', handlePopState);
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
       // Clean up the event listener when the component is unmounted
-      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener("popstate", handlePopState);
     };
   }, [router]);
 
@@ -97,10 +97,10 @@ const SalesOpen = ({ data }: props) => {
     setImports(true);
   };
 
-  const showPrompt =()=>{
-    console.log('checking')
-    setPromptVal(true)
-  }
+  const showPrompt = () => {
+    console.log("checking");
+    setPromptVal(true);
+  };
 
   const cancelImports = () => {
     setBool(false);
@@ -115,8 +115,8 @@ const SalesOpen = ({ data }: props) => {
       setForm(false);
       setBool(true);
     }, 500);
-  }; 
-   const cancelPrompts = () => {
+  };
+  const cancelPrompts = () => {
     setBool(false);
     setTimeout(() => {
       setPromptVal(false);
@@ -124,20 +124,18 @@ const SalesOpen = ({ data }: props) => {
     }, 500);
   };
   const AddLead = (e: any, e1: any) => {
-    console.log(e1)
+    console.log(e1);
     if (e1 === 0) {
       showForm();
-    } 
-    else if (e1 === 1) {
+    } else if (e1 === 1) {
       showImports();
-    }
-    else if(e1===2){
+    } else if (e1 === 2) {
       showPrompt();
       // showForm()
     }
   };
 
-  console.log(prompt,imports,"here is it")
+  console.log(prompt, imports, "here is it");
 
   const ref: any = useRef();
 
@@ -180,7 +178,7 @@ const SalesOpen = ({ data }: props) => {
         </Backdrop>
       )}
       <Navigation
-        title={"Sales>Open>Manage Leads"}
+        title={""}
         buttons={[
           {
             text: "View",
@@ -188,6 +186,7 @@ const SalesOpen = ({ data }: props) => {
             id: 0,
             click: viewButtinClick,
             light: false,
+            dark: true,
             list: [
               {
                 title: "Table View",
@@ -207,6 +206,7 @@ const SalesOpen = ({ data }: props) => {
             icon: "Plus",
             click: AddLead,
             light: false,
+            dark: false,
             list: [
               { title: "Using Form", Icon: "Text" },
               { title: "Import Leads", Icon: "Download" },
@@ -219,6 +219,7 @@ const SalesOpen = ({ data }: props) => {
             id: 1,
             icon: "Download",
             light: true,
+            dark: false,
             click: addExport,
             list: [
               // { title: "Print", Icon: "Printer" },

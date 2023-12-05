@@ -30,7 +30,12 @@
   filter: invert(21%) sepia(92%) saturate(4187%) hue-rotate(233deg)
     brightness(96%) contrast(95%) !important;
 }
-
+.react-paginate a.selected {
+  background-color: rgb(253, 157, 48);
+  /* Change the background color of the active page */
+  color: #fff;
+  /* Change the text color of the active page */
+}
 .svg-not-selected {
   filter: invert(63%) sepia(16%) saturate(139%) hue-rotate(178deg)
     brightness(94%) contrast(91%) !important;

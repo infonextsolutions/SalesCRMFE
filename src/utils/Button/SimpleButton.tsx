@@ -12,7 +12,7 @@ const SimpleButton = ({
 }: ButtonProps) => {
   const Theme =
     theme === 1
-      ? "bg-renal-blue hover:bg-[#350dff]"
+      ? "bg-text-red hover:bg-text-red"
       : theme === 2
       ? "bg-[#f5f5f5] hover:bg-gray-200"
       : theme === 3
