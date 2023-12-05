@@ -107,7 +107,7 @@ const ProfilePage = ({ data1, updated }: any) => {
     }
   });
 
-  function formatDateFromISOString(isoString:any) {
+  function formatDateFromISOString(isoString: any) {
     const dateObject = new Date(isoString);
     const hours = String(dateObject.getHours()).padStart(2, '0');
     const minutes = String(dateObject.getMinutes()).padStart(2, '0');
@@ -115,7 +115,7 @@ const ProfilePage = ({ data1, updated }: any) => {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const month = monthNames[dateObject.getMonth()];
     const year = dateObject.getFullYear();
-  
+
     return `${hours}:${minutes}, ${day}, ${month}, ${year}`;
   }
 
@@ -175,12 +175,12 @@ const ProfilePage = ({ data1, updated }: any) => {
             </strong>
             <p className="block text-black">{data.companyId.company_name}</p>
           </li>
-          <li className="px-2 mt-4">
+          {/* <li className="px-2 mt-4">
             <strong className="text-[16px]  mr-1 text-[#000] font-medium -500">
               Company Location
             </strong>
             <p className="block text-black">{data.companyId.company_location}</p>
-          </li>
+          </li> */}
           <li className="px-2 mt-4">
             <strong className="font-medium text-[16px] mr-1 text-[#000] -500">
               Website Link
@@ -197,7 +197,7 @@ const ProfilePage = ({ data1, updated }: any) => {
                       window.open(data.companyId.company_website_url, "_blank");
                     }
                   }}
-                  // onClick={openWebsite}
+                // onClick={openWebsite}
                 >
                   {data.companyId.company_website_url}
                 </button>
@@ -270,18 +270,18 @@ const ProfilePage = ({ data1, updated }: any) => {
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1 text-black">
-              Lead Owner(Primary)
+              Lead Owner
             </strong>
             <span className="block text-[#000] ">
-              <p>{data.owners.length !== 0 && data.owners[0].name}</p>
+              <p>{data?.owners?.[0]?.name}</p>
             </span>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium mr-1 text-black">
-              Lead Owner(Secondary)
+              Lead Manager
             </strong>
             <p className="block text-[#000] ">
-              {data.owners.length !== 0 && data.owners[1].name}
+              {data?.manager}
             </p>
           </li>
           <li className="px-2 mt-4">

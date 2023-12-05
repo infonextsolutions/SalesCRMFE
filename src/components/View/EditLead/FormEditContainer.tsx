@@ -50,7 +50,7 @@ const FormEditContainer = ({
                     ...data.companyId,
                     lead_title: data?.lead_title,
                     lead_description: data?.lead_description,
-                    lead_manager: data?.customerId?.name,
+                    lead_manager: data?.manager,
                     industry_type: data.companyId.company_product_category,
                     lead_owner: data.owners.length > 0 ? data.owners[0].name : "",
                     Stage: data?.leadStage,
@@ -73,27 +73,12 @@ const FormEditContainer = ({
                         companyId: {
                           _id: data.companyId._id,
                           company_product_category: values.industry_type,
-                          // company_name: values.company_name,
-                          // company_location: values.company_location,
-                          // company_description: values.company_description,
-                          // company_website_url: values.website_url,
-                          // linkedin_url: values.linkedInurl,
-                          // twitter_url: values.Twitter,
                         },
-                        customerId: {
-                          _id: data.customerId._id,
-                          name: values.lead_manager
-                        },
-                        // linkedInurl: values.linkedInurl,
-                        // Twitter: values.Twitter,
                         owners: [values.lead_owner],
+                        manager: values.lead_manager,
                         leadStage: values.Stage,
                         leadStatus: values.Status,
                         source: values.Source,
-                        // company_socialMedia1: data?.company_socialMedia1,
-                        // company_socialMedia1Url: data?.company_socialMedia1Url,
-                        // company_socialMedia2: data?.company_socialMedia2,
-                        // company_socialMedia2Url: data?.company_socialMedia2Url,
                       };
                       update();
                       const response = await axios.put(
@@ -608,15 +593,6 @@ const FormEditContainer = ({
                 </h1>
                 <Formik
                   initialValues={{
-                    // leadUpdatedOn: "",
-                    // inquiryType: data.inquiry,
-                    // productService: data.companyId.company_product_category,
-                    // dealSize: data.potential_deal_size,
-                    // existingBudget: data.existing_budget,
-                    // winProbability: data.win_probability,
-                    // leadCreatedBy: data.created_by,
-                    // interestedProductService: "",
-
                     name: data.customerId.name,
                     designation: data.customerId.designation,
                     phone: data.customerId.contact,
@@ -672,7 +648,7 @@ const FormEditContainer = ({
                           <div className="flex gap-5">
                             <div className="mb-4 flex-grow">
                               <label
-                                htmlFor="primaryClientName"
+                                htmlFor="name"
                                 className="block font-medium mb-2 text-[#8a9099]"
                               >
                                 {/* Primary Client POC Name */}
@@ -680,14 +656,14 @@ const FormEditContainer = ({
                               </label>
                               <Field
                                 type="text"
-                                id="primaryClientName"
-                                name="primaryClientName"
+                                id="name"
+                                name="name"
                                 className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                               />
                             </div>
                             <div className="mb-4 flex-grow">
                               <label
-                                htmlFor="primaryClientDesignation"
+                                htmlFor="designation"
                                 className="block font-medium mb-2 text-[#8a9099]"
                               >
                                 {/* Primary Client POC Designation */}
@@ -695,8 +671,8 @@ const FormEditContainer = ({
                               </label>
                               <Field
                                 type="text"
-                                id="primaryClientDesignation"
-                                name="primaryClientDesignation"
+                                id="designation"
+                                name="designation"
                                 className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                               />
                             </div>
@@ -1139,6 +1115,7 @@ export interface Root {
   source: string;
   leadId: string;
   owners: Owner[];
+  manager?: string;
   __v: number;
   updatedAt: string;
   createdAt: string;
