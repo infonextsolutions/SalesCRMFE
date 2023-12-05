@@ -1,5 +1,6 @@
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const AddText = ({ top, title, width, change, required }: any) => {
@@ -37,6 +38,7 @@ const AddLead = ({ cancel }: any) => {
   const [moreContact2, setMoreContact2] = useState(false);
   const [showMoreContactButton1, setShowMoreContactButton1] = useState(true);
   const [showMoreContactButton2, setShowMoreContactButton2] = useState(true);
+  const router = useRouter();
 
   const hadleMoreContactButton1 = () => {
     setMoreContact1(true);
@@ -55,17 +57,29 @@ const AddLead = ({ cancel }: any) => {
 
   const submit = () => {
     const payload = {
-      leadDetails: leadData,
+      leadDetails: {
+        ...leadData,
+        potential_deal_size: "600",
+        win_probability:"100%",
+        created_by: "Sales",
+        customer_name: "Tanish",
+        inquiry: "Demo Enquiry 1",
+        existing_budget: "10000",
+      },
       companyDetails: companyData,
       contactDeails: {
         contactData: contactData,
         moreContactFirst: moreContactData1,
         moreContactSecond: moreContactData2,
       },
+      ...leadData,
+      ...companyData,
+      ...contactData
     };
     axios
       .post("https://testsalescrm.nextsolutions.in/api/leads/create", payload)
       .then((e: any) => {
+        router.reload();
         cancel();
       });
   };
