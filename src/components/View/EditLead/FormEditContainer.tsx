@@ -304,7 +304,6 @@ const FormEditContainer = ({
               </div>
             </>
           )}
-
           {activeTitle === "company-profile" && (
             <>
               <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
@@ -384,10 +383,11 @@ const FormEditContainer = ({
                         </div>
                         <div className="flex flex-col gap-2">
                           <h2 className="font-medium text-[#8a9099]">Industry Type</h2>
-                          <select
-                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                          <Field
+                            as="select"
                             id="industry_type"
                             name="industry_type"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           >
                             <option selected value="">
                               -- Select Industry Type --
@@ -399,7 +399,7 @@ const FormEditContainer = ({
                             <option value="Product B">Product B</option>
                             <option value="Product C">Product C</option>
                             <option value="Product D">Product D</option>
-                          </select>
+                          </Field>
                         </div>
                         <div className="w-[100%]">
                           <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
@@ -427,10 +427,11 @@ const FormEditContainer = ({
                         </div>
                         <div className="flex flex-col gap-2">
                           <h2 className="font-medium text-[#8a9099]">Country</h2>
-                          <select
-                            className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                          <Field
+                            as="select"
                             id="company_country"
                             name="company_country"
+                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           >
                             <option selected value="">
                               -- Select Country --
@@ -440,14 +441,15 @@ const FormEditContainer = ({
                             <option value="Srilanka">Srilanka</option>
                             <option value="England">England</option>
                             <option value="Australia">Australia</option>
-                          </select>
+                          </Field>
                         </div>
                         <div className="w-[100%] py-2 flex items-center justify-between gap-4">
                           <div className="w-[100%]">
                             <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                               State*
                             </p>
-                            <select
+                            <Field
+                              as="select"
                               id="company_state"
                               name="company_state"
                               className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
@@ -460,16 +462,18 @@ const FormEditContainer = ({
                               <option value="Goa">Goa</option>
                               <option value="Rajastha">Rajasthan</option>
                               <option value="kerela">Kerela</option>
-                            </select>
+                            </Field>
                           </div>
                           <div className="w-[100%]">
                             <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                               City*
                             </p>
-                            <select
+                            <Field
+                              as="select"
                               id="company_city"
                               name="company_city"
                               className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+
                             >
                               <option value="" selected>
                                 -- Select a City --
@@ -479,7 +483,7 @@ const FormEditContainer = ({
                               <option value="Kolkata">Kolkata</option>
                               <option value="Chennai">Chennai</option>
                               <option value="Bengalore">Bengalore</option>
-                            </select>
+                            </Field>
                           </div>
                         </div>
                         <div className="w-[100%]">
@@ -494,12 +498,12 @@ const FormEditContainer = ({
                             placeholder="Company Website"
                           />
                         </div>
-
                         <div className="w-[100%] my-4">
                           <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                             Social Media 1
                           </p>
-                          <select
+                          <Field
+                            as="select"
                             id="company_socialMedia1"
                             name="company_socialMedia1"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
@@ -511,7 +515,7 @@ const FormEditContainer = ({
                             <option value="Twitter">Twitter</option>
                             <option value="Instagram">Instagram</option>
                             <option value="Whatsapp">Whatsapp</option>
-                          </select>
+                          </Field>
                         </div>
                         <div className="w-[100%]">
                           <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
@@ -529,7 +533,8 @@ const FormEditContainer = ({
                           <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                             Social Media 2
                           </p>
-                          <select
+                          <Field
+                            as="select"
                             id="company_socialMedia2"
                             name="company_socialMedia2"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
@@ -541,7 +546,7 @@ const FormEditContainer = ({
                             <option value="Twitter">Twitter</option>
                             <option value="Instagram">Instagram</option>
                             <option value="Whatsapp">Whatsapp</option>
-                          </select>
+                          </Field>
                         </div>
                         <div className="w-[100%]">
                           <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
@@ -733,9 +738,10 @@ const FormEditContainer = ({
                           <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                             Social Media 1
                           </p>
-                          <select
-                            id="company_socialMedia1"
-                            name="company_socialMedia1"
+                          <Field
+                            as="select"
+                            id="customer_socialMedia1"
+                            name="customer_socialMedia1"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           >
                             <option value="" selected>
@@ -745,7 +751,7 @@ const FormEditContainer = ({
                             <option value="Twitter">Twitter</option>
                             <option value="Instagram">Instagram</option>
                             <option value="Whatsapp">Whatsapp</option>
-                          </select>
+                          </Field>
                         </div>
                         <div className="w-[100%]">
                           <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
@@ -753,8 +759,8 @@ const FormEditContainer = ({
                           </label>
                           <Field
                             type="text"
-                            name="company_socialMedia1Url"
-                            id="company_socialMedia1Url"
+                            name="customer_socialMedia1Url"
+                            id="customer_socialMedia1Url"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder=" Social Media 1 URL"
                           />
@@ -763,9 +769,10 @@ const FormEditContainer = ({
                           <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
                             Social Media 2
                           </p>
-                          <select
-                            id="company_socialMedia2"
-                            name="company_socialMedia2"
+                          <Field
+                            as="select"
+                            id="customer_socialMedia2"
+                            name="customer_socialMedia2"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                           >
                             <option value="" selected>
@@ -775,7 +782,7 @@ const FormEditContainer = ({
                             <option value="Twitter">Twitter</option>
                             <option value="Instagram">Instagram</option>
                             <option value="Whatsapp">Whatsapp</option>
-                          </select>
+                          </Field>
                         </div>
                         <div className="w-[100%]">
                           <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
@@ -783,8 +790,8 @@ const FormEditContainer = ({
                           </label>
                           <Field
                             type="text"
-                            name="company_socialMedia2Url"
-                            id="company_socialMedia2Url"
+                            name="customer_socialMedia2Url"
+                            id="customer_socialMedia2Url"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder=" Social Media 2 URL"
                           />

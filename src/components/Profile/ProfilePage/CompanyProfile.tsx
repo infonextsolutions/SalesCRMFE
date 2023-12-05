@@ -153,7 +153,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
           {/* made company website open in new page */}
           <span className="block text-black">
             <a
-              href={`https://${data.result.companyId.company_website_url}`}
+              href={`${data.result.companyId.company_website_url}`}
               target="_blank"
             >
               {data.result.companyId.company_website_url}
@@ -173,38 +173,34 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             SOCIAL MEDIA
           </strong>
           <div className="flex mt-[10px]">
-            {data?.companyId?.twitter_url &&
-              data?.companyId?.twitter_url.length !== 0 && (
+            {data?.companyId?.company_socialMedia1 && (
+              <a href={data?.companyId?.company_socialMedia1Url} target="_blank">
                 <Image
-                  onClick={() => {
-                    window.open(data?.companyId.twitter_url, "_blank");
-                  }}
-                  src={getBasicIcon("Twitter")}
+                  src={getBasicIcon(data?.companyId?.company_socialMedia1)}
                   className={`w-[20px] svg-grey mr-2`}
-                  alt=""
+                  alt={data?.companyId?.company_socialMedia1}
                   width={20}
                   height={20}
                   style={{
                     objectFit: "contain",
                   }}
                 />
-              )}
-            {data?.companyId?.linkedin_url &&
-              data?.companyId?.linkedin_url.length !== 0 && (
+              </a>
+            )}
+            {data?.companyId?.company_socialMedia2 && (
+              <a href={data?.companyId?.company_socialMedia2Url} target="_blank">
                 <Image
-                  onClick={() => {
-                    window.open(data?.companyId.linkedin_url, "_blank");
-                  }}
-                  src="/Images/Icons/Basic/Linked.svg"
+                  src={getBasicIcon(data?.companyId?.company_socialMedia2)}
                   className={`w-[20px] svg-grey`}
-                  alt=""
+                  alt={data?.companyId?.company_socialMedia2}
                   width={20}
                   height={20}
                   style={{
                     objectFit: "contain",
                   }}
                 />
-              )}
+              </a>
+            )}
           </div>
         </li>
       </ul>

@@ -123,26 +123,34 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               SOCIAL MEDIA
             </strong>
             <div className="flex mt-[4px]">
-              <Image
-                src={getBasicIcon("Twitter")}
-                className={`w-[20px] svg-grey mr-2`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <Image
-                src="/Images/Icons/Basic/Linked.svg"
-                className={`w-[20px] svg-grey`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
+              {data?.result?.customerId?.customer_socialMedia1 && (
+                <a href={data?.result?.customerId?.customer_socialMedia1Url} target="_blank">
+                  <Image
+                    src={getBasicIcon(data?.result?.customerId?.customer_socialMedia1)}
+                    className={`w-[20px] svg-grey mr-2`}
+                    alt={data?.result?.customerId?.customer_socialMedia1}
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+              )}
+              {data?.result?.customerId?.customer_socialMedia2 && (
+                <a href={data?.result?.customerId?.customer_socialMedia2Url} target="_blank">
+                  <Image
+                    src={data?.result?.customerId?.customer_socialMedia2}
+                    className={`w-[20px] svg-grey`}
+                    alt={data?.result?.customerId?.customer_socialMedia2}
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+              )}
             </div>
           </li>
         </ul>
@@ -175,7 +183,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             <span className="block text-black">
               <a
                 target="_blank"
-                href={`https://${data.result.companyId.company_website_url}`}
+                href={`${data.result.companyId.company_website_url}`}
               >
                 {data.result.companyId.company_website_url}
               </a>
@@ -186,7 +194,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               INDUSTRY TYPE
             </strong>
             <a href="industry:" className="block text-black">
-            {data?.result?.companyId?.company_product_category}
+              {data?.result?.companyId?.company_product_category}
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -194,26 +202,34 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               SOCIAL MEDIA
             </strong>
             <div className="flex mt-[5px]">
-              <Image
-                src={getBasicIcon("Twitter")}
-                className={`w-[20px] svg-grey mr-2`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <Image
-                src="/Images/Icons/Basic/Linked.svg"
-                className={`w-[20px] svg-grey`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
+              {data?.result?.companyId?.company_socialMedia1 && (
+                <a href={data?.result?.companyId?.company_socialMedia1Url} target="_blank">
+                  <Image
+                    src={getBasicIcon(data?.result?.companyId?.company_socialMedia1)}
+                    className={`w-[20px] svg-grey mr-2`}
+                    alt={data?.result?.companyId?.company_socialMedia1}
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+              )}
+              {data?.result?.companyId?.company_socialMedia2 && (
+                <a href={data?.result?.companyId?.company_socialMedia2Url} target="_blank">
+                  <Image
+                    src={data?.result?.companyId?.company_socialMedia2}
+                    className={`w-[20px] svg-grey`}
+                    alt={data?.result?.companyId?.company_socialMedia2}
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+              )}
             </div>
           </li>
         </ul>
