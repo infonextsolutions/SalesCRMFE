@@ -105,7 +105,7 @@ import Interruptions from "./360_components/SRM_Bdm_Dashboard/Interruptions_Grap
 import DropSelect3 from "./Drop_Select3.jsx";
 import CustomTable from "./360_components/CustomTable.jsx";
 import MainLayout from "./360_components/MainLayout.jsx";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 const Comp = ({ component }) => {
   const isMobile = window.innerWidth <= 768; // Adjust the breakpoint as per your needs
@@ -396,7 +396,6 @@ const Comp = ({ component }) => {
   );
 };
 
-const ComponentSelector = dynamic(() => Promise.resolve(Comp), { ssr: false })
-
+const ComponentSelector = dynamic(() => Promise.resolve(Comp), { ssr: false });
 
 export default ComponentSelector;

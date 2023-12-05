@@ -131,7 +131,7 @@ const AudioProfile = ({ data, scripts }: any) => {
   };
   return (
     <>
-      <Navbar title="Calls > Active Calls" src="Phone" />
+      <Navbar mainTitle="Calls" title="Active Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         {make && (
           <Backdrop bool={bool}>
@@ -194,6 +194,7 @@ const AudioProfile = ({ data, scripts }: any) => {
               dropdown: true,
               id: 2,
               light: false,
+              dark: false,
               list: [],
               onClick1: async () => {
                 setUploadModalStatus(true);
@@ -204,6 +205,7 @@ const AudioProfile = ({ data, scripts }: any) => {
               dropdown: true,
               id: 1,
               light: false,
+              dark: false,
               list: [],
               onClick1: async () => {
                 // const response = await axios.post(

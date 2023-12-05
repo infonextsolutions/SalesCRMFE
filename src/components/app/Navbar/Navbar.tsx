@@ -44,7 +44,7 @@ const Search = ({ change }: any) => {
   );
 };
 
-const Navbar = ({ title, src }: any) => {
+const Navbar = ({ mainTitle, title, src }: any) => {
   const { menuOpen } = useUI();
   const [view, setView] = React.useState(false);
   const dispatch = useAppDispatch();
@@ -56,20 +56,6 @@ const Navbar = ({ title, src }: any) => {
   return (
     <div className="w-full h-[60px] border-b-[1px] border-[#eaebec]  bg-white flex items-center justify-between">
       <div className=" w-4/12 flex ">
-        <Image
-          src={getBasicIcon("Menu")}
-          className="ml-[20px] cursor-pointer"
-          alt=""
-          onClick={() => {
-            dispatch(triggerMenu());
-          }}
-          // fill={true}
-          style={{
-            objectFit: "contain",
-          }}
-          width={20}
-          height={40}
-        />
         <div className="pr-9 flex justify-between gap-3">
           <Image
             src={src ? getBasicIcon(src) : getBasicIcon("Grid")}
@@ -82,7 +68,17 @@ const Navbar = ({ title, src }: any) => {
             width={20}
             height={40}
           />
-          <h1 className="text-lg font-semibold">{title}</h1>
+          <div className="flex gap-2">
+            <h1 className="text-lg font-semibold">{mainTitle}</h1>
+            {title && (
+              <div className="flex gap-2">
+                <h1 className="text-lg font-semibold">{">"}</h1>
+                <h1 className="text-lg font-semibold capitalize text-text-red">
+                  {title}
+                </h1>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div
@@ -112,7 +108,7 @@ const Navbar = ({ title, src }: any) => {
           height={40}
         />
       </div>
-      <div className="flex w-[220px] h-[100%] pt-[14px] pb-[10px] justify-between mr-[50px]">
+      <div className="flex w-[80px] h-[100%] pt-[14px] pb-[10px] justify-between mr-[50px]">
         {/* <Image
           src={getBasicIcon("Search")}
           className="pt-[7px] pb-[7px] cursor-pointer mx-[10px]"
@@ -135,7 +131,7 @@ const Navbar = ({ title, src }: any) => {
           width={20}
           height={40}
         /> */}
-        <div className="flex w-[400px] justify-between items-center border-l-[1px] ml-[10px] border-[#dcd4d4] ">
+        <div className="flex w-[400px] justify-around items-center border-l-[1px] ml-[10px] border-[#dcd4d4] ">
           <Image
             className="ml-[20px] h-[100%] cursor-pointer"
             src={getRoundedAvatar(1, 30)}
@@ -146,13 +142,19 @@ const Navbar = ({ title, src }: any) => {
             }}
             width={30}
             height={40}
+            // onClick={() => {
+            //   dispatch(logout());
+            //   dispatch(setLoggedInStatus(false));
+            //   router.replace("/login");
+            //   localStorage.clear();
+            // }}
           />
-          <div className="shrink-0 ml-[20px]">
+          {/* <p className="text-black  cursor-pointer">Jane C.</p> */}
+          {/* <div className="shrink-0 ml-[20px]">
             <p className="text-black  cursor-pointer">
               {state.user.name.split("@")[0]}
             </p>
-            {/* <p className="text-black  cursor-pointer">Jane C.</p> */}
-          </div>
+          </div> */}
           <ButtonDropDown
             dropdown={true}
             list={[{ title: "Logout" }]}
@@ -165,6 +167,7 @@ const Navbar = ({ title, src }: any) => {
             text={""}
             id={0}
             light={true}
+            dark={false}
           />
           {/* <Image
             src={getBasicIcon("Arrow Down 1")}

@@ -5,6 +5,8 @@ import SideItem from "./SideItem";
 import Logo from "./SidebarLogo";
 import { useDispatch } from "react-redux";
 import { setLoggedInStatus } from "@/store/auth";
+import Image from "next/image";
+import { triggerMenu } from "@/store/UI";
 
 const Loader = () => {
   return (
@@ -41,11 +43,24 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`overflow-x-hidden h-screen  ease-in duration-200 bg-white pt-[13px] border-r-[1px] border-[#eaebec] ${
+      className={`overflow-x-hidden h-screen  ease-in duration-200 bg-bg-grey pt-[13px] border-r-[1px] border-[#eaebec] ${
         menuOpen ? "w-[300px]" : "w-[55px]"
       }`}
     >
-      <Logo />
+      <Image
+        src={getBasicIcon("asset")}
+        className="ml-[20px] cursor-pointer"
+        alt=""
+        onClick={() => {
+          dispatch(triggerMenu());
+        }}
+        // fill={true}
+        style={{
+          objectFit: "contain",
+        }}
+        width={20}
+        height={40}
+      />
       {loading && (
         <>
           {menuOptions.map((item: any, i: any) => {

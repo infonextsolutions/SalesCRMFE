@@ -6,7 +6,7 @@ const Navigation = ({ buttons, title }: NavigationProps) => {
   return (
     <div className="w-[100%] min-h-[100px] flex items-center justify-between">
       <h1 className="w-[50%] text-[#3F434A] font-medium text-3xl">{title}</h1>
-      {buttons?.length>0 && 
+      {buttons?.length > 0 && (
         <div className="w-[50%] flex justify-end ">
           {buttons.map((item, i) => {
             return (
@@ -21,11 +21,12 @@ const Navigation = ({ buttons, title }: NavigationProps) => {
                 onClick1={item.onClick1}
                 key={i}
                 light={item.light}
+                dark={item.dark}
               />
             );
           })}
         </div>
-      }
+      )}
     </div>
   );
 };

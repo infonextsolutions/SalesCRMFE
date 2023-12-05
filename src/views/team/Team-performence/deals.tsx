@@ -2,17 +2,16 @@ import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/open/Container";
 import Charts from "@/components/team/Charts";
 import { useRouter } from "next/router";
-import React,{useEffect} from "react";
-
+import React, { useEffect } from "react";
 
 const TeamsPerformence = ({ data }: any) => {
   const router = useRouter();
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
-      router.events.on('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
       router.beforePopState(() => {
-        router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+        router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
         return true;
       });
     };
@@ -20,7 +19,7 @@ const TeamsPerformence = ({ data }: any) => {
     handleBeforeHistoryChange();
 
     return () => {
-      router.events.off('beforeHistoryChange', handleBeforeHistoryChange);
+      router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
     };
   }, []);
 
@@ -34,6 +33,7 @@ const TeamsPerformence = ({ data }: any) => {
             dropdown: true,
             id: 0,
             light: true,
+            dark: true,
             list: [
               {
                 title: "Table View",
@@ -51,6 +51,7 @@ const TeamsPerformence = ({ data }: any) => {
             dropdown: true,
             id: 1,
             light: true,
+            dark: true,
             list: [
               { title: "Using Form", Icon: "Text" },
               { title: "Import Leads", Icon: "Download" },

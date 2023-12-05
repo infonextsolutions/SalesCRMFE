@@ -22,7 +22,9 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState(window.location.pathname.split("/").pop() === 'open' ? "open" : "close");
+  const [status, setStatus] = useState(
+    window.location.pathname.split("/").pop() === "open" ? "open" : "close"
+  );
   const [stage, setStage] = useState("Enquiry");
   const [product, setProduct] = useState(" Product A");
   const [leadSource, setLeadSource] = useState("Website");
@@ -75,7 +77,9 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
               <select
                 onChange={(e) => {
                   setStatus(e.target.value);
-                  router.push(`/sales/${e.target.value === "open" ? "open" : "closed"}`)
+                  router.push(
+                    `/sales/${e.target.value === "open" ? "open" : "closed"}`
+                  );
                 }}
                 className="text-red-500"
                 id="countries"

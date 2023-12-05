@@ -89,8 +89,6 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
             userId: owners,
           });
 
-
-
           const formData = new FormData();
           // formData.append("userId", owners);
           formData.append("leadId", leadId);
@@ -99,8 +97,6 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
           formData.append("activeCallId", id);
 
           console.log(formData);
-
-         
 
           const res = await axios
             .post(

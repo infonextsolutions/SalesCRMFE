@@ -14,17 +14,17 @@ const Navigator = ({ list, current, callback }: NavigatorProps) => {
         {list.map((item: any, i: any) => {
           return (
             <div
-              className={`pb-[20px] px-[5px] cursor-pointer text-[14px] leading-[21px] font-medium text-[#595F69] text-bold border-b-[2px] ${
+              className={` cursor-pointer text-[14px] leading-[21px] font-medium text-[#595F69] text-bold ${
                 item.id === activeTitle
-                  ? "border-b-[#304FFD]"
-                  : "border-b-[#fff]"
+                  ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe5043ad] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
+                  : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:text-w hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
               }`}
               key={i}
               onClick={() => handleOnClick(item.id)}
             >
               <p
                 className={`text-[13px] tracking-wide ${
-                  item.id === activeTitle ? "text-[#304FFD]" : "text-[#000]"
+                  item.id === activeTitle ? "text-white" : "text-[#000]"
                 }`}
               >
                 {item.title}

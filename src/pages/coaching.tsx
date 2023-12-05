@@ -6,13 +6,14 @@ const Coaching = () => {
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       {/* <Navigation  /> */}
       <Navigation
-      title={"Coaching"}
+        title={"Coaching"}
         buttons={[
           {
             text: "View",
             dropdown: true,
             id: 0,
             light: false,
+            dark: true,
             list: [
               {
                 title: "Table View",
@@ -30,6 +31,7 @@ const Coaching = () => {
             id: 1,
             icon: "Plus",
             light: false,
+            dark: false,
             list: [
               { title: "Using Form", Icon: "Text" },
               { title: "Import Leads", Icon: "Download" },
@@ -41,6 +43,7 @@ const Coaching = () => {
             id: 1,
             icon: "Download",
             light: true,
+            dark: false,
             list: [
               { title: "Print", Icon: "Printer" },
               { title: "Excel", Icon: "Excel" },
@@ -50,7 +53,7 @@ const Coaching = () => {
           },
         ]}
       />
-      <h1 className="text-[40px] poppins text-black" >Coaching</h1>
+      <h1 className="text-[40px] poppins text-black">Coaching</h1>
     </div>
   );
 };

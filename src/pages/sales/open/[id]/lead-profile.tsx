@@ -119,7 +119,11 @@ const Profile = ({ data }: any) => {
 
   return (
     <>
-      <Navbar title="Manage Leads" src="manageLeadsIcon" />
+      <Navbar
+        mainTitle="Sales > Open"
+        title={`${data1.result.lead_title} - Info`}
+        src="manageLeadsIcon"
+      />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         {notes && (
           <Backdrop bool={bool}>
@@ -167,7 +171,7 @@ const Profile = ({ data }: any) => {
           </Backdrop>
         )}
         <Navigation
-          title={`Manage Leads>${data1.result.lead_title}`}
+          title={""}
           buttons={[
             {
               text: "Take Action",
@@ -175,6 +179,7 @@ const Profile = ({ data }: any) => {
               id: 1,
               icon: "Plus",
               click: AddLead,
+              dark: true,
               light: false,
               list: [
                 { title: "Call", Icon: "Phone" },

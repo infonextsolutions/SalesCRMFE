@@ -650,7 +650,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               })} */}
             </p>
           </div>
-          <CallItem width={100} left={20} text={LeadData.owners[0].name} />
+          <CallItem width={100} left={20} text={LeadData.owners[0]?.name} />
           <CallItemMultiple
             width={130}
             left={20}

@@ -62,6 +62,7 @@ const Selling = ({
             setEndDate={setEndDate}
           />
           <ButtonDropDown
+            dark={false}
             light={true}
             text={"Team A"}
             border={true}

@@ -21,7 +21,7 @@ function useUI() {
           { title: "Active Calls", route: "active-calls" },
           { title: "Recorded Calls", route: "recorded-calls" },
         ],
-        icon: "Phone",
+        icon: "fluent_call-end-16-regular",
       },
       {
         title: "Sales",
@@ -30,7 +30,7 @@ function useUI() {
           { title: "Open", route: "open" },
           { title: "Closed", route: "closed" },
         ],
-        icon: "Sort",
+        icon: "salesIcon",
       },
       {
         title: "Indicator",

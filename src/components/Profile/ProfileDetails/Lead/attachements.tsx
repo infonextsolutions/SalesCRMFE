@@ -258,7 +258,7 @@ const Attachements = ({ data }: any) => {
           <h2 className="text-[#3F434A] text-2xl font-medium">Attachments</h2>
           <button
             onClick={showNotes}
-            className="ml-[400px] absolute right-[20px]  flex bg-renal-blue pl-[18px] rounded-xl pr-[18px] py-[10px]"
+            className="ml-[400px] absolute right-[20px]  flex bg-text-red pl-[18px] rounded-xl pr-[18px] py-[10px]"
           >
             <Image
               src="/Images/Logo/Upload.svg"

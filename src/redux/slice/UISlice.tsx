@@ -15,7 +15,7 @@ const menuOptions = [
       { title: "Closed", route: "closed" },
       // { title: "Estimates and Insights", route: "estimates-and-insights" },
     ],
-    icon: "Sort",
+    icon: "salesIcon",
   },
   {
     title: "Calling",
