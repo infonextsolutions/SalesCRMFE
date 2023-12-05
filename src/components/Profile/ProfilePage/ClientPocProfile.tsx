@@ -140,7 +140,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               {data?.result?.customerId?.customer_socialMedia2 && (
                 <a href={data?.result?.customerId?.customer_socialMedia2Url} target="_blank">
                   <Image
-                    src={data?.result?.customerId?.customer_socialMedia2}
+                    src={getBasicIcon(data?.result?.customerId?.customer_socialMedia2)}
                     className={`w-[20px] svg-grey`}
                     alt={data?.result?.customerId?.customer_socialMedia2}
                     width={20}
@@ -219,7 +219,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               {data?.result?.companyId?.company_socialMedia2 && (
                 <a href={data?.result?.companyId?.company_socialMedia2Url} target="_blank">
                   <Image
-                    src={data?.result?.companyId?.company_socialMedia2}
+                    src={getBasicIcon(data?.result?.companyId?.company_socialMedia2)}
                     className={`w-[20px] svg-grey`}
                     alt={data?.result?.companyId?.company_socialMedia2}
                     width={20}
