@@ -16,6 +16,7 @@ export interface LeadId {
     source: string;
     leadId: string;
     owners: Owner[];
+    manager?: string;
     __v: number;
   }
   

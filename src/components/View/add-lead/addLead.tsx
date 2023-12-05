@@ -235,13 +235,13 @@ const AddLead = ({ cancel }: any) => {
                 <option value="" selected>
                   -- Select Lead Stage --
                 </option>
-                {leadData.leadStatus == "open" ? (
+                {(leadData.leadStatus == "open" || leadData.leadStatus == "Open") ? (
                   <>
                     <option value="Enquiry">Enquiry</option>
                     <option value="Interaction">Interaction</option>
                     <option value="Proposal">Proposal</option>
                   </>
-                ) : leadData.leadStatus == "close" ? (
+                ) : (leadData.leadStatus == "close" || leadData.leadStatus == "Close") ? (
                   <>
                     <option value="Win">Win</option>
                     <option value="Lost">Lost</option>
