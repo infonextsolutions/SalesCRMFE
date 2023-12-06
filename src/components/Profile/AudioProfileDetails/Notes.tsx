@@ -9,15 +9,14 @@ import { setError, setSuccess } from "@/store/ai";
 
 const Note = ({ title, content, date }: any) => {
   return (
-    <div className="mb-[30px] shrink-0 mt-[5px] min-h-[250px] w-[100%] px-[28px] border-black border-[2px] py-[28px] pb-[40px] rounded-[20px] ">
-      <p className="font-medium border-b-[2px]  flex border-[#E8E9EB] border-dashed pb-[10px] mb-[20px] text-gray-600">
-        {date}
-      </p>
-      <p className=" text-[18px] font-medium text-[#3F434A] capitalize">
-        {title}
-      </p>
-      <div className="py-1"></div>
-      <p className=" text-[14px] font-medium text-gray-500">{content}</p>
+    <div className="mb-[30px] w-[420px] shrink-0 mt-[5px] min-h-[250px] px-[12px] py-[28px] pb-[40px] flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow ">
+      <div className="flex justify-between gap-24 pb-4">
+        <p className=" text-[18px] font-medium text-[#3F434A] capitalize">
+          {title}
+        </p>
+        <p className="font-medium flex text-gray-600">{date}</p>
+      </div>
+      <p className=" text-[14px] font-medium text-gray-500 p-3">{content}</p>
     </div>
   );
 };
@@ -69,7 +68,7 @@ const Notes = ({ data, refresh }: any) => {
             {
               title: title,
               content: content,
-              updatedAt:iso
+              updatedAt: iso,
             },
           ]);
           dispatch(
@@ -138,46 +137,33 @@ const Notes = ({ data, refresh }: any) => {
         </Backdrop>
       )}
       <div className="w-[100%]">
-        <div className="bg-gray-100 px-4 py-3 mb-[20px] flex items-center justify-end">
-          <Image
-            src={getBasicIcon("Filter")}
-            className={`w-[30px] p-[6px] mr-[5px] bg-white rounded-md svg-grey`}
-            alt=""
-            width={15}
-            height={15}
-            style={{
-              objectFit: "contain",
+        <div className="flex justify-end">
+          <button
+            onClick={() => {
+              showNotes();
             }}
-          />
-          <div className="flex items-center ml-[10px]">
-            <button
-              onClick={() => {
-                showNotes();
+            className="bg-[#757372] hover:bg-[#757372]  flex items-center pl-[12px] right-0 rounded-xl pr-[12px] p-[10px]"
+          >
+            <p className="whitespace-nowrap font-medium text-[14px] pl-[5px] pr-[5px] text-[#ffffff] ">
+              Add Note
+            </p>
+            <Image
+              src={getBasicIcon("Plus")}
+              className={`w-[20px] svg-white`}
+              alt=""
+              width={20}
+              height={20}
+              style={{
+                objectFit: "contain",
               }}
-              className="bg-renal-blue  flex pl-[5px] rounded-xl pr-[5px] p-[7px]"
-            >
-              <Image
-                src={getBasicIcon("Plus")}
-                className={`w-[20px] svg-white`}
-                alt=""
-                width={20}
-                height={20}
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-              <p className="whitespace-nowrap font-medium text-[14px] pl-[5px] pr-[5px] text-[#ffffff] ">
-                Add Note
-              </p>
-            </button>
-          </div>
+            />
+          </button>
         </div>
-        <div className="py-2"></div>
         <div
           ref={containerRef}
-          className=" px-[10%] overflow-y-auto flex flex-col custom-scroll-black h-[90vh]"
+          className="overflow-y-auto flex flex-col custom-scroll-black h-[90vh]"
         >
-          <div className="w-[100%] flex flex-col-reverse " >
+          <div className=" flex flex-col-reverse ">
             {list.map((item: any, i: any) => {
               console.log(item, "che21441");
               return (

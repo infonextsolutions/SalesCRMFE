@@ -9,6 +9,7 @@ import Activityhistory from "./ProfileDetails/Lead/activity";
 import Questionnaire from "../View/Questionnaire/Index";
 import { data } from "../analysis/Call/Tree/data";
 import axios from "axios";
+import Navigation from "../app/Navigation";
 
 const RecordProfile = ({
   titles,
@@ -64,7 +65,6 @@ const RecordProfile = ({
     }
   });
   console.log(new Date(data1.createdAt).toDateString(), "arijit");
-  console.log(data2, "arijit");
   return (
     <div
       className={`w-[${
@@ -106,6 +106,7 @@ const RecordProfile = ({
           </div>
         </div>
       )}
+      <hr className="border-t-4 border-red-300 mt-4" />
       <Navigator callback={CallBack} current={current} list={list} />
       <div className="flex justify-between w-[100%] relative overflow-hidden ">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">

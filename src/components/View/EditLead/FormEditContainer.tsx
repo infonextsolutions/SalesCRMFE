@@ -19,23 +19,34 @@ const FormEditContainer = ({
   cancel,
   title,
 }: FormEditContainerProps) => {
-  const [activeTitle, setActiveTitle] = useState(window.location.pathname.split("/").pop());
-  console.log('------------------------ active Title --------------------', activeTitle);
+  const [activeTitle, setActiveTitle] = useState(
+    window.location.pathname.split("/").pop()
+  );
+  console.log(
+    "------------------------ active Title --------------------",
+    activeTitle
+  );
   // company-profile lead-profile client-profile
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  console.log("+++++++++++++++++++++++ here is form data ++++++++++++++++++++++++", data);
+  console.log(
+    "+++++++++++++++++++++++ here is form data ++++++++++++++++++++++++",
+    data
+  );
   const dispatch = useAppDispatch();
   return (
     <div
-      className={`w-[${width ? width : "100%"
-        }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
+      className={`w-[${
+        width ? width : "100%"
+      }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
     >
       {/* <Navigator callback={CallBack} current={current} list={list} /> */}
-      <h1 className="w-[100%] text-[#3F434A] text-center pt-[10px] font-medium text-3xl">{title}</h1>
+      <h1 className="w-[100%] text-[#3F434A] text-center pt-[10px] font-medium text-3xl">
+        {title}
+      </h1>
       <div className="flex justify-between pl-[20px] relative ">
         <div className="text-black text-[14px] overflow-auto leading-[21px] mt-[10px] w-[100%] tracking-wide  ">
           {activeTitle === "lead-profile" && (
@@ -52,7 +63,8 @@ const FormEditContainer = ({
                     lead_description: data?.lead_description,
                     lead_manager: data?.manager,
                     industry_type: data.companyId.company_product_category,
-                    lead_owner: data.owners.length > 0 ? data.owners[0].name : "",
+                    lead_owner:
+                      data.owners.length > 0 ? data.owners[0].name : "",
                     Stage: data?.leadStage,
                     Status: data?.leadStatus,
                     Source: data?.source,
@@ -64,7 +76,10 @@ const FormEditContainer = ({
                     leadCreatedBy: data.created_by,
                   }}
                   onSubmit={async (values) => {
-                    console.log('>>>>>>>>>>>>>>>>>>>>>>> EIDT LEAD : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>', values)
+                    console.log(
+                      ">>>>>>>>>>>>>>>>>>>>>>> EIDT LEAD : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>",
+                      values
+                    );
                     try {
                       const val = {
                         _id: data._id,
@@ -104,7 +119,10 @@ const FormEditContainer = ({
                     <Form className="custom-scroll-black w-[100%] flex justify-between pr-[20px] pb-[50px]">
                       <div className="flex flex-col w-[100%] gap-4">
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="lead_title"
+                          >
                             Lead Title*
                           </label>
                           <Field
@@ -116,7 +134,10 @@ const FormEditContainer = ({
                           />
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="lead_description">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="lead_description"
+                          >
                             Lead Description*
                           </label>
                           <Field
@@ -146,11 +167,19 @@ const FormEditContainer = ({
                             <option value="Website">Website</option>
                             <option value="Referrals">Referrals</option>
                             <option value="Social Media">Social Media</option>
-                            <option value="Email Marketing">Email Marketing</option>
-                            <option value="Paid Advertising">Paid Advertising</option>
+                            <option value="Email Marketing">
+                              Email Marketing
+                            </option>
+                            <option value="Paid Advertising">
+                              Paid Advertising
+                            </option>
                             <option value="Events">Events</option>
-                            <option value="Offline Channels">Offline Channels</option>
-                            <option value="Content Marketing">Content Marketing</option>
+                            <option value="Offline Channels">
+                              Offline Channels
+                            </option>
+                            <option value="Content Marketing">
+                              Content Marketing
+                            </option>
                             <option value="Partnerships">Partnerships</option>
                           </Field>
                         </div>
@@ -170,9 +199,15 @@ const FormEditContainer = ({
                             <option value="" selected>
                               -- Select Lead Owner --
                             </option>
-                            <option value="507f1f77bcf86cd799439011">LO1</option>
-                            <option value="507f191e810c19729de860ea">LO2</option>
-                            <option value="00000020f51bb4362eee2a4d">LO3</option>
+                            <option value="507f1f77bcf86cd799439011">
+                              LO1
+                            </option>
+                            <option value="507f191e810c19729de860ea">
+                              LO2
+                            </option>
+                            <option value="00000020f51bb4362eee2a4d">
+                              LO3
+                            </option>
                           </Field>
                         </div>
                         <div className="w-[100%]">
@@ -258,13 +293,17 @@ const FormEditContainer = ({
                               <option value="" selected>
                                 -- Select Lead Stage --
                               </option>
-                              {(data.leadStatus === "open" || data.leadStatus === "Open") ? (
+                              {data.leadStatus === "open" ||
+                              data.leadStatus === "Open" ? (
                                 <>
                                   <option value="Enquiry">Enquiry</option>
-                                  <option value="Interaction">Interaction</option>
+                                  <option value="Interaction">
+                                    Interaction
+                                  </option>
                                   <option value="Proposal">Proposal</option>
                                 </>
-                              ) : (data.leadStatus === "close" || data.leadStatus === "Close") ? (
+                              ) : data.leadStatus === "close" ||
+                                data.leadStatus === "Close" ? (
                                 <>
                                   <option value="Win">Win</option>
                                   <option value="Lost">Lost</option>
@@ -279,8 +318,8 @@ const FormEditContainer = ({
                         <SimpleButton
                           theme={2}
                           text="Cancel"
-                          left={20}
-                          right={0}
+                          left={0}
+                          right={40}
                           click={() => {
                             cancel();
                           }}
@@ -290,7 +329,7 @@ const FormEditContainer = ({
                         <SimpleButton
                           theme={1}
                           text="Save"
-                          left={20}
+                          left={0}
                           right={0}
                           type="submit"
                           click={() => {
@@ -321,12 +360,17 @@ const FormEditContainer = ({
                     city: data?.companyId?.company_city,
                     website_url: data?.companyId?.company_website_url,
                     company_socialMedia1: data?.companyId?.company_socialMedia1,
-                    company_socialMedia1Url: data?.companyId?.company_socialMedia1Url,
+                    company_socialMedia1Url:
+                      data?.companyId?.company_socialMedia1Url,
                     company_socialMedia2: data?.companyId?.company_socialMedia2,
-                    company_socialMedia2Url: data?.companyId?.company_socialMedia2Url,
+                    company_socialMedia2Url:
+                      data?.companyId?.company_socialMedia2Url,
                   }}
                   onSubmit={async (values) => {
-                    console.log('>>>>>>>>>>>>>>>>>>>>>>> EDIT COMPANY : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>', values)
+                    console.log(
+                      ">>>>>>>>>>>>>>>>>>>>>>> EDIT COMPANY : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>",
+                      values
+                    );
                     try {
                       const val = {
                         _id: data._id,
@@ -342,10 +386,12 @@ const FormEditContainer = ({
                           company_city: values?.city,
                           company_website_url: values?.website_url,
                           company_socialMedia1: values?.company_socialMedia1,
-                          company_socialMedia1Url: values?.company_socialMedia1Url,
+                          company_socialMedia1Url:
+                            values?.company_socialMedia1Url,
                           company_socialMedia2: values?.company_socialMedia2,
-                          company_socialMedia2Url: values?.company_socialMedia2Url,
-                        }
+                          company_socialMedia2Url:
+                            values?.company_socialMedia2Url,
+                        },
                       };
                       const response = await axios.put(
                         "https://testsalescrm.nextsolutions.in/api/leads/update",
@@ -370,7 +416,10 @@ const FormEditContainer = ({
                     <Form className="custom-scroll-black w-[100%] flex justify-between pr-[20px] pb-[50px]">
                       <div className="flex flex-col w-[100%] gap-4">
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="company_name">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="company_name"
+                          >
                             Company Name
                           </label>
                           <Field
@@ -382,7 +431,9 @@ const FormEditContainer = ({
                           />
                         </div>
                         <div className="flex flex-col gap-2">
-                          <h2 className="font-medium text-[#8a9099]">Industry Type</h2>
+                          <h2 className="font-medium text-[#8a9099]">
+                            Industry Type
+                          </h2>
                           <Field
                             as="select"
                             id="industry_type"
@@ -402,7 +453,10 @@ const FormEditContainer = ({
                           </Field>
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="lead_title"
+                          >
                             Company Description
                           </label>
                           <Field
@@ -414,7 +468,10 @@ const FormEditContainer = ({
                           />
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="company_location">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="company_location"
+                          >
                             Company Address
                           </label>
                           <Field
@@ -426,7 +483,9 @@ const FormEditContainer = ({
                           />
                         </div>
                         <div className="flex flex-col gap-2">
-                          <h2 className="font-medium text-[#8a9099]">Country</h2>
+                          <h2 className="font-medium text-[#8a9099]">
+                            Country
+                          </h2>
                           <Field
                             as="select"
                             id="company_country"
@@ -473,7 +532,6 @@ const FormEditContainer = ({
                               id="company_city"
                               name="company_city"
                               className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[8px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
-
                             >
                               <option value="" selected>
                                 -- Select a City --
@@ -487,7 +545,10 @@ const FormEditContainer = ({
                           </div>
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="lead_title"
+                          >
                             Company Website
                           </label>
                           <Field
@@ -518,7 +579,10 @@ const FormEditContainer = ({
                           </Field>
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="lead_title"
+                          >
                             Social Media 1 URL
                           </label>
                           <Field
@@ -549,7 +613,10 @@ const FormEditContainer = ({
                           </Field>
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="lead_title"
+                          >
                             Social Media 2 URL
                           </label>
                           <Field
@@ -603,13 +670,20 @@ const FormEditContainer = ({
                     phone: data.customerId.contact,
                     email: data.customerId.email,
                     gender: data.customerId.gender,
-                    customer_socialMedia1: data?.customerId?.customer_socialMedia1,
-                    customer_socialMedia1Url: data?.customerId?.customer_socialMedia1Url,
-                    customer_socialMedia2: data?.customerId?.customer_socialMedia2,
-                    customer_socialMedia2Url: data?.customerId?.customer_socialMedia2Url,
+                    customer_socialMedia1:
+                      data?.customerId?.customer_socialMedia1,
+                    customer_socialMedia1Url:
+                      data?.customerId?.customer_socialMedia1Url,
+                    customer_socialMedia2:
+                      data?.customerId?.customer_socialMedia2,
+                    customer_socialMedia2Url:
+                      data?.customerId?.customer_socialMedia2Url,
                   }}
                   onSubmit={async (values) => {
-                    console.log('>>>>>>>>>>>>>>>>>>>>>>> EDIT CLIENT : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>', values)
+                    console.log(
+                      ">>>>>>>>>>>>>>>>>>>>>>> EDIT CLIENT : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>",
+                      values
+                    );
                     try {
                       const val = {
                         ...data,
@@ -622,9 +696,11 @@ const FormEditContainer = ({
                           contact: values.phone,
                           email: values.email,
                           customer_socialMedia1: values?.customer_socialMedia1,
-                          customer_socialMedia1Url: values?.customer_socialMedia1Url,
+                          customer_socialMedia1Url:
+                            values?.customer_socialMedia1Url,
                           customer_socialMedia2: values?.customer_socialMedia2,
-                          customer_socialMedia2Url: values?.customer_socialMedia2Url,
+                          customer_socialMedia2Url:
+                            values?.customer_socialMedia2Url,
                         },
                       };
                       const response = await axios.put(
@@ -754,7 +830,10 @@ const FormEditContainer = ({
                           </Field>
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="lead_title"
+                          >
                             Social Media 1 URL
                           </label>
                           <Field
@@ -785,7 +864,10 @@ const FormEditContainer = ({
                           </Field>
                         </div>
                         <div className="w-[100%]">
-                          <label className="font-medium text-[#8a9099]" htmlFor="lead_title">
+                          <label
+                            className="font-medium text-[#8a9099]"
+                            htmlFor="lead_title"
+                          >
                             Social Media 2 URL
                           </label>
                           <Field

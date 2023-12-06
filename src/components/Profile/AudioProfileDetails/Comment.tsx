@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
+import Notes from "./notesRecordt";
 
 const Comment = ({ user, content, time, reply, last, replied }: any) => {
   const [repVis, setRepVis] = useState(false);
@@ -35,7 +36,7 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
     console.log(reply, 2412141);
   };
   return (
-    <div className="border-t-[1px] border-[#ccc] py-[20px]">
+    <div className="h-[280px] mb-4 rounded-xl w-[490px] border-[1px] border-[#ccc] py-[10px]">
       <div className="flex items-center justify-between my-2 ml-4">
         <h3 className="text-[16px] text-black  ml-4  font-medium">{user}</h3>
         <p className="text-sm text-gray-600 mr-10 font-medium">{last}</p>
@@ -164,7 +165,7 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
   );
 };
 
-const Comments = ({ data }: any) => {
+const CommentsAndNotes = ({ data, notesData }: any) => {
   const [text, setText] = React.useState("");
   const [list, setList] = React.useState<any>(data?.comments);
   console.log(list, "2131");
@@ -218,7 +219,7 @@ const Comments = ({ data }: any) => {
 
   return (
     <>
-      <div className="flex w-[100%] h-[800px] flex-col px-[40px]">
+      <div className="flex w-[100%] h-[800px] flex-col px-[20px]">
         <div className="relative">
           <textarea
             value={text}
@@ -333,13 +334,14 @@ const Comments = ({ data }: any) => {
               setText("");
             }
           }}
-          className="bg-renal-blue mt-[18px] rounded-xl justify-end w-[110px] h-[38px] ml-auto font-medium tracking-wide pl-[5px] p-[5px]"
+          className="bg-text-red mt-[18px] rounded-xl justify-end w-[140px] h-[38px] ml-auto font-medium tracking-wide pl-[5px] p-[8px]"
         >
           <p className="whitespace-nowrap font-large text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
-            comment
+            Comment
           </p>
         </button>
-        <div className="my-4 overflow-y-auto">
+        <hr className="border-t-4 border-gray-300 mt-4" />
+        <div className="my-4 overflow-y-auto custom-scroll-black ">
           {list.map((item: any, i: any) => {
             return (
               <Comment
@@ -384,8 +386,10 @@ const Comments = ({ data }: any) => {
           })}
         </div>
       </div>
+      <hr className="border-t-4 border-gray-300" />
+      <Notes data={notesData} />
     </>
   );
 };
 
-export default Comments;
+export default CommentsAndNotes;

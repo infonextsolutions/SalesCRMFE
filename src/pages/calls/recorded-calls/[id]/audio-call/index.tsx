@@ -12,7 +12,7 @@ import Navbar from "@/components/app/Navbar/Navbar";
 //Manya will make this page
 
 const CallProfile = ({ data, data1 }: any) => {
-  const titles = ["CALL INFO", "COMMENTS", "NOTES", "COACHING"];
+  const titles = ["CALL INFO", "COMMENTS & NOTES", "COACHING"];
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
   const [bool, setBool] = useState(true);
@@ -65,7 +65,7 @@ const CallProfile = ({ data, data1 }: any) => {
           </Backdrop>
         )}
         <Navigation
-          title="Calls>Recorded Calls>Discussion on PX features"
+          title="Calls > Recorded Calls > Call Recordings"
           buttons={[
             {
               text: "Share",
@@ -73,7 +73,7 @@ const CallProfile = ({ data, data1 }: any) => {
               id: 1,
               icon: "Share",
               light: false,
-              dark: false,
+              dark: true,
               click: addCall,
               list: [
                 { title: "Full Call", Icon: "Phone" },

@@ -18,9 +18,9 @@ const ScriptDoc = ({
   check,
   id,
   onSelectFile,
+  setSelected,
+  selected,
 }: any) => {
-
-  
   //fetch file data from a
   const fetchAdditionalData = async (fileUrl: string) => {
     try {
@@ -36,7 +36,7 @@ const ScriptDoc = ({
   };
 
   return (
-    <div className="w-[100%] mt-[20px]">
+    <div onClick={() => setSelected(!selected)} className="w-[100%] mt-[20px]">
       <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
         {title}
       </p>
@@ -135,7 +135,11 @@ const ScriptList = ({
   moredata,
   refresh,
   onSelectFile,
+  setSelected,
+  selected,
 }: {
+  setSelected: any;
+  selected: any;
   data: any;
   moredata: ActiveCall;
   refresh: () => void;
@@ -292,15 +296,19 @@ const ScriptList = ({
           />
         </Backdrop>
       )}
-      <div className="w-[100%] p-[30px]">
-        <Navigator callback={CallBack} current={0} list={list} />
-        <div className="flex mt-[20px]">
+
+      <div className="w-[100%] mt-5 flex flex-col gap-4 items-center p-6 bg-white border border-gray-200 rounded-lg shadow">
+        {/* <Navigator callback={CallBack} current={0} list={list} /> */}
+        <div className="w-[100%] flex justify-between">
+          <button className="text-lg font-semibold">Script List</button>
           <button
-            className=" ml-auto flex bg-renal-blue pl-[18px] rounded-xl pr-[18px] py-[10px]"
             onClick={() => {
               showUploads();
             }}
+            type="button"
+            className="text-white bg-text-red font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-4"
           >
+            Upload
             <Image
               src="/Images/Logo/Upload.svg"
               className={`w-[18px] svg-white`}
@@ -311,9 +319,6 @@ const ScriptList = ({
                 objectFit: "contain",
               }}
             />
-            <p className="whitespace-nowrap font-medium  text-[14px] pl-[5px] pr-[5px] text-[#ffffff] ">
-              Upload
-            </p>
           </button>
         </div>
         {data.map((item: any, i: any) => {
@@ -330,6 +335,8 @@ const ScriptList = ({
               refresh={refresh}
               data={convertDatetime(item.createdAt)}
               onSelectFile={onSelectFile}
+              setSelected={setSelected}
+              selected={selected}
             />
           );
         })}
@@ -378,43 +385,32 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   return (
     <div className="w-full p-[30px]">
       {selected && (
-        <>
-          <Navigator callback={CallBack} current={0} list={list} />
-          {activeTitle === 0 && (
-            <div className="w-full h-[900px] bg-[#ccc] p-[30px]">
-              <div className="w-full h-full bg-white px-[30px] py-[60px]">
-                <p className="text-black font-medium uppercase text-[14px] tracking-wider">
-                 {` **Alice**: Hi Bob, how are you doing today? **Bob**: Hello
-                  Alice! I'm doing well, thank you. How about you? **Alice**:
-                  I'm good too, thanks for asking. Did you get a chance to check
-                  out that new movie that released last week? **Bob**: Yes,
-                  Alice, I did. It was an interesting movie. I really enjoyed
-                  the plot twists. **Alice**: That's great to hear, Bob. I
-                  haven't watched it yet. Would you recommend it? **Bob**:
-                  Absolutely, Alice. It's a must-watch. The storyline is
-                  compelling and the performances are outstanding. **Alice**:
-                  Sounds exciting, Bob. I'll definitely watch it over the
-                  weekend. **Bob**: That's a good plan, Alice. Let me know what
-                  you think of it. **Alice**: Sure, Bob. I'll share my thoughts
-                  with you after I watch it. **Bob**: Looking forward to it,
-                  Alice. By the way, have you tried the new Italian restaurant
-                  in town? **Alice**: Not yet, Bob. Is it good? **Bob**: Yes,
-                  Alice. The food is delicious and the ambiance is great. You
-                  should try it. **Alice**: Thanks for the recommendation, Bob.
-                  I'll check it out soon. **Bob**: You're welcome, Alice. I hope
-                  you'll like it. **Alice**: I'm sure I will, Bob. Thanks again.
-                  Talk to you later.`}
-                </p>
-              </div>
-            </div>
-          )}
-        </>
+        <div className="w-[100%] flex flex-col gap-4 justify-between p-4 bg-white border border-gray-200 rounded-lg shadow">
+          <h2 className="text-lg font-semibold">Script</h2>
+          <p className="text-sm">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
+            itaque cumque, voluptatibus vel iste nisi est repellat, fugit
+            blanditiis eveniet accusantium molestias ipsa dolore ad vitae
+            repellendus, architecto neque! Maiores. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Porro itaque cumque, voluptatibus vel
+            iste nisi est repellat, fugit blanditiis eveniet accusantium
+            molestias ipsa dolore ad vitae repellendus, architecto neque!
+            Maiores. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Porro itaque cumque, voluptatibus vel iste nisi est repellat, fugit
+            blanditiis eveniet accusantium molestias ipsa dolore ad vitae
+            repellendus, architecto neque! vel iste nisi est repellat, fugit
+            blanditiis eveniet accusantium molestias ipsa dolore ad vitae
+            repellendus, architecto neque.
+          </p>
+        </div>
       )}
       <ScriptList
         refresh={refresh}
         data={currScripts}
         moredata={data}
         onSelectFile={handleFileSelect}
+        setSelected={setSelected}
+        selected={selected}
       />
     </div>
   );

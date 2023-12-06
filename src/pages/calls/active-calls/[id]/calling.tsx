@@ -162,7 +162,7 @@ const AudioProfile = ({ data, scripts }: any) => {
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="bg-renal-blue hover:bg-[#350dff] text-white px-[40px] py-[10px] rounded-xl font-medium text-[14px]"
+                  className="bg-text-red hover:bg-text-red text-white px-[40px] py-[10px] rounded-xl font-medium text-[14px]"
                 >
                   Save
                 </button>
@@ -171,7 +171,7 @@ const AudioProfile = ({ data, scripts }: any) => {
           </Backdrop>
         )}
         <Navigation
-          title="Calls>Active Calls>Discussion on PX features"
+          title="Calls > Active Calls > Scheduled Calls"
           buttons={[
             // {
             //   text: "Refresh",
@@ -190,22 +190,11 @@ const AudioProfile = ({ data, scripts }: any) => {
             //   },
             // },
             {
-              text: "Upload Call",
-              dropdown: true,
-              id: 2,
-              light: false,
-              dark: false,
-              list: [],
-              onClick1: async () => {
-                setUploadModalStatus(true);
-              },
-            },
-            {
               text: "Make Call",
               dropdown: true,
               id: 1,
               light: false,
-              dark: false,
+              dark: true,
               list: [],
               onClick1: async () => {
                 // const response = await axios.post(
@@ -215,6 +204,18 @@ const AudioProfile = ({ data, scripts }: any) => {
                 //   }
                 // );
                 setCall(true);
+              },
+            },
+            {
+              text: "Action",
+              dropdown: true,
+              id: 2,
+              light: false,
+              dark: false,
+              icon: "Plus",
+              list: [],
+              onClick1: async () => {
+                setUploadModalStatus(true);
               },
             },
 

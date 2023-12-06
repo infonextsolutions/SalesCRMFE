@@ -104,9 +104,9 @@ const Calls = ({ data }: any) => {
         <Navigation
           title={
             recodedCalls
-              ? "Calls>Recorded Calls>Call Recordings"
+              ? "Calls > Recorded Calls > Call Recordings"
               : recodedMeeting
-              ? "Calls>Recorded Calls>Meeting Recordings"
+              ? "Calls > Recorded Calls > Meeting Recordings"
               : ""
           }
           buttons={[
