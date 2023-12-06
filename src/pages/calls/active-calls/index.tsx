@@ -135,7 +135,7 @@ const Calls = ({ data }: any) => {
 
   return (
     <>
-      <Navbar title={"Calls > Active Calls"} src="Phone" />
+      <Navbar mainTitle={"Calls "} title={"Active Calls"} src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
           title={

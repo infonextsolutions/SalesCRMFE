@@ -1,7 +1,7 @@
 import SimpleButton from "@/utils/Button/SimpleButton";
 import React, { useState } from "react";
 
-const AddText = ({ top, title, width, change,placeholder }: any) => {
+const AddText = ({ top, title, width, change, placeholder }: any) => {
   const [input, setInput] = useState();
   return (
     <div
@@ -68,8 +68,8 @@ const Notesd = ({ cancel }: any) => {
           <SimpleButton
             theme={2}
             text={"Cancel"}
-            left={20}
-            right={0}
+            left={0}
+            right={40}
             click={() => {
               cancel();
             }}
@@ -82,7 +82,7 @@ const Notesd = ({ cancel }: any) => {
             }}
             theme={1}
             text={"Create"}
-            left={20}
+            left={0}
             right={0}
           />
         </div>

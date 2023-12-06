@@ -70,7 +70,7 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
 
         <div className="w-[100%] flex flex-col-reverse">
           {history.map((item: any, i: any) => {
-            // console.log(item, "plae");
+            console.log(item, "arijit");
             const date = formatDateAndTime(item.createdAt);
             // console.log(date, "pleas1");
             return (
@@ -87,6 +87,8 @@ const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
                           ? getBasicIcon("Mail")
                           : item.type === "note"
                           ? getBasicIcon("Tasks")
+                          : item.call_title
+                          ? getBasicIcon("Phone")
                           : getBasicIcon("activity-1")
                       }
                       className={`

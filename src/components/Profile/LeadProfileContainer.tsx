@@ -13,7 +13,10 @@ const LeadProfileContainer = ({
   data,
   width,
 }: LeadProfileContainerProps) => {
-  console.log('+++++++++++++++++++++++++++++++ DATA : LEAD PROFILE CONTAINER +++++++++++++++++++++++++++', data);
+  console.log(
+    "+++++++++++++++++++++++++++++++ DATA : LEAD PROFILE CONTAINER +++++++++++++++++++++++++++",
+    data
+  );
   const [activeTitle, setActiveTitle] = useState(0);
   function CallBack(childData: any) {
     setActiveTitle(childData);
@@ -49,53 +52,49 @@ const LeadProfileContainer = ({
               </h2>
               <div className="pr-20">
                 <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-lg">Last Activity</p>
-                  <p className=" text-[#595F69] text-lg font-medium">
+                  <p className="text-[#3F434A] text-sm">Last Activity</p>
+                  <p className=" text-[#595F69] text-sm font-medium">
                     {info[activeTitle].data.lastActivity}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-lg">
+                  <p className="text-[#3F434A] text-sm">
                     Product/ Service Type
                   </p>
-                  <p className="text-[#595F69] text-lg font-medium">
+                  <p className="text-[#595F69] text-sm font-medium">
                     {info[activeTitle].data.productType}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-lg">
+                  <p className="text-[#3F434A] text-sm">
                     Last Call Disposition
                   </p>
-                  <p className="text-[#595F69] text-lg font-medium">
-                    {/* {info[activeTitle].data.lastActivity} */}
+                  <p className="text-[#595F69] text-sm font-medium">
+                    {info[activeTitle].data.lastActivity}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-lg">Next Action</p>
-                  <p className="text-[#595F69] text-lg font-medium">
+                  <p className="text-[#3F434A] text-sm">Next Action</p>
+                  <p className="text-[#595F69] text-sm font-medium">
                     {info[activeTitle].data.nextAction}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-lg">
+                  <p className="text-[#3F434A] text-sm">
                     Interested Product/Service Type
                   </p>
-                  <p className="text-[#595F69] text-lg font-medium">
+                  <p className="text-[#595F69] text-sm font-medium">
                     {info[0].data.interestedProductType}
                   </p>
                 </div>
               </div>
 
               <h2 className="text-2xl font-semibold mt-5">Lead Description</h2>
-              <p className="mt-4">
-                {data?.lead_description}
-              </p>
+              <p className="mt-4">{data?.lead_description}</p>
               <h2 className="text-2xl font-semibold mt-5">
                 Company Description
               </h2>
-              <p className="mt-4">
-                {data?.companyId?.company_description}
-              </p>
+              <p className="mt-4">{data?.companyId?.company_description}</p>
             </>
           )}
           {activeTitle === 1 && <ActivityHistory data1={data} data={data} />}

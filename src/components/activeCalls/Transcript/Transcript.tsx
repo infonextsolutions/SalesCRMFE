@@ -61,7 +61,7 @@ const Transcript = ({
 
   console.log(utterances);
 
-  const arr :any= [];
+  const arr: any = [];
   for (let i = 0; i < utterances.length; i++) {
     arr.push({
       title: utterances[i].speaker === "A" ? "A" : "B",
@@ -181,13 +181,15 @@ const Transcript = ({
               <React.Fragment key={i}>
                 <div className="flex  my-[8px] ">
                   <p
-                    className="text-[#304FFD] shrink-0 w-[100px] font-medium text-[15px] mr-[30px] tracking-wide"
+                    className="text-[#304FFD] shrink-0 w-[48px] font-medium text-[15px] mr-[30px] tracking-wide"
                     style={{
                       color: item.title === "A" ? "#304FFD" : "#FF965D",
                     }}
                     dangerouslySetInnerHTML={{
                       // __html: `00:05 ${item.title}:`,
-                      __html: `${convertMilliseconds(item.start)} ${item.title}:`,
+                      __html: `${convertMilliseconds(item.start)} ${
+                        item.title
+                      }:`,
                     }}
                   ></p>
                   <p
