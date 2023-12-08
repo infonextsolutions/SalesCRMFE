@@ -66,14 +66,14 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             />
             <div className="ml-3 items-center ">
               <h2 className="text-xl font-small whitespace-nowrap leading-7 tracking-wide text-black">
-                {data.result.customerId.name}
+                {data?.result?.customerId?.customer_name}
               </h2>
 
               <a
                 href="#0"
                 className="block ml-1 text-sm text-[12px] text-gray-500 hover:text-indigo-500"
               >
-                {data.result.customerId.designation}
+                {data?.result?.customerId?.customer_designation}
               </a>
             </div>
             <div className="h-[80%] ml-auto ">
@@ -101,21 +101,21 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               GENDER
             </strong>
             <p className="block text-black capitalize">
-              {data.result.customerId.gender}
+              {data?.result?.customerId?.customer_gender}
             </p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm mr-1 text-gray-500">
               PHONE
             </strong>
-            <p className="block text-black">{data.result.customerId.contact}</p>
+            <p className="block text-black">{data?.result?.customerId?.customer_contact}</p>
           </li>
           <li className="px-2 mt-4">
             <strong className="font-medium text-sm text-gray-500 mr-1">
               EMAIL
             </strong>
             <a href="mailto:" className="block text-black">
-              {data.result.customerId.email}
+              {data?.result?.customerId?.customer_email}
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -165,7 +165,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               COMPANY NAME
             </strong>
             <a href="name" className="block text-black">
-              {data.result.companyId.company_name}
+              {data?.result?.companyId?.company_name}
             </a>
           </li>
           <li className="px-2 mt-4">
@@ -173,7 +173,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               COMPANY ADDRESS
             </strong>
             <p className="block text-black">
-              {data.result.companyId.company_location}
+              {data?.result?.companyId?.company_address || data?.result?.companyId?.company_location}
             </p>
           </li>
           <li className="px-2 mt-4">
@@ -183,9 +183,9 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             <span className="block text-black">
               <a
                 target="_blank"
-                href={`${data.result.companyId.company_website_url}`}
+                href={`${data?.result?.companyId?.company_website_url}`}
               >
-                {data.result.companyId.company_website_url}
+                {data?.result?.companyId?.company_website_url}
               </a>
             </span>
           </li>
@@ -250,7 +250,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
         </div>
 
         <div className="py-2"></div>
-        <ul role="list" className="">
+        {/* <ul role="list" className="">
           {contacts.map((item: any, i: any) => {
             function random_number_between_1_and_7() {
               // Generate a random number between 0 and 1 (exclusive)
@@ -290,7 +290,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
         <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
       </div>
     </>
