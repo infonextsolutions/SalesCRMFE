@@ -69,7 +69,7 @@ const AddLead = ({ cancel }: any) => {
     axios
       .post(`${API_DOMAIN}/api/leads/create`, payload)
       .then((e: any) => {
-        // router.reload();
+        router.reload();
         cancel();
       });
   };
