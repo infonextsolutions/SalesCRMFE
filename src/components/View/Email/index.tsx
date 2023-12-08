@@ -355,12 +355,12 @@ const EmailPage = ({
   refresh?: any;
   leadIdResult?: any;
 }) => {
+  console.log('++++++++++++++ EMAIL PAGE ++++++++++++++++++++', data, leadIdResult);
   // const [receiver, setReceiver] = useState<any>("");
   const [receiver, setReceiver] = useState<any>("");
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
   const [sendTo, setSendTo] = useState<any>("");
-  const [newEmailList, setNewEmailList] = useState<any>([{}]);
   const emailList = [
     {
       title: "Client 1",
@@ -378,10 +378,11 @@ const EmailPage = ({
       selected: false,
     },
   ];
+  const [newEmailList, setNewEmailList] = useState<any>([emailList]);
   const dispatch = useAppDispatch();
   const submit = (e1: any, e2: any, e3: any) => {
     const payload = {
-      _id: data._id,
+      _id: data?._id,
       leadId: data._id,
       companyName: data.companyId?.company_name,
       clientPoc: "",
@@ -412,16 +413,16 @@ const EmailPage = ({
   };
 
   useEffect(() => {
-    console.log("resuulllttt", data._id);
+    console.log("resuulllttt ++++++++++++++++++++++++", data?._id);
     if (data && data.customerId) {
-      const { name, email, contacts } = data.customerId;
+      const { customer_name, customer_email, contacts } = data.customerId;
 
       const updatedEmailList = []; // Create an empty array to store new values
 
       // Add customer ID's name and email to updatedEmailList
       updatedEmailList.push({
-        title: name,
-        val: email,
+        title: customer_name,
+        val: customer_email,
         selected: false,
       });
 
@@ -444,7 +445,7 @@ const EmailPage = ({
 
     axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data?._id}`
       )
       .then((res) => {
         console.log("new result is", res);
@@ -488,7 +489,6 @@ const EmailPage = ({
             selected: true,
           },
           ...newEmailList,
-          // ...emailList,
         ]}
       />
       {/* <DropItems

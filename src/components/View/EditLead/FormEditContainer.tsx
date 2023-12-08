@@ -678,6 +678,7 @@ const FormEditContainer = ({
                       data?.customerId?.customer_socialMedia2,
                     customer_socialMedia2Url:
                       data?.customerId?.customer_socialMedia2Url,
+                    primary_client_poc: true
                   }}
                   onSubmit={async (values) => {
                     console.log(
@@ -685,24 +686,51 @@ const FormEditContainer = ({
                       values
                     );
                     try {
-                      const val = {
-                        ...data,
-                        customerId: {
-                          ...data.customerId,
-                          _id: data.customerId._id,
-                          customer_name: values.customer_name,
-                          customer_designation: values.customer_designation,
-                          customer_gender: values.customer_gender,
-                          customer_contact: values.customer_contact,
-                          customer_email: values.customer_email,
-                          customer_socialMedia1: values?.customer_socialMedia1,
-                          customer_socialMedia1Url:
-                            values?.customer_socialMedia1Url,
-                          customer_socialMedia2: values?.customer_socialMedia2,
-                          customer_socialMedia2Url:
-                            values?.customer_socialMedia2Url,
-                        },
-                      };
+                      // add as contacts[] if primary_client_poc
+                      let val = {};
+                      if (values?.primary_client_poc) {
+                        val = {
+                          ...data,
+                          customerId: {
+                            ...data.customerId,
+                            _id: data.customerId._id,
+                            customer_name: values.customer_name,
+                            customer_designation: values.customer_designation,
+                            customer_gender: values.customer_gender,
+                            customer_contact: values.customer_contact,
+                            customer_email: values.customer_email,
+                            customer_socialMedia1: values?.customer_socialMedia1,
+                            customer_socialMedia1Url:
+                              values?.customer_socialMedia1Url,
+                            customer_socialMedia2: values?.customer_socialMedia2,
+                            customer_socialMedia2Url:
+                              values?.customer_socialMedia2Url,
+                          },
+                        };
+                      } else {
+                        val = {
+                          ...data,
+                          customerId: {
+                            ...data.customerId,
+                            contacts: [
+                              ...data?.customerId?.contacts,
+                              {
+                                customer_name: values?.customer_name,
+                                customer_designation: values?.customer_designation,
+                                customer_gender: values?.customer_gender,
+                                customer_contact: values?.customer_contact,
+                                customer_email: values?.customer_email,
+                                customer_socialMedia1: values?.customer_socialMedia1,
+                                customer_socialMedia1Url:
+                                  values?.customer_socialMedia1Url,
+                                customer_socialMedia2: values?.customer_socialMedia2,
+                                customer_socialMedia2Url:
+                                  values?.customer_socialMedia2Url,
+                              }
+                            ]
+                          }
+                        }
+                      }
                       const response = await axios.put(
                         "https://salescrmbe.onrender.com/api/leads/update",
                         val
@@ -878,264 +906,21 @@ const FormEditContainer = ({
                             placeholder=" Social Media 2 URL"
                           />
                         </div>
-                        {/* <div className="my-4 ">
-                        <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] tracking-[1px]">
-                          More Contact Information - 1
-                        </h2>
-                        <div className="mb-4 flex gap-5">
-                          <div className="flex-grow">
-                            <label
-                              htmlFor="moreContactInfoName"
-                              className="block font-medium mb-2 text-[#8a9099]"
-                            >
-                              Name
-                            </label>
-                            <Field
-                              type="text"
-                              id="moreContactInfoName"
-                              name="moreContactInfoName"
-                              className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                            />
-                          </div>
-                          <div className="flex-grow">
-                            <label
-                              htmlFor="moreContactInfoDesignation"
-                              className="block font-medium mb-2 text-[#8a9099]"
-                            >
-                              Designation
-                            </label>
-                            <Field
-                              type="text"
-                              id="moreContactInfoDesignation"
-                              name="moreContactInfoDesignation"
-                              className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                            />
-                          </div>
-                        </div>
 
-                        <div className="mb-4 flex gap-5">
-                          <div className="flex-grow">
-                            <label
-                              htmlFor="moreContactInfoPhone"
-                              className="block font-medium mb-2 text-[#8a9099]"
-                            >
-                              Phone
-                            </label>
-                            <Field
-                              type="text"
-                              id="moreContactInfoPhone"
-                              name="moreContactInfoPhone"
-                              className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                            />
-                          </div>
-                          <div className="flex-grow">
-                            <label
-                              htmlFor="moreContactInfoEmail"
-                              className="block font-medium mb-2 text-[#8a9099]"
-                            >
-                              Email
-                            </label>
-                            <Field
-                              type="email"
-                              id="moreContactInfoEmail"
-                              name="moreContactInfoEmail"
-                              className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="w-1/2">
-                          <label
-                            htmlFor="gender"
-                            className="block font-medium mb-2 text-[#8a9099]"
-                          >
-                            Gender
-                          </label>
+                        <div className="w-[100%] flex align-center gap-[6px] pt-[30px]">
                           <Field
-                            as="select"
-                            id="gender"
-                            name="gender"
-                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="" selected>
-                              Select Gender
-                            </option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                          </Field>
-                        </div>
-                      </div> */}
-                        {/* <div className="mb-4">
-                        <h2 className="text-[#3f434a] text-[18px] font-medium mb-[16px] tracking-[1px]">
-                          More Contact Information - 2
-                        </h2>
-                        <div className="mb-4 flex gap-5">
-                          <div className="flex-grow">
-                            <label
-                              htmlFor="moreContactInfoName"
-                              className="block font-medium mb-2 text-[#8a9099]"
-                            >
-                              Name
-                            </label>
-                            <Field
-                              type="text"
-                              id="moreContactInfoName"
-                              name="moreContactInfoName"
-                              className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                            />
-                          </div>
-                          <div className="flex-grow">
-                            <label
-                              htmlFor="moreContactInfoDesignation"
-                              className="block font-medium mb-2 text-[#8a9099]"
-                            >
-                              Designation
-                            </label>
-                            <Field
-                              type="text"
-                              id="moreContactInfoDesignation"
-                              name="moreContactInfoDesignation"
-                              className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="mb-4 flex gap-5">
-                          <div className="flex-grow">
-                            <label
-                              htmlFor="moreContactInfoPhone"
-                              className="block font-medium mb-2 text-[#8a9099]"
-                            >
-                              Phone
-                            </label>
-                            <Field
-                              type="text"
-                              id="moreContactInfoPhone"
-                              name="moreContactInfoPhone"
-                              className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                            />
-                          </div>
-                          <div className="flex-grow">
-                            <label
-                              htmlFor="moreContactInfoEmail"
-                              className="block font-medium mb-2 text-[#8a9099]"
-                            >
-                              Email
-                            </label>
-                            <Field
-                              type="email"
-                              id="moreContactInfoEmail"
-                              name="moreContactInfoEmail"
-                              className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="w-1/2">
-                          <label
-                            htmlFor="gender"
-                            className="block font-medium mb-2 text-[#8a9099]"
-                          >
-                            Gender
-                          </label>
-                          <Field
-                            as="select"
-                            id="gender"
-                            name="gender"
-                            className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="" selected>
-                              Select Gender
-                            </option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                          </Field>
-                        </div>
-                      </div> */}
-                        {/* <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
-                        More Information
-                      </h1> */}
-                        {/* <div className="flex gap-5">
-                        <div className="mb-4 flex-grow">
-                          <label
-                            htmlFor=""
-                            className="block font-medium mb-2 text-[#8a9099]"
-                          >
-                            Lead Last Updated On
-                          </label>
-                          <Field
-                            type="text"
-                            id=""
-                            name=""
-                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
+                            type="checkbox"
+                            name="primary_client_poc"
+                            id="primary_client_poc"
+                            className="w-[20px] h-[20px] accent-[red]"
                           />
-                        </div>
-                        <div className="mb-4 flex-grow">
                           <label
-                            htmlFor=""
-                            className="block font-medium mb-2 text-[#8a9099]"
+                            className="font-medium"
+                            htmlFor="primary_client_poc"
                           >
-                            Lead Created By
+                            Add as Primary Client POC
                           </label>
-                          <Field
-                            as="select"
-                            id=""
-                            name=""
-                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="" selected>
-                              -- Select --
-                            </option>
-                            <option value="LM1">LM1</option>
-                            <option value="LM2">LM2</option>
-                            <option value="LM3">LM3</option>
-                          </Field>
                         </div>
-                      </div> */}
-                        {/* <div className="flex gap-5">
-                        <div className="mb-4 flex-grow">
-                          <label
-                            htmlFor="primaryClientName"
-                            className="block font-medium mb-2 text-[#8a9099]"
-                          >
-                            Product/Service
-                          </label>
-                          <Field
-                            as="select"
-                            id="primaryClientName"
-                            name="primaryClientName"
-                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="" selected>
-                              -- Select Product/Service --
-                            </option>
-                            <option value="Open">Open</option>
-                            <option value="Closed">Closed</option>
-                          </Field>
-                        </div>
-                        <div className="mb-4 flex-grow">
-                          <label
-                            htmlFor="primaryClientDesignation"
-                            className="block font-medium mb-2 text-[#8a9099]"
-                          >
-                            Past Product/Service Interactions
-                          </label>
-                          <Field
-                            as="select"
-                            id="primaryClientDesignation"
-                            name="primaryClientDesignation"
-                            className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
-                          >
-                            <option value="" selected>
-                              -- Select Past Product/Service Interactions --
-                            </option>
-                            <option value="Enquiry">Enquiry</option>
-                            <option value="Open">Open</option>
-                            <option value="Lost">Lost</option>
-                            <option value="Dead">Dead</option>
-                          </Field>
-                        </div>
-                      </div> */}
                       </div>
                       <div className="mt-16 ">
                         <div className="absolute right-[160px] bottom-[10px] flex">

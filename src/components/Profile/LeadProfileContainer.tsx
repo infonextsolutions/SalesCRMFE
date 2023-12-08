@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import ActivityHistory from "./ProfileDetails/Lead/activity";
 import Attachements from "./ProfileDetails/Lead/attachements";
 import { LeadId } from "@/types/leadId";
+import Lead from "@/types/Leads";
 
 const LeadProfileContainer = ({
   titles,
@@ -15,7 +16,7 @@ const LeadProfileContainer = ({
 }: LeadProfileContainerProps) => {
   console.log(
     "+++++++++++++++++++++++++++++++ DATA : LEAD PROFILE CONTAINER +++++++++++++++++++++++++++",
-    data
+    data || "no data", info || "no info"
   );
   const [activeTitle, setActiveTitle] = useState(0);
   function CallBack(childData: any) {
@@ -25,9 +26,8 @@ const LeadProfileContainer = ({
 
   return (
     <div
-      className={`w-[${
-        width ? width : "100%"
-      }] bg-white rounded-xl p-[25px] px-[35px] pt-[30px] `}
+      className={`w-[${width ? width : "100%"
+        }] bg-white rounded-xl p-[25px] px-[35px] pt-[30px] `}
     >
       <Navigator callback={CallBack} current={current} list={list} />
       <div className="flex justify-between pl-[20px] relative">
@@ -54,7 +54,7 @@ const LeadProfileContainer = ({
                 <div className="flex items-center mt-4 justify-between">
                   <p className="text-[#3F434A] text-sm">Last Activity</p>
                   <p className=" text-[#595F69] text-sm font-medium">
-                    {info[activeTitle].data.lastActivity}
+                    {data?.activityId?.lastActivity?.type}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
@@ -62,7 +62,7 @@ const LeadProfileContainer = ({
                     Product/ Service Type
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">
-                    {info[activeTitle].data.productType}
+                    {data?.companyId?.company_product_category}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
@@ -97,7 +97,7 @@ const LeadProfileContainer = ({
               <p className="mt-4">{data?.companyId?.company_description}</p>
             </>
           )}
-          {activeTitle === 1 && <ActivityHistory data1={data} data={data} />}
+          {activeTitle === 1 && <ActivityHistory data={data} />}
           {activeTitle === 2 && <Attachements data={data} />}
         </div>
       </div>
@@ -111,5 +111,5 @@ interface LeadProfileContainerProps {
   titles: any[] | any;
   current: Number;
   [key: string]: any;
-  data: LeadId;
+  data: Lead;
 }

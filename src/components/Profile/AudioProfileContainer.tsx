@@ -39,7 +39,7 @@ const AudioProfileContainer = ({
     >
       {data1?.companyId?.company_name && (
         <div className="w-[70%] flex justify-around">
-          <div className="flex gap-2">
+          <div className="flex gap-2 text-[black]">
             <Image
               src={getBasicIcon("buildingIcon")}
               style={{
@@ -51,7 +51,7 @@ const AudioProfileContainer = ({
             />
             {info[0].data?.companyName}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 text-[black]">
             <Image
               src={getBasicIcon("Calendar")}
               style={{

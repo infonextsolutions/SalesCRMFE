@@ -217,7 +217,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
   return (
     <>
       <div
-        className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] flex flex-col justify-between mh-[270px] shadow-lg shadow-slate-400"
+        className="p-[15px] rounded-xl mb-[20px] w-[270px] flex flex-col justify-between mh-[270px] shadow-lg shadow-slate-400"
         key={i}
       >
         <div className="block-heading text-black text-[13px] leading-4 mb-[23px]">
@@ -225,61 +225,56 @@ const KanbanItem = ({ item, i, Item }: any) => {
             onClick={() => {
               leadId();
             }}
-            className="cursor-pointer"
+            className="cursor-pointer text-[16px] text-rose-600"
           >
             Lead Id-{Item?.leadId}
           </p>
-          <p className="text-bold">
-            {Item?.lead_title} |
-            <span
-              onClick={() => {
-                companyId();
-              }}
-              className="cursor-pointer"
-            >
-              {" "}
-              {Item?.companyId?.company_name} |{" "}
-            </span>
-            {/* {item.data.companyAddress} */}
-            {Item?.companyId?.company_address || Item?.companyId?.company_location}
-            {/* {"Noida"} */}
+          <p className="text-bold text-[16px] text-rose-600 mt-[6px]">
+            {Item?.lead_title}
           </p>
           <p
-            className="text-black/50 cursor-pointer"
+            onClick={() => {
+              companyId();
+            }}
+            className="text-black/70 cursor-pointer"
+          >
+            {Item?.companyId?.company_name} |{" "}{Item?.companyId?.company_address || Item?.companyId?.company_location}
+          </p>
+          <p
+            className="text-black/70 cursor-pointer"
             onClick={() => {
               clientId();
             }}
           >
             {Item?.customerId?.customer_name || Item?.customerId?.name} | {Item?.customerId?.customer_designation || Item?.customerId?.designation}
           </p>
-          <p className="text-black/50">- {/* {item.data.names} */}</p>
         </div>
         <div className="block-details text-black text-[12px] mb-[20px]">
           <div className="flex justify-between">
-            <p className="text-black/[.65]">Last Activity:</p>
-            <p className="text-black/[.45]">
+            <p className="text-black/[.55]">Last Activity:</p>
+            <p className="text-black/[.75]">
               {activity
                 ? activity?.history?.length > 0 &&
-                  (activity?.history?.[activity?.history?.length - 1]?.type === "note"
-                    ? "Note added"
-                    : "Email Sent")
+                (activity?.history?.[activity?.history?.length - 1]?.type === "note"
+                  ? "Note added"
+                  : "Email Sent")
                 : ""}{" "}
               {activity ? "|" : "-"}{" "}
               {activity
                 ? activity?.history?.length > 0 &&
-                  convertToFormattedDate(
-                    activity?.history?.[activity?.history?.length - 1]?.createdAt
-                  )
+                convertToFormattedDate(
+                  activity?.history?.[activity?.history?.length - 1]?.createdAt
+                )
                 : ""}
             </p>
           </div>
-          <div className="flex justify-between">
+          {/* <div className="flex justify-between">
             <p className="text-black/[.65]">Deal Size:</p>
             <p className="text-black/[.45]">Rs.{Item?.potential_deal_size}</p>
-          </div>
+          </div> */}
           <div className="flex justify-between">
-            <p className="text-black/[.65]">Product/Service:</p>
-            <p className="text-black/[.45]">{item?.data?.product}</p>
+            <p className="text-black/[.55]">Product/Service:</p>
+            <p className="text-black/[.75]">{item?.data?.product}</p>
           </div>
         </div>
 
@@ -288,7 +283,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           <div className="icons flex gap-[6px]">
             <Image
               src={getBasicIcon("Tasks")}
-              className={`w-[16px] cursor-pointer`}
+              className={`w-[20px] cursor-pointer`}
               alt=""
               width={15}
               height={15}
@@ -301,7 +296,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
             <Image
               src={getBasicIcon("Mail")}
-              className={`w-[16px] cursor-pointer`}
+              className={`w-[20px] cursor-pointer`}
               alt=""
               width={15}
               height={15}
@@ -314,7 +309,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
             <Image
               src={getBasicIcon("Calendar")}
-              className={`w-[16px] cursor-pointer`}
+              className={`w-[20px] cursor-pointer`}
               alt=""
               width={15}
               height={15}
@@ -327,7 +322,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
             <Image
               src={getBasicIcon("Phone")}
-              className={`w-[16px] cursor-pointer`}
+              className={`w-[20px] cursor-pointer`}
               alt=""
               width={15}
               height={15}
@@ -340,7 +335,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
             <Image
               src={getBasicIcon("Chat")}
-              className={`w-[16px] cursor-pointer`}
+              className={`w-[20px] cursor-pointer`}
               alt=""
               width={15}
               height={15}
@@ -353,10 +348,10 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
           </div>
         </div>
-        <div className="px-[10px] py-[5px] text-[12px] text-black rounded-[14px] border border-black flex mt-[10px] opacity-80 gap-[4px] w-[fit-content]">
+        <div className="px-[10px] py-[5px] text-[12px] text-black rounded-[14px] border border-black flex mt-[10px] opacity-80 gap-[4px] w-[100%] flex justify-between">
           <Image
             src={getBasicIcon("Phone")}
-            className={`w-[16px]`}
+            className={`w-[18px]`}
             alt=""
             width={15}
             height={15}
@@ -368,7 +363,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
 
           <Image
             src={getBasicIcon("Mail")}
-            className={`w-[16px]`}
+            className={`w-[18px]`}
             alt=""
             width={15}
             height={15}
@@ -380,7 +375,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
 
           <Image
             src={getBasicIcon("Tasks")}
-            className={`w-[16px] cursor-pointer`}
+            className={`w-[18px] cursor-pointer`}
             onClick={() => {
               AddLead(1, 2);
             }}
@@ -393,8 +388,8 @@ const KanbanItem = ({ item, i, Item }: any) => {
           />
           <p>{Activities.notes}</p>
           <Image
-            src={getBasicIcon("calendar")}
-            className={`w-[16px]`}
+            src={getBasicIcon("Calendar")}
+            className={`w-[18px]`}
             alt=""
             width={15}
             height={15}
@@ -402,10 +397,10 @@ const KanbanItem = ({ item, i, Item }: any) => {
               objectFit: "contain",
             }}
           />
-          <p>-</p>
+          <p>0</p>
           <Image
             src={getBasicIcon("Attachment")}
-            className={`w-[16px]`}
+            className={`w-[18px]`}
             alt=""
             width={15}
             height={15}
@@ -413,10 +408,10 @@ const KanbanItem = ({ item, i, Item }: any) => {
               objectFit: "contain",
             }}
           />
-          <p>-</p>
+          <p>0</p>
           <Image
             src={getBasicIcon("Chat")}
-            className={`w-[16px]`}
+            className={`w-[18px]`}
             alt=""
             width={15}
             height={15}
@@ -424,7 +419,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
               objectFit: "contain",
             }}
           />
-          <p>-</p>
+          <p>0</p>
         </div>
       </div>
       {notes && (

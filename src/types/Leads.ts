@@ -18,6 +18,7 @@ export default interface Lead {
   source: string
   leadId: string
   owners: Owner[]
+  activityId: any
   __v: number
 }
 
