@@ -1,3 +1,5 @@
+import { CompanyId, CustomerId } from "./Leads";
+
 export interface ActiveCall {
   _id: string;
   callId: string;
@@ -52,30 +54,4 @@ export interface Note {
   _id: string;
   createdAt: string;
   updatedAt: string;
-}
-
-export interface CompanyId {
-  _id: string;
-  company_name: string;
-  company_website_url: string;
-  company_icon: string;
-  company_location: string;
-  company_product_category: string;
-  company_description: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-export interface CustomerId {
-  _id: string;
-  name: string;
-  contact: string;
-  email: string;
-  parentId: string;
-  designation: string;
-  companyId: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
 }
