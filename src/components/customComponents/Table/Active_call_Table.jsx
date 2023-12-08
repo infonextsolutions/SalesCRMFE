@@ -24,7 +24,7 @@ const LeadsTable = ({ totalRecords, search }) => {
 
   const getallItems = async (current) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/active-call/find-all?limit=${limit}&page=${current}`
+      `https://salescrmbe.onrender.com/api/active-call/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
     return data;
@@ -45,7 +45,7 @@ const LeadsTable = ({ totalRecords, search }) => {
       if (pageNumber >= count && pageCount !== 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://testsalescrm.nextsolutions.in/api/active-call/find-all`
+          `https://salescrmbe.onrender.com/api/active-call/find-all`
         );
         const data = res.data.result;
 

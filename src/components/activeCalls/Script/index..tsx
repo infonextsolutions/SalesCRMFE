@@ -92,7 +92,7 @@ const ScriptDoc = ({
             onClick={(e) => {
               axios
                 .delete(
-                  `https://testsalescrm.nextsolutions.in/api/call-script/delete-by-id?id=${id}`
+                  `https://salescrmbe.onrender.com/api/call-script/delete-by-id?id=${id}`
                 )
                 .then((e) => {
                   console.log(e, "huqbfq");
@@ -360,7 +360,7 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   const refresh = () => {
     axios
       .get(
-        `https://testsalescrm.nextsolutions.in/api/call-script/active-call?activeCallId=${data._id}`
+        `https://salescrmbe.onrender.com/api/call-script/active-call?activeCallId=${data._id}`
       )
       .then((e) => {
         console.log(setCurrScripts(e.data.result));

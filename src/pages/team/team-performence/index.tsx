@@ -82,7 +82,7 @@ export default function Open({ data }: any) {
 
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/lead-report/find-all?page=0&limit=10"
+    "https://salescrmbe.onrender.com/api/lead-report/find-all?page=0&limit=10"
   );
   console.log(response.data);
   return {

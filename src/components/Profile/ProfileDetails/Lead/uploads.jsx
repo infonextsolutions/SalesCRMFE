@@ -84,7 +84,7 @@ const Uploads = ({ cancel, id, refresh }) => {
 
       const res = await axios
         .post(
-          `https://testsalescrm.nextsolutions.in/api/leads/addLeadAttachments`,
+          `https://salescrmbe.onrender.com/api/leads/addLeadAttachments`,
           formData
         )
         .then((e) => {

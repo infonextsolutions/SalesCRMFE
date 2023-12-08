@@ -179,7 +179,7 @@ const Calls = ({ data }: any) => {
               list: [],
               onClick1: async () => {
                 // const response = await axios.post(
-                //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+                //   "https://salescrmbe.onrender.com/api/calling/make-call",
                 //   {
                 //     callTo: "7669481778",
                 //   }
@@ -220,7 +220,7 @@ const Calls = ({ data }: any) => {
 
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/recording/getManualRecordingList"
+    "https://salescrmbe.onrender.com/api/recording/getManualRecordingList"
   );
   return {
     props: {

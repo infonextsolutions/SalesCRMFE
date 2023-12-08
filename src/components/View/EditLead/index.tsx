@@ -112,7 +112,7 @@ const EditLead = ({ cancel, data, update, title }: { cancel: any; data: any; upd
     customerId: data?.companyId._id,
   });
   const submit = () => {
-    const url = "https://testsalescrm.nextsolutions.in/api/leads/update";
+    const url = "https://salescrmbe.onrender.com/api/leads/update";
     axios
       .put(url, {
         id: data._id,

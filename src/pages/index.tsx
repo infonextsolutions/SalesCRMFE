@@ -58,6 +58,10 @@ export default function Home({ data }: any) {
 
   const router = useRouter();
 
+  useEffect(() => {
+    router.push("/dashboard");
+  }, []);
+
   //  useEffect(()=>{
   //     // router.push("/calls/upload-calls");
   //   })
@@ -119,7 +123,7 @@ export default function Home({ data }: any) {
 
 export async function getServerSideProps({ query, ...params }: any) {
   // const response = await axios.get(
-  //   "https://testsalescrm.nextsolutions.in/api/leads/find-all"
+  //   "https://salescrmbe.onrender.com/api/leads/find-all"
   // );
   return {
     props: {

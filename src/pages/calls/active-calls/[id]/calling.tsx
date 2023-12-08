@@ -108,7 +108,7 @@ const AudioProfile = ({ data, scripts }: any) => {
     console.log("audioFile");
     axios
       .post(
-        "https://testsalescrm.nextsolutions.in/api/recording/add-rc",
+        "https://salescrmbe.onrender.com/api/recording/add-rc",
         formData
       )
       .then((e: any) => {
@@ -181,7 +181,7 @@ const AudioProfile = ({ data, scripts }: any) => {
             //   list: [],
             //   onClick1: async () => {
             //     const url =
-            //       "https://testsalescrm.nextsolutions.in/api/calling/call-status";
+            //       "https://salescrmbe.onrender.com/api/calling/call-status";
             //     axios.post(url, {
             //       sid: "8af470ce2b4befc3f0e8292d237e175b",
             //     }).then((e)=>{
@@ -198,7 +198,7 @@ const AudioProfile = ({ data, scripts }: any) => {
               list: [],
               onClick1: async () => {
                 // const response = await axios.post(
-                //   "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+                //   "https://salescrmbe.onrender.com/api/calling/make-call",
                 //   {
                 //     callTo: "7669481778",
                 //   }
@@ -265,12 +265,12 @@ const AudioProfile = ({ data, scripts }: any) => {
 export default AudioProfile;
 
 export async function getServerSideProps({ query, params }: any) {
-  // "https://testsalescrm.nextsolutions.in/api/active-call/find-all"
+  // "https://salescrmbe.onrender.com/api/active-call/find-all"
   const response = await axios.get(
-    `https://testsalescrm.nextsolutions.in/api/active-call/find-by-id?id=${params.id}`
+    `https://salescrmbe.onrender.com/api/active-call/find-by-id?id=${params.id}`
   );
   const another = await axios.get(
-    `https://testsalescrm.nextsolutions.in/api/call-script/active-call?activeCallId=${response?.data?.result?._id}`
+    `https://salescrmbe.onrender.com/api/call-script/active-call?activeCallId=${response?.data?.result?._id}`
   );
   console.log(another);
   return {

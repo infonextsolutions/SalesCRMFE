@@ -10,7 +10,7 @@ export default Update;
 export async function getServerSideProps({ query, ...params }: any) {
   // console.log(params.limit,params.page);
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/leads/update"
+    "https://salescrmbe.onrender.com/api/leads/update"
   );
   return {
     props: {

@@ -49,7 +49,7 @@ const Notes = ({ data, refresh }: any) => {
     if (e) {
       // setList([...list, e]);
       const url =
-        "https://testsalescrm.nextsolutions.in/api/v2/active-call/notes";
+        "https://salescrmbe.onrender.com/api/v2/active-call/notes";
       const { title, content } = e;
       console.log(e, "please ch-11");
       axios

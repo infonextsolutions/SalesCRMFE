@@ -116,9 +116,8 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -287,20 +286,42 @@ const ExpandableRow = ({
         <div className="w-[100%] mt-[10px]">
           <p className="text-[16px] text-[#000] font-medium">Social Media</p>
           <div className="flex mt-[2px]">
-            <Image
-              src={getBasicIcon("Twitter")}
-              className="mr-[8px] cursor-pointer"
-              height={20}
-              width={20}
-              alt=""
-            />
-            <Image
-              src={getBasicIcon("Linked")}
-              className=" cursor-pointer"
-              height={20}
-              width={20}
-              alt=""
-            />
+            <a href="">
+              <Image
+                src={getBasicIcon("Twitter")}
+                className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                height={20}
+                width={20}
+                alt=""
+              />
+            </a>
+            <a href="">
+              <Image
+                src={getBasicIcon("Facebook")}
+                className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                height={20}
+                width={20}
+                alt=""
+              />
+            </a>
+            <a href="">
+              <Image
+                src={getBasicIcon("Instagram")}
+                className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                height={20}
+                width={20}
+                alt=""
+              />
+            </a>
+            <a href="">
+              <Image
+                src={getBasicIcon("Linkedin")}
+                className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                height={20}
+                width={20}
+                alt=""
+              />
+            </a>
           </div>
         </div>
       </div>
@@ -368,7 +389,7 @@ const LeadContainer = ({
   const [call, setCall] = React.useState(false);
   const [detailShow, setDetailShow] = useState(false);
 
-  console.log(LeadData, "please chhhh");
+  console.log("--------------- LEAD DATA ------------------", LeadData);
   const num = Math.floor(Math.random() * 4);
   const showNotes = () => {
     setNotes(true);
@@ -469,7 +490,7 @@ const LeadContainer = ({
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${LeadData._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${LeadData._id}`
       )
       .then((e) => {
         setLeadData(e.data.result);
@@ -633,8 +654,8 @@ const LeadContainer = ({
           <LeadItemMultiple
             width={130}
             left={20}
-            upperText={company.company_name}
-            bottomText={company.company_location}
+            upperText={LeadData?.companyId.company_name}
+            bottomText={LeadData?.companyId?.company_location || LeadData?.companyId?.company_address}
             bold={true}
             click={true}
             route={`${pathname}/${id}/company-profile`}
@@ -642,12 +663,12 @@ const LeadContainer = ({
           <LeadItem
             width={110}
             left={10}
-            text={customer.name}
+            text={LeadData?.customerId?.customer_name}
             click={true}
             route={`${pathname}/${id}/client-poc-profile`}
           />
-          <LeadItem width={190} left={20} text={customer.email} />
-          <LeadItem width={130} left={20} text={customer.contact} />
+          <LeadItem width={200} left={20} text={LeadData?.customerId?.customer_email} />
+          <LeadItem width={130} left={20} text={LeadData?.customerId?.customer_contact} />
           <QuickActions
             width={120}
             notes={() => {
@@ -673,25 +694,26 @@ const LeadContainer = ({
               contacts.length > 1
                 ? `${contacts[0].name}, ${contacts[1].name}`
                 : contacts.length > 0
-                ? `${contacts[0].name}`
-                : "-"
+                  ? `${contacts[0].name}`
+                  : "-"
             }
-            // text={"Anil L, Paul G, Rekha"}
+          // text={"Anil L, Paul G, Rekha"}
           />
-          <LeadItem width={120} left={10} textLeft={10} text={leadStage} />
-          <LeadItem width={120} left={10} text={leadStatus} textLeft={5} />
+          <LeadItem width={120} left={10} textLeft={10} text={LeadData.leadStage} />
+          <LeadItem width={120} left={10} text={LeadData.leadStatus} textLeft={5} />
           <LeadItem
             width={130}
             left={10}
             textLeft={10}
             text={LeadData?.owners[0]?.name}
           />
+          <LeadItem width={200} left={10} textLeft={10} text={"-"} />
           <LeadItem width={150} left={10} text={LeadData.inquiry} />
           <LeadItem
             width={150}
             left={10}
             textLeft={10}
-            text={company.company_product_category}
+            text={LeadData?.product_category}
           />
           {/* <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} /> */}
 
@@ -733,17 +755,17 @@ const LeadContainer = ({
             upperText={
               activity
                 ? activity.history.length > 0 &&
-                  (activity.history[activity.history.length - 1].type === "note"
-                    ? "Note added"
-                    : "Email Sent")
+                (activity.history[activity.history.length - 1].type === "note"
+                  ? "Note added"
+                  : "Email Sent")
                 : "-"
             }
             bottomText={
               activity
                 ? activity.history.length > 0 &&
-                  convertToFormattedDate(
-                    activity.history[activity.history.length - 1].createdAt
-                  )
+                convertToFormattedDate(
+                  activity.history[activity.history.length - 1].createdAt
+                )
                 : ""
             }
           />
@@ -784,7 +806,7 @@ const LeadContainer = ({
             link={true}
             width={150}
             left={10}
-            text={company.company_website_url}
+            text={LeadData.leadSource}
           />
           {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
           {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
@@ -811,16 +833,9 @@ const LeadContainer = ({
       >
         {detailShow && (
           <ExpandableRow
-            // leadDesc={
-            //   "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
-            // }
             leadDesc={LeadData.lead_description}
-            // companyDesc={
-            //   "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
-            // }
             companyDesc={LeadData.companyId.company_description}
             companyWebsite={LeadData.companyId.company_website_url}
-            // LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
             LeadOwners={LeadData.owners}
             otherContacts={[
               { name: "Regina Cooper", position: "Project Manager" },
@@ -909,8 +924,8 @@ const LeadContainer = ({
 export default LeadContainer;
 
 interface LeadProps {
-  company: CompanyId;
-  customer: CustomerId;
+  company: any;
+  customer: any;
   id: String;
   leadStage: String;
   leadStatus: String;

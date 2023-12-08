@@ -553,7 +553,7 @@ const Questionnaire = ({ data, data1 }: any) => {
       console.log(questionList, 3141, title);
       axios
         .post(
-          "https://testsalescrm.nextsolutions.in/api/v2/active-call/questionnaire",
+          "https://salescrmbe.onrender.com/api/v2/active-call/questionnaire",
           {
             id: data._id,
             questionnaire: questionList,
@@ -566,7 +566,7 @@ const Questionnaire = ({ data, data1 }: any) => {
           setTimeout(() => {
             axios
               .get(
-                `https://testsalescrm.nextsolutions.in/api/active-call/find-by-id?id=${data._id}`
+                `https://salescrmbe.onrender.com/api/active-call/find-by-id?id=${data._id}`
               )
               .then((ev: any) => {
                 console.log(ev?.data?.result?.questionnaire, 12916498187);

@@ -13,7 +13,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
 
   //   const getallItems = async (current: any) => {
   //     const res = await axios.get(
-  //       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+  //       `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
   //     );
   //     const data = res.data.result;
   //     return data;
@@ -23,14 +23,14 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
     setLoading(true);
     const getItems = async () => {
       const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Open`
+        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open`
       );
       // console.log(res, "only check here");
-      const data = res.data.result;
+      const data = res?.data?.result;
       const filtered = data.filter(
         (e: Lead) =>
-          e.companyId?.company_name.includes(search) ||
-          e.customerId?.name.includes(search) ||
+          e.companyId?.company_name?.includes(search) ||
+          e.customerId?.name?.includes(search) ||
           e.potential_deal_size?.includes(search) ||
           e?.lead_title?.includes(search)||
           e?.leadId?.includes(search)
@@ -38,7 +38,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
 
       // const filtered = data;
       // console.log(filtered);
-      settotalLeads(filtered.length);
+      settotalLeads(filtered?.length);
       // console.log(data, search);
       setItems(filtered);
     };
@@ -52,8 +52,8 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
 
-  const stages = ["Lost", "Dead"];
-  const titles = [ "LOST", "DEAD"];
+  const stages = ["Won", "Lost", "Dead"];
+  const titles = [ "WON", "LOST", "DEAD"];
   console.log(items, "please check here");
   useEffect(() => {
     items.map((e: any, i: any) => {
@@ -86,7 +86,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
           })
         )} */}
 
-        {stages.map((col, i) => {
+        {stages?.map((col, i) => {
           const toBeFilter = items;
           const res = items.filter((obj: any) => {
             return obj.leadStage.includes(stages[i]);

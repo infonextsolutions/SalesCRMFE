@@ -8,7 +8,7 @@ const Kanban = ({ list }: KanbasProps) => {
   // console.log(list);
   const fetchItems = async () => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/leads/find-all`
+      `https://salescrmbe.onrender.com/api/leads/find-all`
     );
   };
   fetchItems();

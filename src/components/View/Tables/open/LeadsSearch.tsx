@@ -24,7 +24,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open`
+      `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open`
     );
     const data = res.data.result;
     return data;
@@ -37,7 +37,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     if (pageNumber >= count && pageCount != 0) setpageNumber(0);
     const getItems = async () => {
       const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Open`
+        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open`
       );
       // console.log(res, "only check here");
       const data = res.data.result;
@@ -72,7 +72,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const fetchItems = async (current: any) => {
   
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
+      `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
     const filtered = data.filter(

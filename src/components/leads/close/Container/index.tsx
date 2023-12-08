@@ -43,7 +43,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     };
 
     const response = await axios.post(
-      "https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Open",
+      "https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open",
       payload
     );
     records = { ...response.data };

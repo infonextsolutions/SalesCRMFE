@@ -10,8 +10,10 @@ export default interface Lead {
   existing_budget: string
   leadStatus: string
   leadStage: string
+  leadSource: string
   lead_title: string
   lead_description: string
+  product_category: string
   notes: Note[]
   source: string
   leadId: string
@@ -56,6 +58,15 @@ export interface CompanyId {
   company_location: string
   company_product_category: string
   company_description: string
+  industry_type: string
+  company_address: string
+  company_country: string
+  company_state: string
+  company_city: string
+  company_socialMedia1: string
+  company_socialMedia2: string
+  company_socialMedia1Url: string
+  company_socialMedia2Url: string
   createdAt: string
   updatedAt: string
   __v: number
@@ -66,11 +77,22 @@ export interface CustomerId {
   name: string
   contact: string
   email: string
-  parentId: string
   designation: string
   companyId: string
+  parentId: string
   createdAt: string
   updatedAt: string
+  customer_name: string
+  customer_contact: string
+  customer_email: string
+  customer_designation: string
+  customer_gender: string
+  industry: string
+  contacts: string[]
+  customer_socialMedia1: string
+  customer_socialMedia1Url: string
+  customer_socialMedia2: string
+  customer_socialMedia2Url: string
   __v: number
 }
 

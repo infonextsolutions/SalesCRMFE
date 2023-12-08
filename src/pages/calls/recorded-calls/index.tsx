@@ -175,7 +175,7 @@ const Calls = ({ data }: any) => {
 
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/recording/find-all"
+    "https://salescrmbe.onrender.com/api/recording/find-all"
   );
   return {
     props: {

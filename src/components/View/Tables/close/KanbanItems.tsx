@@ -183,7 +183,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${Item._id}`
+          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${Item._id}`
         )
         .then((e) => {
           const history = e.data.result.activityId.history;
@@ -217,10 +217,10 @@ const KanbanItem = ({ item, i, Item }: any) => {
   return (
     <>
       <div
-        className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] flex flex-col justify-between h-[260px] shadow-lg shadow-slate-400"
+        className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] flex flex-col justify-between mh-[270px] shadow-lg shadow-slate-400"
         key={i}
       >
-        <div className="block-heading text-black text-[11px] leading-4 mb-[23px]">
+        <div className="block-heading text-black text-[13px] leading-4 mb-[23px]">
           <p
             onClick={() => {
               leadId();
@@ -254,10 +254,10 @@ const KanbanItem = ({ item, i, Item }: any) => {
           </p>
           <p className="text-black/50">- {/* {item.data.names} */}</p>
         </div>
-        <div className="block-details text-black text-[10px] mb-[20px]">
+        <div className="block-details text-black text-[12px] mb-[20px]">
           <div className="flex justify-between">
             <p className="text-black/[.65]">Last Activity:</p>
-            <p className="text-black/[.35]">
+            <p className="text-black/[.45]">
               {activity
                 ? activity.history.length > 0 &&
                   (activity.history[activity.history.length - 1].type === "note"
@@ -275,20 +275,20 @@ const KanbanItem = ({ item, i, Item }: any) => {
           </div>
           <div className="flex justify-between">
             <p className="text-black/[.65]">Deal Size:</p>
-            <p className="text-black/[.35]">Rs.{Item?.potential_deal_size}</p>
+            <p className="text-black/[.45]">Rs.{Item?.potential_deal_size}</p>
           </div>
           <div className="flex justify-between">
             <p className="text-black/[.65]">Product/Service:</p>
-            <p className="text-black/[.35]">{item.data.product}</p>
+            <p className="text-black/[.45]">{item.data.product}</p>
           </div>
         </div>
 
-        <div className="quick-actions text-[10px] px-[9px] mt-auto py-[5px]  bg-slate-200 rounded-[12px] flex items-center justify-between">
+        <div className="quick-actions text-[10px] px-[9px] mt-auto py-[6px]  bg-slate-200 rounded-[12px] flex items-center justify-between">
           <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
-          <div className="icons flex gap-[4px] opacity-70">
+          <div className="icons flex gap-[6px]">
             <Image
               src={getBasicIcon("Tasks")}
-              className={`w-[14px] cursor-pointer`}
+              className={`w-[16px] cursor-pointer`}
               alt=""
               width={14}
               height={14}
@@ -301,7 +301,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
             <Image
               src={getBasicIcon("Mail")}
-              className={`w-[14px] cursor-pointer`}
+              className={`w-[16px] cursor-pointer`}
               alt=""
               width={14}
               height={14}
@@ -314,7 +314,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
             <Image
               src={getBasicIcon("Calendar")}
-              className={`w-[14px] cursor-pointer`}
+              className={`w-[16px] cursor-pointer`}
               alt=""
               width={14}
               height={14}
@@ -327,7 +327,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
             <Image
               src={getBasicIcon("Phone")}
-              className={`w-[14px] cursor-pointer`}
+              className={`w-[16px] cursor-pointer`}
               alt=""
               width={14}
               height={14}
@@ -340,7 +340,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
             <Image
               src={getBasicIcon("Chat")}
-              className={`w-[14px] cursor-pointer`}
+              className={`w-[16px] cursor-pointer`}
               alt=""
               width={14}
               height={14}
@@ -353,10 +353,10 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
           </div>
         </div>
-        <div className="px-[10px] py-[5px] text-[11px] text-black rounded-[14px] border border-black flex mt-[10px] opacity-80 gap-[4px]">
+        <div className="px-[10px] py-[5px] text-[12px] text-black rounded-[14px] border border-black flex mt-[10px] opacity-80 gap-[4px] w-[fit-content]">
           <Image
             src={getBasicIcon("Phone")}
-            className={`w-[14px]`}
+            className={`w-[16px]`}
             alt=""
             width={14}
             height={14}
@@ -368,7 +368,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
 
           <Image
             src={getBasicIcon("Mail")}
-            className={`w-[14px]`}
+            className={`w-[16px]`}
             alt=""
             width={14}
             height={14}
@@ -380,7 +380,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
 
           <Image
             src={getBasicIcon("Tasks")}
-            className={`w-[14px] cursor-pointer`}
+            className={`w-[16px] cursor-pointer`}
             onClick={() => {
               AddLead(1, 2);
             }}
@@ -394,7 +394,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           <p>{Activities.notes}</p>
           <Image
             src={getBasicIcon("calendar")}
-            className={`w-[14px]`}
+            className={`w-[16px]`}
             alt=""
             width={14}
             height={14}
@@ -405,7 +405,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           <p>-</p>
           <Image
             src={getBasicIcon("Attachment")}
-            className={`w-[14px]`}
+            className={`w-[16px]`}
             alt=""
             width={14}
             height={14}
@@ -416,7 +416,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           <p>-</p>
           <Image
             src={getBasicIcon("Chat")}
-            className={`w-[14px]`}
+            className={`w-[16px]`}
             alt=""
             width={14}
             height={14}

@@ -389,7 +389,7 @@ const EmailPage = ({
       subject: e2,
       content: e3,
     };
-    const url = "https://testsalescrm.nextsolutions.in/api/send-email";
+    const url = "https://salescrmbe.onrender.com/api/send-email";
     const body = {
       email: e1,
       subject: e2,
@@ -444,7 +444,7 @@ const EmailPage = ({
 
     axios
       .get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data._id}`
       )
       .then((res) => {
         console.log("new result is", res);

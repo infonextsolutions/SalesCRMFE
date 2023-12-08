@@ -83,7 +83,7 @@ export default function Open({ data }: any) {
 
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Close"
+    "https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Close"
   );
   return {
     props: {

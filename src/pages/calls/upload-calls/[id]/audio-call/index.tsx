@@ -163,7 +163,7 @@ export default CallProfile;
 
 export async function getServerSideProps({ query, params }: any) {
   const response = await axios.post(
-    `https://testsalescrm.nextsolutions.in/api/recording/getManualRecording`,
+    `https://salescrmbe.onrender.com/api/recording/getManualRecording`,
     {
       transId: params.id,
     }

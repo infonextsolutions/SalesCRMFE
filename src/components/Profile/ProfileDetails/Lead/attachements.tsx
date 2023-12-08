@@ -68,7 +68,7 @@ const ScriptDoc = ({
             alt=""
             onClick={(e) => {
               // axios
-              //   .delete(`https://testsalescrm.nextsolutions.in/api/call-script/delete-by-id?id=${id}`)
+              //   .delete(`https://salescrmbe.onrender.com/api/call-script/delete-by-id?id=${id}`)
               //   .then((e) => {
               //     console.log(e, "huqbfq");
               //     refresh();
@@ -206,7 +206,7 @@ const Attachements = ({ data }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data._id}`
+          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data._id}`
         )
         .then((e) => {
           console.log(e.data);
@@ -221,7 +221,7 @@ const Attachements = ({ data }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data._id}`
+          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data._id}`
         )
         .then((e) => {
           console.log(e.data);
@@ -299,7 +299,7 @@ const Attachements = ({ data }: any) => {
                 };
                 axios
                   .put(
-                    "https://testsalescrm.nextsolutions.in/api/leads/update",
+                    "https://salescrmbe.onrender.com/api/leads/update",
                     val
                   )
                   .then((e) => {
