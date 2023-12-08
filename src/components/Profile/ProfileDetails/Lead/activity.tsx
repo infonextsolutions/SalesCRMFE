@@ -4,7 +4,7 @@ import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import { LeadId } from "@/types/leadId";
 
-const Activityhistory = ({ data, data1 }: { data: any; data1: LeadId }) => {
+const Activityhistory = ({ data }: { data: any }) => {
   const history = data.activityId?.history ? data.activityId?.history : [];
   const notes = history.filter((item: any) => item.type == "note");
 

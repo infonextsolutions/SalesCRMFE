@@ -96,16 +96,16 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
               <div className="flex gap-[20px]" key={i}>
                 <div className="w-[270px] shrink-0 ">
                   <div className="leadName flex mb-[10px]">
-                    <div className="w-[100%] bg-renal-blue h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
+                    <div className="w-[100%] bg-slate-700 h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
                       <div className="enq-header font-medium flex items-center ml-[10px] text-[13px] flex gap-[8px] items-center">
                         <p className="">{titles[i]}</p>
                         <div className="text-[10px] h-[19px] justify-center w-[20px] font-medium text-[#fff] flex items-center bg-slate-400 px-[4px] h-[13px] rounded-[4px]">
                           {res.length}
                         </div>
                       </div>
-                      <a href="#" className="flex items-center">
+                      {/* <a href="#" className="flex items-center">
                         ...
-                      </a>
+                      </a> */}
                     </div>
                     {/* <div className="pl-[30px] h-[45px] bg-renal-blue rounded-xl flex items-center justify-center cursor-pointer ml-[15px] pr-[20px] relative p-[5px]">
                       {
