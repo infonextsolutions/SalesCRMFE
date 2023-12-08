@@ -580,7 +580,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             color={"#000"}
             // text={"Discussion on PX features"}
             text={
-              call_title?.active_calls.length > 0
+              call_title?.active_calls?.length > 0
                 ? call_title?.active_calls[0].call_title
                 : ""
             }

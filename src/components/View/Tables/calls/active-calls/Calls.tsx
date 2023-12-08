@@ -66,9 +66,9 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
           const idss: any = String(convertDatetimeToCustomFormat(e.updatedAt));
           const leadid = e.leadId?.leadId;
           return (
-            idss.includes(search) ||
-            leadid.includes(search) ||
-            e.call_title.includes(search)
+            idss?.includes(search) ||
+            leadid?.includes(search) ||
+            e?.call_title?.includes(search)
           );
         });
         filtered.reverse();

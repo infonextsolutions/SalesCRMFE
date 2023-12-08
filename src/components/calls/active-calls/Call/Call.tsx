@@ -77,7 +77,7 @@ const CallItem = ({
             color: color ? color : "#8A9099",
           }}
           onClick={() => {
-            if (click) {
+            if (click && route) {
               router.push(route);
             }
           }}
@@ -516,7 +516,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={110}
             left={20}
-            text={CallData?.customerId?.name}
+            text={CallData?.customerId?.customer_name}
             color={"#000"}
           />
           <CallItem
