@@ -9,6 +9,7 @@ import { LeadId } from "@/types/leadId";
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
 import axios from "axios";
+import Lead from "@/types/Leads";
 
 const ProfilePage = ({ data1, updated }: any) => {
   const [edit, setEdit] = useState(false);
@@ -35,7 +36,7 @@ const ProfilePage = ({ data1, updated }: any) => {
     return ""; // Return an empty string if no match is found
   }
 
-  const [data, setData] = useState<LeadId>(data1);
+  const [data, setData] = useState<Lead>(data1);
 
   // const domain = extractDomain(data.companyId?.company_website_url);
 
@@ -128,7 +129,7 @@ const ProfilePage = ({ data1, updated }: any) => {
     const month = monthNames[dateObject.getMonth()];
     const year = dateObject.getFullYear();
 
-    return `${hours}:${minutes}, ${day}, ${month}, ${year}`;
+    return `${hours}:${minutes} ${day} ${month} ${year}`;
   }
 
   return (
@@ -143,10 +144,10 @@ const ProfilePage = ({ data1, updated }: any) => {
           />
         </Backdrop>
       )}
-      <div className="">
-        <div className="flex -space-x-2 overflow-hidden">
+      <div className="w-[100%]">
+        <div className="flex -space-x-2 overflow-hidden w-[100%]">
           <div className="flex items-center w-[100%] justify-between pb-[10px] ">
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5 w-[100%]">
               <Image
                 className="inline-block w-[40px] rounded-full ring-2 ring-white"
                 src={getRoundedAvatar(5, 30)}
@@ -206,14 +207,11 @@ const ProfilePage = ({ data1, updated }: any) => {
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium"> Social Media</p>
-          <p className="text-sm font-semibold text-black">
-            {data?.companyId.twitter_url &&
-              data?.companyId.twitter_url.length !== 0 && (
+          <p className="text-sm font-semibold text-black flex">
+            {data?.companyId?.company_socialMedia1 && (
+              <a href={data?.companyId?.company_socialMedia1Url}>
                 <Image
-                  onClick={() => {
-                    window.open(data?.companyId.twitter_url, "_blank");
-                  }}
-                  src={getBasicIcon("Twitter")}
+                  src={getBasicIcon(data?.companyId?.company_socialMedia1)}
                   className={`w-[20px] svg-grey mr-2`}
                   alt=""
                   width={20}
@@ -222,15 +220,13 @@ const ProfilePage = ({ data1, updated }: any) => {
                     objectFit: "contain",
                   }}
                 />
-              )}
-            {data?.companyId.linkedin_url &&
-              data?.companyId.linkedin_url.length !== 0 && (
+              </a>
+            )}
+            {data?.companyId?.company_socialMedia2 && (
+              <a href={data?.companyId?.company_socialMedia2Url}>
                 <Image
-                  onClick={() => {
-                    window.open(data?.companyId.linkedin_url, "_blank");
-                  }}
-                  src="/Images/Icons/Basic/Linked.svg"
-                  className={`w-[20px] svg-grey`}
+                  src={getBasicIcon(data?.companyId?.company_socialMedia2)}
+                  className={`w-[20px] svg-grey mr-2`}
                   alt=""
                   width={20}
                   height={20}
@@ -238,7 +234,8 @@ const ProfilePage = ({ data1, updated }: any) => {
                     objectFit: "contain",
                   }}
                 />
-              )}
+              </a>
+            )}
           </p>
         </div>
 
@@ -262,7 +259,7 @@ const ProfilePage = ({ data1, updated }: any) => {
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead owner</p>
           <p className="text-sm font-semibold text-black">
-            {data1.owner ?? "-"}
+            {data1.owners[0] ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
@@ -280,7 +277,7 @@ const ProfilePage = ({ data1, updated }: any) => {
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Updated on</p>
           <p className="text-sm font-semibold text-black">
-            {data1.lead_updatedAt ?? "-"}
+            {formatDateFromISOString(data1.updatedAt) ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-12/12  mt-[7px] leading-[21px]">
@@ -311,7 +308,7 @@ const ProfilePage = ({ data1, updated }: any) => {
                     objectFit: "contain",
                   }}
                 />
-                <p className="text-black">-</p>
+                <p className="text-black">0</p>
               </div>
               <div className="flex gap-2 mr-[8px]">
                 <Image
@@ -339,7 +336,7 @@ const ProfilePage = ({ data1, updated }: any) => {
                   }}
                   className="mr-[3px] svg-red cursor-pointer"
                 />
-                <p className="text-black">-</p>
+                <p className="text-black">0</p>
               </div>
               <div className="flex gap-2 mr-[8px]">
                 <Image
@@ -373,13 +370,13 @@ const ProfilePage = ({ data1, updated }: any) => {
           />
           <div className="ml-3">
             <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-wide text-[#000] -900 font-normal">
-              {data.customerId.name}
+              {data.customerId.customer_name}
             </h2>
             <a
               href="#0"
               className="block text-xs text-[14px] text-[#000] -500 tracking-wide hover:text-indigo-500"
             >
-              {data.customerId.designation}
+              {data.customerId.customer_designation}
             </a>
           </div>
         </div>
@@ -387,31 +384,28 @@ const ProfilePage = ({ data1, updated }: any) => {
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[-22px] leading-[21px]">
           <p className="text-sm font-medium">Gender</p>
           <p className="text-sm font-semibold text-black">
-            {data.customerId.gender}
+            {data.customerId.customer_gender}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Phone</p>
           <p className="text-sm font-semibold text-black">
-            {data.customerId.contact}
+            {data.customerId.customer_contact}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Email</p>
           <p className="text-sm font-semibold text-black">
-            {data.customerId.email}
+            {data.customerId.customer_email}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Social Media</p>
           <div className="flex">
-            {data?.companyId.twitter_url &&
-              data?.companyId.twitter_url.length !== 0 && (
+            {data?.customerId?.customer_socialMedia1 && (
+              <a href={data?.customerId?.customer_socialMedia1Url}>
                 <Image
-                  onClick={() => {
-                    window.open(data?.companyId.twitter_url, "_blank");
-                  }}
-                  src={getBasicIcon("Twitter")}
+                  src={getBasicIcon(data?.customerId?.customer_socialMedia1)}
                   className={`w-[20px] svg-grey mr-2`}
                   alt=""
                   width={20}
@@ -420,15 +414,13 @@ const ProfilePage = ({ data1, updated }: any) => {
                     objectFit: "contain",
                   }}
                 />
-              )}
-            {data?.companyId.linkedin_url &&
-              data?.companyId.linkedin_url.length !== 0 && (
+              </a>
+            )}
+            {data?.customerId?.customer_socialMedia2 && (
+              <a href={data?.customerId?.customer_socialMedia2Url}>
                 <Image
-                  onClick={() => {
-                    window.open(data?.companyId.linkedin_url, "_blank");
-                  }}
-                  src="/Images/Icons/Basic/Linked.svg"
-                  className={`w-[20px] svg-grey`}
+                  src={getBasicIcon(data?.customerId?.customer_socialMedia2)}
+                  className={`w-[20px] svg-grey mr-2`}
                   alt=""
                   width={20}
                   height={20}
@@ -436,7 +428,8 @@ const ProfilePage = ({ data1, updated }: any) => {
                     objectFit: "contain",
                   }}
                 />
-              )}
+              </a>
+            )}
           </div>
         </div>
 

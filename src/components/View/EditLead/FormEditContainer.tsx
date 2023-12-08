@@ -8,6 +8,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
+import { CompanyId, CustomerId } from "@/types/Leads";
 
 const FormEditContainer = ({
   titles,
@@ -39,9 +40,8 @@ const FormEditContainer = ({
   const dispatch = useAppDispatch();
   return (
     <div
-      className={`w-[${
-        width ? width : "100%"
-      }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
+      className={`w-[${width ? width : "100%"
+        }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
     >
       {/* <Navigator callback={CallBack} current={current} list={list} /> */}
       <h1 className="w-[100%] text-[#3F434A] text-center pt-[10px] font-medium text-3xl">
@@ -226,9 +226,9 @@ const FormEditContainer = ({
                             <option value="" selected>
                               -- Select Lead Manager --
                             </option>
-                            <option value="LM1">LM1</option>
-                            <option value="LM2">LM2</option>
-                            <option value="LM3">LM3</option>
+                            <option value="507f1f77bcf86cd799439011">LM1</option>
+                            <option value="507f191e810c19729de860ea">LM2</option>
+                            <option value="00000020f51bb4362eee2a4d">LM3</option>
                           </Field>
                         </div>
                         <div className="w-[100%]">
@@ -294,7 +294,7 @@ const FormEditContainer = ({
                                 -- Select Lead Stage --
                               </option>
                               {data.leadStatus === "open" ||
-                              data.leadStatus === "Open" ? (
+                                data.leadStatus === "Open" ? (
                                 <>
                                   <option value="Enquiry">Enquiry</option>
                                   <option value="Interaction">
@@ -353,12 +353,12 @@ const FormEditContainer = ({
                   initialValues={{
                     company_name: data?.companyId?.company_name,
                     industry_type: data?.companyId?.company_product_category,
-                    company_location: data.companyId.company_location,
+                    company_address: data?.companyId?.company_address,
                     company_description: data?.companyId?.company_description,
                     country: data?.companyId?.company_country,
                     state: data?.companyId?.company_state,
                     city: data?.companyId?.company_city,
-                    website_url: data?.companyId?.company_website_url,
+                    company_website_url: data?.companyId?.company_website_url,
                     company_socialMedia1: data?.companyId?.company_socialMedia1,
                     company_socialMedia1Url:
                       data?.companyId?.company_socialMedia1Url,
@@ -379,12 +379,12 @@ const FormEditContainer = ({
                           _id: data.companyId._id,
                           company_name: values?.company_name,
                           company_product_category: values?.industry_type,
-                          company_location: values?.company_location,
+                          company_address: values?.company_address,
                           company_description: values?.company_description,
                           company_country: values?.country,
                           company_state: values?.state,
                           company_city: values?.city,
-                          company_website_url: values?.website_url,
+                          company_website_url: values?.company_website_url,
                           company_socialMedia1: values?.company_socialMedia1,
                           company_socialMedia1Url:
                             values?.company_socialMedia1Url,
@@ -470,14 +470,14 @@ const FormEditContainer = ({
                         <div className="w-[100%]">
                           <label
                             className="font-medium text-[#8a9099]"
-                            htmlFor="company_location"
+                            htmlFor="company_address"
                           >
                             Company Address
                           </label>
                           <Field
                             type="text"
-                            name="company_location"
-                            id="company_location"
+                            name="company_address"
+                            id="company_address"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Company Location"
                           />
@@ -553,8 +553,8 @@ const FormEditContainer = ({
                           </label>
                           <Field
                             type="text"
-                            name="website_url"
-                            id="website_url"
+                            name="company_website_url"
+                            id="company_website_url"
                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[5px] rounded-[13px] py-[10px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                             placeholder="Company Website"
                           />
@@ -665,11 +665,11 @@ const FormEditContainer = ({
                 </h1>
                 <Formik
                   initialValues={{
-                    name: data.customerId.name,
-                    designation: data.customerId.designation,
-                    phone: data.customerId.contact,
-                    email: data.customerId.email,
-                    gender: data.customerId.gender,
+                    customer_name: data.customerId.customer_name,
+                    customer_designation: data.customerId.customer_designation,
+                    customer_contact: data.customerId.customer_contact,
+                    customer_email: data.customerId.customer_email,
+                    customer_gender: data.customerId.customer_gender,
                     customer_socialMedia1:
                       data?.customerId?.customer_socialMedia1,
                     customer_socialMedia1Url:
@@ -690,11 +690,11 @@ const FormEditContainer = ({
                         customerId: {
                           ...data.customerId,
                           _id: data.customerId._id,
-                          name: values.name,
-                          designation: values.designation,
-                          gender: values.gender,
-                          contact: values.phone,
-                          email: values.email,
+                          customer_name: values.customer_name,
+                          customer_designation: values.customer_designation,
+                          customer_gender: values.customer_gender,
+                          customer_contact: values.customer_contact,
+                          customer_email: values.customer_email,
                           customer_socialMedia1: values?.customer_socialMedia1,
                           customer_socialMedia1Url:
                             values?.customer_socialMedia1Url,
@@ -729,7 +729,7 @@ const FormEditContainer = ({
                           <div className="flex gap-5">
                             <div className="mb-4 flex-grow">
                               <label
-                                htmlFor="name"
+                                htmlFor="customer_name"
                                 className="block font-medium mb-2 text-[#8a9099]"
                               >
                                 {/* Primary Client POC Name */}
@@ -737,14 +737,14 @@ const FormEditContainer = ({
                               </label>
                               <Field
                                 type="text"
-                                id="name"
-                                name="name"
+                                id="customer_name"
+                                name="customer_name"
                                 className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                               />
                             </div>
                             <div className="mb-4 flex-grow">
                               <label
-                                htmlFor="designation"
+                                htmlFor="customer_designation"
                                 className="block font-medium mb-2 text-[#8a9099]"
                               >
                                 {/* Primary Client POC Designation */}
@@ -752,8 +752,8 @@ const FormEditContainer = ({
                               </label>
                               <Field
                                 type="text"
-                                id="designation"
-                                name="designation"
+                                id="customer_designation"
+                                name="customer_designation"
                                 className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                               />
                             </div>
@@ -762,7 +762,7 @@ const FormEditContainer = ({
                         <div className="mb-4 flex gap-5">
                           <div className="flex-grow">
                             <label
-                              htmlFor="phone"
+                              htmlFor="customer_contact"
                               className="block font-medium mb-2 text-[#8a9099]"
                             >
                               {/* Phone */}
@@ -770,37 +770,37 @@ const FormEditContainer = ({
                             </label>
                             <Field
                               type="text"
-                              id="phone"
-                              name="phone"
+                              id="customer_contact"
+                              name="customer_contact"
                               className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                             />
                           </div>
                           <div className="flex-grow">
                             <label
-                              htmlFor="email"
+                              htmlFor="customer_email"
                               className="block font-medium mb-2 text-[#8a9099]"
                             >
                               Email
                             </label>
                             <Field
                               type="email"
-                              id="email"
-                              name="email"
+                              id="customer_email"
+                              name="customer_email"
                               className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                             />
                           </div>
                         </div>
                         <div className="w-1/2">
                           <label
-                            htmlFor="gender"
+                            htmlFor="customer_gender"
                             className="block font-medium mb-2 text-[#8a9099]"
                           >
                             Gender
                           </label>
                           <Field
                             as="select"
-                            id="gender"
-                            name="gender"
+                            id="customer_gender"
+                            name="customer_gender"
                             className="w-full bg-white border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           >
                             <option value="" selected>
@@ -1210,46 +1210,6 @@ export interface Root {
   createdAt: string;
   scriptId: string;
   callId: string;
-}
-
-export interface CompanyId {
-  _id: string;
-  company_name: string;
-  company_website_url: string;
-  company_icon: string;
-  company_location: string;
-  company_country?: string;
-  company_state?: string;
-  company_city?: string;
-  company_product_category: string;
-  company_description: string;
-  createdAt: string;
-  updatedAt: string;
-  linkedin_url: string;
-  twitter_url: string;
-  company_socialMedia1?: string;
-  company_socialMedia2?: string;
-  company_socialMedia1Url?: string;
-  company_socialMedia2Url?: string;
-  __v: number;
-}
-
-export interface CustomerId {
-  _id: string;
-  name: string;
-  contact: string;
-  email: string;
-  parentId: string;
-  designation: string;
-  companyId: string;
-  createdAt: string;
-  updatedAt: string;
-  gender?: string;
-  customer_socialMedia1?: string;
-  customer_socialMedia1Url?: string;
-  customer_socialMedia2?: string;
-  customer_socialMedia2Url?: string;
-  __v: number;
 }
 
 export interface Note {

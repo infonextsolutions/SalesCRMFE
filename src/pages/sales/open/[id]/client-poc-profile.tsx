@@ -16,13 +16,13 @@ const ClientProfile = ({ data }: any) => {
   const titles = ["Deals"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  const [ttitle, setTitle] = useState(data.result.customerId.name);
+  const [ttitle, setTitle] = useState(data?.result?.customerId?.customer_name);
   return (
     <>
       <Navbar title="Manage Leads" src="manageLeadsIcon" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
-          title={`Manage Leads>${ttitle}`}
+          title={`Manage Leads > ${ttitle}`}
           buttons={
             [
               // {

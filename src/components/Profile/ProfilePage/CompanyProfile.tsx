@@ -100,10 +100,10 @@ const CompanyProfile = ({ data1, refresh }: any) => {
           />
           <div className="flex items-center justify-center flex-col">
             <h2 className="text-[20px] whitespace-nowrap leading-7 tracking-wide text-[#000] capitalize -900 font-medium">
-              {data.result.companyId.company_name}
+              {data?.result?.companyId?.company_name}
             </h2>
             <p className="block  py-2 text-xs leading-[10px ] font-medium ml-[-6px] text-[14px] text-[#8A9099] -600 hover:text-indigo-500">
-              {data.result.companyId.company_location}
+              {data?.result?.companyId?.company_address || data?.result?.companyId?.company_location}
             </p>
           </div>
           <div className="w-[40px] relative bottom-4 h-[100%] flex items-center justify-center">
@@ -132,7 +132,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             COMPANY NAME
           </strong>
           <p className="block text-black ">
-            {data.result.companyId.company_name}
+            {data?.result?.companyId?.company_name}
           </p>
         </li>
         <li className="px-2 mt-4">
@@ -142,7 +142,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
           </strong>
           {/* <p className="block text-black">12th Block tower A,</p> */}
           <p className="block text-black">
-            {data.result.companyId.company_location}
+            {data?.result?.companyId?.company_address}
           </p>
         </li>
         <li className="px-2 mt-4">
@@ -153,10 +153,10 @@ const CompanyProfile = ({ data1, refresh }: any) => {
           {/* made company website open in new page */}
           <span className="block text-black">
             <a
-              href={`${data.result.companyId.company_website_url}`}
+              href={`${data?.result?.companyId?.company_website_url}`}
               target="_blank"
             >
-              {data.result.companyId.company_website_url}
+              {data?.result?.companyId?.company_website_url}
             </a>
           </span>
         </li>
@@ -165,7 +165,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             INDUSTRY TYPE
           </strong>
           <a href="industry:" className="block text-black">
-            {data.result.companyId.company_product_category}
+            {data?.result?.companyId?.company_product_category}
           </a>
         </li>
         <li className="px-2 mt-4">
@@ -173,10 +173,10 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             SOCIAL MEDIA
           </strong>
           <div className="flex mt-[10px]">
-            {data?.companyId?.company_socialMedia1 && (
-              <a href={data?.companyId?.company_socialMedia1Url} target="_blank">
+            {data?.result?.companyId?.company_socialMedia1 && (
+              <a href={data?.result?.companyId?.company_socialMedia1Url} target="_blank">
                 <Image
-                  src={getBasicIcon(data?.companyId?.company_socialMedia1)}
+                  src={getBasicIcon(data?.result?.companyId?.company_socialMedia1)}
                   className={`w-[20px] svg-grey mr-2`}
                   alt={data?.companyId?.company_socialMedia1}
                   width={20}
@@ -187,12 +187,12 @@ const CompanyProfile = ({ data1, refresh }: any) => {
                 />
               </a>
             )}
-            {data?.companyId?.company_socialMedia2 && (
-              <a href={data?.companyId?.company_socialMedia2Url} target="_blank">
+            {data?.result?.companyId?.company_socialMedia2 && (
+              <a href={data?.result?.companyId?.company_socialMedia2Url} target="_blank">
                 <Image
-                  src={getBasicIcon(data?.companyId?.company_socialMedia2)}
+                  src={getBasicIcon(data?.result?.companyId?.company_socialMedia2)}
                   className={`w-[20px] svg-grey`}
-                  alt={data?.companyId?.company_socialMedia2}
+                  alt={data?.result?.companyId?.company_socialMedia2}
                   width={20}
                   height={20}
                   style={{
@@ -317,7 +317,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
         Company Description
       </h3>
       <p className="text-base text-gray-500 font-medium mt-[10px] text-sm text-[12px]">
-        {data.result.companyId.company_description}
+        {data?.result?.companyId?.company_description}
       </p>
     </>
   );
