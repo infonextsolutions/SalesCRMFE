@@ -151,7 +151,7 @@ const SalesOpen = ({ data }: props) => {
 
   const makecall = async () => {
     const res = await axios.post(
-      "https://testsalescrm.nextsolutions.in/api/calling/make-call",
+      "https://salescrmbe.onrender.com/api/calling/make-call",
       {
         callTo: "7669481778",
       }

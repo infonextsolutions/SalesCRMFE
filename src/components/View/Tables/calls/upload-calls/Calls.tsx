@@ -26,7 +26,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/recording/getManualRecordingList?limit=${limit}&page=${current}"`
+      `https://salescrmbe.onrender.com/api/recording/getManualRecordingList?limit=${limit}&page=${current}"`
     );
     const data = res.data.result;
     return data;
@@ -51,7 +51,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://testsalescrm.nextsolutions.in/api/recording/getManualRecordingList`
+          `https://salescrmbe.onrender.com/api/recording/getManualRecordingList`
         );
         // console.log(res, "only check here");
         const data = res.data.result;
@@ -84,7 +84,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 
   const fetchItems = async (current: any) => {
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/recording/getManualRecordingList?limit=${limit}&page=${current}`
+      `https://salescrmbe.onrender.com/api/recording/getManualRecordingList?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
     const filtered = data.filter((e: any) => e._id.includes(search));

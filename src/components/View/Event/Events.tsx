@@ -484,7 +484,7 @@ const Events = ({
 
     axios
       .post(
-        "https://testsalescrm.nextsolutions.in/api/event/create",
+        "https://salescrmbe.onrender.com/api/event/create",
         finalPayload
       )
       .then((e: any) => {

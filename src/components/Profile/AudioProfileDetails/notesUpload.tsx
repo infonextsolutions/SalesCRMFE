@@ -50,7 +50,7 @@ const Notes = ({ data, refresh }: any) => {
     if (e) {
       // setList([...list, e]);
       const url =
-        "https://testsalescrm.nextsolutions.in/api/recording/notes/addManual";
+        "https://salescrmbe.onrender.com/api/recording/notes/addManual";
       const { title, content } = e;
       console.log(e, "please ch-11");
       setList([...list, e]);

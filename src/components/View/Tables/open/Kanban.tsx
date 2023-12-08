@@ -13,7 +13,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
 
   //   const getallItems = async (current: any) => {
   //     const res = await axios.get(
-  //       `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+  //       `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
   //     );
   //     const data = res.data.result;
   //     return data;
@@ -23,16 +23,16 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
     setLoading(true);
     const getItems = async () => {
       const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Open`
+        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open`
       );
       // console.log(res, "only check here");
       const data = res.data.result;
       const filtered = data.filter(
         (e: Lead) =>
-          e.companyId?.company_name.includes(search) ||
-          e.customerId?.name.includes(search) ||
+          e.companyId?.company_name?.includes(search) ||
+          e.customerId?.name?.includes(search) ||
           e.potential_deal_size?.includes(search) ||
-          e?.lead_title?.includes(search)||
+          e?.lead_title?.includes(search) ||
           e?.leadId?.includes(search)
       );
 
@@ -52,8 +52,8 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
   // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
 
-  const stages = ["Enquiry", "Interaction", "Proposal", "win", "Lost", "Dead"];
-  const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WIN", "LOST", "DEAD"];
+  const stages = ["Enquiry", "Interaction", "Proposal", "Won", "Lost"];
+  const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WON", "LOST"];
   console.log(items, "please check here");
   useEffect(() => {
     items.map((e: any, i: any) => {
@@ -91,7 +91,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
           const res = items.filter((obj: any) => {
             return obj.leadStage.includes(stages[i]);
           });
-          if (res.length || col==="Dead") {
+          if (res.length || col === "Dead") {
             return (
               <div className="flex gap-[20px]" key={i}>
                 <div className="w-[270px] shrink-0 ">
@@ -103,11 +103,11 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
                           {res.length}
                         </div>
                       </div>
-                      <a href="#" className="flex items-center">
+                      <a href="" className="flex items-center">
                         ...
                       </a>
                     </div>
-                    {/* <div className="pl-[30px] h-[45px] bg-renal-blue rounded-xl flex items-center justify-center cursor-pointer ml-[15px] pr-[20px] relative p-[5px]">
+                    <div className="pl-[30px] h-[45px] bg-renal-blue rounded-xl flex items-center justify-center cursor-pointer ml-[15px] pr-[20px] relative p-[5px]">
                       {
                         <div className="absolute left-3  w-[28px]">
                           <div className={`w-[100%] p-[3px] rounded-md }`}>
@@ -124,10 +124,10 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
                           </div>
                         </div>
                       }
-                    </div> */}
+                    </div>
                   </div>
                   {res.map((Item: any, i: any) => {
-                    console.log(Item,"please checkk-2314211")
+                    console.log(Item, "please checkk-2314211")
                     const item = {
                       data: {
                         companyName: "ABC Corp",

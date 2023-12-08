@@ -21,7 +21,7 @@ const Profile = ({ data }: any) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data.result._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data.result._id}`
       )
       .then((e) => {
         setData(e.data);
@@ -212,7 +212,7 @@ export default Profile;
 
 export async function getServerSideProps({ query, params }: any) {
   const response = await axios.get(
-    `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${params.id}`
+    `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${params.id}`
   );
   return {
     props: {

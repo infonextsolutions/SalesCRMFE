@@ -26,7 +26,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${data1.result._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1.result._id}`
       )
       .then((e) => {
         setData(e.data);

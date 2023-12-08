@@ -97,7 +97,7 @@ const FormEditContainer = ({
                       };
                       update();
                       const response = await axios.put(
-                        "https://testsalescrm.nextsolutions.in/api/leads/update",
+                        "https://salescrmbe.onrender.com/api/leads/update",
                         val
                       );
                       dispatch(
@@ -394,7 +394,7 @@ const FormEditContainer = ({
                         },
                       };
                       const response = await axios.put(
-                        "https://testsalescrm.nextsolutions.in/api/leads/update",
+                        "https://salescrmbe.onrender.com/api/leads/update",
                         val
                       );
                       dispatch(
@@ -704,7 +704,7 @@ const FormEditContainer = ({
                         },
                       };
                       const response = await axios.put(
-                        "https://testsalescrm.nextsolutions.in/api/leads/update",
+                        "https://salescrmbe.onrender.com/api/leads/update",
                         val
                       );
                       dispatch(

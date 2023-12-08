@@ -194,7 +194,7 @@ const Deals = ({ data }: any) => {
 
 
   useEffect(() => {
-axios.get(`https://testsalescrm.nextsolutions.in/api/leads/getDeals?userId=${data?.result?._id}`)
+axios.get(`https://salescrmbe.onrender.com/api/leads/getDeals?userId=${data?.result?._id}`)
       .then(response => {
         const data = response?.data;
         setOpenDeals(data?.openDeals);

@@ -207,7 +207,7 @@ const Calls = ({ data }: any) => {
 
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/active-call/find-all"
+    "https://salescrmbe.onrender.com/api/active-call/find-all"
   );
   return {
     props: {

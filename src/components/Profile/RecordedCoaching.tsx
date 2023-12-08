@@ -166,7 +166,7 @@ const Coaching = ({ data }: any) => {
     if (checked) {
       axios
         .post(
-          "https://testsalescrm.nextsolutions.in/api/indicator/getIndicatorValues",
+          "https://salescrmbe.onrender.com/api/indicator/getIndicatorValues",
           {
             id: data,
           }

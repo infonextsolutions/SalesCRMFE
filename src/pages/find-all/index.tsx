@@ -13,7 +13,7 @@ const FindAll=()=>{
 export default FindAll;
 
 export async function getServerSideProps({ query,...params }:any) {
-    const response = await axios.get("https://testsalescrm.nextsolutions.in/api/leads/find-all");
+    const response = await axios.get("https://salescrmbe.onrender.com/api/leads/find-all");
     return {
         props: {
           // TODO: Can do better error handling here by passing another property error in the component

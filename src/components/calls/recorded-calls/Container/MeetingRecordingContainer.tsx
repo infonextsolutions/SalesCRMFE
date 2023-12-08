@@ -39,7 +39,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     };
 
     const response = await axios.post(
-      "https://testsalescrm.nextsolutions.in/api/leads/find-all?leadStatus=Close",
+      "https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Close",
       payload
     );
     dummy1 = { ...response.data };

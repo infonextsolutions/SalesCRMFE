@@ -11,7 +11,7 @@ export const FEEDBACK_CALL_REVIEW = {
         {
           type: "CUSTOMTABLE",
           actions: [],
-          api: "https://testsalescrm.nextsolutions.in/api/active-call/find-all",
+          api: "https://salescrmbe.onrender.com/api/active-call/find-all",
           tableItems: [
             {
               property: "callID",

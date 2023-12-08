@@ -34,10 +34,10 @@ const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
     // console.log(`pageNumber is ${pageNumber} and pageCount is ${pageCount}`);
     const getItems = async () => {
       // const res = await fetch(
-      //   `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${pageNumber}`
+      //   `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${pageNumber}`
       // );
       const res = await axios.get(
-        `https://testsalescrm.nextsolutions.in/api/lead-report/find-all?limit=${limit}&page=${pageNumber}`
+        `https://salescrmbe.onrender.com/api/lead-report/find-all?limit=${limit}&page=${pageNumber}`
       );
       // const data = await res.json();
       // console.log(data);
@@ -56,10 +56,10 @@ const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
   // console.log(items.result);
   const fetchItems = async (current: any) => {
     // const res = await fetch(
-    //   `https://testsalescrm.nextsolutions.in/api/leads/find-all?limit=${limit}&page=${current}`
+    //   `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}`
     // );
     const res = await axios.get(
-      `https://testsalescrm.nextsolutions.in/api/lead-report/find-all?limit=${limit}&page=${current}`
+      `https://salescrmbe.onrender.com/api/lead-report/find-all?limit=${limit}&page=${current}`
     );
     // console.log(res.data,"only check this!");
     // const data = await res.json();

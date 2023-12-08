@@ -28,19 +28,16 @@ const MidPath = ({ active }: any) => {
   return (
     <div className="w-[31px] flex items-center justify-between">
       <div
-        className={`w-[4px] h-[4px] rounded-[50%] ${
-          active ? "bg-[#B656EB]" : "bg-gray-400"
-        }`}
+        className={`w-[4px] h-[4px] rounded-[50%] ${active ? "bg-[#B656EB]" : "bg-gray-400"
+          }`}
       ></div>
       <div
-        className={`w-[19px] h-[4px] rounded-[12px] ${
-          active ? "bg-[#B656EB]" : "bg-gray-400"
-        }`}
+        className={`w-[19px] h-[4px] rounded-[12px] ${active ? "bg-[#B656EB]" : "bg-gray-400"
+          }`}
       ></div>
       <div
-        className={`w-[4px] h-[4px] rounded-[50%] ${
-          active ? "bg-[#B656EB]" : "bg-gray-400"
-        }`}
+        className={`w-[4px] h-[4px] rounded-[50%] ${active ? "bg-[#B656EB]" : "bg-gray-400"
+          }`}
       ></div>
     </div>
   );
@@ -103,12 +100,12 @@ const Single = ({ item, i, data }: any) => {
     item?.type === "email"
       ? "Mail"
       : item?.callId
-      ? "Phone"
-      : item?.type === "note"
-      ? "Tasks"
-      : "";
+        ? "Phone"
+        : item?.type === "note"
+          ? "Tasks"
+          : "";
   const owners = data?.owners.length > 0 ? data?.owners[0].name : "";
-  function formatDate(inputDate:any) {
+  function formatDate(inputDate: any) {
     const months = [
       "Jan",
       "Feb",
@@ -159,7 +156,7 @@ const Single = ({ item, i, data }: any) => {
       }}
     >
       {i === 0 ? <></> : <MidPath active={true} />}
-      <Image src={getBasicIcon(src)} alt="" width={15} height={15} />
+      <Image src={getBasicIcon(src)} alt="" width={16} height={16} />
       {/* {
     activityType: "Phone",
     title: "Demo call with Shradha",
@@ -181,10 +178,10 @@ const Single = ({ item, i, data }: any) => {
             {item?.type === "email"
               ? `Email sent to ${owners}`
               : item?.callId
-              ? `Call setup with ${owners}`
-              : item?.type === "note"
-              ? `Note added by ${owners}`
-              : ""}
+                ? `Call setup with ${owners}`
+                : item?.type === "note"
+                  ? `Note added by ${owners}`
+                  : ""}
           </p>
           <p className="text-[#000] text-[9px] w-[100%] font-medium">{formatDate(item.createdAt)}</p>
         </div>
@@ -223,6 +220,7 @@ const ActivityHistory = ({ width, left, random, data }: any) => {
       })} */}
 
       {arr.map((item: any, i: any) => {
+        console.log('>>>>>>>>>>>>>>>>>>>> ACTIVITY HISTORY >>>>>>>>>>>>>>>>>>>', item, i);
         return (
           <React.Fragment key={i}>
             {item === null ? (

@@ -10,7 +10,7 @@ export default csvFile;
 export async function getServerSideProps({ query, ...params }: any) {
   // console.log(params.limit,params.page);
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/leads/upload"
+    "https://salescrmbe.onrender.com/api/leads/upload"
   );
   return {
     props: {

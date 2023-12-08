@@ -1,9 +1,10 @@
+import { API_DOMAIN } from "@/constants/api";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const AddText = ({ top, title, width, change, required }: any) => {
+const AddText = ({ key, top, title, width, change, required }: any) => {
   return (
     <div
       className="w-[100%] "
@@ -16,6 +17,7 @@ const AddText = ({ top, title, width, change, required }: any) => {
         {title}
       </p>
       <input
+        name={key}
         onChange={(e: any) => {
           change(e.target.value);
         }}
@@ -57,29 +59,17 @@ const AddLead = ({ cancel }: any) => {
 
   const submit = () => {
     const payload = {
-      leadDetails: {
-        ...leadData,
-        potential_deal_size: "600",
-        win_probability:"100%",
-        created_by: "Sales",
-        customer_name: "Tanish",
-        inquiry: "Demo Enquiry 1",
-        existing_budget: "10000",
-      },
+      leadDetails: leadData,
       companyDetails: companyData,
-      contactDeails: {
+      contactDetails: {
         contactData: contactData,
-        moreContactFirst: moreContactData1,
-        moreContactSecond: moreContactData2,
+        moreContacts: [moreContactData1, moreContactData2],
       },
-      ...leadData,
-      ...companyData,
-      ...contactData
     };
     axios
-      .post("https://testsalescrm.nextsolutions.in/api/leads/create", payload)
+      .post(`${API_DOMAIN}/api/leads/create`, payload)
       .then((e: any) => {
-        router.reload();
+        // router.reload();
         cancel();
       });
   };
@@ -106,6 +96,7 @@ const AddLead = ({ cancel }: any) => {
             }}
             title="Lead Title*"
             required={true}
+            key="lead_title"
           />
           <AddText
             top={"10px"}
@@ -117,6 +108,7 @@ const AddLead = ({ cancel }: any) => {
             }}
             title="Lead Description*"
             required={true}
+            key="lead_description"
           />
           <div className="w-[100%] my-4">
             <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
@@ -131,6 +123,7 @@ const AddLead = ({ cancel }: any) => {
                   leadSource: e.target.value,
                 });
               }}
+              name="leadSource"
             >
               <option value="" selected>
                 -- Select Lead Source --
@@ -156,15 +149,16 @@ const AddLead = ({ cancel }: any) => {
               onChange={(e: any) => {
                 setLeadData({
                   ...leadData,
-                  leadOwner: e.target.value,
+                  owners: [e.target.value],
                 });
               }}
+              name="owners"
             >
               <option value="" selected>
                 -- Select Lead Owner --
               </option>
-              <option value="Ramesh">Ramesh</option>
-              <option value="Riya">Riya</option>
+              <option value="507f1f77bcf86cd799439011">Ramesh</option>
+              <option value="507f191e810c19729de860ea">Riya</option>
             </select>
           </div>
           <div className="w-[100%] my-4">
@@ -177,9 +171,10 @@ const AddLead = ({ cancel }: any) => {
               onChange={(e: any) => {
                 setLeadData({
                   ...leadData,
-                  leadManager: e.target.value,
+                  manager: e.target.value,
                 });
               }}
+              name="manager"
             >
               <option value="" selected>
                 -- Select Lead Manager --
@@ -201,6 +196,7 @@ const AddLead = ({ cancel }: any) => {
                   product_category: e.target.value,
                 });
               }}
+              name="product_category"
             >
               <option value="" selected>
                 -- Select Product/Service --
@@ -225,6 +221,7 @@ const AddLead = ({ cancel }: any) => {
                   });
                 }}
                 className="w-[80%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[7px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
+                name="leadStatus"
               >
                 <option value="" selected>
                   -- Select Lead Status --
@@ -244,6 +241,7 @@ const AddLead = ({ cancel }: any) => {
                     leadStage: e.target.value,
                   });
                 }}
+                name="leadStage"
                 className="w-[80%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[7px] tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
               >
                 <option value="" selected>
@@ -276,11 +274,12 @@ const AddLead = ({ cancel }: any) => {
             change={(e: any) => {
               setCompanyData({
                 ...companyData,
-                comapany_name: e,
+                company_name: e,
               });
             }}
             title="Company Name*"
             required={true}
+            key="company_name"
           />
           <div className="w-[100%] my-4">
             <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
@@ -295,6 +294,7 @@ const AddLead = ({ cancel }: any) => {
                   industry_type: e.target.value,
                 });
               }}
+              name="industry_type"
             >
               {/*      */}
               <option value="" selected>
@@ -317,6 +317,7 @@ const AddLead = ({ cancel }: any) => {
               });
             }}
             title="Company Description"
+            key="company_description"
           />
           <AddText
             top={"10px"}
@@ -327,6 +328,7 @@ const AddLead = ({ cancel }: any) => {
               });
             }}
             title="Company Address"
+            key="company_address"
           />
 
           <div className="w-[100%] my-4">
@@ -339,13 +341,12 @@ const AddLead = ({ cancel }: any) => {
               onChange={(e: any) => {
                 setCompanyData({
                   ...companyData,
-                  company_Country: e.target.value,
+                  company_country: e.target.value,
                 });
               }}
+              name="company_country"
             >
-              <option selected value="Indian">
-                Indian
-              </option>
+              <option selected value="India">India</option>
               <option value="Pakistan">Pakistan</option>
               <option value="Srilanka">Srilanka</option>
               <option value="England">England</option>
@@ -364,9 +365,10 @@ const AddLead = ({ cancel }: any) => {
                 onChange={(e: any) => {
                   setCompanyData({
                     ...companyData,
-                    company_State: e.target.value,
+                    company_state: e.target.value,
                   });
                 }}
+                name="company_state"
               >
                 <option value="" selected>
                   -- Select a State --
@@ -388,9 +390,10 @@ const AddLead = ({ cancel }: any) => {
                 onChange={(e: any) => {
                   setCompanyData({
                     ...companyData,
-                    company_City: e.target.value,
+                    company_city: e.target.value,
                   });
                 }}
+                name="company_city"
               >
                 <option value="" selected>
                   -- Select a City --
@@ -410,9 +413,10 @@ const AddLead = ({ cancel }: any) => {
             change={(e: any) => {
               setCompanyData({
                 ...companyData,
-                website_link: e,
+                company_website_url: e,
               });
             }}
+            key="company_website_url"
           />
 
           <div className="w-[100%] my-4">
@@ -427,6 +431,7 @@ const AddLead = ({ cancel }: any) => {
                   company_socialMedia1: e.target.value,
                 });
               }}
+              name="company_socialMedia1"
             >
               <option value="" selected>
                 -- Select a Social Media --
@@ -445,6 +450,7 @@ const AddLead = ({ cancel }: any) => {
                 company_socialMedia1Url: e,
               });
             }}
+            key="company_socialMedia1Url"
           />
 
           <div className="w-[100%] my-4">
@@ -459,6 +465,7 @@ const AddLead = ({ cancel }: any) => {
                   company_socialMedia2: e.target.value,
                 });
               }}
+              name="company_socialMedia2"
             >
               <option value="" selected>
                 -- Select a Social Media --
@@ -477,9 +484,10 @@ const AddLead = ({ cancel }: any) => {
             change={(e: any) => {
               setCompanyData({
                 ...companyData,
-                company_socialMedia21Url: e,
+                company_socialMedia2Url: e,
               });
             }}
+            key="company_socialMedia2Url"
           />
         </>
       ) : (
@@ -492,11 +500,12 @@ const AddLead = ({ cancel }: any) => {
             change={(e: any) => {
               setContactData({
                 ...contactData,
-                client_poc_name: e,
+                customer_name: e,
               });
             }}
             title="Primary Client POC Name*"
             required={true}
+            key="customer_name"
           />
           <AddText
             top={"10px"}
@@ -508,28 +517,31 @@ const AddLead = ({ cancel }: any) => {
             }}
             title="Designation*"
             required={true}
+            key="designation"
           />
           <AddText
             top={"10px"}
             change={(e: any) => {
               setContactData({
                 ...contactData,
-                phoneNumber: e,
+                customer_contact: e,
               });
             }}
             title="Contact Number*"
             required={true}
+            key="customer_contact"
           />
           <AddText
             top={"10px"}
             change={(e: any) => {
               setContactData({
                 ...contactData,
-                email: e,
+                customer_email: e,
               });
             }}
             title="Email*"
             required={true}
+            key="customer_email"
           />
           <div className="w-[100%] my-4">
             <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
@@ -541,9 +553,10 @@ const AddLead = ({ cancel }: any) => {
               onChange={(e: any) => {
                 setContactData({
                   ...contactData,
-                  gender: e.target.value,
+                  customer_gender: e.target.value,
                 });
               }}
+              name="customer_gender"
             >
               <option value="" selected>
                 -- Select Gender --
@@ -563,9 +576,10 @@ const AddLead = ({ cancel }: any) => {
               onChange={(e: any) => {
                 setContactData({
                   ...contactData,
-                  socialMedia1: e.target.value,
+                  customer_socialMedia1: e.target.value,
                 });
               }}
+              name="customer_socialMedia1"
             >
               <option value="" selected>
                 -- Select a Social Media --
@@ -583,9 +597,10 @@ const AddLead = ({ cancel }: any) => {
             change={(e: any) => {
               setContactData({
                 ...contactData,
-                socialMedia1Url: e,
+                customer_socialMedia1Url: e,
               });
             }}
+            key="customer_socialMedia1Url"
           />
 
           <div className="w-[100%] my-4">
@@ -597,9 +612,10 @@ const AddLead = ({ cancel }: any) => {
               onChange={(e: any) => {
                 setContactData({
                   ...contactData,
-                  socialMedia2: e.target.value,
+                  customer_socialMedia2: e.target.value,
                 });
               }}
+              name="customer_socialMedia2"
             >
               <option value="" selected>
                 -- Select a Social Media --
@@ -617,9 +633,10 @@ const AddLead = ({ cancel }: any) => {
             change={(e: any) => {
               setContactData({
                 ...contactData,
-                socialMedia21Url: e,
+                customer_socialMedia2Url: e,
               });
             }}
+            key="customer_socialMedia2Url"
           />
 
           {showMoreContactButton1 && (
@@ -633,7 +650,7 @@ const AddLead = ({ cancel }: any) => {
             </div>
           )}
 
-          {moreContact1 && (
+          {/* {moreContact1 && (
             <>
               <h1 className="text-[#3f434a] text-[20px] mt-4 mb-[20px] tracking-[1px]">
                 More Contact Info - 1
@@ -915,7 +932,7 @@ const AddLead = ({ cancel }: any) => {
                 }}
               />
             </>
-          )}
+          )} */}
         </>
       )}
       <div className="w-[100%] mt-[70px] text-[#ffffff] flex justify-end">

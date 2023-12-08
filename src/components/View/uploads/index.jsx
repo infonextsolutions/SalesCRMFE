@@ -100,7 +100,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
 
           const res = await axios
             .post(
-              `https://testsalescrm.nextsolutions.in/api/call-script/create?activeCallId=${id}`,
+              `https://salescrmbe.onrender.com/api/call-script/create?activeCallId=${id}`,
               formData
             )
             .then((e) => {

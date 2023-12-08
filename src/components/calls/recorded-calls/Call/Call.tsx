@@ -487,7 +487,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     if (CallData.leadId.length > 0) {
       axios
         .get(
-          `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
+          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
         )
         .then((e: any) => {
           console.log(e);
@@ -650,7 +650,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               })} */}
             </p>
           </div>
-          <CallItem width={100} left={20} text={LeadData.owners[0]?.name} />
+          <CallItem width={100} left={20} text={LeadData.owners?.[0]?.name} />
           <CallItemMultiple
             width={130}
             left={20}

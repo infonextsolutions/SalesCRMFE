@@ -23,7 +23,7 @@ const Dashboard = ({ data }: any) => {
     };
     axios
       .post(
-        "https://testsalescrm.nextsolutions.in/api/pitch-analysis/find-one",
+        "https://salescrmbe.onrender.com/api/pitch-analysis/find-one",
         finalPayload
       )
       .then((res) => {
@@ -42,7 +42,7 @@ const Dashboard = ({ data }: any) => {
     };
     axios
       .post(
-        "https://testsalescrm.nextsolutions.in/api/selling-analysis/find-one",
+        "https://salescrmbe.onrender.com/api/selling-analysis/find-one",
         finalPayload
       )
       .then((res) => {
@@ -62,7 +62,7 @@ const Dashboard = ({ data }: any) => {
     };
     axios
       .post(
-        "https://testsalescrm.nextsolutions.in/api/script-analysis/find-one",
+        "https://salescrmbe.onrender.com/api/script-analysis/find-one",
         finalPayload
       )
       .then((res) => {

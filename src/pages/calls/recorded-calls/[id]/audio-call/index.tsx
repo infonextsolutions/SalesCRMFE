@@ -106,12 +106,12 @@ export default CallProfile;
 
 export async function getServerSideProps({ query, params }: any) {
   const response = await axios.get(
-    `https://testsalescrm.nextsolutions.in/api/calling/find-by-id?id=${params.id}`
+    `https://salescrmbe.onrender.com/api/calling/find-by-id?id=${params.id}`
   );
 
   console.log(response.data.result.leadId._id);
   const response1 = await axios.get(
-    `https://testsalescrm.nextsolutions.in/api/leads/find-by-id?id=${response.data.result.leadId._id}`
+    `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${response.data.result.leadId._id}`
   );
 
   return {

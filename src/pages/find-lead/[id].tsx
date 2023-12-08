@@ -10,7 +10,7 @@ export default FindLead;
 export async function getServerSideProps({ query, ...params }: any) {
   // console.log(params.limit,params.page);
   const response = await axios.get(
-    "https://testsalescrm.nextsolutions.in/api/leads/find-by-id"
+    "https://salescrmbe.onrender.com/api/leads/find-by-id"
   );
   return {
     props: {

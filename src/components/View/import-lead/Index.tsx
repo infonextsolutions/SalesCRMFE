@@ -202,7 +202,7 @@ const Step1 = ({ next, cancel }: any) => {
       formdata.append("file", e[0]);
       axios
         .post(
-          "https://testsalescrm.nextsolutions.in/api/leads/upload/afakfabk",
+          "https://salescrmbe.onrender.com/api/leads/upload/afakfabk",
         formdata
         )
         .then((e) => {

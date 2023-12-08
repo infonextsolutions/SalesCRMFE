@@ -13,7 +13,7 @@ const DatePicker = ({ startDate, setStartDate, endDate, setEndDate }: any) => {
           onChange={(event) => setStartDate(event.target.value)}
         />
       </div>
-      <h2 className="py-1">to</h2>
+      <h2 className="py-1 text-black">to</h2>
       <div>
         <input
           value={endDate}

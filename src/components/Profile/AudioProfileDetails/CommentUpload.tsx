@@ -204,7 +204,7 @@ const Comments = ({ data }: any) => {
 
   const UpdateCalls = () => {
     setTimeout(() => {
-      const urri = `https://testsalescrm.nextsolutions.in/api/recording/getManualRecording`;
+      const urri = `https://salescrmbe.onrender.com/api/recording/getManualRecording`;
       axios
         .post(urri, {
           transId: data._id,
@@ -310,7 +310,7 @@ const Comments = ({ data }: any) => {
 
               axios
                 .post(
-                  "https://testsalescrm.nextsolutions.in/api/recording/comments/addManual",
+                  "https://salescrmbe.onrender.com/api/recording/comments/addManual",
                   {
                     recordingId: data._id,
                     comments: [...list, letsSee],
@@ -358,7 +358,7 @@ const Comments = ({ data }: any) => {
                   console.log(finalList, "24111421");
                     axios
                       .post(
-                        "https://testsalescrm.nextsolutions.in/api/recording/comments/addManual",
+                        "https://salescrmbe.onrender.com/api/recording/comments/addManual",
                         {
                           recordingId: data._id,
                           comments: finalList,
