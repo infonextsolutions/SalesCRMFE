@@ -77,11 +77,14 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
           text={"LEAD ID"}
         />
         <HeaderItem width={250} left={0} text={"Lead title"} />
+
+        <HeaderItem width={120} text={""} />
         <HeaderItem width={130} left={20} text={"COMPANY"} />
         <HeaderItem width={110} left={10} text={"CLIENT POC"} />
-        <HeaderItem width={200} left={20} text={"EMAIL"} />
-        <HeaderItem width={130} left={20} text={"PHONE"} />
-        <HeaderItem width={120} text={"Quick Actions"} />
+        {/* <HeaderItem width={200} left={20} text={"EMAIL"} />
+        <HeaderItem width={130} left={20} text={"PHONE"} /> */}
+        {/* <HeaderItem width={120} text={"Quick Actions"} /> */}
+        <HeaderItem width={200} left={20} text={"Contact"} />
         {/* <HeaderItem width={150} left={20} text={"more contacts"} /> */}
         <HeaderItem width={120} left={10} text={"lead status"} />
         <HeaderItem width={120} left={10} text={"lead stage"} />

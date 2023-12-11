@@ -220,6 +220,107 @@ const QuickActions = ({
   );
 };
 
+const NotesEventQuickActions = ({ width, left, notes, events }: any) => {
+  return (
+    <div
+      className={`flex  h-[18px] item-center shrink-0`}
+      style={{ width: width, marginLeft: left }}
+    >
+      <Image
+        src={getBasicIcon("Calendar")}
+        alt=""
+        className="mr-[4px] cursor-pointer"
+        width={25}
+        height={25}
+        onClick={() => {
+          events();
+        }}
+        style={{
+          objectFit: "contain",
+        }}
+      />
+      <Image
+        src={getBasicIcon("Tasks")}
+        alt=""
+        className="mr-[4px] cursor-pointer"
+        width={25}
+        height={25}
+        onClick={() => {
+          notes();
+        }}
+        style={{
+          objectFit: "contain",
+        }}
+      />
+    </div>
+  );
+};
+const ContactQuickActions = ({
+  width,
+  left,
+  textEmail,
+  textPhone,
+  emails,
+  messages,
+  call,
+}: any) => {
+  return (
+    <div
+      className={`flex  h-[45px] item-center shrink-0`}
+      style={{ width: width, marginLeft: left }}
+    >
+      <div className="flex flex-col text-[13px] text-[#8A9099] font-medium">
+        <div className="flex items-center">
+          <Image
+            src={getBasicIcon("Mail")}
+            alt=""
+            width={25}
+            onClick={() => {
+              emails();
+            }}
+            height={25}
+            style={{
+              objectFit: "contain",
+            }}
+            className="mr-[4px] h-[18px] shrink-0 cursor-pointer"
+          />
+          <p>{textEmail}</p>
+        </div>
+        <div className="flex">
+          <Image
+            src={getBasicIcon("Phone")}
+            alt=""
+            className="mr-[4px] cursor-pointer h-[18px] shrink-0"
+            width={25}
+            height={25}
+            onClick={() => {
+              call();
+            }}
+            style={{
+              objectFit: "contain",
+            }}
+          />
+
+          <Image
+            src={getBasicIcon("Chat")}
+            alt=""
+            className="mr-[4px] cursor-pointer h-[18px] shrink-0"
+            width={25}
+            height={25}
+            style={{
+              objectFit: "contain",
+            }}
+            onClick={() => {
+              messages();
+            }}
+          />
+          <p>+91-{textPhone}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ExpandingIcon = ({ change }: any) => {
   const [show, setShow] = useState(false);
 
@@ -652,6 +753,15 @@ const LeadContainer = ({
             click={true}
             route={`${pathname}/${id}/lead-profile`}
           />
+          <NotesEventQuickActions
+            width={120}
+            notes={() => {
+              AddLead(1, 0);
+            }}
+            events={() => {
+              AddLead(1, 1);
+            }}
+          />
           <LeadItemMultiple
             width={130}
             left={20}
@@ -671,7 +781,7 @@ const LeadContainer = ({
             click={true}
             route={`${pathname}/${id}/client-poc-profile`}
           />
-          <LeadItem
+          {/* <LeadItem
             width={200}
             left={20}
             text={LeadData?.customerId?.customer_email}
@@ -680,8 +790,8 @@ const LeadContainer = ({
             width={130}
             left={20}
             text={LeadData?.customerId?.customer_contact}
-          />
-          <QuickActions
+          /> */}
+          {/* <QuickActions
             width={120}
             notes={() => {
               AddLead(1, 0);
@@ -689,6 +799,27 @@ const LeadContainer = ({
             events={() => {
               AddLead(1, 1);
             }}
+            emails={() => {
+              AddLead(1, 3);
+            }}
+            messages={() => {
+              AddLead(1, 5);
+            }}
+            call={() => {
+              AddLead(1, 6);
+            }}
+          /> */}
+          <ContactQuickActions
+            width={200}
+            left={20}
+            // notes={() => {
+            //   AddLead(1, 0);
+            // }}
+            // events={() => {
+            //   AddLead(1, 1);
+            // }}
+            textEmail={LeadData?.customerId?.customer_email}
+            textPhone={LeadData?.customerId?.customer_contact}
             emails={() => {
               AddLead(1, 3);
             }}
