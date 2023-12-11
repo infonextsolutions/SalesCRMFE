@@ -119,11 +119,7 @@ const Profile = ({ data }: any) => {
 
   return (
     <>
-      <Navbar
-        mainTitle="Sales > Close"
-        title={`${data1.result.lead_title} - Info`}
-        src="manageLeadsIcon"
-      />
+      <Navbar mainTitle="Sales" title="Close" src="manageLeadsIcon" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         {notes && (
           <Backdrop bool={bool}>
@@ -171,7 +167,7 @@ const Profile = ({ data }: any) => {
           </Backdrop>
         )}
         <Navigation
-          title={``}
+          title={`${data1.result.lead_title} - Info`}
           buttons={[
             {
               text: "Take Action",

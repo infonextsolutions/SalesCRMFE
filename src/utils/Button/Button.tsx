@@ -57,8 +57,8 @@ const ButtonDropDown = ({
         light
           ? "bg-white hover:bg-gray-200"
           : dark
-          ? "bg-[#757372] hover:bg-[#757372"
-          : "bg-text-red hover:bg-text-red"
+          ? "bg-[#757372] hover:bg-[#999999]"
+          : "bg-bg-red hover:bg-[#ff7d6d]"
       } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px]  p-[10px] relative`}
       onMouseOver={() => {
         setMouseOver(true);

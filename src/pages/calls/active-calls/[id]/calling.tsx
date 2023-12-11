@@ -107,10 +107,7 @@ const AudioProfile = ({ data, scripts }: any) => {
     formData.append("file", audioFile);
     console.log("audioFile");
     axios
-      .post(
-        "https://salescrmbe.onrender.com/api/recording/add-rc",
-        formData
-      )
+      .post("https://salescrmbe.onrender.com/api/recording/add-rc", formData)
       .then((e: any) => {
         setUploadModalStatus(false);
         dispatch(
@@ -162,7 +159,7 @@ const AudioProfile = ({ data, scripts }: any) => {
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="bg-text-red hover:bg-text-red text-white px-[40px] py-[10px] rounded-xl font-medium text-[14px]"
+                  className="bg-bg-red hover:bg-[#ff7d6d] text-white px-[40px] py-[10px] rounded-xl font-medium text-[14px]"
                 >
                   Save
                 </button>
