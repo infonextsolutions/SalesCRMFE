@@ -39,7 +39,7 @@ const Selling = ({
   selling,
   getSellingData,
 }: {
-  selling: Result;
+  selling: any;
   getSellingData: any;
 }) => {
   const [startDate, setStartDate] = useState("2023-07-19");
