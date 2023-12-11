@@ -70,21 +70,26 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
             selectAll();
           }}
         />
-        <HeaderItem className="decoration-red-50" width={150} left={70} text={"LEAD ID"} />
+        <HeaderItem
+          className="decoration-red-50"
+          width={150}
+          left={70}
+          text={"LEAD ID"}
+        />
         <HeaderItem width={250} left={0} text={"Lead title"} />
-        <HeaderItem width={130} left={20} text={"COMPANY NAME"} />
+        <HeaderItem width={130} left={20} text={"COMPANY"} />
         <HeaderItem width={110} left={10} text={"CLIENT POC"} />
         <HeaderItem width={200} left={20} text={"EMAIL"} />
         <HeaderItem width={130} left={20} text={"PHONE"} />
         <HeaderItem width={120} text={"Quick Actions"} />
-        <HeaderItem width={150} left={20} text={"more contacts"} />
-        <HeaderItem width={120} left={10} text={"lead stage"} />
+        {/* <HeaderItem width={150} left={20} text={"more contacts"} /> */}
         <HeaderItem width={120} left={10} text={"lead status"} />
-        <HeaderItem width={120} left={10} text={"lead owner"} />
+        <HeaderItem width={120} left={10} text={"lead stage"} />
+        {/* <HeaderItem width={120} left={10} text={"lead owner"} />
         <HeaderItem width={200} left={10} text={"lead manager"} />
-        <HeaderItem width={150} left={10} text={"lead Enquiry"} />
+        <HeaderItem width={150} left={10} text={"lead Enquiry"} /> */}
         <HeaderItem width={150} left={10} text={"product/service"} />
-        <HeaderItem
+        {/* <HeaderItem
           width={180}
           left={0}
           text={"activity history"}
@@ -119,9 +124,9 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
             budget();
           }}
         />
-        <HeaderItem width={150} left={10} text={"lead source"} />
+        <HeaderItem width={150} left={10} text={"lead source"} /> */}
         {/* <HeaderItem width={150} left={10} text={"close date"} /> */}
-        <HeaderItem width={150} left={20} text={"notes"} />
+        {/* <HeaderItem width={150} left={20} text={"notes"} /> */}
       </div>
     </div>
   );
