@@ -158,7 +158,7 @@ const ProfilePage = ({ data1, updated }: any) => {
                   objectFit: "contain",
                 }}
               />
-              <p className="block cursor-pointer text-lg leading-[10px ] font-semibold ml-[-6px] text-[14px] text-black hover:text-text-red">
+              <p className="block cursor-pointer text-lg leading-[10px ] font-semibold ml-[-6px] text-[14px] text-black hover:text-bg-red">
                 Lead id - {data.leadId}
               </p>
             </div>

@@ -362,7 +362,7 @@ const Login = () => {
                     <div>
                       <Link
                         href="/forgot-password"
-                        className="text-base text-text-red font-medium "
+                        className="text-base text-bg-red font-medium "
                       >
                         Forgot your password ?
                       </Link>
@@ -374,7 +374,7 @@ const Login = () => {
                       handleSubmit();
                     }}
                     type="submit"
-                    className=" mt-[30px] w-[100%] py-[10px] inline-block rounded-[15px] text-white font-semibold bg-text-red hover:bg-text-red hover:border-bg-text-red "
+                    className=" mt-[30px] w-[100%] py-[10px] inline-block rounded-[15px] text-white font-semibold bg-bg-red hover:bg-[#ff7d6d] hover:border-bg-[#ff7d6d] "
                   >
                     Log In
                   </button>

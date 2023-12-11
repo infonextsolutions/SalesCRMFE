@@ -7,7 +7,7 @@ module.exports = {
         "renal-blue": "#304dfd",
         norm: "#8A9099",
         "text-norm": "#3F434A",
-        "text-red": "#fe5143",
+        "bg-red": "#fe5143",
         "bg-grey": "#2E3134",
       },
     },

@@ -48,8 +48,7 @@ const Notes = ({ data, refresh }: any) => {
   const cancelNotes = (e: any) => {
     if (e) {
       // setList([...list, e]);
-      const url =
-        "https://salescrmbe.onrender.com/api/v2/active-call/notes";
+      const url = "https://salescrmbe.onrender.com/api/v2/active-call/notes";
       const { title, content } = e;
       console.log(e, "please ch-11");
       axios
@@ -142,7 +141,7 @@ const Notes = ({ data, refresh }: any) => {
             onClick={() => {
               showNotes();
             }}
-            className="bg-[#757372] hover:bg-[#757372]  flex items-center pl-[12px] right-0 rounded-xl pr-[12px] p-[10px]"
+            className="bg-[#757372] hover:bg-[#999999]  flex items-center pl-[12px] right-0 rounded-xl pr-[12px] p-[10px]"
           >
             <p className="whitespace-nowrap font-medium text-[14px] pl-[5px] pr-[5px] text-[#ffffff] ">
               Add Note

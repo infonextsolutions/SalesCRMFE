@@ -145,7 +145,7 @@ const Notes = ({ data, refresh }: any) => {
               onClick={() => {
                 showNotes();
               }}
-              className="bg-text-red  flex items-center pl-[12px] right-0 rounded-xl pr-[12px] p-[10px]"
+              className="bg-bg-red hover:bg-[#ff7d6d] flex items-center pl-[12px] right-0 rounded-xl pr-[12px] p-[10px]"
             >
               <p className="whitespace-nowrap font-medium text-[14px] pl-[5px] pr-[5px] text-[#ffffff] ">
                 Add Note

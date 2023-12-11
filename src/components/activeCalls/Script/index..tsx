@@ -306,7 +306,7 @@ const ScriptList = ({
               showUploads();
             }}
             type="button"
-            className="text-white bg-text-red font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-4"
+            className="text-white bg-bg-red hover:bg-[#ff7d6d] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-4"
           >
             Upload
             <Image

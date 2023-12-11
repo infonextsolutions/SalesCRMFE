@@ -334,7 +334,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
               setText("");
             }
           }}
-          className="bg-text-red mt-[18px] rounded-xl justify-end w-[140px] h-[38px] ml-auto font-medium tracking-wide pl-[5px] p-[8px]"
+          className="bg-bg-red hover:bg-[#ff7d6d] mt-[18px] rounded-xl justify-end w-[140px] h-[38px] ml-auto font-medium tracking-wide pl-[5px] p-[8px]"
         >
           <p className="whitespace-nowrap font-large text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
             Comment

@@ -73,7 +73,7 @@ const Navbar = ({ mainTitle, title, src }: any) => {
             {title && (
               <div className="flex gap-2">
                 <h1 className="text-lg font-semibold">{">"}</h1>
-                <h1 className="text-lg font-semibold capitalize text-text-red">
+                <h1 className="text-lg font-semibold capitalize text-bg-red">
                   {title}
                 </h1>
               </div>
