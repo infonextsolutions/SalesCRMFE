@@ -116,8 +116,9 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -655,7 +656,10 @@ const LeadContainer = ({
             width={130}
             left={20}
             upperText={LeadData?.companyId.company_name}
-            bottomText={LeadData?.companyId?.company_location || LeadData?.companyId?.company_address}
+            bottomText={
+              LeadData?.companyId?.company_location ||
+              LeadData?.companyId?.company_address
+            }
             bold={true}
             click={true}
             route={`${pathname}/${id}/company-profile`}
@@ -667,8 +671,16 @@ const LeadContainer = ({
             click={true}
             route={`${pathname}/${id}/client-poc-profile`}
           />
-          <LeadItem width={200} left={20} text={LeadData?.customerId?.customer_email} />
-          <LeadItem width={130} left={20} text={LeadData?.customerId?.customer_contact} />
+          <LeadItem
+            width={200}
+            left={20}
+            text={LeadData?.customerId?.customer_email}
+          />
+          <LeadItem
+            width={130}
+            left={20}
+            text={LeadData?.customerId?.customer_contact}
+          />
           <QuickActions
             width={120}
             notes={() => {
@@ -687,28 +699,40 @@ const LeadContainer = ({
               AddLead(1, 6);
             }}
           />
-          <LeadItem
+          {/* <LeadItem
             width={150}
             left={20}
             text={
               contacts.length > 1
                 ? `${contacts[0].name}, ${contacts[1].name}`
                 : contacts.length > 0
-                  ? `${contacts[0].name}`
-                  : "-"
+                ? `${contacts[0].name}`
+                : "-"
             }
-          // text={"Anil L, Paul G, Rekha"}
-          />
-          <LeadItem width={120} left={10} textLeft={10} text={LeadData.leadStage} />
-          <LeadItem width={120} left={10} text={LeadData.leadStatus} textLeft={5} />
+            // text={"Anil L, Paul G, Rekha"}
+          /> */}
           <LeadItem
+            width={120}
+            left={10}
+            text={LeadData.leadStatus}
+            textLeft={5}
+          />
+          <LeadItem
+            width={120}
+            left={10}
+            textLeft={10}
+            text={LeadData.leadStage}
+          />
+          {/* start - hiding uneccessary column */}
+          {/* <LeadItem
             width={130}
             left={10}
             textLeft={10}
             text={LeadData?.owners[0]?.name}
           />
           <LeadItem width={200} left={10} textLeft={10} text={"-"} />
-          <LeadItem width={150} left={10} text={LeadData.inquiry} />
+          <LeadItem width={150} left={10} text={LeadData.inquiry} /> */}
+          {/* end - hiding uneccessary column */}
           <LeadItem
             width={150}
             left={10}
@@ -744,36 +768,34 @@ const LeadContainer = ({
             <MidPath />
             <Image src={getBasicIcon("Phone")} alt="" width={15} height={15} />
           </div>  */}
-
-          <ActivityHistory width={180} left={0} data={LeadData1} random={num} />
+          {/* start - hiding uneccessary column */}
+          {/* <ActivityHistory width={180} left={0} data={LeadData1} random={num} /> */}
 
           {/* activity history ends here*/}
-
-          <LeadItemMultiple
+          {/* start - hiding uneccessary column */}
+          {/* <LeadItemMultiple
             width={130}
             left={20}
             upperText={
               activity
                 ? activity.history.length > 0 &&
-                (activity.history[activity.history.length - 1].type === "note"
-                  ? "Note added"
-                  : "Email Sent")
+                  (activity.history[activity.history.length - 1].type === "note"
+                    ? "Note added"
+                    : "Email Sent")
                 : "-"
             }
             bottomText={
               activity
                 ? activity.history.length > 0 &&
-                convertToFormattedDate(
-                  activity.history[activity.history.length - 1].createdAt
-                )
+                  convertToFormattedDate(
+                    activity.history[activity.history.length - 1].createdAt
+                  )
                 : ""
             }
-          />
-          <LeadItemMultiple
+          /> */}
+          {/* <LeadItemMultiple
             width={150}
             left={10}
-            // upperText={"Send Email"}
-            // bottomText={"on 23 Jan 2023"}
             upperText={
               activity
                 ? findFutureCallStartTime(activity.history)
@@ -807,17 +829,18 @@ const LeadContainer = ({
             width={150}
             left={10}
             text={LeadData.leadSource}
-          />
+          /> */}
           {/* <LeadItem width={150} textLeft={20} left={10} text={"-"} /> */}
           {/* <LeadItem width={150} left={10} text={LeadData.close_date} /> */}
-          <LeadItem
+          {/* <LeadItem
             width={150}
             left={10}
             text={"Read Notes"}
             onClick={() => {
               AddLead(1, 2);
             }}
-          />
+          /> */}
+          {/* end - hiding uneccessary column */}
         </div>
       </div>
       <div
