@@ -39,14 +39,16 @@ const Selling = ({
   selling,
   getSellingData,
 }: {
-  selling: Result;
+  selling: any;
   getSellingData: any;
 }) => {
   const [startDate, setStartDate] = useState("2023-07-19");
   const [endDate, setEndDate] = useState("2023-07-26");
 
   useEffect(() => {
-    getSellingData([startDate, endDate]);
+    if (getSellingData) {
+      getSellingData([startDate, endDate]);
+    }
   }, [startDate, endDate]);
   return (
     <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
@@ -104,15 +106,15 @@ const Selling = ({
 export default Selling;
 
 export interface Result {
-  _id: string;
-  consultative_selling: number;
-  empathy: number;
-  listening_skills: number;
-  confidence: number;
-  urgency_creation: number;
-  positive_energy: number;
-  report_building: number;
-  politeness: number;
-  createdAt: string;
-  updatedAt: string;
+  _id?: string;
+  consultative_selling?: number;
+  empathy?: number;
+  listening_skills?: number;
+  confidence?: number;
+  urgency_creation?: number;
+  positive_energy?: number;
+  report_building?: number;
+  politeness?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }

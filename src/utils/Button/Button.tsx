@@ -121,7 +121,7 @@ const ButtonDropDown = ({
           {text}
         </p>
       )}
-      {list.length !== 0 && (
+      {list?.length !== 0 && (
         <div
           className={`absolute ${
             tight ? "right-3 w-[16px]" : "right-2 w-[24px]"
@@ -153,12 +153,12 @@ export default ButtonDropDown;
 
 export interface ButtonProps {
   icon?: String;
-  dropdown: Boolean | {};
+  dropdown?: Boolean | {};
   width?: Number;
   text: String;
   id: Number;
-  light: Boolean;
-  dark: Boolean;
+  light?: Boolean;
+  dark?: Boolean;
   height?: Number;
   border?: Boolean;
   onClick1?: any;

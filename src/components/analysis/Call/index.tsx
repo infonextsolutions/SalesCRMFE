@@ -14,12 +14,12 @@ const CallAnalysis = ({
 }: any) => {
   return (
     <div className="w-[100%] mt-[20px] min-h-[100vh] overflow-x-auto custom-scroll">
+      <TreeMap getPitchData={getPitchData} data1={tree} />
       <div className="w-[100%] flex mb-[50px]">
         <ScriptBuilding getScriptData={getScriptData} script={script} />
         <Selling getSellingData={getSellingData} selling={emotion} />
       </div>
-      {/* <Emotion /> */}
-      <TreeMap getPitchData={getPitchData} data1={tree} />
+      <Emotion />
     </div>
   );
 };

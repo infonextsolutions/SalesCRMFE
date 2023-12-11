@@ -15,7 +15,7 @@ const TreeMap = ({ data1, getPitchData }: any) => {
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Pitch Analysis
         </h1>
-        <div className="flex">
+        {/* <div className="flex">
           <DatePicker
             startDate={startDate}
             setStartDate={setStartDate}
@@ -31,7 +31,7 @@ const TreeMap = ({ data1, getPitchData }: any) => {
             dropdown={true}
             list={[]}
           />
-        </div>
+        </div> */}
       </div>
       <div className="w-[100%] overflow-x-auto custom-scroll">
         <Charts data1={data1} />
