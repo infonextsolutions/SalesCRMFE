@@ -359,6 +359,7 @@ const ExpandableRow = ({
   companyWebsite,
   LeadOwners,
   otherContacts,
+  leadData
 }: any) => {
   return (
     <div className="w-[100%] h-[100%] flex px-[110px] py-[10px] ">
@@ -388,42 +389,28 @@ const ExpandableRow = ({
         <div className="w-[100%] mt-[10px]">
           <p className="text-[16px] text-[#000] font-medium">Social Media</p>
           <div className="flex mt-[2px]">
-            <a href="">
-              <Image
-                src={getBasicIcon("Twitter")}
-                className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
-                height={20}
-                width={20}
-                alt=""
-              />
-            </a>
-            <a href="">
-              <Image
-                src={getBasicIcon("Facebook")}
-                className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
-                height={20}
-                width={20}
-                alt=""
-              />
-            </a>
-            <a href="">
-              <Image
-                src={getBasicIcon("Instagram")}
-                className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
-                height={20}
-                width={20}
-                alt=""
-              />
-            </a>
-            <a href="">
-              <Image
-                src={getBasicIcon("Linkedin")}
-                className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
-                height={20}
-                width={20}
-                alt=""
-              />
-            </a>
+            {leadData?.companyId?.company_socialMedia1 && (
+              <a href={leadData?.companyId?.company_socialMedia1Url}>
+                <Image
+                  src={getBasicIcon(leadData?.companyId?.company_socialMedia1)}
+                  className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                  height={20}
+                  width={20}
+                  alt=""
+                />
+              </a>
+            )}
+            {leadData?.companyId?.company_socialMedia2 && (
+              <a href={leadData?.companyId?.company_socialMedia2Url}>
+                <Image
+                  src={getBasicIcon(leadData?.companyId?.company_socialMedia2)}
+                  className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                  height={20}
+                  width={20}
+                  alt=""
+                />
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -996,6 +983,7 @@ const LeadContainer = ({
               { name: "Suman A.", position: "Sales Manager" },
               { name: "Judith Black", position: "Creative Director" },
             ]}
+            leadData={LeadData}
           />
         )}
       </div>

@@ -33,7 +33,7 @@ const EmotionalAnalysisComp = () => {
       "Curiosity",
       "Confidence",
       "Empathy",
-    ],       
+    ],
     datasets: [
       {
         label: "# of Votes",
@@ -50,6 +50,9 @@ const EmotionalAnalysisComp = () => {
       className="chart-container"
       style={{ width: "500px", height: "500px" }}
     >
+      <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
+        Emotional Analysis
+      </h1>
       <Radar data={data} height={200}></Radar>
     </div>
   );
