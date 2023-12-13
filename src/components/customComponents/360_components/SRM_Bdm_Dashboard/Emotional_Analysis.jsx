@@ -47,7 +47,7 @@ const EmotionalAnalysisComp = () => {
 
   return (
     <div
-      className="chart-container"
+      className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]"
       style={{ width: "500px", height: "500px" }}
     >
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">

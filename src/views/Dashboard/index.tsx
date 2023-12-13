@@ -13,6 +13,15 @@ import Leaderboard from "@/components/customComponents/360_components/TOP_leader
 import EmotionalAnalysisComp from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Emotional_Analysis";
 import TreeMap from "@/components/analysis/Call/Tree";
 import Emotion from "@/components/analysis/Call/Charts/Emotion";
+import StageWiseAnalysis from "@/components/analysis/Call/Charts/StageWiseAnalysis";
+import HighIntentCallVolume from "@/components/analysis/Call/Charts/HighIntentCallVolume";
+import DealAnalysis from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Deal_Analytics";
+import TalkRatio from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Ratio_bar";
+import BarChartVertical from "@/components/analysis/Call/Charts/BarChartVertical";
+import NoOfInterruptions from "@/components/analysis/Call/Charts/NoOfInterruptions";
+import NoOfParticipants from "@/components/analysis/Call/Charts/NoOfParticipants";
+import CallSentiment from "@/components/customComponents/360_components/CallSentiment";
+import NoiseAndVolumeChart from "@/components/analysis/Call/Charts/NoiseAndVolumeChart";
 
 // const Dashboard = ({ data }: any) => {
 const Dashboard = ({ data }: any) => {
@@ -103,7 +112,7 @@ const Dashboard = ({ data }: any) => {
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
       <div className="flex w-[100%] justify-end gap-[10px] mt-[20px]">
-        <Button
+        {/* <Button
           text={"Last 7 days"}
           id={0}
         // dropdown={[]}
@@ -118,7 +127,7 @@ const Dashboard = ({ data }: any) => {
         />
         <button>
           <Image width={20} height={20} src={getBasicIcon("Download")} alt="download" />
-        </button>
+        </button> */}
       </div>
       <Navigator callback={handleTabNavigation} current={currTab} list={tabs} />
       {currTab === 0 && (
@@ -131,10 +140,16 @@ const Dashboard = ({ data }: any) => {
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
               <Selling getSellingData={getSellingData} selling={sellingData} />
+              <BarChartVertical title="Selling Skills" />
+              <BarChartVertical title="Average Call Score" />
+              <BarChartVertical title="Number of Questions Asked" />
+              <StageWiseAnalysis getSellingData={getSellingData} selling={sellingData} />
             </div>
             <div className="flex-[1]">
               <Leaderboard />
               <Top_Call />
+              <BarChartVertical title="High Intent Call Volume" />
+              <DealAnalysis />
             </div>
           </div>
         </div>
@@ -150,13 +165,36 @@ const Dashboard = ({ data }: any) => {
             emotion={sellingData}
             getPitchData={getPitchData}
           /> */}
-          <EmotionalAnalysisComp />
-          {/* <Emotion /> */}
+          <div className="w-[100%] flex">
+            <div className=" flex-[1]">
+              <EmotionalAnalysisComp />
+              <BarChartVertical title="Longest Monologue" />
+              <TalkRatio />
+              <BarChartVertical title="Number of Topics" />
+            </div>
+            <div className="flex-[1]">
+              <BarChartVertical title="Sales Rep's Patience/Silence" />
+              <BarChartVertical title="Longest Customer Story" />
+              <NoOfInterruptions />
+              <BarChartVertical title="Number of Switches" />
+            </div>
+          </div>
         </div>
       )}
       {currTab === 2 && (
         <div className="">
-
+          <div className="w-[100%] flex">
+            <div className=" flex-[1]">
+              <NoOfParticipants />
+              <BarChartVertical title="Sales Rep Sentiment Score  " />
+              <CallSentiment />
+            </div>
+            <div className="flex-[1]">
+              <BarChartVertical title="Satisfaction Score" />
+              <BarChartVertical title="Performance Rate" />
+              <NoiseAndVolumeChart />
+            </div>
+          </div>
         </div>
       )}
     </div>

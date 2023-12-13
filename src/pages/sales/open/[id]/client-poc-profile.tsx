@@ -9,7 +9,7 @@ import Navbar from "@/components/app/Navbar/Navbar";
 
 const ClientProfile = ({ data }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
-  console.log("clientprofile:", data);
+  console.log("******************* clientprofile *******************", data);
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
@@ -52,7 +52,7 @@ const ClientProfile = ({ data }: any) => {
             />
           </div>
           <div className="bg-white rounded-xl w-[100%] px-[25px]">
-            <Deals data={data} />
+            <Deals data={data} type="customer" />
           </div>
         </div>
         {/* write your code here for profile page manya! */}

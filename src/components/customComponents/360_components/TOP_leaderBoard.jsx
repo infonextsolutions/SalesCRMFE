@@ -21,8 +21,8 @@ const Leaderboard = () => {
   ];
   return (
     <>
-      <h1>Leaderboard</h1>
-      <div className="parent-container color-[black]">
+      <h1 className="text-black">Leaderboard</h1>
+      <div className="parent-container color-[black] text-black">
         <div className="container1">
           <div className="best-performer-heading">
             {/* <img src={boy} alt="" /> */}
