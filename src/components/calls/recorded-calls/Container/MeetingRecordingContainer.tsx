@@ -6,6 +6,12 @@ import Search from "../Search/Search";
 import Spinner from "@/components/loader/spinner";
 import DatePicker from "@/utils/Button/DatePicker";
 import axios from "axios";
+import Navigation from "@/components/app/Navigation";
+import * as XLSX from "xlsx";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   const [startDate, setStartDate] = useState("");
@@ -48,9 +54,50 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   // useEffect(() => {
   //   getData();
   // }, [product, companyName, callOwner, callType, startDate, endDate, search]);
+  const exportXLSX = () => {
+    const worksheet = XLSX.utils.json_to_sheet(data.result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    XLSX.writeFile(workbook, "DataSheet.xlsx");
+    console.log("Exporting to Excel", data);
+  };
+  const exportPDF = () => {
+    const documentDefinition = {
+      content: [
+        {
+          text: "JSON to PDF Conversion",
+          style: "header",
+        },
+        {
+          text: JSON.stringify(data.result, null, 4),
+          style: "contentStyle",
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          marginBottom: 10,
+        },
+        contentStyle: {
+          fontSize: 12,
+          margin: [0, 5, 0, 15] as [number, number, number, number],
+        },
+      },
+    };
 
+    pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
+    console.log("Exporting to PDF", data);
+  };
+  const addExport = (e: any, e1: any) => {
+    if (e1 === 0) {
+      exportXLSX();
+    } else if (e1 === 1) {
+      exportPDF();
+    }
+  };
   return (
-    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] relative mb-[40px]">
+    <div className="w-[100%] bg-[#ffe3e170] pt-3 min-h-[70vh] rounded-[18px] relative mb-[40px]">
       <div className="w-[100%] h-[170px] flex items-center  px-[8px]">
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex gap-5">
@@ -112,6 +159,8 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
+          </div>
+          <div className="flex items-center gap-4">
             <div className="flex items-center w-40 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Location</h2>
               <select
@@ -125,18 +174,18 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 <option value="meet">Meet</option>
               </select>
             </div>
-          </div>
-          <div className="flex gap-4 items-center w-72 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <h2 className="font-medium">Call Dispostion</h2>
-            <select
-              onChange={(e) => setCallDisposition(e.target.value)}
-              className="text-red-500"
-              id="callDispostion"
-            >
-              <option selected value="Follow-up Required">
-                Follow-up Required
-              </option>
-            </select>
+            <div className="flex gap-4 items-center w-72 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <h2 className="font-medium">Call Dispostion</h2>
+              <select
+                onChange={(e) => setCallDisposition(e.target.value)}
+                className="text-red-500"
+                id="callDispostion"
+              >
+                <option selected value="Follow-up Required">
+                  Follow-up Required
+                </option>
+              </select>
+            </div>
           </div>
         </div>
         {/* <ButtonDropDown

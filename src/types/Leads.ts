@@ -68,6 +68,7 @@ export interface CompanyId {
   company_socialMedia2: string
   company_socialMedia1Url: string
   company_socialMedia2Url: string
+product: string
   createdAt: string
   updatedAt: string
   __v: number

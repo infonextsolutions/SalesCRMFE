@@ -321,7 +321,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               previousLabel={
                 <Image
                   src={getBasicIcon("Arrow-Right 2")}
-                  className={`${pageNumber != 0 ? "svg-blue" : ""} rotate-180`}
+                  className={`${pageNumber != 0 ? "svg-red" : ""} rotate-180`}
                   alt=""
                   width={20}
                   height={20}
@@ -333,7 +333,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               nextLabel={
                 <Image
                   src={getBasicIcon("Arrow-Right 2")}
-                  className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""}`}
+                  className={`${pageNumber != pageCount - 1 ? "svg-red" : ""}`}
                   alt=""
                   width={16}
                   height={16}
@@ -351,15 +351,13 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
               pageLinkClassName={``}
               previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-                pageNumber === 0 ? "bg-[#f5f5f5] opacity-30" : "bg-[#e8ebfd]"
+                pageNumber === 0 ? "" : "bg-[#ffad9f]"
               }`}
               previousLinkClassName={`flex justify-center ${
                 pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
               }`}
               nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-                pageNumber === pageCount - 1
-                  ? "bg-[#f5f5f5] opacity-30"
-                  : "bg-[#e8ebfd]"
+                pageNumber === pageCount - 1 ? "" : "bg-[#ffad9f]"
               }`}
               nextLinkClassName={`flex justify-center ${
                 pageNumber === pageCount - 1 ? "cursor-auto" : ""
@@ -367,12 +365,12 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               breakClassName={""}
               breakLinkClassName={""}
               forcePage={pageNumber}
-              activeClassName={`bg-renal-blue text-[#fff] rounded-[10px]`}
+              activeClassName={`bg-bg-red text-[#fff] rounded-[10px]`}
             />
             <div
               className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${
                 pageNumber === pageCount - 1
-                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
+                  ? ""
                   : "bg-[#e8ebfd] cursor-pointer"
               }`}
               onClick={setLastPage}
@@ -380,7 +378,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
                 className={`${
-                  pageNumber != pageCount - 1 ? "svg-blue" : ""
+                  pageNumber != pageCount - 1 ? "svg-red" : ""
                 } translate-x-[6px]`}
                 alt=""
                 width={18}
@@ -389,7 +387,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
                 className={`${
-                  pageNumber != pageCount - 1 ? "svg-blue" : ""
+                  pageNumber != pageCount - 1 ? "svg-red" : ""
                 } translate-x-[-6px]`}
                 alt=""
                 width={18}

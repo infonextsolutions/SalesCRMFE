@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { getBasicIcon } from "../AssetsHelper";
 import DropDown from "./DropDown";
+import { title } from "process";
 
 const ButtonDropDown = ({
   text,
@@ -52,14 +53,16 @@ const ButtonDropDown = ({
     <div
       data-dropdown-toggle="dropdown"
       className={`${icon ? "pl-[32px]" : ""} ${
-        border ? "border-[1px] border-[#ccc]" : ""
+        border ? "border-[1px] border-[#8f8f8f]" : ""
       } ${
         light
-          ? "bg-white hover:bg-gray-200"
-          : dark
-          ? "bg-[#757372] hover:bg-[#999999]"
+          ? ""
+          : dark && text !== "View"
+          ? "bg-[#909193] hover:bg-[#999999]"
+          : text == "View"
+          ? "bg-[#434343] hover:bg-[#2e2d2d]"
           : "bg-bg-red hover:bg-[#ff7d6d]"
-      } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px]  p-[10px] relative`}
+      } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px]  p-[10px]`}
       onMouseOver={() => {
         setMouseOver(true);
       }}
@@ -96,11 +99,35 @@ const ButtonDropDown = ({
       ) : (
         <></>
       )}
-      {icon && (
-        <div className="absolute left-3  w-[28px]">
-          <div className={`w-[100%] p-[3px] rounded-md }`}>
+      {text.length > 0 && (
+        <p
+          className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
+            light ? "pl-[4px] pr-[4px]" : "pl-[20px] pr-[10px]"
+          } ${light ? "text-[#3F434A]" : "text-[#ffffff]"} `}
+        >
+          {text}
+        </p>
+      )}
+
+      {text == "View" && (
+        <div className={` ${light ? "w-[16px]" : " w-[24px]"} `}>
+          <div
+            className={`flex gap-2 w-[100%] ${
+              light ? "p-[1px]" : "p-[3px]"
+            } rounded-md ${clicked && (light ? "bg-[#eeeeee]" : "")} `}
+          >
             <Image
-              src={getBasicIcon(icon)}
+              src={getBasicIcon("bi_kanban")}
+              className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
+              alt=""
+              width={24}
+              height={24}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+            <Image
+              src={getBasicIcon("bi_list")}
               className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
               alt=""
               width={24}
@@ -112,28 +139,31 @@ const ButtonDropDown = ({
           </div>
         </div>
       )}
-      {text.length > 0 && (
-        <p
-          className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
-            tight ? "pl-[4px] pr-[4px]" : "pl-[20px] pr-[10px]"
-          } ${light ? "text-[#3F434A]" : "text-[#ffffff]"} `}
-        >
-          {text}
-        </p>
-      )}
-      {list?.length !== 0 && (
-        <div
-          className={`absolute ${
-            tight ? "right-3 w-[16px]" : "right-2 w-[24px]"
-          } `}
-        >
+      {list?.length !== 0 && text !== "View" && (
+        <div className={` ${light ? "w-[16px]" : " w-[24px]"} `}>
           <div
-            className={`w-[100%] ${tight ? "p-[1px]" : "p-[3px]"} rounded-md ${
+            className={`w-[100%] ${light ? "p-[1px]" : "p-[3px]"} rounded-md ${
               clicked && (light ? "bg-[#eeeeee]" : "")
             } `}
           >
             <Image
               src={getBasicIcon("Arrow-Down 2")}
+              className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
+              alt=""
+              width={24}
+              height={24}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </div>
+        </div>
+      )}
+      {icon?.length && (
+        <div className=" right-3  w-[28px]">
+          <div className={`w-[100%] p-[3px] rounded-md }`}>
+            <Image
+              src={getBasicIcon(icon)}
               className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
               alt=""
               width={24}

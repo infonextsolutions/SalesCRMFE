@@ -47,8 +47,8 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   // }, [product, companyName, callOwner, callType, startDate, endDate, search]);
 
   return (
-    <div className="w-[100%] bg-white min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] h-[120px] flex items-center  px-[8px]">
+    <div className="w-[100%] bg-[#ffe3e170] pt-3 min-h-[70vh] rounded-[18px] relative mb-[40px]">
+      <div className="w-[100%] h-[160px] flex items-center  px-[8px]">
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex gap-5">
             <Search change={onChange} />
@@ -60,7 +60,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
             />
           </div>
           <div className="flex items-center gap-5">
-            <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -72,7 +72,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
-            <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
@@ -85,7 +85,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 <option value="Close">Product B</option>
               </select>
             </div>
-            <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
@@ -97,7 +97,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
-            <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
@@ -109,18 +109,18 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
-            <div className="flex gap-4 items-center w-62 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <h2 className="font-medium">Call Dispostion</h2>
-              <select
-                onChange={(e) => setCallDisposition(e.target.value)}
-                className="text-red-500"
-                id="callDispostion"
-              >
-                <option selected value="Follow-up Required">
-                  Follow-up Required
-                </option>
-              </select>
-            </div>
+          </div>
+          <div className="flex gap-4 items-center w-80 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <h2 className="font-medium">Call Dispostion</h2>
+            <select
+              onChange={(e) => setCallDisposition(e.target.value)}
+              className="text-red-500"
+              id="callDispostion"
+            >
+              <option selected value="Follow-up Required">
+                Follow-up Required
+              </option>
+            </select>
           </div>
         </div>
         {/* <ButtonDropDown

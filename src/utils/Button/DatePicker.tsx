@@ -1,26 +1,37 @@
+import Image from "next/image";
 import React from "react";
+import { getBasicIcon } from "../AssetsHelper";
 
 const DatePicker = ({ startDate, setStartDate, endDate, setEndDate }: any) => {
   return (
-    <div className="flex space-x-4">
+    <div className="flex items-center space-x-2 bg-white border-2 p-1.5 rounded-xl">
       <div>
         <input
           value={startDate}
           type="date"
           id="start-date"
           name="start-date"
-          className="border border-gray-300 rounded-xl px-2 py-1.5"
+          className="outline-none"
           onChange={(event) => setStartDate(event.target.value)}
         />
       </div>
-      <h2 className="py-1 text-black">to</h2>
+
+      <Image
+        src={getBasicIcon("InputSeperator")}
+        style={{
+          zIndex: 10,
+        }}
+        alt=""
+        width={18}
+        height={13}
+      />
       <div>
         <input
           value={endDate}
           type="date"
           id="end-date"
           name="end-date"
-          className="border border-gray-300 rounded-xl px-2 py-1.5"
+          className="outline-none"
           onChange={(event) => setEndDate(event.target.value)}
         />
       </div>

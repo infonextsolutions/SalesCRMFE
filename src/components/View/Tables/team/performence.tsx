@@ -14,8 +14,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Root from "@/types/teams";
-const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
-
+const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
   console.log(filter);
 
   // console.log(totalRecords);
@@ -160,7 +159,7 @@ const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
             previousLabel={
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != 0 ? "svg-blue" : ""} rotate-180`}
+                className={`${pageNumber != 0 ? "svg-red" : ""} rotate-180`}
                 alt=""
                 width={20}
                 height={20}
@@ -172,7 +171,7 @@ const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
             nextLabel={
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""}`}
+                className={`${pageNumber != pageCount - 1 ? "svg-red" : ""}`}
                 alt=""
                 width={16}
                 height={16}
@@ -204,7 +203,7 @@ const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
             breakClassName={""}
             breakLinkClassName={""}
             forcePage={pageNumber}
-            activeClassName={`bg-renal-blue text-[#fff] rounded-[10px]`}
+            activeClassName={`bg-bg-red text-[#fff] rounded-[10px]`}
           />
           <div
             className={`flex justify-center ml-[8px] h-[40px] w-[40px] cursor-pointer rounded-[10px] ${
@@ -215,7 +214,7 @@ const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
             <Image
               src={getBasicIcon("Arrow-Right 2")}
               className={`${
-                pageNumber != pageCount - 1 ? "svg-blue" : ""
+                pageNumber != pageCount - 1 ? "svg-red" : ""
               } translate-x-[6px]`}
               alt=""
               width={18}
@@ -224,7 +223,7 @@ const PerformenceTable = ({ totalRecords,filter }: TableProps) => {
             <Image
               src={getBasicIcon("Arrow-Right 2")}
               className={`${
-                pageNumber != pageCount - 1 ? "svg-blue" : ""
+                pageNumber != pageCount - 1 ? "svg-red" : ""
               } translate-x-[-6px]`}
               alt=""
               width={18}
@@ -288,5 +287,5 @@ interface TableProps {
   [key: string]: any;
   icon?: String;
   search?: String;
-  filter:any
+  filter: any;
 }
