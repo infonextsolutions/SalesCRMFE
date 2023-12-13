@@ -250,47 +250,67 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
         </div>
 
         <div className="py-2"></div>
-        {/* <ul role="list" className="">
-          {contacts.map((item: any, i: any) => {
-            function random_number_between_1_and_7() {
-              // Generate a random number between 0 and 1 (exclusive)
-              const randomNum = Math.random();
-
-              // Scale the number to the range of 1 to 7
-              const scaledNum = Math.floor(randomNum * 7) + 1;
-
-              return scaledNum;
-            }
-            const random = random_number_between_1_and_7();
-            return (
-              <li className="mb-[10px]" key={i}>
-                <div className="flex items-center gap-x-3 mr-3">
-                  <Image
-                    className="h-12 w-10 rounded-full ml-2"
-                    src={getRoundedAvatar(random, 30)}
-                    alt=""
-                    width={64}
-                    height={48}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                  <div>
-                    <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                      {item.name}
-                    </h4>
-                    <a
-                      href="#0"
-                      className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
-                    >
-                      {item.designation}
-                    </a>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul> */}
+        <ul
+        role="list"
+        className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+      >
+        <li>
+          <div className="flex items-center gap-x-2 mr-4">
+            <Image
+              className="h-12 w-12 rounded-full "
+              src={getRoundedAvatar(6, 30)}
+              alt=""
+              width={54}
+              height={48}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+            <div>
+              <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                {data?.result?.customerId?.contacts?.[0]?.customer_name}
+              </h4>
+              <a
+                href="#0"
+                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+              >
+                {data?.result?.customerId?.contacts?.[0]?.designation}
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div className="py-2"></div>
+      <ul
+        role="list"
+        className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+      >
+        <li>
+          <div className="flex items-center gap-x-2 mr-4">
+            <Image
+              className="h-12 w-12 rounded-full "
+              src={getRoundedAvatar(6, 30)}
+              alt=""
+              width={54}
+              height={48}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+            <div>
+              <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                {data?.result?.customerId?.contacts?.[1]?.customer_name}
+              </h4>
+              <a
+                href="#0"
+                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+              >
+                {data?.result?.customerId?.contacts?.[1]?.designation}
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
         <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
       </div>
     </>
