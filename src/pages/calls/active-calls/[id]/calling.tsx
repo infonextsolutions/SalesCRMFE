@@ -44,9 +44,9 @@ const AudioProfile = ({ data, scripts }: any) => {
   };
 
   // console.log(data.result, scripts);
-  console.log("asdasdasd", data.result);
+  console.log("asdasdasd", data?.result);
   const handleFileChange = (event: any) => {
-    setAudioFile(event.target.files[0]);
+    setAudioFile(event?.target?.files[0]);
   };
   const handleSubmit = () => {
     if (!audioFile) {
@@ -247,10 +247,10 @@ const AudioProfile = ({ data, scripts }: any) => {
             check={false}
             current={0}
             info={dummy.audioCallDetails}
-            data1={data.result}
+            data1={data?.result}
           />
           <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
-            <Script data={data.result} scripts={scripts} />
+            <Script data={data?.result} scripts={scripts} />
           </div>
         </div>
         {/* write your code here for profile page manya! */}
@@ -263,18 +263,29 @@ export default AudioProfile;
 
 export async function getServerSideProps({ query, params }: any) {
   // "https://salescrmbe.onrender.com/api/active-call/find-all"
-  const response = await axios.get(
-    `https://salescrmbe.onrender.com/api/active-call/find-by-id?id=${params.id}`
-  );
-  const another = await axios.get(
-    `https://salescrmbe.onrender.com/api/call-script/active-call?activeCallId=${response?.data?.result?._id}`
-  );
-  console.log(another);
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-      scripts: another.data || {},
-    }, // will be passed to the page component as props
-  };
+  try {
+    const response = await axios.get(
+      `https://salescrmbe.onrender.com/api/active-call/find-by-id?id=${params.id}`
+    );
+    const another = await axios.get(
+      `https://salescrmbe.onrender.com/api/call-script/active-call?activeCallId=${response?.data?.result?._id}`
+    );
+    console.log(">>>>------->>>>>> CALLING >>>------>>>>>", response, another);
+    return {
+      props: {
+        // TODO: Can do better error handling here by passing another property error in the component
+        data: response.data || {},
+        scripts: another.data || {},
+      }, // will be passed to the page component as props
+    };
+  } catch (error) {
+    console.log('----- ERROR CALLING -----', error);
+    return {
+      props: {
+        // TODO: Can do better error handling here by passing another property error in the component
+        // data: response.data || {},
+        // scripts: another.data || {},
+      }, // will be passed to the page component as props
+    };
+  }
 }

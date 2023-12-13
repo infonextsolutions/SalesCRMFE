@@ -33,7 +33,7 @@ const RecordProfile = ({
   const UpdateCall = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/active-call/find-by-id?id=${data1._id}`
+        `https://salescrmbe.onrender.com/api/active-call/find-by-id?id=${data1?._id}`
       )
       .then((e) => {
         setActiveCall(e.data.result);
@@ -46,7 +46,7 @@ const RecordProfile = ({
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1.leadId._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1?.leadId._id}`
       )
       .then((e) => {
         setData(e.data.result);
@@ -64,7 +64,7 @@ const RecordProfile = ({
       setChecked(true);
     }
   });
-  console.log(new Date(data1.createdAt).toDateString(), "arijit");
+  console.log(new Date(data1?.createdAt).toDateString(), "arijit");
   return (
     <div
       className={`w-[${
