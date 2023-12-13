@@ -22,9 +22,9 @@ const Note = ({ title, content, date }: any) => {
 };
 
 const Notes = ({ data, refresh }: any) => {
-  const [list, setList] = useState<any>([...data.notes]);
+  const [list, setList] = useState<any>(data ? [...data?.notes] : []);
 
-  console.log(data.notes, "please ch-11", data);
+  console.log(data?.notes, "please ch-11", data);
 
   const [notes, setNotes] = React.useState(false);
   const [bool, setBool] = React.useState(true);

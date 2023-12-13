@@ -30,7 +30,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1.leadId._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1?.leadId._id}`
       )
       .then((e) => {
         setData(e.data);
@@ -50,8 +50,8 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   });
 
   const called: any = data1;
-  const owner = called.owner;
-  const participants = called.participants;
+  const owner = called?.owner;
+  const participants = called?.participants;
 
   function convertDatetimeToCustomFormat(dateStr: any) {
     // Convert the string to a Date object
@@ -78,22 +78,22 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
         </Backdrop>
       )}
       <h4 className="text-2xl font-semibold capitalize pl-7">
-        {data1.call_title}
+        {data1?.call_title}
       </h4>
       <div className="pl-[30px]">
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id - {convertDatetimeToCustomFormat(data1.updatedAt)}
+          Call Id - {convertDatetimeToCustomFormat(data1?.updatedAt)}
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">LEAD ID</p>
           <p className="text-sm font-semibold text-black">
-            {data1.leadId.leadId}
+            {data1?.leadId?.leadId}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Title</p>
           <p className="text-sm font-semibold text-black">
-            {data1.leadId.lead_title}
+            {data1?.leadId?.lead_title}
           </p>
         </div>
 
@@ -103,25 +103,25 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium"> Company Name</p>
           <p className="text-sm font-semibold text-black">
-            {data1.companyId.company_name}
+            {data1?.companyId?.company_name}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Client POC</p>
           <p className="text-sm font-semibold text-black">
-            {data1.customerId.name}
+            {data1?.customerId?.name}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Product/Service</p>
           <p className="text-sm font-semibold text-black">
-            {data1.companyId.company_product_category}
+            {data1?.companyId?.company_product_category}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Stage</p>
           <p className="text-sm font-semibold text-black">
-            {data1.leadId.leadStage}
+            {data1?.leadId?.leadStage}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
@@ -179,7 +179,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
                 Talk/Listen Ratio
               </p>
               <p className="mt-[5px] text-[#8A9099] text-[12px] leading-[18px]">
-                {info[activeTitle].data.talkRatio}
+                {info?.[activeTitle]?.data?.talkRatio}
               </p>
             </div>
             <div className="mt-[12px]">
@@ -187,7 +187,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
                 Longest Monologue
               </p>
               <p className="text-[#8A9099] text-[12px] leading-[18px]">
-                {info[activeTitle].data.longestMonologue}
+                {info?.[activeTitle]?.data?.longestMonologue}
               </p>
             </div>
             <div className="mt-[12px]">
@@ -195,7 +195,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
                 Filler words per minute
               </p>
               <p className="text-[#8A9099] text-[12px] leading-[18px]">
-                {info[activeTitle].data.fillerWords}
+                {info?.[activeTitle]?.data?.fillerWords}
               </p>
             </div>
             <div className="mt-[12px]">
@@ -203,7 +203,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
                 Interactivity
               </p>
               <p className="text-[#8A9099] text-[12px] leading-[18px]">
-                {info[activeTitle].data.interactivity}
+                {info?.[activeTitle]?.data?.interactivity}
               </p>
             </div>
             <div className="mt-[12px]">
@@ -211,7 +211,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
                 Next Steps
               </p>
               <p className="text-[#8A9099] text-[12px] leading-[18px]">
-                {info[activeTitle].data.nextSteps}
+                {info?.[activeTitle]?.data?.nextSteps}
               </p>
             </div>
             <div className="mt-[12px]">
@@ -219,7 +219,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
                 Engaging questions
               </p>
               <p className="text-[#8A9099] text-[12px] leading-[18px]">
-                {info[activeTitle].data.engagingQuestions}
+                {info?.[activeTitle]?.data?.engagingQuestions}
               </p>
             </div>
           </div>

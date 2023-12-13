@@ -321,7 +321,7 @@ const ScriptList = ({
             />
           </button>
         </div>
-        {data.map((item: any, i: any) => {
+        {data?.map((item: any, i: any) => {
           console.log(item, "please checck here", i);
           return (
             <ScriptDoc
@@ -347,20 +347,20 @@ const ScriptList = ({
 
 const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   console.log(scripts);
-  console.log(data._id);
+  console.log(data?._id);
 
   const [activeTitle, setActiveTitle] = React.useState(0);
 
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
-  const [currScripts, setCurrScripts] = useState<any[]>(scripts.result);
+  const [currScripts, setCurrScripts] = useState<any[]>(scripts?.result);
   const [selected, setSelected] = useState(false);
 
   const refresh = () => {
     axios
       .get(
-        `https://salescrmbe.onrender.com/api/call-script/active-call?activeCallId=${data._id}`
+        `https://salescrmbe.onrender.com/api/call-script/active-call?activeCallId=${data?._id}`
       )
       .then((e) => {
         console.log(setCurrScripts(e.data.result));
