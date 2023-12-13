@@ -1,3 +1,4 @@
+import { BarChart } from '@mui/x-charts';
 import React from 'react'
 
 const Chart = ({ title, percent }: any) => {
@@ -50,6 +51,9 @@ const BarChartVertical = ({
         <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
             <h3 className='text-black'>{title}</h3>
             <div className='chart-container'>
+                {/* <BarChart 
+                    xAxis
+                /> */}
                 <ChartContainer>
                     {
                         formattedData?.map((barItem: any, index: number) => (

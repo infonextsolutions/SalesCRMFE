@@ -27,8 +27,6 @@ const NoiseAndVolumeChart = () => {
                         percent={.2}
                         hideText={true}
                         arcWidth={.3}
-                    // arcsLength={.2}
-
                     />
                     <span className='text-black mx-auto'>Low Volume</span>
                 </div>
