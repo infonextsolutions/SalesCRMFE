@@ -137,39 +137,34 @@ const Calls = ({ data }: any) => {
     <>
       <Navbar mainTitle={"Calls "} title={"Active Calls"} src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-        <Navigation
-          title={
-            scheduleCalls
-              ? "Calls > Active calls > Schedule Calls"
-              : scheduleMeeting
-              ? "Calls > Active calls > Schedule Meeting"
-              : ""
-          }
+        {/* <Navigation
+          title=""
           buttons={[
             {
-              text: "Export",
+              text: "",
               dropdown: true,
               id: 1,
               icon: "Download",
               light: true,
               dark: false,
               click: addExport,
+              onClick1: exportXLSX,
               list: [
-                { title: "Excel", Icon: "Excel" },
-                { title: "PDF", Icon: "PDF" },
-                {
-                  title: "CSV",
-                  Icon: "CSV",
-                  wrapper: (
-                    <CSVLink data={data.result} className="" ref={ref}>
-                      CSV
-                    </CSVLink>
-                  ),
-                },
+                // { title: "Excel", Icon: "Excel" },
+                // { title: "PDF", Icon: "PDF" },
+                // {
+                //   title: "CSV",
+                //   Icon: "CSV",
+                //   wrapper: (
+                //     <CSVLink data={data.result} className="" ref={ref}>
+                //       CSV
+                //     </CSVLink>
+                //   ),
+                // },
               ],
             },
           ]}
-        />
+        /> */}
         <div className="flex justify-around pb-5">
           <button
             onClick={gotoScheduleCall}

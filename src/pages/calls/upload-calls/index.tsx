@@ -188,12 +188,13 @@ const Calls = ({ data }: any) => {
               },
             },
             {
-              text: "Export",
+              text: "",
               dropdown: true,
               id: 1,
               icon: "Download",
               light: true,
               dark: false,
+              onClick1: exportXLSX,
               click: addExport,
               list: [
                 // { title: "Print", Icon: "Printer" },

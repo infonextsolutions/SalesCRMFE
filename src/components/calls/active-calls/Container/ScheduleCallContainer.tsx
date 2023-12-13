@@ -49,7 +49,7 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
   // }, [product, companyName, callOwner, callType, startDate, endDate, search]);
 
   return (
-    <div className="pr-[10px] w-[100%] bg-white min-h-[70vh] rounded-[18px] overflow-hidden mb-[40px]">
+    <div className="pr-[10px] w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] overflow-hidden mb-[40px]">
       <div className="w-[100%] h-[120px] flex items-center  px-[8px]">
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex gap-5">

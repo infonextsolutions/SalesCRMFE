@@ -162,7 +162,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
             previousLabel={
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != 0 ? "svg-blue" : ""} rotate-180`}
+                className={`${pageNumber != 0 ? "svg-red" : ""} rotate-180`}
                 alt=""
                 width={20}
                 height={20}
@@ -174,7 +174,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
             nextLabel={
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != pageCount - 1 ? "svg-blue" : ""}`}
+                className={`${pageNumber != pageCount - 1 ? "svg-red" : ""}`}
                 alt=""
                 width={16}
                 height={16}
@@ -217,7 +217,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
             <Image
               src={getBasicIcon("Arrow-Right 2")}
               className={`${
-                pageNumber != pageCount - 1 ? "svg-blue" : ""
+                pageNumber != pageCount - 1 ? "svg-red" : ""
               } translate-x-[6px]`}
               alt=""
               width={18}
@@ -226,7 +226,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
             <Image
               src={getBasicIcon("Arrow-Right 2")}
               className={`${
-                pageNumber != pageCount - 1 ? "svg-blue" : ""
+                pageNumber != pageCount - 1 ? "svg-red" : ""
               } translate-x-[-6px]`}
               alt=""
               width={18}

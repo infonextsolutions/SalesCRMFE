@@ -442,6 +442,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${
     minutes != undefined ? minutes : ""
   } ${period}`;
+  console.log(CallData);
 
   return (
     <>
@@ -487,6 +488,13 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={CallData?.companyId?.company_name}
             click={true}
             route={`/sales/open/${CallData?._id}/company-profile`}
+            color={"#000"}
+          />
+          <CallItem
+            width={120}
+            left={20}
+            text={CallData?.companyId?.product}
+            click={true}
             color={"#000"}
           />
           {/* <div

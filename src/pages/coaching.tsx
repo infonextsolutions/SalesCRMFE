@@ -38,17 +38,17 @@ const Coaching = () => {
             ],
           },
           {
-            text: "Export",
+            text: "",
             dropdown: true,
             id: 1,
             icon: "Download",
             light: true,
             dark: false,
             list: [
-              { title: "Print", Icon: "Printer" },
-              { title: "Excel", Icon: "Excel" },
-              { title: "PDF", Icon: "PDF" },
-              { title: "CSV", Icon: "CSV" },
+              // { title: "Print", Icon: "Printer" },
+              // { title: "Excel", Icon: "Excel" },
+              // { title: "PDF", Icon: "PDF" },
+              // { title: "CSV", Icon: "CSV" },
             ],
           },
         ]}

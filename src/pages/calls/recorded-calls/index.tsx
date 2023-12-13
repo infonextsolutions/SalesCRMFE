@@ -102,35 +102,30 @@ const Calls = ({ data }: any) => {
       <Navbar mainTitle="Calls" title="Recorded Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
         <Navigation
-          title={
-            recodedCalls
-              ? "Calls > Recorded Calls > Call Recordings"
-              : recodedMeeting
-              ? "Calls > Recorded Calls > Meeting Recordings"
-              : ""
-          }
+          title=""
           buttons={[
             {
-              text: "Export",
+              text: "",
               dropdown: true,
               id: 1,
               icon: "Download",
               light: true,
               dark: false,
+              onClick1: exportXLSX,
               click: addExport,
               list: [
                 // { title: "Print", Icon: "Printer" },
-                { title: "Excel", Icon: "Excel" },
-                // { title: "PDF", Icon: "PDF" },
-                {
-                  title: "CSV",
-                  Icon: "CSV",
-                  wrapper: (
-                    <CSVLink data={data.result} className="" ref={ref}>
-                      CSV
-                    </CSVLink>
-                  ),
-                },
+                // { title: "Excel", Icon: "Excel" },
+                // // { title: "PDF", Icon: "PDF" },
+                // {
+                //   title: "CSV",
+                //   Icon: "CSV",
+                //   wrapper: (
+                //     <CSVLink data={data.result} className="" ref={ref}>
+                //       CSV
+                //     </CSVLink>
+                //   ),
+                // },
               ],
             },
           ]}

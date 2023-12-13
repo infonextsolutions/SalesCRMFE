@@ -11,9 +11,17 @@ const Search = ({ change }: any) => {
   return (
     <>
       <div
-        className="w-[60%] h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] overflow-hidden  flex items-center"
+        className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] overflow-hidden  flex items-center"
         ref={ref}
       >
+        <div className="grow h-[32px] ">
+          <input
+            type="text"
+            onChange={change}
+            className="w-[100%] h-[32px] px-4 bg-white outline-0 text-black "
+            placeholder="Search Recorded Call..."
+          />
+        </div>
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
           <Image
             className="w-[100%]"
@@ -25,14 +33,6 @@ const Search = ({ change }: any) => {
             style={{
               objectFit: "contain",
             }}
-          />
-        </div>
-        <div className="grow h-[32px] ">
-          <input
-            type="text"
-            onChange={change}
-            className="w-[100%] h-[32px] bg-white outline-0 text-black "
-            placeholder="Search Recorded Call..."
           />
         </div>
         {/* <div
@@ -56,7 +56,7 @@ const Search = ({ change }: any) => {
           />
         </div> */}
       </div>
-       {show && (
+      {show && (
         <Filter
           top={bounding.top}
           left={bounding.left}
