@@ -650,7 +650,10 @@ const AddLead = ({ cancel }: any) => {
             </div>
           )}
 
-          {/* {moreContact1 && (
+
+
+
+          {moreContact1 && (
             <>
               <h1 className="text-[#3f434a] text-[20px] mt-4 mb-[20px] tracking-[1px]">
                 More Contact Info - 1
@@ -660,7 +663,7 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData1({
                     ...moreContactData1,
-                    name: e,
+                    customer_name: e,
                   });
                 }}
                 title="Name*"
@@ -680,7 +683,7 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData1({
                     ...moreContactData1,
-                    phoneNumber: e,
+                    customer_contact: e,
                   });
                 }}
                 title="Contact Number*"
@@ -690,7 +693,7 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData1({
                     ...moreContactData1,
-                    email: e,
+                    customer_email: e,
                   });
                 }}
                 title="Email*"
@@ -704,7 +707,7 @@ const AddLead = ({ cancel }: any) => {
                   onChange={(e: any) => {
                     setMoreContactData1({
                       ...moreContactData1,
-                      gender: e.target.value,
+                      customer_gender: e.target.value,
                     });
                   }}
                 >
@@ -726,7 +729,7 @@ const AddLead = ({ cancel }: any) => {
                   onChange={(e: any) => {
                     setMoreContactData1({
                       ...moreContactData1,
-                      socialMedia1: e.target.value,
+                      customer_socialMedia1: e.target.value,
                     });
                   }}
                 >
@@ -746,7 +749,7 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData1({
                     ...moreContactData1,
-                    socialMedia1Url: e,
+                    customer_socialMedia1Url: e,
                   });
                 }}
               />
@@ -760,7 +763,7 @@ const AddLead = ({ cancel }: any) => {
                   onChange={(e: any) => {
                     setMoreContactData1({
                       ...moreContactData1,
-                      socialMedia2: e.target.value,
+                      customer_socialMedia2: e.target.value,
                     });
                   }}
                 >
@@ -780,12 +783,13 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData1({
                     ...moreContactData1,
-                    socialMedia21Url: e,
+                    customer_socialMedia2Url: e,
                   });
                 }}
               />
             </>
           )}
+
           {showMoreContactButton2 && !showMoreContactButton1 && (
             <div>
               <button
@@ -807,7 +811,7 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData2({
                     ...moreContactData2,
-                    name: e,
+                    customer_name: e,
                   });
                 }}
                 title="Name*"
@@ -827,7 +831,7 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData2({
                     ...moreContactData2,
-                    phoneNumber: e,
+                    customer_contact: e,
                   });
                 }}
                 title="Contact Number*"
@@ -837,7 +841,7 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData2({
                     ...moreContactData2,
-                    email: e,
+                    customer_email: e,
                   });
                 }}
                 title="Email*"
@@ -851,7 +855,7 @@ const AddLead = ({ cancel }: any) => {
                   onChange={(e: any) => {
                     setMoreContactData2({
                       ...moreContactData2,
-                      gender: e.target.value,
+                      customer_gender: e.target.value,
                     });
                   }}
                 >
@@ -873,7 +877,7 @@ const AddLead = ({ cancel }: any) => {
                   onChange={(e: any) => {
                     setMoreContactData2({
                       ...moreContactData2,
-                      socialMedia1: e.target.value,
+                      customer_socialMedia1: e.target.value,
                     });
                   }}
                 >
@@ -893,7 +897,7 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData2({
                     ...moreContactData2,
-                    socialMedia1Url: e,
+                    customer_socialMedia1Url: e,
                   });
                 }}
               />
@@ -907,7 +911,7 @@ const AddLead = ({ cancel }: any) => {
                   onChange={(e: any) => {
                     setMoreContactData2({
                       ...moreContactData2,
-                      socialMedia2: e.target.value,
+                      customer_socialMedia2: e.target.value,
                     });
                   }}
                 >
@@ -927,12 +931,12 @@ const AddLead = ({ cancel }: any) => {
                 change={(e: any) => {
                   setMoreContactData2({
                     ...moreContactData2,
-                    socialMedia21Url: e,
+                    customer_socialMedia2Url: e,
                   });
                 }}
               />
             </>
-          )} */}
+          )}
         </>
       )}
       <div className="w-[100%] mt-[70px] text-[#ffffff] flex justify-end">
