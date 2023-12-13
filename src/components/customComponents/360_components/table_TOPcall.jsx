@@ -27,7 +27,7 @@ function Top_Call(){
 
     return(
         <>
-        <h1>Top Call</h1>
+        <h1 className="text-black">Top Call</h1>
         <TableContainer className="table">
   <Table>
     <TableHead>

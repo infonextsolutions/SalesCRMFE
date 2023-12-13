@@ -56,7 +56,7 @@ const Selling = ({
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Selling Skills
         </h1>
-        <div className="flex">
+        {/* <div className="flex">
           <DatePicker
             startDate={startDate}
             setStartDate={setStartDate}
@@ -72,7 +72,7 @@ const Selling = ({
             dropdown={true}
             list={[]}
           />
-        </div>
+        </div> */}
       </div>
       <ChartContainer>
         <Chart

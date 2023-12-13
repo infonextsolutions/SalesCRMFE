@@ -94,7 +94,7 @@ const QuickActions = ({
   );
 };
 
-const Deals = ({ data }: any) => {
+const Deals = ({ data, type }: any) => {
   const [notes, setNotes] = React.useState(false);
   const [events, setEvents] = React.useState(false);
   const [notes1, setNotes1] = React.useState(false);
@@ -195,7 +195,7 @@ const Deals = ({ data }: any) => {
 
   useEffect(() => {
     console.log('============================ data.result._id ================================', data);
-    axios.get(`https://salescrmbe.onrender.com/api/leads/getDeals?userId=${data?.result?._id}`)
+    axios.get(`https://salescrmbe.onrender.com/api/leads/getDeals?id=${data?.result?.companyId?._id}&type=${type}`)
       .then(response => {
         const data = response?.data;
         setOpenDeals(data?.openDeals);

@@ -437,7 +437,7 @@ const CallHolder = ({ click }: any) => {
 const CallPlayer = () => {
   const [playing, setPlaying] = React.useState(false);
   const ref: any = useRef();
-  React.useEffect(() => {});
+  React.useEffect(() => { });
 
   return (
     <div className="w-[100%] h-[100px] mb-[100px] mt-[20px] px-[40px]">
@@ -447,7 +447,7 @@ const CallPlayer = () => {
       <audio src="/poor-audio.ogg" ref={ref}></audio>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
         <div className="h-[100%] w-[40%] bg-renal-blue rounded-l-[3px] relative">
-          <CallHolder click={() => {}} />
+          <CallHolder click={() => { }} />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
           15:53/30:00
@@ -561,7 +561,7 @@ const Audio = ({ data, data1 }: props) => {
     }
   });
 
-  console.log(callData, "only check here");
+  console.log("============== CALLDATA ==============================", callData);
 
   return (
     <>
