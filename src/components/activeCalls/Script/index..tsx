@@ -130,6 +130,45 @@ const ScriptDoc = ({
   );
 };
 
+
+export function convertDatetime(inputStr: any) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  // Parse the input string into a Date object
+  const dateObj = new Date(inputStr);
+
+  // Convert UTC time to IST
+  const istOffset = 5.5 * 60 * 60 * 1000; // Offset in milliseconds (5 hours and 30 minutes)
+  const istTime = new Date(dateObj.getTime() + istOffset);
+
+  // Get the components of the IST date
+  const day = istTime.getUTCDate();
+  const month = months[istTime.getUTCMonth()];
+  const year = istTime.getUTCFullYear();
+  const hours = istTime.getUTCHours();
+  const minutes = istTime.getUTCMinutes();
+
+  // Format the time part (hours and minutes) in 12-hour clock format with AM/PM indicator
+  let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"
+    }`;
+
+  // Format the date and time as desired
+  return `${day} ${month} ${year}, ${timeStr}`;
+}
+
 const ScriptList = ({
   data,
   moredata,
@@ -168,45 +207,6 @@ const ScriptList = ({
   };
 
   console.log(moredata, "here is more");
-
-  function convertDatetime(inputStr: any) {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    // Parse the input string into a Date object
-    const dateObj = new Date(inputStr);
-
-    // Convert UTC time to IST
-    const istOffset = 5.5 * 60 * 60 * 1000; // Offset in milliseconds (5 hours and 30 minutes)
-    const istTime = new Date(dateObj.getTime() + istOffset);
-
-    // Get the components of the IST date
-    const day = istTime.getUTCDate();
-    const month = months[istTime.getUTCMonth()];
-    const year = istTime.getUTCFullYear();
-    const hours = istTime.getUTCHours();
-    const minutes = istTime.getUTCMinutes();
-
-    // Format the time part (hours and minutes) in 12-hour clock format with AM/PM indicator
-    let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${
-      hours >= 12 ? "PM" : "AM"
-    }`;
-
-    // Format the date and time as desired
-    return `${day} ${month} ${year}, ${timeStr}`;
-  }
 
   function getTitleFromURL(url: any) {
     const parts = url.split("/");
@@ -365,7 +365,7 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
       .then((e) => {
         console.log(setCurrScripts(e.data.result));
       })
-      .catch((e) => {});
+      .catch((e) => { });
   };
 
   console.log(scripts);

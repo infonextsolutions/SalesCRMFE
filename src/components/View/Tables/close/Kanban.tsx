@@ -32,7 +32,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
           e.companyId?.company_name?.includes(search) ||
           e.customerId?.name?.includes(search) ||
           e.potential_deal_size?.includes(search) ||
-          e?.lead_title?.includes(search)||
+          e?.lead_title?.includes(search) ||
           e?.leadId?.includes(search)
       );
 
@@ -53,7 +53,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
   const [selectAll, setSelectAll] = useState(false);
 
   const stages = ["Won", "Lost", "Dead"];
-  const titles = [ "WON", "LOST", "DEAD"];
+  const titles = ["WON", "LOST", "DEAD"];
   console.log(items, "please check here");
   useEffect(() => {
     items.map((e: any, i: any) => {
@@ -62,7 +62,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
   }, [items]);
   return (
     <>
-      <div className="px-[20px] mt-[10px] text-[#ffffff] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll">
+      <div className="px-[20px] mt-[10px] text-[#ffffff] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll relative">
         {/* {loading ? (
           <Spinner />
         ) : (
@@ -89,13 +89,13 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
         {stages?.map((col, i) => {
           const toBeFilter = items;
           const res = items.filter((obj: any) => {
-            return obj.leadStage.includes(stages[i]);
+                        return obj.leadStage.includes(stages[i]);
           });
-          if (res.length || col==="Dead") {
+          if (res.length || col === "Dead") {
             return (
               <div className="flex gap-[20px]" key={i}>
                 <div className="w-[270px] shrink-0 ">
-                  <div className="leadName flex mb-[10px]">
+                  <div className="leadName flex mb-[10px] sticky t-[0px]">
                     <div className="w-[100%] bg-slate-700 h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
                       <div className="enq-header font-medium flex items-center ml-[10px] text-[13px] flex gap-[8px] items-center">
                         <p className="">{titles[i]}</p>
@@ -127,7 +127,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
                     </div> */}
                   </div>
                   {res.map((Item: any, i: any) => {
-                    console.log(Item,"please checkk-2314211")
+                    console.log(Item, "please checkk-2314211")
                     const item = {
                       data: {
                         companyName: "ABC Corp",
