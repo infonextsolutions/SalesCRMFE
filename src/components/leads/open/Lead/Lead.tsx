@@ -117,8 +117,9 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -359,14 +360,12 @@ const ExpandableRow = ({
   companyWebsite,
   LeadOwners,
   otherContacts,
-  leadData
+  leadData,
 }: any) => {
   return (
     <div className="w-[100%] h-[100%] flex px-[110px] py-[10px] ">
       <div className="w-[350px] ml-[30px]">
-        <p className="text-[16px] text-[#000] font-medium">
-          Lead Source
-        </p>
+        <p className="text-[16px] text-[#000] font-medium">Lead Source</p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
           {leadData?.leadSource}
         </p>
@@ -386,11 +385,11 @@ const ExpandableRow = ({
         </p>
       </div>
       <div className="w-[350px] ml-[30px]">
-        <p className="text-[16px] text-[#000] font-medium">
-          Note
-        </p>
+        <p className="text-[16px] text-[#000] font-medium">Note</p>
         <div className="">
-          <h3 className="font-medium text-[#444]">{leadData?.notes[0]?.title || "-"}</h3>
+          <h3 className="font-medium text-[#444]">
+            {leadData?.notes[0]?.title || "-"}
+          </h3>
         </div>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
           {leadData?.notes[0]?.content || "-"}
@@ -449,8 +448,11 @@ const ExpandableRow = ({
       <div className="w-[320px] ml-[50px]">
         <p className="text-[16px] text-[#000] font-medium">Other Contacts</p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider">
-          <span className="text-[#000] text-[15px]"> {leadData?.customerId?.customer_name}</span>,
-          {leadData?.customerId?.customer_designation}
+          <span className="text-[#000] text-[15px]">
+            {" "}
+            {leadData?.customerId?.customer_name}
+          </span>
+          ,{leadData?.customerId?.customer_designation}
         </p>
         {otherContacts?.map((item: any, i: any) => {
           return (
@@ -458,16 +460,17 @@ const ExpandableRow = ({
               key={i}
               className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
             >
-              <span className="text-[#000] text-[15px]"> {item.customer_name}</span>,
-              {item.designation}
+              <span className="text-[#000] text-[15px]">
+                {" "}
+                {item.customer_name}
+              </span>
+              ,{item.designation}
             </p>
           );
         })}
       </div>
       <div className="w-[350px] ml-[30px]">
-        <p className="text-[16px] text-[#000] font-medium">
-          Lead Created On
-        </p>
+        <p className="text-[16px] text-[#000] font-medium">Lead Created On</p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
           {convertDatetime(leadData.createdAt)}
         </p>
@@ -748,14 +751,14 @@ const LeadContainer = ({
         </div> 
         */}
           <LeadBox width={30} bool={selectAll} />
-          <ExpandingIcon
+          {/* <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
             }}
-          />
+          /> */}
           <LeadItem
             width={150}
-            left={20}
+            left={70}
             textLeft={0}
             weight={500}
             color={"#000"}
@@ -764,7 +767,7 @@ const LeadContainer = ({
             route={`${pathname}/${id}/lead-profile`}
           />
           <LeadItem
-            width={250}
+            width={160}
             left={0}
             color={"#000"}
             text={LeadData.lead_title}
@@ -782,7 +785,7 @@ const LeadContainer = ({
           />
           <LeadItemMultiple
             width={130}
-            left={20}
+            left={120}
             upperText={LeadData?.companyId.company_name}
             bottomText={
               LeadData?.companyId?.company_location ||
@@ -828,8 +831,8 @@ const LeadContainer = ({
             }}
           /> */}
           <ContactQuickActions
-            width={200}
-            left={20}
+            width={220}
+            left={10}
             // notes={() => {
             //   AddLead(1, 0);
             // }}
@@ -864,11 +867,11 @@ const LeadContainer = ({
             width={120}
             left={10}
             text={LeadData.leadStatus}
-            textLeft={5}
+            textLeft={0}
           />
           <LeadItem
             width={120}
-            left={10}
+            left={-10}
             textLeft={10}
             text={LeadData.leadStage}
           />
@@ -884,7 +887,7 @@ const LeadContainer = ({
           {/* end - hiding uneccessary column */}
           <LeadItem
             width={150}
-            left={10}
+            left={20}
             textLeft={10}
             text={LeadData?.product_category}
           />
