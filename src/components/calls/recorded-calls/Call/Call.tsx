@@ -218,8 +218,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -448,8 +449,9 @@ const ParticipantsHover = ({
         return (
           <p
             key={i}
-            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-renal-blue"
-              } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${
+              i === 0 ? "text-[#000] mt-[19px]" : "text-renal-blue"
+            } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -473,6 +475,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       setW(wRef.current.offsetWidth);
     }
   });
+  console.log(CallData);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
@@ -560,14 +563,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           ref={wRef}
         >
           <CallBox width={30} bool={selectAll} />
-          <ExpandingIcon
+          {/* <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
             }}
-          />
+          /> */}
           <CallItem
             width={200}
-            left={20}
+            left={70}
             // text={"345345354335"}
             text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
@@ -585,20 +588,21 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
                 : ""
             }
             click={true}
-          // route={`${pathname}/${id}/audio-call`}
+            // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
             left={10}
             text={CallData.leadId.length > 0 ? CallData.leadId[0].leadId : "-"}
             click={true}
-            route={`/sales/open/${CallData.leadId.length > 0 && CallData.leadId[0]._id
-              }/lead-profile`}
+            route={`/sales/open/${
+              CallData.leadId.length > 0 && CallData.leadId[0]._id
+            }/lead-profile`}
             color={"#000"}
           />
           <CallItem
             width={220}
-            left={-55}
+            left={-65}
             text={LeadData?.lead_title}
             click={true}
             route={`/sales/open/${LeadData?._id}/lead-profile`}
@@ -606,7 +610,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           />
           <CallItem
             width={220}
-            left={0}
+            left={40}
             text={LeadData?.companyId?.company_name}
             click={true}
             route={`/sales/open/${LeadData?._id}/company-profile`}
@@ -632,9 +636,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
-                }`}
-            // >
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
+                true ? "text-[#3F434A]" : "text-[#8A9099]"
+              }`}
+              // >
             >
               -
               {/* {LeadData.owners?.map((item:any, i:any) => {
@@ -646,7 +651,13 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               })} */}
             </p>
           </div>
-          <CallItem width={100} left={20} text={LeadData.owners?.[0]?.name} />
+          <CallItem
+            width={110}
+            left={-330}
+            text={LeadData?.companyId?.company_product_category ?? "-"}
+          />
+          <CallItem width={110} left={60} text={""} />
+          <CallItem width={100} left={90} text={LeadData.owners?.[0]?.name} />
           <CallItemMultiple
             width={130}
             left={20}
@@ -659,7 +670,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={calculateTimeDifference(CallData.StartTime, CallData.EndTime)}
           />
           <CallItem width={110} left={20} text={"-"} />
-          <CallItem
+          <CallItem width={110} left={20} text={"-"} />
+          <CallItem width={110} left={20} text={"-"} />
+
+          {/* <CallItem
             width={110}
             left={20}
             img={"/msg.svg"}
@@ -669,8 +683,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             click={true}
             route={`${pathname}/${id}/audio-call`}
             text={`${CallData.comments.length}`}
-          />
-          <CallItem width={110} left={20} text={"Read Summary"} />
+          /> */}
+          {/* <CallItem width={110} left={20} text={"Read Summary"} /> */}
         </div>
       </div>
       <div
