@@ -64,6 +64,10 @@ const ProfilePage = ({ data1, updated }: any) => {
   const contacted: any = data.customerId;
   const contacts = contacted.contacts;
 
+  const checkForAllNull = contacts.every((item: any) => item === null);
+  const filteredContactArray = checkForAllNull
+    ? []
+    : contacts.filter((item: any) => item !== null);
   console.log(contacts, "Pejvfaek");
 
   const [Activities, setActivities] = useState({
@@ -432,10 +436,11 @@ const ProfilePage = ({ data1, updated }: any) => {
             )}
           </div>
         </div>
-
-        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Other Contact
-        </p>
+        {filteredContactArray.length > 1 && (
+          <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+            Other Contact
+          </p>
+        )}
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           {contacts.map((item: any, i: any) => {
             function random_number_between_1_and_7() {
@@ -449,31 +454,35 @@ const ProfilePage = ({ data1, updated }: any) => {
             }
             const random = random_number_between_1_and_7();
             return (
-              <li className="mb-[10px]" key={i}>
-                <div className="flex items-center gap-x-3 mr-3">
-                  <Image
-                    className="h-12 w-10 rounded-full ml-2"
-                    src={getRoundedAvatar(random, 30)}
-                    alt=""
-                    width={64}
-                    height={48}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                  <div>
-                    <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                      {item.name}
-                    </h4>
-                    <a
-                      href="#0"
-                      className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
-                    >
-                      {item.designation}
-                    </a>
-                  </div>
-                </div>
-              </li>
+              <>
+                {item !== null && (
+                  <li className="mb-[10px]" key={i}>
+                    <div className="flex items-center gap-x-3 mr-3">
+                      <Image
+                        className="h-12 w-10 rounded-full ml-2"
+                        src={getRoundedAvatar(random, 30)}
+                        alt=""
+                        width={64}
+                        height={48}
+                        style={{
+                          objectFit: "contain",
+                        }}
+                      />
+                      <div>
+                        <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
+                          {item?.name}
+                        </h4>
+                        <a
+                          href="#0"
+                          className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
+                        >
+                          {item?.designation}
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                )}
+              </>
             );
           })}
         </div>

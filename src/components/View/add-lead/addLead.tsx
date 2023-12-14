@@ -63,15 +63,27 @@ const AddLead = ({ cancel }: any) => {
       companyDetails: companyData,
       contactDetails: {
         contactData: contactData,
-        moreContacts: [moreContactData1, moreContactData2],
+        moreContacts: [moreContactData1, moreContactData2].filter(Boolean),
       },
     };
-    axios
-      .post(`${API_DOMAIN}/api/leads/create`, payload)
-      .then((e: any) => {
-        router.reload();
-        cancel();
-      });
+
+    if (
+      !(moreContactData1.name || moreContactData1.email) ||
+      Object.keys(moreContactData1).length === 0
+    ) {
+      delete payload.contactDetails.moreContacts[0];
+    }
+    if (
+      !(moreContactData2.name || moreContactData2.email) ||
+      Object.keys(moreContactData2).length === 0
+    ) {
+      delete payload.contactDetails.moreContacts[1];
+    }
+
+    axios.post(`${API_DOMAIN}/api/leads/create`, payload).then((e) => {
+      router.reload();
+      cancel();
+    });
   };
 
   return (
@@ -247,13 +259,15 @@ const AddLead = ({ cancel }: any) => {
                 <option value="" selected>
                   -- Select Lead Stage --
                 </option>
-                {(leadData.leadStatus == "open" || leadData.leadStatus == "Open") ? (
+                {leadData.leadStatus == "open" ||
+                leadData.leadStatus == "Open" ? (
                   <>
                     <option value="Enquiry">Enquiry</option>
                     <option value="Interaction">Interaction</option>
                     <option value="Proposal">Proposal</option>
                   </>
-                ) : (leadData.leadStatus == "close" || leadData.leadStatus == "Close") ? (
+                ) : leadData.leadStatus == "close" ||
+                  leadData.leadStatus == "Close" ? (
                   <>
                     <option value="Win">Win</option>
                     <option value="Lost">Lost</option>
@@ -346,7 +360,9 @@ const AddLead = ({ cancel }: any) => {
               }}
               name="company_country"
             >
-              <option selected value="India">India</option>
+              <option selected value="India">
+                India
+              </option>
               <option value="Pakistan">Pakistan</option>
               <option value="Srilanka">Srilanka</option>
               <option value="England">England</option>
@@ -649,9 +665,6 @@ const AddLead = ({ cancel }: any) => {
               </button>
             </div>
           )}
-
-
-
 
           {moreContact1 && (
             <>
