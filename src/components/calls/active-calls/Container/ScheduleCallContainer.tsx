@@ -54,12 +54,6 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex gap-5">
             <Search change={onChange} />
-            <DatePicker
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-            />
           </div>
           <div className="flex items-center gap-5">
             <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -111,6 +105,12 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
+            <DatePicker
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+            />
           </div>
         </div>
         {/* <ButtonDropDown
