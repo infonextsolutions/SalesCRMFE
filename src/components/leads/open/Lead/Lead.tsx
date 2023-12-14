@@ -14,6 +14,7 @@ import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 import ButtonDropDown from "@/utils/Button/Button";
 import axios from "axios";
+import { convertDatetime } from "@/components/activeCalls/Script/index.";
 
 const LeadBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -116,9 +117,8 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -363,6 +363,14 @@ const ExpandableRow = ({
 }: any) => {
   return (
     <div className="w-[100%] h-[100%] flex px-[110px] py-[10px] ">
+      <div className="w-[350px] ml-[30px]">
+        <p className="text-[16px] text-[#000] font-medium">
+          Lead Source
+        </p>
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
+          {leadData?.leadSource}
+        </p>
+      </div>
       <div className="w-[300px]">
         <p className="text-[16px] text-[#000] font-medium">Lead Description</p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
@@ -375,6 +383,17 @@ const ExpandableRow = ({
         </p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
           {companyDesc}
+        </p>
+      </div>
+      <div className="w-[350px] ml-[30px]">
+        <p className="text-[16px] text-[#000] font-medium">
+          Note
+        </p>
+        <div className="">
+          <h3 className="font-medium text-[#444]">{leadData?.notes[0]?.title || "-"}</h3>
+        </div>
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
+          {leadData?.notes[0]?.content || "-"}
         </p>
       </div>
       <div className="flex flex-col ml-[30px]">
@@ -427,19 +446,31 @@ const ExpandableRow = ({
           );
         })}
       </div>
-      <div className="w-[280px] ml-[50px]">
+      <div className="w-[320px] ml-[50px]">
         <p className="text-[16px] text-[#000] font-medium">Other Contacts</p>
-        {otherContacts.map((item: any, i: any) => {
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider">
+          <span className="text-[#000] text-[15px]"> {leadData?.customerId?.customer_name}</span>,
+          {leadData?.customerId?.customer_designation}
+        </p>
+        {otherContacts?.map((item: any, i: any) => {
           return (
             <p
               key={i}
               className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
             >
-              <span className="text-[#000] text-[15px]"> {item.name}</span>,
-              {item.position}
+              <span className="text-[#000] text-[15px]"> {item.customer_name}</span>,
+              {item.designation}
             </p>
           );
         })}
+      </div>
+      <div className="w-[350px] ml-[30px]">
+        <p className="text-[16px] text-[#000] font-medium">
+          Lead Created On
+        </p>
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
+          {convertDatetime(leadData.createdAt)}
+        </p>
       </div>
     </div>
   );
@@ -965,7 +996,7 @@ const LeadContainer = ({
         className="duration-300 bg-[#f7f7f7]"
         style={{
           width: w,
-          height: detailShow ? 150 : 0,
+          height: detailShow ? 180 : 0,
           zIndex: -1,
           clipPath: detailShow
             ? "inset(0px 0px 0 1px)"
@@ -978,11 +1009,7 @@ const LeadContainer = ({
             companyDesc={LeadData.companyId.company_description}
             companyWebsite={LeadData.companyId.company_website_url}
             LeadOwners={LeadData.owners}
-            otherContacts={[
-              { name: "Regina Cooper", position: "Project Manager" },
-              { name: "Suman A.", position: "Sales Manager" },
-              { name: "Judith Black", position: "Creative Director" },
-            ]}
+            otherContacts={LeadData?.customerId?.contacts}
             leadData={LeadData}
           />
         )}
