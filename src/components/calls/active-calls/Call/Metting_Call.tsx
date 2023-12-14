@@ -111,8 +111,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -342,7 +343,10 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
 };
 
 const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
-  console.log('------------------------- CallData : Meeting Call -------------------------', CallData);
+  console.log(
+    "------------------------- CallData : Meeting Call -------------------------",
+    CallData
+  );
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -433,7 +437,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           />
           <CallItem
             width={150}
-            left={20}
+            left={0}
             color={"#000"}
             text={CallData?.description ? CallData?.description : "Zoom"}
             click={true}
@@ -463,12 +467,16 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={150}
             left={10}
-            text={CallData?.leadId?.Product_services ? CallData?.leadId?.Product_services : "P1"}
+            text={
+              CallData?.companyId?.company_product_category
+                ? CallData?.leadId?.Product_services
+                : "P1"
+            }
             color={"#000"}
           />
           <div
             className={`flex justify-between flex-col h-[34px] shrink-150 cursor-pointer`}
-            style={{ width: 200, marginLeft: 20 }}
+            style={{ width: 200, marginLeft: 40 }}
             ref={ref}
             onMouseOver={() => {
               const box = ref.current.getBoundingClientRect();
@@ -480,27 +488,53 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
-                }`}
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
+                true ? "text-[#3F434A]" : "text-[#8A9099]"
+              }`}
             >
-              <span>{CallData?.callParticipant ? CallData?.callParticipant + "," : "-"}</span>{" "}
+              <span>
+                {CallData?.callParticipant
+                  ? CallData?.callParticipant + ","
+                  : "-"}
+              </span>{" "}
               <span className="text-renal-blue ">
                 {owners ? owners.name : ""}
               </span>
             </p>
           </div>
           <CallItem width={150} left={20} text={owners ? owners.name : ""} />
-          <CallItem width={150} left={20} text={CallData?.type ? CallData?.type : "demo call"} />
-          <CallItem width={150} left={20} text={CallData?.leadId?.date_time ? CallData?.leadId?.date_time : "23 January 20233:00 pm"} />
-          <CallItem width={150} left={20} text={CallData?.duration ? CallData?.duration : "30 Minutes"} />
-          <CallItem width={150} left={20} text={CallData?.location ? CallData?.location : "Zoom"} />
+          <CallItem
+            width={150}
+            left={20}
+            text={CallData?.type ? CallData?.type : "demo call"}
+          />
+          <CallItem
+            width={150}
+            left={20}
+            text={
+              CallData?.leadId?.date_time
+                ? CallData?.leadId?.date_time
+                : "23 January 20233:00 pm"
+            }
+          />
+          <CallItem
+            width={150}
+            left={20}
+            text={CallData?.duration ? CallData?.duration : "30 Minutes"}
+          />
+          <CallItem
+            width={150}
+            left={20}
+            text={CallData?.location ? CallData?.location : "Zoom"}
+          />
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={`${isISOString(CallData.call_start_time)
-              ? formatDateToCustomFormat(CallData.call_start_time)
-              : "-"
-              }`}
+            upperText={`${
+              isISOString(CallData.call_start_time)
+                ? formatDateToCustomFormat(CallData.call_start_time)
+                : "-"
+            }`}
             bottomText={
               isISOString(CallData.call_start_time)
                 ? convertISOToTime(CallData.call_start_time)

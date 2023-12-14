@@ -111,21 +111,20 @@ const Calls = ({ data }: any) => {
               icon: "Download",
               light: true,
               dark: false,
-              onClick1: exportXLSX,
               click: addExport,
               list: [
-                // { title: "Print", Icon: "Printer" },
-                // { title: "Excel", Icon: "Excel" },
-                // // { title: "PDF", Icon: "PDF" },
-                // {
-                //   title: "CSV",
-                //   Icon: "CSV",
-                //   wrapper: (
-                //     <CSVLink data={data.result} className="" ref={ref}>
-                //       CSV
-                //     </CSVLink>
-                //   ),
-                // },
+                { title: "Print", Icon: "Printer" },
+                { title: "Excel", Icon: "Excel" },
+                // { title: "PDF", Icon: "PDF" },
+                {
+                  title: "CSV",
+                  Icon: "CSV",
+                  wrapper: (
+                    <CSVLink data={data.result} className="" ref={ref}>
+                      CSV
+                    </CSVLink>
+                  ),
+                },
               ],
             },
           ]}

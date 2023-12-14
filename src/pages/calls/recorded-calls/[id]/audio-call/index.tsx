@@ -53,7 +53,7 @@ const CallProfile = ({ data, data1 }: any) => {
   return (
     <>
       <Navbar mainTitle="Calls" title="Recorded Calls" src="Phone" />
-      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+      <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px]">
         {fullCall && (
           <Backdrop bool={bool} width={"60%"} pad={"50px 0"}>
             <FullCall cancel={cancelFull} data={data.result} />
@@ -65,7 +65,7 @@ const CallProfile = ({ data, data1 }: any) => {
           </Backdrop>
         )}
         <Navigation
-          title="Calls > Recorded Calls > Call Recordings"
+          title=""
           buttons={[
             {
               text: "Share",
@@ -82,17 +82,17 @@ const CallProfile = ({ data, data1 }: any) => {
             },
           ]}
         />
-        <div className="w-[100%] flex gap-[25px] mb-[100px] ">
+        <div className="w-[100%] flex gap-[8px] mb-[100px] ">
           <AudioProfileContainer
             data={data.result}
-            width={"50%"}
+            width={"42%"}
             titles={titles}
             check={true}
             current={0}
             data1={data1.result}
             info={dummy.audioCallDetails}
           />
-          <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
+          <div className="w-[58%] min-h-[50vh] bg-white rounded-xl">
             <Audio data={data.result} data1={data1.result} />
           </div>
         </div>

@@ -29,13 +29,11 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  console.log(activeTitle, "pleafgwafaw");
-
   return (
     <div
       className={`w-[${
         width ? width : "100%"
-      }]  bg-white rounded-xl p-[25px] px-[35px] pt-[30px]`}
+      }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
     >
       {data1?.companyId?.company_name && (
         <div className="w-[70%] flex justify-around">

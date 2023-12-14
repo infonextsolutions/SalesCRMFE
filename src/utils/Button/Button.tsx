@@ -62,7 +62,7 @@ const ButtonDropDown = ({
           : text == "View"
           ? "bg-[#434343] hover:bg-[#2e2d2d]"
           : "bg-bg-red hover:bg-[#ff7d6d]"
-      } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px]  p-[10px]`}
+      } rounded-xl flex items-center justify-center cursor-pointer ml-[30px] pr-[32px]  p-[10px] relative`}
       onMouseOver={() => {
         setMouseOver(true);
       }}
@@ -99,6 +99,22 @@ const ButtonDropDown = ({
       ) : (
         <></>
       )}
+      {icon?.length && (
+        <div className=" right-3  w-[28px]">
+          <div className={`w-[100%] p-[3px] rounded-md }`}>
+            <Image
+              src={getBasicIcon(icon)}
+              className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
+              alt=""
+              width={24}
+              height={24}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </div>
+        </div>
+      )}
       {text.length > 0 && (
         <p
           className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
@@ -109,7 +125,7 @@ const ButtonDropDown = ({
         </p>
       )}
 
-      {text == "View" && (
+      {/* {text == "View" && (
         <div className={` ${light ? "w-[16px]" : " w-[24px]"} `}>
           <div
             className={`flex gap-2 w-[100%] ${
@@ -138,8 +154,8 @@ const ButtonDropDown = ({
             />
           </div>
         </div>
-      )}
-      {list?.length !== 0 && text !== "View" && (
+      )} */}
+      {list?.length !== 0 && (
         <div className={` ${light ? "w-[16px]" : " w-[24px]"} `}>
           <div
             className={`w-[100%] ${light ? "p-[1px]" : "p-[3px]"} rounded-md ${
@@ -148,22 +164,6 @@ const ButtonDropDown = ({
           >
             <Image
               src={getBasicIcon("Arrow-Down 2")}
-              className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
-              alt=""
-              width={24}
-              height={24}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-          </div>
-        </div>
-      )}
-      {icon?.length && (
-        <div className=" right-3  w-[28px]">
-          <div className={`w-[100%] p-[3px] rounded-md }`}>
-            <Image
-              src={getBasicIcon(icon)}
               className={`w-[24px] ${light ? "svg-dark" : "svg-white"}`}
               alt=""
               width={24}

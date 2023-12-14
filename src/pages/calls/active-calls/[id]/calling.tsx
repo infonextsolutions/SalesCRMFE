@@ -129,7 +129,7 @@ const AudioProfile = ({ data, scripts }: any) => {
   return (
     <>
       <Navbar mainTitle="Calls" title="Active Calls" src="Phone" />
-      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+      <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px]">
         {make && (
           <Backdrop bool={bool}>
             <MakeCall cancel={cancelCall} data={data.result} />
@@ -168,7 +168,7 @@ const AudioProfile = ({ data, scripts }: any) => {
           </Backdrop>
         )}
         <Navigation
-          title="Calls > Active Calls > Scheduled Calls"
+          title=""
           buttons={[
             // {
             //   text: "Refresh",
@@ -187,7 +187,19 @@ const AudioProfile = ({ data, scripts }: any) => {
             //   },
             // },
             {
-              text: "Make Call",
+              text: "Make a call ",
+              dropdown: true,
+              id: 2,
+              light: false,
+              dark: false,
+              // icon: "",
+              list: [],
+              onClick1: async () => {
+                setUploadModalStatus(true);
+              },
+            },
+            {
+              text: "Action",
               dropdown: true,
               id: 1,
               light: false,
@@ -201,18 +213,6 @@ const AudioProfile = ({ data, scripts }: any) => {
                 //   }
                 // );
                 setCall(true);
-              },
-            },
-            {
-              text: "Action",
-              dropdown: true,
-              id: 2,
-              light: false,
-              dark: false,
-              icon: "Plus",
-              list: [],
-              onClick1: async () => {
-                setUploadModalStatus(true);
               },
             },
 
@@ -233,7 +233,7 @@ const AudioProfile = ({ data, scripts }: any) => {
           ]}
         />
 
-        <div className="w-[100%] flex gap-[25px] mb-[100px] ">
+        <div className="w-[100%] flex gap-[8px] mb-[100px] ">
           {/* <AudioProfileContainer
           width={"50%"}
           titles={titles}
@@ -242,14 +242,14 @@ const AudioProfile = ({ data, scripts }: any) => {
           info={dummy.audioCallDetails}
         /> */}
           <RecordProfile
-            width={"50%"}
+            width={"42%"}
             titles={titles}
             check={false}
             current={0}
             info={dummy.audioCallDetails}
             data1={data?.result}
           />
-          <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
+          <div className="w-[58%] min-h-[50vh] bg-white rounded-xl">
             <Script data={data?.result} scripts={scripts} />
           </div>
         </div>
@@ -279,7 +279,7 @@ export async function getServerSideProps({ query, params }: any) {
       }, // will be passed to the page component as props
     };
   } catch (error) {
-    console.log('----- ERROR CALLING -----', error);
+    console.log("----- ERROR CALLING -----", error);
     return {
       props: {
         // TODO: Can do better error handling here by passing another property error in the component
