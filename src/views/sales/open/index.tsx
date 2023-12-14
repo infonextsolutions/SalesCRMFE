@@ -180,25 +180,25 @@ const SalesOpen = ({ data }: props) => {
       <Navigation
         title={""}
         buttons={[
-          {
-            text: "Actions",
-            dropdown: true,
-            id: 0,
-            click: viewButtinClick,
-            light: false,
-            dark: true,
-            list: [
-              // {
-              //   title: "Table View",
-              //   Icon: "List 2",
-              // },
-              // {
-              //   title: "Kanban View",
-              //   Icon: "Grid",
-              // },
-            ],
-            value: 0,
-          },
+          // {
+          //   text: "Actions",
+          //   dropdown: true,
+          //   id: 0,
+          //   click: viewButtinClick,
+          //   light: false,
+          //   dark: true,
+          //   list: [
+          //     {
+          //       title: "Table View",
+          //       Icon: "List 2",
+          //     },
+          //     {
+          //       title: "Kanban View",
+          //       Icon: "Grid",
+          //     },
+          //   ],
+          //   value: 0,
+          // },
           {
             text: "View",
             dropdown: true,
@@ -207,14 +207,14 @@ const SalesOpen = ({ data }: props) => {
             light: false,
             dark: true,
             list: [
-              // {
-              //   title: "Table View",
-              //   Icon: "List 2",
-              // },
-              // {
-              //   title: "Kanban View",
-              //   Icon: "Grid",
-              // },
+              {
+                title: "Table View",
+                Icon: "List 2",
+              },
+              {
+                title: "Kanban View",
+                Icon: "Grid",
+              },
             ],
             value: 0,
           },
@@ -227,8 +227,8 @@ const SalesOpen = ({ data }: props) => {
             light: false,
             dark: false,
             list: [
-              // { title: "Using Form", Icon: "Text" },
-              // { title: "Import Leads", Icon: "Download" },
+              { title: "Using Form", Icon: "Text" },
+              { title: "Import Leads", Icon: "Download" },
               // { title: "Using Prompt", Icon: "Text" },
             ],
           },
@@ -239,21 +239,21 @@ const SalesOpen = ({ data }: props) => {
             icon: "Download",
             light: true,
             dark: false,
-            onClick1: exportXLSX,
+            // onClick1: exportXLSX,
             click: addExport,
             list: [
-              // // { title: "Print", Icon: "Printer" },
-              // { title: "Excel", Icon: "Excel" },
-              // // { title: "PDF", Icon: "PDF" },
-              // {
-              //   title: "CSV",
-              //   Icon: "CSV",
-              //   wrapper: (
-              //     <CSVLink data={data.result} className="" ref={ref}>
-              //       CSV
-              //     </CSVLink>
-              //   ),
-              // },
+              // { title: "Print", Icon: "Printer" },
+              { title: "Excel", Icon: "Excel" },
+              // { title: "PDF", Icon: "PDF" },
+              {
+                title: "CSV",
+                Icon: "CSV",
+                wrapper: (
+                  <CSVLink data={data.result} className="" ref={ref}>
+                    CSV
+                  </CSVLink>
+                ),
+              },
             ],
           },
         ]}

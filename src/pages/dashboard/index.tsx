@@ -43,6 +43,7 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
   }, [id, name, role, logged]);
 
   React.useEffect(() => {
+    console.log('+++++++++++++++ USE EFFECT : DASHBOARD +++++++++++++++++++++', state, logged);
     if (!state.isLoggedIn) {
       if (logged === null) {
         router.push("/login");
