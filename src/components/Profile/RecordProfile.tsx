@@ -64,12 +64,12 @@ const RecordProfile = ({
       setChecked(true);
     }
   });
-  console.log(new Date(data1?.createdAt).toDateString(), "arijit");
+
   return (
     <div
       className={`w-[${
         width ? width : "100%"
-      }]  bg-white rounded-xl p-[25px] px-[35px] pt-[30px]`}
+      }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
     >
       {live && (
         <div className="h-[440px] bg-[#EDEDED] flex justify-center items-center text-[#000000]">
