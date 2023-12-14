@@ -114,9 +114,8 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -251,6 +250,7 @@ const ExpandingIcon = ({ change }: any) => {
 };
 
 const ExpandableRow = ({
+  leadData,
   leadDesc,
   companyDesc,
   companyWebsite,
@@ -259,6 +259,14 @@ const ExpandableRow = ({
 }: any) => {
   return (
     <div className="w-[100%] h-[100%] flex px-[110px] py-[10px] ">
+      <div className="w-[350px] ml-[30px]">
+        <p className="text-[16px] text-[#000] font-medium">
+          Lead Source
+        </p>
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
+          {leadData?.leadSource}
+        </p>
+      </div>
       <div className="w-[300px]">
         <p className="text-[16px] text-[#000] font-medium">Lead Description</p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
@@ -273,6 +281,17 @@ const ExpandableRow = ({
           {companyDesc}
         </p>
       </div>
+      <div className="w-[350px] ml-[30px]">
+        <p className="text-[16px] text-[#000] font-medium">
+          Note
+        </p>
+        <div className="">
+          <h3 className="font-medium text-[#444]">{leadData?.notes[0]?.title || "-"}</h3>
+        </div>
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
+          {leadData?.notes[leadData?.notes?.length - 1]?.content || "-"}
+        </p>
+      </div>
       <div className="flex flex-col ml-[30px]">
         <div className="w-[100%]">
           <p className="text-[16px] text-[#000] font-medium">Company Website</p>
@@ -283,20 +302,28 @@ const ExpandableRow = ({
         <div className="w-[100%] mt-[10px]">
           <p className="text-[16px] text-[#000] font-medium">Social Media</p>
           <div className="flex mt-[2px]">
-            <Image
-              src={getBasicIcon("Twitter")}
-              className="mr-[8px] cursor-pointer"
-              height={20}
-              width={20}
-              alt=""
-            />
-            <Image
-              src={getBasicIcon("Linked")}
-              className=" cursor-pointer"
-              height={20}
-              width={20}
-              alt=""
-            />
+            {leadData?.companyId?.company_socialMedia1 && (
+              <a href={leadData?.companyId?.company_socialMedia1Url}>
+                <Image
+                  src={getBasicIcon(leadData?.companyId?.company_socialMedia1)}
+                  className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                  height={20}
+                  width={20}
+                  alt=""
+                />
+              </a>
+            )}
+            {leadData?.companyId?.company_socialMedia2 && (
+              <a href={leadData?.companyId?.company_socialMedia2Url}>
+                <Image
+                  src={getBasicIcon(leadData?.companyId?.company_socialMedia2)}
+                  className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                  height={20}
+                  width={20}
+                  alt=""
+                />
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -315,14 +342,18 @@ const ExpandableRow = ({
       </div>
       <div className="w-[280px] ml-[50px]">
         <p className="text-[16px] text-[#000] font-medium">Other Contacts</p>
-        {otherContacts.map((item: any, i: any) => {
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider">
+          <span className="text-[#000] text-[15px]"> {leadData?.customerId?.customer_name}</span>,
+          {leadData?.customerId?.customer_designation}
+        </p>
+        {otherContacts?.map((item: any, i: any) => {
           return (
             <p
               key={i}
               className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
             >
-              <span className="text-[#000] text-[15px]"> {item.name}</span>,
-              {item.position}
+              <span className="text-[#000] text-[15px]"> {item.customer_name}</span>,
+              {item.designation}
             </p>
           );
         })}
@@ -648,6 +679,7 @@ const LeadContainer = ({
             // leadDesc={
             //   "Need a mix of Product A and Product B.  Additional features required. Need pricing revised for 50+ users."
             // }
+            leadData={LeadData}
             leadDesc={LeadData.lead_description}
             // companyDesc={
             //   "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
@@ -656,11 +688,7 @@ const LeadContainer = ({
             companyWebsite={LeadData.companyId.company_website_url}
             // LeadOwners={["John C.", "Aarti S", "Raghav V.", "Ajay P."]}
             LeadOwners={LeadData.owners}
-            otherContacts={[
-              { name: "Regina Cooper", position: "Project Manager" },
-              { name: "Suman A.", position: "Sales Manager" },
-              { name: "Judith Black", position: "Creative Director" },
-            ]}
+            otherContacts={LeadData?.customerId?.contacts}
           />
         )}
       </div>
@@ -703,7 +731,7 @@ const LeadContainer = ({
       {emails && (
         <Backdrop bool={bool} pad={"50px 0"}>
           <EmailPage
-            refresh={(e: any) => {}}
+            refresh={(e: any) => { }}
             cancel={cancelEmails}
             data={LeadData}
           />

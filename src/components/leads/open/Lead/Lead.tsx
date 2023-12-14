@@ -392,7 +392,7 @@ const ExpandableRow = ({
           </h3>
         </div>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
-          {leadData?.notes[0]?.content || "-"}
+          {leadData?.notes[leadData?.notes?.length - 1]?.content || "-"}
         </p>
       </div>
       <div className="flex flex-col ml-[30px]">
@@ -512,7 +512,7 @@ const LeadContainer = ({
   const [call, setCall] = React.useState(false);
   const [detailShow, setDetailShow] = useState(false);
 
-  console.log("--------------- LEAD DATA ------------------", LeadData);
+  // console.log("--------------- LEAD DATA ------------------", LeadData);
   const num = Math.floor(Math.random() * 4);
   const showNotes = () => {
     setNotes(true);
@@ -762,7 +762,7 @@ const LeadContainer = ({
             textLeft={0}
             weight={500}
             color={"#000"}
-            text={LeadData.leadId}
+            text={LeadData1.leadId}
             click={true}
             route={`${pathname}/${id}/lead-profile`}
           />
@@ -770,7 +770,7 @@ const LeadContainer = ({
             width={160}
             left={0}
             color={"#000"}
-            text={LeadData.lead_title}
+            text={LeadData1.lead_title}
             click={true}
             route={`${pathname}/${id}/lead-profile`}
           />
@@ -785,11 +785,11 @@ const LeadContainer = ({
           />
           <LeadItemMultiple
             width={130}
-            left={120}
-            upperText={LeadData?.companyId.company_name}
+            left={20}
+            upperText={LeadData1?.companyId.company_name}
             bottomText={
-              LeadData?.companyId?.company_location ||
-              LeadData?.companyId?.company_address
+              LeadData1?.companyId?.company_location ||
+              LeadData1?.companyId?.company_address
             }
             bold={true}
             click={true}
@@ -798,19 +798,19 @@ const LeadContainer = ({
           <LeadItem
             width={110}
             left={10}
-            text={LeadData?.customerId?.customer_name}
+            text={LeadData1?.customerId?.customer_name}
             click={true}
             route={`${pathname}/${id}/client-poc-profile`}
           />
           {/* <LeadItem
             width={200}
             left={20}
-            text={LeadData?.customerId?.customer_email}
+            text={LeadData1?.customerId?.customer_email}
           />
           <LeadItem
             width={130}
             left={20}
-            text={LeadData?.customerId?.customer_contact}
+            text={LeadData1?.customerId?.customer_contact}
           /> */}
           {/* <QuickActions
             width={120}
@@ -839,8 +839,8 @@ const LeadContainer = ({
             // events={() => {
             //   AddLead(1, 1);
             // }}
-            textEmail={LeadData?.customerId?.customer_email}
-            textPhone={LeadData?.customerId?.customer_contact}
+            textEmail={LeadData1?.customerId?.customer_email}
+            textPhone={LeadData1?.customerId?.customer_contact}
             emails={() => {
               AddLead(1, 3);
             }}
@@ -866,30 +866,30 @@ const LeadContainer = ({
           <LeadItem
             width={120}
             left={10}
-            text={LeadData.leadStatus}
-            textLeft={0}
+            text={LeadData1.leadStatus}
+            textLeft={5}
           />
           <LeadItem
             width={120}
             left={-10}
             textLeft={10}
-            text={LeadData.leadStage}
+            text={LeadData1.leadStage}
           />
           {/* start - hiding uneccessary column */}
           {/* <LeadItem
             width={130}
             left={10}
             textLeft={10}
-            text={LeadData?.owners[0]?.name}
+            text={LeadData1?.owners[0]?.name}
           />
           <LeadItem width={200} left={10} textLeft={10} text={"-"} />
-          <LeadItem width={150} left={10} text={LeadData.inquiry} /> */}
+          <LeadItem width={150} left={10} text={LeadData1.inquiry} /> */}
           {/* end - hiding uneccessary column */}
           <LeadItem
             width={150}
             left={20}
             textLeft={10}
-            text={LeadData?.product_category}
+            text={LeadData1?.product_category}
           />
           {/* <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} /> */}
 
@@ -1004,6 +1004,7 @@ const LeadContainer = ({
           clipPath: detailShow
             ? "inset(0px 0px 0 1px)"
             : "inset(0px 0px 150px 1px)",
+          overflowX: "auto"
         }}
       >
         {detailShow && (

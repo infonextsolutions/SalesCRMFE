@@ -14,16 +14,27 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-const LeadsTable = ({ totalRecords, search }: TableProps) => {
+const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
 
+  useEffect(function () {
+    axios.get(
+      `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${pageNumber}&leadStatus=Close&${queryStr}`
+    ).then(res => {
+      setItems(res?.data?.result);
+      settotalLeads(res?.data?.totalRecords)
+      const count = Math.ceil(Number(res?.data?.totalRecords) / limit);
+      setpageCount(count);
+    });
+  }, [queryStr]);
+
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Close`
+      `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Close${queryStr}`
     );
     const data = res.data.result;
     return data;
@@ -36,7 +47,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     if (pageNumber >= count && pageCount != 0) setpageNumber(0);
     const getItems = async () => {
       const res = await axios.get(
-        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Close`
+        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Close${queryStr}`
       );
       // console.log(res, "only check here");
       const data = res.data.result;
@@ -275,41 +286,37 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               <option value="10" selected>
                 10
               </option>
-              <option value="11">11</option>
+              {/* <option value="11">11</option>
               <option value="12">12</option>
-              <option value="13">13</option>
+              <option value="13">13</option> */}
             </select>
             <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${
-                (pageNumber + 1) * limit > totalLeads
-                  ? totalLeads
-                  : (pageNumber + 1) * limit
-              } of ${totalLeads}`}
+              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${(pageNumber + 1) * limit > totalLeads
+                ? totalLeads
+                : (pageNumber + 1) * limit
+                } of ${totalLeads}`}
             </p>
           </div>
           <div className="flex justify-center my-[45px] ">
             <div
-              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${
-                pageNumber === 0
-                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
-                  : "bg-[#e8ebfd] cursor-pointer"
-              }`}
+              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === 0
+                ? "bg-[#f5f5f5] opacity-30 cursor-auto"
+                : "bg-[#e8ebfd] cursor-pointer"
+                }`}
               onClick={setFirstPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != 0 ? "svg-blue" : ""
-                } rotate-180 translate-x-[6px]`}
+                className={`${pageNumber != 0 ? "svg-blue" : ""
+                  } rotate-180 translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != 0 ? "svg-blue" : ""
-                } rotate-180 translate-x-[-6px]`}
+                className={`${pageNumber != 0 ? "svg-blue" : ""
+                  } rotate-180 translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}
@@ -348,45 +355,38 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
               containerClassName={"text-black flex justify-center gap-[8px]"}
               pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
               pageLinkClassName={``}
-              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-                pageNumber === 0 ? "" : "bg-[#ffad9f]"
-              }`}
-              previousLinkClassName={`flex justify-center ${
-                pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
-              }`}
-              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-                pageNumber === pageCount - 1 ? "" : "bg-[#ffad9f]"
-              }`}
-              nextLinkClassName={`flex justify-center ${
-                pageNumber === pageCount - 1 ? "cursor-auto" : ""
-              }`}
+              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === 0 ? "" : "bg-[#ffad9f]"
+                }`}
+              previousLinkClassName={`flex justify-center ${pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
+                }`}
+              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === pageCount - 1 ? "" : "bg-[#ffad9f]"
+                }`}
+              nextLinkClassName={`flex justify-center ${pageNumber === pageCount - 1 ? "cursor-auto" : ""
+                }`}
               breakClassName={""}
               breakLinkClassName={""}
               forcePage={pageNumber}
               activeClassName={`bg-bg-red text-[#fff] rounded-[10px]`}
             />
             <div
-              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${
-                pageNumber === pageCount - 1
-                  ? ""
-                  : "bg-[#ffccbb] cursor-pointer"
-              }`}
+              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === pageCount - 1
+                ? ""
+                : "bg-[#ffccbb] cursor-pointer"
+                }`}
               onClick={setLastPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != pageCount - 1 ? "svg-red" : ""
-                } translate-x-[6px]`}
+                className={`${pageNumber != pageCount - 1 ? "svg-red" : ""
+                  } translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != pageCount - 1 ? "svg-red" : ""
-                } translate-x-[-6px]`}
+                className={`${pageNumber != pageCount - 1 ? "svg-red" : ""
+                  } translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}
