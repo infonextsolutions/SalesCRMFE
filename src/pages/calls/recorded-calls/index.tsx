@@ -130,27 +130,30 @@ const Calls = ({ data }: any) => {
             },
           ]}
         />
-        <div className="flex justify-around pb-5">
+        <div className="flex justify-between items-center pb-5">
           <button
             onClick={gotoCallRecording}
             className={
               recodedCalls
-                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
-                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
+                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
+                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-1.5 hover:text-white hover:px-16 hover:mt-2 hover:mb-2"
             }
           >
             Call Recordings
           </button>
-          <button
-            onClick={gotoMeetingRecording}
-            className={
-              recodedMeeting
-                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
-                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
-            }
-          >
-            Metting Recordings
-          </button>
+          <div className="w-[40%]">
+            <button
+              onClick={gotoMeetingRecording}
+              // className="bg-bg-red w-[70%]"
+              className={
+                recodedMeeting
+                  ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
+                  : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-1.5 hover:text-white hover:px-16 hover:mt-2 hover:mb-2"
+              }
+            >
+              Metting Recordings
+            </button>
+          </div>
         </div>
         <hr className="border-t-2 border-gray-300 mb-4" />
         {recodedCalls && (

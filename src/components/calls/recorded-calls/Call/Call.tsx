@@ -475,6 +475,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       setW(wRef.current.offsetWidth);
     }
   });
+  console.log(CallData);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
@@ -650,7 +651,13 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               })} */}
             </p>
           </div>
-          <CallItem width={100} left={-90} text={LeadData.owners?.[0]?.name} />
+          <CallItem
+            width={110}
+            left={-330}
+            text={LeadData?.companyId?.company_product_category ?? "-"}
+          />
+          <CallItem width={110} left={60} text={""} />
+          <CallItem width={100} left={90} text={LeadData.owners?.[0]?.name} />
           <CallItemMultiple
             width={130}
             left={20}
@@ -663,11 +670,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={calculateTimeDifference(CallData.StartTime, CallData.EndTime)}
           />
           <CallItem width={110} left={20} text={"-"} />
-          <CallItem
-            width={110}
-            left={0}
-            text={LeadData?.companyId?.company_product_category ?? "-"}
-          />
+          <CallItem width={110} left={20} text={"-"} />
+          <CallItem width={110} left={20} text={"-"} />
+
           {/* <CallItem
             width={110}
             left={20}

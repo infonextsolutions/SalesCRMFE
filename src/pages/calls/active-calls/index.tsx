@@ -137,7 +137,7 @@ const Calls = ({ data }: any) => {
     <>
       <Navbar mainTitle={"Calls "} title={"Active Calls"} src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-        {/* <Navigation
+        <Navigation
           title=""
           buttons={[
             {
@@ -164,29 +164,31 @@ const Calls = ({ data }: any) => {
               ],
             },
           ]}
-        /> */}
-        <div className="flex justify-around pb-5">
+        />
+        <div className="flex justify-between items-center pb-5">
           <button
             onClick={gotoScheduleCall}
             className={
               scheduleCalls
-                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
-                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
+                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
+                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:text-white hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
             }
             type="button"
           >
             Schedule Call
           </button>
-          <button
-            onClick={gotoScheduleMeeting}
-            className={
-              scheduleMeeting
-                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-5 py-2.5 mt-2 mb-2"
-                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-2.5 hover:px-5 hover:mt-2 hover:mb-2"
-            }
-          >
-            Schedule Metting
-          </button>
+          <div className="w-[40%]">
+            <button
+              onClick={gotoScheduleMeeting}
+              className={
+                scheduleMeeting
+                  ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
+                  : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:text-white hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
+              }
+            >
+              Schedule Metting
+            </button>
+          </div>
         </div>
         <hr className="border-t-2 border-gray-300 mb-4" />
         {scheduleCalls && (
