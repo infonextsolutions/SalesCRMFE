@@ -57,8 +57,7 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
         <HeaderItem width={130} left={20} text={"call date-time"} />
         <HeaderItem width={120} left={10} text={"call duration"} />
         <HeaderItem width={120} left={10} text={"call score"} />
-        <HeaderItem width={120} left={10} text={"call comments"} />
-        <HeaderItem width={120} left={10} text={"call highlights"} />
+        <HeaderItem width={120} left={10} text={"Product / Service"} />
       </div>
     </div>
   );
