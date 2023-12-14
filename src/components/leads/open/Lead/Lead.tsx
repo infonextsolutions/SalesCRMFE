@@ -767,7 +767,7 @@ const LeadContainer = ({
             route={`${pathname}/${id}/lead-profile`}
           />
           <LeadItem
-            width={160}
+            width={120}
             left={0}
             color={"#000"}
             text={LeadData1.lead_title}
@@ -775,7 +775,7 @@ const LeadContainer = ({
             route={`${pathname}/${id}/lead-profile`}
           />
           <NotesEventQuickActions
-            width={120}
+            width={90}
             notes={() => {
               AddLead(1, 0);
             }}
@@ -785,7 +785,7 @@ const LeadContainer = ({
           />
           <LeadItemMultiple
             width={130}
-            left={20}
+            left={190}
             upperText={LeadData1?.companyId.company_name}
             bottomText={
               LeadData1?.companyId?.company_location ||
@@ -1004,7 +1004,7 @@ const LeadContainer = ({
           clipPath: detailShow
             ? "inset(0px 0px 0 1px)"
             : "inset(0px 0px 150px 1px)",
-          overflowX: "auto"
+          overflowX: "auto",
         }}
       >
         {detailShow && (

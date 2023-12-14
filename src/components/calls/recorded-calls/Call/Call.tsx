@@ -657,7 +657,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={LeadData?.companyId?.company_product_category ?? "-"}
           />
           <CallItem width={110} left={60} text={""} />
-          <CallItem width={100} left={90} text={LeadData.owners?.[0]?.name} />
+          <CallItem width={100} left={80} text={LeadData.owners?.[0]?.name} />
           <CallItemMultiple
             width={130}
             left={20}

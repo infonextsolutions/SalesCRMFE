@@ -239,7 +239,6 @@ const SalesOpen = ({ data }: props) => {
             icon: "Download",
             light: true,
             dark: false,
-            // onClick1: exportXLSX,
             click: addExport,
             list: [
               // { title: "Print", Icon: "Printer" },

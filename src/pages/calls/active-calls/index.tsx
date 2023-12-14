@@ -148,19 +148,18 @@ const Calls = ({ data }: any) => {
               light: true,
               dark: false,
               click: addExport,
-              onClick1: exportXLSX,
               list: [
-                // { title: "Excel", Icon: "Excel" },
-                // { title: "PDF", Icon: "PDF" },
-                // {
-                //   title: "CSV",
-                //   Icon: "CSV",
-                //   wrapper: (
-                //     <CSVLink data={data.result} className="" ref={ref}>
-                //       CSV
-                //     </CSVLink>
-                //   ),
-                // },
+                { title: "Excel", Icon: "Excel" },
+                { title: "PDF", Icon: "PDF" },
+                {
+                  title: "CSV",
+                  Icon: "CSV",
+                  wrapper: (
+                    <CSVLink data={data.result} className="" ref={ref}>
+                      CSV
+                    </CSVLink>
+                  ),
+                },
               ],
             },
           ]}
