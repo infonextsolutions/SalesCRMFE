@@ -99,7 +99,7 @@ const Login = () => {
         );
         dispatch(setLoggedInStatus(true));
         setLocalData(res.data?._id, res.data?.name, "BDM");
-        router.push("/sales/open");
+        router.push("/");
       })
       .catch((err) => {
         setInvalid(true);
