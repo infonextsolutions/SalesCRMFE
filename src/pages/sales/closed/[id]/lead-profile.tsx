@@ -21,7 +21,7 @@ const Profile = ({ data }: any) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data.result._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data?.result?._id}`
       )
       .then((e) => {
         setData(e.data);

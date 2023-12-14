@@ -83,13 +83,23 @@ export default function Open({ data }: any) {
 }
 
 export async function getServerSideProps({ query, ...params }: any) {
-  const response = await axios.get(
-    "https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open"
-  );
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-    }, // will be passed to the page component as props
-  };
+  try {
+    const response = await axios.get(
+      "https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open"
+    );
+    return {
+      props: {
+        // TODO: Can do better error handling here by passing another property error in the component
+        data: response.data || {},
+      }, // will be passed to the page component as props
+    };
+  } catch (error) {
+    console.log('--------------------- ERROR ----------------', error);
+    return {
+      props: {
+        // TODO: Can do better error handling here by passing another property error in the component
+        data: {},
+      }, // will be passed to the page component as props
+    };
+  }
 }
