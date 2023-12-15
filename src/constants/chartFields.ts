@@ -267,11 +267,43 @@ export const CallScoreGraph = {
 };
 
 export const NoOfInterruptions = {
-    labels: [],
-    mappings: {},
+    labels: [
+        "day_1",
+        "day_2",
+        "day_3",
+        "day_4",
+        "day_5",
+        "day_6",
+        "day_7",
+    ],
+    mappings: {
+        day_1: "Day 1",
+        day_2: "Day 2",
+        day_3: "Day 3",
+        day_4: "Day 4",
+        day_5: "Day 5",
+        day_6: "Day 6",
+        day_7: "Day 7",
+    },
 };
 
 export const NoOfParticipants = {
-    labels: [],
-    mappings: {},
+    labels: [
+        "day_1",
+        "day_2",
+        "day_3",
+        "day_4",
+        "day_5",
+        "day_6",
+        "day_7",
+    ],
+    mappings: {
+        day_1: "Day 1",
+        day_2: "Day 2",
+        day_3: "Day 3",
+        day_4: "Day 4",
+        day_5: "Day 5",
+        day_6: "Day 6",
+        day_7: "Day 7",
+    },
 };

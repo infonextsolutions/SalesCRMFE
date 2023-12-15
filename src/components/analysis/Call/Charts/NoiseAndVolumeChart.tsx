@@ -4,7 +4,7 @@ import GaugeChart from 'react-gauge-chart';
 const NoiseAndVolumeChart = () => {
     return (
         <div className="w-[700px] h-[250px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
-            <h3 className='text-black'>Noise and Volume Chart</h3>
+            <h1 className='text-[20px] font-medium text-[#3F434A] tracking-wide'>Noise and Volume Chart</h1>
             <div className='chart-container flex'>
                 <div className=''>
                     <GaugeChart
