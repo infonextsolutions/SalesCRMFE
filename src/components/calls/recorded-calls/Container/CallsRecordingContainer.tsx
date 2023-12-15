@@ -1,11 +1,14 @@
 import Kanban from "@/components/View/Kanban";
 import CallsTable from "@/components/View/Tables/calls/recorded-calls/Calls";
 import ButtonDropDown from "@/utils/Button/Button";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import Search from "../Search/Search";
 import Spinner from "@/components/loader/spinner";
 import DatePicker from "@/utils/Button/DatePicker";
 import axios from "axios";
+import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
+import { CSVLink } from "react-csv";
+import * as XLSX from "xlsx";
 
 const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   const [startDate, setStartDate] = useState("");
@@ -42,6 +45,23 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     dummy1 = { ...response.data };
   };
 
+  const ref: any = useRef();
+  const exportXLSX = () => {
+    const worksheet = XLSX.utils.json_to_sheet(data.result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, "DataSheet.xlsx");
+    console.log("exporting", data);
+  };
+
+  const addExport = (e: any, e1: any) => {
+    if (e1 === 0) {
+      exportXLSX();
+    }
+  };
+
   // useEffect(() => {
   //   getData();
   // }, [product, companyName, callOwner, callType, startDate, endDate, search]);
@@ -57,6 +77,32 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               setStartDate={setStartDate}
               endDate={endDate}
               setEndDate={setEndDate}
+            />
+            <NavigationWithoutTitle
+              buttons={[
+                {
+                  text: "",
+                  dropdown: true,
+                  id: 1,
+                  icon: "Download",
+                  light: true,
+                  dark: false,
+                  click: addExport,
+                  list: [
+                    { title: "Excel", Icon: "Excel" },
+                    { title: "Print", Icon: "Printer" },
+                    {
+                      title: "CSV",
+                      Icon: "CSV",
+                      wrapper: (
+                        <CSVLink data={data.result} className="" ref={ref}>
+                          CSV
+                        </CSVLink>
+                      ),
+                    },
+                  ],
+                },
+              ]}
             />
           </div>
           <div className="flex items-center gap-5">

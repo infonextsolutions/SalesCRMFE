@@ -10,7 +10,7 @@ const Search = ({ change }: any) => {
   return (
     <>
       <div
-        className="bg-white w-[60%] h-[40px] overflow-hidden relative border-[#ccc] border-[1px] rounded-[12px]  flex items-center"
+        className="bg-white w-[50%] h-[40px] overflow-hidden relative border-[#ccc] border-[1px] rounded-[12px]  flex items-center"
         ref={ref}
       >
         <div className="grow h-[32px] ">

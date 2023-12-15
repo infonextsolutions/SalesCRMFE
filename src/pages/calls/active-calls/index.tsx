@@ -137,40 +137,13 @@ const Calls = ({ data }: any) => {
     <>
       <Navbar mainTitle={"Calls "} title={"Active Calls"} src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-        <Navigation
-          title=""
-          buttons={[
-            {
-              text: "",
-              dropdown: true,
-              id: 1,
-              icon: "Download",
-              light: true,
-              dark: false,
-              click: addExport,
-              list: [
-                { title: "Excel", Icon: "Excel" },
-                { title: "PDF", Icon: "PDF" },
-                {
-                  title: "CSV",
-                  Icon: "CSV",
-                  wrapper: (
-                    <CSVLink data={data.result} className="" ref={ref}>
-                      CSV
-                    </CSVLink>
-                  ),
-                },
-              ],
-            },
-          ]}
-        />
-        <div className="flex justify-between items-center pb-5">
+        <div className="flex justify-between items-center pb-5 mt-6">
           <button
             onClick={gotoScheduleCall}
             className={
               scheduleCalls
-                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
-                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:text-white hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
+                ? "focus:outline-none text-black bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
+                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg  hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
             }
             type="button"
           >
@@ -181,8 +154,8 @@ const Calls = ({ data }: any) => {
               onClick={gotoScheduleMeeting}
               className={
                 scheduleMeeting
-                  ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
-                  : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:text-white hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
+                  ? "focus:outline-none text-black bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
+                  : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg  hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
               }
             >
               Schedule Metting
