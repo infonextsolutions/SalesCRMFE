@@ -90,7 +90,7 @@ const Navbar = ({ mainTitle, title, src }: any) => {
         <div>
           <Image
             src={getBasicIcon("Bell")}
-            className="ml-[20px] cursor-pointer"
+            className="ml-[20px] mr-3 cursor-pointer"
             alt=""
             onClick={() => {
               dispatch(triggerMenu());
@@ -103,9 +103,9 @@ const Navbar = ({ mainTitle, title, src }: any) => {
             height={40}
           />
         </div>
-        <div>
+        <div className=" border-l-2  border-gray-200">
           <Image
-            className="ml-[20px] h-[100%] cursor-pointer"
+            className="ml-[20px] h-[100%] cursor-pointer "
             src={getRoundedAvatar(1, 30)}
             alt=""
             // fill={true}
