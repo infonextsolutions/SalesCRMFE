@@ -8,11 +8,11 @@ const HorizontalBarComparator = (payload: any) => {
             <BarChart
                 xAxis={[{ scaleType: 'band', data: ['label 1', 'label 2'], position: "left" }]}
                 yAxis={[{ position: "bottom" }]}
-                series={[{ data: [20, 75], color: "#FE5143" }]}
+                series={[{ data: [25, 75], color: "#FE5143" }]}
                 leftAxis={{ tickSize: 0 }}
                 bottomAxis={{ tickSize: 0 }}
-                width={200}
-                height={200}
+                width={120}
+                height={140}
             // layout="horizontal"
             />
         </div>

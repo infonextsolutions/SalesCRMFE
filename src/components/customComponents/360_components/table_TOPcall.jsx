@@ -26,7 +26,7 @@ function Top_Call() {
 
 
   return (
-    <div className="w-[700px] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
+    <div className="w-[auto] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">Top Call</h1>
       <div className='chart-container'>
         <TableContainer className="table">
