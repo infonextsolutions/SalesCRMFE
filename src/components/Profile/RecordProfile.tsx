@@ -56,6 +56,14 @@ const RecordProfile = ({
       });
   };
 
+  const timestamp = data1.createdAt;
+  const date = new Date(timestamp);
+
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+
+  const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -79,7 +87,7 @@ const RecordProfile = ({
         </div>
       )}
       {data2?.companyId?.company_name && (
-        <div className="w-[70%] flex justify-around">
+        <div className="w-[90%] flex justify-around">
           <div className="flex gap-2">
             <Image
               src={getBasicIcon("buildingIcon")}
@@ -103,6 +111,18 @@ const RecordProfile = ({
               height={25}
             />
             {new Date(data1.createdAt).toDateString()}
+          </div>
+          <div className="flex gap-2">
+            <Image
+              src={getBasicIcon("Time")}
+              style={{
+                zIndex: 10,
+              }}
+              alt=""
+              width={25}
+              height={25}
+            />
+            {formattedTime}
           </div>
         </div>
       )}

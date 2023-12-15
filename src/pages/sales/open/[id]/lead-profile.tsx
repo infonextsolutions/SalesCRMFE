@@ -12,6 +12,7 @@ import Notes from "@/components/View/Notes";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
+import UpdatedNavbar from "@/components/app/Navbar/UpdatedNavbar";
 
 const Profile = ({ data }: any) => {
   // console.log("data10", data);
@@ -119,8 +120,28 @@ const Profile = ({ data }: any) => {
 
   return (
     <>
-      <Navbar mainTitle="Sales" title="Open" src="manageLeadsIcon" />
-      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+      <UpdatedNavbar
+        mainTitle="Sales > Open"
+        title={`${data1.result.lead_title} - Info`}
+        src="manageLeadsIcon"
+        buttons={[
+          {
+            text: "Action",
+            dropdown: true,
+            id: 1,
+            dark: true,
+            light: false,
+            list: [
+              { title: "Call", Icon: "Phone" },
+              { title: "Email", Icon: "Mail" },
+              { title: "Event", Icon: "Calendar" },
+              { title: "Add note", Icon: "Tasks" },
+              { title: "Message", Icon: "Chat" },
+            ],
+          },
+        ]}
+      />
+      <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px] pt-6">
         {notes && (
           <Backdrop bool={bool}>
             <Notes
@@ -166,8 +187,8 @@ const Profile = ({ data }: any) => {
             />
           </Backdrop>
         )}
-        <Navigation
-          title={`${data1.result.lead_title} - Info`}
+        {/* <Navigation
+          title=
           buttons={[
             {
               text: "Take Action",
@@ -186,9 +207,9 @@ const Profile = ({ data }: any) => {
               ],
             },
           ]}
-        />
+        /> */}
         <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-          <div className="w-[340px] min-h-[70vh] bg-white rounded-xl shrink-0 p-[20px]">
+          <div className="w-[340px] min-h-[70vh] bg-[#ffe3e170] rounded-xl shrink-0 p-[20px]">
             <ProfilePage updated={UpdateData} data1={data.result} />
           </div>
           <LeadProfileContainer
