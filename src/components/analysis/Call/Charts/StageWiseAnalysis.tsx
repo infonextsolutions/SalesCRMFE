@@ -36,52 +36,54 @@ const ChartContainer = ({ children }: any) => {
 };
 
 const StageWiseAnalysis = ({
-    selling,
-    getSellingData,
-}: {
-    selling: any;
-    getSellingData: any;
-}) => {
-    const [startDate, setStartDate] = useState("2023-07-19");
-    const [endDate, setEndDate] = useState("2023-07-26");
-
-    useEffect(() => {
-        if (getSellingData) {
-            getSellingData([startDate, endDate]);
-        }
-    }, [startDate, endDate]);
+    title = "Stage Wise Analysis",
+    template,
+    data,
+}: any) => {
     return (
         <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
             <div className="w-[100%] flex items-center justify-between">
                 <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-                    Stage Wise Analysis
+                    {title}
                 </h1>
             </div>
-            <ChartContainer>
-                <Chart
-                    title={"Consultative Selling"}
-                    percent={`${selling.consultative_selling}%`}
-                />
-                <Chart title={"Empathy"} percent={`${selling.empathy}%`} />
-                <Chart
-                    title={"Listening Skills"}
-                    percent={`${selling.listening_skills}%`}
-                />
-                <Chart title={"Confidence"} percent={`${selling.confidence}%`} />
-                <Chart
-                    title={"Urgency Creation"}
-                    percent={`${selling.urgency_creation}%`}
-                />
-                <Chart
-                    title={"Positive Energy"}
-                    percent={`${selling.positive_energy}%`}
-                />
-                <Chart
-                    title={"Rapport Building"}
-                    percent={`${selling.report_building}%`}
-                />
-                <Chart title={"Politeness"} percent={`${selling.politeness}%`} />
-            </ChartContainer>
+            <div className='chart-container'>
+                <ul className="">
+                    <li className="">
+                        <span className="text-[#333]">Opening</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Lead Qualification</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Need Discovery</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Product Knowledge</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Closing</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Price Discussion</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Consultative Selling</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Empathy</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Listening Skills</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Confidence</span>
+                    </li>
+                    <li className="">
+                        <span className="text-[#333]">Urgency Creation</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 };

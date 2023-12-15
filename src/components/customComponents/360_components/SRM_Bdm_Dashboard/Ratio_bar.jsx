@@ -10,7 +10,7 @@ const xLabels = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
 const TalkRatio = () => {
   return (
     <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
-      <h3 className="text-black">Talk Ratio</h3>
+      <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">Talk Ratio</h1>
       <BarChart
         width={500}
         height={300}

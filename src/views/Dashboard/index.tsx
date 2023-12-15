@@ -17,7 +17,7 @@ import BarChartVertical from "@/components/analysis/Call/Charts/BarChartVertical
 import CallSentiment from "@/components/customComponents/360_components/CallSentiment";
 import NoiseAndVolumeChart from "@/components/analysis/Call/Charts/NoiseAndVolumeChart";
 import { AvgCallScore, NoOfQuesAsked, SellingSkills, HighIntentCallVolume, LongestMonologue, NoOfTopics, SalesRepPatienceSilence, LongestCustomerStory, NoOfSwitches, SalesRepSentimentScore, SatisfactionScore, PerformanceRate, NoOfInterruptions, NoOfParticipants } from "@/constants/chartFields";
-import { avgCallScore, highIntentCallVolume, noOfTopics, salesRepSentimentScore, satisfactionScore } from "@/constants/dummyData";
+import { avgCallScore, highIntentCallVolume, noOfParticipants, noOfTopics, salesRepSentimentScore, satisfactionScore } from "@/constants/dummyData";
 import GroupBarChartVertical from "@/components/analysis/Call/Charts/GroupBarChartVertical";
 
 // const Dashboard = ({ data }: any) => {
@@ -174,7 +174,7 @@ const Dashboard = ({ data }: any) => {
             <div className="flex-[1]">
               <BarChartVertical title="Sales Rep's Patience/Silence" template={SalesRepPatienceSilence} data={avgCallScore} />
               <BarChartVertical title="Longest Customer Story" template={LongestCustomerStory} data={avgCallScore} />
-              <GroupBarChartVertical title="Number of Interruptions" template={NoOfInterruptions} />
+              <GroupBarChartVertical title="Number of Interruptions" template={NoOfInterruptions} data={noOfParticipants} />
               <BarChartVertical title="Number of Switches" template={NoOfSwitches} data={avgCallScore} />
             </div>
           </div>
@@ -184,7 +184,7 @@ const Dashboard = ({ data }: any) => {
         <div className="">
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
-              <GroupBarChartVertical title="Number of Participants" template={NoOfParticipants} />
+              <GroupBarChartVertical title="Number of Participants" template={NoOfParticipants} data={noOfParticipants} />
               <BarChartVertical title="Sales Rep Sentiment Score" template={SalesRepSentimentScore} data={salesRepSentimentScore} />
               <CallSentiment />
             </div>

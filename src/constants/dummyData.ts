@@ -46,3 +46,24 @@ export const satisfactionScore = {
     "clarity_on_pricing_and_terms": 9.9,
     "likelihood_to_recommend": 99,
 };
+
+export const noOfParticipants = {
+    sdr: {
+        day_1: 23,
+        day_2: 23.9,
+        day_3: 56.7,
+        day_4: 87,
+        day_5: 45,
+        day_6: 23,
+        day_7: 77.5,
+    },
+    prospect: {
+        day_1: 56,
+        day_2: 20,
+        day_3: 6.99,
+        day_4: 88,
+        day_5: 48,
+        day_6: 39,
+        day_7: 91,
+    }
+};
