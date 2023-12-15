@@ -8,9 +8,9 @@ import RecordProfile from "@/components/Profile/RecordProfile";
 import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import MakeCall from "@/components/View/makeCall/index";
-import Navbar from "@/components/app/Navbar/Navbar";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
+import UpdatedNavbar from "@/components/app/Navbar/UpdatedNavbar";
 //Manya will make this page
 
 const AudioProfile = ({ data, scripts }: any) => {
@@ -128,8 +128,49 @@ const AudioProfile = ({ data, scripts }: any) => {
   };
   return (
     <>
-      <Navbar mainTitle="Calls" title="Active Calls" src="Phone" />
-      <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px]">
+      <UpdatedNavbar
+        mainTitle="Calls > Active Calls"
+        title="Scheduled Calls"
+        src="Phone"
+        buttons={[
+          {
+            text: "Make a call ",
+            dropdown: true,
+            id: 2,
+            light: false,
+            dark: false,
+            // icon: "",
+            list: [],
+            onClick1: async () => {
+              setUploadModalStatus(true);
+            },
+          },
+          {
+            text: "Action",
+            dropdown: true,
+            id: 0,
+            // click: viewButtinClick,
+            light: false,
+            dark: true,
+            list: [
+              {
+                title: "Email",
+                Icon: "Mail",
+              },
+              {
+                title: "Note",
+                Icon: "Tasks",
+              },
+              {
+                title: "Message",
+                Icon: "Chat",
+              },
+            ],
+            value: 0,
+          },
+        ]}
+      />
+      <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px] pt-4">
         {make && (
           <Backdrop bool={bool}>
             <MakeCall cancel={cancelCall} data={data.result} />
@@ -167,76 +208,6 @@ const AudioProfile = ({ data, scripts }: any) => {
             </div>
           </Backdrop>
         )}
-        <Navigation
-          title=""
-          buttons={[
-            // {
-            //   text: "Refresh",
-            //   dropdown: true,
-            //   id: 1,
-            //   light: false,
-            //   list: [],
-            //   onClick1: async () => {
-            //     const url =
-            //       "https://salescrmbe.onrender.com/api/calling/call-status";
-            //     axios.post(url, {
-            //       sid: "8af470ce2b4befc3f0e8292d237e175b",
-            //     }).then((e)=>{
-            //       console.log(e.data);
-            //     })
-            //   },
-            // },
-            {
-              text: "Make a call ",
-              dropdown: true,
-              id: 2,
-              light: false,
-              dark: false,
-              // icon: "",
-              list: [],
-              onClick1: async () => {
-                setUploadModalStatus(true);
-              },
-            },
-            {
-              text: "Action",
-              dropdown: true,
-              id: 0,
-              // click: viewButtinClick,
-              light: false,
-              dark: true,
-              list: [
-                {
-                  title: "Email",
-                  Icon: "Mail",
-                },
-                {
-                  title: "Note",
-                  Icon: "Tasks",
-                },
-                {
-                  title: "Message",
-                  Icon: "Chat",
-                },
-              ],
-              value: 0,
-            },
-            // {
-            //   text: "Take Action ",
-            //   click: takeAction,
-            //   dropdown: true,
-            //   id: 1,
-            //   icon: "Plus",
-            //   light: false,
-            //   list: [
-            //     { title: "Email", Icon: "Mail" },
-            //     { title: "Meeting", Icon: "Calendar" },
-            //     { title: "Notes", Icon: "Tasks" },
-            //     { title: "Message", Icon: "Chat" },
-            //   ],
-            // },
-          ]}
-        />
 
         <div className="w-[100%] flex gap-[8px] mb-[100px] ">
           {/* <AudioProfileContainer

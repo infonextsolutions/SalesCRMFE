@@ -6,6 +6,7 @@ import Navigator from "@/utils/customNavigator";
 import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "@/components/app/Navbar/Navbar";
+import UpdatedNavbar from "@/components/app/Navbar/UpdatedNavbar";
 
 const ClientProfile = ({ data }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
@@ -19,9 +20,14 @@ const ClientProfile = ({ data }: any) => {
   const [ttitle, setTitle] = useState(data?.result?.customerId?.customer_name);
   return (
     <>
-      <Navbar title="Manage Leads" src="manageLeadsIcon" />
-      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-        <Navigation
+      <UpdatedNavbar
+        buttons={[]}
+        mainTitle="Manage Leads"
+        title={ttitle}
+        src="manageLeadsIcon"
+      />
+      <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px]">
+        {/* <Navigation
           title={`Manage Leads > ${ttitle}`}
           buttons={
             [
@@ -41,9 +47,9 @@ const ClientProfile = ({ data }: any) => {
               // },
             ]
           }
-        />
-        <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-          <div className="w-[400px] min-h-[70vh] bg-white rounded-xl p-[20px]">
+        /> */}
+        <div className="w-[100%] flex gap-[25px] mb-[100px] mt-6">
+          <div className="w-[44%] min-h-[70vh] bg-white rounded-xl p-[20px]">
             <ProfilePage
               refresh={(e: any) => {
                 setTitle(e);
@@ -51,7 +57,7 @@ const ClientProfile = ({ data }: any) => {
               data1={data}
             />
           </div>
-          <div className="bg-white rounded-xl w-[100%] px-[25px]">
+          <div className="bg-white rounded-xl w-[60%] px-[25px]">
             <Deals data={data} type="customer" />
           </div>
         </div>

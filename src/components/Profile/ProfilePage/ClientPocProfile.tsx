@@ -42,7 +42,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
   return (
     <>
       {edit && (
-        <Backdrop pad={"50px 0"} bool={true} width={"900px"}>
+        <Backdrop pad={"50px 0"} bool={true} width={"100px"}>
           <EditLead
             update={UpdateData}
             cancel={cancelEdit}
@@ -51,270 +51,179 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
           />
         </Backdrop>
       )}
-      <div className="w-[100%] bg-white min-h-[250vh] rounded-[18px] overflow-hidden">
-        <div className="flex -space-x-2 overflow-hidden">
-          <div className="flex items-center w-[100%] border-gray-300 border-b-[1px] pb-[30px] pt-[20px] ">
-            <Image
-              className="inline-block w-[50px] rounded-full ring-2 ring-white"
-              src={getRoundedAvatar(2, 30)}
-              alt=""
-              width={60}
-              height={60}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-            <div className="ml-3 items-center ">
-              <h2 className="text-xl font-small whitespace-nowrap leading-7 tracking-wide text-black">
-                {data?.result?.customerId?.customer_name}
-              </h2>
-
-              <a
-                href="#0"
-                className="block ml-1 text-sm text-[12px] text-gray-500 hover:text-indigo-500"
-              >
-                {data?.result?.customerId?.customer_designation}
-              </a>
-            </div>
-            <div className="h-[80%] ml-auto ">
+      <div className="w-[120%]">
+        <div className="flex -space-x-2 overflow-hidden w-[100%]">
+          <div className="flex items-center w-[100%] justify-between pb-[10px] ">
+            <div className="flex items-center gap-5 w-[100%]">
               <Image
-                src={getBasicIcon("Edit")}
-                className={`cursor-pointer`}
-                alt="Edit"
-                width={20}
-                height={20}
+                className="inline-block w-[40px] rounded-full ring-2 ring-white"
+                src={getRoundedAvatar(5, 30)}
+                alt=""
+                width={40}
+                height={40}
                 style={{
                   objectFit: "contain",
                 }}
-                onClick={() => {
-                  showEdit();
-                }}
               />
+              <div className="flex flex-col items-center">
+                <p className="block cursor-pointer text-xl leading-[10px ] font-semibold ml-[-6px] text-[14px] text-black hover:text-bg-red">
+                  {data?.result?.customerId?.customer_name}
+                </p>
+                <p className="block cursor-pointer text-sm leading-[10px ] ml-[-6px] text-[12px] text-black hover:text-bg-red">
+                  {data?.result?.customerId?.customer_designation}
+                </p>
+              </div>
             </div>
+            {/* <Image
+              src={getBasicIcon("Edit")}
+              className={`w-[20px] svg-grey svg-not-selected  cursor-pointer`}
+              alt="Edit"
+              width={20}
+              height={20}
+              onClick={() => {
+                showEdit();
+              }}
+              style={{
+                objectFit: "contain",
+              }}
+            /> */}
           </div>
         </div>
-        <div className="py-2"></div>
-        <h3 className="text-sm font-medium text-black mt-5 ml-4">INFO</h3>
-        <ul className="mt-2 mb-10 ml-2">
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm mr-1 text-gray-500 ">
-              GENDER
-            </strong>
-            <p className="block text-black capitalize">
-              {data?.result?.customerId?.customer_gender}
-            </p>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm mr-1 text-gray-500">
-              PHONE
-            </strong>
-            <p className="block text-black">{data?.result?.customerId?.customer_contact}</p>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm text-gray-500 mr-1">
-              EMAIL
-            </strong>
-            <a href="mailto:" className="block text-black">
-              {data?.result?.customerId?.customer_email}
-            </a>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm text-gray-500 mr-1">
-              SOCIAL MEDIA
-            </strong>
-            <div className="flex mt-[4px]">
-              {data?.result?.customerId?.customer_socialMedia1 && (
-                <a href={data?.result?.customerId?.customer_socialMedia1Url} target="_blank">
-                  <Image
-                    src={getBasicIcon(data?.result?.customerId?.customer_socialMedia1)}
-                    className={`w-[20px] svg-grey mr-2`}
-                    alt={data?.result?.customerId?.customer_socialMedia1}
-                    width={20}
-                    height={20}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </a>
-              )}
-              {data?.result?.customerId?.customer_socialMedia2 && (
-                <a href={data?.result?.customerId?.customer_socialMedia2Url} target="_blank">
-                  <Image
-                    src={getBasicIcon(data?.result?.customerId?.customer_socialMedia2)}
-                    className={`w-[20px] svg-grey`}
-                    alt={data?.result?.customerId?.customer_socialMedia2}
-                    width={20}
-                    height={20}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </a>
-              )}
-            </div>
-          </li>
-        </ul>
-        <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
-        <div className="py-1"></div>
-        <h3 className="text-sm font-medium mt-5 text-black ml-4">
-          COMPANY INFO
-        </h3>
-        <ul className="mt-2 mb-10 ml-2">
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm text-gray-500 mr-1">
-              COMPANY NAME
-            </strong>
-            <a href="name" className="block text-black">
-              {data?.result?.companyId?.company_name}
-            </a>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm text-gray-500 mr-1">
-              COMPANY ADDRESS
-            </strong>
-            <p className="block text-black">
-              {data?.result?.companyId?.company_address || data?.result?.companyId?.company_location}
-            </p>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm text-gray-500 mr-1">
-              WEBSITE LINK
-            </strong>
-            <span className="block text-black">
-              <a
-                target="_blank"
-                href={`${data?.result?.companyId?.company_website_url}`}
-              >
-                {data?.result?.companyId?.company_website_url}
-              </a>
-            </span>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm text-gray-500 mr-1">
-              INDUSTRY TYPE
-            </strong>
-            <a href="industry:" className="block text-black">
-              {data?.result?.companyId?.company_product_category}
-            </a>
-          </li>
-          <li className="px-2 mt-4">
-            <strong className="font-medium text-sm text-gray-500 mr-1">
-              SOCIAL MEDIA
-            </strong>
-            <div className="flex mt-[5px]">
-              {data?.result?.companyId?.company_socialMedia1 && (
-                <a href={data?.result?.companyId?.company_socialMedia1Url} target="_blank">
-                  <Image
-                    src={getBasicIcon(data?.result?.companyId?.company_socialMedia1)}
-                    className={`w-[20px] svg-grey mr-2`}
-                    alt={data?.result?.companyId?.company_socialMedia1}
-                    width={20}
-                    height={20}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </a>
-              )}
-              {data?.result?.companyId?.company_socialMedia2 && (
-                <a href={data?.result?.companyId?.company_socialMedia2Url} target="_blank">
-                  <Image
-                    src={getBasicIcon(data?.result?.companyId?.company_socialMedia2)}
-                    className={`w-[20px] svg-grey`}
-                    alt={data?.result?.companyId?.company_socialMedia2}
-                    width={20}
-                    height={20}
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </a>
-              )}
-            </div>
-          </li>
-        </ul>
-        <div className="mx-auto w-[100%] border-b border-gray-300 my-3"></div>
-        <div className="py-1"></div>
-        <div className="flex items-center justify-between mt-2 ml-4">
-          <h3 className="text-sm text-black font-medium">OTHER CONTACTS</h3>
-          <Image
-            src={getBasicIcon("Plus")}
-            className="w-5 h-5 ml-2 mr-2"
-            alt=""
-            width={20}
-            height={20}
-            style={{
-              objectFit: "contain",
-            }}
-          />
+        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+          Info
+        </p>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium">Gender</p>
+          <p className="text-sm font-semibold text-black">
+            {data?.result?.customerId?.customer_gender}
+          </p>
         </div>
-        <div className="py-2"></div>
-        {data?.result?.customerId?.contacts?.[0] && Object.keys(data?.result?.customerId?.contacts?.[0]).length !== 0 && (
-          <ul
-            role="list"
-            className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-          >
-            <li>
-              <div className="flex items-center gap-x-2 mr-4">
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium">Phone</p>
+          <p className="text-sm font-semibold text-black">
+            {data?.result?.customerId?.customer_contact}
+          </p>
+        </div>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium">Email</p>
+          <p className="text-sm font-semibold text-black">
+            {data?.result?.customerId?.customer_email}
+          </p>
+        </div>
+        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+          Company Info
+        </p>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium">Company Name</p>
+          <p className="text-sm font-semibold text-black">
+            {data?.result?.companyId?.company_name}
+          </p>
+        </div>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium">Company Addrsss</p>
+          <p className="text-sm font-semibold text-black">
+            {data?.result?.companyId?.company_address}
+          </p>
+        </div>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium">Website link</p>
+          <p className="text-sm font-semibold text-black">
+            {data?.result?.companyId?.company_website_url}
+          </p>
+        </div>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium">Industry Type</p>
+          <p className="text-sm font-semibold text-black">
+            {data?.result?.companyId?.company_product_category}
+          </p>
+        </div>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium"> Social Media</p>
+          <p className="text-sm font-semibold text-black flex">
+            {data?.result?.companyId?.company_socialMedia1 && (
+              <a href={data?.companyId?.company_socialMedia1Url}>
                 <Image
-                  className="h-12 w-12 rounded-full "
-                  src={getRoundedAvatar(6, 30)}
+                  src={getBasicIcon(
+                    data?.result?.companyId?.company_socialMedia1
+                  )}
+                  className={`w-[20px] svg-grey mr-2`}
                   alt=""
-                  width={54}
-                  height={48}
+                  width={20}
+                  height={20}
                   style={{
                     objectFit: "contain",
                   }}
                 />
-                <div>
-                  <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                    {data?.result?.customerId?.contacts?.[0]?.customer_name}
-                  </h4>
-                  <a
-                    href="#0"
-                    className="block text-sm font-small text-gray-500 hover:text-indigo-500"
-                  >
-                    {data?.result?.customerId?.contacts?.[0]?.designation}
-                  </a>
-                </div>
-              </div>
-            </li>
-          </ul>
-        )}
-        <div className="py-2"></div>
-        {data?.result?.customerId?.contacts?.[0] && Object.keys(data?.result?.customerId?.contacts?.[0]).length !== 0 && (
-          <ul
-            role="list"
-            className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-          >
-            <li>
-              <div className="flex items-center gap-x-2 mr-4">
+              </a>
+            )}
+            {data?.result?.companyId?.company_socialMedia2 && (
+              <a href={data?.companyId?.company_socialMedia2Url}>
                 <Image
-                  className="h-12 w-12 rounded-full "
-                  src={getRoundedAvatar(6, 30)}
+                  src={getBasicIcon(
+                    data?.result?.companyId?.company_socialMedia2
+                  )}
+                  className={`w-[20px] svg-grey mr-2`}
                   alt=""
-                  width={54}
-                  height={48}
+                  width={20}
+                  height={20}
                   style={{
                     objectFit: "contain",
                   }}
                 />
-                <div>
-                  <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                    {data?.result?.customerId?.contacts?.[1]?.customer_name}
-                  </h4>
-                  <a
-                    href="#0"
-                    className="block text-sm font-small text-gray-500 hover:text-indigo-500"
-                  >
-                    {data?.result?.customerId?.contacts?.[1]?.designation}
-                  </a>
-                </div>
-              </div>
-            </li>
-          </ul>
+              </a>
+            )}
+          </p>
+        </div>
+        {contacts.length > 0 && (
+          <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+            Other Contacts
+          </p>
         )}
-        <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+          {contacts?.map((item: any, i: any) => {
+            function random_number_between_1_and_7() {
+              // Generate a random number between 0 and 1 (exclusive)
+              const randomNum = Math.random();
+
+              // Scale the number to the range of 1 to 7
+              const scaledNum = Math.floor(randomNum * 7) + 1;
+
+              return scaledNum;
+            }
+            const random = random_number_between_1_and_7();
+            if (item && Object.keys(item).length !== 0) {
+              return (
+                <li className="mb-[10px]" key={i}>
+                  <div className="flex items-center gap-x-3 mr-3">
+                    <Image
+                      className="h-12 w-10 rounded-full ml-2"
+                      src={getRoundedAvatar(random, 30)}
+                      alt=""
+                      width={64}
+                      height={48}
+                      style={{
+                        objectFit: "contain",
+                      }}
+                    />
+                    <div>
+                      <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
+                        {item?.name}
+                      </h4>
+                      <a
+                        href="#0"
+                        className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
+                      >
+                        {item?.designation}
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              );
+            } else {
+              return null;
+            }
+          })}
+        </div>
       </div>
     </>
   );

@@ -461,8 +461,11 @@ const ExpandableRow = ({
                 key={i}
                 className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
               >
-                <span className="text-[#000] text-[15px]"> {item?.customer_name}</span>,
-                {item?.designation}
+                <span className="text-[#000] text-[15px]">
+                  {" "}
+                  {item?.customer_name}
+                </span>
+                ,{item?.designation}
               </p>
             );
           } else {
@@ -728,6 +731,17 @@ const LeadContainer = ({
   const contacted: any = LeadData.customerId;
   const contacts = contacted.contacts;
   console.log(contacts, "98126192");
+
+  const [showDescModal, setShowDescModal] = useState(false);
+
+  const handleDoubleClick = () => {
+    setShowDescModal(!showDescModal);
+  };
+
+  const handleCloseModal = () => {
+    setShowDescModal(false);
+  };
+
   return (
     <>
       <div
@@ -737,9 +751,17 @@ const LeadContainer = ({
         }}
       >
         <div
-          className="relative pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
+          onDoubleClick={handleDoubleClick}
+          className="-z-50 pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
           ref={wRef}
         >
+          {/* {showDescModal && (
+            <div className="z-50 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 absolute right-0">
+              Content for your modal
+              <h2>Modal Title</h2>
+              <p>Modal content goes here.</p>
+            </div>
+          )} */}
           {/*
         <div className="fixed flex items-center left-[1390px] h-[50px] cursor-pointer">
           <Image

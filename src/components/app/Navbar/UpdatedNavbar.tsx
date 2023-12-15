@@ -3,14 +3,15 @@ import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import { useAppDispatch } from "@/store/store";
 import { triggerMenu } from "@/store/UI";
 import Image from "next/image";
-import ButtonDropDown from "@/utils/Button/Button";
+import ButtonDropDown, { ButtonProps } from "@/utils/Button/Button";
 import { logout, setLoggedInStatus } from "@/store/auth";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import useUI from "@/hooks/useUI";
 import { title } from "process";
+import Button from "@/utils/Button/Button";
 
-const Search = ({ change }: any) => {
+const Search = ({ change, handleSerachBar }: any) => {
   const ref: any = useRef();
   return (
     <>
@@ -28,6 +29,7 @@ const Search = ({ change }: any) => {
         </div>
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
           <Image
+            onClick={handleSerachBar}
             className="w-[100%] "
             src={getBasicIcon("Search")}
             alt=""
@@ -44,7 +46,12 @@ const Search = ({ change }: any) => {
   );
 };
 
-const Navbar = ({ mainTitle, title, src }: any) => {
+const UpdatedNavbar = ({
+  mainTitle,
+  title,
+  buttons,
+  src,
+}: UpdatedNavigationProps) => {
   const { menuOpen } = useUI();
   const [view, setView] = React.useState(false);
   const dispatch = useAppDispatch();
@@ -52,7 +59,10 @@ const Navbar = ({ mainTitle, title, src }: any) => {
   const router = useRouter();
 
   const [search, setSearch] = useState("");
-
+  const [showSearch, setShowSearch] = useState(false);
+  const handleSerachBar = () => {
+    setShowSearch(!showSearch);
+  };
   return (
     <div className="w-full h-[60px] border-b-[1px] border-[#eaebec]  bg-white flex items-center justify-between">
       <div className="flex gap-2">
@@ -80,12 +90,52 @@ const Navbar = ({ mainTitle, title, src }: any) => {
         </div>
       </div>
       <div className=" flex justify-evenly items-center">
+        <div className="mr-3">
+          {buttons?.length > 0 && (
+            <div className="flex justify-end ">
+              {buttons.map((item, i) => {
+                console.log(item.list);
+                return (
+                  <Button
+                    dropdown={item.dropdown}
+                    click={item.click}
+                    value={item.value}
+                    list={item.list}
+                    icon={item.icon}
+                    text={item.text}
+                    id={item.id}
+                    onClick1={item.onClick1}
+                    key={i}
+                    light={item.light}
+                    dark={item.dark}
+                  />
+                );
+              })}
+            </div>
+          )}
+        </div>
         <div>
-          <Search
-            placeHolder="Search Here..."
-            change={({ e }: any) => setSearch(e.target.value)}
-            view={view}
-          />
+          {showSearch ? (
+            <Search
+              handleSerachBar={handleSerachBar}
+              placeHolder="Search Here..."
+              change={({ e }: any) => setSearch(e.target.value)}
+              view={view}
+            />
+          ) : (
+            <Image
+              onClick={handleSerachBar}
+              className="w-[100%] cursor-pointer"
+              src={getBasicIcon("Search")}
+              alt=""
+              // fill={true}
+              width={30}
+              height={30}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          )}
         </div>
         <div>
           <Image
@@ -143,4 +193,12 @@ const Navbar = ({ mainTitle, title, src }: any) => {
   );
 };
 
-export default Navbar;
+export default UpdatedNavbar;
+
+interface UpdatedNavigationProps {
+  buttons: ButtonProps[];
+  children?: JSX.Element[] | JSX.Element;
+  title: String;
+  mainTitle: String;
+  src: String;
+}
