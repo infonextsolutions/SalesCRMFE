@@ -3,8 +3,6 @@ import DUMMY from "@/shared/dummy";
 import React, { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import dummy from "@/shared/dummy";
-import { CSVLink } from "react-csv";
-import * as XLSX from "xlsx";
 import { useRouter } from "next/router";
 import Navbar from "@/components/app/Navbar/Navbar";
 import CallsRecordingContainer from "@/components/calls/recorded-calls/Container/CallsRecordingContainer";
@@ -70,23 +68,6 @@ const Calls = ({ data }: any) => {
     };
   }, []);
 
-  const ref: any = useRef();
-  const exportXLSX = () => {
-    const worksheet = XLSX.utils.json_to_sheet(data.result);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
-    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
-    XLSX.writeFile(workbook, "DataSheet.xlsx");
-    console.log("exporting", data);
-  };
-
-  const addExport = (e: any, e1: any) => {
-    if (e1 === 0) {
-      exportXLSX();
-    }
-  };
-
   const gotoCallRecording = () => {
     setRecordedCalls(true);
     setRecodedMeeting(false);
@@ -101,41 +82,13 @@ const Calls = ({ data }: any) => {
     <>
       <Navbar mainTitle="Calls" title="Recorded Calls" src="Phone" />
       <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-        <Navigation
-          title=""
-          buttons={[
-            {
-              text: "",
-              dropdown: true,
-              id: 1,
-              icon: "Download",
-              light: true,
-              dark: false,
-              click: addExport,
-              list: [
-                { title: "Print", Icon: "Printer" },
-                { title: "Excel", Icon: "Excel" },
-                // { title: "PDF", Icon: "PDF" },
-                {
-                  title: "CSV",
-                  Icon: "CSV",
-                  wrapper: (
-                    <CSVLink data={data.result} className="" ref={ref}>
-                      CSV
-                    </CSVLink>
-                  ),
-                },
-              ],
-            },
-          ]}
-        />
-        <div className="flex justify-between items-center pb-5">
+        <div className="flex justify-between items-center mt-6 pb-5">
           <button
             onClick={gotoCallRecording}
             className={
               recodedCalls
-                ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
-                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-1.5 hover:text-white hover:px-16 hover:mt-2 hover:mb-2"
+                ? "focus:outline-none text-black bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
+                : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
             }
           >
             Call Recordings
@@ -146,8 +99,8 @@ const Calls = ({ data }: any) => {
               // className="bg-bg-red w-[70%]"
               className={
                 recodedMeeting
-                  ? "focus:outline-none text-white bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
-                  : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-1.5 hover:text-white hover:px-16 hover:mt-2 hover:mb-2"
+                  ? "focus:outline-none text-black bg-[#fe5043ad] hover:bg-[#fe50437a] font-medium rounded-lg text-md px-16 py-1.5 mt-2 mb-2"
+                  : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
               }
             >
               Metting Recordings

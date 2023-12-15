@@ -141,7 +141,7 @@ const Metting_LeadsTable = ({ totalRecords, search }: TableProps) => {
   };
 
   const Leads = items;
-  console.log(Leads);
+
   // console.log(Leads);
   // console.log(`limit is ${limit}`);
 

@@ -1,7 +1,7 @@
 import Kanban from "@/components/View/Kanban";
 import CallsTable from "@/components/View/Tables/calls/recorded-calls/Calls";
 import ButtonDropDown from "@/utils/Button/Button";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import Search from "../Search/Search";
 import Spinner from "@/components/loader/spinner";
 import DatePicker from "@/utils/Button/DatePicker";
@@ -10,6 +10,8 @@ import Navigation from "@/components/app/Navigation";
 import * as XLSX from "xlsx";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
+import { CSVLink } from "react-csv";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -50,6 +52,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     );
     dummy1 = { ...response.data };
   };
+  const ref: any = useRef();
 
   // useEffect(() => {
   //   getData();
@@ -107,6 +110,32 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               setStartDate={setStartDate}
               endDate={endDate}
               setEndDate={setEndDate}
+            />
+            <NavigationWithoutTitle
+              buttons={[
+                {
+                  text: "",
+                  dropdown: true,
+                  id: 1,
+                  icon: "Download",
+                  light: true,
+                  dark: false,
+                  click: addExport,
+                  list: [
+                    { title: "Excel", Icon: "Excel" },
+                    { title: "Print", Icon: "Printer" },
+                    {
+                      title: "CSV",
+                      Icon: "CSV",
+                      wrapper: (
+                        <CSVLink data={data.result} className="" ref={ref}>
+                          CSV
+                        </CSVLink>
+                      ),
+                    },
+                  ],
+                },
+              ]}
             />
           </div>
           <div className="flex items-center gap-5">

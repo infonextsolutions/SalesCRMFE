@@ -201,21 +201,26 @@ const AudioProfile = ({ data, scripts }: any) => {
             {
               text: "Action",
               dropdown: true,
-              id: 1,
+              id: 0,
+              // click: viewButtinClick,
               light: false,
               dark: true,
-              list: [],
-              onClick1: async () => {
-                // const response = await axios.post(
-                //   "https://salescrmbe.onrender.com/api/calling/make-call",
-                //   {
-                //     callTo: "7669481778",
-                //   }
-                // );
-                setCall(true);
-              },
+              list: [
+                {
+                  title: "Email",
+                  Icon: "Mail",
+                },
+                {
+                  title: "Note",
+                  Icon: "Tasks",
+                },
+                {
+                  title: "Message",
+                  Icon: "Chat",
+                },
+              ],
+              value: 0,
             },
-
             // {
             //   text: "Take Action ",
             //   click: takeAction,
