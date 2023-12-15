@@ -131,7 +131,7 @@ const Dashboard = ({ data }: any) => {
       </div>
       <Navigator callback={handleTabNavigation} current={currTab} list={tabs} />
       {currTab === 0 && (
-        <div className="">
+        <div className="w-[100%]">
           <div className="flex w-[100%]">
             <DealsCard label="Open Deals" icon={"↑"} count={100} percent={58.8} />
             <DealsCard label="Closed Deals" icon={"↑"} count={76} percent={50} />
@@ -156,14 +156,6 @@ const Dashboard = ({ data }: any) => {
       {currTab === 1 && (
         <div className="">
           <TreeMap getPitchData={getPitchData} data1={pitchData} />
-          {/* <CallAnalysis
-            script={scriptbuilderData}
-            getScriptData={getScriptData}
-            tree={pitchData}
-            getSellingData={getSellingData}
-            emotion={sellingData}
-            getPitchData={getPitchData}
-          /> */}
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
               <EmotionalAnalysisComp />
