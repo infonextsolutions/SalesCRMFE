@@ -62,7 +62,7 @@ const LeadProfileContainer = ({
                     Product/ Service Type
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">
-                    {data?.companyId?.company_product_category}
+                    {data?.product_category}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
