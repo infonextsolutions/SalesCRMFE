@@ -248,69 +248,72 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             }}
           />
         </div>
-
         <div className="py-2"></div>
-        <ul
-        role="list"
-        className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-      >
-        <li>
-          <div className="flex items-center gap-x-2 mr-4">
-            <Image
-              className="h-12 w-12 rounded-full "
-              src={getRoundedAvatar(6, 30)}
-              alt=""
-              width={54}
-              height={48}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-            <div>
-              <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                {data?.result?.customerId?.contacts?.[0]?.customer_name}
-              </h4>
-              <a
-                href="#0"
-                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
-              >
-                {data?.result?.customerId?.contacts?.[0]?.designation}
-              </a>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div className="py-2"></div>
-      <ul
-        role="list"
-        className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-      >
-        <li>
-          <div className="flex items-center gap-x-2 mr-4">
-            <Image
-              className="h-12 w-12 rounded-full "
-              src={getRoundedAvatar(6, 30)}
-              alt=""
-              width={54}
-              height={48}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-            <div>
-              <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                {data?.result?.customerId?.contacts?.[1]?.customer_name}
-              </h4>
-              <a
-                href="#0"
-                className="block text-sm font-small text-gray-500 hover:text-indigo-500"
-              >
-                {data?.result?.customerId?.contacts?.[1]?.designation}
-              </a>
-            </div>
-          </div>
-        </li>
-      </ul>
+        {data?.result?.customerId?.contacts?.[0] && Object.keys(data?.result?.customerId?.contacts?.[0]).length !== 0 && (
+          <ul
+            role="list"
+            className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+          >
+            <li>
+              <div className="flex items-center gap-x-2 mr-4">
+                <Image
+                  className="h-12 w-12 rounded-full "
+                  src={getRoundedAvatar(6, 30)}
+                  alt=""
+                  width={54}
+                  height={48}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+                <div>
+                  <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                    {data?.result?.customerId?.contacts?.[0]?.customer_name}
+                  </h4>
+                  <a
+                    href="#0"
+                    className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                  >
+                    {data?.result?.customerId?.contacts?.[0]?.designation}
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        )}
+        <div className="py-2"></div>
+        {data?.result?.customerId?.contacts?.[0] && Object.keys(data?.result?.customerId?.contacts?.[0]).length !== 0 && (
+          <ul
+            role="list"
+            className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+          >
+            <li>
+              <div className="flex items-center gap-x-2 mr-4">
+                <Image
+                  className="h-12 w-12 rounded-full "
+                  src={getRoundedAvatar(6, 30)}
+                  alt=""
+                  width={54}
+                  height={48}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+                <div>
+                  <h4 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                    {data?.result?.customerId?.contacts?.[1]?.customer_name}
+                  </h4>
+                  <a
+                    href="#0"
+                    className="block text-sm font-small text-gray-500 hover:text-indigo-500"
+                  >
+                    {data?.result?.customerId?.contacts?.[1]?.designation}
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        )}
         <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
       </div>
     </>

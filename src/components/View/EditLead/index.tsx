@@ -113,7 +113,7 @@ const EditLead = ({ cancel, data, update, title }: { cancel: any; data: any; upd
   });
   const submit = () => {
     const url = "https://salescrmbe.onrender.com/api/leads/update";
-    axios
+    axios 
       .put(url, {
         id: data._id,
         lead_title: content.lead_title,

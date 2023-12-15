@@ -5,16 +5,12 @@ import Navigator from "@/utils/customNavigator";
 import axios from "axios";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import Button, { ButtonProps } from "@/utils/Button/Button";
 import DealsCard from "@/components/customComponents/360_components/cardDeals";
-import Selling from "@/components/analysis/Call/Charts/Selling";
 import Top_Call from "@/components/customComponents/360_components/table_TOPcall";
 import Leaderboard from "@/components/customComponents/360_components/TOP_leaderBoard";
 import EmotionalAnalysisComp from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Emotional_Analysis";
 import TreeMap from "@/components/analysis/Call/Tree";
-import Emotion from "@/components/analysis/Call/Charts/Emotion";
 import StageWiseAnalysis from "@/components/analysis/Call/Charts/StageWiseAnalysis";
-import HighIntentCallVolume from "@/components/analysis/Call/Charts/HighIntentCallVolume";
 import DealAnalysis from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Deal_Analytics";
 import TalkRatio from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Ratio_bar";
 import BarChartVertical from "@/components/analysis/Call/Charts/BarChartVertical";
@@ -22,6 +18,7 @@ import NoOfInterruptions from "@/components/analysis/Call/Charts/NoOfInterruptio
 import NoOfParticipants from "@/components/analysis/Call/Charts/NoOfParticipants";
 import CallSentiment from "@/components/customComponents/360_components/CallSentiment";
 import NoiseAndVolumeChart from "@/components/analysis/Call/Charts/NoiseAndVolumeChart";
+import { AvgCallScore, NoOfQuesAsked, SellingSkills, HighIntentCallVolume, LongestMonologue, NoOfTopics, SalesRepPatienceSilence, LongestCustomerStory, NoOfSwitches, SalesRepSentimentScore, SatisfactionScore, PerformanceRate } from "@/constants/chartFields";
 
 // const Dashboard = ({ data }: any) => {
 const Dashboard = ({ data }: any) => {
@@ -54,6 +51,7 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
+        console.log('____________ GET PITCH DATA ___________', res.data);
         setPitchData(res.data.result);
       })
       .catch((e) => {
@@ -73,6 +71,7 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
+        console.log('____________ GET SELLING DATA ___________', res.data);
         setSellingData(res.data.result);
       })
       .catch((e) => {
@@ -93,6 +92,7 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
+        console.log('____________ GET SCRIPT DATA ___________', res.data);
         setScriptBuilderData(res.data.result);
       })
       .catch((e) => {
@@ -139,16 +139,15 @@ const Dashboard = ({ data }: any) => {
           </div>
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
-              <Selling getSellingData={getSellingData} selling={sellingData} />
-              <BarChartVertical title="Selling Skills" />
-              <BarChartVertical title="Average Call Score" />
-              <BarChartVertical title="Number of Questions Asked" />
+              <BarChartVertical getSellingData={getSellingData} title="Selling Skills" data={sellingData} template={SellingSkills} />
+              <BarChartVertical title="Average Call Score" template={AvgCallScore} data={{}} />
+              <BarChartVertical title="Number of Questions Asked" template={NoOfQuesAsked} data={{}} />
               <StageWiseAnalysis getSellingData={getSellingData} selling={sellingData} />
             </div>
             <div className="flex-[1]">
               <Leaderboard />
               <Top_Call />
-              <BarChartVertical title="High Intent Call Volume" />
+              <BarChartVertical title="High Intent Call Volume" template={HighIntentCallVolume} data={{}} />
               <DealAnalysis />
             </div>
           </div>
@@ -168,15 +167,15 @@ const Dashboard = ({ data }: any) => {
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
               <EmotionalAnalysisComp />
-              <BarChartVertical title="Longest Monologue" />
+              <BarChartVertical title="Longest Monologue" template={LongestMonologue} data={{}} />
               <TalkRatio />
-              <BarChartVertical title="Number of Topics" />
+              <BarChartVertical title="Number of Topics" template={NoOfTopics} data={{}} />
             </div>
             <div className="flex-[1]">
-              <BarChartVertical title="Sales Rep's Patience/Silence" />
-              <BarChartVertical title="Longest Customer Story" />
+              <BarChartVertical title="Sales Rep's Patience/Silence" template={SalesRepPatienceSilence} data={{}} />
+              <BarChartVertical title="Longest Customer Story" template={LongestCustomerStory} data={{}} />
               <NoOfInterruptions />
-              <BarChartVertical title="Number of Switches" />
+              <BarChartVertical title="Number of Switches" template={NoOfSwitches} data={{}} />
             </div>
           </div>
         </div>
@@ -186,12 +185,12 @@ const Dashboard = ({ data }: any) => {
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
               <NoOfParticipants />
-              <BarChartVertical title="Sales Rep Sentiment Score  " />
+              <BarChartVertical title="Sales Rep Sentiment Score" template={SalesRepSentimentScore} data={{}} />
               <CallSentiment />
             </div>
             <div className="flex-[1]">
-              <BarChartVertical title="Satisfaction Score" />
-              <BarChartVertical title="Performance Rate" />
+              <BarChartVertical title="Satisfaction Score" template={SatisfactionScore} data={{}} />
+              <BarChartVertical title="Performance Rate" template={PerformanceRate} data={{}} />
               <NoiseAndVolumeChart />
             </div>
           </div>

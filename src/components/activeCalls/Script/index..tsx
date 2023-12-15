@@ -290,9 +290,9 @@ const ScriptList = ({
           <Uploads
             refresh={refresh}
             cancel={cancelUploads}
-            id={moredata._id}
-            leadId={moredata.leadId._id}
-            owners={moredata.leadId.owners[0]}
+            id={moredata?._id}
+            leadId={moredata?.leadId?._id}
+            owners={moredata?.leadId?.owners?.[0]}
           />
         </Backdrop>
       )}

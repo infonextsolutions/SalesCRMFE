@@ -216,6 +216,10 @@ const AddLead = ({ cancel }: any) => {
               <option value="P1">P1</option>
               <option value="P2">P2</option>
               <option value="P3">P3</option>
+              <option value="Product A">Product A</option>
+              <option value="Product B">Product B</option>
+              <option value="Product C">Product C</option>
+              <option value="Product D">Product D</option>
             </select>
           </div>
 
@@ -305,10 +309,10 @@ const AddLead = ({ cancel }: any) => {
               onChange={(e: any) => {
                 setCompanyData({
                   ...companyData,
-                  industry_type: e.target.value,
+                  company_product_category: e.target.value,
                 });
               }}
-              name="industry_type"
+              name="company_product_category"
             >
               {/*      */}
               <option value="" selected>
