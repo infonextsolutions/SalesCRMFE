@@ -46,17 +46,17 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
       queryStr += `&leadStage=${stage}`;
     }
     if (product !== "") {
-      queryStr += `&product=${product}`;
+      queryStr += `&productCategory=${product}`;
     }
     if (leadSource !== "") {
       queryStr += `&leadSource=${leadSource}`;
     }
-    // if (startDate !== "") {
-    //   queryStr += `&search=${startDate}`;
-    // }
-    // if (endDate !== "") {
-    //   queryStr += `&search=${endDate}`;
-    // }
+    if (startDate !== "") {
+      queryStr += `&startDate=${startDate}`;
+    }
+    if (endDate !== "") {
+      queryStr += `&endDate=${endDate}`;
+    }
     setQueryStr(queryStr);
     return queryStr;
   };

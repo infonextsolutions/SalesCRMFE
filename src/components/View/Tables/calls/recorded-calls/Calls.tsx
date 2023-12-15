@@ -16,7 +16,7 @@ import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import ActiveCall from "@/types/recorded-call";
 import CallContainer from "@/components/calls/recorded-calls/Call/Call";
-const LeadsTable = ({ totalRecords, search }: TableProps) => {
+const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -24,9 +24,20 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
   const [selectAll, setSelectAll] = useState(false);
 
+  useEffect(function () {
+    axios.get(
+      `https://salescrmbe.onrender.com/api/recording/find-all?limit=${limit}&page=${pageNumber}${queryStr}`
+    ).then(res => {
+      setItems(res?.data?.result);
+      settotalLeads(res?.data?.totalRecords)
+      const count = Math.ceil(Number(res?.data?.totalRecords) / limit);
+      setpageCount(count);
+    });
+  }, [queryStr]);
+
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://salescrmbe.onrender.com/api/recording/find-all?limit=${limit}&page=${current}"`
+      `https://salescrmbe.onrender.com/api/recording/find-all?limit=${limit}&page=${current}${queryStr}"`
     );
     const data = res.data.result;
     return data;
@@ -51,7 +62,7 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://salescrmbe.onrender.com/api/recording/find-all`
+          `https://salescrmbe.onrender.com/api/recording/find-all?${queryStr}`
         );
         // console.log(res, "only check here");
         const data = res.data.result;
