@@ -442,7 +442,7 @@ const ProfilePage = ({ data1, updated }: any) => {
           </p>
         )}
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          {contacts.map((item: any, i: any) => {
+          {contacts?.map((item: any, i: any) => {
             function random_number_between_1_and_7() {
               // Generate a random number between 0 and 1 (exclusive)
               const randomNum = Math.random();
@@ -453,37 +453,37 @@ const ProfilePage = ({ data1, updated }: any) => {
               return scaledNum;
             }
             const random = random_number_between_1_and_7();
-            return (
-              <>
-                {item !== null && (
-                  <li className="mb-[10px]" key={i}>
-                    <div className="flex items-center gap-x-3 mr-3">
-                      <Image
-                        className="h-12 w-10 rounded-full ml-2"
-                        src={getRoundedAvatar(random, 30)}
-                        alt=""
-                        width={64}
-                        height={48}
-                        style={{
-                          objectFit: "contain",
-                        }}
-                      />
-                      <div>
-                        <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                          {item?.name}
-                        </h4>
-                        <a
-                          href="#0"
-                          className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
-                        >
-                          {item?.designation}
-                        </a>
-                      </div>
+            if ( item && Object.keys(item).length !== 0) {
+              return (
+                <li className="mb-[10px]" key={i}>
+                  <div className="flex items-center gap-x-3 mr-3">
+                    <Image
+                      className="h-12 w-10 rounded-full ml-2"
+                      src={getRoundedAvatar(random, 30)}
+                      alt=""
+                      width={64}
+                      height={48}
+                      style={{
+                        objectFit: "contain",
+                      }}
+                    />
+                    <div>
+                      <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
+                        {item?.name}
+                      </h4>
+                      <a
+                        href="#0"
+                        className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
+                      >
+                        {item?.designation}
+                      </a>
                     </div>
-                  </li>
-                )}
-              </>
-            );
+                  </div>
+                </li>
+              );
+            } else {
+              return null;
+            }
           })}
         </div>
       </div>

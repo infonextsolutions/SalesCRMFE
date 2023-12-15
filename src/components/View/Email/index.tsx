@@ -355,7 +355,6 @@ const EmailPage = ({
   refresh?: any;
   leadIdResult?: any;
 }) => {
-  console.log('++++++++++++++ EMAIL PAGE ++++++++++++++++++++', data, leadIdResult);
   // const [receiver, setReceiver] = useState<any>("");
   const [receiver, setReceiver] = useState<any>("");
   const [title, setTitle] = useState<any>("");
@@ -413,7 +412,6 @@ const EmailPage = ({
   };
 
   useEffect(() => {
-    console.log("resuulllttt ++++++++++++++++++++++++", data?._id);
     if (data && data.customerId) {
       const { customer_name, customer_email, contacts } = data.customerId;
 

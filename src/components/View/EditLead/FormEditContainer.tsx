@@ -58,42 +58,37 @@ const FormEditContainer = ({
                 <Formik
                   initialValues={{
                     ...data,
-                    ...data.companyId,
                     lead_title: data?.lead_title,
                     lead_description: data?.lead_description,
                     lead_manager: data?.manager,
-                    industry_type: data.companyId.company_product_category,
+                    product_category: data?.product_category,
                     lead_owner:
                       data.owners.length > 0 ? data.owners[0].name : "",
                     Stage: data?.leadStage,
                     Status: data?.leadStatus,
-                    Source: data?.source,
-                    inquiryType: data.inquiry,
-                    productService: data.companyId.company_product_category,
-                    dealSize: data.potential_deal_size,
-                    existingBudget: data.existing_budget,
-                    winProbability: data.win_probability,
-                    leadCreatedBy: data.created_by,
+                    Source: data?.leadSource,
+                    inquiryType: data?.inquiry,
+                    dealSize: data?.potential_deal_size,
+                    existingBudget: data?.existing_budget,
+                    winProbability: data?.win_probability,
+                    leadCreatedBy: data?.created_by,
                   }}
                   onSubmit={async (values) => {
                     console.log(
-                      ">>>>>>>>>>>>>>>>>>>>>>> EIDT LEAD : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>",
+                      ">>>>>>>>>>>> EIDT LEAD : ONSUBMIT VALUES >>>>>>>>>>>>",
                       values
                     );
                     try {
                       const val = {
                         _id: data._id,
                         lead_title: values.lead_title,
-                        lead_description: data?.lead_description,
-                        companyId: {
-                          _id: data.companyId._id,
-                          company_product_category: values.industry_type,
-                        },
+                        lead_description: values?.lead_description,
+                        product_category: values?.product_category,
                         owners: [values.lead_owner],
                         manager: values.lead_manager,
                         leadStage: values.Stage,
                         leadStatus: values.Status,
-                        source: values.Source,
+                        leadSource: values.Source,
                       };
                       update();
                       const response = await axios.put(
@@ -233,15 +228,15 @@ const FormEditContainer = ({
                         </div>
                         <div className="w-[100%]">
                           <label
-                            htmlFor="industry_type"
+                            htmlFor="product_category"
                             className="block font-medium mb-2 text-[#8a9099]"
                           >
                             Product/Service*
                           </label>
                           <Field
                             as="select"
-                            id="industry_type"
-                            name="industry_type"
+                            id="product_category"
+                            name="product_category"
                             className="w-full bg-white font-medium border-[#e8e9eb] border-[2px] rounded-[13px] py-[10px] px-[14px] outline-none text-[#3f434a]"
                           >
                             <option value="" selected>
@@ -368,7 +363,7 @@ const FormEditContainer = ({
                   }}
                   onSubmit={async (values) => {
                     console.log(
-                      ">>>>>>>>>>>>>>>>>>>>>>> EDIT COMPANY : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>",
+                      ">>>>>>>>>> EDIT COMPANY : ONSUBMIT VALUES >>>>>>>>>>",
                       values
                     );
                     try {
@@ -443,13 +438,12 @@ const FormEditContainer = ({
                             <option selected value="">
                               -- Select Industry Type --
                             </option>
-                            <option value="IT1">IT1</option>
-                            <option value="IT2">IT2</option>
-                            <option value="IT3">IT3</option>
-                            <option value="Product A">Product A</option>
-                            <option value="Product B">Product B</option>
-                            <option value="Product C">Product C</option>
-                            <option value="Product D">Product D</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Education">Education</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value=" Real Estate"> Real Estate</option>
                           </Field>
                         </div>
                         <div className="w-[100%]">
@@ -665,11 +659,11 @@ const FormEditContainer = ({
                 </h1>
                 <Formik
                   initialValues={{
-                    customer_name: data.customerId.customer_name,
-                    customer_designation: data.customerId.customer_designation,
-                    customer_contact: data.customerId.customer_contact,
-                    customer_email: data.customerId.customer_email,
-                    customer_gender: data.customerId.customer_gender,
+                    customer_name: data?.customerId?.customer_name,
+                    customer_designation: data?.customerId?.customer_designation,
+                    customer_contact: data?.customerId?.customer_contact,
+                    customer_email: data?.customerId?.customer_email,
+                    customer_gender: data?.customerId?.customer_gender,
                     customer_socialMedia1:
                       data?.customerId?.customer_socialMedia1,
                     customer_socialMedia1Url:
@@ -682,7 +676,7 @@ const FormEditContainer = ({
                   }}
                   onSubmit={async (values) => {
                     console.log(
-                      ">>>>>>>>>>>>>>>>>>>>>>> EDIT CLIENT : ONSUBMIT VALUES >>>>>>>>>>>>>>>>>>>>>>>>",
+                      ">>>>>>>>>> EDIT CLIENT : ONSUBMIT VALUES >>>>>>>>>>>",
                       values
                     );
                     try {
@@ -694,11 +688,11 @@ const FormEditContainer = ({
                           customerId: {
                             ...data.customerId,
                             _id: data.customerId._id,
-                            customer_name: values.customer_name,
-                            customer_designation: values.customer_designation,
-                            customer_gender: values.customer_gender,
-                            customer_contact: values.customer_contact,
-                            customer_email: values.customer_email,
+                            customer_name: values?.customer_name,
+                            customer_designation: values?.customer_designation,
+                            customer_gender: values?.customer_gender,
+                            customer_contact: values?.customer_contact,
+                            customer_email: values?.customer_email,
                             customer_socialMedia1: values?.customer_socialMedia1,
                             customer_socialMedia1Url:
                               values?.customer_socialMedia1Url,
@@ -976,6 +970,7 @@ export interface Root {
   companyId: CompanyId;
   customerId: CustomerId;
   potential_deal_size: string;
+  product_category: string;
   win_probability: string;
   created_by: string;
   customer_name: string;
@@ -986,7 +981,8 @@ export interface Root {
   lead_title: string;
   lead_description: string;
   notes: Note[];
-  source: string;
+  leadSource: string;
+  source?: string;
   leadId: string;
   owners: Owner[];
   manager?: string;

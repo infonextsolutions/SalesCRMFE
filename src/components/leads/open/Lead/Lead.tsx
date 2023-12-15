@@ -455,24 +455,25 @@ const ExpandableRow = ({
           ,{leadData?.customerId?.customer_designation}
         </p>
         {otherContacts?.map((item: any, i: any) => {
-          return (
-            <p
-              key={i}
-              className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
-            >
-              <span className="text-[#000] text-[15px]">
-                {" "}
-                {item.customer_name}
-              </span>
-              ,{item.designation}
-            </p>
-          );
+          if (item && Object.keys(item).length !== 0) {
+            return (
+              <p
+                key={i}
+                className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
+              >
+                <span className="text-[#000] text-[15px]"> {item?.customer_name}</span>,
+                {item?.designation}
+              </p>
+            );
+          } else {
+            return null;
+          }
         })}
       </div>
       <div className="w-[350px] ml-[30px]">
         <p className="text-[16px] text-[#000] font-medium">Lead Created On</p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
-          {convertDatetime(leadData.createdAt)}
+          {convertDatetime(leadData?.createdAt)}
         </p>
       </div>
     </div>

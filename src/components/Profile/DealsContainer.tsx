@@ -194,14 +194,12 @@ const Deals = ({ data, type }: any) => {
 
 
   useEffect(() => {
-    console.log('============================ data.result._id ================================', data);
     axios.get(`https://salescrmbe.onrender.com/api/leads/getDeals?id=${data?.result?.companyId?._id}&type=${type}`)
       .then(response => {
         const data = response?.data;
         setOpenDeals(data?.openDeals);
         setClosedDeals(data?.closeDeals);
         setInterest(data?.intrest);
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>> API RESPONSE DEALS >>>>>>>>>>>>>>>>>>>>>>>>>>>>', response);
 
       })
       .catch(error => console.error('Error fetching data: ', error));
