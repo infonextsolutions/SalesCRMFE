@@ -442,18 +442,17 @@ const ProfilePage = ({ data1, updated }: any) => {
           </p>
         )}
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          {contacts?.map((item: any, i: any) => {
+          {data?.customerId?.contacts && data?.customerId?.contacts?.map((item: any, i: any) => {
             function random_number_between_1_and_7() {
               // Generate a random number between 0 and 1 (exclusive)
               const randomNum = Math.random();
-
               // Scale the number to the range of 1 to 7
               const scaledNum = Math.floor(randomNum * 7) + 1;
-
               return scaledNum;
             }
             const random = random_number_between_1_and_7();
-            if ( item && Object.keys(item).length !== 0) {
+            console.log('--------------- item ----------------', item);
+            if (item && Object.keys(item).length !== 0) {
               return (
                 <li className="mb-[10px]" key={i}>
                   <div className="flex items-center gap-x-3 mr-3">
@@ -469,13 +468,13 @@ const ProfilePage = ({ data1, updated }: any) => {
                     />
                     <div>
                       <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                        {item?.name}
+                        {item?.customer_name}
                       </h4>
                       <a
                         href="#0"
                         className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
                       >
-                        {item?.designation}
+                        {item?.customer_designation || item?.designation}
                       </a>
                     </div>
                   </div>
