@@ -2,7 +2,7 @@ import { BarChart } from '@mui/x-charts';
 import React from 'react'
 
 
-const BarChartVertical = ({
+const GroupBarChartVertical = ({
     title = "",
     data,
     template
@@ -32,4 +32,4 @@ const BarChartVertical = ({
     )
 }
 
-export default BarChartVertical
+export default GroupBarChartVertical

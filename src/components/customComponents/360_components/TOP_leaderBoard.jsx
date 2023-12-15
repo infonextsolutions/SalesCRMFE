@@ -20,7 +20,7 @@ const Leaderboard = () => {
     "Abhishek Kapoor",
   ];
   return (
-    <>
+    <div className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
       <h1 className="text-black">Leaderboard</h1>
       <div className="parent-container color-[black] text-black">
         <div className="container1">
@@ -49,7 +49,7 @@ const Leaderboard = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
