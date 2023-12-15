@@ -10,7 +10,10 @@ import Backdrop from "@/components/View/Backdrop/Center";
 import MakeCall from "@/components/View/makeCall/index";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
-import NavbarWithButton from "@/components/app/Navbar/UpdatedNavbar";
+import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
+import EmailPage from "@/components/View/Email";
+import Notes from "@/components/View/Notes";
+import Messages from "@/components/View/messages";
 //Manya will make this page
 
 const AudioProfile = ({ data, scripts }: any) => {
@@ -19,6 +22,7 @@ const AudioProfile = ({ data, scripts }: any) => {
   const [make, setCall] = useState(false);
   const [bool, setBool] = useState(true);
   const [audioFile, setAudioFile] = useState(null);
+  const [makeCallModal, setCallModal] = useState(false);
   const [uploadModalStatus, setUploadModalStatus] = useState(false);
   const dispatch = useAppDispatch();
   const cancelCall = () => {
@@ -102,8 +106,8 @@ const AudioProfile = ({ data, scripts }: any) => {
     //   data.result?.call_new_participant_designation
     // );
     // formData.append("callId", data.result?.callId);
-    formData.append("leadId", data.result?.leadId?._id);
-    formData.append("activeCallId", data.result?._id);
+    formData.append("leadId", data1.result?.leadId?._id);
+    formData.append("activeCallId", data1.result?._id);
     formData.append("file", audioFile);
     console.log("audioFile");
     axios
@@ -126,6 +130,65 @@ const AudioProfile = ({ data, scripts }: any) => {
         );
       });
   };
+
+  const [notes, setNotes] = React.useState(false);
+  const [events, setEvents] = React.useState(false);
+  const [notes1, setNotes1] = React.useState(false);
+  const [emails, setEmail] = React.useState(false);
+  const [messages, setMessages] = React.useState(false);
+
+  const showNotes = () => {
+    setNotes(true);
+  };
+  const showEmail = () => {
+    setEmail(true);
+  };
+  const showMessages = () => {
+    setMessages(true);
+  };
+
+  const cancelEmails = () => {
+    setBool(false);
+    setTimeout(() => {
+      setEmail(false);
+      setBool(true);
+    }, 500);
+  };
+  const cancelNotes = () => {
+    setBool(false);
+    setTimeout(() => {
+      setNotes(false);
+      setBool(true);
+    }, 1700);
+  };
+  const cancelMessages = () => {
+    setBool(false);
+    setTimeout(() => {
+      setMessages(false);
+      setBool(true);
+    }, 1700);
+  };
+  const AddLead = (e: any, e1: any) => {
+    if (e1 === 0) {
+      showEmail();
+    } else if (e1 === 1) {
+      showNotes();
+    } else if (e1 === 2) {
+      showMessages();
+    }
+  };
+  const [data1, setData] = useState(data);
+
+  const UpdateData = async () => {
+    const response = await axios
+      .get(
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data.result._id}`
+      )
+      .then((e) => {
+        setData(e.data);
+      })
+      .catch(() => {});
+  };
   return (
     <>
       <NavbarWithButton
@@ -142,6 +205,18 @@ const AudioProfile = ({ data, scripts }: any) => {
             // icon: "",
             list: [],
             onClick1: async () => {
+              setCallModal(true);
+            },
+          },
+          {
+            text: "Upload",
+            dropdown: true,
+            id: 2,
+            light: false,
+            dark: false,
+            // icon: "",
+            list: [],
+            onClick1: async () => {
               setUploadModalStatus(true);
             },
           },
@@ -149,7 +224,7 @@ const AudioProfile = ({ data, scripts }: any) => {
             text: "Action",
             dropdown: true,
             id: 0,
-            // click: viewButtinClick,
+            click: AddLead,
             light: false,
             dark: true,
             list: [
@@ -176,9 +251,45 @@ const AudioProfile = ({ data, scripts }: any) => {
             <MakeCall cancel={cancelCall} data={data.result} />
           </Backdrop>
         )}
+        {/* <MakeCall cancel={cancelCall} data={data.result} /> */}
+        {makeCallModal && (
+          <Backdrop bool={bool}>
+            <div className="p-4">
+              <h1 className="mx-auto text-left mt-4 pl-3 text-3xl font-semibold">
+                Make a Call
+              </h1>
+              <p className="mx-auto text-left mt-4 pl-3 text-lg text-gray-400">
+                Call To :
+              </p>
+              <p className="mx-auto text-left mt-4 pl-3 text-lg text-gray-400">
+                Designation :
+              </p>
+              <input
+                type="text"
+                name=""
+                disabled
+                className="border w-[80%] pl-4 ml-3 mt-2 py-2 rounded-lg"
+                value="+ 918269816289"
+              />
+              <div className="flex gap-4 justify-end mr-4 mt-6">
+                <button
+                  onClick={() => setCallModal(false)}
+                  className="bg-[#F5F5F5]  text-black px-[20px] py-[10px] rounded-xl font-medium text-[14px]"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSubmit}
+                  className="bg-bg-red hover:bg-[#ff7d6d] text-white px-[40px] py-[10px] rounded-xl font-medium text-[14px]"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </Backdrop>
+        )}
         {uploadModalStatus && (
           <Backdrop bool={bool}>
-            {/* <MakeCall cancel={cancelCall} data={data.result} /> */}
             <div>
               <h1 className="mx-auto text-center mt-4 text-3xl font-semibold">
                 Upload A Call
@@ -208,7 +319,32 @@ const AudioProfile = ({ data, scripts }: any) => {
             </div>
           </Backdrop>
         )}
-
+        {emails && (
+          <Backdrop bool={bool} pad={"50px 0"}>
+            <EmailPage
+              refresh={(e: any) => {
+                UpdateData();
+              }}
+              cancel={cancelEmails}
+              data={data.result}
+              leadIdResult={data.result._id}
+            />
+          </Backdrop>
+        )}
+        {notes && (
+          <Backdrop bool={bool}>
+            <Notes
+              cancel={cancelNotes}
+              update={UpdateData}
+              leadid={data.result._id}
+            />
+          </Backdrop>
+        )}
+        {messages && (
+          <Backdrop bool={bool} pad={"50px 0"}>
+            <Messages cancel={cancelMessages} />
+          </Backdrop>
+        )}
         <div className="w-[100%] flex gap-[8px] mb-[100px] ">
           {/* <AudioProfileContainer
           width={"50%"}
