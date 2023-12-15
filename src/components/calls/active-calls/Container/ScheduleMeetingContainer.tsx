@@ -28,11 +28,42 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
   const ref: any = useRef();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [companyName, setCompanyName] = useState("ABC Corp");
-  const [product, setProduct] = useState(" Product A");
-  const [callOwner, setCallOwner] = useState("John");
-  const [callType, setCallType] = useState("Product Demo");
-  const [location, setLocation] = useState("zoom");
+  const [companyName, setCompanyName] = useState("");
+  const [product, setProduct] = useState(" ");
+  const [callOwner, setCallOwner] = useState("");
+  const [callType, setCallType] = useState("");
+  const [location, setLocation] = useState("");
+  const [queryStr, setQueryStr] = useState("");
+
+  const getQueryStr = () => {
+    let queryStr = "";
+    if (search !== "") {
+      queryStr += `&search=${search}`;
+    }
+    if (companyName !== "") {
+      queryStr += `&companyName=${companyName}`;
+    }
+    if (product !== "") {
+      queryStr += `&productCategory=${product}`;
+    }
+    if (callOwner !== "") {
+      queryStr += `&callOwner=${callOwner}`;
+    }
+    if (callType !== "") {
+      queryStr += `&callType=${callType}`;
+    }
+    if (location !== "") {
+      queryStr += `&location=${location}`;
+    }
+    if (startDate !== "") {
+      queryStr += `&startDate=${startDate}`;
+    }
+    if (endDate !== "") {
+      queryStr += `&endDate=${endDate}`;
+    }
+    setQueryStr(queryStr);
+    return queryStr;
+  };
 
   const getData = async () => {
     const payload = {
@@ -65,6 +96,10 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
     XLSX.writeFile(workbook, "DataSheet.xlsx");
     console.log("Exporting to Excel", data);
   };
+  useEffect(() => {
+    // getData();
+    getQueryStr();
+  }, [product, companyName, callOwner, callType, startDate, endDate, search, location]);
 
   const exportPDF = () => {
     const documentDefinition = {
@@ -149,9 +184,11 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 className="text-red-500"
                 id="company"
               >
-                <option selected value="ABC Corp">
-                  ABC Corp
-                </option>
+                <option selected={companyName === ""} value=""></option>
+                <option selected={companyName === "ABC Corp"} value="ABC Corp">ABC Corp</option>
+                <option selected={companyName === "Bridge Corp."} value="Bridge Corp.">Bridge Corp.</option>
+                <option selected={companyName === "Zen Corp."} value="Zen Corp.">Zen Corp.</option>
+                <option selected={companyName === "XYZ Corp."} value="XYZ Corp.">XYZ Corp.</option>
               </select>
             </div>
             <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -161,10 +198,14 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="Product A">
-                  Product A
-                </option>
-                <option value="Close">Product B</option>
+                <option selected={product === ""} value=""></option>
+                <option selected={product === "P1"} value="P1">P1</option>
+                <option selected={product === "P2"} value="P2">P2</option>
+                <option selected={product === "P3"} value="P3">P3</option>
+                <option selected={product === "Product A"} value="Product A">Product A</option>
+                <option selected={product === "Product B"} value="Product B">Product B</option>
+                <option selected={product === "Product C"} value="Product C">Product C</option>
+                <option selected={product === "Product D"} value="Product D">Product D</option>
               </select>
             </div>
             <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -174,9 +215,8 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="john">
-                  John
-                </option>
+                <option selected={callOwner === ""} value=""></option>
+                <option selected={callOwner === "John"} value="John">John</option>
               </select>
             </div>
             <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -186,23 +226,21 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="Product Demo">
-                  Product Demo
-                </option>
+                <option selected={callType === ""} value=""></option>
+                <option selected={callType === "Product Demo"} value="Product Demo">Product Demo</option>
               </select>
             </div>
           </div>
           <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <h2 className="font-medium">Location</h2>
             <select
-              onChange={(e) => setCallType(e.target.value)}
+              onChange={(e) => setLocation(e.target.value)}
               className="text-red-500"
               id="location"
             >
-              <option selected value="zoom">
-                Zoom
-              </option>
-              <option value="meet">Google Meet</option>
+              <option selected={location === ""} value=""></option>
+              <option selected={location === "zoom"} value="zoom">Zoom</option>
+              <option selected={location === "meet"} value="meet">Google Meet</option>
             </select>
           </div>
         </div>
@@ -216,7 +254,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
         /> */}
       </div>
       <Suspense fallback={<Spinner />}>
-        <CallsTable totalRecords={dummy1.totalRecords} search={search} />
+        <CallsTable totalRecords={dummy1.totalRecords} search={search} queryStr={queryStr} />
       </Suspense>
     </div>
   );
