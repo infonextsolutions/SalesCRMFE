@@ -46,7 +46,7 @@ const Search = ({ change, handleSerachBar }: any) => {
   );
 };
 
-const UpdatedNavbar = ({
+const NavbarWithButton = ({
   mainTitle,
   title,
   buttons,
@@ -193,7 +193,7 @@ const UpdatedNavbar = ({
   );
 };
 
-export default UpdatedNavbar;
+export default NavbarWithButton;
 
 interface UpdatedNavigationProps {
   buttons: ButtonProps[];

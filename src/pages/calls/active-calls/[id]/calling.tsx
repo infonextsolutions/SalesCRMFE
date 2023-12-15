@@ -10,7 +10,7 @@ import Backdrop from "@/components/View/Backdrop/Center";
 import MakeCall from "@/components/View/makeCall/index";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
-import UpdatedNavbar from "@/components/app/Navbar/UpdatedNavbar";
+import NavbarWithButton from "@/components/app/Navbar/UpdatedNavbar";
 //Manya will make this page
 
 const AudioProfile = ({ data, scripts }: any) => {
@@ -128,7 +128,7 @@ const AudioProfile = ({ data, scripts }: any) => {
   };
   return (
     <>
-      <UpdatedNavbar
+      <NavbarWithButton
         mainTitle="Calls > Active Calls"
         title="Scheduled Calls"
         src="Phone"

@@ -9,6 +9,7 @@ import Backdrop from "@/components/View/Backdrop/Center";
 import FullCall from "@/components/View/full-call";
 import CallSnippet from "@/components/View/call-snippet";
 import Navbar from "@/components/app/Navbar/Navbar";
+import NavbarWithButton from "@/components/app/Navbar/UpdatedNavbar";
 //Manya will make this page
 
 const CallProfile = ({ data, data1 }: any) => {
@@ -52,7 +53,26 @@ const CallProfile = ({ data, data1 }: any) => {
 
   return (
     <>
-      <Navbar mainTitle="Calls" title="Recorded Calls" src="Phone" />
+      <NavbarWithButton
+        buttons={[
+          {
+            text: "Share",
+            dropdown: true,
+            id: 1,
+            icon: "Share",
+            light: false,
+            dark: true,
+            click: addCall,
+            list: [
+              { title: "Full Call", Icon: "Phone" },
+              { title: "Call Snippet", Icon: "Mail" },
+            ],
+          },
+        ]}
+        mainTitle="Calls"
+        title="Recorded Calls"
+        src="Phone"
+      />
       <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px]">
         {fullCall && (
           <Backdrop bool={bool} width={"60%"} pad={"50px 0"}>
@@ -64,25 +84,7 @@ const CallProfile = ({ data, data1 }: any) => {
             <CallSnippet cancel={cancelSnippet} />
           </Backdrop>
         )}
-        <Navigation
-          title=""
-          buttons={[
-            {
-              text: "Share",
-              dropdown: true,
-              id: 1,
-              icon: "Share",
-              light: false,
-              dark: true,
-              click: addCall,
-              list: [
-                { title: "Full Call", Icon: "Phone" },
-                { title: "Call Snippet", Icon: "Mail" },
-              ],
-            },
-          ]}
-        />
-        <div className="w-[100%] flex gap-[8px] mb-[100px] ">
+        <div className="w-[100%] flex gap-[8px] mb-[100px] mt-6">
           <AudioProfileContainer
             data={data.result}
             width={"42%"}
