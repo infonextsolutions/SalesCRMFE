@@ -12,7 +12,7 @@ import Notes from "@/components/View/Notes";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
-import UpdatedNavbar from "@/components/app/Navbar/UpdatedNavbar";
+import NavbarWithButton from "@/components/app/Navbar/UpdatedNavbar";
 
 const Profile = ({ data }: any) => {
   // console.log("data10", data);
@@ -120,7 +120,7 @@ const Profile = ({ data }: any) => {
 
   return (
     <>
-      <UpdatedNavbar
+      <NavbarWithButton
         mainTitle="Sales > Open"
         title={`${data1.result.lead_title} - Info`}
         src="manageLeadsIcon"
