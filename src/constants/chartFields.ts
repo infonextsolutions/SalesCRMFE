@@ -270,3 +270,8 @@ export const NoOfInterruptions = {
     labels: [],
     mappings: {},
 };
+
+export const NoOfParticipants = {
+    labels: [],
+    mappings: {},
+};

@@ -14,11 +14,11 @@ import StageWiseAnalysis from "@/components/analysis/Call/Charts/StageWiseAnalys
 import DealAnalysis from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Deal_Analytics";
 import TalkRatio from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Ratio_bar";
 import BarChartVertical from "@/components/analysis/Call/Charts/BarChartVertical";
-import NoOfInterruptions from "@/components/analysis/Call/Charts/NoOfInterruptions";
-import NoOfParticipants from "@/components/analysis/Call/Charts/NoOfParticipants";
 import CallSentiment from "@/components/customComponents/360_components/CallSentiment";
 import NoiseAndVolumeChart from "@/components/analysis/Call/Charts/NoiseAndVolumeChart";
-import { AvgCallScore, NoOfQuesAsked, SellingSkills, HighIntentCallVolume, LongestMonologue, NoOfTopics, SalesRepPatienceSilence, LongestCustomerStory, NoOfSwitches, SalesRepSentimentScore, SatisfactionScore, PerformanceRate } from "@/constants/chartFields";
+import { AvgCallScore, NoOfQuesAsked, SellingSkills, HighIntentCallVolume, LongestMonologue, NoOfTopics, SalesRepPatienceSilence, LongestCustomerStory, NoOfSwitches, SalesRepSentimentScore, SatisfactionScore, PerformanceRate, NoOfInterruptions, NoOfParticipants } from "@/constants/chartFields";
+import { avgCallScore, highIntentCallVolume, noOfTopics, salesRepSentimentScore, satisfactionScore } from "@/constants/dummyData";
+import GroupBarChartVertical from "@/components/analysis/Call/Charts/GroupBarChartVertical";
 
 // const Dashboard = ({ data }: any) => {
 const Dashboard = ({ data }: any) => {
@@ -140,14 +140,14 @@ const Dashboard = ({ data }: any) => {
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
               <BarChartVertical getSellingData={getSellingData} title="Selling Skills" data={sellingData} template={SellingSkills} />
-              <BarChartVertical title="Average Call Score" template={AvgCallScore} data={{}} />
-              <BarChartVertical title="Number of Questions Asked" template={NoOfQuesAsked} data={{}} />
+              <BarChartVertical title="Average Call Score" template={AvgCallScore} data={avgCallScore} />
+              <BarChartVertical title="Number of Questions Asked" template={NoOfQuesAsked} data={avgCallScore} />
               <StageWiseAnalysis getSellingData={getSellingData} selling={sellingData} />
             </div>
             <div className="flex-[1]">
               <Leaderboard />
               <Top_Call />
-              <BarChartVertical title="High Intent Call Volume" template={HighIntentCallVolume} data={{}} />
+              <BarChartVertical title="High Intent Call Volume" template={HighIntentCallVolume} data={highIntentCallVolume} />
               <DealAnalysis />
             </div>
           </div>
@@ -167,15 +167,15 @@ const Dashboard = ({ data }: any) => {
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
               <EmotionalAnalysisComp />
-              <BarChartVertical title="Longest Monologue" template={LongestMonologue} data={{}} />
+              <BarChartVertical title="Longest Monologue" template={LongestMonologue} data={avgCallScore} />
               <TalkRatio />
-              <BarChartVertical title="Number of Topics" template={NoOfTopics} data={{}} />
+              <BarChartVertical title="Number of Topics" template={NoOfTopics} data={noOfTopics} />
             </div>
             <div className="flex-[1]">
-              <BarChartVertical title="Sales Rep's Patience/Silence" template={SalesRepPatienceSilence} data={{}} />
-              <BarChartVertical title="Longest Customer Story" template={LongestCustomerStory} data={{}} />
-              <NoOfInterruptions />
-              <BarChartVertical title="Number of Switches" template={NoOfSwitches} data={{}} />
+              <BarChartVertical title="Sales Rep's Patience/Silence" template={SalesRepPatienceSilence} data={avgCallScore} />
+              <BarChartVertical title="Longest Customer Story" template={LongestCustomerStory} data={avgCallScore} />
+              <GroupBarChartVertical title="Number of Interruptions" template={NoOfInterruptions} />
+              <BarChartVertical title="Number of Switches" template={NoOfSwitches} data={avgCallScore} />
             </div>
           </div>
         </div>
@@ -184,13 +184,13 @@ const Dashboard = ({ data }: any) => {
         <div className="">
           <div className="w-[100%] flex">
             <div className=" flex-[1]">
-              <NoOfParticipants />
-              <BarChartVertical title="Sales Rep Sentiment Score" template={SalesRepSentimentScore} data={{}} />
+              <GroupBarChartVertical title="Number of Participants" template={NoOfParticipants} />
+              <BarChartVertical title="Sales Rep Sentiment Score" template={SalesRepSentimentScore} data={salesRepSentimentScore} />
               <CallSentiment />
             </div>
             <div className="flex-[1]">
-              <BarChartVertical title="Satisfaction Score" template={SatisfactionScore} data={{}} />
-              <BarChartVertical title="Performance Rate" template={PerformanceRate} data={{}} />
+              <BarChartVertical title="Satisfaction Score" template={SatisfactionScore} data={satisfactionScore} />
+              <BarChartVertical title="Performance Rate" template={PerformanceRate} data={avgCallScore} />
               <NoiseAndVolumeChart />
             </div>
           </div>
