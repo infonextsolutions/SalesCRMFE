@@ -9,7 +9,7 @@ import Backdrop from "@/components/View/Backdrop/Center";
 import FullCall from "@/components/View/full-call";
 import CallSnippet from "@/components/View/call-snippet";
 import Navbar from "@/components/app/Navbar/Navbar";
-import NavbarWithButton from "@/components/app/Navbar/UpdatedNavbar";
+import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 //Manya will make this page
 
 const CallProfile = ({ data, data1 }: any) => {
@@ -56,6 +56,18 @@ const CallProfile = ({ data, data1 }: any) => {
       <NavbarWithButton
         buttons={[
           {
+            text: "Request Feedback",
+            dropdown: true,
+            id: 2,
+            light: false,
+            dark: false,
+            // icon: "",
+            list: [],
+            // onClick1: async () => {
+            //   setCallModal(true);
+            // },
+          },
+          {
             text: "Share",
             dropdown: true,
             id: 1,
@@ -73,7 +85,7 @@ const CallProfile = ({ data, data1 }: any) => {
         title="Recorded Calls"
         src="Phone"
       />
-      <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px]">
+      <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px] pt-6">
         {fullCall && (
           <Backdrop bool={bool} width={"60%"} pad={"50px 0"}>
             <FullCall cancel={cancelFull} data={data.result} />
@@ -84,7 +96,7 @@ const CallProfile = ({ data, data1 }: any) => {
             <CallSnippet cancel={cancelSnippet} />
           </Backdrop>
         )}
-        <div className="w-[100%] flex gap-[8px] mb-[100px] mt-6">
+        <div className="w-[100%] flex gap-[8px] mb-[100px] ">
           <AudioProfileContainer
             data={data.result}
             width={"42%"}

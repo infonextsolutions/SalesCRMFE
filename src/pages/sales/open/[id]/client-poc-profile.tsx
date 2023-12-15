@@ -6,7 +6,7 @@ import Navigator from "@/utils/customNavigator";
 import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "@/components/app/Navbar/Navbar";
-import NavbarWithButton from "@/components/app/Navbar/UpdatedNavbar";
+import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 
 const ClientProfile = ({ data }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);

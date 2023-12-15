@@ -46,7 +46,7 @@ const RecordProfile = ({
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1?.leadId._id}`
+        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1?.leadId?._id}`
       )
       .then((e) => {
         setData(e.data.result);

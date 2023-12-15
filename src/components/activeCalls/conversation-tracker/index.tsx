@@ -6,7 +6,7 @@ const Tracker = ({ color, title, list }: any) => {
   React.useEffect(() => {
     const onChange = () => {
       if (ref) {
-        setWidth(ref.current.offsetWidth);
+        setWidth(ref.current?.offsetWidth);
       }
     };
     window.addEventListener("resize", onChange);

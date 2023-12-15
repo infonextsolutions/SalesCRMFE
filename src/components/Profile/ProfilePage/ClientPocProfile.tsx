@@ -37,6 +37,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
       });
   };
   console.log("data4:", data.result);
+  console.log("data1:", data1);
   const contacted: any = data.result.customerId;
   const contacts = contacted?.contacts ? contacted?.contacts : [];
   return (
@@ -175,6 +176,13 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
           </p>
         </div>
         <div className="py-2"></div>
+        {!data?.result?.customerId?.contacts?.every(
+          (item: any) => item === null
+        ) && (
+          <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+            Other Contacts
+          </p>
+        )}
         {data?.result?.customerId?.contacts &&
           data?.result?.customerId?.contacts?.map(
             (contact: any, index: number) => {
@@ -183,7 +191,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
                   <ul
                     key={index}
                     role="list"
-                    className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+                    className="grid gap-x-8 pt-2 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
                   >
                     <li>
                       <div className="flex items-center gap-x-2 mr-4">
@@ -217,7 +225,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
               }
             }
           )}
-        <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div>
+        {/* <div className="mx-auto w-[100%] border-b border-gray-300 my-6"></div> */}
       </div>
     </>
   );

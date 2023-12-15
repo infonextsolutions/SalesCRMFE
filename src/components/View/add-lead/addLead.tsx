@@ -63,23 +63,15 @@ const AddLead = ({ cancel }: any) => {
       companyDetails: companyData,
       contactDetails: {
         contactData: contactData,
-        moreContacts: [moreContactData1, moreContactData2].filter(Boolean),
+        moreContacts: [moreContactData1, moreContactData2],
       },
     };
-
-    if (
-      !(moreContactData1.name || moreContactData1.email) ||
-      Object.keys(moreContactData1).length === 0
-    ) {
-      delete payload.contactDetails.moreContacts[0];
-    }
-    if (
-      !(moreContactData2.name || moreContactData2.email) ||
-      Object.keys(moreContactData2).length === 0
-    ) {
-      delete payload.contactDetails.moreContacts[1];
-    }
-
+    payload.contactDetails.moreContacts =
+      payload.contactDetails.moreContacts.filter(
+        (contact) => Object.keys(contact).length > 0
+      );
+    console.log(payload);
+    // return;
     axios.post(`${API_DOMAIN}/api/leads/create`, payload).then((e) => {
       router.reload();
       cancel();

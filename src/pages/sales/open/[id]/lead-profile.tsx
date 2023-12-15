@@ -12,7 +12,7 @@ import Notes from "@/components/View/Notes";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
-import NavbarWithButton from "@/components/app/Navbar/UpdatedNavbar";
+import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 
 const Profile = ({ data }: any) => {
   // console.log("data10", data);
@@ -131,6 +131,7 @@ const Profile = ({ data }: any) => {
             id: 1,
             dark: true,
             light: false,
+            click: AddLead,
             list: [
               { title: "Call", Icon: "Phone" },
               { title: "Email", Icon: "Mail" },
