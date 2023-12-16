@@ -1,6 +1,4 @@
-
 import React from "react";
-
 
 import {
   Chart as ChartJS,
@@ -12,7 +10,6 @@ import {
   Legend,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
-
 
 ChartJS.register(
   RadialLinearScale,
@@ -47,13 +44,13 @@ const EmotionalAnalysisComp = () => {
 
   return (
     <div
-      className="w-[700px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]"
-      style={{ width: "500px", height: "500px" }}
+      className="w-[100%] h-[1450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[0px]"
+      style={{ width: "600px", height: "500px" }}
     >
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         Emotional Analysis
       </h1>
-      <Radar data={data} height={200}></Radar>
+      <Radar data={data} height={200} width={1200}></Radar>
     </div>
   );
 };

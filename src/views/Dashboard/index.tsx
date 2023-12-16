@@ -16,8 +16,30 @@ import TalkRatio from "@/components/customComponents/360_components/SRM_Bdm_Dash
 import BarChartVertical from "@/components/analysis/Call/Charts/BarChartVertical";
 import CallSentiment from "@/components/customComponents/360_components/CallSentiment";
 import NoiseAndVolumeChart from "@/components/analysis/Call/Charts/NoiseAndVolumeChart";
-import { AvgCallScore, NoOfQuesAsked, SellingSkills, HighIntentCallVolume, LongestMonologue, NoOfTopics, SalesRepPatienceSilence, LongestCustomerStory, NoOfSwitches, SalesRepSentimentScore, SatisfactionScore, PerformanceRate, NoOfInterruptions, NoOfParticipants } from "@/constants/chartFields";
-import { avgCallScore, highIntentCallVolume, noOfParticipants, noOfTopics, salesRepSentimentScore, satisfactionScore } from "@/constants/dummyData";
+import {
+  AvgCallScore,
+  NoOfQuesAsked,
+  SellingSkills,
+  HighIntentCallVolume,
+  LongestMonologue,
+  NoOfTopics,
+  SalesRepPatienceSilence,
+  LongestCustomerStory,
+  NoOfSwitches,
+  SalesRepSentimentScore,
+  SatisfactionScore,
+  PerformanceRate,
+  NoOfInterruptions,
+  NoOfParticipants,
+} from "@/constants/chartFields";
+import {
+  avgCallScore,
+  highIntentCallVolume,
+  noOfParticipants,
+  noOfTopics,
+  salesRepSentimentScore,
+  satisfactionScore,
+} from "@/constants/dummyData";
 import GroupBarChartVertical from "@/components/analysis/Call/Charts/GroupBarChartVertical";
 
 // const Dashboard = ({ data }: any) => {
@@ -51,7 +73,7 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
-        console.log('____________ GET PITCH DATA ___________', res.data);
+        console.log("____________ GET PITCH DATA ___________", res.data);
         setPitchData(res.data.result);
       })
       .catch((e) => {
@@ -71,7 +93,7 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
-        console.log('____________ GET SELLING DATA ___________', res.data);
+        console.log("____________ GET SELLING DATA ___________", res.data);
         setSellingData(res.data.result);
       })
       .catch((e) => {
@@ -92,7 +114,7 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
-        console.log('____________ GET SCRIPT DATA ___________', res.data);
+        console.log("____________ GET SCRIPT DATA ___________", res.data);
         setScriptBuilderData(res.data.result);
       })
       .catch((e) => {
@@ -110,7 +132,7 @@ const Dashboard = ({ data }: any) => {
   };
 
   return (
-    <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
+    <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px]">
       <div className="flex w-[100%] justify-end gap-[10px] mt-[20px]">
         {/* <Button
           text={"Last 7 days"}
@@ -132,22 +154,57 @@ const Dashboard = ({ data }: any) => {
       <Navigator callback={handleTabNavigation} current={currTab} list={tabs} />
       {currTab === 0 && (
         <div className="w-[100%]">
-          <div className="flex w-[100%]">
-            <DealsCard label="Open Deals" icon={"↑"} count={100} percent={58.8} />
-            <DealsCard label="Closed Deals" icon={"↑"} count={76} percent={50} />
-            <DealsCard label="Lost Deals" icon={"↑"} count={18} percent={27.3} />
+          <div className="flex w-[100%] justify-between py-4">
+            <DealsCard
+              label="Open Deals"
+              icon={"↑"}
+              count={100}
+              percent={58.8}
+            />
+            <DealsCard
+              label="Closed Deals"
+              icon={"↑"}
+              count={76}
+              percent={50}
+            />
+            <DealsCard
+              label="Lost Deals"
+              icon={"↑"}
+              count={18}
+              percent={27.3}
+            />
           </div>
-          <div className="w-[100%] flex">
-            <div className=" flex-[1]">
-              <BarChartVertical getSellingData={getSellingData} title="Selling Skills" data={sellingData} template={SellingSkills} />
-              <BarChartVertical title="Average Call Score" template={AvgCallScore} data={avgCallScore} />
-              <BarChartVertical title="Number of Questions Asked" template={NoOfQuesAsked} data={avgCallScore} />
-              <StageWiseAnalysis getSellingData={getSellingData} selling={sellingData} />
+          <div className="w-[100%] flex gap-12 mt-5">
+            <div className="flex flex-col gap-6 ">
+              <BarChartVertical
+                getSellingData={getSellingData}
+                title="Selling Skills"
+                data={sellingData}
+                template={SellingSkills}
+              />
+              <BarChartVertical
+                title="Average Call Score"
+                template={AvgCallScore}
+                data={avgCallScore}
+              />
+              <BarChartVertical
+                title="Number of Questions Asked"
+                template={NoOfQuesAsked}
+                data={avgCallScore}
+              />
+              <StageWiseAnalysis
+                getSellingData={getSellingData}
+                selling={sellingData}
+              />
             </div>
-            <div className="flex-[1]">
+            <div className="flex flex-col gap-6">
               <Leaderboard />
               <Top_Call />
-              <BarChartVertical title="High Intent Call Volume" template={HighIntentCallVolume} data={highIntentCallVolume} />
+              <BarChartVertical
+                title="High Intent Call Volume"
+                template={HighIntentCallVolume}
+                data={highIntentCallVolume}
+              />
               <DealAnalysis />
             </div>
           </div>
@@ -156,35 +213,73 @@ const Dashboard = ({ data }: any) => {
       {currTab === 1 && (
         <div className="">
           <TreeMap getPitchData={getPitchData} data1={pitchData} />
-          <div className="w-[100%] flex">
-            <div className=" flex-[1]">
+          <div className="w-[100%] flex justify-between gap-10">
+            <div className="flex flex-col gap-6">
               <EmotionalAnalysisComp />
-              <BarChartVertical title="Longest Monologue" template={LongestMonologue} data={avgCallScore} />
+              <BarChartVertical
+                title="Longest Monologue"
+                template={LongestMonologue}
+                data={avgCallScore}
+              />
               <TalkRatio />
-              <BarChartVertical title="Number of Topics" template={NoOfTopics} data={noOfTopics} />
+              <BarChartVertical
+                title="Number of Topics"
+                template={NoOfTopics}
+                data={noOfTopics}
+              />
             </div>
-            <div className="flex-[1]">
-              <BarChartVertical title="Sales Rep's Patience/Silence" template={SalesRepPatienceSilence} data={avgCallScore} />
-              <BarChartVertical title="Longest Customer Story" template={LongestCustomerStory} data={avgCallScore} />
-              <GroupBarChartVertical title="Number of Interruptions" template={NoOfInterruptions} data={noOfParticipants} />
-              <BarChartVertical title="Number of Switches" template={NoOfSwitches} data={avgCallScore} />
+            <div className=" flex flex-col gap-6">
+              <BarChartVertical
+                title="Sales Rep's Patience/Silence"
+                template={SalesRepPatienceSilence}
+                data={avgCallScore}
+              />
+              <BarChartVertical
+                title="Longest Customer Story"
+                template={LongestCustomerStory}
+                data={avgCallScore}
+              />
+              <GroupBarChartVertical
+                title="Number of Interruptions"
+                template={NoOfInterruptions}
+                data={noOfParticipants}
+              />
+              <BarChartVertical
+                title="Number of Switches"
+                template={NoOfSwitches}
+                data={avgCallScore}
+              />
             </div>
           </div>
         </div>
       )}
       {currTab === 2 && (
-        <div className="">
-          <div className="w-[100%] flex">
-            <div className=" flex-[1]">
-              <GroupBarChartVertical title="Number of Participants" template={NoOfParticipants} data={noOfParticipants} />
-              <BarChartVertical title="Sales Rep Sentiment Score" template={SalesRepSentimentScore} data={salesRepSentimentScore} />
-              <CallSentiment />
-            </div>
-            <div className="flex-[1]">
-              <BarChartVertical title="Satisfaction Score" template={SatisfactionScore} data={satisfactionScore} />
-              <BarChartVertical title="Performance Rate" template={PerformanceRate} data={avgCallScore} />
-              <NoiseAndVolumeChart />
-            </div>
+        <div className="w-[100%] mt-6 flex justify-between gap-2">
+          <div className="flex flex-col gap-6">
+            <GroupBarChartVertical
+              title="Number of Participants"
+              template={NoOfParticipants}
+              data={noOfParticipants}
+            />
+            <BarChartVertical
+              title="Sales Rep Sentiment Score"
+              template={SalesRepSentimentScore}
+              data={salesRepSentimentScore}
+            />
+            <CallSentiment />
+          </div>
+          <div className="flex flex-col gap-6">
+            <BarChartVertical
+              title="Satisfaction Score"
+              template={SatisfactionScore}
+              data={satisfactionScore}
+            />
+            <BarChartVertical
+              title="Performance Rate"
+              template={PerformanceRate}
+              data={avgCallScore}
+            />
+            <NoiseAndVolumeChart />
           </div>
         </div>
       )}

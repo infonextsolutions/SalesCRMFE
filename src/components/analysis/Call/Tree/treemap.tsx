@@ -1,11 +1,8 @@
 import React from "react";
 import Chart from "react-apexcharts";
-import {  options } from "./data";
+import { options } from "./data";
 
-
-
-
-const SoleChart = ({ i, title, w ,data}: any) => {
+const SoleChart = ({ i, title, w, data }: any) => {
   const option1: any = options[i];
   const data1: any = data[i];
   const data2: any = data[i + 1];
@@ -33,7 +30,7 @@ const SoleChart = ({ i, title, w ,data}: any) => {
   );
 };
 
-const Charts = ({data1}:{data1:Root}) => {
+const Charts = ({ data1 }: { data1: Root }) => {
   console.log(data1);
 
   const data = [
@@ -54,7 +51,7 @@ const Charts = ({data1}:{data1:Root}) => {
           },
           {
             x: "Voice Mail",
-            y:data1.voice_mail,
+            y: data1.voice_mail,
           },
         ],
       },
@@ -90,7 +87,7 @@ const Charts = ({data1}:{data1:Root}) => {
           },
           {
             x: "Sales Visibility",
-            y: data1.sales_visibility
+            y: data1.sales_visibility,
           },
         ],
       },
@@ -189,48 +186,47 @@ const Charts = ({data1}:{data1:Root}) => {
   return (
     <div className="mt-[40px] flex">
       <SoleChart title="Opening" i={0} w={300} data={data} />
-      <SoleChart title="Product Knowledge" i={1} w={280}  data={data}/>
-      <SoleChart title="Need Discovery" i={2} w={300} data={data}/>
+      <SoleChart title="Product Knowledge" i={1} w={280} data={data} />
+      <SoleChart title="Need Discovery" i={2} w={300} data={data} />
       <SoleChart title="Lead Qualification" i={3} w={300} data={data} />
-      <SoleChart title="Key Value Proposition" i={4} w={300} data={data}/>
-      <SoleChart title="Closing" i={5} w={150} data={data}/>
+      <SoleChart title="Key Value Proposition" i={4} w={300} data={data} />
+      <SoleChart title="Closing" i={5} w={150} data={data} />
     </div>
   );
 };
 
 export default Charts;
 
-
 interface Root {
-  _id: string
-  call_purpose: number
-  company_intro: number
-  self_credentialing: number
-  voice_mail: number
-  real_time_cues: number
-  post_call_analytics: number
-  integration: number
-  open_ended: number
-  sales_coaching: number
-  sales_visibility: number
-  dialer: number
-  CRM: number
-  decision_maker: number
-  revenue_potential: number
-  web_conferencing: number
-  better_sales_visibility: number
-  improved_customer_experience: number
-  actionable_insights: number
-  conversion_rate: number
-  ramp_time: number
-  data_driven_coaching: number
-  trail: number
-  email: number
-  meeting: number
-  closure: number
-  call: number
-  next_steps: number
-  zoom_demo: number
-  createdAt: string
-  updatedAt: string
+  _id: string;
+  call_purpose: number;
+  company_intro: number;
+  self_credentialing: number;
+  voice_mail: number;
+  real_time_cues: number;
+  post_call_analytics: number;
+  integration: number;
+  open_ended: number;
+  sales_coaching: number;
+  sales_visibility: number;
+  dialer: number;
+  CRM: number;
+  decision_maker: number;
+  revenue_potential: number;
+  web_conferencing: number;
+  better_sales_visibility: number;
+  improved_customer_experience: number;
+  actionable_insights: number;
+  conversion_rate: number;
+  ramp_time: number;
+  data_driven_coaching: number;
+  trail: number;
+  email: number;
+  meeting: number;
+  closure: number;
+  call: number;
+  next_steps: number;
+  zoom_demo: number;
+  createdAt: string;
+  updatedAt: string;
 }
