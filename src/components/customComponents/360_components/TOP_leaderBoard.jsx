@@ -20,8 +20,10 @@ const Leaderboard = () => {
     "Abhishek Kapoor",
   ];
   return (
-    <div className="w-[auto] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
-      <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">Leaderboard</h1>
+    <div className="w-[100%] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+      <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
+        Leaderboard
+      </h1>
       <div className="parent-container color-[black] text-black">
         <div className="container1">
           <div className="best-performer-heading">

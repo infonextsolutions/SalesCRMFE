@@ -1,4 +1,11 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
 function Top_Call() {
   const data = [
@@ -24,11 +31,12 @@ function Top_Call() {
 
   const columns = ["Call Title", "Call Owner", "Call Duration", "Call Score"];
 
-
   return (
-    <div className="w-[auto] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[50px]">
-      <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">Top Call</h1>
-      <div className='chart-container'>
+    <div className="w-[100%] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+      <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
+        Top Call
+      </h1>
+      <div className="chart-container">
         <TableContainer className="table">
           <Table>
             <TableHead>
@@ -52,8 +60,7 @@ function Top_Call() {
         </TableContainer>
       </div>
     </div>
-  )
+  );
 }
-
 
 export default Top_Call;
