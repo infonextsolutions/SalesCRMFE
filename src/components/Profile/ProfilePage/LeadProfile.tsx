@@ -290,7 +290,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Created by</p>
           <p className="text-sm font-semibold text-black">
-            {data?.lead_createdAt ?? "-"}
+            {data?.created_by ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
