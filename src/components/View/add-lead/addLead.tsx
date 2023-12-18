@@ -29,7 +29,7 @@ const AddText = ({ key, top, title, width, change, required }: any) => {
   );
 };
 
-const AddLead = ({ cancel }: any) => {
+const AddLead = ({ cancel, mastersData }: any) => {
   const [leadData, setLeadData] = React.useState<any>({});
   const [companyData, setCompanyData] = React.useState<any>({});
   const [contactData, setContactData] = React.useState<any>({});
@@ -59,7 +59,7 @@ const AddLead = ({ cancel }: any) => {
 
   const submit = () => {
     const payload = {
-      leadDetails: leadData,
+      leadDetails: { ...leadData, created_by: localStorage.getItem("user-name") || "Sales User" },
       companyDetails: companyData,
       contactDetails: {
         contactData: contactData,
@@ -161,8 +161,12 @@ const AddLead = ({ cancel }: any) => {
               <option value="" selected>
                 -- Select Lead Owner --
               </option>
-              <option value="507f1f77bcf86cd799439011">Ramesh</option>
-              <option value="507f191e810c19729de860ea">Riya</option>
+              {
+                mastersData?.result?.map((item: any, index: number) => (
+                  <option value={item?._id} key={item?._id || index}>{item?.name}</option>
+                ))
+              }
+              {/* <option value="507f191e810c19729de860ea">Riya</option> */}
             </select>
           </div>
           <div className="w-[100%] my-4">
@@ -183,7 +187,11 @@ const AddLead = ({ cancel }: any) => {
               <option value="" selected>
                 -- Select Lead Manager --
               </option>
-              <option value="Rohan Sharma">Rohan Sharma</option>
+              {
+                mastersData?.result?.map((item: any, index: number) => (
+                  <option value={item?._id} key={item?._id || index}>{item?.name}</option>
+                ))
+              }
             </select>
           </div>
 
@@ -256,7 +264,7 @@ const AddLead = ({ cancel }: any) => {
                   -- Select Lead Stage --
                 </option>
                 {leadData.leadStatus == "open" ||
-                leadData.leadStatus == "Open" ? (
+                  leadData.leadStatus == "Open" ? (
                   <>
                     <option value="Enquiry">Enquiry</option>
                     <option value="Interaction">Interaction</option>

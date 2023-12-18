@@ -49,6 +49,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             cancel={cancelEdit}
             data={data.result}
             title={"Edit Client"}
+            mastersData={{}}
           />
         </Backdrop>
       )}

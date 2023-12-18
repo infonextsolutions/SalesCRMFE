@@ -436,7 +436,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {events && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Events cancel={cancelEvents} />
+          <Events cancel={cancelEvents} companyName={Item?.companyId?.company_name} data={Item} />
         </Backdrop>
       )}
       {emails && (
@@ -457,7 +457,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {messages && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Messages cancel={cancelMessages} />
+          <Messages cancel={cancelMessages} companyName={Item?.companyId?.company_name} data={Item} />
         </Backdrop>
       )}
       {call && (

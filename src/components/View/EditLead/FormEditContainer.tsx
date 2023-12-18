@@ -16,6 +16,7 @@ const FormEditContainer = ({
   info,
   update,
   data,
+  mastersData,
   width,
   cancel,
   title,
@@ -35,9 +36,12 @@ const FormEditContainer = ({
 
   console.log(
     "+++++++++++++++++++++++ here is form data ++++++++++++++++++++++++",
-    data
+    data,
+    mastersData
   );
+
   const dispatch = useAppDispatch();
+
   return (
     <div
       className={`w-[${
@@ -61,10 +65,10 @@ const FormEditContainer = ({
                     ...data,
                     lead_title: data?.lead_title,
                     lead_description: data?.lead_description,
-                    lead_manager: data?.manager,
+                    lead_manager: data?.manager?._id,
                     product_category: data?.product_category,
                     lead_owner:
-                      data.owners.length > 0 ? data.owners[0].name : "",
+                      data.owners.length > 0 ? data?.owners?.[0]?._id : "",
                     Stage: data?.leadStage,
                     Status: data?.leadStatus,
                     Source: data?.leadSource,
@@ -195,15 +199,13 @@ const FormEditContainer = ({
                             <option value="" selected>
                               -- Select Lead Owner --
                             </option>
-                            <option value="507f1f77bcf86cd799439011">
-                              LO1
-                            </option>
-                            <option value="507f191e810c19729de860ea">
-                              LO2
-                            </option>
-                            <option value="00000020f51bb4362eee2a4d">
-                              LO3
-                            </option>
+                            {mastersData?.result?.map(
+                              (item: any, index: number) => (
+                                <option value={item?._id} key={index}>
+                                  {item?.name}
+                                </option>
+                              )
+                            )}
                           </Field>
                         </div>
                         <div className="w-[100%]">
@@ -222,15 +224,13 @@ const FormEditContainer = ({
                             <option value="" selected>
                               -- Select Lead Manager --
                             </option>
-                            <option value="507f1f77bcf86cd799439011">
-                              LM1
-                            </option>
-                            <option value="507f191e810c19729de860ea">
-                              LM2
-                            </option>
-                            <option value="00000020f51bb4362eee2a4d">
-                              LM3
-                            </option>
+                            {mastersData?.result?.map(
+                              (item: any, index: number) => (
+                                <option value={item?._id} key={index}>
+                                  {item?.name}
+                                </option>
+                              )
+                            )}
                           </Field>
                         </div>
                         <div className="w-[100%]">
@@ -998,7 +998,7 @@ export interface Root {
   source?: string;
   leadId: string;
   owners: Owner[];
-  manager?: string;
+  manager?: string | any;
   __v: number;
   updatedAt: string;
   createdAt: string;

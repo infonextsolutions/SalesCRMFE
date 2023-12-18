@@ -419,12 +419,14 @@ const Events = ({
   companyId,
   companyName,
   clientPOCName,
+  data
 }: {
   cancel?: any,
   leadid?: any,
   companyId?: any,
   companyName?: any,
-  clientPOCName?: any
+  clientPOCName?: any,
+  data?: any
 }) => {
   // const [eventType1, setEventType1] = useState("");
   const [eventTitle, setEventTitle] = useState("");

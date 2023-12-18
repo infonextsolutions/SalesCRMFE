@@ -49,14 +49,14 @@ const RecordProfile = ({
         `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1?.leadId?._id}`
       )
       .then((e) => {
-        setData(e.data.result);
+        setData(e?.data?.result);
       })
       .catch((e) => {
         console.log(e, "error occured");
       });
   };
 
-  const timestamp = data1.createdAt;
+  const timestamp = data1?.createdAt;
   const date = new Date(timestamp);
 
   const hours = date.getUTCHours();
