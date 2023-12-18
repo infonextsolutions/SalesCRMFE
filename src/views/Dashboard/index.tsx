@@ -190,8 +190,8 @@ const Dashboard = ({ data }: any) => {
   };
 
   return (
-    <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px]">
-      <div className="flex w-[100%] justify-end gap-[10px] mt-[20px]">
+    <div className="bg-white w-[100%] min-h-[90vh] pl-[20px] pr-[20px]">
+      <div className="flex w-[100%] justify-end gap-[10px]">
         <Navigation
           title=""
           buttons={[
@@ -268,7 +268,7 @@ const Dashboard = ({ data }: any) => {
               percent={27.3}
             />
           </div>
-          <div className="w-[100%] flex gap-8 mt-5">
+          <div className="w-[100%] flex gap-10 mt-5">
             <div className="flex flex-col gap-6 ">
               <BarChartVertical
                 getSellingData={getSellingData}
@@ -305,7 +305,7 @@ const Dashboard = ({ data }: any) => {
         </div>
       )}
       {currTab === 1 && (
-        <div className="">
+        <div className="px-6">
           <TreeMap getPitchData={getPitchData} data1={pitchData} />
           <div className="w-[100%] flex justify-between gap-10">
             <div className="flex flex-col gap-6">
@@ -348,7 +348,7 @@ const Dashboard = ({ data }: any) => {
         </div>
       )}
       {currTab === 2 && (
-        <div className="w-[100%] mt-6 flex justify-between gap-2">
+        <div className="w-[100%] mt-10 flex justify-between gap-2">
           <div className="flex flex-col gap-6">
             <GroupBarChartVertical
               title="Number of Participants"

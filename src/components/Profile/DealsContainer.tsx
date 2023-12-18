@@ -206,7 +206,7 @@ const Deals = ({ data, type }: any) => {
   }, []);
 
   return (
-    <>
+    <div className="">
       <Navigator
         callback={() => {}}
         current={0}
@@ -214,7 +214,7 @@ const Deals = ({ data, type }: any) => {
       />
 
       <div className="w-[700px]">
-        <div className="bg-[#ffffff] my-[40px] overflow-hidden">
+        <div className=" my-[40px] overflow-hidden">
           <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
             Open Deals
           </h5>
@@ -233,7 +233,7 @@ const Deals = ({ data, type }: any) => {
                 key={index}
                 className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
               >
-                <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+                <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
                   <div className="w-[140px]">
                     <p className="text-[#3F434A]">
                       {deal?.leadData?.leadId || "00000"}
@@ -356,7 +356,7 @@ const Deals = ({ data, type }: any) => {
 
         {/* ?close deals */}
 
-        <div className="bg-[#ffffff] my-[40px] overflow-hidden">
+        <div className=" my-[40px] overflow-hidden">
           <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
             Close Deals
           </h5>
@@ -375,7 +375,7 @@ const Deals = ({ data, type }: any) => {
                 key={index}
                 className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
               >
-                <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+                <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
                   <div className="w-[140px]">
                     <p className="text-[#3F434A]">
                       {deal?.leadData?.leadId || "00000"}
@@ -496,7 +496,7 @@ const Deals = ({ data, type }: any) => {
             ))}
         </div>
 
-        <div className="bg-[#ffffff] my-[50px] mt-[80px]">
+        <div className="my-[50px] mt-[80px]">
           <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
             Interest History
           </h5>
@@ -513,7 +513,7 @@ const Deals = ({ data, type }: any) => {
                 key={index}
                 className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
               >
-                <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#F8F8F8] rounded-xl">
+                <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center  rounded-xl">
                   <div className="w-[180px]">
                     <p className="ml-2">
                       {deal?.companyData?.company_product_category ||
@@ -544,7 +544,7 @@ const Deals = ({ data, type }: any) => {
             ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

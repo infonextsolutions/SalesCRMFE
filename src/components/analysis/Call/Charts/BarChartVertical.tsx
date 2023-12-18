@@ -1,3 +1,4 @@
+import { Card } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import React from "react";
 
@@ -11,8 +12,9 @@ const BarChartVertical = ({ title = "", data, template }: any) => {
   });
 
   return (
-    <div
-      className={`w-[600px] h-[300px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]`}
+    <Card
+      sx={{ width: 580, bgcolor: "#fff" }}
+      className={`w-[580px] h-[300px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]`}
     >
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         {title}
@@ -27,7 +29,7 @@ const BarChartVertical = ({ title = "", data, template }: any) => {
           />
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 

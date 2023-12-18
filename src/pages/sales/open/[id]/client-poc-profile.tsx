@@ -19,7 +19,7 @@ const ClientProfile = ({ data }: any) => {
 
   const [ttitle, setTitle] = useState(data?.result?.customerId?.customer_name);
   return (
-    <>
+    <div className="bg-white">
       <NavbarWithButton
         buttons={[]}
         mainTitle="Manage Leads"
@@ -48,8 +48,8 @@ const ClientProfile = ({ data }: any) => {
             ]
           }
         /> */}
-        <div className="w-[100%] flex gap-[25px] mb-[100px] mt-6">
-          <div className="w-[44%] min-h-[70vh] bg-white rounded-xl p-[20px]">
+        <div className="w-[100%] pl-4 flex gap-[25px] mb-[100px] mt-6">
+          <div className="w-[32%] min-h-[70vh] bg-[#ffe3e170] rounded-xl p-[20px]">
             <ProfilePage
               refresh={(e: any) => {
                 setTitle(e);
@@ -57,13 +57,13 @@ const ClientProfile = ({ data }: any) => {
               data1={data}
             />
           </div>
-          <div className="bg-white rounded-xl w-[60%] px-[25px]">
+          <div className="bg-[#F7F7F7] rounded-xl w-[70%] px-[25px]">
             <Deals data={data} type="customer" />
           </div>
         </div>
         {/* write your code here for profile page manya! */}
       </div>
-    </>
+    </div>
   );
 };
 

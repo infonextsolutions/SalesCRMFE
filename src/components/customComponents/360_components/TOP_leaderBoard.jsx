@@ -1,4 +1,5 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import { Card } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 // import star from "../../../assets/star.svg";
@@ -26,7 +27,7 @@ const Leaderboard = () => {
     "Abhishek Kapoor",
   ];
   return (
-    <div className="w-[100%] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className="w-[580px] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[24px] font-semibold text-[#3F434A] tracking-wide">
         Leaderboard
       </h1>
@@ -105,7 +106,7 @@ const Leaderboard = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

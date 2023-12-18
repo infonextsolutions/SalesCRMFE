@@ -1,4 +1,5 @@
 import {
+  Card,
   Table,
   TableBody,
   TableCell,
@@ -32,7 +33,7 @@ function Top_Call() {
   const columns = ["Call Title", "Call Owner", "Call Duration", "Call Score"];
 
   return (
-    <div className="w-[100%] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className="w-[580px] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         Top Call
       </h1>
@@ -59,7 +60,7 @@ function Top_Call() {
           </Table>
         </TableContainer>
       </div>
-    </div>
+    </Card>
   );
 }
 
