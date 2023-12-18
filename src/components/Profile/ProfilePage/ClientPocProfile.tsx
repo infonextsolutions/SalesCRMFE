@@ -68,11 +68,11 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
                     objectFit: "contain",
                   }}
                 />
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col">
                   <p className="block cursor-pointer text-xl leading-[10px ] font-semibold ml-[-6px] text-[14px] text-black hover:text-bg-red">
                     {data?.result?.customerId?.customer_name}
                   </p>
-                  <p className="block cursor-pointer text-sm leading-[10px ] ml-[-6px] text-[12px] text-black hover:text-bg-red">
+                  <p className="block cursor-pointer text-sm leading-[10px ] ml-[-6px] text-[12px] text-gray-400 hover:text-bg-red">
                     {data?.result?.customerId?.customer_designation}
                   </p>
                 </div>
@@ -93,7 +93,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             </div>
           </div>
         </div>
-        <p className="w-3/4 pb-2 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+        <p className="border-b-2 border-red-400 w-3/4 pb-2 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Info
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">

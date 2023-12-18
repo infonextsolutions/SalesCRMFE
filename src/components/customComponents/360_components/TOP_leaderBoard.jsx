@@ -32,13 +32,13 @@ const Leaderboard = () => {
         Leaderboard
       </h1>
       <div className="parent-container color-[black] text-black">
-        <div className="mt-3 flex justify-between w-[86%]">
+        <div className="mt-3 flex justify-between">
           <div className="container1">
             <div className="best-performer-heading">
               {/* <img src="/Images/Icons/Basic/Star.svg" alt="star" /> */}
               <Image
                 src={getBasicIcon("star_yellow")}
-                className=" mr-3"
+                className="mr-3"
                 alt=""
                 style={{
                   objectFit: "contain",
@@ -55,7 +55,7 @@ const Leaderboard = () => {
               >
                 {/* <img className="img-user" src={""} alt="" /> */}
                 <Image
-                  className="w-[40px] rounded-full ring-2 ring-white"
+                  className=""
                   src={getRoundedAvatar(5, 30)}
                   alt=""
                   width={40}
@@ -70,7 +70,7 @@ const Leaderboard = () => {
           </div>
 
           <div className="container1">
-            <div className="best-performer-heading">
+            <div className="best-performer-heading pl-14">
               {/* <img src="/Images/Icons/Basic/Star.svg" alt="star" /> */}
               <Image
                 src={getBasicIcon("star_red")}
