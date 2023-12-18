@@ -48,6 +48,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             cancel={cancelEdit}
             data={data.result}
             title={"Edit Company"}
+            mastersData={{}}
           />
         </Backdrop>
       )}
