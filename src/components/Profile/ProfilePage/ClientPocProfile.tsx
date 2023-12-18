@@ -49,6 +49,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
             cancel={cancelEdit}
             data={data.result}
             title={"Edit Client"}
+            mastersData={{}}
           />
         </Backdrop>
       )}
@@ -179,10 +180,10 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
         {!data?.result?.customerId?.contacts?.every(
           (item: any) => item === null
         ) && (
-          <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-            Other Contacts
-          </p>
-        )}
+            <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+              Other Contacts
+            </p>
+          )}
         {data?.result?.customerId?.contacts &&
           data?.result?.customerId?.contacts?.map(
             (contact: any, index: number) => {

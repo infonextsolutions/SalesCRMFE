@@ -74,6 +74,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
               UpdateData();
             }}
             data={data2?.result}
+            mastersData={{}}
           />
         </Backdrop>
       )}
