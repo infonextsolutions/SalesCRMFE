@@ -173,7 +173,7 @@ const Profile = ({ data, mastersData }: any) => {
         )}
         {messages && (
           <Backdrop bool={bool} pad={"50px 0"}>
-            <Messages cancel={cancelMessages} />
+            <Messages cancel={cancelMessages} companyName={data1?.result?.companyId?.company_name} />
           </Backdrop>
         )}
         {call && (
@@ -185,6 +185,7 @@ const Profile = ({ data, mastersData }: any) => {
                 UpdateData();
               }}
               companyId={data1?.result?.companyId?._id}
+              companyName={data1?.result?.companyId?.company_name}
               lead={data1?.result}
               customerId={data1?.result?.customerId?._id}
             />

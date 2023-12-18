@@ -157,19 +157,19 @@ const Dashboard = ({ data }: any) => {
           <div className="flex w-[100%] justify-between py-4">
             <DealsCard
               label="Open Deals"
-              icon={"↑"}
+              icon="/Images/Icons/Basic/UpArrow.svg"
               count={100}
               percent={58.8}
             />
             <DealsCard
               label="Closed Deals"
-              icon={"↑"}
+              icon="/Images/Icons/Basic/DownArrow.svg"
               count={76}
               percent={50}
             />
             <DealsCard
               label="Lost Deals"
-              icon={"↑"}
+              icon="/Images/Icons/Basic/BottomArrow.svg"
               count={18}
               percent={27.3}
             />
