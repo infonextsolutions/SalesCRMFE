@@ -48,5 +48,5 @@ interface NavigatorProps {
   list: any[] | any;
   current: Number;
   callback: Function;
-  width: boolean;
+  width: boolean | null;
 }

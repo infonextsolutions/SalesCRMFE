@@ -64,7 +64,12 @@ const AudioProfileContainer = ({
         </div>
       )}
       <hr className="border-t-4 border-red-300 mt-4" />
-      <Navigator callback={CallBack} current={activeTitle} list={list} />
+      <Navigator
+        callback={CallBack}
+        current={activeTitle}
+        list={list}
+        width={false}
+      />
       <div className="flex justify-between w-[100%] relative overflow-hidden">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && (

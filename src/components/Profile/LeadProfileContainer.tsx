@@ -16,7 +16,8 @@ const LeadProfileContainer = ({
 }: LeadProfileContainerProps) => {
   console.log(
     "+++++++++++++++++++++++++++++++ DATA : LEAD PROFILE CONTAINER +++++++++++++++++++++++++++",
-    data || "no data", info || "no info"
+    data || "no data",
+    info || "no info"
   );
   const [activeTitle, setActiveTitle] = useState(0);
   function CallBack(childData: any) {
@@ -25,7 +26,10 @@ const LeadProfileContainer = ({
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
   const isCall = () => {
-    if (((data?.activityId?.lastActivity?.type)?.toLowerCase() === "call" || (data?.activityId?.lastActivity?.call_type)?.toLowerCase() === "call")) {
+    if (
+      data?.activityId?.lastActivity?.type?.toLowerCase() === "call" ||
+      data?.activityId?.lastActivity?.call_type?.toLowerCase() === "call"
+    ) {
       return true;
     } else {
       return false;
@@ -36,33 +40,53 @@ const LeadProfileContainer = ({
     const actionHistory = data?.activityId?.history;
     const len = actionHistory?.length;
     for (let i = len - 1; i >= 0; i--) {
-      if (actionHistory?.[i]?.type?.toLowerCase() === "call" || actionHistory?.[i]?.callType?.toLowerCase() === "call") {
+      if (
+        actionHistory?.[i]?.type?.toLowerCase() === "call" ||
+        actionHistory?.[i]?.callType?.toLowerCase() === "call"
+      ) {
         return actionHistory[i];
       }
     }
     return null;
   };
 
-  const lastCallData = isCall() ? data?.activityId?.lastActivity : getLastCallData();
+  const lastCallData = isCall()
+    ? data?.activityId?.lastActivity
+    : getLastCallData();
 
-  console.log('------------------- last call data ------------------', lastCallData);
+  console.log(
+    "------------------- last call data ------------------",
+    lastCallData
+  );
 
   const formatDateTime = (timestamp: any, format = "dd mon yyyy") => {
     const date = new Date();
     // if today show the time
     // if yesterday show tomorrow
-    const formattedDate = date.toLocaleString('default', {
-      hour12: true, hour: "2-digit", minute: "2-digit", day: 'numeric', month: '2-digit', year: "numeric",
+    const formattedDate = date.toLocaleString("default", {
+      hour12: true,
+      hour: "2-digit",
+      minute: "2-digit",
+      day: "numeric",
+      month: "2-digit",
+      year: "numeric",
     });
     return formattedDate;
   };
 
   return (
     <div
-      className={`w-[${width ? width : "100%"
-        }] bg-white rounded-xl p-[25px] px-[35px] pt-[30px] `}
+      className={`w-[${
+        width ? width : "100%"
+      }] bg-white rounded-xl p-[25px] px-[35px] pt-[30px] `}
     >
-      <Navigator callback={CallBack} current={current} list={list} />
+      width={false}
+      <Navigator
+        width={false}
+        callback={CallBack}
+        current={current}
+        list={list}
+      />
       <div className="flex justify-between pl-[20px] relative">
         <div className="text-black text-[14px] leading-[21px] mt-[25px] w-[100%] tracking-wide  ">
           {activeTitle === 0 && (
@@ -87,7 +111,9 @@ const LeadProfileContainer = ({
                 <div className="flex items-center mt-4 justify-between">
                   <p className="text-[#3F434A] text-sm">Last Activity</p>
                   <p className=" text-[#595F69] text-sm font-medium">
-                    {data?.activityId?.lastActivity?.call_type || data?.activityId?.lastActivity?.type || "-"}
+                    {data?.activityId?.lastActivity?.call_type ||
+                      data?.activityId?.lastActivity?.type ||
+                      "-"}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
@@ -103,7 +129,11 @@ const LeadProfileContainer = ({
                     Last Call Disposition
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">
-                    {lastCallData ? `${lastCallData?.call_type || lastCallData?.type} on ${formatDateTime(lastCallData?.createdAt)}` : "-"}
+                    {lastCallData
+                      ? `${
+                          lastCallData?.call_type || lastCallData?.type
+                        } on ${formatDateTime(lastCallData?.createdAt)}`
+                      : "-"}
                   </p>
                 </div>
                 <div className="flex items-center mt-4 justify-between">
@@ -117,7 +147,8 @@ const LeadProfileContainer = ({
                     Interested Product/Service Type
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">
-                    {data?.activityId?.lastActivity?.interestedProductType || "-"}
+                    {data?.activityId?.lastActivity?.interestedProductType ||
+                      "-"}
                   </p>
                 </div>
               </div>

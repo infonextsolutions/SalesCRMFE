@@ -208,6 +208,7 @@ const Deals = ({ data, type }: any) => {
   return (
     <div className="">
       <Navigator
+        width={false}
         callback={() => {}}
         current={0}
         list={[{ id: 0, title: "Deals" }]}
