@@ -63,11 +63,11 @@ const AddText = ({ top, title, width, change }: any) => {
   );
 };
 
-const EditLead = ({ cancel, data, update, title }: { cancel: any; data: any; update: () => void; title?: any }) => {
+const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; data: any; update: () => void; title?: any; mastersData: any }) => {
   const titles = ["LEAD INFO", "CONTACT INFO", "DEAL INFO"];
   const [content, setContent] = useState<any>({});
   const router = useRouter();
-  console.log('============================== DATA ============================', data);
+  console.log('============================== DATA ============================', data, mastersData);
   //   companyId:data.companyId._id,34
   //   company_name,
   //   company_website_url,
@@ -113,7 +113,7 @@ const EditLead = ({ cancel, data, update, title }: { cancel: any; data: any; upd
   });
   const submit = () => {
     const url = "https://salescrmbe.onrender.com/api/leads/update";
-    axios 
+    axios
       .put(url, {
         id: data._id,
         lead_title: content.lead_title,
@@ -130,6 +130,7 @@ const EditLead = ({ cancel, data, update, title }: { cancel: any; data: any; upd
     <>
       <FormEditContainer
         data={data}
+        mastersData={mastersData}
         update={update}
         titles={titles}
         current={0}

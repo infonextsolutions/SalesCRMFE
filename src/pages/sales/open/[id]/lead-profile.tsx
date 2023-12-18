@@ -14,8 +14,10 @@ import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 
-const Profile = ({ data }: any) => {
+const Profile = ({ data, mastersData }: any) => {
   // console.log("data10", data);
+
+  console.log('============================= Profile : data ==============================', data, mastersData);
 
   const [data1, setData] = useState(data);
 
@@ -27,7 +29,7 @@ const Profile = ({ data }: any) => {
       .then((e) => {
         setData(e.data);
       })
-      .catch(() => {});
+      .catch(() => { });
   };
   const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS"];
 
@@ -122,7 +124,7 @@ const Profile = ({ data }: any) => {
     <>
       <NavbarWithButton
         mainTitle="Sales > Open"
-        title={`${data1.result.lead_title} - Info`}
+        title={`${data1?.result?.lead_title} - Info`}
         src="manageLeadsIcon"
         buttons={[
           {
@@ -148,7 +150,7 @@ const Profile = ({ data }: any) => {
             <Notes
               cancel={cancelNotes}
               update={UpdateData}
-              leadid={data.result._id}
+              leadid={data?.result?._id}
             />
           </Backdrop>
         )}
@@ -164,8 +166,8 @@ const Profile = ({ data }: any) => {
                 UpdateData();
               }}
               cancel={cancelEmails}
-              data={data1.result}
-              leadIdResult={data1.result._id}
+              data={data1?.result}
+              leadIdResult={data1?.result._id}
             />
           </Backdrop>
         )}
@@ -178,13 +180,13 @@ const Profile = ({ data }: any) => {
           <Backdrop bool={bool} pad={"50px 0"}>
             <ActiveCall
               cancel={cancelCall}
-              id={data1.result._id}
+              id={data1?.result?._id}
               refresh={() => {
                 UpdateData();
               }}
-              companyId={data1.result.companyId._id}
-              lead={data1.result}
-              customerId={data1.result.customerId._id}
+              companyId={data1?.result?.companyId?._id}
+              lead={data1?.result}
+              customerId={data1?.result?.customerId?._id}
             />
           </Backdrop>
         )}
@@ -211,10 +213,10 @@ const Profile = ({ data }: any) => {
         /> */}
         <div className="w-[100%] flex gap-[25px] mb-[100px] ">
           <div className="w-[340px] min-h-[70vh] bg-[#ffe3e170] rounded-xl shrink-0 p-[20px]">
-            <ProfilePage updated={UpdateData} data1={data.result} />
+            <ProfilePage updated={UpdateData} data1={data?.result} mastersData={mastersData} />
           </div>
           <LeadProfileContainer
-            data={data1.result}
+            data={data1?.result}
             titles={titles}
             current={0}
             info={dummy.leadInfo}
@@ -232,10 +234,14 @@ export async function getServerSideProps({ query, params }: any) {
   const response = await axios.get(
     `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${params.id}`
   );
+  const response2 = await axios.get(
+    `https://salescrmbe.onrender.com/api/master-users/find-all`
+  );
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component
       data: response.data || {},
+      mastersData: response2?.data || {}
     }, // will be passed to the page component as props
   };
 }

@@ -52,7 +52,7 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const SalesOpen = ({ data }: props) => {
+const SalesOpen = ({ data, mastersData }: props) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
 
@@ -174,7 +174,7 @@ const SalesOpen = ({ data }: props) => {
       )}
       {form && (
         <Backdrop bool={bool}>
-          <AddLeadForm cancel={cancelForms} />
+          <AddLeadForm cancel={cancelForms} mastersData={mastersData} />
         </Backdrop>
       )}
       <Navigation
@@ -266,4 +266,5 @@ export default SalesOpen;
 
 interface props {
   data: any;
+  mastersData: any;
 }
