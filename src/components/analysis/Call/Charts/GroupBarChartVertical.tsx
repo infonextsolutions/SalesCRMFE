@@ -1,3 +1,4 @@
+import { Card } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import React from "react";
 
@@ -29,7 +30,7 @@ const GroupBarChartVertical = ({
   });
 
   return (
-    <div className="w-[600px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className="w-[600px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         {title}
       </h1>
@@ -43,7 +44,7 @@ const GroupBarChartVertical = ({
           />
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 

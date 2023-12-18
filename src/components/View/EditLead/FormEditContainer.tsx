@@ -36,15 +36,17 @@ const FormEditContainer = ({
 
   console.log(
     "+++++++++++++++++++++++ here is form data ++++++++++++++++++++++++",
-    data, mastersData
+    data,
+    mastersData
   );
 
   const dispatch = useAppDispatch();
 
   return (
     <div
-      className={`w-[${width ? width : "100%"
-        }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
+      className={`w-[${
+        width ? width : "100%"
+      }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
     >
       {/* <Navigator callback={CallBack} current={current} list={list} /> */}
       <h1 className="w-[100%] text-[#3F434A] text-center pt-[10px] font-medium text-3xl">
@@ -197,11 +199,13 @@ const FormEditContainer = ({
                             <option value="" selected>
                               -- Select Lead Owner --
                             </option>
-                            {
-                              mastersData?.result?.map((item: any, index: number) => (
-                                <option value={item?._id} key={index}>{item?.name}</option>
-                              ))
-                            }
+                            {mastersData?.result?.map(
+                              (item: any, index: number) => (
+                                <option value={item?._id} key={index}>
+                                  {item?.name}
+                                </option>
+                              )
+                            )}
                           </Field>
                         </div>
                         <div className="w-[100%]">
@@ -220,11 +224,13 @@ const FormEditContainer = ({
                             <option value="" selected>
                               -- Select Lead Manager --
                             </option>
-                            {
-                              mastersData?.result?.map((item: any, index: number) => (
-                                <option value={item?._id} key={index}>{item?.name}</option>
-                              ))
-                            }
+                            {mastersData?.result?.map(
+                              (item: any, index: number) => (
+                                <option value={item?._id} key={index}>
+                                  {item?.name}
+                                </option>
+                              )
+                            )}
                           </Field>
                         </div>
                         <div className="w-[100%]">
@@ -290,7 +296,7 @@ const FormEditContainer = ({
                                 -- Select Lead Stage --
                               </option>
                               {data.leadStatus === "open" ||
-                                data.leadStatus === "Open" ? (
+                              data.leadStatus === "Open" ? (
                                 <>
                                   <option value="Enquiry">Enquiry</option>
                                   <option value="Interaction">
@@ -655,13 +661,14 @@ const FormEditContainer = ({
           {activeTitle === "client-poc-profile" && (
             <>
               <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">
-                <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
+                {/* <h1 className="text-[#3f434a] text-[22px] font-medium  mb-[24px] tracking-[1px]">
                   Deal Information
-                </h1>
+                </h1> */}
                 <Formik
                   initialValues={{
                     customer_name: data?.customerId?.customer_name,
-                    customer_designation: data?.customerId?.customer_designation,
+                    customer_designation:
+                      data?.customerId?.customer_designation,
                     customer_contact: data?.customerId?.customer_contact,
                     customer_email: data?.customerId?.customer_email,
                     customer_gender: data?.customerId?.customer_gender,
@@ -673,7 +680,7 @@ const FormEditContainer = ({
                       data?.customerId?.customer_socialMedia2,
                     customer_socialMedia2Url:
                       data?.customerId?.customer_socialMedia2Url,
-                    primary_client_poc: true
+                    primary_client_poc: true,
                   }}
                   onSubmit={async (values) => {
                     console.log(
@@ -694,10 +701,12 @@ const FormEditContainer = ({
                             customer_gender: values?.customer_gender,
                             customer_contact: values?.customer_contact,
                             customer_email: values?.customer_email,
-                            customer_socialMedia1: values?.customer_socialMedia1,
+                            customer_socialMedia1:
+                              values?.customer_socialMedia1,
                             customer_socialMedia1Url:
                               values?.customer_socialMedia1Url,
-                            customer_socialMedia2: values?.customer_socialMedia2,
+                            customer_socialMedia2:
+                              values?.customer_socialMedia2,
                             customer_socialMedia2Url:
                               values?.customer_socialMedia2Url,
                           },
@@ -711,20 +720,23 @@ const FormEditContainer = ({
                               ...data?.customerId?.contacts,
                               {
                                 customer_name: values?.customer_name,
-                                customer_designation: values?.customer_designation,
+                                customer_designation:
+                                  values?.customer_designation,
                                 customer_gender: values?.customer_gender,
                                 customer_contact: values?.customer_contact,
                                 customer_email: values?.customer_email,
-                                customer_socialMedia1: values?.customer_socialMedia1,
+                                customer_socialMedia1:
+                                  values?.customer_socialMedia1,
                                 customer_socialMedia1Url:
                                   values?.customer_socialMedia1Url,
-                                customer_socialMedia2: values?.customer_socialMedia2,
+                                customer_socialMedia2:
+                                  values?.customer_socialMedia2,
                                 customer_socialMedia2Url:
                                   values?.customer_socialMedia2Url,
-                              }
-                            ]
-                          }
-                        }
+                              },
+                            ],
+                          },
+                        };
                       }
                       const response = await axios.put(
                         "https://salescrmbe.onrender.com/api/leads/update",
@@ -918,7 +930,7 @@ const FormEditContainer = ({
                         </div>
                       </div>
                       <div className="mt-16 ">
-                        <div className="absolute right-[160px] bottom-[10px] flex">
+                        <div className="absolute right-[190px] bottom-[10px] flex">
                           <SimpleButton
                             theme={2}
                             text="Cancel"

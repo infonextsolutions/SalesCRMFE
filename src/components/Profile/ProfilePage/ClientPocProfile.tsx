@@ -43,7 +43,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
   return (
     <>
       {edit && (
-        <Backdrop pad={"50px 0"} bool={true} width={"100px"}>
+        <Backdrop pad={"50px 0"} bool={true} width={"60%"}>
           <EditLead
             update={UpdateData}
             cancel={cancelEdit}
@@ -53,45 +53,47 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
           />
         </Backdrop>
       )}
-      <div className="w-[120%]">
+      <div className="w-[100%]">
         <div className="flex -space-x-2 overflow-hidden w-[100%]">
           <div className="flex items-center w-[100%] justify-between pb-[10px] ">
-            <div className="flex items-center gap-5 w-[100%]">
+            <div className="flex items-center justify-between gap-5 w-[100%]">
+              <div className="flex gap-5">
+                <Image
+                  className="inline-block w-[40px] rounded-full ring-2 ring-white"
+                  src={getRoundedAvatar(5, 30)}
+                  alt=""
+                  width={40}
+                  height={40}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+                <div className="flex flex-col">
+                  <p className="block cursor-pointer text-xl leading-[10px ] font-semibold ml-[-6px] text-[14px] text-black hover:text-bg-red">
+                    {data?.result?.customerId?.customer_name}
+                  </p>
+                  <p className="block cursor-pointer text-sm leading-[10px ] ml-[-6px] text-[12px] text-gray-400 hover:text-bg-red">
+                    {data?.result?.customerId?.customer_designation}
+                  </p>
+                </div>
+              </div>
               <Image
-                className="inline-block w-[40px] rounded-full ring-2 ring-white"
-                src={getRoundedAvatar(5, 30)}
-                alt=""
-                width={40}
-                height={40}
+                src={getBasicIcon("Edit")}
+                className={`w-[20px] svg-grey svg-not-selected  cursor-pointer`}
+                alt="Edit"
+                width={20}
+                height={20}
+                onClick={() => {
+                  showEdit();
+                }}
                 style={{
                   objectFit: "contain",
                 }}
               />
-              <div className="flex flex-col items-center">
-                <p className="block cursor-pointer text-xl leading-[10px ] font-semibold ml-[-6px] text-[14px] text-black hover:text-bg-red">
-                  {data?.result?.customerId?.customer_name}
-                </p>
-                <p className="block cursor-pointer text-sm leading-[10px ] ml-[-6px] text-[12px] text-black hover:text-bg-red">
-                  {data?.result?.customerId?.customer_designation}
-                </p>
-              </div>
             </div>
-            {/* <Image
-              src={getBasicIcon("Edit")}
-              className={`w-[20px] svg-grey svg-not-selected  cursor-pointer`}
-              alt="Edit"
-              width={20}
-              height={20}
-              onClick={() => {
-                showEdit();
-              }}
-              style={{
-                objectFit: "contain",
-              }}
-            /> */}
           </div>
         </div>
-        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+        <p className="border-b-2 border-red-400 w-3/4 pb-2 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Info
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
@@ -177,13 +179,13 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
           </p>
         </div>
         <div className="py-2"></div>
-        {!data?.result?.customerId?.contacts?.every(
+        {/* {!data?.result?.customerId?.contacts?.every(
           (item: any) => item === null
         ) && (
-            <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-              Other Contacts
-            </p>
-          )}
+        )} */}
+        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+          Other Contacts
+        </p>
         {data?.result?.customerId?.contacts &&
           data?.result?.customerId?.contacts?.map(
             (contact: any, index: number) => {

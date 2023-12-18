@@ -1,5 +1,6 @@
 import * as React from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
+import { Card } from "@mui/material";
 
 const uData = [4000, 3000, 2000, 2780, 1890, 2390];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800];
@@ -8,7 +9,7 @@ const xLabels = ["12 Nov", "26 Nov", "10 Dec", "24 Dec", "7 Jan", "21 Jan"];
 
 const CallSentiment = () => {
   return (
-    <div className="w-[600px] h-[250px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className="w-[600px] h-[250px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         Call Sentiment
       </h1>
@@ -39,7 +40,7 @@ const CallSentiment = () => {
           xAxis={[{ scaleType: "point", data: xLabels }]}
         />
       </div>
-    </div>
+    </Card>
   );
 };
 

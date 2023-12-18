@@ -3,15 +3,26 @@ import { Card, CardContent, Typography } from "@mui/material";
 
 function DealsCard({ label, count, percent, icon }) {
   return (
-    <Card sx={{ width: 300, bgcolor: "#ffe3e170" }}>
+    <Card sx={{ width: 380, bgcolor: "#fff0f0 " }}>
       <CardContent>
-        <Typography variant="h5" component="div" gutterBottom>
+        <Typography
+          fontWeight={600}
+          color="grey"
+          variant="h5"
+          component="div"
+          gutterBottom
+        >
           {label}
         </Typography>
         <Typography
           variant="h3"
           component="div"
-          sx={{ display: "flex", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+          fontWeight={600}
         >
           {count}
           <Typography

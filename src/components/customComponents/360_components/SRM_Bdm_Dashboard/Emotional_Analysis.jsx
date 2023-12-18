@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Radar } from "react-chartjs-2";
+import { Card } from "@mui/material";
 
 ChartJS.register(
   RadialLinearScale,
@@ -43,7 +44,8 @@ const EmotionalAnalysisComp = () => {
   };
 
   return (
-    <div
+    <Card
+      sx={{ width: "100%", bgcolor: "#fff" }}
       className="w-[100%] h-[1450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[0px]"
       style={{ width: "600px", height: "500px" }}
     >
@@ -51,7 +53,7 @@ const EmotionalAnalysisComp = () => {
         Emotional Analysis
       </h1>
       <Radar data={data} height={200} width={1200}></Radar>
-    </div>
+    </Card>
   );
 };
 
