@@ -19,7 +19,7 @@ function DealsCard({ label, count, percent, icon }) {
             component="span"
             sx={{ color: "green", ml: 1 }}
           >
-            {icon}
+            <img src={icon} alt={label} />
             {percent}%
           </Typography>
         </Typography>
