@@ -59,7 +59,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
 
   const submit = () => {
     const payload = {
-      leadDetails: leadData,
+      leadDetails: { ...leadData, created_by: localStorage.getItem("user-name") || "Sales User" },
       companyDetails: companyData,
       contactDetails: {
         contactData: contactData,

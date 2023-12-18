@@ -7,9 +7,19 @@ import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import KanbanItem from "./KanbanItems";
 
-const KanbanTable = ({ totalRecords, search }: TableProps) => {
+const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
+
+  useEffect(function () {
+    axios.get(
+      `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Close&${queryStr}`
+    ).then(res => {
+      console.log('================== internal LEADS FETCH =============', res.data.result);
+      setItems(res?.data?.result);
+      // settotalLeads(res?.data?.totalRecords)
+    });
+  }, [queryStr]);
 
   //   const getallItems = async (current: any) => {
   //     const res = await axios.get(
@@ -23,7 +33,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
     setLoading(true);
     const getItems = async () => {
       const res = await axios.get(
-        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open`
+        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Close`
       );
       // console.log(res, "only check here");
       const data = res?.data?.result;
@@ -40,6 +50,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
       // console.log(filtered);
       settotalLeads(filtered?.length);
       // console.log(data, search);
+      console.log('+++++++++++++++++++++ filtered INTERNAL SEARCH KANBAN ++++++++++++++++++++', filtered);
       setItems(filtered);
     };
 
@@ -87,72 +98,51 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
         )} */}
 
         {stages?.map((col, i) => {
-          const toBeFilter = items;
           const res = items.filter((obj: any) => {
-                        return obj.leadStage.includes(stages[i]);
+            return obj.leadStage.includes(stages[i]);
           });
-          if (res.length || col === "Dead") {
-            return (
-              <div className="flex gap-[20px]" key={i}>
-                <div className="w-[270px] shrink-0 ">
-                  <div className="leadName flex mb-[10px] sticky t-[0px]">
-                    <div className="w-[100%] bg-slate-700 h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
-                      <div className="enq-header font-medium flex items-center ml-[10px] text-[13px] flex gap-[8px] items-center">
-                        <p className="">{titles[i]}</p>
-                        <div className="text-[10px] h-[19px] justify-center w-[20px] font-medium text-[#fff] flex items-center bg-slate-400 px-[4px] h-[13px] rounded-[4px]">
-                          {res.length}
-                        </div>
+          console.log('>>>>>>>>>>>>>>>>>>>>>>> res : KANBAN >>>>>>>>>>>>>>>>>>>>>>', res);
+          return (
+            <div className="flex gap-[20px]" key={i}>
+              <div className="w-[270px] shrink-0 ">
+                <div className="leadName flex mb-[10px] sticky t-[0px]">
+                  <div className="w-[100%] bg-slate-700 h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
+                    <div className="enq-header font-medium flex items-center ml-[10px] text-[13px] flex gap-[8px] items-center">
+                      <p className="">{titles[i]}</p>
+                      <div className="text-[10px] h-[19px] justify-center w-[20px] font-medium text-[#fff] flex items-center bg-slate-400 px-[4px] h-[13px] rounded-[4px]">
+                        {res.length}
                       </div>
-                      {/* <a href="#" className="flex items-center">
-                        ...
-                      </a> */}
                     </div>
-                    {/* <div className="pl-[30px] h-[45px] bg-renal-blue rounded-xl flex items-center justify-center cursor-pointer ml-[15px] pr-[20px] relative p-[5px]">
-                      {
-                        <div className="absolute left-3  w-[28px]">
-                          <div className={`w-[100%] p-[3px] rounded-md }`}>
-                            <Image
-                              src={getBasicIcon("Plus")}
-                              className={`w-[24px] svg-white`}
-                              alt=""
-                              width={24}
-                              height={24}
-                              style={{
-                                objectFit: "contain",
-                              }}
-                            />
-                          </div>
-                        </div>
-                      }
-                    </div> */}
                   </div>
-                  {res.map((Item: any, i: any) => {
-                    console.log(Item, "please checkk-2314211")
-                    const item = {
-                      data: {
-                        companyName: "ABC Corp",
-                        companyAddress: "Noida, UP",
-                        poc: "Shraddha P.",
-                        pocJob: "Sales Manager",
-                        names: "Anil L., Paul G., Rekha",
-                        lastActivity: "Email sent on 23 Jan 2023",
-                        dealSize: "11000",
-                        product: "Product A",
-                        calls: 5,
-                        docs: 2,
-                        chats: 5,
-                        mails: 5,
-                        meetings: 5,
-                        tasks: 5,
-                      },
-                    };
-                    return <KanbanItem i={i} key={i} item={item} Item={Item} />;
-                  })}
                 </div>
+                {res.map((Item: any, i: any) => {
+                  console.log(Item, "please checkk-2314211")
+                  const item = {
+                    data: {
+                      companyName: "ABC Corp",
+                      companyAddress: "Noida, UP",
+                      poc: "Shraddha P.",
+                      pocJob: "Sales Manager",
+                      names: "Anil L., Paul G., Rekha",
+                      lastActivity: "Email sent on 23 Jan 2023",
+                      dealSize: "11000",
+                      product: "Product A",
+                      calls: 5,
+                      docs: 2,
+                      chats: 5,
+                      mails: 5,
+                      meetings: 5,
+                      tasks: 5,
+                    },
+                  };
+                  return <KanbanItem i={i} key={i} item={item} Item={Item} />;
+                })}
               </div>
-            );
-          }
-          return <React.Fragment key={i}></React.Fragment>;
+            </div>
+          );
+          // if (res.length || col === "Dead") {
+          // }
+          // return <React.Fragment key={i}></React.Fragment>;
         })}
       </div>
 

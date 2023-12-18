@@ -76,7 +76,7 @@ const TextBox = ({ title, place, change }: any) => {
   );
 };
 
-const Messages = ({ cancel, companyId, companyName, id }: any) => {
+const Messages = ({ cancel, companyId, companyName, id, data }: any) => {
   const [eventCompanyName, setEventCompanyName] = useState("");
   const [smsReceiver, setSmsReceiver] = useState("");
   const [contactNumber, setContactNumber] = useState("");
