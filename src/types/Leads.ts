@@ -11,6 +11,9 @@ export default interface Lead {
   leadStatus: string
   leadStage: string
   leadSource: string
+  lead_createdAt?: string
+  manager?: any
+  updatedAt?: any
   lead_title: string
   lead_description: string
   product_category: string
@@ -68,7 +71,7 @@ export interface CompanyId {
   company_socialMedia2: string
   company_socialMedia1Url: string
   company_socialMedia2Url: string
-product: string
+  product: string
   createdAt: string
   updatedAt: string
   __v: number

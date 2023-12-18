@@ -53,6 +53,9 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         )
         .then((e) => {
           setData(e.data.result);
+          if (updated) {
+            updated();
+          }
           console.log("svfev ");
         })
         .catch((e) => {
@@ -250,22 +253,22 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Status</p>
-          <p className="text-sm font-semibold text-black">{data1?.leadStatus}</p>
+          <p className="text-sm font-semibold text-black">{data?.leadStatus}</p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Stage</p>
-          <p className="text-sm font-semibold text-black">{data1?.leadStage}</p>
+          <p className="text-sm font-semibold text-black">{data?.leadStage}</p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Source</p>
           <p className="text-sm font-semibold text-black">
-            {data1?.leadSource ?? "-"}
+            {data?.leadSource ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead owner</p>
           {
-            data1?.owners?.map((owner: any, index: number) => {
+            data?.owners?.map((owner: any, index: number) => {
               if (owner && Object.keys(owner).length !== 0) {
                 return (
                   <p className="text-sm font-semibold text-black" key={index}>
@@ -281,19 +284,19 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Manager</p>
           <p className="text-sm font-semibold text-black">
-            {data1.manager?.name ?? "-"}
+            {data?.manager?.name ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Created by</p>
           <p className="text-sm font-semibold text-black">
-            {data1.lead_createdAt ?? "-"}
+            {data?.lead_createdAt ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Updated on</p>
           <p className="text-sm font-semibold text-black">
-            {formatDateFromISOString(data1.updatedAt) ?? "-"}
+            {formatDateFromISOString(data?.updatedAt) ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-12/12  mt-[7px] leading-[21px]">
