@@ -156,7 +156,7 @@ const Profile = ({ data, mastersData }: any) => {
         )}
         {events && (
           <Backdrop bool={bool} pad={"50px 0"}>
-            <Events cancel={cancelEvents} />
+            <Events cancel={cancelEvents} companyName={data1?.result?.companyId?.company_name} data={data1} />
           </Backdrop>
         )}
         {emails && (
@@ -173,7 +173,7 @@ const Profile = ({ data, mastersData }: any) => {
         )}
         {messages && (
           <Backdrop bool={bool} pad={"50px 0"}>
-            <Messages cancel={cancelMessages} companyName={data1?.result?.companyId?.company_name} />
+            <Messages cancel={cancelMessages} companyName={data1?.result?.companyId?.company_name} data={data1} />
           </Backdrop>
         )}
         {call && (
