@@ -160,7 +160,7 @@ const Loader = () => {
 };
 
 const Coaching = ({ data }: any) => {
-  console.log('-------------------- data : coaching ----------------', data)
+  console.log("-------------------- data : coaching ----------------", data);
   const [loading, setLoading] = React.useState(true);
   const [checked, setChecked] = React.useState(true);
   const [data1, setData] = useState({
@@ -190,10 +190,13 @@ const Coaching = ({ data }: any) => {
       Satisfaction: 0,
       Curiosity: 0,
       Assertiveness: 0,
-    }
+    },
   });
   const [tab, setTab] = useState<any>(0);
-  const tabs = [{ id: 0, title: "Auto" }, { id: 1, title: "Manual" }];
+  const tabs = [
+    { id: 0, title: "Auto" },
+    { id: 1, title: "Manual" },
+  ];
   useEffect(() => {
     if (checked) {
       axios
@@ -204,11 +207,14 @@ const Coaching = ({ data }: any) => {
           }
         )
         .then((e) => {
-          console.log(">>>>>>>>>>>>>>>>>>>>>> data1 script selling emotion >>>>>>>>>>>>>>>>>>>>", e);
+          console.log(
+            ">>>>>>>>>>>>>>>>>>>>>> data1 script selling emotion >>>>>>>>>>>>>>>>>>>>",
+            e
+          );
           setData(e.data);
           setLoading(false);
         })
-        .catch((e) => { });
+        .catch((e) => {});
       setChecked(false);
     }
   });
@@ -222,7 +228,9 @@ const Coaching = ({ data }: any) => {
       ) : (
         <>
           <div>
-            <h3 className="text-[20px] font-medium text-[#3F434A] tracking-wide">Call Analysis</h3>
+            <h3 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
+              Call Analysis
+            </h3>
             <div className="flex justify-between gap-[10px]">
               <div className="w-[100%]">
                 <div className="w-[100%] flex justify-between">
@@ -236,13 +244,20 @@ const Coaching = ({ data }: any) => {
               </div>
               {tab === 1 && (
                 <div className="w-[120px] flex flex-col items-center px-[6px]">
-                  <span className="text-yellow">{data?.CallScore || "Not Scored"}</span>
+                  <span className="text-yellow">
+                    {data?.CallScore || "Not Scored"}
+                  </span>
                   <span className="text-[16px] font-medium">Call Score</span>
                 </div>
               )}
             </div>
           </div>
-          <Navigator callback={handleCallback} current={tab} list={tabs} />
+          <Navigator
+            width={false}
+            callback={handleCallback}
+            current={tab}
+            list={tabs}
+          />
           {tab === 0 && (
             <>
               <ScriptBuilding script={data1?.scriptBuilding} />
@@ -253,35 +268,73 @@ const Coaching = ({ data }: any) => {
           {tab === 1 && (
             <div>
               <div className="fieldset mt-[24px]">
-                <span className="text-[16px] font-bold mb-[16px]">Client Introduction</span>
+                <span className="text-[16px] font-bold mb-[16px]">
+                  Client Introduction
+                </span>
                 <div>
                   <div>
                     <label htmlFor="client_intro_mark0">
-                      <input type="radio" id="client_intro_mark0" name="client_intro" />
-                      <span><span className="font-medium">0 marks:</span>No introduction or insufficient information about the client.</span>
+                      <input
+                        type="radio"
+                        id="client_intro_mark0"
+                        name="client_intro"
+                      />
+                      <span>
+                        <span className="font-medium">0 marks:</span>No
+                        introduction or insufficient information about the
+                        client.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="client_intro_mark2">
-                      <input type="radio" id="client_intro_mark2" name="client_intro" />
-                      <span><span className="font-medium">2 marks:</span>Basic information provided, but lacks personalization or relevant details.</span>
+                      <input
+                        type="radio"
+                        id="client_intro_mark2"
+                        name="client_intro"
+                      />
+                      <span>
+                        <span className="font-medium">2 marks:</span>Basic
+                        information provided, but lacks personalization or
+                        relevant details.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="client_intro_mark4">
-                      <input type="radio" id="client_intro_mark4" name="client_intro" />
-                      <span><span className="font-medium">4 marks:</span>Adequate introduction with some personalization and relevant details about the client.</span>
+                      <input
+                        type="radio"
+                        id="client_intro_mark4"
+                        name="client_intro"
+                      />
+                      <span>
+                        <span className="font-medium">4 marks:</span>Adequate
+                        introduction with some personalization and relevant
+                        details about the client.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="client_intro_mark5">
-                      <input type="radio" id="client_intro_mark5" name="client_intro" />
-                      <span><span className="font-medium">5 marks:</span>Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry.</span>
+                      <input
+                        type="radio"
+                        id="client_intro_mark5"
+                        name="client_intro"
+                      />
+                      <span>
+                        <span className="font-medium">5 marks:</span>Execellent
+                        introduction that demonstrates a strong understanding of
+                        the client&apos;s background, industry.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="client_intro_na">
-                      <input type="radio" id="client_intro_na" name="client_intro" />
+                      <input
+                        type="radio"
+                        id="client_intro_na"
+                        name="client_intro"
+                      />
                       <span>Not applicable.</span>
                     </label>
                   </div>
@@ -289,30 +342,63 @@ const Coaching = ({ data }: any) => {
               </div>
 
               <div className="fieldset mt-[24px]">
-                <span className="text-[16px] font-bold mb-[16px]">Service Offerings</span>
+                <span className="text-[16px] font-bold mb-[16px]">
+                  Service Offerings
+                </span>
                 <div>
                   <div>
                     <label htmlFor="so_mark0">
-                      <input type="radio" id="so_mark0" name="service_offerings" />
-                      <span><span className="font-medium">0 marks:</span>No mention or unclear explanation of  the service offerings.</span>
+                      <input
+                        type="radio"
+                        id="so_mark0"
+                        name="service_offerings"
+                      />
+                      <span>
+                        <span className="font-medium">0 marks:</span>No mention
+                        or unclear explanation of the service offerings.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="so_mark2">
-                      <input type="radio" id="so_mark2" name="service_offerings" />
-                      <span><span className="font-medium">2 marks:</span>Basic description of the service offerings, but lacks clarity or fails to highlight key benefits.</span>
+                      <input
+                        type="radio"
+                        id="so_mark2"
+                        name="service_offerings"
+                      />
+                      <span>
+                        <span className="font-medium">2 marks:</span>Basic
+                        description of the service offerings, but lacks clarity
+                        or fails to highlight key benefits.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="so_mark4">
-                      <input type="radio" id="so_mark4" name="service_offerings" />
-                      <span><span className="font-medium">4 marks:</span>Clear explanation of the service offerings with an emphasis on key benefits and value proposition.</span>
+                      <input
+                        type="radio"
+                        id="so_mark4"
+                        name="service_offerings"
+                      />
+                      <span>
+                        <span className="font-medium">4 marks:</span>Clear
+                        explanation of the service offerings with an emphasis on
+                        key benefits and value proposition.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="so_mark5">
-                      <input type="radio" id="so_mark5" name="service_offerings" />
-                      <span><span className="font-medium">5 marks:</span>Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits.</span>
+                      <input
+                        type="radio"
+                        id="so_mark5"
+                        name="service_offerings"
+                      />
+                      <span>
+                        <span className="font-medium">5 marks:</span>Detailed
+                        and persuasive presentation of the service offerings,
+                        highlighting specific features, benefits.
+                      </span>
                     </label>
                   </div>
                   <div>
@@ -325,30 +411,64 @@ const Coaching = ({ data }: any) => {
               </div>
 
               <div className="fieldset mt-[24px]">
-                <span className="text-[16px] font-bold mb-[16px]">Purpose of Call</span>
+                <span className="text-[16px] font-bold mb-[16px]">
+                  Purpose of Call
+                </span>
                 <div>
                   <div>
                     <label htmlFor="pc_mark0">
-                      <input type="radio" id="pc_mark0" name="purpose_of_call" />
-                      <span><span className="font-medium">0 marks:</span>No introduction or insufficient information about the client.</span>
+                      <input
+                        type="radio"
+                        id="pc_mark0"
+                        name="purpose_of_call"
+                      />
+                      <span>
+                        <span className="font-medium">0 marks:</span>No
+                        introduction or insufficient information about the
+                        client.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="pc_mark2">
-                      <input type="radio" id="pc_mark2" name="purpose_of_call" />
-                      <span><span className="font-medium">2 marks:</span>Basic information provided, but lacks personalization or relevant details.</span>
+                      <input
+                        type="radio"
+                        id="pc_mark2"
+                        name="purpose_of_call"
+                      />
+                      <span>
+                        <span className="font-medium">2 marks:</span>Basic
+                        information provided, but lacks personalization or
+                        relevant details.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="pc_mark4">
-                      <input type="radio" id="pc_mark4" name="purpose_of_call" />
-                      <span><span className="font-medium">4 marks:</span>Adequate introduction with some personalization and relevant details about the client.</span>
+                      <input
+                        type="radio"
+                        id="pc_mark4"
+                        name="purpose_of_call"
+                      />
+                      <span>
+                        <span className="font-medium">4 marks:</span>Adequate
+                        introduction with some personalization and relevant
+                        details about the client.
+                      </span>
                     </label>
                   </div>
                   <div>
                     <label htmlFor="pc_mark5">
-                      <input type="radio" id="pc_mark5" name="purpose_of_call" />
-                      <span><span className="font-medium">5 marks:</span>Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry.</span>
+                      <input
+                        type="radio"
+                        id="pc_mark5"
+                        name="purpose_of_call"
+                      />
+                      <span>
+                        <span className="font-medium">5 marks:</span>Execellent
+                        introduction that demonstrates a strong understanding of
+                        the client&apos;s background, industry.
+                      </span>
                     </label>
                   </div>
                   <div>
@@ -360,9 +480,7 @@ const Coaching = ({ data }: any) => {
                 </div>
               </div>
 
-              <div className="form_btns">
-
-              </div>
+              <div className="form_btns"></div>
             </div>
           )}
         </>
