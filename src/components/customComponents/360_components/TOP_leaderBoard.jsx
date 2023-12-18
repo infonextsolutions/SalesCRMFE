@@ -35,7 +35,7 @@ const Leaderboard = () => {
         <div className="mt-3 flex justify-between w-[86%]">
           <div className="container1">
             <div className="best-performer-heading">
-              <img src="/Images/Icons/Basic/Star.svg" alt="star" />
+              {/* <img src="/Images/Icons/Basic/Star.svg" alt="star" /> */}
               <Image
                 src={getBasicIcon("star_yellow")}
                 className=" mr-3"
@@ -53,7 +53,7 @@ const Leaderboard = () => {
                 className="best-performer-list flex items-center"
                 key={index}
               >
-                <img className="img-user" src={""} alt="" />
+                {/* <img className="img-user" src={""} alt="" /> */}
                 <Image
                   className="w-[40px] rounded-full ring-2 ring-white"
                   src={getRoundedAvatar(5, 30)}
@@ -71,7 +71,7 @@ const Leaderboard = () => {
 
           <div className="container1">
             <div className="best-performer-heading">
-              <img src="/Images/Icons/Basic/Star.svg" alt="star" />
+              {/* <img src="/Images/Icons/Basic/Star.svg" alt="star" /> */}
               <Image
                 src={getBasicIcon("star_red")}
                 className="mr-3"
