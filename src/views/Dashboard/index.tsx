@@ -4,7 +4,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Navigator from "@/utils/customNavigator";
 import axios from "axios";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DealsCard from "@/components/customComponents/360_components/cardDeals";
 import Top_Call from "@/components/customComponents/360_components/table_TOPcall";
 import Leaderboard from "@/components/customComponents/360_components/TOP_leaderBoard";
@@ -41,13 +41,19 @@ import {
   satisfactionScore,
 } from "@/constants/dummyData";
 import GroupBarChartVertical from "@/components/analysis/Call/Charts/GroupBarChartVertical";
+import { CSVLink } from "react-csv";
+import * as XLSX from "xlsx";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 // const Dashboard = ({ data }: any) => {
 const Dashboard = ({ data }: any) => {
   const [scriptbuilderData, setScriptBuilderData] = useState([]);
   const [sellingData, setSellingData] = useState([]);
   const [pitchData, setPitchData] = useState([]);
-  console.log(data.first);
+  console.log(data);
   console.log(data.second);
   console.log(data.third);
   const [startDate, setStartDate] = useState("2023-07-19");
@@ -130,30 +136,118 @@ const Dashboard = ({ data }: any) => {
   const handleTabNavigation = (payload: any) => {
     setCurrTab(payload);
   };
+  const ref: any = useRef();
+
+  const exportXLSX = () => {
+    const worksheet = XLSX.utils.json_to_sheet([
+      data.first.result,
+      data.second.result,
+      data.third.result,
+    ]);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    XLSX.writeFile(workbook, "DataSheet.xlsx");
+  };
+
+  const exportPDF = () => {
+    const documentDefinition = {
+      content: [
+        {
+          text: "JSON to PDF Conversion",
+          style: "header",
+        },
+        {
+          text: JSON.stringify(
+            [data.first.result, data.second.result, data.third.result],
+            null,
+            4
+          ),
+          style: "contentStyle",
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          marginBottom: 10,
+        },
+        contentStyle: {
+          fontSize: 12,
+          margin: [0, 5, 0, 15] as [number, number, number, number],
+        },
+      },
+    };
+
+    pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
+  };
+
+  const addExport = (e: any, e1: any) => {
+    if (e1 === 0) {
+      exportXLSX();
+    } else if (e1 === 1) {
+      exportPDF();
+    }
+  };
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px]">
       <div className="flex w-[100%] justify-end gap-[10px] mt-[20px]">
-        {/* <Button
-          text={"Last 7 days"}
-          id={0}
-        // dropdown={[]}
-        // click={() => { }}
-        // value={0}
-        // list={[]}
-        // icon={""}
-        // onClick1={() => { }}
-        // key={0}
-        // light={}
-        // dark={}
+        <Navigation
+          title=""
+          buttons={[
+            {
+              text: "Last 7 days",
+              dropdown: true,
+              id: 1,
+              dark: true,
+              light: false,
+              list: [
+                { title: "Last 7 days", Icon: "" },
+                { title: "Last 15 days", Icon: "" },
+                { title: "Last 30 days", Icon: "" },
+              ],
+            },
+            {
+              text: "",
+              dropdown: true,
+              id: 1,
+              icon: "Download",
+              light: true,
+              dark: false,
+              click: addExport,
+              list: [
+                { title: "Excel", Icon: "Excel" },
+                { title: "Print", Icon: "Printer" },
+                {
+                  title: "CSV",
+                  Icon: "CSV",
+                  wrapper: (
+                    <CSVLink
+                      data={[
+                        data.first.result,
+                        data.second.result,
+                        data.third.result,
+                      ]}
+                      className=""
+                      ref={ref}
+                    >
+                      CSV
+                    </CSVLink>
+                  ),
+                },
+              ],
+            },
+          ]}
         />
-        <button>
-          <Image width={20} height={20} src={getBasicIcon("Download")} alt="download" />
-        </button> */}
       </div>
-      <Navigator callback={handleTabNavigation} current={currTab} list={tabs} />
+      <Navigator
+        callback={handleTabNavigation}
+        current={currTab}
+        list={tabs}
+        width={true}
+      />
       {currTab === 0 && (
-        <div className="w-[100%]">
+        <div className="w-[100%] mt-4 px-6">
           <div className="flex w-[100%] justify-between py-4">
             <DealsCard
               label="Open Deals"
@@ -174,7 +268,7 @@ const Dashboard = ({ data }: any) => {
               percent={27.3}
             />
           </div>
-          <div className="w-[100%] flex gap-12 mt-5">
+          <div className="w-[100%] flex gap-8 mt-5">
             <div className="flex flex-col gap-6 ">
               <BarChartVertical
                 getSellingData={getSellingData}

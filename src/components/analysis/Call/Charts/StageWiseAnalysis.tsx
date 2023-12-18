@@ -1,6 +1,7 @@
 import { BarChart } from "@mui/x-charts";
 import React from "react";
 
+const valueFormatter = (value: any) => `${value}mm`;
 const HorizontalBarComparator = (payload: any) => {
   return (
     <div>
@@ -40,7 +41,7 @@ const StageWiseAnalysis = ({
   ];
 
   return (
-    <div className="w-[600px] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[0px]">
+    <div className="w-[580px] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[0px]">
       <div className="w-[100%] flex items-center justify-between">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           {title}
