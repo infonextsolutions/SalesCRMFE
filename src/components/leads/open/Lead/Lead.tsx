@@ -396,17 +396,19 @@ const ExpandableRow = ({
           {companyDesc ?? "-"}
         </p>
       </div>
-      <div className="w-[100%] mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">Note</p>
-        <div className="">
-          <h3 className="font-medium text-[#000]">
-            {leadData?.notes[0]?.title || "-"}
-          </h3>
+      {leadData?.notes?.length !== 0 && (
+        <div className="w-[100%] mb-[20px]">
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">Note</p>
+          <div className="">
+            <h3 className="font-medium text-[#000]">
+              {leadData?.notes[leadData?.notes?.length - 1]?.title || "-"}
+            </h3>
+          </div>
+          <p className="text-[#53565a] font-medium mt-[5px] text-[16px] tracking-wide">
+            {leadData?.notes[leadData?.notes?.length - 1]?.content || "-"}
+          </p>
         </div>
-        <p className="text-[#53565a] font-medium mt-[5px] text-[16px] tracking-wide">
-          {leadData?.notes[leadData?.notes?.length - 1]?.content || "-"}
-        </p>
-      </div>
+      )}
       <div className="flex flex-col mb-[20px]">
         <div className="w-[100%] flex items-center mb-[20px]">
           <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Company Website</p>
