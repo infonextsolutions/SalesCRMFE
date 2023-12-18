@@ -70,6 +70,7 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
             selectAll();
           }}
         />
+        <HeaderItem width={50} left={0} text={""} />
         <HeaderItem
           className="decoration-red-50"
           width={150}
