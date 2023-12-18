@@ -10,10 +10,10 @@ import Navbar from "@/components/app/Navbar/Navbar";
 
 const SalesOpen = React.lazy(() => import("@/views/sales/open"));
 
-export default function Open({ data }: any) {
+export default function Open({ data, mastersData }: any) {
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
-  console.log(data);
+  console.log('data', data, 'masters data', mastersData);
   const dispatch = useDispatch();
 
   const [logged] = useLocalStorage("logged", "loading");
@@ -74,7 +74,7 @@ export default function Open({ data }: any) {
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
-            <SalesOpen data={data} />
+            <SalesOpen data={data} mastersData={mastersData} />
           </Suspense>
         )}
       </Suspense>
@@ -87,10 +87,14 @@ export async function getServerSideProps({ query, ...params }: any) {
     const response = await axios.get(
       "https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open"
     );
+    const response2 = await axios.get(
+      "https://salescrmbe.onrender.com/api/master-users/find-all"
+    );
     return {
       props: {
         // TODO: Can do better error handling here by passing another property error in the component
         data: response.data || {},
+        mastersData: response2.data || {}
       }, // will be passed to the page component as props
     };
   } catch (error) {
@@ -99,6 +103,7 @@ export async function getServerSideProps({ query, ...params }: any) {
       props: {
         // TODO: Can do better error handling here by passing another property error in the component
         data: {},
+        mastersData: {}
       }, // will be passed to the page component as props
     };
   }

@@ -11,7 +11,8 @@ import EditLead from "@/components/View/EditLead";
 import axios from "axios";
 import Lead from "@/types/Leads";
 
-const ProfilePage = ({ data1, updated }: any) => {
+const ProfilePage = ({ data1, updated, mastersData }: any) => {
+  console.log('+++++++++++++++++++++++ PROFILE PAGE ++++++++++++++++++++++', data1, updated, mastersData);
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -48,7 +49,7 @@ const ProfilePage = ({ data1, updated }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1._id}`
+          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1?._id}`
         )
         .then((e) => {
           setData(e.data.result);
@@ -83,8 +84,8 @@ const ProfilePage = ({ data1, updated }: any) => {
   useEffect(() => {
     if (!check) {
       if (data2?.activityId) {
-        if (data2?.activityId.history) {
-          const history = data2?.activityId.history;
+        if (data2?.activityId?.history) {
+          const history = data2?.activityId?.history;
           let calls = 0;
           let emails = 0;
           let notes = 0;
@@ -144,6 +145,7 @@ const ProfilePage = ({ data1, updated }: any) => {
             cancel={cancelEdit}
             update={UpdateData}
             data={data}
+            mastersData={mastersData}
             title={"Edit Lead"}
           />
         </Backdrop>
@@ -187,20 +189,20 @@ const ProfilePage = ({ data1, updated }: any) => {
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Company Name</p>
           <p className="text-sm font-semibold text-black">
-            {data.companyId.company_name}
+            {data?.companyId?.company_name}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium"> Website Link</p>
           <p
             onClick={() => {
-              if (data.companyId.company_website_url) {
-                window.open(data.companyId.company_website_url, "_blank");
+              if (data?.companyId?.company_website_url) {
+                window.open(data?.companyId?.company_website_url, "_blank");
               }
             }}
             className="text-sm font-semibold text-black"
           >
-            {data.companyId.company_website_url}
+            {data?.companyId?.company_website_url}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
@@ -248,28 +250,38 @@ const ProfilePage = ({ data1, updated }: any) => {
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Status</p>
-          <p className="text-sm font-semibold text-black">{data1.leadStatus}</p>
+          <p className="text-sm font-semibold text-black">{data1?.leadStatus}</p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Stage</p>
-          <p className="text-sm font-semibold text-black">{data1.leadStage}</p>
+          <p className="text-sm font-semibold text-black">{data1?.leadStage}</p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Source</p>
           <p className="text-sm font-semibold text-black">
-            {data1.leadSource ?? "-"}
+            {data1?.leadSource ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead owner</p>
-          <p className="text-sm font-semibold text-black">
-            {data1.owners[0] ?? "-"}
-          </p>
+          {
+            data1?.owners?.map((owner: any, index: number) => {
+              if (owner && Object.keys(owner).length !== 0) {
+                return (
+                  <p className="text-sm font-semibold text-black" key={index}>
+                    {owner?.name ?? "-"}
+                  </p>
+                );
+              } else {
+                return null;
+              }
+            })
+          }
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Manager</p>
           <p className="text-sm font-semibold text-black">
-            {data1.manager ?? "-"}
+            {data1.manager?.name ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
