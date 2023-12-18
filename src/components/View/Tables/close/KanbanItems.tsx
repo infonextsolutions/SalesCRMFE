@@ -12,6 +12,7 @@ import axios from "axios";
 import ActiveCall from "@/components/View/active-call-add";
 
 const KanbanItem = ({ item, i, Item }: any) => {
+  console.log('---------------- item, i, Item -------------', Item)
   const { pathname, replace, push } = useRouter();
   const leadId = () => {
     const route = `${pathname}/${Item._id}/lead-profile`;
@@ -270,7 +271,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           </div>
           <div className="flex justify-between">
             <p className="text-black/[.55]">Product/Service:</p>
-            <p className="text-black/[.75]">{item.data.product}</p>
+            <p className="text-black/[.75]">{item?.data?.product}</p>
           </div>
         </div>
 
@@ -421,18 +422,18 @@ const KanbanItem = ({ item, i, Item }: any) => {
       {notes && (
         <Backdrop bool={bool}>
           <Notes
-            leadid={Item._id}
+            leadid={Item?._id}
             cancel={cancelNotes}
             update={() => {
               update();
             }}
-            note={Item.notes}
+            note={Item?.notes}
           />
         </Backdrop>
       )}
       {events && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Events cancel={cancelEvents} />
+          <Events cancel={cancelEvents} companyName={Item?.companyId?.company_name} data={Item} />
         </Backdrop>
       )}
       {emails && (
@@ -453,7 +454,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {messages && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Messages cancel={cancelMessages} />
+          <Messages cancel={cancelMessages} companyName={Item?.companyId?.company_name} data={Item} />
         </Backdrop>
       )}
       {call && (
