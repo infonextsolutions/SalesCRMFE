@@ -1,4 +1,5 @@
-import Backdrop from "@/components/View/Backdrop/Right";
+import Backdrop from "@/components/View/Backdrop/Center";
+import BackdropRight from "@/components/View/Backdrop/Right";
 import Notes from "@/components/View/Notes";
 import Lead, { CompanyId, CustomerId, Owner } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
@@ -1056,7 +1057,7 @@ const LeadContainer = ({
         }}
       > */}
       {detailShow && (
-        <Backdrop bool={detailShow}>
+        <BackdropRight bool={detailShow}>
           <ExpandableRow
             leadDesc={LeadData.lead_description}
             companyDesc={LeadData.companyId.company_description}
@@ -1066,7 +1067,7 @@ const LeadContainer = ({
             leadData={LeadData}
             handleClose={() => setDetailShow(!detailShow)}
           />
-        </Backdrop>
+        </BackdropRight>
       )}
       {/* </div> */}
       {/* {hover && (
