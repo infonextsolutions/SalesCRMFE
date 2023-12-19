@@ -798,15 +798,15 @@ const LeadContainer = ({
           ref={wRef}
         >
           <LeadBox width={30} bool={selectAll} />
-          <ExpandingIcon
+          {/* <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
             }}
             showProp={detailShow}
-          />
+          /> */}
           <LeadItem
             width={150}
-            left={70}
+            left={120}
             weight={500}
             textLeft={0}
             color={"#000"}
