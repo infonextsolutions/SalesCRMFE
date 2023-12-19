@@ -1,4 +1,4 @@
-import Backdrop from "@/components/View/Backdrop/Center";
+import Backdrop from "@/components/View/Backdrop/Right";
 import Notes from "@/components/View/Notes";
 import Lead, { CompanyId, CustomerId, Owner } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
@@ -117,8 +117,9 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -322,7 +323,6 @@ const ContactQuickActions = ({
 };
 
 const ExpandingIcon = ({ change, show = false }: any) => {
-
   return (
     <div className="w-[50px] flex items-center justify-center cursor-pointer">
       {!show ? (
@@ -357,33 +357,49 @@ const ExpandableRow = ({
   LeadOwners,
   otherContacts,
   leadData,
-  handleClose
+  handleClose,
 }: any) => {
   return (
-    <div className="custom-scroll-black w-[100%] h-[auto] py-[30px] px-[50px] overflow-y-auto"
+    <div
+      className="custom-scroll-black w-[100%] h-[auto] py-[30px] px-[50px] overflow-y-auto"
       style={{
         zIndex: 100000000000000,
-      }}>
+      }}
+    >
       <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
         <h2 className="text-[24px]">Lead Details</h2>
-        <button className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]" onClick={handleClose}>
-          <img alt="close" loading="lazy" className="w-[15px] h-[15px]" src="/Images/Icons/Basic/Cross.svg" />
+        <button
+          className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
+          onClick={handleClose}
+        >
+          <img
+            alt="close"
+            loading="lazy"
+            className="w-[15px] h-[15px]"
+            src="/Images/Icons/Basic/Cross.svg"
+          />
         </button>
       </div>
       <div className="w-[100%] flex items-center">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Lead Source</p>
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Lead Source
+        </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {leadData?.leadSource}
         </p>
       </div>
       <div className="w-[100%] flex items-center mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Last Call Disposition</p>
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Last Call Disposition
+        </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {leadData?.activityId?.lastCallDisposition ?? "-"}
         </p>
       </div>
       <div className="w-[100%] mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Lead Description</p>
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Lead Description
+        </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {leadDesc}
         </p>
@@ -398,7 +414,9 @@ const ExpandableRow = ({
       </div>
       {leadData?.notes?.length !== 0 && (
         <div className="w-[100%] mb-[20px]">
-          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">Note</p>
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">
+            Note
+          </p>
           <div className="">
             <h3 className="font-medium text-[#000]">
               {leadData?.notes[leadData?.notes?.length - 1]?.title || "-"}
@@ -411,7 +429,9 @@ const ExpandableRow = ({
       )}
       <div className="flex flex-col mb-[20px]">
         <div className="w-[100%] flex items-center mb-[20px]">
-          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Company Website</p>
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+            Company Website
+          </p>
           <p className="text-[#000] font-medium mt-[0px] text-[16px] tracking-wide">
             <a href={`https://${companyWebsite}`} target="_blank">
               {companyWebsite}
@@ -419,7 +439,9 @@ const ExpandableRow = ({
           </p>
         </div>
         <div className="w-[100%] mt-[10px] flex items-center">
-          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Social Media</p>
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+            Social Media
+          </p>
           <div className="flex mt-[2px]">
             {leadData?.companyId?.company_socialMedia1 && (
               <a href={leadData?.companyId?.company_socialMedia1Url}>
@@ -447,7 +469,9 @@ const ExpandableRow = ({
         </div>
       </div>
       <div className="w-[100%] mb-[20px] flex items-center">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Lead Owner</p>
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Lead Owner
+        </p>
         {LeadOwners.map((item: Owner, i: any) => {
           return (
             <p
@@ -460,7 +484,9 @@ const ExpandableRow = ({
         })}
       </div>
       <div className="w-[100%] mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Other Contacts</p>
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Other Contacts
+        </p>
         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider">
           <span className="text-[#000] text-[15px]">
             {" "}
@@ -488,7 +514,9 @@ const ExpandableRow = ({
         })}
       </div>
       <div className="w-[100%] mb-[20px] flex items-center">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">Lead Created On</p>
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Lead Created On
+        </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {convertDatetime(leadData?.createdAt)}
         </p>
@@ -749,7 +777,7 @@ const LeadContainer = ({
   const [showDescModal, setShowDescModal] = useState(false);
 
   const handleDoubleClick = () => {
-    setShowDescModal(!showDescModal);
+    setDetailShow(true);
   };
 
   const handleCloseModal = () => {
@@ -769,24 +797,6 @@ const LeadContainer = ({
           className="-z-50 pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
           ref={wRef}
         >
-          {/* {showDescModal && (
-            <div className="z-50 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 absolute right-0">
-              Content for your modal
-              <h2>Modal Title</h2>
-              <p>Modal content goes here.</p>
-            </div>
-          )} */}
-          {/*
-        <div className="fixed flex items-center left-[1390px] h-[50px] cursor-pointer">
-          <Image
-              src={getBasicIcon("More")}
-              className="rotate-90"
-              alt=""
-              width={20}
-              height={20}
-            />
-        </div> 
-        */}
           <LeadBox width={30} bool={selectAll} />
           <ExpandingIcon
             change={(e: any) => {
