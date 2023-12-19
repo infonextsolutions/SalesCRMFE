@@ -6,25 +6,7 @@ import { ActiveCall } from "@/types/active-call";
 import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Uploads from "@/components/View/uploads/index.jsx";
-import { Button, Card } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-
-import {
-  PdfViewerComponent,
-  Toolbar,
-  Magnification,
-  Navigation,
-  LinkAnnotation,
-  BookmarkView,
-  ThumbnailView,
-  Print,
-  TextSelection,
-  Annotation,
-  TextSearch,
-  Inject,
-  FormDesigner,
-  FormFields,
-} from "@syncfusion/ej2-react-pdfviewer";
+import { Card } from "@mui/material";
 
 const ScriptDoc = ({
   title,
