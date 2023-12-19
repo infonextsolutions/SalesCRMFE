@@ -6,8 +6,25 @@ import { ActiveCall } from "@/types/active-call";
 import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Uploads from "@/components/View/uploads/index.jsx";
-import { Card } from "@mui/material";
-import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+import { Button, Card } from "@mui/material";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+
+import {
+  PdfViewerComponent,
+  Toolbar,
+  Magnification,
+  Navigation,
+  LinkAnnotation,
+  BookmarkView,
+  ThumbnailView,
+  Print,
+  TextSelection,
+  Annotation,
+  TextSearch,
+  Inject,
+  FormDesigner,
+  FormFields,
+} from "@syncfusion/ej2-react-pdfviewer";
 
 const ScriptDoc = ({
   title,
@@ -49,7 +66,7 @@ const ScriptDoc = ({
         {title}
       </p>
       <div className="flex items-center mt-[14px]">
-        <Image
+        {/* <Image
           src={
             check === 1 ? "/Images/Logo/PDF 1.svg" : "/Images/Logo/DOC 1.svg"
           }
@@ -71,7 +88,7 @@ const ScriptDoc = ({
               console.error("Error fetching additional data:", error);
             }
           }}
-        />
+        /> */}
         <div className="ml-[10px]">
           <p className="text-[12px] text-[#3F434A] font-medium ">{docName}</p>
           <p className="text-[11px] text-[#8A9099] font-medium">{size}</p>
@@ -132,11 +149,12 @@ const ScriptDoc = ({
             height={20}
           /> */}
 
-          <button className="relative">
+          <div className="relative">
             <Image
               src={getBasicIcon("More")}
               onClick={() => setbtn(!btn)}
               alt=""
+              className="cursor-pointer"
               // fill={true}
               style={
                 {
@@ -146,18 +164,18 @@ const ScriptDoc = ({
               width={20}
               height={20}
             />
-          </button>
-          {btn && (
-            <Card
-              sx={{ borderRadius: "12px" }}
-              className="absolute flex flex-col gap-2 ml-[-22px] py-2 mt-24 cursor-pointer"
-            >
-              <p onClick={handleView} className="hover:bg-gray-200 px-7">
-                {selected ? "Hide" : "View"}
-              </p>
-              <p className="hover:bg-gray-200 px-7">Share</p>
-            </Card>
-          )}
+            {btn && (
+              <Card
+                sx={{ borderRadius: "12px" }}
+                className="absolute top-[-70px] right-[-22px] flex flex-col gap-2 ml-[-22px] py-2 mt-24 cursor-pointer"
+              >
+                <p onClick={handleView} className="hover:bg-gray-200 px-7">
+                  {selected ? "Hide" : "View"}
+                </p>
+                {/* <p className="hover:bg-gray-200 px-7">Share</p> */}
+              </Card>
+            )}
+          </div>
         </div>
       </div>
       <p className="text-[#8A9099] text-[13px] font-medium mt-[10px]">{data}</p>
@@ -378,6 +396,17 @@ const ScriptList = ({
     </>
   );
 };
+const ScriptView = ({ data }: { data: any }) => {
+  return (
+    <>
+      <embed
+        height={300}
+        src={`${data?.fileUrl}#toolbar=0`}
+        type="application/pdf"
+      />
+    </>
+  );
+};
 
 const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   console.log(scripts, "arijit");
@@ -390,6 +419,7 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
     setActiveTitle(childData);
   }
   const [currScripts, setCurrScripts] = useState<any[]>(scripts?.result);
+
   const [selected, setSelected] = useState(false);
 
   const refresh = () => {
@@ -403,7 +433,7 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
       .catch((e) => {});
   };
 
-  console.log(scripts);
+  console.log(currScripts, "currScripts");
 
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
@@ -417,28 +447,62 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
     setSelected(true);
   };
 
+  // const [numPages, setNumPages] = useState(null);
+  // const [pdfText, setPdfText] = useState("");
+
+  // const onDocumentLoadSuccess = ({ numPages }: any) => {
+  //   console.log("arijit");
+
+  //   setNumPages(numPages);
+
+  //   const loadingTask = pdfjs.getDocument({
+  //     url: "https://salescrm247.s3.amazonaws.com/scripts/Get_Started_With_Smallpdf.pdf",
+  //   });
+  //   console.log(loadingTask, "arijit");
+  //   loadingTask.promise
+  //     .then((pdf) => {
+  //       const textPromises = [];
+
+  //       for (let i = 1; i <= numPages; i++) {
+  //         textPromises.push(
+  //           pdf
+  //             .getPage(i)
+  //             .then((page) => page.getTextContent())
+  //             .then((textContent) => {
+  //               const pageText = textContent.items
+  //                 .map((item) => {
+  //                   if ("str" in item) {
+  //                     return item.str;
+  //                   } else if ("text" in item) {
+  //                     return item.text;
+  //                   } else {
+  //                     return "";
+  //                   }
+  //                 })
+  //                 .join(" ");
+  //               return pageText;
+  //             })
+  //         );
+  //       }
+
+  //       return Promise.all(textPromises);
+  //     })
+  //     .then((pageTexts) => {
+  //       const extractedText = pageTexts.join(" ");
+  //       setPdfText(extractedText);
+  //     })
+  //     .catch((error) => console.error("Failed to extract PDF text:", error));
+  // };
+
   return (
     <div className="w-full p-[30px]">
       {selected && (
         <div className="w-[100%] flex flex-col gap-4 justify-between p-4 bg-white border border-gray-200 rounded-lg shadow">
           <h2 className="text-lg font-semibold">Script</h2>
-          <p className="text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-            itaque cumque, voluptatibus vel iste nisi est repellat, fugit
-            blanditiis eveniet accusantium molestias ipsa dolore ad vitae
-            repellendus, architecto neque! Maiores. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Porro itaque cumque, voluptatibus vel
-            iste nisi est repellat, fugit blanditiis eveniet accusantium
-            molestias ipsa dolore ad vitae repellendus, architecto neque!
-            Maiores. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Porro itaque cumque, voluptatibus vel iste nisi est repellat, fugit
-            blanditiis eveniet accusantium molestias ipsa dolore ad vitae
-            repellendus, architecto neque! vel iste nisi est repellat, fugit
-            blanditiis eveniet accusantium molestias ipsa dolore ad vitae
-            repellendus, architecto neque.
-          </p>
+          <ScriptView data={currScripts[0]} />
         </div>
       )}
+
       <ScriptList
         refresh={refresh}
         data={currScripts}
