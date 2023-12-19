@@ -14,6 +14,7 @@ import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import EmailPage from "@/components/View/Email";
 import Notes from "@/components/View/Notes";
 import Messages from "@/components/View/messages";
+import Call from "@/components/calls/active-calls/Call/Call";
 //Manya will make this page
 
 const AudioProfile = ({ data, scripts }: any) => {
@@ -24,6 +25,7 @@ const AudioProfile = ({ data, scripts }: any) => {
   const [audioFile, setAudioFile] = useState(null);
   const [makeCallModal, setCallModal] = useState(false);
   const [uploadModalStatus, setUploadModalStatus] = useState(false);
+  const [noToCall, setNoToCall] = useState(data?.result?.participants?.customer_contact);
   const dispatch = useAppDispatch();
   const cancelCall = () => {
     setBool(false);
@@ -134,7 +136,7 @@ const AudioProfile = ({ data, scripts }: any) => {
       sid: callRes?.Sid,
       leadId: callRes?.leadId,
     };
-    axios.post(`api/calling/call-status`, payload)
+    axios.post(`https://salescrmbe.onrender.com/api/calling/call-status`, payload)
       .then((res: any) => {
         console.log('----------------------- CALL STATUS RES ====================', res);
       })
@@ -151,7 +153,7 @@ const AudioProfile = ({ data, scripts }: any) => {
 
   const handleCallSubmit = () => {
     const payload = {
-      callTo: data?.result?.call_new_participant_number,
+      callTo: noToCall,
       id: data?.result?._id,
       leadId: data?.result?.leadId?._id
     }
@@ -159,8 +161,8 @@ const AudioProfile = ({ data, scripts }: any) => {
       `https://salescrmbe.onrender.com/api/calling/make-call?`, payload
     )
       .then((res: any) => {
-        const call = res?.result?.Call;
-        console.log('----------------------- CALLING RES ====================', res?.result?.Call);
+        const call = res?.data?.result?.Call;
+        console.log('----------------------- CALLING RES ====================', call);
         setCallModal(false);
         dispatch(
           setSuccess({
@@ -316,15 +318,17 @@ const AudioProfile = ({ data, scripts }: any) => {
               <input
                 type="text"
                 name=""
-                disabled
+                onChange={(e) => {
+                  setNoToCall(e.target.value);
+                }}
                 className="border w-[80%] pl-4 ml-3 mt-2 py-2 rounded-lg"
-                value={data?.result?.call_new_participant_number}
+                value={noToCall}
               />
               <p className="mx-auto text-left mt-4 pl-3 text-lg text-gray-400">
                 Designation :
               </p>
               <p className="mx-auto text-left mt-4 pl-3 text-lg text-black">
-                {data?.result?.call_new_participant_designation}
+                {data?.result?.customerId?.customer_designation}
               </p>
               <div className="flex gap-4 justify-end mr-4 mt-6">
                 <button
