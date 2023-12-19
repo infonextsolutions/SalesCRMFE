@@ -111,9 +111,8 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -418,6 +417,21 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     return isoPattern.test(inputString);
   }
 
+  const getParticipants = (payload: any) => {
+    let participants = payload?.callParticipant;
+    if (typeof payload.invite === "string") {
+      participants += payload.invite;
+    } else {
+      payload?.invite?.map((item: string, index: number) => {
+        if (participants !== "") {
+          participants += ", ";
+        }
+        participants += item;
+      });
+    }
+    return participants;
+  };
+
   return (
     <>
       <div className="flex">
@@ -433,7 +447,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             // text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
             click={true}
-            route={`${pathname}/${id}/calling`}
+            route={`${pathname}/${id}/meeting`}
           />
           <CallItem
             width={150}
@@ -441,6 +455,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             color={"#000"}
             text={CallData?.description ? CallData?.description : "Zoom"}
             click={true}
+            route={`${pathname}/${id}/meeting`}
           />
           <CallItem
             width={150}
@@ -459,7 +474,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={150}
             left={40}
-            text={CallData?.companyId?.company_name}
+            text={CallData?.leadId?.companyId?.company_name}
             click={true}
             route={`/sales/open/${CallData?._id}/company-profile`}
             color={"#000"}
@@ -468,8 +483,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             width={150}
             left={10}
             text={
-              CallData?.companyId?.company_product_category
-                ? CallData?.leadId?.Product_services
+              CallData?.leadId?.companyId?.company_product_category
+                ? CallData?.leadId?.product_category
                 : "P1"
             }
             color={"#000"}
@@ -488,39 +503,38 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
-                true ? "text-[#3F434A]" : "text-[#8A9099]"
-              }`}
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
+                }`}
             >
               <span>
-                {CallData?.callParticipant
-                  ? CallData?.callParticipant + ","
+                {CallData
+                  ? getParticipants(CallData)
                   : "-"}
               </span>{" "}
               <span className="text-renal-blue ">
-                {owners ? owners.name : ""}
+                {CallData?.allocatedOwner ? CallData?.allocatedOwner : "-"}
               </span>
             </p>
           </div>
-          <CallItem width={150} left={20} text={owners ? owners.name : ""} />
+          <CallItem width={150} left={20} text={owners ? owners.name : "-"} />
           <CallItem
             width={150}
             left={20}
-            text={CallData?.type ? CallData?.type : "demo call"}
+            text={CallData?.type ? CallData?.type : "-"}
           />
           <CallItem
             width={150}
             left={20}
             text={
-              CallData?.leadId?.date_time
-                ? CallData?.leadId?.date_time
-                : "23 January 20233:00 pm"
+              CallData?.datetime?.fromDate
+                ? formatDateToCustomFormat(CallData?.datetime?.fromDate)
+                : "-"
             }
           />
           <CallItem
             width={150}
             left={20}
-            text={CallData?.duration ? CallData?.duration : "30 Minutes"}
+            text={CallData?.duration ? `${CallData?.duration} Minutes` : "-"}
           />
           <CallItem
             width={150}
@@ -530,11 +544,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={`${
-              isISOString(CallData.call_start_time)
-                ? formatDateToCustomFormat(CallData.call_start_time)
-                : "-"
-            }`}
+            upperText={`${isISOString(CallData.call_start_time)
+              ? formatDateToCustomFormat(CallData.call_start_time)
+              : "-"
+              }`}
             bottomText={
               isISOString(CallData.call_start_time)
                 ? convertISOToTime(CallData.call_start_time)

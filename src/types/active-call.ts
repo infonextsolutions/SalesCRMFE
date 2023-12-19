@@ -1,12 +1,13 @@
-import { CompanyId, CustomerId } from "./Leads";
+import Lead, { CompanyId, CustomerId } from "./Leads";
 
 export interface ActiveCall {
   _id: string;
   callId: string;
   call_title: string;
-  leadId: LeadId;
+  leadId: Lead;
   companyId: CompanyId;
   customerId: CustomerId;
+  allocatedOwner: any;
   call_date: string;
   call_start_time: string;
   createdAt: string;
@@ -16,6 +17,8 @@ export interface ActiveCall {
   participants: {
     name: string;
   };
+  invite: string[];
+  datetime: any;
   description: string;
   title: string;
   callParticipant: string;
@@ -23,29 +26,6 @@ export interface ActiveCall {
   duration: string;
   location: string;
   call_type: string;
-}
-
-export interface LeadId {
-  _id: string;
-  companyId: string;
-  customerId: string;
-  potential_deal_size: string;
-  win_probability: string;
-  created_by: string;
-  customer_name: string;
-  inquiry: string;
-  existing_budget: string;
-  leadStatus: string;
-  leadStage: string;
-  lead_title: string;
-  lead_description: string;
-  notes: Note[];
-  source: string;
-  leadId: string;
-  owners: string[];
-  __v: number;
-  Product_services: string;
-  date_time: string;
 }
 
 export interface Note {
