@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import { useAppDispatch } from "@/store/store";
 import { triggerMenu } from "@/store/UI";
@@ -52,6 +52,13 @@ const Navbar = ({ mainTitle, title, src }: any) => {
   const router = useRouter();
 
   const [search, setSearch] = useState("");
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      setUserName(window.localStorage.getItem("user-name") || "");
+    }
+  }, []);
 
   return (
     <div className="w-full h-[60px] border-b-[1px] border-[#eaebec]  bg-white flex items-center justify-between">
@@ -114,12 +121,12 @@ const Navbar = ({ mainTitle, title, src }: any) => {
             }}
             width={30}
             height={40}
-            // onClick={() => {
-            //   dispatch(logout());
-            //   dispatch(setLoggedInStatus(false));
-            //   router.replace("/login");
-            //   localStorage.clear();
-            // }}
+          // onClick={() => {
+          //   dispatch(logout());
+          //   dispatch(setLoggedInStatus(false));
+          //   router.replace("/login");
+          //   localStorage.clear();
+          // }}
           />
         </div>
         <div>
@@ -132,7 +139,7 @@ const Navbar = ({ mainTitle, title, src }: any) => {
               router.replace("/login");
               localStorage.clear();
             }}
-            text={""}
+            text={userName}
             id={0}
             light={true}
             dark={false}

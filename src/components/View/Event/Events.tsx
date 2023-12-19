@@ -439,12 +439,15 @@ const Events = ({
   const [eventToDate, setEventToDate] = useState("");
   const [eventType, setEventType] = useState("");
   const [eventLocation, setEventLocation] = useState("");
+  const [link, setLink] = useState("");
   const [eventCallParticipants, setCallParticipants] = useState("");
   const [eventNotifyBefore, setEventNotifyBefore] = useState("");
   const [timeDifference, setTimeDifference] = useState("");
   const [eventInvites, setEventInvites] = useState("");
   const [allocatedCallOwner, setAllocateCallOwner] = useState("");
   const dispatch = useAppDispatch();
+
+  console.log('=================== EVENTS : LEADDATA ====================', data);
 
   const calculateTimeDifference = ({ fromTime, toTime }: any) => {
     const [fromHours, fromMinutes] = fromTime.split(":").map(Number);
@@ -476,8 +479,10 @@ const Events = ({
       },
       duration: timeDifference,
       location: eventLocation,
-      leadid: leadid,
+      link: link,
+      leadId: leadid,
       callParticipant: eventCallParticipants,
+      allocatedOwner: allocatedCallOwner,
       // companyName: "ABC",
       invite: emailInvites,
       notifyBefore: eventNotifyBefore,
@@ -490,6 +495,20 @@ const Events = ({
         finalPayload
       )
       .then((e: any) => {
+        console.log('============ res 1 ==========', e);
+        const { result } = e?.data;
+        const payload = {
+          meetLink: result?.link,
+          user_id: result?.leadId,
+          id: result?._id,
+        };
+        axios.post("https://user-details-sut4.onrender.com/save_user_info", payload)
+          .then((res: any) => {
+            console.log('============ res 2 ==========', res);
+          }).catch((err: any) => {
+            console.log('+++++++++++ error 2 +++++++++++', err);
+          });
+
         cancel();
         dispatch(
           setSuccess({
@@ -514,7 +533,7 @@ const Events = ({
 
   const loggedInUser = localStorage.getItem("user-name")?.split("@")[0];
   return (
-    <div className="hide-scrollbar w-[100%]  px-[40px] py-[30px] h-[100%] overflow-y-auto relative ">
+    <div className="hide-scrollbar w-[100%]  px-[40px] py-[30px] h-[100%] overflow-y-auto relative">
       <div
         className="w-[30px] h-[30px] cursor-pointer rounded-xl absolute top-[30px] right-[30px] flex items-center justify-center bg-[#f8f8f8]"
         onClick={() => {
@@ -605,7 +624,7 @@ const Events = ({
           },
           {
             title: loggedInUser,
-            val: 0,
+            val: 1,
             selected: false,
           },
         ]}
@@ -641,6 +660,13 @@ const Events = ({
             selected: false,
           },
         ]}
+      />
+      <AddText
+        title={"Link"}
+        top={20}
+        change={(e: any) => {
+          setLink(e);
+        }}
       />
       <DropItems
         title={"Call Participants"}

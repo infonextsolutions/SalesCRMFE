@@ -111,9 +111,8 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -439,9 +438,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const twelveHourFormat = parsedHours % 12 || 12; // Convert 0 to 12 for midnight
 
   // Construct the formatted time string
-  const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${
-    minutes != undefined ? minutes : ""
-  } ${period}`;
+  const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${minutes != undefined ? minutes : ""
+    } ${period}`;
   console.log(CallData);
 
   return (
@@ -456,7 +454,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             width={100}
             left={20}
             // text={CallData.callId}
-            text={convertDatetimeToCustomFormat(CallData.updatedAt)}
+            text={CallData?.callId}
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/calling`}
@@ -467,6 +465,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             color={"#000"}
             text={CallData.call_title}
             click={true}
+            route={`${pathname}/${id}/calling`}
           />
           <CallItem
             width={100}
@@ -493,7 +492,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={120}
             left={20}
-            text={CallData?.companyId?.product}
+            text={CallData?.companyId?.company_product_category}
             click={true}
             color={"#000"}
           />

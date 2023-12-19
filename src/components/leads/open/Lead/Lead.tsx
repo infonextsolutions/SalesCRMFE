@@ -1091,6 +1091,7 @@ const LeadContainer = ({
             companyId={LeadData.companyId._id}
             companyName={LeadData.companyId.company_name}
             clientPOCName={LeadData.customerId.name}
+            data={LeadData}
           />
         </Backdrop>
       )}
