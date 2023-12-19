@@ -48,16 +48,15 @@ const AudioProfile = ({ data, scripts }: any) => {
   };
 
   // console.log(data.result, scripts);
-  console.log("asdasdasd", data?.result);
+  console.log("----------------------- DATA & SCRIPTS --------------------", data, scripts);
   const handleFileChange = (event: any) => {
     setAudioFile(event?.target?.files[0]);
   };
-  const handleSubmit = () => {
+  const handleRecSubmit = () => {
     if (!audioFile) {
       setUploadModalStatus(false);
       return;
     }
-
     const formData = new FormData();
 
     // const payload = {
@@ -109,7 +108,6 @@ const AudioProfile = ({ data, scripts }: any) => {
     formData.append("leadId", data1.result?.leadId?._id);
     formData.append("activeCallId", data1.result?._id);
     formData.append("file", audioFile);
-    console.log("audioFile");
     axios
       .post("https://salescrmbe.onrender.com/api/recording/add-rc", formData)
       .then((e: any) => {
@@ -122,6 +120,60 @@ const AudioProfile = ({ data, scripts }: any) => {
         );
       })
       .catch((e) => {
+        dispatch(
+          setError({
+            show: true,
+            error: "Error Occured!",
+          })
+        );
+      });
+  };
+
+  const checkCallStatus = (callRes: any) => {
+    const payload = {
+      sid: callRes?.Sid,
+      leadId: callRes?.leadId,
+    };
+    axios.post(`api/calling/call-status`, payload)
+      .then((res: any) => {
+        console.log('----------------------- CALL STATUS RES ====================', res);
+      })
+      .catch((err: any) => {
+        console.log('Error: ', err);
+        dispatch(
+          setError({
+            show: true,
+            error: "Error Checking Status!",
+          })
+        );
+      });
+  };
+
+  const handleCallSubmit = () => {
+    const payload = {
+      callTo: data?.result?.call_new_participant_number,
+      id: data?.result?._id,
+      leadId: data?.result?.leadId?._id
+    }
+    axios.post(
+      `https://salescrmbe.onrender.com/api/calling/make-call?`, payload
+    )
+      .then((res: any) => {
+        const call = res?.result?.Call;
+        console.log('----------------------- CALLING RES ====================', res?.result?.Call);
+        setCallModal(false);
+        dispatch(
+          setSuccess({
+            show: true,
+            success: "Called Successfully!",
+          })
+        );
+        const intervalId = setInterval(() => {
+          // checkCallStatus(call);
+        }, 3000);
+      })
+      .catch((err: any) => {
+        console.log('Error: ', err);
         dispatch(
           setError({
             show: true,
@@ -187,7 +239,7 @@ const AudioProfile = ({ data, scripts }: any) => {
       .then((e) => {
         setData(e.data);
       })
-      .catch(() => {});
+      .catch(() => { });
   };
   return (
     <>
@@ -197,7 +249,7 @@ const AudioProfile = ({ data, scripts }: any) => {
         src="Phone"
         buttons={[
           {
-            text: "Make a call ",
+            text: "Make a call",
             dropdown: true,
             id: 2,
             light: false,
@@ -261,16 +313,19 @@ const AudioProfile = ({ data, scripts }: any) => {
               <p className="mx-auto text-left mt-4 pl-3 text-lg text-gray-400">
                 Call To :
               </p>
-              <p className="mx-auto text-left mt-4 pl-3 text-lg text-gray-400">
-                Designation :
-              </p>
               <input
                 type="text"
                 name=""
                 disabled
                 className="border w-[80%] pl-4 ml-3 mt-2 py-2 rounded-lg"
-                value="+ 918269816289"
+                value={data?.result?.call_new_participant_number}
               />
+              <p className="mx-auto text-left mt-4 pl-3 text-lg text-gray-400">
+                Designation :
+              </p>
+              <p className="mx-auto text-left mt-4 pl-3 text-lg text-black">
+                {data?.result?.call_new_participant_designation}
+              </p>
               <div className="flex gap-4 justify-end mr-4 mt-6">
                 <button
                   onClick={() => setCallModal(false)}
@@ -279,7 +334,7 @@ const AudioProfile = ({ data, scripts }: any) => {
                   Cancel
                 </button>
                 <button
-                  onClick={handleSubmit}
+                  onClick={handleCallSubmit}
                   className="bg-bg-red hover:bg-[#ff7d6d] text-white px-[40px] py-[10px] rounded-xl font-medium text-[14px]"
                 >
                   Save
@@ -310,7 +365,7 @@ const AudioProfile = ({ data, scripts }: any) => {
                   Cancel
                 </button>
                 <button
-                  onClick={handleSubmit}
+                  onClick={handleRecSubmit}
                   className="bg-bg-red hover:bg-[#ff7d6d] text-white px-[40px] py-[10px] rounded-xl font-medium text-[14px]"
                 >
                   Save

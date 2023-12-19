@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import { useAppDispatch } from "@/store/store";
 import { triggerMenu } from "@/store/UI";
@@ -60,9 +60,17 @@ const NavbarWithButton = ({
 
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [userName, setUserName] = useState("");
+
   const handleSerachBar = () => {
     setShowSearch(!showSearch);
   };
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      setUserName(window.localStorage.getItem("user-name") || "");
+    }
+  }, []);
+
   return (
     <div className="w-full h-[60px] border-b-[1px] border-[#eaebec]  bg-white flex items-center justify-between">
       <div className="flex gap-2">
@@ -164,12 +172,12 @@ const NavbarWithButton = ({
             }}
             width={30}
             height={40}
-            // onClick={() => {
-            //   dispatch(logout());
-            //   dispatch(setLoggedInStatus(false));
-            //   router.replace("/login");
-            //   localStorage.clear();
-            // }}
+          // onClick={() => {
+          //   dispatch(logout());
+          //   dispatch(setLoggedInStatus(false));
+          //   router.replace("/login");
+          //   localStorage.clear();
+          // }}
           />
         </div>
         <div>
@@ -182,7 +190,7 @@ const NavbarWithButton = ({
               router.replace("/login");
               localStorage.clear();
             }}
-            text={""}
+            text={userName}
             id={0}
             light={true}
             dark={false}
