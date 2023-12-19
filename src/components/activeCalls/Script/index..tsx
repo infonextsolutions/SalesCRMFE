@@ -6,6 +6,8 @@ import { ActiveCall } from "@/types/active-call";
 import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Uploads from "@/components/View/uploads/index.jsx";
+import { Card } from "@mui/material";
+import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 
 const ScriptDoc = ({
   title,
@@ -35,8 +37,14 @@ const ScriptDoc = ({
     }
   };
 
+  const [btn, setbtn] = useState(false);
+
+  const handleView = () => {
+    setSelected(!selected);
+    setbtn(false);
+  };
   return (
-    <div onClick={() => setSelected(!selected)} className="w-[100%] mt-[20px]">
+    <div className="w-[100%] mt-[20px]">
       <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
         {title}
       </p>
@@ -111,7 +119,7 @@ const ScriptDoc = ({
             width={20}
             height={20}
           />
-          <Image
+          {/* <Image
             src={getBasicIcon("More")}
             alt=""
             // fill={true}
@@ -122,14 +130,40 @@ const ScriptDoc = ({
             }
             width={20}
             height={20}
-          />
+          /> */}
+
+          <button className="relative">
+            <Image
+              src={getBasicIcon("More")}
+              onClick={() => setbtn(!btn)}
+              alt=""
+              // fill={true}
+              style={
+                {
+                  // objectFit:"contain"
+                }
+              }
+              width={20}
+              height={20}
+            />
+          </button>
+          {btn && (
+            <Card
+              sx={{ borderRadius: "12px" }}
+              className="absolute flex flex-col gap-2 ml-[-22px] py-2 mt-24 cursor-pointer"
+            >
+              <p onClick={handleView} className="hover:bg-gray-200 px-7">
+                {selected ? "Hide" : "View"}
+              </p>
+              <p className="hover:bg-gray-200 px-7">Share</p>
+            </Card>
+          )}
         </div>
       </div>
       <p className="text-[#8A9099] text-[13px] font-medium mt-[10px]">{data}</p>
     </div>
   );
 };
-
 
 export function convertDatetime(inputStr: any) {
   const months = [
@@ -162,8 +196,9 @@ export function convertDatetime(inputStr: any) {
   const minutes = istTime.getUTCMinutes();
 
   // Format the time part (hours and minutes) in 12-hour clock format with AM/PM indicator
-  let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"
-    }`;
+  let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${
+    hours >= 12 ? "PM" : "AM"
+  }`;
 
   // Format the date and time as desired
   return `${day} ${month} ${year}, ${timeStr}`;
@@ -296,7 +331,6 @@ const ScriptList = ({
           />
         </Backdrop>
       )}
-
       <div className="w-[100%] mt-5 flex flex-col gap-4 items-center p-6 bg-white border border-gray-200 rounded-lg shadow">
         {/* <Navigator callback={CallBack} current={0} list={list} /> */}
         <div className="w-[100%] flex justify-between">
@@ -346,7 +380,8 @@ const ScriptList = ({
 };
 
 const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
-  console.log(scripts);
+  console.log(scripts, "arijit");
+  console.log(data, "arijit");
   console.log(data?._id);
 
   const [activeTitle, setActiveTitle] = React.useState(0);
@@ -365,7 +400,7 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
       .then((e) => {
         console.log(setCurrScripts(e.data.result));
       })
-      .catch((e) => { });
+      .catch((e) => {});
   };
 
   console.log(scripts);
