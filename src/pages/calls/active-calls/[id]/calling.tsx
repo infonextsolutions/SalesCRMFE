@@ -161,14 +161,15 @@ const AudioProfile = ({ data, scripts }: any) => {
       .then((res: any) => {
         const call = res?.result?.Call;
         console.log('----------------------- CALLING RES ====================', res?.result?.Call);
+        setCallModal(false);
+        dispatch(
+          setSuccess({
+            show: true,
+            success: "Called Successfully!",
+          })
+        );
         const intervalId = setInterval(() => {
-          setUploadModalStatus(false);
-          dispatch(
-            setSuccess({
-              show: true,
-              success: "Called Successfully!",
-            })
-          );
+          // checkCallStatus(call);
         }, 3000);
       })
       .catch((err: any) => {
