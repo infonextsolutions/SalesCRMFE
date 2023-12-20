@@ -146,6 +146,7 @@ const Indicator = () => {
           <ul className="flex flex-col gap-4 items-center">
             {sideBarItems.map((item) => (
               <li
+                key={item}
                 onClick={() => setIndicatorType(item)}
                 value={item}
                 className={`${

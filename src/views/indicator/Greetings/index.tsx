@@ -1,4 +1,6 @@
 import Navigation from "@/components/app/Navigation";
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 import React from "react";
 
 type Props = {};
@@ -6,23 +8,79 @@ type Props = {};
 const Greetings = (props: Props) => {
   const dummydata = [
     {
+      id: 1,
       indicator_value: "Hi",
-      alternative_values: ["Hey", "Hello", "Hey There "],
+      alternative_values: [
+        {
+          id: 1,
+          value: "Hey",
+        },
+        {
+          id: 2,
+          value: "Hello",
+        },
+        {
+          id: 3,
+          value: "Hey There",
+        },
+      ],
       score: "1",
     },
     {
+      id: 2,
       indicator_value: "Hi",
-      alternative_values: ["Hey", "Hello", "Hey There "],
+      alternative_values: [
+        {
+          id: 1,
+          value: "Hey",
+        },
+        {
+          id: 2,
+          value: "Hello",
+        },
+        {
+          id: 3,
+          value: "Hey There",
+        },
+      ],
       score: "1",
     },
     {
+      id: 3,
       indicator_value: "Hi",
-      alternative_values: ["Hey", "Hello", "Hey There "],
+      alternative_values: [
+        {
+          id: 1,
+          value: "Hey",
+        },
+        {
+          id: 2,
+          value: "Hello",
+        },
+        {
+          id: 3,
+          value: "Hey There",
+        },
+      ],
       score: "1",
     },
     {
+      id: 4,
       indicator_value: "Hi",
-      alternative_values: ["Hey", "Hello", "Hey There "],
+      alternative_values: [
+        {
+          id: 1,
+          value: "Hey",
+        },
+        {
+          id: 2,
+          value: "Hello",
+        },
+        {
+          id: 3,
+          value: "Hey There",
+        },
+      ],
       score: "1",
     },
   ];
@@ -64,17 +122,45 @@ const Greetings = (props: Props) => {
         <hr className="mt-2" />
 
         {dummydata.map((data) => (
-          <div>
-            <div className="h-[auto] flex justify-between w-[80%] py-4">
-              <h4 className="text-gray-600 font-semibold">
-                {data.indicator_value}
-              </h4>
-              <div className="flex flex-col gap-3">
-                {data.alternative_values.map((item) => (
-                  <h4 className="text-gray-600 font-semibold">{item}</h4>
-                ))}
+          <div key={data.id}>
+            <div className=" w-[99%] flex justify-between">
+              <div className=" h-[auto] flex justify-between w-[80%] py-4">
+                <h4 className="text-gray-600 font-semibold">
+                  {data.indicator_value}
+                </h4>
+                <div className="flex flex-col gap-3">
+                  {data.alternative_values.map((item) => (
+                    <h4 key={item.id} className="text-gray-600 font-semibold">
+                      {item.value}
+                    </h4>
+                  ))}
+                </div>
+                <h4 className="text-gray-600 font-semibold">{data.score}</h4>
               </div>
-              <h4 className="text-gray-600 font-semibold">{data.score}</h4>
+              <div className="flex gap-4 w-[10%] h-[62px]">
+                <Image
+                  className="w-[20%] cursor-pointer "
+                  src={getBasicIcon("Edit")}
+                  alt=""
+                  // fill={true}
+                  width={30}
+                  height={30}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />{" "}
+                <Image
+                  className="w-[20%] cursor-pointer  "
+                  src={getBasicIcon("Delete")}
+                  alt=""
+                  // fill={true}
+                  width={30}
+                  height={30}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
             </div>
             <hr />
           </div>
