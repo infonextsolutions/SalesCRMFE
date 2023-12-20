@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 function useUI() {
   const ui = useSelector((state: any) => state.ui);
   const auth = useSelector((state: any) => state.auth);
-  console.log('>>>>>>>>>>>>>>>>>>>>>> UI & AUTH <<<<<<<<<<<<<<<<<<<<<', ui, auth);
+  console.log(
+    ">>>>>>>>>>>>>>>>>>>>>> UI & AUTH <<<<<<<<<<<<<<<<<<<<<",
+    ui,
+    auth
+  );
 
   let menuOptions = ui.menuOptions;
 
@@ -17,15 +21,6 @@ function useUI() {
           list: [],
         },
         {
-          title: "Calling",
-          route: "calls",
-          list: [
-            { title: "Active Calls", route: "active-calls" },
-            { title: "Recorded Calls", route: "recorded-calls" },
-          ],
-          icon: "fluent_call-end-16-regular",
-        },
-        {
           title: "Sales",
           route: "sales",
           list: [
@@ -33,6 +28,15 @@ function useUI() {
             { title: "Closed", route: "closed" },
           ],
           icon: "salesIcon",
+        },
+        {
+          title: "Calling",
+          route: "calls",
+          list: [
+            { title: "Active Calls", route: "active-calls" },
+            { title: "Recorded Calls", route: "recorded-calls" },
+          ],
+          icon: "fluent_call-end-16-regular",
         },
         {
           title: "Indicator",
@@ -119,15 +123,6 @@ function useUI() {
           list: [],
         },
         {
-          title: "Calls",
-          route: "calls",
-          list: [
-            { title: "Active Calls", route: "active-calls" },
-            { title: "Recorded Calls", route: "recorded-calls" },
-          ],
-          icon: "fluent_call-end-16-regular",
-        },
-        {
           title: "Sales",
           route: "sales",
           list: [
@@ -135,6 +130,15 @@ function useUI() {
             { title: "Closed", route: "closed" },
           ],
           icon: "salesIcon",
+        },
+        {
+          title: "Calls",
+          route: "calls",
+          list: [
+            { title: "Active Calls", route: "active-calls" },
+            { title: "Recorded Calls", route: "recorded-calls" },
+          ],
+          icon: "fluent_call-end-16-regular",
         },
         {
           title: "Indicator",
