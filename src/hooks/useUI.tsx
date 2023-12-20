@@ -8,6 +8,7 @@ function useUI() {
   let menuOptions = ui.menuOptions;
 
   switch (auth.user.role) {
+    // team manager - Manager
     case "TM":
       menuOptions = [
         {
@@ -110,6 +111,9 @@ function useUI() {
         },
       ];
       break;
+    case "Admin":
+    case "BDR":
+    case "SDR":
     default:
       menuOptions = [
         {

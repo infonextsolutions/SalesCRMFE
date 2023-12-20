@@ -86,10 +86,10 @@ const NavbarWithButton = ({
           height={40}
         />
         <div className="flex gap-2">
-          <h1 className="text-lg font-semibold">{mainTitle}</h1>
+          <h1 className="text-lg font-semibold text-[black]">{mainTitle}</h1>
           {title && (
             <div className="flex gap-2">
-              <h1 className="text-lg font-semibold">{">"}</h1>
+              <h1 className="text-lg font-semibold text-[black]">{">"}</h1>
               <h1 className="text-lg font-semibold capitalize text-bg-red">
                 {title}
               </h1>
