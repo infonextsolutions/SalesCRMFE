@@ -125,7 +125,7 @@ const Profile = ({ data, mastersData }: any) => {
   };
 
   return (
-    <>
+    <div className="bg-white">
       <NavbarWithButton
         mainTitle="Sales > Open"
         title={`${data1?.result?.lead_title} - Info`}
@@ -241,7 +241,7 @@ const Profile = ({ data, mastersData }: any) => {
         </div>
         {/* write your code here for profile page manya! */}
       </div>
-    </>
+    </div>
   );
 };
 
