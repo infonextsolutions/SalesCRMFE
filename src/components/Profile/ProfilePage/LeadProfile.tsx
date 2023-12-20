@@ -12,7 +12,12 @@ import axios from "axios";
 import Lead from "@/types/Leads";
 
 const ProfilePage = ({ data1, updated, mastersData }: any) => {
-  console.log('+++++++++++++++++++++++ PROFILE PAGE ++++++++++++++++++++++', data1, updated, mastersData);
+  console.log(
+    "+++++++++++++++++++++++ PROFILE PAGE ++++++++++++++++++++++",
+    data1,
+    updated,
+    mastersData
+  );
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -68,10 +73,6 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
   const contacted: any = data.customerId;
   const contacts = contacted.contacts;
 
-  const checkForAllNull = contacts.every((item: any) => item === null);
-  const filteredContactArray = checkForAllNull
-    ? []
-    : contacts.filter((item: any) => item !== null);
   console.log(contacts, "Pejvfaek");
 
   const [Activities, setActivities] = useState({
@@ -267,19 +268,17 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead owner</p>
-          {
-            data?.owners?.map((owner: any, index: number) => {
-              if (owner && Object.keys(owner).length !== 0) {
-                return (
-                  <p className="text-sm font-semibold text-black" key={index}>
-                    {owner?.name ?? "-"}
-                  </p>
-                );
-              } else {
-                return null;
-              }
-            })
-          }
+          {data?.owners?.map((owner: any, index: number) => {
+            if (owner && Object.keys(owner).length !== 0) {
+              return (
+                <p className="text-sm font-semibold text-black" key={index}>
+                  {owner?.name ?? "-"}
+                </p>
+              );
+            } else {
+              return null;
+            }
+          })}
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Manager</p>
@@ -451,54 +450,53 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             )}
           </div>
         </div>
-        {filteredContactArray.length > 1 && (
-          <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-            Other Contact
-          </p>
-        )}
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          {data?.customerId?.contacts && data?.customerId?.contacts?.map((item: any, i: any) => {
-            function random_number_between_1_and_7() {
-              // Generate a random number between 0 and 1 (exclusive)
-              const randomNum = Math.random();
-              // Scale the number to the range of 1 to 7
-              const scaledNum = Math.floor(randomNum * 7) + 1;
-              return scaledNum;
-            }
-            const random = random_number_between_1_and_7();
-            console.log('--------------- item ----------------', item);
-            if (item && Object.keys(item).length !== 0) {
-              return (
-                <li className="mb-[10px]" key={i}>
-                  <div className="flex items-center gap-x-3 mr-3">
-                    <Image
-                      className="h-12 w-10 rounded-full ml-2"
-                      src={getRoundedAvatar(random, 30)}
-                      alt=""
-                      width={64}
-                      height={48}
-                      style={{
-                        objectFit: "contain",
-                      }}
-                    />
-                    <div>
-                      <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
-                        {item?.customer_name}
-                      </h4>
-                      <a
-                        href="#0"
-                        className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
-                      >
-                        {item?.customer_designation || item?.designation}
-                      </a>
+        <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
+          Other Contact
+        </p>
+        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[2px] leading-[21px]">
+          {data?.customerId?.contacts &&
+            data?.customerId?.contacts?.map((item: any, i: any) => {
+              function random_number_between_1_and_7() {
+                // Generate a random number between 0 and 1 (exclusive)
+                const randomNum = Math.random();
+                // Scale the number to the range of 1 to 7
+                const scaledNum = Math.floor(randomNum * 7) + 1;
+                return scaledNum;
+              }
+              const random = random_number_between_1_and_7();
+              console.log("--------------- item ----------------", item);
+              if (item && Object.keys(item).length !== 0) {
+                return (
+                  <li className="mb-[10px]" key={i}>
+                    <div className="flex items-center gap-x-3 mr-3">
+                      <Image
+                        className="h-12 w-10 rounded-full ml-2"
+                        src={getRoundedAvatar(random, 30)}
+                        alt=""
+                        width={64}
+                        height={48}
+                        style={{
+                          objectFit: "contain",
+                        }}
+                      />
+                      <div>
+                        <h4 className="text-base text-[12px] leading-7 tracking-wide text-black">
+                          {item?.customer_name}
+                        </h4>
+                        <a
+                          href="#0"
+                          className="block text-xs font-small text-[#000] -500 hover:text-indigo-500"
+                        >
+                          {item?.customer_designation || item?.designation}
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              );
-            } else {
-              return null;
-            }
-          })}
+                  </li>
+                );
+              } else {
+                return null;
+              }
+            })}
         </div>
       </div>
     </>

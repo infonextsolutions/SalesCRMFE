@@ -80,7 +80,6 @@ const LeadProfileContainer = ({
         width ? width : "100%"
       }] bg-white rounded-xl p-[25px] px-[35px] pt-[30px] `}
     >
-      width={false}
       <Navigator
         width={false}
         callback={CallBack}

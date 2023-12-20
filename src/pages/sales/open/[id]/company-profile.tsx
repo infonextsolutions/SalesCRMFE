@@ -6,35 +6,16 @@ import axios from "axios";
 import Navbar from "@/components/app/Navbar/Navbar";
 
 const CompanyProfile = ({ data }: any) => {
-  const [title, setTitle] = React.useState(data?.result?.companyId?.company_name);
+  const [title, setTitle] = React.useState(
+    data?.result?.companyId?.company_name
+  );
 
   return (
-    <>
-      <Navbar title="Manage Leads" src="manageLeadsIcon" />
-      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">
-        <Navigation
-          title={`Manage Leads > ${title}`}
-          buttons={
-            [
-              //   {
-              //     text: "Take Action",
-              //     dropdown: true,
-              //     id: 1,
-              //     icon: "Plus",
-              //     light: false,
-              //     list: [
-              //       { title: "Call", Icon: "Phone" },
-              //       { title: "Email", Icon: "Mail" },
-              //       { title: "Event", Icon: "Calendar" },
-              //       { title: "Task", Icon: "Tasks" },
-              //       { title: "Message", Icon: "Chat" },
-              //     ],
-              //   },
-            ]
-          }
-        />
+    <div className="bg-white">
+      <Navbar mainTitle="Manage Leads" title={title} src="manageLeadsIcon" />
+      <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px] pt-6">
         <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-          <div className="w-[320px] shrink-0 min-h-[70vh] bg-white rounded-xl p-[20px]">
+          <div className="w-[320px] shrink-0 min-h-[70vh] bg-[#ffe3e170] rounded-xl p-[20px]">
             <ProfilePage
               refresh={(e: any) => {
                 setTitle(e);
@@ -42,13 +23,13 @@ const CompanyProfile = ({ data }: any) => {
               data1={data}
             />
           </div>
-          <div className="bg-white rounded-xl w-[100%] px-[25px]">
+          <div className="bg-[#F7F7F7] rounded-xl w-[100%] px-[25px]">
             <Deals data={data} type="company" />
           </div>
         </div>
         {/* write your code here for profile page manya! */}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -217,7 +217,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
   return (
     <>
       <div
-        className="p-[15px] rounded-xl mb-[20px] w-[270px] flex flex-col justify-between mh-[270px] shadow-lg shadow-slate-400"
+        className="p-[15px] rounded-xl mb-[20px] w-[240px] flex flex-col justify-between mh-[270px] shadow-lg shadow-slate-400"
         key={i}
       >
         <div className="block-heading text-black text-[13px] leading-4 mb-[23px]">
@@ -238,7 +238,9 @@ const KanbanItem = ({ item, i, Item }: any) => {
             }}
             className="text-black/70 cursor-pointer"
           >
-            {Item?.companyId?.company_name} |{" "}{Item?.companyId?.company_address || Item?.companyId?.company_location}
+            {Item?.companyId?.company_name} |{" "}
+            {Item?.companyId?.company_address ||
+              Item?.companyId?.company_location}
           </p>
           <p
             className="text-black/70 cursor-pointer"
@@ -246,7 +248,9 @@ const KanbanItem = ({ item, i, Item }: any) => {
               clientId();
             }}
           >
-            {Item?.customerId?.customer_name || Item?.customerId?.name} | {Item?.customerId?.customer_designation || Item?.customerId?.designation}
+            {Item?.customerId?.customer_name || Item?.customerId?.name} |{" "}
+            {Item?.customerId?.customer_designation ||
+              Item?.customerId?.designation}
           </p>
         </div>
         <div className="block-details text-black text-[12px] mb-[20px]">
@@ -255,16 +259,18 @@ const KanbanItem = ({ item, i, Item }: any) => {
             <p className="text-black/[.75]">
               {activity
                 ? activity?.history?.length > 0 &&
-                (activity?.history?.[activity?.history?.length - 1]?.type === "note"
-                  ? "Note added"
-                  : "Email Sent")
+                  (activity?.history?.[activity?.history?.length - 1]?.type ===
+                  "note"
+                    ? "Note added"
+                    : "Email Sent")
                 : ""}{" "}
               {activity ? "|" : "-"}{" "}
               {activity
                 ? activity?.history?.length > 0 &&
-                convertToFormattedDate(
-                  activity?.history?.[activity?.history?.length - 1]?.createdAt
-                )
+                  convertToFormattedDate(
+                    activity?.history?.[activity?.history?.length - 1]
+                      ?.createdAt
+                  )
                 : ""}
             </p>
           </div>
@@ -279,7 +285,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
         </div>
 
         <div className="quick-actions text-[12px] px-[9px] mt-auto py-[6px]  bg-slate-200 rounded-[12px] flex items-center justify-between">
-          <p className="text-black/[.75] leading-[5px]">Quick Actions</p>
+          <p className="text-black/[.75] leading-[14px]">Quick Actions</p>
           <div className="icons flex gap-[6px]">
             <Image
               src={getBasicIcon("Tasks")}
@@ -436,7 +442,11 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {events && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Events cancel={cancelEvents} companyName={Item?.companyId?.company_name} data={Item} />
+          <Events
+            cancel={cancelEvents}
+            companyName={Item?.companyId?.company_name}
+            data={Item}
+          />
         </Backdrop>
       )}
       {emails && (
@@ -457,7 +467,11 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {messages && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Messages cancel={cancelMessages} companyName={Item?.companyId?.company_name} data={Item} />
+          <Messages
+            cancel={cancelMessages}
+            companyName={Item?.companyId?.company_name}
+            data={Item}
+          />
         </Backdrop>
       )}
       {call && (

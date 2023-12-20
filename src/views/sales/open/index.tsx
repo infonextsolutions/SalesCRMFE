@@ -165,7 +165,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
   };
 
   return (
-    <div className="relative w-[100%] min-h-[90vh] pl-[40px] ">
+    <div className="relative w-[100%] min-h-[90vh] px-[10px] ">
       {/* <Navigation  /> */}
       {imports && (
         <Backdrop bool={bool}>
