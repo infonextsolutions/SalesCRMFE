@@ -11,6 +11,8 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setMenuOptions } from "@/store/UI";
 import axios from "axios";
 import Link from "next/link";
+import { useAppDispatch } from "@/store/store";
+import { setError, setSuccess } from "@/store/ai";
 
 const SignupSchema = Yup.object().shape({
     user: Yup.string().email("Invalid email").required("Required"),
@@ -22,23 +24,31 @@ const ResetPassword = () => {
     const [invalid, setInvalid] = useState(false);
     const dispatch = useDispatch();
     const router = useRouter();
+    const { token } = router.query;
+    console.log('+++++++++++++++++++ TOKEN +++++++++++++++++++', token);
 
-    const setLocalData = (id: any, Name: any, role: any) => {
+    const setLocalData = (id: any, Name: any, role: any, accessToken: any) => {
         localStorage.setItem("user-id", id);
         localStorage.setItem("user-name", Name);
         localStorage.setItem("user-role", role);
         localStorage.setItem("logged", "loggedIn");
+        localStorage.setItem("access-token", accessToken);
     };
 
     const [logged] = useLocalStorage("logged", "loading");
     const [id] = useLocalStorage("user-id", "not-loaded");
     const [name] = useLocalStorage("user-name", "not-loaded");
     const [role] = useLocalStorage("user-role", "not-loaded");
+    const [accessToken] = useLocalStorage("access-token", "no-token");
+
+    const appDispatch = useAppDispatch();
 
     const submit = ({ user, pass }: any) => {
         setInvalid(false);
         const finalPayload = {
-            newPassword: pass
+            email: user,
+            newPassword: pass,
+            token: token
         };
         axios
             .post(
@@ -46,16 +56,37 @@ const ResetPassword = () => {
                 finalPayload
             )
             .then((res) => {
-                console.log("user password reset", res.data);
-                dispatch(
-                    setUser1({ _id: res.data?._id, User: res.data?.name, Role: "BDM" })
-                );
-                setLocalData(res.data?._id, res.data?.name, "BDM");
-                router.push("/sales/open");
+                console.log("============ user password reset ==============", res.data);
+                if (res?.data?.success) {
+                    appDispatch(setSuccess({
+                        show: true,
+                        success: "Password updated successfully!",
+                    }));
+                    router.push("/login");
+                    // dispatch(
+                    //     setUser1({ _id: res.data?._id, User: res.data?.name, Role: res?.data?.role, accessToken: res?.data?.accessToken })
+                    // );
+                    // dispatch(setLoggedInStatus(true));
+                    // setLocalData(res.data?._id, res.data?.name, res?.data?.role, res?.data?.accessToken);
+                } else {
+                    dispatch(
+                        setError({
+                            show: true,
+                            error: "Error occurred.",
+                        })
+                    );
+                }
+
             })
             .catch((err) => {
                 setInvalid(true);
                 console.log(err);
+                dispatch(
+                    setError({
+                        show: true,
+                        error: "Error occurred.",
+                    })
+                );
             });
     };
 
@@ -146,10 +177,10 @@ const ResetPassword = () => {
                                         </div>
                                         <input
                                             type={show}
-                                            id="username"
-                                            value={values.user}
-                                            onBlur={handleBlur("user")}
-                                            onChange={handleChange("user")}
+                                            id="password"
+                                            value={values.pass}
+                                            onBlur={handleBlur("pass")}
+                                            onChange={handleChange("pass")}
                                             className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] pl-7 tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                                             // className="border-b-[2px] text-base font-medium px-2 py-2 bg-white text-black outline-none focus:ring-0 focus:border-gray-600"
                                             placeholder="Enter New Password"
@@ -187,7 +218,7 @@ const ResetPassword = () => {
                                     )}
                                 </div>
                                 <div className="py-1 my-[10px]">
-                                    <div className="flex flex-col h-[95px]">
+                                    {/* <div className="flex flex-col h-[95px]">
                                         <label
                                             htmlFor="password"
                                             className=" block text-black text-base mr-auto mb-2 font-medium tracking-wide"
@@ -245,7 +276,7 @@ const ResetPassword = () => {
                                                 *{errors.pass}
                                             </p>
                                         )}
-                                    </div>
+                                    </div> */}
                                     {invalid && (
                                         <p className="block text-[#ff0000]  text-start mt-[-15px] mb-[-9px] mb-2 py-3 font-medium tracking-wide">
                                             *Invalid Credentials

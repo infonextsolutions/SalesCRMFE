@@ -46,17 +46,19 @@ const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const setLocalData = (id: any, Name: any, role: any) => {
+  const setLocalData = (id: any, Name: any, role: any, accessToken: any) => {
     localStorage.setItem("user-id", id);
     localStorage.setItem("user-name", Name);
     localStorage.setItem("user-role", role);
     localStorage.setItem("logged", "loggedIn");
+    localStorage.setItem("access-token", accessToken);
   };
 
   const [logged] = useLocalStorage("logged", "loading");
   const [id] = useLocalStorage("user-id", "not-loaded");
   const [name] = useLocalStorage("user-name", "not-loaded");
   const [role] = useLocalStorage("user-role", "not-loaded");
+  const [accessToken] = useLocalStorage("access-token", "no-token");
 
   React.useEffect(() => {
     if (!state.isLoggedIn) {
@@ -93,12 +95,12 @@ const Login = () => {
         finalPayload
       )
       .then((res) => {
-        console.log("user login", res.data);
+        console.log("=========== user login ===========", res.data);
         dispatch(
-          setUser1({ _id: res.data?._id, User: res.data?.name, Role: "BDM" })
+          setUser1({ _id: res.data?._id, User: res.data?.name, Role: res?.data?.role, accessToken: res?.data?.accessToken })
         );
         dispatch(setLoggedInStatus(true));
-        setLocalData(res.data?._id, res.data?.name, "BDM");
+        setLocalData(res.data?._id, res.data?.name, res?.data?.role, res?.data?.accessToken);
         router.push("/");
       })
       .catch((err) => {

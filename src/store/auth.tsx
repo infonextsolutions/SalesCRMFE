@@ -4,6 +4,7 @@ const authSlice = createSlice({
   name: "user",
   initialState: {
     isLoggedIn: false,
+    accessToken: "",
     user: {
       name: "",
       role: "",
@@ -16,6 +17,7 @@ const authSlice = createSlice({
       state._id = action.payload._id;
       state.user.name = action.payload.User;
       state.user.role=action.payload.Role;
+      state.accessToken = action.payload.accessToken;
     },
     setRights: (state, action) => {
       state.rights = action.payload.rights;

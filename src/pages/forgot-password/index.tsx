@@ -11,6 +11,8 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setMenuOptions } from "@/store/UI";
 import axios from "axios";
 import Link from "next/link";
+import { setError, setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 
 const SignupSchema = Yup.object().shape({
     user: Yup.string().email("Invalid email").required("Required"),
@@ -18,6 +20,7 @@ const SignupSchema = Yup.object().shape({
 
 const ForgotPassword = () => {
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     const submit = ({ user }: any) => {
         const finalPayload = {
@@ -25,15 +28,29 @@ const ForgotPassword = () => {
         };
         axios
             .post(
-                "https://salescrmbe.onrender.com/api/master-users/forgot_password",
+                "https://salescrmbe.onrender.com/api/master-users/forgotPassword",
                 finalPayload
             )
             .then((res) => {
-                console.log("forgot password", res.data);
-                router.push("/login");
+                console.log("================= forgot password ===============", res.data);
+                if (res?.data?.success) {
+                    dispatch(
+                        setSuccess({
+                            show: true,
+                            success: "Check your email to Reset your password.",
+                        })
+                    );
+                    router.push("/login");
+                }
             })
             .catch((err) => {
                 console.log(err);
+                dispatch(
+                    setError({
+                        show: true,
+                        error: "Error occurred.",
+                    })
+                );
             });
     };
 
