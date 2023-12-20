@@ -142,13 +142,13 @@ function useUI() {
             { title: "Active Calls", route: "active-calls" },
             { title: "Recorded Calls", route: "recorded-calls" },
           ],
-          icon: "fluent_call-end-16-regular",
+          icon: "Phone",
         },
         {
           title: "Indicator",
           route: "indicator",
           list: [{ title: "Indicator-basic", route: "basic" }],
-          icon: "Zap",
+          icon: "Indicators",
         },
       ];
   }

@@ -19,7 +19,7 @@ export interface ActiveCall {
   };
   invite: string[];
   datetime: any;
-  description: string;
+  call_description: string;
   title: string;
   callParticipant: string;
   type: string;

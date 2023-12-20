@@ -1,9 +1,12 @@
+import { convertDatetime } from "@/components/activeCalls/Script/index.";
 import Call, { CompanyId, CustomerId } from "@/types/Calls";
+import { Owner } from "@/types/Leads";
 import { ActiveCall } from "@/types/active-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
+import BackdropRight from "@/components/View/Backdrop/Right";
 
 const CallBox = ({ width, bool }: any) => {
   const [check, setCheck] = useState(false);
@@ -111,8 +114,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -166,16 +170,45 @@ const CallItemMultiple = ({
 //   );
 // };
 
-const ExpandingIcon = ({ change }: any) => {
-  const [show, setShow] = useState(false);
+// const ExpandingIcon = ({ change }: any) => {
+//   const [show, setShow] = useState(false);
 
+//   return (
+//     <div className="w-[50px] flex items-center justify-center cursor-pointer">
+//       {!show ? (
+//         <Image
+//           onClick={() => {
+//             change(!show);
+//             setShow(!show);
+//           }}
+//           src={"/plus-circle.svg"}
+//           alt=""
+//           width={15}
+//           height={15}
+//         />
+//       ) : (
+//         <Image
+//           onClick={() => {
+//             change(!show);
+//             setShow(!show);
+//           }}
+//           src={"/minus-circle.svg"}
+//           alt=""
+//           width={15}
+//           height={15}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+const ExpandingIcon = ({ change, show = false }: any) => {
   return (
     <div className="w-[50px] flex items-center justify-center cursor-pointer">
       {!show ? (
         <Image
           onClick={() => {
-            change(!show);
-            setShow(!show);
+            change(true);
           }}
           src={"/plus-circle.svg"}
           alt=""
@@ -185,8 +218,7 @@ const ExpandingIcon = ({ change }: any) => {
       ) : (
         <Image
           onClick={() => {
-            change(!show);
-            setShow(!show);
+            change(false);
           }}
           src={"/minus-circle.svg"}
           alt=""
@@ -264,51 +296,226 @@ const CallPlayer = () => {
   );
 };
 
+// const ExpandableRow = ({
+//   CallDesc,
+//   callMatrics,
+//   engagingQuestions,
+//   height,
+// }: any) => {
+//   return (
+//     <div
+//       className="w-[100%] h-[100%] flex px-[110px] py-[10px] duration-300"
+//       style={{ height: height }}
+//     >
+//       <div className="w-[300px]">
+//         <p className="text-[16px] text-[#000] font-medium">Call Description</p>
+//         <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
+//           {CallDesc}
+//         </p>
+//       </div>
+//       <div className="w-[180px] ml-[50px]">
+//         <p className="text-[16px] text-[#000] font-medium">Call Metrics</p>
+//         {callMatrics.map((item: any, i: any) => {
+//           return (
+//             <div className="flex justify-between items-center mt-[3px]" key={i}>
+//               <p className="text-[#000] font-medium mt-[2px] text-[13px] tracking-wide">
+//                 {item.title}
+//               </p>
+//               <p
+//                 key={i}
+//                 className="text-[#8A9099] font-medium mt-[2px] text-[13px] tracking-wide"
+//               >
+//                 {item.data}
+//               </p>
+//             </div>
+//           );
+//         })}
+//       </div>
+
+//       <div className="flex h-[20px]  justify-between items-center w-[200px] mt-[40px] ml-[60px]">
+//         <p className="text-[#000] font-medium mt-[2px] text-[13px] tracking-wide">
+//           Engaging Questions
+//         </p>
+//         <p className="text-[#8A9099] font-medium mt-[2px] text-[13px] tracking-wide">
+//           {engagingQuestions}
+//         </p>
+//       </div>
+//       <CallPlayer />
+//     </div>
+//   );
+// };
+
 const ExpandableRow = ({
-  CallDesc,
-  callMatrics,
-  engagingQuestions,
-  height,
+  leadDesc,
+  companyDesc,
+  companyWebsite,
+  LeadOwners,
+  otherContacts,
+  leadData,
+  handleClose,
 }: any) => {
   return (
     <div
-      className="w-[100%] h-[100%] flex px-[110px] py-[10px] duration-300"
-      style={{ height: height }}
+      className="custom-scroll-black w-[100%] h-[auto] py-[30px] px-[50px] overflow-y-auto"
+      style={{
+        zIndex: 100000000000000,
+      }}
     >
-      <div className="w-[300px]">
-        <p className="text-[16px] text-[#000] font-medium">Call Description</p>
-        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
-          {CallDesc}
+      <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
+        <h2 className="text-[24px]">Meeting Details</h2>
+        <button
+          className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
+          onClick={handleClose}
+        >
+          <img
+            alt="close"
+            loading="lazy"
+            className="w-[15px] h-[15px]"
+            src="/Images/Icons/Basic/Cross.svg"
+          />
+        </button>
+      </div>
+      <div className="w-[100%] flex items-center">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Lead Source
+        </p>
+        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+          {leadData?.leadSource}
         </p>
       </div>
-      <div className="w-[180px] ml-[50px]">
-        <p className="text-[16px] text-[#000] font-medium">Call Metrics</p>
-        {callMatrics.map((item: any, i: any) => {
+      <div className="w-[100%] flex items-center mb-[20px]">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Last Call Disposition
+        </p>
+        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+          {leadData?.activityId?.lastCallDisposition ?? "-"}
+        </p>
+      </div>
+      <div className="w-[100%] mb-[20px]">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Lead Description
+        </p>
+        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+          {leadDesc}
+        </p>
+      </div>
+      <div className="w-[100%] mb-[20px]">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Company Description
+        </p>
+        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+          {companyDesc ?? "-"}
+        </p>
+      </div>
+      {leadData?.notes?.length !== 0 && (
+        <div className="w-[100%] mb-[20px]">
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">
+            Note
+          </p>
+          <div className="">
+            {/* <h3 className="font-medium text-[#000]">
+              {leadData?.notes[leadData?.notes?.length - 1]?.title ?? "-"}
+            </h3> */}
+          </div>
+          {/* <p className="text-[#53565a] font-medium mt-[5px] text-[16px] tracking-wide">
+            {leadData?.notes[leadData?.notes?.length - 1]?.content || "-"}
+          </p> */}
+        </div>
+      )}
+      <div className="flex flex-col mb-[20px]">
+        <div className="w-[100%] flex items-center mb-[20px]">
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+            Company Website
+          </p>
+          <p className="text-[#000] font-medium mt-[0px] text-[16px] tracking-wide">
+            <a href={`https://${companyWebsite}`} target="_blank">
+              {companyWebsite}
+            </a>
+          </p>
+        </div>
+        <div className="w-[100%] mt-[10px] flex items-center">
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+            Social Media
+          </p>
+          <div className="flex mt-[2px]">
+            {leadData?.companyId?.company_socialMedia1 && (
+              <a href={leadData?.companyId?.company_socialMedia1Url}>
+                <Image
+                  src={getBasicIcon(leadData?.companyId?.company_socialMedia1)}
+                  className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                  height={20}
+                  width={20}
+                  alt=""
+                />
+              </a>
+            )}
+            {leadData?.companyId?.company_socialMedia2 && (
+              <a href={leadData?.companyId?.company_socialMedia2Url}>
+                <Image
+                  src={getBasicIcon(leadData?.companyId?.company_socialMedia2)}
+                  className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
+                  height={20}
+                  width={20}
+                  alt=""
+                />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="w-[100%] mb-[20px] flex items-center">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Lead Owner
+        </p>
+        {LeadOwners?.map((item: Owner, i: any) => {
           return (
-            <div className="flex justify-between items-center mt-[3px]" key={i}>
-              <p className="text-[#000] font-medium mt-[2px] text-[13px] tracking-wide">
-                {item.title}
-              </p>
-              <p
-                key={i}
-                className="text-[#8A9099] font-medium mt-[2px] text-[13px] tracking-wide"
-              >
-                {item.data}
-              </p>
-            </div>
+            <p
+              key={i}
+              className="text-[#000] font-medium mt-[2px] text-[16px] tracking-wide"
+            >
+              {item.name}
+            </p>
           );
         })}
       </div>
-
-      <div className="flex h-[20px]  justify-between items-center w-[200px] mt-[40px] ml-[60px]">
-        <p className="text-[#000] font-medium mt-[2px] text-[13px] tracking-wide">
-          Engaging Questions
+      <div className="w-[100%] mb-[20px]">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Other Contacts
         </p>
-        <p className="text-[#8A9099] font-medium mt-[2px] text-[13px] tracking-wide">
-          {engagingQuestions}
+        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider">
+          <span className="text-[#000] text-[15px]">
+            {" "}
+            {leadData?.customerId?.customer_name}
+          </span>
+          , {leadData?.customerId?.customer_designation}
+        </p>
+        {otherContacts?.map((item: any, i: any) => {
+          if (item && Object.keys(item).length !== 0) {
+            return (
+              <p
+                key={i}
+                className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
+              >
+                <span className="text-[#000] text-[15px]">
+                  {" "}
+                  {item?.customer_name}
+                </span>
+                , {item?.designation}
+              </p>
+            );
+          } else {
+            return null;
+          }
+        })}
+      </div>
+      <div className="w-[100%] mb-[20px] flex items-center">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Lead Created On
+        </p>
+        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+          {convertDatetime(leadData?.createdAt)}
         </p>
       </div>
-      <CallPlayer />
     </div>
   );
 };
@@ -342,10 +549,7 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
 };
 
 const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
-  console.log(
-    "------------------------- CallData : Meeting Call -------------------------",
-    CallData
-  );
+  console.log(CallData, "arijit");
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -440,6 +644,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           ref={wRef}
         >
           <CallBox width={30} bool={selectAll} />
+          <ExpandingIcon
+            change={(e: any) => {
+              setDetailShow(e);
+            }}
+            showProp={detailShow}
+          />
           <CallItem
             width={150}
             left={20}
@@ -453,7 +663,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             width={150}
             left={0}
             color={"#000"}
-            text={CallData?.description ? CallData?.description : "Zoom"}
+            text={
+              CallData?.call_description ? CallData?.call_description : "Zoom"
+            }
             click={true}
             route={`${pathname}/${id}/meeting`}
           />
@@ -503,14 +715,11 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
-                }`}
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
+                true ? "text-[#3F434A]" : "text-[#8A9099]"
+              }`}
             >
-              <span>
-                {CallData
-                  ? getParticipants(CallData)
-                  : "-"}
-              </span>{" "}
+              <span>{CallData ? getParticipants(CallData) : "-"}</span>{" "}
               <span className="text-renal-blue ">
                 {CallData?.allocatedOwner ? CallData?.allocatedOwner : "-"}
               </span>
@@ -544,10 +753,11 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={`${isISOString(CallData.call_start_time)
-              ? formatDateToCustomFormat(CallData.call_start_time)
-              : "-"
-              }`}
+            upperText={`${
+              isISOString(CallData.call_start_time)
+                ? formatDateToCustomFormat(CallData.call_start_time)
+                : "-"
+            }`}
             bottomText={
               isISOString(CallData.call_start_time)
                 ? convertISOToTime(CallData.call_start_time)
@@ -557,7 +767,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           {/* <CallItem width={120} left={10} text={"30 min."} /> */}
         </div>
       </div>
-      <div
+      {/* <div
         className="duration-300 bg-[#f7f7f7]"
         style={{
           width: w,
@@ -588,7 +798,21 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           ]}
           engagingQuestions={3}
         />
-      </div>
+      </div> */}
+
+      {detailShow && (
+        <BackdropRight bool={detailShow}>
+          <ExpandableRow
+            leadDesc={CallData?.call_description}
+            companyDesc={CallData?.companyId?.company_description}
+            companyWebsite={CallData?.companyId?.company_website_url}
+            LeadOwners={CallData?.leadId?.owners}
+            otherContacts={CallData?.customerId?.contacts}
+            leadData={CallData}
+            handleClose={() => setDetailShow(!detailShow)}
+          />
+        </BackdropRight>
+      )}
       {hover && (
         <ParticipantsHover
           owner={owners}

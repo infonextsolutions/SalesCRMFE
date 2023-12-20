@@ -794,20 +794,20 @@ const LeadContainer = ({
         }}
       >
         <div
-          onDoubleClick={handleDoubleClick}
+          // onDoubleClick={handleDoubleClick}
           className="-z-50 pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
           ref={wRef}
         >
           <LeadBox width={30} bool={selectAll} />
-          {/* <ExpandingIcon
+          <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
             }}
             showProp={detailShow}
-          /> */}
+          />
           <LeadItem
             width={150}
-            left={120}
+            left={70}
             weight={500}
             textLeft={0}
             color={"#000"}
