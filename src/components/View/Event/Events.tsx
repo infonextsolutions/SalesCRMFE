@@ -505,17 +505,14 @@ const Events = ({
         axios.post("https://user-details-sut4.onrender.com/save_user_info", payload)
           .then((res: any) => {
             console.log('============ res 2 ==========', res);
-          }).catch((err: any) => {
-            console.log('+++++++++++ error 2 +++++++++++', err);
+            cancel();
+            dispatch(
+              setSuccess({
+                show: true,
+                success: "Event Added Successfully!",
+              })
+            );
           });
-
-        cancel();
-        dispatch(
-          setSuccess({
-            show: true,
-            success: "Event Added Successfully!",
-          })
-        );
       })
       .catch((e) => {
         dispatch(

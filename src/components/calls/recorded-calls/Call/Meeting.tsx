@@ -486,7 +486,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     if (CallData.leadId.length > 0) {
       axios
         .get(
-          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
+          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${CallData.leadId}`
         )
         .then((e: any) => {
           console.log(e);
@@ -647,7 +647,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             text={LeadData?.companyId?.company_product_category ?? "-"}
           />
           <CallItem width={200} left={20} text={"-"} />
-          <CallItem width={100} left={20} text={LeadData.owners?.[0]?.name} />
+          <CallItem width={140} left={20} text={LeadData.owners?.[0]?.name} />
           <CallItem width={130} left={20} text={"-"} />
           <CallItemMultiple
             width={120}
