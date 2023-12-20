@@ -1,7 +1,66 @@
 import DealsCard from '@/components/customComponents/360_components/cardDeals'
-import React from 'react'
+import React, { useState } from 'react'
+import Table from '../Table'
+import Pagination from '../Pagination';
 
 const Activity = () => {
+    const columns = [
+        {
+            width: 200,
+            left: 40,
+            text: "Team Member",
+        },
+        {
+            width: 200,
+            left: 20,
+            text: "Open Leads (Volume)",
+        },
+        {
+            width: 200,
+            left: 20,
+            text: "Close Leads (Volume)",
+        },
+        {
+            width: 200,
+            left: 20,
+            text: "Leads Won (Volume)",
+        },
+        {
+            width: 200,
+            left: 20,
+            text: "Leads Lost (Volume)",
+        },
+        {
+            width: 200,
+            left: 20,
+            text: "Leads Dead (Volume)",
+        },
+    ];
+
+    const [rows, setRows] = useState([
+        [
+            {
+                text: "Shraddha P.",
+                subText: "Sales Manager",
+            },
+            {
+                text: "950",
+            },
+            {
+                text: "2100",
+            },
+            {
+                text: "2100",
+            },
+            {
+                text: "2100",
+            },
+            {
+                text: "2100",
+            },
+        ]
+    ]);
+
     return (
         <div className='w-[100%]'>
             <div className="flex w-[100%] justify-between py-4">
@@ -29,6 +88,10 @@ const Activity = () => {
                     count={101}
                     percent={50.8}
                 />
+            </div>
+            <div>
+                <Table columns={columns} rows={rows} />
+                <Pagination />
             </div>
         </div>
     )

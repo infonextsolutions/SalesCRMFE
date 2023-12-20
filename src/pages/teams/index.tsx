@@ -24,15 +24,15 @@ const TeamsPage = () => {
 
     return (
         <>
-            <Navbar mainTitle="Teams" src="Teams" />
+            <Navbar mainTitle="Teams" title={tabs?.[currTab]?.title} src="Teams" />
             <Suspense fallback={<BigSpinner />}>
                 <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px]">
                     <Navigator width={false} callback={handleTabNavigation} current={currTab} list={tabs} />
                     {currTab === 0 && <Activity />}
                     {currTab === 1 && <Interaction />}
                     {currTab === 2 && <TalkingPoint />}
-                    {currTab === 3 && <Indicators />}
-                    {currTab === 4 && <Guidance />}
+                    {/* {currTab === 3 && <Indicators />} */}
+                    {/* {currTab === 4 && <Guidance />} */}
                 </div>
             </Suspense>
         </>
