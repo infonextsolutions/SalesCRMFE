@@ -9,7 +9,7 @@ function useUI() {
 
   switch (auth.user.role) {
     // team manager - Manager
-    case "TM":
+    case "Manager":
       menuOptions = [
         {
           title: "Dashboard",
@@ -49,7 +49,7 @@ function useUI() {
         },
       ];
       break;
-    case "QAE":
+    case "QA Analyst":
       menuOptions = [
         {
           title: "Dashboard",
@@ -81,15 +81,9 @@ function useUI() {
           list: [{ title: "Indicator-basic", route: "basic" }],
           icon: "Zap",
         },
-        {
-          title: "Teams",
-          route: "teams",
-          icon: "Teams",
-          list: [],
-        },
       ];
       break;
-    case "QAM":
+    case "QA manager":
       menuOptions = [
         {
           title: "Insights",
