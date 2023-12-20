@@ -36,7 +36,7 @@ const EmotionalAnalysisComp = () => {
       {
         label: "# of Votes",
         data: [25, 50, 30, 40, 10, 15],
-        backgroundColor: "rgba(254, 81, 67, 0.3)",
+        backgroundColor: "#fe5143",
         borderColor: "rgba(254, 81, 67, 0.3)",
         borderWidth: 1,
       },
@@ -45,14 +45,13 @@ const EmotionalAnalysisComp = () => {
 
   return (
     <Card
-      sx={{ width: "100%", bgcolor: "#fff" }}
-      className="w-[100%] h-[1450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[0px]"
-      style={{ width: "600px", height: "500px" }}
+      className="w-[600px] h-[400px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] ml-[0px]"
+      // style={{ width: "600px", height: "500px" }}
     >
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         Emotional Analysis
       </h1>
-      <Radar data={data} height={200} width={1200}></Radar>
+      <Radar data={data} height={200} width={800}></Radar>
     </Card>
   );
 };
