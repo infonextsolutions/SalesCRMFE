@@ -8,12 +8,12 @@ const xLabels = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
 
 const TalkRatio = () => {
   return (
-    <Card className="w-[600px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className=" h-[370px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         Talk Ratio
       </h1>
       <BarChart
-        width={500}
+        width={600}
         height={300}
         series={[
           {

@@ -8,7 +8,7 @@ const xLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const DealAnalysis = () => {
   return (
-    <Card className="w-[580px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className="w-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         Deal Analytics
       </h1>

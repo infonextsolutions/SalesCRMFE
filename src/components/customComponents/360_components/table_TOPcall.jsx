@@ -33,7 +33,7 @@ function Top_Call() {
   const columns = ["Call Title", "Call Owner", "Call Duration", "Call Score"];
 
   return (
-    <Card className="w-[580px] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className="w-[auto] h-[390px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         Top Call
       </h1>

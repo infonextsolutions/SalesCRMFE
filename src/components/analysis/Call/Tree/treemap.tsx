@@ -16,7 +16,7 @@ const SoleChart = ({ i, title, w, data }: any) => {
           data1[0].data.length < 5 ? (data2[0].data.length < 5 ? -29 : -39) : 0,
       }}
     >
-      <h4 className="text-center translate-x-[-13px] text-[16px] font-medium text-text-norm">
+      <h4 className="text-[#8A9099] text-center translate-x-[-13px] text-[16px] font-medium">
         {title}
       </h4>
       <Chart
@@ -185,12 +185,12 @@ const Charts = ({ data1 }: { data1: Root }) => {
   ];
   return (
     <div className="mt-[40px] flex">
-      <SoleChart title="Opening" i={0} w={300} data={data} />
-      <SoleChart title="Product Knowledge" i={1} w={280} data={data} />
-      <SoleChart title="Need Discovery" i={2} w={300} data={data} />
-      <SoleChart title="Lead Qualification" i={3} w={300} data={data} />
-      <SoleChart title="Key Value Proposition" i={4} w={300} data={data} />
-      <SoleChart title="Closing" i={5} w={150} data={data} />
+      <SoleChart title="Opening" i={0} w={270} data={data} />
+      <SoleChart title="Product Knowledge" i={1} w={220} data={data} />
+      <SoleChart title="Need Discovery" i={2} w={240} data={data} />
+      <SoleChart title="Lead Qualification" i={3} w={200} data={data} />
+      <SoleChart title="Key Value Proposition" i={4} w={210} data={data} />
+      <SoleChart title="Closing" i={5} w={140} data={data} />
     </div>
   );
 };

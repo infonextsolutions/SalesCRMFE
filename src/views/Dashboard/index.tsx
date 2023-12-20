@@ -190,7 +190,7 @@ const Dashboard = ({ data }: any) => {
   };
 
   return (
-    <div className="bg-white w-[100%] min-h-[90vh] pl-[20px] pr-[20px]">
+    <div className="bg-white w-[100%] min-h-[90vh] pl-[20px] pr-[20px] pb-8">
       <div className="flex w-[100%] justify-end gap-[10px]">
         <Navigation
           title=""
@@ -247,8 +247,8 @@ const Dashboard = ({ data }: any) => {
         width={true}
       />
       {currTab === 0 && (
-        <div className="w-[100%] mt-4 px-6">
-          <div className="flex w-[100%] justify-between py-4">
+        <div className="w-[100%] mt-4">
+          <div className="flex w-[100%] justify-between flex-wrap gap-4 py-4">
             <DealsCard
               label="Open Deals"
               icon="/Images/Icons/Basic/UpArrow.svg"
@@ -268,8 +268,8 @@ const Dashboard = ({ data }: any) => {
               percent={27.3}
             />
           </div>
-          <div className="w-[100%] flex gap-10 mt-5">
-            <div className="flex flex-col gap-6 ">
+          <div className="w-[100%] flex justify-between flex-wrap mt-5">
+            <div className="w-[52%] flex flex-col gap-6 ">
               <BarChartVertical
                 getSellingData={getSellingData}
                 title="Selling Skills"
@@ -291,7 +291,7 @@ const Dashboard = ({ data }: any) => {
                 selling={sellingData}
               />
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="w-[46%] flex flex-col gap-6">
               <Leaderboard />
               <Top_Call />
               <BarChartVertical
@@ -305,10 +305,10 @@ const Dashboard = ({ data }: any) => {
         </div>
       )}
       {currTab === 1 && (
-        <div className="px-6">
+        <div className="">
           <TreeMap getPitchData={getPitchData} data1={pitchData} />
-          <div className="w-[100%] flex justify-between gap-10">
-            <div className="flex flex-col gap-6">
+          <div className="w-[100%] flex justify-between flex-wrap gap-2">
+            <div className="w-[48%] flex flex-col gap-6">
               <EmotionalAnalysisComp />
               <BarChartVertical
                 title="Longest Monologue"
@@ -322,7 +322,7 @@ const Dashboard = ({ data }: any) => {
                 data={noOfTopics}
               />
             </div>
-            <div className=" flex flex-col gap-6">
+            <div className="w-[48%] flex flex-col gap-6">
               <BarChartVertical
                 title="Sales Rep's Patience/Silence"
                 template={SalesRepPatienceSilence}
@@ -349,7 +349,7 @@ const Dashboard = ({ data }: any) => {
       )}
       {currTab === 2 && (
         <div className="w-[100%] mt-10 flex justify-between gap-2">
-          <div className="flex flex-col gap-6">
+          <div className="w-[50%] flex flex-col gap-6">
             <GroupBarChartVertical
               title="Number of Participants"
               template={NoOfParticipants}
@@ -362,7 +362,7 @@ const Dashboard = ({ data }: any) => {
             />
             <CallSentiment />
           </div>
-          <div className="flex flex-col gap-6">
+          <div className="w-[46%] flex flex-col gap-6">
             <BarChartVertical
               title="Satisfaction Score"
               template={SatisfactionScore}

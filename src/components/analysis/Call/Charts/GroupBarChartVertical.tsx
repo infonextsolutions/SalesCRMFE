@@ -30,7 +30,7 @@ const GroupBarChartVertical = ({
   });
 
   return (
-    <Card className="w-[600px] h-[450px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className="w-[auto] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         {title}
       </h1>
@@ -39,8 +39,8 @@ const GroupBarChartVertical = ({
           <BarChart
             xAxis={[{ scaleType: "band", data: xLabels }]}
             series={series}
-            width={580}
-            height={340}
+            width={550}
+            height={330}
           />
         )}
       </div>

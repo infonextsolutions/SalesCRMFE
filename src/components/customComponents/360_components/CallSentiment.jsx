@@ -9,7 +9,7 @@ const xLabels = ["12 Nov", "26 Nov", "10 Dec", "24 Dec", "7 Jan", "21 Jan"];
 
 const CallSentiment = () => {
   return (
-    <Card className="w-[600px] h-[250px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
+    <Card className="w-[auto] h-[320px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
         Call Sentiment
       </h1>

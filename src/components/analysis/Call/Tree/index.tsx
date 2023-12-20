@@ -10,10 +10,10 @@ const TreeMap = ({ data1, getPitchData }: any) => {
     getPitchData([startDate, endDate]);
   }, [startDate, endDate]);
   return (
-    <div className="w-[100%] overflow-hidden bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px] mt-[50px] mb-[50px]">
+    <div className="w-[100%] overflow-hidden bg-[#fff] rounded-xl shrink-0 px-[2px] py-[19px] mt-[50px] mb-[50px]">
       <div className="w-[100%] flex items-center justify-between overflow-hidden">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-          Pitch Analysis
+          Sales Pitch Analysis
         </h1>
         {/* <div className="flex">
           <DatePicker
