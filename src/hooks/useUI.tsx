@@ -1,17 +1,21 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function useUI() {
   const ui = useSelector((state: any) => state.ui);
   const auth = useSelector((state: any) => state.auth);
-  console.log(
-    ">>>>>>>>>>>>>>>>>>>>>> UI & AUTH <<<<<<<<<<<<<<<<<<<<<",
-    ui,
-    auth
-  );
+  console.log('>>>>>>>>>>>>>>>>>>>>>> UI & AUTH <<<<<<<<<<<<<<<<<<<<<', ui, auth);
+  const [role, setRole] = useState("SDR");
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      setRole(auth.user.role || localStorage.getItem("user-role"))
+    }
+  }, [role]);
 
   let menuOptions = ui.menuOptions;
 
-  switch (auth.user.role) {
+  switch (role) {
     // team manager - Manager
     case "Manager":
       menuOptions = [
@@ -63,7 +67,7 @@ function useUI() {
         },
         {
           title: "Active Calls",
-          route: "/qae/active-calls",
+          route: "calls/active-calls",
           list: [
             { title: "Allocated Calls", route: "allocated-calls" },
             { title: "Feedback Call Reviews", route: "feedback-call-reviews" },
@@ -72,7 +76,7 @@ function useUI() {
         },
         {
           title: "Closed Calls",
-          route: "closed-calls",
+          route: "calls/closed-calls",
           list: [
             { title: "Allocated Calls", route: "allocated-calls" },
             { title: "Feedback Call Reviews", route: "feedback-call-reviews" },
@@ -91,7 +95,7 @@ function useUI() {
       menuOptions = [
         {
           title: "Insights",
-          route: "dashboard",
+          route: "insights",
           icon: "Insights",
           list: [],
         },
