@@ -20,7 +20,7 @@ const TalkingPoint = () => {
 
     return (
         <div className=''>
-            <Navigator callback={handleTabNavigation} current={currTab} list={tabs} />
+            <Navigator width={false} callback={handleTabNavigation} current={currTab} list={tabs} />
             {currTab === 0 && <OTPD />}
             {currTab === 1 && <PTPD />}
             {currTab === 2 && <TD />}

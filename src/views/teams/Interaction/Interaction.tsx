@@ -114,7 +114,7 @@ const Interaction = () => {
 
     return (
         <div className=''>
-            <Navigator callback={handleTabNavigation} current={currTab} list={tabs} />
+            <Navigator width={false} callback={handleTabNavigation} current={currTab} list={tabs} />
             {currTab === 0 && <RenderTeamTrends />}
             {currTab === 1 && <RenderTeam />}
             {currTab === 2 && <RenderIndividual />}

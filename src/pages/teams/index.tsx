@@ -27,7 +27,7 @@ const TeamsPage = () => {
             <Navbar mainTitle="Teams" src="Teams" />
             <Suspense fallback={<BigSpinner />}>
                 <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px]">
-                    <Navigator callback={handleTabNavigation} current={currTab} list={tabs} />
+                    <Navigator width={false} callback={handleTabNavigation} current={currTab} list={tabs} />
                     {currTab === 0 && <Activity />}
                     {currTab === 1 && <Interaction />}
                     {currTab === 2 && <TalkingPoint />}
