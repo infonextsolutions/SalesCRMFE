@@ -21,6 +21,7 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
   const [role] = useLocalStorage("user-role", "not-loaded");
 
   React.useEffect(() => {
+    console.log('===================== DASHBOARD COMPLETE ===================', state, logged, id, name, role);
     if (!state.isLoggedIn) {
       if (logged === "loading" || logged === "loggedIn") {
         if (id === null || name === null || role === null) {
@@ -32,8 +33,8 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
             name !== "not-loaded" &&
             role !== "not-loaded"
           ) {
-            dispatch(setUser1({ _id: id, User: name, Role: role }));
             dispatch(setLoggedInStatus(true));
+            dispatch(setUser1({ _id: id, User: name, Role: role }));
           }
         }
       } else if (logged === null) {
