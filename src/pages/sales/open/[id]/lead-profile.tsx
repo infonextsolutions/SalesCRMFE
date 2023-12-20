@@ -17,7 +17,11 @@ import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 const Profile = ({ data, mastersData }: any) => {
   // console.log("data10", data);
 
-  console.log('============================= Profile : data ==============================', data, mastersData);
+  console.log(
+    "============================= Profile : data ==============================",
+    data,
+    mastersData
+  );
 
   const [data1, setData] = useState(data);
 
@@ -29,7 +33,7 @@ const Profile = ({ data, mastersData }: any) => {
       .then((e) => {
         setData(e.data);
       })
-      .catch(() => { });
+      .catch(() => {});
   };
   const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS"];
 
@@ -156,7 +160,11 @@ const Profile = ({ data, mastersData }: any) => {
         )}
         {events && (
           <Backdrop bool={bool} pad={"50px 0"}>
-            <Events cancel={cancelEvents} companyName={data1?.result?.companyId?.company_name} data={data1} />
+            <Events
+              cancel={cancelEvents}
+              companyName={data1?.result?.companyId?.company_name}
+              data={data1}
+            />
           </Backdrop>
         )}
         {emails && (
@@ -173,7 +181,11 @@ const Profile = ({ data, mastersData }: any) => {
         )}
         {messages && (
           <Backdrop bool={bool} pad={"50px 0"}>
-            <Messages cancel={cancelMessages} companyName={data1?.result?.companyId?.company_name} data={data1} />
+            <Messages
+              cancel={cancelMessages}
+              companyName={data1?.result?.companyId?.company_name}
+              data={data1}
+            />
           </Backdrop>
         )}
         {call && (
@@ -214,7 +226,11 @@ const Profile = ({ data, mastersData }: any) => {
         /> */}
         <div className="w-[100%] flex gap-[25px] mb-[100px] ">
           <div className="w-[340px] min-h-[70vh] bg-[#ffe3e170] rounded-xl shrink-0 p-[20px]">
-            <ProfilePage updated={UpdateData} data1={data?.result} mastersData={mastersData} />
+            <ProfilePage
+              updated={UpdateData}
+              data1={data?.result}
+              mastersData={mastersData}
+            />
           </div>
           <LeadProfileContainer
             data={data1?.result}
@@ -242,7 +258,7 @@ export async function getServerSideProps({ query, params }: any) {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component
       data: response.data || {},
-      mastersData: response2?.data || {}
+      mastersData: response2?.data || {},
     }, // will be passed to the page component as props
   };
 }
