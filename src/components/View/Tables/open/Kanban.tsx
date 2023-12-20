@@ -62,7 +62,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
   }, [items]);
   return (
     <>
-      <div className="px-[20px] mt-[10px] text-[#ffffff] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll">
+      <div className="px-[10px] mt-[10px] text-[#ffffff] flex gap-[10px] h-[1200px] overflow-x-auto custom-scroll">
         {/* {loading ? (
           <Spinner />
         ) : (
@@ -94,7 +94,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
           if (res.length || col === "Dead") {
             return (
               <div className="flex gap-[20px]" key={i}>
-                <div className="w-[270px] shrink-0 ">
+                <div className="w-[240px] shrink-0 ">
                   <div className="leadName flex mb-[10px]">
                     <div className="w-[100%] bg-slate-700 h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
                       <div className="enq-header font-medium flex items-center ml-[10px] text-[13px] flex gap-[8px] items-center">
@@ -127,7 +127,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
                     </div> */}
                   </div>
                   {res.map((Item: any, i: any) => {
-                    console.log(Item, "please checkk-2314211")
+                    console.log(Item, "please checkk-2314211");
                     const item = {
                       data: {
                         companyName: "ABC Corp",
