@@ -47,19 +47,19 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
             selectAll();
           }}
         />
-        <HeaderItem width={200} left={70} text={"Call ID"} />
-        <HeaderItem width={130} left={20} text={"Call title"} />
+        <HeaderItem width={200} left={70} text={"Meeting ID"} />
+        <HeaderItem width={130} left={20} text={"Meeting title"} />
         <HeaderItem width={200} left={10} text={"Lead id"} />
         <HeaderItem width={240} left={-65} text={"Lead title"} />
         <HeaderItem width={220} left={40} text={"Company Name"} />
         <HeaderItem width={200} left={20} text={"Product/Service"} />
         <HeaderItem width={200} left={20} text={"Participants"} />
-        <HeaderItem width={100} left={20} text={"Call owner"} />
-        <HeaderItem width={130} left={20} text={"Call type"} />
-        <HeaderItem width={120} left={10} text={"Call Date/Time"} />
+        <HeaderItem width={140} left={20} text={"Meeting owner"} />
+        <HeaderItem width={130} left={20} text={"Meeting type"} />
+        <HeaderItem width={120} left={10} text={"Meeting Date/Time"} />
         <HeaderItem width={120} left={10} text={"Duration"} />
-        <HeaderItem width={160} left={10} text={"Call Disposition"} />
-        <HeaderItem width={120} left={10} text={"Call Score"} />
+        <HeaderItem width={160} left={10} text={"Location"} />
+        <HeaderItem width={120} left={10} text={"Join Info"} />
       </div>
     </div>
   );
