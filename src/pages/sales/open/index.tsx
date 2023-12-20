@@ -13,13 +13,14 @@ const SalesOpen = React.lazy(() => import("@/views/sales/open"));
 export default function Open({ data, mastersData }: any) {
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
-  console.log('data', data, 'masters data', mastersData);
+  console.log('--------- data ---------', data, '------------ masters data ----------', mastersData);
   const dispatch = useDispatch();
 
   const [logged] = useLocalStorage("logged", "loading");
   const [id] = useLocalStorage("user-id", "not-loaded");
   const [name] = useLocalStorage("user-name", "not-loaded");
   const [role] = useLocalStorage("user-role", "not-loaded");
+  const [accessToken] = useLocalStorage("access-token", "no-token")
 
   React.useEffect(() => {
     const doACall = async () => {
@@ -90,6 +91,7 @@ export async function getServerSideProps({ query, ...params }: any) {
     const response2 = await axios.get(
       "https://salescrmbe.onrender.com/api/master-users/find-all"
     );
+    console.log('>>>>>>>>>>>>>>>>>>>>>> respose 2 <<<<<<<<<<<<<<<<<<<<<<', response2);
     return {
       props: {
         // TODO: Can do better error handling here by passing another property error in the component

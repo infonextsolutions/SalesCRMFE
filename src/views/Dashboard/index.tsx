@@ -59,12 +59,27 @@ const Dashboard = ({ data }: any) => {
   const [startDate, setStartDate] = useState("2023-07-19");
   const [endDate, setEndDate] = useState("2023-07-26");
 
-  const [tabs, setTabs] = useState([
-    { id: 0, title: "Sales Performance" },
-    { id: 1, title: "Communication & Interaction" },
-    { id: 2, title: "Engagement Reports" },
-  ]);
+  const [tabs, setTabs] = useState<any>([]);
   const [currTab, setCurrTab] = useState(0);
+  const [role, setRole] = useState<any>("SDR");
+
+  useEffect(() => {
+    setRole(localStorage.getItem("user-role"));
+    switch (role) {
+      case "QA Analyst":
+        setTabs([
+          { id: 0, title: "Call Reviews" },
+          { id: 1, title: "Communication & Interaction" },
+        ]);
+        break;
+      default:
+        setTabs([
+          { id: 0, title: "Sales Performance" },
+          { id: 1, title: "Communication & Interaction" },
+          { id: 2, title: "Engagement Reports" },
+        ]);
+    }
+  }, [role]);
 
   const getPitchData = ({ ...startEndDate }: any) => {
     const finalPayload = {
@@ -347,7 +362,7 @@ const Dashboard = ({ data }: any) => {
           </div>
         </div>
       )}
-      {currTab === 2 && (
+      {(currTab === 2) && (
         <div className="w-[100%] mt-10 flex justify-between gap-2">
           <div className="w-[50%] flex flex-col gap-6">
             <GroupBarChartVertical
