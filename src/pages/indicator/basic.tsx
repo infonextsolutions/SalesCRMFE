@@ -52,6 +52,7 @@ const Indicator = () => {
   }, [state.isLoggedIn, logged]);
   return (
     <>
+      <Navbar title="Indicator > Basic" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />
