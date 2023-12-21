@@ -12,6 +12,9 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 import SalesPerformance from "./subTabs/SalesPerformance";
 import CommunicationInteraction from "./subTabs/CommunicationInteraction";
 import EngagementReports from "./subTabs/EngagementReports";
+import CallReviews from "./subTabs/CallReviews";
+import DashboardQAM from "./subTabs/DashboardQAM";
+import Scoring from "./subTabs/Scoring";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -183,6 +186,24 @@ const Dashboard = ({ data }: any) => {
     }
   };
 
+  const renderTab0 = () => {
+    if (role === "QA Analyst") {
+      return <CallReviews tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} />;
+    } else if (role === "QA manager") {
+      return <DashboardQAM tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} />
+    } else {
+      return <SalesPerformance tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} />;
+    }
+  };
+
+  const renderTab2 = () => {
+    if (role === "QA manager") {
+      return <Scoring tabData={tabs[currTab]} />;
+    } else {
+      return <EngagementReports tabData={tabs[currTab]} />;
+    }
+  };
+
   return (
     <div className="bg-white w-[100%] min-h-[90vh] pl-[20px] pr-[20px] pb-8">
       <div className="flex w-[100%] justify-end gap-[10px]">
@@ -241,13 +262,16 @@ const Dashboard = ({ data }: any) => {
         width={true}
       />
       {currTab === 0 && (
-        <SalesPerformance tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} />
+        renderTab0()
       )}
       {currTab === 1 && (
         <CommunicationInteraction tabData={tabs[currTab]} pitchData={pitchData} getPitchData={getPitchData} />
       )}
       {(currTab === 2) && (
-        <EngagementReports tabData={tabs[currTab]} />
+        renderTab2()
+      )}
+      {currTab === 3 && (
+        <Scoring tabData={tabs[currTab]} />
       )}
     </div>
   );

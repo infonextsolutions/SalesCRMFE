@@ -13,6 +13,7 @@ import Pagination from "@/views/teams/Pagination";
 import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
+import Backdrop from "@/components/View/Backdrop";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -151,6 +152,9 @@ const FeedbackCallReviewsCC = ({ data }: any) => {
             text: "Time to Complete Review",
         },
     ];
+
+    const [showManageCol, setShowManageCol] = useState(false);
+    const [colToShow, setColToShow] = useState(columns);
 
     const [rows, setRows] = useState([
         [
@@ -339,7 +343,7 @@ const FeedbackCallReviewsCC = ({ data }: any) => {
                 <div className="flex items-center justify-between">
                     <input type="text" className="" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
                     <div className="flex items-center">
-                        {/* <button className="text-black ml-[220px]">Manage Columns</button> */}
+                        <button className="text-black ml-[220px]">Manage Columns</button>
                         <NavigationWithoutTitle
                             buttons={[
                                 {
@@ -372,6 +376,13 @@ const FeedbackCallReviewsCC = ({ data }: any) => {
                 <Table rows={rows} columns={columns} />
                 <Pagination />
             </div>
+            {showManageCol && (
+                <Backdrop>
+                    <div className="flex items-center justify-between">
+                        <h1 className="text-black">Manage Columns</h1>
+                    </div>
+                </Backdrop>
+            )}
         </>
     )
 }
