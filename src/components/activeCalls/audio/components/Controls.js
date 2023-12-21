@@ -115,7 +115,7 @@ const Controls = ({
           className="mr-[9px] cursor-pointer"
         />
         <Image
-          src={isPlaying ? getBasicIcon("pause1") : getBasicIcon("handle")}
+          src={isPlaying ? getBasicIcon("pause1") : getBasicIcon("Handle")}
           style={{
             zIndex: 10,
           }}
