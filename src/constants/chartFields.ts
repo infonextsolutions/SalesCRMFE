@@ -252,13 +252,43 @@ export const PerformanceRate = {
 };
 
 export const CallsDisposition = {
-    labels: [],
-    mappings: {},
+    labels: [
+        "follow_up_required",
+        "call_dropped",
+        "product_demo_required",
+        "call_back_required",
+        "no_answer",
+        "price_too_high",
+    ],
+    mappings: {
+        "follow_up_required": "Follow Up Required",
+        "call_dropped": " Call Dropped",
+        "product_demo_required": " Product Demo Required",
+        "call_back_required": "Call Back required",
+        "no_answer": "No Answer",
+        "price_too_high": "Price Too High",
+    },
 };
 
 export const TalkingSpeed = {
-    labels: [],
-    mappings: {},
+    labels: [
+        "john_c",
+        "pter_k",
+        "barbara_o",
+        "michelle_l",
+        "naomi_o",
+        "meghan_m",
+        "harry_j",
+    ],
+    mappings: {
+        "john_c": "John C.",
+        "pter_k": "Peter K.",
+        "barbara_o": "Barbara O.",
+        "michelle_l": "Michelle L.",
+        "naomi_o": "Naomi O.",
+        "meghan_m": "Meghan M.",
+        "harry_j": "Harry J.",
+    },
 };
 
 export const CallScoreGraph = {
