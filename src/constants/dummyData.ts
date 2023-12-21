@@ -47,6 +47,25 @@ export const satisfactionScore = {
     "likelihood_to_recommend": 99,
 };
 
+export const callDisposition = {
+    "follow_up_required": 25,
+    "call_dropped": 25,
+    "product_demo_required": 25,
+    "call_back_required": 25,
+    "no_answer": 25,
+    "price_too_high": 25,
+};
+
+export const talkingSpeed = {
+    "john_c": 45,
+    "pter_k": 45,
+    "barbara_o": 45,
+    "michelle_l": 45,
+    "naomi_o": 45,
+    "meghan_m": 45,
+    "harry_j": 45,
+};
+
 export const noOfParticipants = {
     sdr: {
         day_1: 23,

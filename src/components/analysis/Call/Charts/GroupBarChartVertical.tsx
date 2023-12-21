@@ -10,6 +10,7 @@ const GroupBarChartVertical = ({
   ],
   data,
   template,
+  options = null
 }: any) => {
   const xLabels = template?.labels?.map(
     (label: string, index: number) => template?.mappings?.[label]
@@ -31,9 +32,20 @@ const GroupBarChartVertical = ({
 
   return (
     <Card className="w-[auto] h-[auto] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
-      <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-        {title}
-      </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
+          {title}
+        </h1>
+        {options && (
+          <select className="text-black" name="option" id="option">
+            {
+              options?.map((option: any, index: number) => (
+                <option key={index} value={option?.key}>{option?.label}</option>
+              ))
+            }
+          </select>
+        )}
+      </div>
       <div className="chart-container">
         {data && (
           <BarChart

@@ -15,11 +15,10 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
   });
   const State = useSelector((state: any) => state.auth);
   const router = useRouter();
+  const noSidebarFor = ["/login", "/forgot-password", "/reset-password"];
   return (
     <div className="w-full min-h-screen bg-[#f5f5f5] flex" id="Home">
-      {router.pathname !== "/login" &&
-        router.pathname !== "/forgot-password" &&
-        router.pathname !== "/reset-password" && <Sidebar />}
+      {!noSidebarFor.includes(router.pathname) && <Sidebar />}
       <div
         className="overflow-auto h-screen"
         // style={width?{

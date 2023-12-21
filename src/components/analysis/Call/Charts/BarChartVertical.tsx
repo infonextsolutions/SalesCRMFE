@@ -3,7 +3,8 @@ import { BarChart } from "@mui/x-charts";
 import React from "react";
 import { axisClasses } from "@mui/x-charts";
 
-const BarChartVertical = ({ title = "", data, template }: any) => {
+const BarChartVertical = ({ title = "", data, template, options = null }: any) => {
+  console.log('------------ options -------------', options);
   const xLabels = template?.labels?.map(
     (label: string, index: number) => template?.mappings?.[label]
   );
@@ -16,9 +17,20 @@ const BarChartVertical = ({ title = "", data, template }: any) => {
     <Card
       className={`w-[auto] h-[400px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]`}
     >
-      <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
-        {title}
-      </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
+          {title}
+        </h1>
+        {options && (
+          <select className="text-black" name="option" id="option">
+            {
+              options?.map((option: any, index: number) => (
+                <option key={index} value={option?.key}>{option?.label}</option>
+              ))
+            }
+          </select>
+        )}
+      </div>
       <div className="chart-container">
         {data && (
           <BarChart
