@@ -210,7 +210,7 @@ const Time = ({ date, setDate }: any) => {
                 {check && (
                   <Image
                     src={getBasicIcon("Check")}
-                    className="absolute left-[0px] top-[5px] cursor-pointer w-[13px] svg-renal-blue"
+                    className="absolute left-[0px] top-[5px] cursor-pointer w-[13px] svg-bg-red"
                     alt=""
                     style={{
                       userSelect: "none",
@@ -389,7 +389,7 @@ const ActiveCall = ({ cancel }: any) => {
       />
       <div className="w-[100%] flex justify-end mt-[20px]">
         {loading ? (
-          <div className="w-[110px] h-[40px] rounded-2xl flex items-center justify-center bg-renal-blue">
+          <div className="w-[110px] h-[40px] rounded-2xl flex items-center justify-center bg-bg-red">
             <Loader />
           </div>
         ) : (

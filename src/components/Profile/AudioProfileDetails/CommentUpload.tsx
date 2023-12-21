@@ -40,7 +40,7 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
         <h3 className="text-[16px] text-black  ml-4  font-medium">{user}</h3>
         <p className="text-sm text-gray-600 mr-10 font-medium">{last}</p>
       </div>
-      <p className="block  font-medium  text-renal-blue py-2 ml-7 text-xs font-small  hover:text-indigo-500">
+      <p className="block  font-medium  text-bg-red py-2 ml-7 text-xs font-small  hover:text-indigo-500">
         *{time}
       </p>
       <div className="flex items-center ">
@@ -132,7 +132,7 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
                 // console.log(reply)
                 setRepVis(false);
               }}
-              className="relative bg-renal-blue mt-[18px] rounded-xl  w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] mr-2"
+              className="relative bg-bg-red mt-[18px] rounded-xl  w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] mr-2"
             >
               <p className="whitespace-nowrap font-small text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
                 Reply
@@ -166,7 +166,9 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
 
 const Comments = ({ data }: any) => {
   const [text, setText] = React.useState("");
-  const [list, setList] = React.useState<any>(data?.comments?data.comments:[]);
+  const [list, setList] = React.useState<any>(
+    data?.comments ? data.comments : []
+  );
   console.log(list, "2131");
   const [emoji, setEmoji] = useState(false);
   function getCurrentTimeInHoursAndMinutes() {
@@ -336,7 +338,7 @@ const Comments = ({ data }: any) => {
               setText("");
             }
           }}
-          className="bg-renal-blue mt-[18px] rounded-xl justify-end w-[110px] h-[38px] ml-auto font-medium tracking-wide pl-[5px] p-[5px]"
+          className="bg-bg-red mt-[18px] rounded-xl justify-end w-[110px] h-[38px] ml-auto font-medium tracking-wide pl-[5px] p-[5px]"
         >
           <p className="whitespace-nowrap font-large text-[15px] pl-[8px] pr-[8px] text-[#ffffff] ">
             comment
@@ -356,31 +358,31 @@ const Comments = ({ data }: any) => {
                   const finalList = list;
                   finalList[i].reply.push(e);
                   console.log(finalList, "24111421");
-                    axios
-                      .post(
-                        "https://salescrmbe.onrender.com/api/recording/comments/addManual",
-                        {
-                          recordingId: data._id,
-                          comments: finalList,
-                        }
-                      )
-                      .then((e) => {
-                        UpdateCalls();
-                        dispatch(
-                          setSuccess({
-                            show: true,
-                            success: "Reply added Successfully!",
-                          })
-                        );
-                      })
-                      .catch(() => {
-                        dispatch(
-                          setError({
-                            show: true,
-                            error: "Error Occured!",
-                          })
-                        );
-                      });
+                  axios
+                    .post(
+                      "https://salescrmbe.onrender.com/api/recording/comments/addManual",
+                      {
+                        recordingId: data._id,
+                        comments: finalList,
+                      }
+                    )
+                    .then((e) => {
+                      UpdateCalls();
+                      dispatch(
+                        setSuccess({
+                          show: true,
+                          success: "Reply added Successfully!",
+                        })
+                      );
+                    })
+                    .catch(() => {
+                      dispatch(
+                        setError({
+                          show: true,
+                          error: "Error Occured!",
+                        })
+                      );
+                    });
                 }}
               />
             );

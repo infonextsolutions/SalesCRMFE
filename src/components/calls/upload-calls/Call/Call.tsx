@@ -330,7 +330,7 @@ const CallPlayer = () => {
         Call Player
       </p>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
-        <div className="h-[100%] w-[40%] bg-renal-blue rounded-l-[3px] relative">
+        <div className="h-[100%] w-[40%] bg-bg-red rounded-l-[3px] relative">
           <CallHolder />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
@@ -378,17 +378,16 @@ const ExpandableRow = ({
   callMatrics,
   engagingQuestions,
   height,
-  CallData
+  CallData,
 }: any) => {
-  console.log(CallData?.audio_url,213401274214981)
+  console.log(CallData?.audio_url, 213401274214981);
   return (
     <div
       className="w-[100%] h-[100%] flex px-[40px] py-[10px] duration-300"
       style={{ height: height }}
     >
-      <div className="w-[700px]" >
-
-      <AudioPlayer check={true} src={CallData?.audio_url} />
+      <div className="w-[700px]">
+        <AudioPlayer check={true} src={CallData?.audio_url} />
       </div>
     </div>
   );
@@ -423,7 +422,7 @@ const ParticipantsHover = ({
           <p
             key={i}
             className={`${
-              i === 0 ? "text-[#000] mt-[19px]" : "text-renal-blue"
+              i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
             } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
@@ -475,14 +474,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       return null;
     }
   }
-  function formatSeconds(seconds:any) {
+  function formatSeconds(seconds: any) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-  
+
     // Use string interpolation to format the result
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   }
-  
+
   return (
     <>
       <div className="flex">

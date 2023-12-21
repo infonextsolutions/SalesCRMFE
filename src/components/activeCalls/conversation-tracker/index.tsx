@@ -24,13 +24,13 @@ const Tracker = ({ color, title, list }: any) => {
         {title}
       </h1>
       <div
-        className="w-[100%] bg-[#efefef] h-[11px] mt-[5px] relative "
+        className="w-[100%] bg-[#efefef]  h-[11px] mt-[5px] relative "
         ref={ref}
       >
         {list.map((item: any, i: any) => {
           return (
             <div
-              className="h-[11px] absolute"
+              className="h-[11px] absolute "
               key={i}
               style={{
                 width: `${(item.duration / width) * 100}px`,

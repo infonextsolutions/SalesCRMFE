@@ -114,8 +114,12 @@ const Text = ({ top, title, width, src }: any) => {
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
           Link
         </p>
-        <a href={src}  target={"_blank"} className="text-renal-blue text-[14px] font-medium mt-[6px] ">
-          {src.substring(0,50)}...
+        <a
+          href={src}
+          target={"_blank"}
+          className="text-bg-red text-[14px] font-medium mt-[6px] "
+        >
+          {src.substring(0, 50)}...
         </a>
       </div>
     </>

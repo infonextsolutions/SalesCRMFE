@@ -8,7 +8,7 @@ const Bars = ({ color }: any) => {
       <div className="w-[80px] h-[80px] rounded-2xl flex items-center justify-between bg-[#fff5ef] px-[13px] py-[17px]">
         <div className="w-[25%] h-[100%] flex items-end">
           <div
-            className="w-[100%] h-[28%] bg-renal-blue rounded-t-[3px]"
+            className="w-[100%] h-[28%] bg-bg-red rounded-t-[3px]"
             style={{
               backgroundColor: color,
             }}
@@ -16,7 +16,7 @@ const Bars = ({ color }: any) => {
         </div>
         <div className="w-[25%] h-[100%] flex items-end">
           <div
-            className="w-[100%] h-[56%] bg-renal-blue rounded-t-[3px]"
+            className="w-[100%] h-[56%] bg-bg-red rounded-t-[3px]"
             style={{
               backgroundColor: color,
             }}
@@ -24,7 +24,7 @@ const Bars = ({ color }: any) => {
         </div>
         <div className="w-[25%] h-[100%] flex items-end">
           <div
-            className="w-[100%] h-[90%] bg-renal-blue rounded-t-[3px]"
+            className="w-[100%] h-[90%] bg-bg-red rounded-t-[3px]"
             style={{
               backgroundColor: color,
             }}

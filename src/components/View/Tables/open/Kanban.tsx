@@ -107,7 +107,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
                         ...
                       </a> */}
                     </div>
-                    {/* <div className="pl-[30px] h-[45px] bg-renal-blue rounded-xl flex items-center justify-center cursor-pointer ml-[15px] pr-[20px] relative p-[5px]">
+                    {/* <div className="pl-[30px] h-[45px] bg-bg-red rounded-xl flex items-center justify-center cursor-pointer ml-[15px] pr-[20px] relative p-[5px]">
                       {
                         <div className="absolute left-3  w-[28px]">
                           <div className={`w-[100%] p-[3px] rounded-md }`}>

@@ -253,7 +253,7 @@ const CallPlayer = () => {
         Call Player
       </p>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
-        <div className="h-[100%] w-[40%] bg-renal-blue rounded-l-[3px] relative">
+        <div className="h-[100%] w-[40%] bg-bg-red rounded-l-[3px] relative">
           <CallHolder />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
@@ -356,7 +356,7 @@ const ExpandableRow = ({
 }: any) => {
   return (
     <div
-      className="custom-scroll-black w-[100%] h-[auto] py-[30px] px-[50px] overflow-y-auto"
+      className="custom-scroll-black w-[100%] h-[100%] py-[30px] px-[50px] overflow-y-auto"
       style={{
         zIndex: 100000000000000,
       }}
@@ -539,7 +539,7 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
       <p className=" mt-[19px] text-[13px] ml-[2px]  w-[100%] font-medium">
         {owner ? owner.name + " (" + owner.designation + ")" : "-"}
       </p>
-      <p className="text-renal-blue text-[13px] ml-[2px]  w-[100%] font-medium">
+      <p className="text-bg-red text-[13px] ml-[2px]  w-[100%] font-medium">
         {participants
           ? participants.name + " (" + participants.designation + ")"
           : "-"}
@@ -728,7 +728,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               }`}
             >
               <span>{participants ? participants.name + "," : "-"}</span>{" "}
-              <span className="text-renal-blue ">
+              <span className="text-bg-red ">
                 {owners ? owners.name : ""}
               </span>
             </p>

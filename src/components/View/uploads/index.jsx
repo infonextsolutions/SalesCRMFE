@@ -169,7 +169,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
                 />
                 <p className="text-[#000] mt-[30px] ">
                   Drop or{" "}
-                  <span className="underline cursor-pointer text-renal-blue">
+                  <span className="underline cursor-pointer text-bg-red">
                     Browse
                   </span>{" "}
                   to upload your file.

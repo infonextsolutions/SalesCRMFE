@@ -152,7 +152,7 @@ const Controls = ({
         </button>
         <input
           type="range"
-          className="diff bg-renal-blue "
+          className="diff bg-bg-red "
           min={0}
           max={100}
           value={volume}

@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 const Search = ({ input, change }: any) => {
   return (
-    <div className="w-full px-[38px] mt-[30px] ">
+    <div className="w-full px-[8px] mt-[30px] ">
       <div className="w-[100%] h-[40px] border-[#ccc] border-[1px] rounded-[12px]  flex items-center overflow-hidden">
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
           <Image
@@ -142,7 +142,7 @@ const Transcript = ({
   }
 
   return (
-    <div>
+    <div className="pt-[1px] ">
       <Search
         change={(e: any) => {
           setInput(e.target.value);
@@ -174,26 +174,42 @@ const Transcript = ({
         }}
         input={input}
       />
-      <div className="w-full px-[22px] mt-[30px] bg-[#ccc] min-h-[30vh]">
-        <div className="w-[100%] h-[400px] hide-scrollbar bg-white px-[30px] py-[26px] overflow-y-auto">
+      <div className="pt-3">
+        <div className="px-4">
           {Arrr.map((item: any, i: any) => {
             return (
               <React.Fragment key={i}>
                 <div className="flex  my-[8px] ">
                   <p
-                    className="text-[#304FFD] shrink-0 w-[48px] font-medium text-[15px] mr-[30px] tracking-wide"
+                    className="text-[#304FFD] shrink-0 w-[48px] font-medium text-[15px] tracking-wide"
                     style={{
-                      color: item.title === "A" ? "#304FFD" : "#FF965D",
+                      color: item.title === "A" ? "#fe5143" : "#909193",
                     }}
-                    dangerouslySetInnerHTML={{
-                      // __html: `00:05 ${item.title}:`,
-                      __html: `${convertMilliseconds(item.start)} ${
-                        item.title
-                      }:`,
-                    }}
-                  ></p>
+                    // dangerouslySetInnerHTML={{
+                    //   // __html: `00:05 ${item.title}:`,
+                    //   __html: `${convertMilliseconds(item.start)} ${
+                    //     item.title
+                    //   }:`,
+                    // }}
+                  >
+                    {convertMilliseconds(item.start)}
+                  </p>
                   <p
-                    className=" text-black tracking-wide font-medium text-[15px]"
+                    className="text-[#304FFD] shrink-0 w-[48px] font-medium text-[15px] tracking-wide"
+                    style={{
+                      color: item.title === "A" ? "#fe5143" : "#909193",
+                    }}
+                    // dangerouslySetInnerHTML={{
+                    //   // __html: `00:05 ${item.title}:`,
+                    //   __html: `${convertMilliseconds(item.start)} ${
+                    //     item.title
+                    //   }:`,
+                    // }}
+                  >
+                    {item.title} :
+                  </p>
+                  <p
+                    className=" text-gray-600 tracking-wide font-medium text-[15px]"
                     dangerouslySetInnerHTML={{ __html: item.message }}
                   ></p>
                 </div>

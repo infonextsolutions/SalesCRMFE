@@ -106,7 +106,7 @@ const CallProfile = ({ data, data1 }: any) => {
             data1={data1.result}
             info={dummy.audioCallDetails}
           />
-          <div className="w-[58%] min-h-[50vh] bg-white rounded-xl">
+          <div className="w-[58%] min-h-[50vh] ">
             <Audio data={data.result} data1={data1.result} />
           </div>
         </div>

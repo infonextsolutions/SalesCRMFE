@@ -63,7 +63,7 @@ const Loading = () => {
           <Image src={getBasicIcon("Cross")} width={14} height={14} alt="" />
         </div>
         <div className="w-[100%] h-[5px]  bg-white rounded-[5px] overflow-hidden">
-          <div className="w-[30%] h-[5px] bg-renal-blue"></div>
+          <div className="w-[30%] h-[5px] bg-bg-red"></div>
         </div>
       </div>
     </div>
@@ -163,7 +163,6 @@ const Col = ({ title, bold, width }: any) => {
 };
 
 const Step1 = ({ next, cancel }: any) => {
-  
   const [activeBox, setActiveBox] = useState(2);
   const [file, setFile] = useState();
   const [dropzoneActive, setDropzoneActive] = useState(false);
@@ -203,7 +202,7 @@ const Step1 = ({ next, cancel }: any) => {
       axios
         .post(
           "https://salescrmbe.onrender.com/api/leads/upload/afakfabk",
-        formdata
+          formdata
         )
         .then((e) => {
           dispatch(
@@ -246,7 +245,7 @@ const Step1 = ({ next, cancel }: any) => {
         </h3> */}
         <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px]">
           Import leads using own file or use{" "}
-          <span className="text-renal-blue underline cursor-pointer">
+          <span className="text-bg-red underline cursor-pointer">
             sample file
           </span>
           .
@@ -277,7 +276,7 @@ const Step1 = ({ next, cancel }: any) => {
         </Dropzone>
         {/* <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px]">
           Check if your file has data in the{" "}
-          <span className="text-renal-blue underline cursor-pointer">
+          <span className="text-bg-red underline cursor-pointer">
             mandatory fields.
           </span>
         </p> */}
@@ -352,7 +351,7 @@ const Step2 = ({ next, cancel }: any) => {
         </h3>
         <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px]">
           Import leads using own file or use{" "}
-          <span className="text-renal-blue underline cursor-pointer">
+          <span className="text-bg-red underline cursor-pointer">
             sample file
           </span>
           .
@@ -369,7 +368,7 @@ const Step2 = ({ next, cancel }: any) => {
         </div>
         <p className="text-[#3F434A] text-[14px] font-medium tracking-wide mt-[10px]">
           Check if your file has data in the{" "}
-          <span className="text-renal-blue underline cursor-pointer">
+          <span className="text-bg-red underline cursor-pointer">
             mandatory fields.
           </span>
         </p>

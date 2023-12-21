@@ -446,7 +446,7 @@ const CallPlayer = () => {
       </p>
       <audio src="/poor-audio.ogg" ref={ref}></audio>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
-        <div className="h-[100%] w-[40%] bg-renal-blue rounded-l-[3px] relative">
+        <div className="h-[100%] w-[40%] bg-bg-red rounded-l-[3px] relative">
           <CallHolder click={() => {}} />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">

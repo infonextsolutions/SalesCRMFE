@@ -608,7 +608,7 @@ const Questionnaire = ({ data, data1 }: any) => {
       <div className="flex items-center justify-between">
         <h1 className="text-[32px] font-medium text-[#3F434A]">{finalTitle}</h1>
         <button
-          className="ml-auto items-center flex bg-renal-blue pl-[11px] rounded-xl pr-[11px] py-[8px]"
+          className="ml-auto items-center flex bg-bg-red pl-[11px] rounded-xl pr-[11px] py-[8px]"
           onClick={openModal}
         >
           <Image

@@ -1,9 +1,4 @@
-const ProgressBar = ({
-  progressBarRef,
-  audioRef,
-  timeProgress,
-  duration,
-}) => {
+const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };
@@ -11,14 +6,12 @@ const ProgressBar = ({
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
       const minutes = Math.floor(time / 60);
-      const formatMinutes =
-        minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
       const seconds = Math.floor(time % 60);
-      const formatSeconds =
-        seconds < 10 ? `0${seconds}` : `${seconds}`;
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
       return `${formatMinutes}:${formatSeconds}`;
     }
-    return '00:00';
+    return "00:00";
   };
 
   return (
@@ -27,7 +20,7 @@ const ProgressBar = ({
         type="range"
         ref={progressBarRef}
         defaultValue="0"
-        className="bg-renal-blue"
+        className="bg-bg-red"
         onChange={handleProgressChange}
       />
     </div>
