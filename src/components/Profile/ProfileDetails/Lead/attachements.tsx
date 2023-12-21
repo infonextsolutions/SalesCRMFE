@@ -21,87 +21,91 @@ const ScriptDoc = ({
   Del,
 }: any) => {
   return (
-    <div className="w-[100%] mt-[40px]">
-      <p className="text-[16px] text-[#595F69] font-medium tracking-wide">
+    <div>
+      <p className="text-[14px] mt-[40px] pl-2 mb-2 text-[#595F69] font-medium tracking-wide ">
         {title}
       </p>
-      <div className="flex items-center mt-[14px]">
-        <Image
-          src={
-            check === 1 ? "/Images/Logo/PDF 1.svg" : "/Images/Logo/DOC 1.svg"
-          }
-          alt=""
-          className="w-[55px] px-[10px] "
-          // fill={true}
-          style={
-            {
-              // objectFit:"contain"
+      <div className="bg-[#ffffff] w-[100%]  rounded-2xl p-2">
+        <div className="flex items-center mt-[14px]">
+          <Image
+            src={
+              check === 1 ? "/Images/Logo/PDF 1.svg" : "/Images/Logo/DOC 1.svg"
             }
-          }
-          width={55}
-          height={40}
-        />
-        <div className="ml-[10px]">
-          <p className="text-[12px] text-[#3F434A] font-medium ">{docName}</p>
-          <p className="text-[11px] text-[#8A9099] font-medium">{size}</p>
+            alt=""
+            className="w-[55px] px-[10px] "
+            // fill={true}
+            style={
+              {
+                // objectFit:"contain"
+              }
+            }
+            width={55}
+            height={40}
+          />
+          <div className="ml-[10px]">
+            <p className="text-[12px] text-[#3F434A] font-medium ">{docName}</p>
+            <p className="text-[11px] text-[#8A9099] font-medium">{size}</p>
+          </div>
+          <div className="flex w-[100px] items-center justify-between ml-auto">
+            <Image
+              src={getBasicIcon("Download")}
+              alt=""
+              className="cursor-pointer"
+              onClick={() => {
+                window.open(file, "_blank");
+              }}
+              // fill={true}
+              style={
+                {
+                  // objectFit:"contain"
+                }
+              }
+              width={20}
+              height={20}
+            />
+            <Image
+              src={getBasicIcon("Delete")}
+              className="cursor-pointer"
+              alt=""
+              onClick={(e) => {
+                // axios
+                //   .delete(`https://salescrmbe.onrender.com/api/call-script/delete-by-id?id=${id}`)
+                //   .then((e) => {
+                //     console.log(e, "huqbfq");
+                //     refresh();
+                //   })
+                //   .catch((e) => {
+                //     console.log(e, "huqbfq");
+                //   });
+                Del();
+              }}
+              // fill={true}
+              style={
+                {
+                  // objectFit:"contain"
+                }
+              }
+              width={20}
+              height={20}
+            />
+            <Image
+              src={getBasicIcon("More")}
+              alt=""
+              // fill={true}
+              style={
+                {
+                  // objectFit:"contain"
+                }
+              }
+              width={20}
+              height={20}
+            />
+          </div>
         </div>
-        <div className="flex w-[100px] items-center justify-between ml-auto">
-          <Image
-            src={getBasicIcon("Download")}
-            alt=""
-            className="cursor-pointer"
-            onClick={() => {
-              window.open(file, "_blank");
-            }}
-            // fill={true}
-            style={
-              {
-                // objectFit:"contain"
-              }
-            }
-            width={20}
-            height={20}
-          />
-          <Image
-            src={getBasicIcon("Delete")}
-            className="cursor-pointer"
-            alt=""
-            onClick={(e) => {
-              // axios
-              //   .delete(`https://salescrmbe.onrender.com/api/call-script/delete-by-id?id=${id}`)
-              //   .then((e) => {
-              //     console.log(e, "huqbfq");
-              //     refresh();
-              //   })
-              //   .catch((e) => {
-              //     console.log(e, "huqbfq");
-              //   });
-              Del();
-            }}
-            // fill={true}
-            style={
-              {
-                // objectFit:"contain"
-              }
-            }
-            width={20}
-            height={20}
-          />
-          <Image
-            src={getBasicIcon("More")}
-            alt=""
-            // fill={true}
-            style={
-              {
-                // objectFit:"contain"
-              }
-            }
-            width={20}
-            height={20}
-          />
-        </div>
+        <p className="text-[#8A9099] text-[13px] font-medium mt-[10px]">
+          {data}
+        </p>
       </div>
-      <p className="text-[#8A9099] text-[13px] font-medium mt-[10px]">{data}</p>
     </div>
   );
 };
@@ -233,7 +237,7 @@ const Attachements = ({ data }: any) => {
     }, 2000);
   };
   const dispatch = useAppDispatch();
-
+  console.log(attachments);
   return (
     <>
       {notes && (
@@ -253,7 +257,7 @@ const Attachements = ({ data }: any) => {
           />
         </Backdrop>
       )}
-      <div className="bg-[#ffffff] my-[30px]">
+      <div className=" my-[30px]">
         <div className="flex">
           <h2 className="text-[#3F434A] text-2xl font-medium">Attachments</h2>
           <button

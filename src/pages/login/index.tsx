@@ -97,10 +97,20 @@ const Login = () => {
       .then((res) => {
         console.log("=========== user login ===========", res.data);
         dispatch(
-          setUser1({ _id: res.data?._id, User: res.data?.name, Role: res?.data?.role, accessToken: res?.data?.accessToken })
+          setUser1({
+            _id: res.data?._id,
+            User: res.data?.name,
+            Role: res?.data?.role,
+            accessToken: res?.data?.accessToken,
+          })
         );
         dispatch(setLoggedInStatus(true));
-        setLocalData(res.data?._id, res.data?.name, res?.data?.role, res?.data?.accessToken);
+        setLocalData(
+          res.data?._id,
+          res.data?.name,
+          res?.data?.role,
+          res?.data?.accessToken
+        );
         router.push("/");
       })
       .catch((err) => {
@@ -216,7 +226,7 @@ const Login = () => {
             touched,
           }) => (
             <>
-              <form className=" items-center w-[86%] md:w-[36%] rounded-xl ml-8 md:ml-0  px-[4%] bg-[#ebb5ae42] ">
+              <form className=" items-center w-[86%] md:w-[36%] rounded-xl ml-8 md:ml-0  px-[4%] bg-[#ebb5ae42] py-12">
                 <div className="">
                   <h2 className="mt-[45px] text-[30px] text-start whitespace-nowrap font-bold tracking-wide text-gray-900">
                     Welcome Back!
@@ -225,13 +235,7 @@ const Login = () => {
                     Login
                   </h2>
                 </div>
-                <div className="flex flex-col w-[100%] mt-[20px] h-[95px]">
-                  <label
-                    htmlFor="username"
-                    className="block text-base mr-auto mb-2 text-[#000] font-medium tracking-wide"
-                  >
-                    Email
-                  </label>
+                <div className="flex flex-col w-[100%] mt-[20px]">
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pr-3 pl-2 pt-3 flex items-center text-sm leading-5">
                       <Image
@@ -249,23 +253,17 @@ const Login = () => {
                       onChange={handleChange("user")}
                       className="w-[100%] bg-white text-[#3f434a] border-[#e8e9eb] border-[2px] mt-[10px] rounded-[13px] py-[10px] pl-7 tracking-wide text-[14px] font-medium px-[14px] h-[38px] outline-none"
                       // className="border-b-[2px] text-base font-medium px-2 py-2 bg-white text-black outline-none focus:ring-0 focus:border-gray-600"
-                      placeholder="Enter Username"
+                      placeholder="Email"
                     />
                   </div>
                   {errors.user && touched.user && (
-                    <p className="block text-[#ff0000] text-start mt-[4px] mb-6 font-medium tracking-wide">
+                    <p className="block text-[#ff0000] text-start mt-[4px] font-medium tracking-wide">
                       *{errors.user}
                     </p>
                   )}
                 </div>
                 <div className="py-1 my-[10px]">
                   <div className="flex flex-col h-[95px]">
-                    <label
-                      htmlFor="password"
-                      className=" block text-black text-base mr-auto mb-2 font-medium tracking-wide"
-                    >
-                      Password
-                    </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pr-3 pl-1 pt-3 flex items-center text-sm leading-5">
                         <Image
@@ -276,7 +274,7 @@ const Login = () => {
                         />
                       </div>
                       <input
-                        placeholder="Enter Password"
+                        placeholder="Password"
                         type={show}
                         value={values.pass}
                         //         className="border-b-[2px] font-medium text-base px-2 py-2 bg-white text-black
@@ -351,7 +349,7 @@ const Login = () => {
                       *Invalid Credentials
                     </p>
                   )}
-                  <div className="mt-[25px] flex justify-between ">
+                  <div className="flex justify-between ">
                     <div className="flex items-center">
                       <input
                         type="checkbox"
@@ -378,7 +376,7 @@ const Login = () => {
                     type="submit"
                     className=" mt-[30px] w-[100%] py-[10px] inline-block rounded-[15px] text-white font-semibold bg-bg-red hover:bg-[#ff7d6d] hover:border-bg-[#ff7d6d] "
                   >
-                    Log In
+                    Sign In
                   </button>
                 </div>
               </form>
