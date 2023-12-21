@@ -24,16 +24,21 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
   const [selectAll, setSelectAll] = useState(false);
 
-  useEffect(function () {
-    axios.get(
-      `https://salescrmbe.onrender.com/api/recording/find-all?limit=${limit}&page=${pageNumber}${queryStr}`
-    ).then(res => {
-      setItems(res?.data?.result);
-      settotalLeads(res?.data?.totalRecords)
-      const count = Math.ceil(Number(res?.data?.totalRecords) / limit);
-      setpageCount(count);
-    });
-  }, [queryStr]);
+  useEffect(
+    function () {
+      axios
+        .get(
+          `https://salescrmbe.onrender.com/api/recording/find-all?limit=${limit}&page=${pageNumber}${queryStr}`
+        )
+        .then((res) => {
+          setItems(res?.data?.result);
+          settotalLeads(res?.data?.totalRecords);
+          const count = Math.ceil(Number(res?.data?.totalRecords) / limit);
+          setpageCount(count);
+        });
+    },
+    [queryStr]
+  );
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
@@ -78,7 +83,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           const leadid = e.leadId.length > 0 ? e.leadId[0].leadId : "-";
           const call_title: any = e;
           const title =
-            call_title?.active_calls.length > 0
+            call_title?.active_calls?.length > 0
               ? call_title?.active_calls[0].call_title
               : "";
           return (

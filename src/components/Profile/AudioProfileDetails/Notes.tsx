@@ -9,7 +9,7 @@ import { setError, setSuccess } from "@/store/ai";
 
 const Note = ({ title, content, date }: any) => {
   return (
-    <div className="mb-[30px] w-[420px] shrink-0 mt-[5px] min-h-[250px] px-[12px] py-[28px] pb-[40px] flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow ">
+    <div className="mb-[30px] w-[96%] shrink-0 mt-[5px] min-h-[250px] px-[12px] py-[28px] pb-[40px] flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow ">
       <div className="flex justify-between gap-24 pb-4">
         <p className=" text-[18px] font-medium text-[#3F434A] capitalize">
           {title}
@@ -162,7 +162,7 @@ const Notes = ({ data, refresh }: any) => {
           ref={containerRef}
           className="overflow-y-auto flex flex-col custom-scroll-black h-[90vh]"
         >
-          <div className=" flex flex-col-reverse ">
+          <div className=" flex flex-col ">
             {list.map((item: any, i: any) => {
               console.log(item, "che21441");
               return (
