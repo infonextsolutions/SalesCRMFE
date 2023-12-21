@@ -194,7 +194,7 @@ const Deals = ({ data, type }: any) => {
   useEffect(() => {
     axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/getDeals?id=${data?.result?.companyId?._id}&type=${type}`
+        `https://salescrmbe.onrender.com/api/leads/getDeals?id=${type === "company" ? data?.result?.companyId?._id : data?.result?.customerId?._id}&type=${type}`
       )
       .then((response) => {
         const data = response?.data;
@@ -209,7 +209,7 @@ const Deals = ({ data, type }: any) => {
     <div className="">
       <Navigator
         width={false}
-        callback={() => {}}
+        callback={() => { }}
         current={0}
         list={[{ id: 0, title: "Deals" }]}
       />
@@ -304,7 +304,7 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool}>
                     <Notes
                       cancel={cancelNotes}
-                      //  leadid={id}
+                    //  leadid={id}
                     />
                   </Backdrop>
                 )}
@@ -312,7 +312,7 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool} pad={"50px 0"}>
                     <Events
                       cancel={cancelEvents}
-                      // leadid={id}
+                    // leadid={id}
                     />
                   </Backdrop>
                 )}
@@ -343,11 +343,11 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool} pad={"50px 0"}>
                     <ActiveCall
                       cancel={cancelCall}
-                      // id={LeadData._id}
-                      // lead={LeadData}
-                      // companyId={LeadData.companyId._id}
-                      // companyName={LeadData.companyId.company_name}
-                      // customerId={LeadData.customerId._id}
+                    // id={LeadData._id}
+                    // lead={LeadData}
+                    // companyId={LeadData.companyId._id}
+                    // companyName={LeadData.companyId.company_name}
+                    // customerId={LeadData.customerId._id}
                     />
                   </Backdrop>
                 )}
@@ -446,7 +446,7 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool}>
                     <Notes
                       cancel={cancelNotes}
-                      //  leadid={id}
+                    //  leadid={id}
                     />
                   </Backdrop>
                 )}
@@ -454,7 +454,7 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool} pad={"50px 0"}>
                     <Events
                       cancel={cancelEvents}
-                      // leadid={id}
+                    // leadid={id}
                     />
                   </Backdrop>
                 )}
@@ -485,11 +485,11 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool} pad={"50px 0"}>
                     <ActiveCall
                       cancel={cancelCall}
-                      // id={LeadData._id}
-                      // lead={LeadData}
-                      // companyId={LeadData.companyId._id}
-                      // companyName={LeadData.companyId.company_name}
-                      // customerId={LeadData.customerId._id}
+                    // id={LeadData._id}
+                    // lead={LeadData}
+                    // companyId={LeadData.companyId._id}
+                    // companyName={LeadData.companyId.company_name}
+                    // customerId={LeadData.customerId._id}
                     />
                   </Backdrop>
                 )}
