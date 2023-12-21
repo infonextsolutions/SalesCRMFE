@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Scoring = () => {
+const Scoring = ({
+    tabData,
+}: {
+    tabData?: any,
+}) => {
     return (
         <div>Scoring</div>
     )

@@ -95,14 +95,16 @@ function useUI() {
       menuOptions = [
         {
           title: "Insights",
-          route: "insights",
+          route: "dashboard",
           icon: "Insights",
           list: [],
         },
         {
           title: "Calls",
           route: "calls",
-          list: [],
+          list: [
+            
+          ],
           icon: "fluent_call-end-16-regular",
         },
         {

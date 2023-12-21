@@ -13,6 +13,7 @@ import Pagination from "@/views/teams/Pagination";
 import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
+import Backdrop from "@/components/View/Backdrop";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -22,123 +23,150 @@ const AllocatedCallsCC = ({ data }: any) => {
             width: 200,
             left: 40,
             text: "Call ID",
+            key: "call_id",
         },
         {
             width: 120,
             left: 20,
             text: "Call Title",
+            key: "call_title",
         },
         {
             width: 120,
             left: 20,
             text: "Lead ID",
+            key: "lead_id",
         },
         {
             width: 200,
             left: 40,
             text: "Lead Title",
+            key: "lead_title",
         },
         {
             width: 120,
             left: 20,
             text: "Participants",
+            key: "participants",
         },
         {
             width: 120,
             left: 20,
             text: "Call Owner",
+            key: "call_owner",
         },
         {
             width: 200,
             left: 40,
             text: "Team Manager",
+            key: "team_manager",
         },
         {
             width: 120,
             left: 20,
             text: "Client POC",
+            key: "client_poc",
         },
         {
             width: 120,
             left: 20,
             text: "Company Name",
+            key: "company_name",
         },
         {
             width: 200,
             left: 40,
             text: "Call Date & Time",
+            key: "call_date_and_time",
         },
         {
             width: 120,
             left: 20,
             text: "Product/Service",
+            key: "product_service",
         },
         {
             width: 120,
             left: 20,
             text: "Call Duration",
+            key: "call_duration",
         },
         {
             width: 200,
             left: 40,
             text: "Call Disposition",
+            key: "call_disposition",
         },
         {
             width: 120,
             left: 20,
             text: "Call Type",
+            key: "call_type",
         },
         {
             width: 120,
             left: 20,
             text: "Call Score",
+            key: "call_score",
         },
         {
             width: 200,
             left: 40,
             text: "Call Review Type",
+            key: "call_ireview_type",
         },
         {
             width: 120,
             left: 20,
             text: "Call Review Status",
+            key: "call_review_status",
         },
         {
             width: 120,
             left: 20,
             text: "Close Date",
+            key: "close_date",
         },
         {
             width: 200,
             left: 40,
             text: "Allocated On",
+            key: "allocated_on",
         },
         {
             width: 120,
             left: 20,
             text: "Review Due Date",
+            key: "review_due_date",
         },
         {
             width: 120,
             left: 20,
             text: "Last Updated On",
+            key: "last_updated_on",
         },
         {
             width: 200,
             left: 40,
             text: "On Time Review",
+            key: "on_time_review",
         },
         {
             width: 120,
             left: 20,
             text: "Delay Time",
+            key: "delay_time",
         },
         {
             width: 120,
             left: 20,
             text: "Time to Complete Review",
+            key: "time_to_complete_review",
         },
     ];
+    const router = useRouter();
+    const [showManageCol, setShowManageCol] = useState(false);
+    const [colToShow, setColToShow] = useState(columns);
 
     const [rows, setRows] = useState([
         [
@@ -220,8 +248,6 @@ const AllocatedCallsCC = ({ data }: any) => {
             },
         ],
     ]);
-
-    const router = useRouter();
 
     const [search, setSearch] = useState("");
 
@@ -343,7 +369,7 @@ const AllocatedCallsCC = ({ data }: any) => {
                 <div className="flex items-center justify-between">
                     <input type="text" className="" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
                     <div className="flex items-center">
-                        {/* <button className="text-black ml-[220px]">Manage Columns</button> */}
+                        <button className="text-black ml-[220px]" onClick={() => setShowManageCol(!showManageCol)}>Manage Columns</button>
                         <NavigationWithoutTitle
                             buttons={[
                                 {
@@ -376,6 +402,13 @@ const AllocatedCallsCC = ({ data }: any) => {
                 <Table rows={rows} columns={columns} />
                 <Pagination />
             </div>
+            {showManageCol && (
+                <Backdrop>
+                    <div className="flex items-center justify-between">
+                        <h1 className="text-black">Manage Columns</h1>
+                    </div>
+                </Backdrop>
+            )}
         </>
     );
 };
