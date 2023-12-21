@@ -52,6 +52,7 @@ const LeadItem = ({
   onClick,
   color,
   weight,
+  maxWidth,
 }: any) => {
   const { push } = useRouter();
 
@@ -834,7 +835,7 @@ const LeadContainer = ({
           />
           <LeadItemMultiple
             width={130}
-            left={190}
+            left={70}
             upperText={LeadData1?.companyId.company_name}
             bottomText={
               LeadData1?.companyId?.company_location ||
@@ -845,8 +846,8 @@ const LeadContainer = ({
             route={`${pathname}/${id}/company-profile`}
           />
           <LeadItem
-            width={110}
-            left={10}
+            width={160}
+            left={40}
             text={LeadData1?.customerId?.customer_name}
             click={true}
             route={`${pathname}/${id}/client-poc-profile`}
