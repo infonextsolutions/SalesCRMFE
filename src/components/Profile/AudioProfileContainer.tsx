@@ -29,6 +29,14 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
+  const timestamp = data1?.createdAt;
+  const date = new Date(timestamp);
+
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+
+  const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+
   return (
     <div
       className={`w-[${
@@ -36,7 +44,7 @@ const AudioProfileContainer = ({
       }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
     >
       {data1?.companyId?.company_name && (
-        <div className="w-[70%] flex justify-around">
+        <div className="w-[90%] flex justify-around">
           <div className="flex gap-2 text-[black]">
             <Image
               src={getBasicIcon("buildingIcon")}
@@ -60,6 +68,18 @@ const AudioProfileContainer = ({
               height={25}
             />
             {new Date(data1.createdAt).toDateString()}
+          </div>
+          <div className="flex gap-2 text-[black]">
+            <Image
+              src={getBasicIcon("Time")}
+              style={{
+                zIndex: 10,
+              }}
+              alt=""
+              width={25}
+              height={25}
+            />
+            {formattedTime}
           </div>
         </div>
       )}

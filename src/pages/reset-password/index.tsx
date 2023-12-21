@@ -184,7 +184,7 @@ const ResetPassword = () => {
                       <div className="absolute inset-y-0 right-0 pr-3 pt-2 flex items-center text-sm leading-5">
                         {show === "password" && (
                           <Image
-                            src={getBasicIcon("hide")}
+                            src={getBasicIcon("Hide")}
                             alt="hide-icon"
                             width={25}
                             height={25}
@@ -196,7 +196,7 @@ const ResetPassword = () => {
 
                         {show === "text" && (
                           <Image
-                            src={getBasicIcon("show")}
+                            src={getBasicIcon("Show")}
                             alt="hide-icon"
                             width={25}
                             height={25}
