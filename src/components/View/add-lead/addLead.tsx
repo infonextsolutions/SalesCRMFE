@@ -40,6 +40,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
   const [moreContact2, setMoreContact2] = useState(false);
   const [showMoreContactButton1, setShowMoreContactButton1] = useState(true);
   const [showMoreContactButton2, setShowMoreContactButton2] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const hadleMoreContactButton1 = () => {
@@ -58,6 +59,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
   };
 
   const submit = () => {
+    setLoading(true);
     const payload = {
       leadDetails: { ...leadData, created_by: localStorage.getItem("user-name") || "Sales User" },
       companyDetails: companyData,
@@ -972,6 +974,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
             text={"Save"}
             left={0}
             right={0}
+            disabled={loading}
             click={() => {
               submit();
             }}

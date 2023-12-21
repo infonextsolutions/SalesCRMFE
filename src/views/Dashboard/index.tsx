@@ -5,46 +5,13 @@ import Navigator from "@/utils/customNavigator";
 import axios from "axios";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import DealsCard from "@/components/customComponents/360_components/cardDeals";
-import Top_Call from "@/components/customComponents/360_components/table_TOPcall";
-import Leaderboard from "@/components/customComponents/360_components/TOP_leaderBoard";
-import EmotionalAnalysisComp from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Emotional_Analysis";
-import TreeMap from "@/components/analysis/Call/Tree";
-import StageWiseAnalysis from "@/components/analysis/Call/Charts/StageWiseAnalysis";
-import DealAnalysis from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Deal_Analytics";
-import TalkRatio from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Ratio_bar";
-import BarChartVertical from "@/components/analysis/Call/Charts/BarChartVertical";
-import CallSentiment from "@/components/customComponents/360_components/CallSentiment";
-import NoiseAndVolumeChart from "@/components/analysis/Call/Charts/NoiseAndVolumeChart";
-import {
-  AvgCallScore,
-  NoOfQuesAsked,
-  SellingSkills,
-  HighIntentCallVolume,
-  LongestMonologue,
-  NoOfTopics,
-  SalesRepPatienceSilence,
-  LongestCustomerStory,
-  NoOfSwitches,
-  SalesRepSentimentScore,
-  SatisfactionScore,
-  PerformanceRate,
-  NoOfInterruptions,
-  NoOfParticipants,
-} from "@/constants/chartFields";
-import {
-  avgCallScore,
-  highIntentCallVolume,
-  noOfParticipants,
-  noOfTopics,
-  salesRepSentimentScore,
-  satisfactionScore,
-} from "@/constants/dummyData";
-import GroupBarChartVertical from "@/components/analysis/Call/Charts/GroupBarChartVertical";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import SalesPerformance from "./subTabs/SalesPerformance";
+import CommunicationInteraction from "./subTabs/CommunicationInteraction";
+import EngagementReports from "./subTabs/EngagementReports";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -68,15 +35,26 @@ const Dashboard = ({ data }: any) => {
     switch (role) {
       case "QA Analyst":
         setTabs([
-          { id: 0, title: "Call Reviews" },
-          { id: 1, title: "Communication & Interaction" },
+          { id: 0, title: "Call Reviews", key: "QA Analyst" },
+          { id: 1, title: "Communication & Interaction", key: "QA Analyst" },
         ]);
         break;
+      case "QA manager":
+        setTabs([
+          { id: 0, title: "Dashboard", key: "QA manager" },
+          { id: 1, title: "Communication & Interaction", key: "QA manager" },
+          { id: 2, title: "Scoring", key: "QA manager" },
+          { id: 3, title: "Call Reviews", key: "QA manager" },
+        ]);
+        break;
+      case "Manager":
+      case "SDR":
+      case "BDM":
       default:
         setTabs([
-          { id: 0, title: "Sales Performance" },
-          { id: 1, title: "Communication & Interaction" },
-          { id: 2, title: "Engagement Reports" },
+          { id: 0, title: "Sales Performance", key: "Manager" },
+          { id: 1, title: "Communication & Interaction", key: "Manager" },
+          { id: 2, title: "Engagement Reports", key: "Manager" },
         ]);
     }
   }, [role]);
@@ -101,6 +79,7 @@ const Dashboard = ({ data }: any) => {
         console.log(e);
       });
   };
+
   const getSellingData = ({ ...startEndDate }: any) => {
     const finalPayload = {
       date: {
@@ -262,135 +241,13 @@ const Dashboard = ({ data }: any) => {
         width={true}
       />
       {currTab === 0 && (
-        <div className="w-[100%] mt-4">
-          <div className="flex w-[100%] justify-between flex-wrap gap-4 py-4">
-            <DealsCard
-              label="Open Deals"
-              icon="/Images/Icons/Basic/UpArrow.svg"
-              count={100}
-              percent={58.8}
-            />
-            <DealsCard
-              label="Closed Deals"
-              icon="/Images/Icons/Basic/DownArrow.svg"
-              count={76}
-              percent={50}
-            />
-            <DealsCard
-              label="Lost Deals"
-              icon="/Images/Icons/Basic/BottomArrow.svg"
-              count={18}
-              percent={27.3}
-            />
-          </div>
-          <div className="w-[100%] flex justify-between flex-wrap mt-5">
-            <div className="w-[52%] flex flex-col gap-6 ">
-              <BarChartVertical
-                getSellingData={getSellingData}
-                title="Selling Skills"
-                data={sellingData}
-                template={SellingSkills}
-              />
-              <BarChartVertical
-                title="Average Call Score"
-                template={AvgCallScore}
-                data={avgCallScore}
-              />
-              <BarChartVertical
-                title="Number of Questions Asked"
-                template={NoOfQuesAsked}
-                data={avgCallScore}
-              />
-              <StageWiseAnalysis
-                getSellingData={getSellingData}
-                selling={sellingData}
-              />
-            </div>
-            <div className="w-[46%] flex flex-col gap-6">
-              <Leaderboard />
-              <Top_Call />
-              <BarChartVertical
-                title="High Intent Call Volume"
-                template={HighIntentCallVolume}
-                data={highIntentCallVolume}
-              />
-              <DealAnalysis />
-            </div>
-          </div>
-        </div>
+        <SalesPerformance tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} />
       )}
       {currTab === 1 && (
-        <div className="">
-          <TreeMap getPitchData={getPitchData} data1={pitchData} />
-          <div className="w-[100%] flex justify-between flex-wrap gap-2">
-            <div className="w-[48%] flex flex-col gap-6">
-              <EmotionalAnalysisComp />
-              <BarChartVertical
-                title="Longest Monologue"
-                template={LongestMonologue}
-                data={avgCallScore}
-              />
-              <TalkRatio />
-              <BarChartVertical
-                title="Number of Topics"
-                template={NoOfTopics}
-                data={noOfTopics}
-              />
-            </div>
-            <div className="w-[48%] flex flex-col gap-6">
-              <BarChartVertical
-                title="Sales Rep's Patience/Silence"
-                template={SalesRepPatienceSilence}
-                data={avgCallScore}
-              />
-              <BarChartVertical
-                title="Longest Customer Story"
-                template={LongestCustomerStory}
-                data={avgCallScore}
-              />
-              <GroupBarChartVertical
-                title="Number of Interruptions"
-                template={NoOfInterruptions}
-                data={noOfParticipants}
-              />
-              <BarChartVertical
-                title="Number of Switches"
-                template={NoOfSwitches}
-                data={avgCallScore}
-              />
-            </div>
-          </div>
-        </div>
+        <CommunicationInteraction tabData={tabs[currTab]} pitchData={pitchData} getPitchData={getPitchData} />
       )}
       {(currTab === 2) && (
-        <div className="w-[100%] mt-10 flex justify-between gap-2">
-          <div className="w-[50%] flex flex-col gap-6">
-            <GroupBarChartVertical
-              title="Number of Participants"
-              template={NoOfParticipants}
-              data={noOfParticipants}
-            />
-            <BarChartVertical
-              title="Sales Rep Sentiment Score"
-              template={SalesRepSentimentScore}
-              data={salesRepSentimentScore}
-            />
-            <CallSentiment />
-          </div>
-          <div className="w-[46%] flex flex-col gap-6">
-            <BarChartVertical
-              title="Satisfaction Score"
-              template={SatisfactionScore}
-              data={satisfactionScore}
-            />
-            <BarChartVertical
-              title="Performance Rate"
-              template={PerformanceRate}
-              data={avgCallScore}
-            />
-            <NoiseAndVolumeChart />
-          </div>
-        </div>
+        <EngagementReports tabData={tabs[currTab]} />
       )}
     </div>
   );
