@@ -302,7 +302,7 @@ const Login = () => {
                             //   ></path>
                             // </svg>
                             <Image
-                              src={getBasicIcon("hide")}
+                              src={getBasicIcon("Hide")}
                               alt="hide-icon"
                               width={25}
                               height={25}
@@ -328,7 +328,7 @@ const Login = () => {
                             //   ></path>
                             // </svg>
                             <Image
-                              src={getBasicIcon("show")}
+                              src={getBasicIcon("Show")}
                               alt="hide-icon"
                               width={25}
                               height={25}
