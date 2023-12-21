@@ -106,7 +106,7 @@ const Activityhistory = ({ data }: { data: any }) => {
                           }
                           className={`
                     `}
-                          // svg-renal-blue
+                          // svg-bg-red
                           alt="Calendar"
                           width={22}
                           height={22}

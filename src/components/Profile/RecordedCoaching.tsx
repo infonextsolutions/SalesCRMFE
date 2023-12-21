@@ -8,7 +8,7 @@ const Chart = ({ title, percent }: any) => {
     <div className="w-[10px] h-[100%] flex flex-col items-center relative">
       <div className="w-[10px] h-[100%] mb-[15px] bg-[#f7f8ff] rounded-t-[19px] relative overflow-hidden">
         <div
-          className="w-[100%] bg-renal-blue bottom-0 absolute rounded-t-[19px]"
+          className="w-[100%] bg-bg-red bottom-0 absolute rounded-t-[19px]"
           style={{ height: percent }}
         ></div>
       </div>

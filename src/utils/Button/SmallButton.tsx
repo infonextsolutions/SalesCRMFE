@@ -22,7 +22,7 @@ const SmallButton = ({
 }: ButtonProps) => {
   const Theme =
     theme === 1
-      ? "bg-renal-blue"
+      ? "bg-bg-red"
       : theme === 2
       ? "bg-[#f5f5f5]"
       : theme === 3
@@ -37,13 +37,17 @@ const SmallButton = ({
       }px] flex items-center justify-center cursor-pointer`}
       onClick={click}
     >
-      {icon && <Image src={getBasicIcon(icon)} alt="" 
-        width={18}
-        height={16}
-        style={{
-          objectFit: "contain",
-        }}
-      />}
+      {icon && (
+        <Image
+          src={getBasicIcon(icon)}
+          alt=""
+          width={18}
+          height={16}
+          style={{
+            objectFit: "contain",
+          }}
+        />
+      )}
       {text && (
         <p className={`${theme === 1 ? "" : "text-[#3F434A]"}`}>{text}</p>
       )}

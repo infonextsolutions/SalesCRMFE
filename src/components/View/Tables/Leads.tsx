@@ -206,7 +206,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
             breakClassName={""}
             breakLinkClassName={""}
             forcePage={pageNumber}
-            activeClassName={`bg-renal-blue text-[#fff] rounded-[10px]`}
+            activeClassName={`bg-bg-red text-[#fff] rounded-[10px]`}
           />
           <div
             className={`flex justify-center ml-[8px] h-[40px] w-[40px] cursor-pointer rounded-[10px] ${

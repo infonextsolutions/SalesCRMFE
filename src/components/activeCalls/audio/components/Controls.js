@@ -115,7 +115,7 @@ const Controls = ({
           className="mr-[9px] cursor-pointer"
         />
         <Image
-          src={isPlaying ? getBasicIcon("pause1") : getBasicIcon("playBtn")}
+          src={isPlaying ? getBasicIcon("pause1") : getBasicIcon("handle")}
           style={{
             zIndex: 10,
           }}
@@ -137,7 +137,7 @@ const Controls = ({
           height={13}
         />
       </div>
-      <div className="volume w-[100px] absolute bottom-[13px]  left-[40px]">
+      {/* <div className="volume w-[100px] absolute bottom-[13px]  left-[40px]">
         <button onClick={() => setMuteVolume((prev) => !prev)}>
           <Image
             src={getBasicIcon("volume")}
@@ -152,7 +152,7 @@ const Controls = ({
         </button>
         <input
           type="range"
-          className="diff bg-renal-blue "
+          className="diff bg-bg-red "
           min={0}
           max={100}
           value={volume}
@@ -161,7 +161,7 @@ const Controls = ({
           }}
           onChange={(e) => setVolume(e.target.value)}
         />
-      </div>
+      </div> */}
       <div className="absolute text-[#8A9099] bottom-[30px] right-[40px] text-[11px] tracking-wide font-medium ">
         {convertMinutesToTime(timeProgress.toFixed(2))}/
         {convertMinutesToTime(duration)}

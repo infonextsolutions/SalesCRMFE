@@ -92,9 +92,7 @@ const UploadAudio = ({ onChange }) => {
                   })}
               </>
             )}
-            <span className="text-renal-blue underline cursor-pointer">
-              Browse
-            </span>
+            <span className="text-bg-red underline cursor-pointer">Browse</span>
           </p>
         ),
       });
@@ -105,9 +103,7 @@ const UploadAudio = ({ onChange }) => {
           <p className="text-[14px] font-medium  text-center">
             wrong type of file
             <br />
-            <span className="text-renal-blue underline cursor-pointer">
-              Browse
-            </span>
+            <span className="text-bg-red underline cursor-pointer">Browse</span>
           </p>
         ),
       });
@@ -171,7 +167,7 @@ const UploadAudio = ({ onChange }) => {
                     <>
                       {" "}
                       Drop or{" "}
-                      <span className="text-renal-blue underline cursor-pointer">
+                      <span className="text-bg-red underline cursor-pointer">
                         Browse
                       </span>{" "}
                       to upload your file.

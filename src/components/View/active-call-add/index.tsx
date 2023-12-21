@@ -266,7 +266,7 @@ const Time = ({ date, setDate }: any) => {
                 {check && (
                   <Image
                     src={getBasicIcon("Check")}
-                    className="absolute left-[0px] top-[5px] cursor-pointer w-[13px] svg-renal-blue"
+                    className="absolute left-[0px] top-[5px] cursor-pointer w-[13px] svg-bg-red"
                     alt=""
                     style={{
                       userSelect: "none",

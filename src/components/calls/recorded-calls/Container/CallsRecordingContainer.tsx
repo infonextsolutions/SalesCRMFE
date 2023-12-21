@@ -99,20 +99,22 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   useEffect(() => {
     // getData();
     getQueryStr();
-  }, [product, companyName, callOwner, callType, callDisposition, startDate, endDate]);
+  }, [
+    product,
+    companyName,
+    callOwner,
+    callType,
+    callDisposition,
+    startDate,
+    endDate,
+  ]);
 
   return (
     <div className="w-[100%] bg-[#ffe3e170] pt-3 min-h-[70vh] rounded-[18px] relative mb-[40px]">
       <div className="w-[100%] h-[160px] flex items-center  px-[8px]">
         <div className="w-[100%] flex flex-col gap-4">
-          <div className="flex gap-5">
+          <div className="flex justify-between">
             <Search change={onChange} />
-            <DatePicker
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-            />
             <NavigationWithoutTitle
               buttons={[
                 {
@@ -149,10 +151,27 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="company"
               >
                 <option selected={companyName === ""} value=""></option>
-                <option selected={companyName === "ABC Corp"} value="ABC Corp">ABC Corp</option>
-                <option selected={companyName === "Bridge Corp."} value="Bridge Corp.">Bridge Corp.</option>
-                <option selected={companyName === "Zen Corp."} value="Zen Corp.">Zen Corp.</option>
-                <option selected={companyName === "XYZ Corp."} value="XYZ Corp.">XYZ Corp.</option>
+                <option selected={companyName === "ABC Corp"} value="ABC Corp">
+                  ABC Corp
+                </option>
+                <option
+                  selected={companyName === "Bridge Corp."}
+                  value="Bridge Corp."
+                >
+                  Bridge Corp.
+                </option>
+                <option
+                  selected={companyName === "Zen Corp."}
+                  value="Zen Corp."
+                >
+                  Zen Corp.
+                </option>
+                <option
+                  selected={companyName === "XYZ Corp."}
+                  value="XYZ Corp."
+                >
+                  XYZ Corp.
+                </option>
               </select>
             </div>
             <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -163,13 +182,27 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="product"
               >
                 <option selected={product === ""} value=""></option>
-                <option selected={product === "P1"} value="P1">P1</option>
-                <option selected={product === "P2"} value="P2">P2</option>
-                <option selected={product === "P3"} value="P3">P3</option>
-                <option selected={product === "Product A"} value="Product A">Product A</option>
-                <option selected={product === "Product B"} value="Product B">Product B</option>
-                <option selected={product === "Product C"} value="Product C">Product C</option>
-                <option selected={product === "Product D"} value="Product D">Product D</option>
+                <option selected={product === "P1"} value="P1">
+                  P1
+                </option>
+                <option selected={product === "P2"} value="P2">
+                  P2
+                </option>
+                <option selected={product === "P3"} value="P3">
+                  P3
+                </option>
+                <option selected={product === "Product A"} value="Product A">
+                  Product A
+                </option>
+                <option selected={product === "Product B"} value="Product B">
+                  Product B
+                </option>
+                <option selected={product === "Product C"} value="Product C">
+                  Product C
+                </option>
+                <option selected={product === "Product D"} value="Product D">
+                  Product D
+                </option>
               </select>
             </div>
             <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -180,9 +213,19 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="callOwner"
               >
                 <option selected={callOwner === ""} value=""></option>
-                <option selected={callOwner === "John"} value="John">John</option>
+                <option selected={callOwner === "John"} value="John">
+                  John
+                </option>
               </select>
             </div>
+            <DatePicker
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+            />
+          </div>
+          <div className="flex gap-4">
             <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Type</h2>
               <select
@@ -191,20 +234,30 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="callType"
               >
                 <option selected={callType === ""} value=""></option>
-                <option selected={callType === "Product Demo"} value="Product Demo">Product Demo</option>
+                <option
+                  selected={callType === "Product Demo"}
+                  value="Product Demo"
+                >
+                  Product Demo
+                </option>
               </select>
             </div>
-          </div>
-          <div className="flex gap-4 items-center w-80 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <h2 className="font-medium">Call Dispostion</h2>
-            <select
-              onChange={(e) => setCallDisposition(e.target.value)}
-              className="text-red-500"
-              id="callDispostion"
-            >
-              <option selected={callDisposition === ""} value=""></option>
-              <option selected={callDisposition === "Follow-up Required"} value="Follow-up Required">Follow-up Required</option>
-            </select>
+            <div className="flex gap-4 items-center w-80 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <h2 className="font-medium">Call Dispostion</h2>
+              <select
+                onChange={(e) => setCallDisposition(e.target.value)}
+                className="text-red-500"
+                id="callDispostion"
+              >
+                <option selected={callDisposition === ""} value=""></option>
+                <option
+                  selected={callDisposition === "Follow-up Required"}
+                  value="Follow-up Required"
+                >
+                  Follow-up Required
+                </option>
+              </select>
+            </div>
           </div>
         </div>
         {/* <ButtonDropDown
@@ -217,7 +270,11 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
         /> */}
       </div>
       <Suspense fallback={<Spinner />}>
-        <CallsTable totalRecords={dummy1.totalRecords} search={search} queryStr={queryStr} />
+        <CallsTable
+          totalRecords={dummy1.totalRecords}
+          search={search}
+          queryStr={queryStr}
+        />
       </Suspense>
     </div>
   );

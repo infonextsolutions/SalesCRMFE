@@ -155,7 +155,7 @@ const Notes = ({ data, refresh }: any) => {
               onClick={() => {
                 showNotes();
               }}
-              className="bg-renal-blue  flex pl-[5px] rounded-xl pr-[5px] p-[7px]"
+              className="bg-bg-red  flex pl-[5px] rounded-xl pr-[5px] p-[7px]"
             >
               <Image
                 src={getBasicIcon("Plus")}

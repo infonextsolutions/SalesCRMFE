@@ -218,8 +218,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -328,7 +329,7 @@ const CallPlayer = () => {
         Call Player
       </p>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
-        <div className="h-[100%] w-[40%] bg-renal-blue rounded-l-[3px] relative">
+        <div className="h-[100%] w-[40%] bg-bg-red rounded-l-[3px] relative">
           <CallHolder />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
@@ -448,8 +449,9 @@ const ParticipantsHover = ({
         return (
           <p
             key={i}
-            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-renal-blue"
-              } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${
+              i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
+            } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -586,15 +588,16 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
                 : ""
             }
             click={true}
-          // route={`${pathname}/${id}/audio-call`}
+            // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
             left={10}
             text={CallData.leadId.length > 0 ? CallData.leadId[0].leadId : "-"}
             click={true}
-            route={`/sales/open/${CallData.leadId.length > 0 && CallData.leadId[0]._id
-              }/lead-profile`}
+            route={`/sales/open/${
+              CallData.leadId.length > 0 && CallData.leadId[0]._id
+            }/lead-profile`}
             color={"#000"}
           />
           <CallItem
@@ -634,7 +637,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
               -
               {LeadData.owners?.map((item:any, i:any) => {
                 return (
-                  <span className={i !== 0 ? "text-renal-blue" : ""} key={i}>
+                  <span className={i !== 0 ? "text-bg-red" : ""} key={i}>
                     {i < 2 && item.name} ,
                   </span>
                 );

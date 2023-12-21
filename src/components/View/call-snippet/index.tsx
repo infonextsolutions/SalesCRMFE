@@ -113,7 +113,7 @@ const Text = ({ top, title, width }: any) => {
         <p className="text-[14px] font-medium tracking-wide text-[#8a9099]">
           Link
         </p>
-        <p className="text-renal-blue text-[14px] font-medium mt-[6px]">
+        <p className="text-bg-red text-[14px] font-medium mt-[6px]">
           https://hello.productx.listen?link23456_1
         </p>
       </div>

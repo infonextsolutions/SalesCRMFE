@@ -437,7 +437,7 @@ const CallHolder = ({ click }: any) => {
 const CallPlayer = () => {
   const [playing, setPlaying] = React.useState(false);
   const ref: any = useRef();
-  React.useEffect(() => { });
+  React.useEffect(() => {});
 
   return (
     <div className="w-[100%] h-[100px] mb-[100px] mt-[20px] px-[40px]">
@@ -446,8 +446,8 @@ const CallPlayer = () => {
       </p>
       <audio src="/poor-audio.ogg" ref={ref}></audio>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
-        <div className="h-[100%] w-[40%] bg-renal-blue rounded-l-[3px] relative">
-          <CallHolder click={() => { }} />
+        <div className="h-[100%] w-[40%] bg-bg-red rounded-l-[3px] relative">
+          <CallHolder click={() => {}} />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
           15:53/30:00
@@ -561,7 +561,10 @@ const Audio = ({ data, data1 }: props) => {
     }
   });
 
-  console.log("============== CALLDATA ==============================", callData);
+  console.log(
+    "============== CALLDATA ==============================",
+    callData
+  );
 
   return (
     <>
@@ -577,47 +580,50 @@ const Audio = ({ data, data1 }: props) => {
       {callData.Status === "completed" && (
         <>
           <AudioPlayer src={data.RecordingUrl} />
-          <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
-            <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
-              call data
-            </h1>
-            <div className="w-full flex items-center">
-              <Image
-                src="/Images/dots/Dot.svg"
-                className="h-[18px] svg-ellipse-5 mr-[25px]"
-                alt=""
-                width={10}
-                height={10}
-              />
-              <p className="text-[#304FFD] text-[14px]">Participant 1:-</p>
+          <div className="w-full mt-[30px] mb-[30px] bg-white rounded-xl p-7 ">
+            <div className="flex gap-8 justify-between items-center">
+              <h1 className="text-[16px] w-[172px] font-medium text-black capitalize mb-[10px]">
+                call data
+              </h1>
+              <div className="w-full gap-2 flex items-center">
+                <Image
+                  src={getBasicIcon("Rectangle_381")}
+                  className="h-[20px]"
+                  alt=""
+                  width={10}
+                  height={10}
+                />
+                <p className="text-gray-600 text-[14px]">Participant 1:-</p>
+              </div>
+              <div className="w-full gap-2 flex items-center mt-[6px]">
+                <Image
+                  src={getBasicIcon("Rectangle_380")}
+                  className="h-[20px] "
+                  alt=""
+                  width={10}
+                  height={10}
+                />
+                <p className="text-[#909193] text-[14px]">Participant 2:-</p>
+              </div>
             </div>
-            <div className="w-full flex items-center mt-[6px]">
-              <Image
-                src="/Images/dots/Dot.svg"
-                className="h-[18px] svg-ellipse-6 mr-[25px]"
-                alt=""
-                width={10}
-                height={10}
-              />
-              <p className="text-[#FF965D] text-[14px]">Participant 2:-</p>
-
-            </div>
+            <Tracker title={"John"} list={list} color={"#4091FF"} />
+            <Tracker title={"Shraddha"} list={list} color={"#FE5143"} />
+            <Tracker title={"Topics"} list={list} color={"#434343"} />
           </div>
-          <Tracker title={"John"} list={list} color={"#304FFD"} />
-          <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
-          <Tracker title={"Topics"} list={list} color={"#0090FF"} />
-          <Transcript
-            src={data.RecordingUrl}
-            data={data}
-            utterances={callData.transcriptId.utterances}
-            text={callData.transcriptId.text}
-          />
+          <div className="bg-white rounded-lg pb-4">
+            <Transcript
+              src={data.RecordingUrl}
+              data={data}
+              utterances={callData.transcriptId.utterances}
+              text={callData.transcriptId.text}
+            />
+          </div>
         </>
       )}
       {callData.Status === "in-progress" && (
         <>
           <AudioPlayer src={data.RecordingUrl} />
-          <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
+          <div className="w-full mt-[30px] mb-[30px] px-[38px] bg-white rounded-xl">
             <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
               call data
             </h1>

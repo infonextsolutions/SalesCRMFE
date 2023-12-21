@@ -6,13 +6,18 @@ import DisplayTrack from "./DisplayTrack";
 import Controls from "./Controls";
 import ProgressBar from "./ProgressBar";
 import TopBar from "./TopBar";
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 
-const AudioPlayer = ({src}) => {
+const AudioPlayer = ({ src }) => {
   // states
   const [trackIndex, setTrackIndex] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(60);
+  const [muteVolume, setMuteVolume] = useState(false);
 
   // reference
   const audioRef = useRef();
@@ -30,11 +35,41 @@ const AudioPlayer = ({src}) => {
 
   return (
     <>
-      <div className="audio-player relative w-[100%] mt-[20px] min-h-[100px] flex flex-col justify-center">
+      <div className="audio-player relative w-[100%] bg-white rounded-xl min-h-[160px] flex flex-col justify-center">
         <div className="inner w-[100%]">
-          <p className="text-[14px] pt-[10px] mb-[15px] font-medium tracking-wide text-[#000]">
-            Call Player
-          </p>
+          <div className="flex justify-between">
+            <p className="text-[14px] pt-[10px] mb-[15px] font-medium tracking-wide text-[#000]">
+              Call Player
+            </p>
+            <div className="flex items-center gap-6">
+              <h4 className="text-gray-600">Speed 1X : </h4>
+              <div className="volume ">
+                <button onClick={() => setMuteVolume((prev) => !prev)}>
+                  <Image
+                    src={getBasicIcon("volume_gray")}
+                    style={{
+                      zIndex: 10,
+                    }}
+                    alt=""
+                    width={13}
+                    height={13}
+                    className="mr-[9px] cursor-pointer"
+                  />
+                </button>
+                <input
+                  type="range"
+                  className="diff  "
+                  min={0}
+                  max={100}
+                  value={volume}
+                  style={{
+                    background: `linear-gradient(to right, #909193  ${volume}%, #ccc ${volume}%)`,
+                  }}
+                  onChange={(e) => setVolume(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
           <ProgressBar
             {...{ progressBarRef, audioRef, timeProgress, duration }}
           />

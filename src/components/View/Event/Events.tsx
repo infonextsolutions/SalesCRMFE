@@ -261,7 +261,7 @@ const Time = ({ id, setEventToTime, setEventFromTime }: any) => {
                 {check && (
                   <Image
                     src={getBasicIcon("Check")}
-                    className="absolute left-[0px] top-[5px] cursor-pointer w-[13px] svg-renal-blue"
+                    className="absolute left-[0px] top-[5px] cursor-pointer w-[13px] svg-bg-red"
                     alt=""
                     style={{
                       userSelect: "none",
@@ -366,8 +366,8 @@ const DateContainer = ({
           setEventFromDate={setEventFromDate}
           setEventToDate={setEventToDate}
           setEventToTime={setEventToTime}
-        // timeFunc={setEventFromTime}
-        // dateFunc={setEventFromDate}
+          // timeFunc={setEventFromTime}
+          // dateFunc={setEventFromDate}
         />
         <div className="w-[30px] h-[1px] bg-[#ccc]" />
         <DateTime
@@ -376,8 +376,8 @@ const DateContainer = ({
           setEventFromDate={setEventFromDate}
           setEventToDate={setEventToDate}
           setEventToTime={setEventToTime}
-        // timeFunc={setEventToTime}
-        // dateFunc={setEventToTime}
+          // timeFunc={setEventToTime}
+          // dateFunc={setEventToTime}
         />
       </div>
     </div>
@@ -419,14 +419,14 @@ const Events = ({
   companyId,
   companyName,
   clientPOCName,
-  data
+  data,
 }: {
-  cancel?: any,
-  leadid?: any,
-  companyId?: any,
-  companyName?: any,
-  clientPOCName?: any,
-  data?: any
+  cancel?: any;
+  leadid?: any;
+  companyId?: any;
+  companyName?: any;
+  clientPOCName?: any;
+  data?: any;
 }) => {
   // const [eventType1, setEventType1] = useState("");
   const [eventTitle, setEventTitle] = useState("");
@@ -447,7 +447,10 @@ const Events = ({
   const [allocatedCallOwner, setAllocateCallOwner] = useState("");
   const dispatch = useAppDispatch();
 
-  console.log('=================== EVENTS : LEADDATA ====================', data);
+  console.log(
+    "=================== EVENTS : LEADDATA ====================",
+    data
+  );
 
   const calculateTimeDifference = ({ fromTime, toTime }: any) => {
     const [fromHours, fromMinutes] = fromTime.split(":").map(Number);
@@ -490,21 +493,22 @@ const Events = ({
     console.log("asdsad", finalPayload);
 
     axios
-      .post(
-        "https://salescrmbe.onrender.com/api/event/create",
-        finalPayload
-      )
+      .post("https://salescrmbe.onrender.com/api/event/create", finalPayload)
       .then((e: any) => {
-        console.log('============ res 1 ==========', e);
+        console.log("============ res 1 ==========", e);
         const { result } = e?.data;
         const payload = {
           meetLink: result?.link,
           user_id: result?.leadId,
           id: result?._id,
         };
-        axios.post("https://user-details-sut4.onrender.com/save_user_info", payload)
+        axios
+          .post(
+            "https://user-details-sut4.onrender.com/save_user_info",
+            payload
+          )
           .then((res: any) => {
-            console.log('============ res 2 ==========', res);
+            console.log("============ res 2 ==========", res);
             cancel();
             dispatch(
               setSuccess({
