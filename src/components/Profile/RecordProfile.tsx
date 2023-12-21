@@ -5,7 +5,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Comments from "./AudioProfileDetails/Comment";
 import Notes from "./AudioProfileDetails/Notes";
 import CallInfo from "./AudioProfileDetails/CallInfo";
-import Activityhistory from "./ProfileDetails/Lead/activity";
+import Activityhistory from "./activeCallActivity";
 import Questionnaire from "../View/Questionnaire/Index";
 import { data } from "../analysis/Call/Tree/data";
 import axios from "axios";

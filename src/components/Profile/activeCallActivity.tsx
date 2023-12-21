@@ -57,36 +57,36 @@ const Activityhistory = ({ data }: { data: any }) => {
 
   return (
     <div>
-      <Card className="bg-[#ffffff] w-[100%] pb-10 p-6">
-        <h2 className="text-[#3F434A] text-2xl font-medium">
-          Activity History
-        </h2>
+      <div className=" w-[100%] pb-10 ">
+        <div className="flex text-[14px] mt-[20px] w-[100%] text-[#8A9099] leading-[21px] items-center justify-between">
+          <p className="text-[#8A9099] text-[14px] font-medium w-[22%]">
+            Date and Time
+          </p>
+          <p className="text-[14px] font-medium text-[#8A9099] w-[22%]">
+            Activity Type
+          </p>
+          <p className="text-[14px] font-medium text-[#8A9099] w-[16%]">
+            Partcipants
+          </p>
+          <p className="text-[14px] font-medium text-[#8A9099] w-[16%]">
+            Outcome
+          </p>
+          <p className="text-[14px] font-medium text-[#8A9099] w-[20%]">
+            Title and Description
+          </p>
+        </div>
         {history.length > 0 && (
-          <div className="mt-[2px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5 w-[100%]">
-            <div className="flex text-[14px] mt-[30px] w-[100%] text-[#8A9099] leading-[21px] items-center justify-between">
-              <p className="text-[#8A9099] font-medium w-[19%]">
-                Date and Time
-              </p>
-              <p className=" font-medium text-[#8A9099] w-[17.5%]">
-                Activity Type
-              </p>
-              <p className="font-medium text-[#8A9099] w-[21%]">Partcipants</p>
-              <p className="font-medium text-[#8A9099] w-[19%]">Outcome</p>
-              <p className="font-medium text-[#8A9099] w-[20%]">
-                Title and Description
-              </p>
-            </div>
-
-            <div className="w-[100%] flex flex-col-reverse">
+          <div className="bg-[#ffe3e170] mt-[2px] flex flex-col gap-y-2.5 w-[100%]">
+            <div className="w-[100%] flex gap-4 flex-col p-2">
               {history.map((item: any, i: any) => {
                 console.log(item, "arijit");
                 const date = formatDateAndTime(item.createdAt);
                 // console.log(date, "pleas1");
                 return (
                   <>
-                    <div className="text-[14px] pl-[20px] mb-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffe3e170] rounded-xl justify-between">
-                      <div className="w-[19%]">
-                        <p className="text-[#3F434A] font-medium">
+                    <div className="text-[14px] mb-[10px] py-[7px] text-[#8A9099] leading-[21px] flex gap-2 items-center bg-[#ffe3e1c0] rounded-xl justify-between">
+                      <div className="w-[22%]">
+                        <p className="text-gray-400 text-[14px] font-medium">
                           {date.date}
                         </p>
                         <p className="text-[#3F434A] font-medium">
@@ -163,7 +163,7 @@ const Activityhistory = ({ data }: { data: any }) => {
             </div>
           </div>
         )}
-      </Card>
+      </div>
       {notes.length > 0 && (
         <Card className="mt-4 flex flex-col gap-4 p-6">
           {notes.length > 0 && <h2 className="text-2xl font-bold">Notes</h2>}
