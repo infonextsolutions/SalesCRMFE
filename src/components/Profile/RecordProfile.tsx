@@ -77,7 +77,7 @@ const RecordProfile = ({
     <div
       className={`w-[${
         width ? width : "100%"
-      }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
+      }]  bg-[#ffe3e170] rounded-xl p-[15px] pt-[30px]`}
     >
       {live && (
         <div className="h-[440px] bg-[#EDEDED] flex justify-center items-center text-[#000000]">
@@ -133,7 +133,7 @@ const RecordProfile = ({
         current={current}
         list={list}
       />
-      <div className="flex justify-between w-[100%] relative overflow-hidden ">
+      <div className=" flex justify-between w-[100%] relative overflow-hidden ">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && (
             <CallInfo check={check} data={data} data1={data1} info={info} />
