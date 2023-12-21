@@ -734,39 +734,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           {/* <CallItem width={110} left={20} text={"Read Summary"} /> */}
         </div>
       </div>
-      {/* <div
-        className="duration-300 bg-[#f7f7f7]"
-        style={{
-          width: w,
-          height: detailShow ? 150 : 0,
-          clipPath: detailShow
-            ? "inset(0px 0px 0 1px)"
-            : "inset(0px 0px 150px 1px)",
-        }}
-      >
-        <ExpandableRow
-          height={detailShow ? 150 : 0}
-          CallDesc={
-            "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
-          }
-          callMatrics={[
-            {
-              title: "Talk/Listen Ratio ",
-              data: "26%",
-            },
-            {
-              title: "Longest Monologue",
-              data: "03:53",
-            },
-            {
-              title: "Filler words per minute",
-              data: "7",
-            },
-          ]}
-          engagingQuestions={3}
-        />
-      </div> */}
-
       {detailShow && (
         <BackdropRight bool={detailShow}>
           <ExpandableRow
