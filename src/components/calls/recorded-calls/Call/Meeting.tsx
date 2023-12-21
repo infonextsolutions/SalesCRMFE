@@ -8,6 +8,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Lead from "@/types/Leads";
 import axios from "axios";
+import BackdropRight from "@/components/View/Backdrop/Right";
 
 const example = {
   _id: "6457d6b590467877fd40291c",
@@ -274,16 +275,13 @@ const CallItemMultiple = ({
 //   );
 // };
 
-const ExpandingIcon = ({ change }: any) => {
-  const [show, setShow] = useState(false);
-
+const ExpandingIcon = ({ change, show = false }: any) => {
   return (
     <div className="w-[50px] flex items-center justify-center cursor-pointer">
       {!show ? (
         <Image
           onClick={() => {
-            change(!show);
-            setShow(!show);
+            change(true);
           }}
           src={"/plus-circle.svg"}
           alt=""
@@ -293,8 +291,7 @@ const ExpandingIcon = ({ change }: any) => {
       ) : (
         <Image
           onClick={() => {
-            change(!show);
-            setShow(!show);
+            change(false);
           }}
           src={"/minus-circle.svg"}
           alt=""
@@ -377,29 +374,39 @@ const ExpandableRow = ({
   callMatrics,
   engagingQuestions,
   height,
+  handleClose,
 }: any) => {
   return (
     <div
-      className="w-[100%] h-[100%] flex px-[110px] py-[10px] duration-300"
-      style={{ height: height }}
+      className="custom-scroll-black w-[100%] h-[100vh] py-[30px] px-[50px] overflow-y-auto"
+      style={{
+        zIndex: 100000000000000,
+      }}
     >
-      <div className="w-[300px]">
-        <p className="text-[16px] text-[#000] font-medium">Call Description</p>
-        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wide">
-          {CallDesc}
-        </p>
+      <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
+        <h2 className="text-[18px] font-medium">Call Metrics</h2>
+        <button
+          className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
+          onClick={handleClose}
+        >
+          <img
+            alt="close"
+            loading="lazy"
+            className="w-[15px] h-[15px]"
+            src="/Images/Icons/Basic/Cross.svg"
+          />
+        </button>
       </div>
-      <div className="w-[180px] ml-[50px]">
-        <p className="text-[16px] text-[#000] font-medium">Call Metrics</p>
+      <div className="w-[100%] flex flex-col justify-between">
         {callMatrics.map((item: any, i: any) => {
           return (
             <div className="flex justify-between items-center mt-[3px]" key={i}>
-              <p className="text-[#000] font-medium mt-[2px] text-[13px] tracking-wide">
+              <p className="text-[#8A9099] font-medium mt-[2px] text-[14px] tracking-wide">
                 {item.title}
               </p>
               <p
                 key={i}
-                className="text-[#8A9099] font-medium mt-[2px] text-[13px] tracking-wide"
+                className="text-[#000] font-medium mt-[2px] text-[14px] tracking-wide"
               >
                 {item.data}
               </p>
@@ -408,15 +415,12 @@ const ExpandableRow = ({
         })}
       </div>
 
-      <div className="flex h-[20px]  justify-between items-center w-[200px] mt-[40px] ml-[60px]">
-        <p className="text-[#000] font-medium mt-[2px] text-[13px] tracking-wide">
-          Engaging Questions
-        </p>
-        <p className="text-[#8A9099] font-medium mt-[2px] text-[13px] tracking-wide">
-          {engagingQuestions}
+      <div className="w-[100%] pt-6 mb-[20px]">
+        <h2 className="text-[18px] font-medium"> Call Description</h2>
+        <p className="text-gray-600 font-medium mt-[5px] text-[14px] tracking-wide">
+          {CallDesc}
         </p>
       </div>
-      <CallPlayer />
     </div>
   );
 };
@@ -563,14 +567,15 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           ref={wRef}
         >
           <CallBox width={30} bool={selectAll} />
-          {/* <ExpandingIcon
+          <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
             }}
-          /> */}
+            showProp={detailShow}
+          />
           <CallItem
             width={200}
-            left={70}
+            left={20}
             // text={"345345354335"}
             text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
@@ -679,38 +684,34 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           {/* <CallItem width={110} left={20} text={"Read Summary"} /> */}
         </div>
       </div>
-      <div
-        className="duration-300 bg-[#f7f7f7]"
-        style={{
-          width: w,
-          height: detailShow ? 150 : 0,
-          clipPath: detailShow
-            ? "inset(0px 0px 0 1px)"
-            : "inset(0px 0px 150px 1px)",
-        }}
-      >
-        <ExpandableRow
-          height={detailShow ? 150 : 0}
-          CallDesc={
-            "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
-          }
-          callMatrics={[
-            {
-              title: "Talk/Listen Ratio ",
-              data: "26%",
-            },
-            {
-              title: "Longest Monologue",
-              data: "03:53",
-            },
-            {
-              title: "Filler words per minute",
-              data: "7",
-            },
-          ]}
-          engagingQuestions={3}
-        />
-      </div>
+      {detailShow && (
+        <BackdropRight bool={detailShow}>
+          <ExpandableRow
+            CallDesc={
+              "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
+            }
+            callMatrics={[
+              {
+                title: "Talk/Listen Ratio ",
+                data: "26%",
+              },
+              {
+                title: "Longest Monologue",
+                data: "03:53",
+              },
+              {
+                title: "Filler words per minute",
+                data: "7",
+              },
+              {
+                title: "Engaging Questions",
+                data: "3",
+              },
+            ]}
+            handleClose={() => setDetailShow(!detailShow)}
+          />
+        </BackdropRight>
+      )}
       {hover && (
         <ParticipantsHover bounding={bounding} data={LeadData} last={last} />
       )}
