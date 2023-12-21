@@ -17,7 +17,9 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
   const router = useRouter();
   return (
     <div className="w-full min-h-screen bg-[#f5f5f5] flex" id="Home">
-      {router.pathname !== "/login" && <Sidebar />}
+      {router.pathname !== "/login" &&
+        router.pathname !== "/forgot-password" &&
+        router.pathname !== "/reset-password" && <Sidebar />}
       <div
         className="overflow-auto h-screen"
         // style={width?{
