@@ -102,9 +102,7 @@ function useUI() {
         {
           title: "Calls",
           route: "calls",
-          list: [
-            
-          ],
+          list: [],
           icon: "fluent_call-end-16-regular",
         },
         {
