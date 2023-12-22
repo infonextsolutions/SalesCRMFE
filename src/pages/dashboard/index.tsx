@@ -49,6 +49,10 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
       if (logged === null) {
         router.push("/login");
       }
+    } else {
+      if (logged === null) {
+        router.push("/login");
+      }
     }
   }, [state.isLoggedIn, logged]);
 

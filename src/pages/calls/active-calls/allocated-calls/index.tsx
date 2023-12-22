@@ -366,8 +366,30 @@ const AllocatedCalls = ({ data }: any) => {
             </div>
             {showManageCol && (
                 <Backdrop>
-                    <div className="flex items-center justify-between">
-                        <h1 className="text-black">Manage Columns</h1>
+                    <div className="flex items-center justify-between p-[20px]">
+                        <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
+                            <h2 className="text-[24px]">Manage Columns</h2>
+                            <button
+                                className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
+                                onClick={() => setShowManageCol(!showManageCol)}
+                            >
+                                <img
+                                    alt="close"
+                                    loading="lazy"
+                                    className="w-[15px] h-[15px]"
+                                    src="/Images/Icons/Basic/Cross.svg"
+                                />
+                            </button>
+                        </div>
+                        <div>
+                            {
+                                columns?.map((column: any, index: number) => (
+                                    <div key={index}>
+                                        <input type="checkbox"  />
+                                    </div>
+                                ))
+                            }
+                        </div>
                     </div>
                 </Backdrop>
             )}
