@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Navbar from "@/components/app/Navbar/Navbar";
 import Navigator from "@/utils/customNavigator";
 import Filters from '@/views/teams/Filters';
 import Table from '@/views/teams/Table';
 import Pagination from '@/views/teams/Pagination';
+import * as XLSX from "xlsx";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
+import { CSVLink } from "react-csv";
+import axios from 'axios';
 
-const CallsPage = () => {
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+const CallsPage = ({ data = [{}, {}] }: any) => {
     const columnsACR = [
         {
             width: 200,
@@ -220,6 +228,11 @@ const CallsPage = () => {
     ]);
 
     const [filters, setFilters] = useState({
+        callStartAndEndDate: {
+            label: "Call Start and End Date",
+            type: "DATERANGE",
+            value: ["", ""],
+        },
         productService: {
             label: "Product/Service",
             options: [
@@ -268,20 +281,114 @@ const CallsPage = () => {
         return query;
     };
 
+    const ref: any = useRef();
+
+    const exportXLSX = () => {
+        const worksheet = XLSX.utils.json_to_sheet(data?.result);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+        XLSX.writeFile(workbook, "DataSheet.xlsx");
+        console.log("Exporting to Excel", data);
+    };
+
+    const exportPDF = () => {
+        const documentDefinition = {
+            content: [
+                {
+                    text: "JSON to PDF Conversion",
+                    style: "header",
+                },
+                {
+                    text: JSON.stringify(data.result, null, 4),
+                    style: "contentStyle",
+                },
+            ],
+            styles: {
+                header: {
+                    fontSize: 18,
+                    bold: true,
+                    marginBottom: 10,
+                },
+                contentStyle: {
+                    fontSize: 12,
+                    margin: [0, 5, 0, 15] as [number, number, number, number],
+                },
+            },
+        };
+
+        pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
+        console.log("Exporting to PDF", data);
+    };
+
+    const addExport = (e: any, e1: any) => {
+        if (e1 === 0) {
+            exportXLSX();
+        } else if (e1 === 1) {
+            exportPDF();
+        }
+    };
+
     useEffect(() => {
         console.log('++++++ currTab or subType CHANGED ++++++', currTab, subType)
         // call api for data with filters
     }, [currTab, subType]);
 
+    const renderControls = () => {
+        return (
+            <div className='flex items-center gap-[20px]'>
+                {
+                    currTab === 0
+                        ? (
+                            <>
+                                <button className='text-black'>Assign To</button>
+                                <button className='text-black'>Auto Allocate</button>
+                            </>
+                        )
+                        : currTab === 1
+                            ? (
+                                <button className='text-black'>Re-Assign To</button>
+                            )
+                            : null
+                }
+            </div>
+        );
+    };
+
     const renderFilters = () => {
         return (
-            <div className=''>
+            <div className='w-[100%]'>
                 <div className='flex items-center justify-between'>
-                    <div className='flex items-center'>
+                    <div className='flex items-center gap-[20px]'>
                         <input type="text" className='' value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search leads...' />
+                        {/* {renderControls()} */}
                     </div>
-                    <div className='flex items-center'>
-
+                    <div className='flex items-center gap-[20px]'>
+                        <NavigationWithoutTitle
+                            buttons={[
+                                {
+                                    text: "",
+                                    dropdown: true,
+                                    id: 1,
+                                    icon: "Download",
+                                    light: true,
+                                    dark: false,
+                                    click: addExport,
+                                    list: [
+                                        { title: "Excel", Icon: "Excel" },
+                                        { title: "PDF", Icon: "PDF" },
+                                        {
+                                            title: "CSV",
+                                            Icon: "CSV",
+                                            wrapper: (
+                                                <CSVLink data={data?.result} className="" ref={ref}>
+                                                    CSV
+                                                </CSVLink>
+                                            ),
+                                        },
+                                    ],
+                                },
+                            ]}
+                        />
                     </div>
                 </div>
                 <div className=''>
@@ -301,7 +408,7 @@ const CallsPage = () => {
 
     const renderToggleSwitch = () => {
         return (
-            <div className='flex text-black'>
+            <div className='flex text-black items-center gap-[20px]'>
                 <button onClick={() => handleSubType("allocated_call_reviews")}>Allocated Call Reviews</button>
                 <button onClick={() => handleSubType("feedback_requested_call_reviews")}>Feedback Requested Call Reviews</button>
             </div>
@@ -327,6 +434,17 @@ const CallsPage = () => {
             <Pagination />
         </>
     )
+}
+
+export async function getServerSideProps({ query, ...params }: any) {
+    const response = await axios.get(
+        "https://salescrmbe.onrender.com/api/active-call/find-all"
+    );
+    return {
+        props: {
+            data: response.data || {},
+        },
+    };
 }
 
 export default CallsPage

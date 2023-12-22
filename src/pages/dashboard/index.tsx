@@ -41,24 +41,25 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
         router.push("/login");
       }
     } else {
+      console.log('________________ THIS ONE ____________________', )
       router.push("/login");
     }
-  }, [id, name, role, logged]);
+  }, [state.isLoggedIn, id, name, role, logged]);
 
-  React.useEffect(() => {
-    console.log('-------------------- isLoggedIn & logged ------------------', state?.isLoggedIn, logged)
-    if (!state.isLoggedIn) {
-      if (logged === null) {
-        router.push("/login");
-      }
-    }
-  }, [state.isLoggedIn, logged]);
+  // React.useEffect(() => {
+  //   console.log('-------------------- isLoggedIn & logged ------------------', state?.isLoggedIn, logged)
+  //   if (!state.isLoggedIn) {
+  //     if (logged === null) {
+  //       router.push("/login");
+  //     }
+  //   }
+  // }, [state.isLoggedIn, logged]);
 
   return (
     <>
       <Navbar mainTitle="Dashboard" src="Grid" />
       <Suspense fallback={<BigSpinner />}>
-        {!state.isLoggedIn || logged === null ? (
+        {!state.isLoggedIn || logged === null || logged !== "loggedIn" ? (
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
