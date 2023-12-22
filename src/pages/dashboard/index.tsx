@@ -40,20 +40,17 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
       } else if (logged === null) {
         router.push("/login");
       }
-    } else {
-      console.log('________________ THIS ONE ____________________', )
-      router.push("/login");
     }
-  }, [state.isLoggedIn, id, name, role, logged]);
+  }, [id, name, role, logged]);
 
-  // React.useEffect(() => {
-  //   console.log('-------------------- isLoggedIn & logged ------------------', state?.isLoggedIn, logged)
-  //   if (!state.isLoggedIn) {
-  //     if (logged === null) {
-  //       router.push("/login");
-  //     }
-  //   }
-  // }, [state.isLoggedIn, logged]);
+  React.useEffect(() => {
+    console.log('-------------------- isLoggedIn & logged ------------------', state?.isLoggedIn, logged)
+    if (!state.isLoggedIn) {
+      if (logged === null) {
+        router.push("/login");
+      }
+    }
+  }, [state.isLoggedIn, logged]);
 
   return (
     <>
