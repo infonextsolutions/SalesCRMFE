@@ -52,7 +52,7 @@ const ButtonDropDown = ({
   return (
     <div
       data-dropdown-toggle="dropdown"
-      className={`${icon ? "pl-[32px]" : ""} ${
+      className={`${icon ? "pl-[0px]" : ""} ${
         border ? "border-[1px] border-[#8f8f8f]" : ""
       } ${
         light

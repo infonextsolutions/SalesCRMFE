@@ -14,131 +14,176 @@ import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 import Backdrop from "@/components/View/Backdrop";
+import { getBasicIcon } from "@/utils/AssetsHelper";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const FeedbackCallReviewsAC = ({ data }: any) => {
-    const columns = [
+    const router = useRouter();
+    const [columns, setColumns] = useState([
         {
             width: 200,
             left: 40,
             text: "Call ID",
+            key: "call_id",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Title",
+            key: "call_title",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Lead ID",
+            key: "lead_id",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Lead Title",
+            key: "lead_title",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Participants",
+            key: "participants",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Owner",
+            key: "call_owner",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Team Manager",
+            key: "team_manager",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Client POC",
+            key: "client_poc",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Company Name",
+            key: "company_name",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Call Date & Time",
+            key: "call_date_and_time",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Product/Service",
+            key: "product_service",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Duration",
+            key: "call_duration",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Call Disposition",
+            key: "call_disposition",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Type",
+            key: "call_type",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Score",
+            key: "call_score",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Call Review Type",
+            key: "call_review_type",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Review Status",
+            key: "call_review_status",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Close Date",
+            key: "close_date",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Allocated On",
+            key: "allocated_on",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Review Due Date",
+            key: "review_due_date",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Last Updated On",
+            key: "last_updated_on",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Feedback Requested On",
+            key: "feedback_requested_on",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Feedback Requested By",
+            key: "feedback_requested_by",
+            checked: true,
         },
-    ];
-
-    const router = useRouter();
+    ]);
     const [showManageCol, setShowManageCol] = useState(false);
-    const [colToShow, setColToShow] = useState(columns);
 
     const [rows, setRows] = useState([
         [
@@ -325,6 +370,25 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
         }
     };
 
+    const handleColsToManage = (column: any, checked: boolean) => {
+        setColumns((currCol: any) => {
+            return currCol?.map((col: any, index: number) => {
+                if (col?.key === column?.key) {
+                    return {
+                        ...col,
+                        checked: checked
+                    }
+                } else {
+                    return col;
+                }
+            });
+        });
+    };
+
+    const updateColsToView = () => {
+        setShowManageCol(!showManageCol);
+    };
+
     useEffect(() => {
         const handleBeforeHistoryChange = () => {
             router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
@@ -346,8 +410,11 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
             <Navbar mainTitle={"Open Reviews"} title={"Allocated Calls"} src="ActiveCalls" />
             <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px] mt-[20px]">
                 <div className="flex items-center justify-between">
-                    <input type="text" className="" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
-                    <div className="flex items-center">
+                <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
+                        <input type="text" className="w-[100%] text-black bg-white" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
+                        <img src={getBasicIcon("Search")} alt="Search" />
+                    </div>
+                    <div className="flex items-center gap-[20px]">
                         <button className="text-bg-red ml-[220px]" onClick={() => setShowManageCol(!showManageCol)}>Manage Columns</button>
                         <NavigationWithoutTitle
                             buttons={[
@@ -383,9 +450,9 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
             </div>
             {showManageCol && (
                 <Backdrop>
-                    <div className="flex items-center justify-between">
+                    <div className="p-[20px]">
                         <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
-                            <h2 className="text-[24px]">Manage Columns</h2>
+                            <h2 className="text-[24px] font-medium">Manage Columns</h2>
                             <button
                                 className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
                                 onClick={() => setShowManageCol(!showManageCol)}
@@ -397,6 +464,24 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
                                     src="/Images/Icons/Basic/Cross.svg"
                                 />
                             </button>
+                        </div>
+                        <div>
+                            <p className="text-black mb-[16px]">Select columns to show</p>
+                            {
+                                columns?.map((column: any, index: number) => (
+                                    <div key={index}>
+                                        <label htmlFor={column?.key} className="text-black flex items-center gap-[16px]">
+                                            <input type="checkbox" id={column?.key} name="manager_columns" onChange={(e) => handleColsToManage(column, e.target.checked)} checked={column?.checked} />
+                                            <span className="">{column?.text}</span>
+                                        </label>
+                                    </div>
+                                ))
+                            }
+                            <div className="w-[100%] flex justify-end pt-[30px]">
+                                <button onClick={updateColsToView} className="bg-bg-red hover:bg-[#ff7d6d] rounded-2xl flex items-center justify-center cursor-pointer py-[10px] px-[30px] self-end">
+                                    <span className="text-[#fff] font-medium text-[15px] tracking-wide">Save</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </Backdrop>
