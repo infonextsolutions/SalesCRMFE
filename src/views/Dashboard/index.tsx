@@ -51,13 +51,23 @@ const Dashboard = ({ data }: any) => {
         ]);
         break;
       case "Manager":
-      case "SDR":
-      case "BDM":
-      default:
         setTabs([
           { id: 0, title: "Sales Performance", key: "Manager" },
           { id: 1, title: "Communication & Interaction", key: "Manager" },
           { id: 2, title: "Engagement Reports", key: "Manager" },
+        ]);
+      case "SDR":
+        setTabs([
+          { id: 0, title: "Sales Performance", key: "SDR" },
+          { id: 1, title: "Communication & Interaction", key: "SDR" },
+          { id: 2, title: "Engagement Reports", key: "SDR" },
+        ]);
+      case "BDM":
+      default:
+        setTabs([
+          { id: 0, title: "Sales Performance", key: "BDM" },
+          { id: 1, title: "Communication & Interaction", key: "BDM" },
+          { id: 2, title: "Engagement Reports", key: "BDM" },
         ]);
     }
   }, [role]);
