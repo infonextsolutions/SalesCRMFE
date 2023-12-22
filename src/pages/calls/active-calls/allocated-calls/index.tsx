@@ -331,7 +331,7 @@ const AllocatedCalls = ({ data }: any) => {
                 <div className="flex items-center justify-between">
                     <input type="text" className="" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
                     <div className="flex items-center">
-                        <button className="text-bg-red ml-[220px]">Manage Columns</button>
+                        <button className="text-bg-red ml-[220px]" onClick={() => setShowManageCol(!showManageCol)}>Manage Columns</button>
                         <NavigationWithoutTitle
                             buttons={[
                                 {

@@ -13,12 +13,11 @@ import Pagination from "@/views/teams/Pagination";
 import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
+import Backdrop from "@/components/View/Backdrop";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const FeedbackCallReviewsAC = ({ data }: any) => {
-    const router = useRouter();
-
     const columns = [
         {
             width: 200,
@@ -136,6 +135,10 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
             text: "Feedback Requested By",
         },
     ];
+
+    const router = useRouter();
+    const [showManageCol, setShowManageCol] = useState(false);
+    const [colToShow, setColToShow] = useState(columns);
 
     const [rows, setRows] = useState([
         [
@@ -345,7 +348,7 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
                 <div className="flex items-center justify-between">
                     <input type="text" className="" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
                     <div className="flex items-center">
-                        {/* <button className="text-black ml-[220px]">Manage Columns</button> */}
+                        <button className="text-bg-red ml-[220px]" onClick={() => setShowManageCol(!showManageCol)}>Manage Columns</button>
                         <NavigationWithoutTitle
                             buttons={[
                                 {
@@ -378,6 +381,13 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
                 <Table rows={rows} columns={columns} />
                 <Pagination />
             </div>
+            {showManageCol && (
+                <Backdrop>
+                    <div className="flex items-center justify-between">
+                        <h1 className="text-black">Manage Columns</h1>
+                    </div>
+                </Backdrop>
+            )}
         </>
     )
 }
