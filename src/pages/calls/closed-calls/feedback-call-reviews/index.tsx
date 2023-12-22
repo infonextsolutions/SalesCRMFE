@@ -366,7 +366,7 @@ const FeedbackCallReviewsCC = ({ data }: any) => {
                 <div className="flex items-center justify-between">
                     <input type="text" className="" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
                     <div className="flex items-center">
-                    <button className="text-bg-red ml-[220px]" onClick={() => setShowManageCol(!showManageCol)}>Manage Columns</button>
+                        <button className="text-bg-red ml-[220px]" onClick={() => setShowManageCol(!showManageCol)}>Manage Columns</button>
                         <NavigationWithoutTitle
                             buttons={[
                                 {
@@ -402,7 +402,20 @@ const FeedbackCallReviewsCC = ({ data }: any) => {
             {showManageCol && (
                 <Backdrop>
                     <div className="flex items-center justify-between">
-                        <h1 className="text-black">Manage Columns</h1>
+                        <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
+                            <h2 className="text-[24px]">Manage Columns</h2>
+                            <button
+                                className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
+                                onClick={() => setShowManageCol(!showManageCol)}
+                            >
+                                <img
+                                    alt="close"
+                                    loading="lazy"
+                                    className="w-[15px] h-[15px]"
+                                    src="/Images/Icons/Basic/Cross.svg"
+                                />
+                            </button>
+                        </div>
                     </div>
                 </Backdrop>
             )}
