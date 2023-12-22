@@ -56,11 +56,16 @@ const Dummy = [
 const Calls = ({ data }: any) => {
   const [scheduleCalls, setScheduleCalls] = useState(true);
   const [scheduleMeeting, setScheduleMeeting] = useState(false);
+  const [role, setRole] = useState<any>("");
   const ref: any = useRef();
 
-  console.log(data);
-
   const router = useRouter();
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setRole(localStorage.getItem("user-role") || "SDR");
+    }
+  }, [role]);
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
