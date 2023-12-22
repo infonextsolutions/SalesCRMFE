@@ -13,6 +13,7 @@ import Pagination from "@/views/teams/Pagination";
 import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
+import Backdrop from "@/components/View/Backdrop";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -198,6 +199,8 @@ const AllocatedCalls = ({ data }: any) => {
     ]);
 
     const router = useRouter();
+    const [showManageCol, setShowManageCol] = useState(false);
+    const [colToShow, setColToShow] = useState(columns);
 
     const [search, setSearch] = useState("");
 
@@ -233,6 +236,29 @@ const AllocatedCalls = ({ data }: any) => {
             ],
             value: "",
         },
+        callDuration: {
+            label: "Call Duration",
+            value: "",
+            type: "SLIDER",
+            min: {
+                value: 30,
+                label: "30 min"
+            },
+            max: {
+                value: 60,
+                label: "1 hr"
+            }
+        },
+        allocatedOn: {
+            label: "Allocated On",
+            value: ["", ""],
+            type: "DATERANGE"
+        },
+        reviewDueDate: {
+            label: "Review Due Date",
+            value: ["", ""],
+            type: "DATERANGE"
+        }
     });
 
     const ref: any = useRef();
@@ -305,7 +331,7 @@ const AllocatedCalls = ({ data }: any) => {
                 <div className="flex items-center justify-between">
                     <input type="text" className="" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
                     <div className="flex items-center">
-                        {/* <button className="text-black ml-[220px]">Manage Columns</button> */}
+                        <button className="text-bg-red ml-[220px]">Manage Columns</button>
                         <NavigationWithoutTitle
                             buttons={[
                                 {
@@ -338,6 +364,13 @@ const AllocatedCalls = ({ data }: any) => {
                 <Table rows={rows} columns={columns} />
                 <Pagination />
             </div>
+            {showManageCol && (
+                <Backdrop>
+                    <div className="flex items-center justify-between">
+                        <h1 className="text-black">Manage Columns</h1>
+                    </div>
+                </Backdrop>
+            )}
         </>
     );
 };

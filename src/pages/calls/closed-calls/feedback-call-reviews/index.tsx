@@ -271,6 +271,29 @@ const FeedbackCallReviewsCC = ({ data }: any) => {
             ],
             value: "",
         },
+        callDuration: {
+            label: "Call Duration",
+            value: "",
+            type: "SLIDER",
+            min: {
+                value: 30,
+                label: "30 min"
+            },
+            max: {
+                value: 60,
+                label: "1 hr"
+            }
+        },
+        feedbackRequestedOn: {
+            label: "Feedback Requested On",
+            type: "DATERANGE",
+            value: ["", ""],
+        },
+        reviewDueDate: {
+            label: "Review Due Date",
+            type: "DATERANGE",
+            value: ["", ""],
+        },
     });
 
     const ref: any = useRef();

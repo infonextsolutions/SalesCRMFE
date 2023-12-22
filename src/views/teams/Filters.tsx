@@ -32,10 +32,17 @@ const DateRangeFilter = ({ filterData, onUpdate }: { filterData?: any, onUpdate?
     );
 };
 
-const RangeFilter = ({ filterData, onUpdate }: { filterData?: any, onUpdate?: any }) => {
+const SliderFilter = ({ filterData, onUpdate }: { filterData?: any, onUpdate?: any }) => {
     return (
-        <div className="flex items-center w-[auto] justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
+        <div>
+            <h2 className="font-medium text-black">{filterData?.label}</h2>
+            <div className="text-black">
+                <input type="range" min={filterData?.min?.value} max={filterData?.max?.value} step={filterData?.step || 1} />
+                <div className='w[100%] flex items-center justify-between mt-[4px]'>
+                    <span className=''>{filterData?.min?.label}</span>
+                    <span className=''>{filterData?.max?.label}</span>
+                </div>
+            </div>
         </div>
     );
 };
@@ -70,6 +77,8 @@ const Filters = ({ filters, onUpdate }: { filters?: any, onUpdate?: any }) => {
                             return <DateFilter filterData={filters[filterKey]} onUpdate={onUpdate} />;
                         case "DATERANGE":
                             return <DateRangeFilter filterData={filters[filterKey]} onUpdate={onUpdate} />;
+                        case "SLIDER":
+                            return <SliderFilter filterData={filters[filterKey]} onUpdate={onUpdate} />;
                         default:
                             return <SelectFilter filterData={filters[filterKey]} onUpdate={onUpdate} />;
                     }
