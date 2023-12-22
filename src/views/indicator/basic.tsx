@@ -10,6 +10,7 @@ import IndicatorContainer from "@/components/Indicator/basic";
 import { useRouter } from "next/router";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import Greetings from "./Greetings";
+import CommonPage from "./CommonPage";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -80,6 +81,16 @@ const Indicator = () => {
 
   const [indicatorType, setIndicatorType] = useState(sideBarItems[0]);
   const [introductionButtons, setIntroductionButtons] = useState("Greetings");
+  const [agendaButtons, setAgendaButtons] = useState("Agenda");
+  const [companyIntroductionButtons, setcompanyIntroductionButtons] =
+    useState("Company overview");
+  const [productButtons, setProductButtons] = useState(
+    "Product Demo/Information"
+  );
+  const [probingButtons, setProbingButtons] = useState("Identifying Needs");
+  const [nesxtStepsButtons, setNextStepsButtons] = useState("Proposing Demo");
+  const [objectionButtons, setobjectionButtons] = useState("Solution offering");
+
   const [introductionGreetingsButtons, setIntroductionGreetingsButtons] =
     useState(true);
   const [introductionNameButtons, setIntroductionNameButtons] = useState(false);
@@ -89,6 +100,28 @@ const Indicator = () => {
     introductionResponsibilitiesButtons,
     setIntroductionResponsibilitiesButtons,
   ] = useState(false);
+
+  const [agendaAgendaButtons, setAgendaAgendaButtons] = useState(true);
+  const [agendaReportButtons, setAgendaReportButtons] = useState(false);
+
+  const [companyoverviewAgendaButtons, setCompanyoverviewButtons] =
+    useState(true);
+  const [companyPropositionReportButtons, setcompanyPropositionButtons] =
+    useState(false);
+
+  const [productDemoButtons, setProductDemoButtons] = useState(true);
+  const [productBenefitsButtons, setProductBenefitsButtons] = useState(false);
+  const [productUsesButtons, setProductUsesButtons] = useState(false);
+
+  const [probingNeedsButtons, setProbingNeedsButtons] = useState(true);
+  const [probingChallangeButtons, setProbingChallangeButtons] = useState(false);
+
+  const [nextDemoButtons, setNextDemoButtons] = useState(true);
+  const [nextScheduleButtons, setNextScheduleButtons] = useState(false);
+
+  const [objectionSolutionButtons, setobjectionSolutionButtons] =
+    useState(true);
+  const [objectionAddressButtons, setobjectionAddressButtons] = useState(false);
 
   const gotoNameTab = () => {
     setIntroductionNameButtons(true);
@@ -119,12 +152,100 @@ const Indicator = () => {
     setIntroductionButtons("Greetings");
   };
 
+  const gotoAgendaTab = () => {
+    setAgendaAgendaButtons(true);
+    setAgendaReportButtons(false);
+    setAgendaButtons("Agenda");
+  };
+  const gotoReportBuildingTab = () => {
+    setAgendaReportButtons(true);
+    setAgendaAgendaButtons(false);
+    setAgendaButtons("Report Building");
+  };
+
+  const gotooverviewTab = () => {
+    setCompanyoverviewButtons(true);
+    setcompanyPropositionButtons(false);
+    setcompanyIntroductionButtons("Company overview");
+  };
+  const gotoPropositionTab = () => {
+    setcompanyPropositionButtons(true);
+    setCompanyoverviewButtons(false);
+    setcompanyIntroductionButtons("Value Proposition");
+  };
+
+  const gotoDemoTab = () => {
+    setProductDemoButtons(true);
+    setcompanyPropositionButtons(false);
+    setProductUsesButtons(false);
+    setProductButtons("Product Demo/Information");
+  };
+  const gotoBenefitsTab = () => {
+    setProductBenefitsButtons(true);
+    setProductDemoButtons(false);
+    setProductUsesButtons(false);
+    setProductButtons("Benefits");
+  };
+  const gotoUsesTab = () => {
+    setProductUsesButtons(true);
+    setProductDemoButtons(false);
+    setProductBenefitsButtons(false);
+    setProductButtons("Use Cases");
+  };
+
+  const gotoNeedsTab = () => {
+    setProbingNeedsButtons(true);
+    setProbingChallangeButtons(false);
+    setProbingButtons("Identifying Needs");
+  };
+  const gotoChallengesTab = () => {
+    setProbingChallangeButtons(true);
+    setProbingNeedsButtons(false);
+    setProbingButtons("Understanding Challanges");
+  };
+  const gotoNextDemoTab = () => {
+    setNextDemoButtons(true);
+    setNextScheduleButtons(false);
+    setNextStepsButtons("Proposing Demo");
+  };
+  const gotoScheduleTab = () => {
+    setNextScheduleButtons(true);
+    setNextDemoButtons(false);
+    setNextStepsButtons("Scheduling Follow-up");
+  };
+  const gotoofferingTab = () => {
+    setobjectionSolutionButtons(true);
+    setobjectionAddressButtons(false);
+    setobjectionButtons("Solution offering");
+  };
+  const gotoAddressTab = () => {
+    setobjectionAddressButtons(true);
+    setobjectionSolutionButtons(false);
+    setobjectionButtons("Address Concerns");
+  };
+
   return (
     <>
       <NavbarWithButton
         src="Indicators"
         mainTitle={`Indicators > ${indicatorType}`}
-        title={indicatorType == sideBarItems[0] ? introductionButtons : ""}
+        title={
+          indicatorType == sideBarItems[0]
+            ? introductionButtons
+            : indicatorType == sideBarItems[1]
+            ? agendaButtons
+            : indicatorType == sideBarItems[2]
+            ? companyIntroductionButtons
+            : indicatorType == sideBarItems[3]
+            ? productButtons
+            : indicatorType == sideBarItems[4]
+            ? probingButtons
+            : indicatorType == sideBarItems[5]
+            ? nesxtStepsButtons
+            : indicatorType == sideBarItems[6]
+            ? objectionButtons
+            : ""
+        }
         buttons={[
           {
             text: "Indicator Settings",
@@ -204,6 +325,202 @@ const Indicator = () => {
             </div>
             <hr className="mt-4" />
             {introductionGreetingsButtons && <Greetings />}
+            {(introductionNameButtons ||
+              introductioTitleAndRolesButtons ||
+              introductionResponsibilitiesButtons) && (
+              <CommonPage title={introductionButtons} />
+            )}
+          </div>
+        )}
+        {sideBarItems[1] == indicatorType && (
+          <div className="bg-[#fe50430c] p-4 w-[80%]">
+            <div className="w-[70%] flex items-start justify-between ">
+              <button
+                onClick={gotoAgendaTab}
+                className={
+                  agendaAgendaButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Agenda
+              </button>
+              <button
+                onClick={gotoReportBuildingTab}
+                className={
+                  agendaReportButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Report Bulding
+              </button>
+            </div>
+            <hr className="mt-4" />
+            {(agendaAgendaButtons || agendaReportButtons) && (
+              <CommonPage title={agendaButtons} />
+            )}
+          </div>
+        )}
+        {sideBarItems[2] == indicatorType && (
+          <div className="bg-[#fe50430c] p-4 w-[80%]">
+            <div className="w-[70%] flex items-start justify-between ">
+              <button
+                onClick={gotooverviewTab}
+                className={
+                  companyoverviewAgendaButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Company overview
+              </button>
+              <button
+                onClick={gotoPropositionTab}
+                className={
+                  companyPropositionReportButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Value Proposition
+              </button>
+            </div>
+            <hr className="mt-4" />
+            {(companyoverviewAgendaButtons ||
+              companyPropositionReportButtons) && (
+              <CommonPage title={companyIntroductionButtons} />
+            )}
+          </div>
+        )}
+        {sideBarItems[3] == indicatorType && (
+          <div className="bg-[#fe50430c] p-4 w-[80%]">
+            <div className="w-[70%] flex items-start justify-between ">
+              <button
+                onClick={gotoDemoTab}
+                className={
+                  productDemoButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Product Demo/Information
+              </button>
+              <button
+                onClick={gotoBenefitsTab}
+                className={
+                  productBenefitsButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Benefits
+              </button>
+              <button
+                onClick={gotoUsesTab}
+                className={
+                  productUsesButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Use Cases
+              </button>
+            </div>
+            <hr className="mt-4" />
+            {(productDemoButtons ||
+              productBenefitsButtons ||
+              productUsesButtons) && <CommonPage title={productButtons} />}
+          </div>
+        )}
+        {sideBarItems[4] == indicatorType && (
+          <div className="bg-[#fe50430c] p-4 w-[80%]">
+            <div className="w-[70%] flex items-start justify-between ">
+              <button
+                onClick={gotoNeedsTab}
+                className={
+                  probingNeedsButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Identifying Needs
+              </button>
+              <button
+                onClick={gotoChallengesTab}
+                className={
+                  probingChallangeButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Understanding Challanges
+              </button>
+            </div>
+            <hr className="mt-4" />
+            {(probingNeedsButtons || probingChallangeButtons) && (
+              <CommonPage title={probingButtons} />
+            )}
+          </div>
+        )}
+        {sideBarItems[5] == indicatorType && (
+          <div className="bg-[#fe50430c] p-4 w-[80%]">
+            <div className="w-[70%] flex items-start justify-between ">
+              <button
+                onClick={gotoNextDemoTab}
+                className={
+                  nextDemoButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Proposing Demo
+              </button>
+              <button
+                onClick={gotoScheduleTab}
+                className={
+                  nextScheduleButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Scheduling Follow-up
+              </button>
+            </div>
+            <hr className="mt-4" />
+            {(nextDemoButtons || nextScheduleButtons) && (
+              <CommonPage title={nesxtStepsButtons} />
+            )}
+          </div>
+        )}
+        {sideBarItems[6] == indicatorType && (
+          <div className="bg-[#fe50430c] p-4 w-[80%]">
+            <div className="w-[70%] flex items-start justify-between ">
+              <button
+                onClick={gotoofferingTab}
+                className={
+                  objectionSolutionButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Solution offering
+              </button>
+              <button
+                onClick={gotoAddressTab}
+                className={
+                  objectionAddressButtons
+                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
+                    : "text-black font-medium text-md px-7 py-2"
+                }
+              >
+                Address Concerns
+              </button>
+            </div>
+            <hr className="mt-4" />
+            {(objectionSolutionButtons || objectionAddressButtons) && (
+              <CommonPage title={objectionButtons} />
+            )}
           </div>
         )}
       </div>
