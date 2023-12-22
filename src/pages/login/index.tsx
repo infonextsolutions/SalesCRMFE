@@ -194,7 +194,7 @@ const Login = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem("user-id")) {
-      router.push("/sales/open");
+      router.push("/");
     }
   });
   return (
