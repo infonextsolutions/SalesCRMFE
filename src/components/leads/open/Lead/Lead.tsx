@@ -110,7 +110,7 @@ const LeadItemMultiple = ({
   const { push } = useRouter();
   return (
     <div
-      className={`flex relative justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
+      className={`flex relative justify-between flex-col shrink-0 cursor-pointer py-2`}
       style={{ width: width, marginLeft: left }}
       onClick={() => {
         if (click) {
