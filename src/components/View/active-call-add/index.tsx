@@ -682,7 +682,7 @@ const ActiveCall = ({
                 val: 0,
                 selected: false,
               },
-              ...list,
+              // ...list,
             ]}
             change={(e: any) => {
               setData({ ...data, call_new_participant_title: e });

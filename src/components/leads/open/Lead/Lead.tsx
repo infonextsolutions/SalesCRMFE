@@ -363,7 +363,7 @@ const ExpandableRow = ({
 }: any) => {
   return (
     <div
-      className="custom-scroll-black w-[100%] h-[auto] py-[30px] px-[50px] overflow-y-auto"
+      className="custom-scroll-black w-[100%] h-[100%] py-[30px] px-[50px] overflow-y-auto"
       style={{
         zIndex: 100000000000000,
       }}

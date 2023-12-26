@@ -70,7 +70,7 @@ const Backdrop = ({ children, bool, pad, width }: any) => {
         }}
       >
         <div
-          className="w-[100%] h-[140vh] absolute top-0 left-0 bg-black z-10 "
+          className="w-[100%] h-[100vh] absolute top-0 left-0 bg-black z-10 "
           style={{
             zIndex: 100,
             opacity: 0,
@@ -79,7 +79,7 @@ const Backdrop = ({ children, bool, pad, width }: any) => {
           ref={backdrop}
         ></div>
         <div
-          className="w-[100%] overflow-auto top-0 z-100 absolute flex justify-end "
+          className="w-[100%] h-[100%] overflow-auto top-0 z-100 absolute flex justify-end "
           style={{
             zIndex: 1000,
             // padding: pad ? pad : "100px 0",
