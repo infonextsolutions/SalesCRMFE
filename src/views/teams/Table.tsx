@@ -193,7 +193,6 @@ const RenderRow = ({
 const Table = ({
     columns,
     rows,
-
 }: {
     columns?: any,
     rows?: any,
