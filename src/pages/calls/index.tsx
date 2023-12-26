@@ -10,6 +10,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
 import { CSVLink } from "react-csv";
 import axios from 'axios';
+import { getBasicIcon } from '@/utils/AssetsHelper';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -259,6 +260,91 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         },
     });
 
+    const generateRows = (data: any) => {
+        if (subType === "allocated_call_reviews") {
+            console.log('-------------------- generateRows ------------------', data);
+            setRowsACR(data?.map((item: any, index: number) => {
+                let row = [
+                    { text: item?.callId || "-" },
+                    { text: item?.callTitle || "-" },
+                    { text: item?.leadId?.[0]?.leadId || "-" },
+                    { text: item?.leadId?.[0]?.lead_title || "-" },
+                    { text: item?.company?.[0]?.company_name || "-" },
+                    { text: item?.owner?.[0]?.name || "-" },  // call owner
+                    { text: item?.teamManager?.name || "-" },  // team manager
+                    { text: item?.callId || "-" },  // client poc
+                    { text: item?.StartTime || "-" },  // call date & time
+                    { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
+                    { text: item?.callDisposiiton || "-" },  // call disposition
+                    { text: item?.callType || "-" },  // call type
+                    { text: item?.callId || "-" },  // call review type
+                    { text: item?.score || "-" },  // call score
+                    { text: item?.callId || "-" },  // allocation type
+                    { text: item?.qaAllocatedAt || "-" },  // allocated on
+                    { text: item?.qaId?.name || "-" },  // allocated to
+                    { text: item?.callId || "-" },  // review due date
+                    { text: item?.callId || "-" },  // call review status
+                ];
+                return row;
+            }));
+        } else {
+            setRowsFRCR(data?.map((item: any, index: number) => {
+                let row = [
+                    { text: item?.callId || "-" },
+                    { text: item?.callTitle || "-" },
+                    { text: item?.leadId?.[0]?.leadId || "-" },
+                    { text: item?.leadId?.[0]?.lead_title || "-" },
+                    { text: item?.owner?.name || "-" },  // call owner
+                    { text: item?.teamManager || "-" },  // team manager
+                    { text: item?.callId || "-" },  // client poc
+                    { text: item?.company?.[0]?.company_name || "-" },
+                    { text: item?.StartTime || "-" },  // call date & time
+                    { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
+                    { text: item?.callId || "-" },  // call review type
+                    { text: item?.callDisposiiton || "-" },  // call disposition
+                    { text: item?.callType || "-" },  // call type
+                    { text: item?.score || "-" },  // call score
+                    { text: item?.qaId?.name || "-" },  // feedback requestd by
+                    { text: item?.callId || "-" },  // on time review
+                    { text: item?.callId || "-" },  // delay time
+                    { text: item?.callId || "-" },  // time to complete review
+                    { text: item?.callId || "-" },  // call review status
+                ];
+                return row;
+            }));
+        }
+    };
+
+    const getData = () => {
+        let status = '';
+        switch (currTab) {
+            case 0:
+                status = 'allocated';
+                break;
+            case 1:
+                status = 'active';
+                break;
+            case 2:
+                status = 'closed';
+                break;
+            default:
+                status = 'active';
+                break;
+        }
+        axios.get(`https://salescrmbe.onrender.com/api/qam/callForReview?qaStatus=${status}`)
+            .then((res: any) => {
+                const data = res?.data?.result;
+                console.log('---------- RESPONSE ----------', data);
+                generateRows(data);
+            }).catch((err: any) => {
+                console.log('++++++ ERROR ++++++', err);
+            });
+    };
+
+    useEffect(() => {
+        getData();
+    }, [currTab, subType]);
+
     const handleTabNavigation = (payload: any) => {
         setCurrTab(payload);
         setSubType("allocated_call_reviews");
@@ -356,10 +442,13 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
 
     const renderFilters = () => {
         return (
-            <div className='w-[100%]'>
+            <div className='w-[100%] py-[20px]'>
                 <div className='flex items-center justify-between'>
-                    <div className='flex items-center gap-[20px]'>
-                        <input type="text" className='' value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search leads...' />
+                    <div className='w-[100%] flex items-center gap-[20px]'>
+                        <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
+                            <input type="text" className="w-[100%] text-black bg-white" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
+                            <img src={getBasicIcon("Search")} alt="Search" />
+                        </div>
                         {/* {renderControls()} */}
                     </div>
                     <div className='flex items-center gap-[20px]'>
@@ -399,6 +488,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     };
 
     const renderACR = () => {
+        console.log('+++++++++++++++ RENDER ACR ++++++++++++++', rowsACR);
         return <Table rows={rowsACR} columns={columnsACR} />;
     };
 
