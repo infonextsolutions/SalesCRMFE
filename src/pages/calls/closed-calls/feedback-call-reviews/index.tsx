@@ -413,6 +413,44 @@ const FeedbackCallReviewsCC = ({ data }: any) => {
     };
 
     useEffect(() => {
+        axios.get(`https://salescrmbe.onrender.com/api/qa/callForReview?qaStatus=allocated&qaId=6582bb01580a434794fa9edc`)
+            .then((res: any) => {
+                const data = res?.data?.result;
+                setRows(data?.map((item: any, index: number) => {
+                    let row = [
+                        { text: item?.callId || "-" },
+                        { text: item?.callTitle || "-" },
+                        { text: item?.leadId?.[0]?.leadId || "-" },
+                        { text: item?.leadId?.[0]?.lead_title || "-" },
+                        { text: item?.callId || "-" },  // participants
+                        { text: item?.owner?.name || "-" },  // call owner
+                        { text: item?.teamManager || "-" },  // team manager
+                        { text: item?.callId || "-" },  // client poc
+                        { text: item?.company?.[0]?.company_name || "-" },
+                        { text: item?.StartTime || "-" },  // call date & time
+                        { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
+                        { text: item?.callId || "-" },  // call duration
+                        { text: item?.callDisposiiton || "-" },  // call disposition
+                        { text: item?.callType || "-" },  // call type
+                        { text: item?.score || "-" },  // call score
+                        { text: item?.qaId?.name || "-" },  // call review type
+                        { text: item?.callId || "-" },  // call review status
+                        { text: item?.callId || "-" },  // close date
+                        { text: item?.qaAllocatedAt || "-" },  // allocated on
+                        { text: item?.callId || "-" },  // review due date
+                        { text: item?.callId || "-" },  // last updated on
+                        { text: item?.callId || "-" },  // feedback requested on
+                        { text: item?.callId || "-" },  // feedback requested by
+                    ];
+                    return row;
+                }));
+            })
+            .catch((err: any) => {
+                console.log('====== ERROR ======', err);
+            });
+    }, []);
+
+    useEffect(() => {
         const handleBeforeHistoryChange = () => {
             router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
             router.beforePopState(() => {
