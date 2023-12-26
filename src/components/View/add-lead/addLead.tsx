@@ -970,7 +970,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
         {currentPage === 3 ? (
           <SimpleButton
             theme={1}
-            text={"Save"}
+            text={loading ? "Saving..." : "Save"}
             left={0}
             right={0}
             disabled={loading}
