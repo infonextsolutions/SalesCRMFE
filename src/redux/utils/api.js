@@ -16,7 +16,7 @@ export const getApiName = (api) => {
 };
 
 export const API_ENDPOINTS = {
-  GET_SDR_DASHBOARD:"https://salescrmbe.onrender.com/api/lead-report/dashboard",
+  GET_SDR_DASHBOARD:"https://sales365.trainright.fit/api/lead-report/dashboard",
  
   rejectProperty: API_DOMAIN + "properties/rejectProperty",
   getPropertiesCountsByUserId:

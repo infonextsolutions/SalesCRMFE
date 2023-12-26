@@ -9,16 +9,19 @@ const TD = () => {
             width: 200,
             left: 40,
             text: "Talking Members",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Total Time",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Average Duration",
+            checked: true,
         },
     ];
 

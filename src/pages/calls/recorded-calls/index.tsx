@@ -125,7 +125,7 @@ const Calls = ({ data }: any) => {
 
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://salescrmbe.onrender.com/api/recording/find-all"
+    "https://sales365.trainright.fit/api/recording/find-all"
   );
   return {
     props: {

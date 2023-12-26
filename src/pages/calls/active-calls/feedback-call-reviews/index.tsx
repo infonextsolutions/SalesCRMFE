@@ -1,11 +1,8 @@
-import DUMMY from "@/shared/dummy";
 import React, { useEffect, useRef, useState } from "react";
-import dummy from "@/shared/dummy";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { useRouter } from "next/router";
 import Navbar from "@/components/app/Navbar/Navbar";
-import ScheduleCallsContainer from "@/components/calls/active-calls/Container/ScheduleCallContainer";
 import axios from "axios";
 import Table from "@/views/teams/Table";
 import Filters from "@/views/teams/Filters";
@@ -18,7 +15,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const FeedbackCallReviewsAC = ({ data }: any) => {
+const FeedbackCallReviewsAC = () => {
     const router = useRouter();
     const [columns, setColumns] = useState([
         {
@@ -326,11 +323,11 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
     const ref: any = useRef();
 
     const exportXLSX = () => {
-        const worksheet = XLSX.utils.json_to_sheet(data?.result);
+        const worksheet = XLSX.utils.json_to_sheet(rows);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
         XLSX.writeFile(workbook, "DataSheet.xlsx");
-        console.log("Exporting to Excel", data);
+        console.log("Exporting to Excel", rows);
     };
 
     const exportPDF = () => {
@@ -341,7 +338,7 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
                     style: "header",
                 },
                 {
-                    text: JSON.stringify(data.result, null, 4),
+                    text: JSON.stringify(rows, null, 4),
                     style: "contentStyle",
                 },
             ],
@@ -359,7 +356,7 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
         };
 
         pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
-        console.log("Exporting to PDF", data);
+        console.log("Exporting to PDF", rows);
     };
 
     const addExport = (e: any, e1: any) => {
@@ -390,41 +387,44 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
     };
 
     useEffect(() => {
-        axios.get(`https://salescrmbe.onrender.com/api/qa/callForReview?qaStatus=allocated&qaId=6582bb01580a434794fa9edc`)
-            .then((res: any) => {
-                const data = res?.data?.result;
-                setRows(data?.map((item: any, index: number) => {
-                    let row = [
-                        { text: item?.callId || "-" },
-                        { text: item?.callTitle || "-" },
-                        { text: item?.leadId?.[0]?.leadId || "-" },
-                        { text: item?.leadId?.[0]?.lead_title || "-" },
-                        { text: item?.callId || "-" },  // participants
-                        { text: item?.owner?.name || "-" },  // call owner
-                        { text: item?.teamManager || "-" },  // team manager
-                        { text: item?.callId || "-" },  // client poc
-                        { text: item?.company?.[0]?.company_name || "-" },
-                        { text: item?.StartTime || "-" },  // call date & time
-                        { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
-                        { text: item?.callId || "-" },  // call duration
-                        { text: item?.callDisposiiton || "-" },  // call disposition
-                        { text: item?.callType || "-" },  // call type
-                        { text: item?.score || "-" },  // call score
-                        { text: item?.qaId?.name || "-" },  // call review type
-                        { text: item?.callId || "-" },  // call review status
-                        { text: item?.callId || "-" },  // close date
-                        { text: item?.qaAllocatedAt || "-" },  // allocated on
-                        { text: item?.callId || "-" },  // review due date
-                        { text: item?.callId || "-" },  // last updated on
-                        { text: item?.callId || "-" },  // feedback requested on
-                        { text: item?.callId || "-" },  // feedback requested by
-                    ];
-                    return row;
-                }));
-            })
-            .catch((err: any) => {
-                console.log('====== ERROR ======', err);
-            });
+        if (window !== undefined) {
+            const userId = localStorage.getItem("user-id");
+            axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}`)
+                .then((res: any) => {
+                    const data = res?.data?.result;
+                    setRows(data?.map((item: any, index: number) => {
+                        let row = [
+                            { text: item?.callId || "-" },
+                            { text: item?.callTitle || "-" },
+                            { text: item?.leadId?.[0]?.leadId || "-" },
+                            { text: item?.leadId?.[0]?.lead_title || "-" },
+                            { text: item?.callId || "-" },  // participants
+                            { text: item?.owner?.name || "-" },  // call owner
+                            { text: item?.teamManager || "-" },  // team manager
+                            { text: item?.callId || "-" },  // client poc
+                            { text: item?.company?.[0]?.company_name || "-" },
+                            { text: item?.StartTime || "-" },  // call date & time
+                            { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
+                            { text: item?.callId || "-" },  // call duration
+                            { text: item?.callDisposiiton || "-" },  // call disposition
+                            { text: item?.callType || "-" },  // call type
+                            { text: item?.score || "-" },  // call score
+                            { text: item?.qaId?.name || "-" },  // call review type
+                            { text: item?.callId || "-" },  // call review status
+                            { text: item?.callId || "-" },  // close date
+                            { text: item?.qaAllocatedAt || "-" },  // allocated on
+                            { text: item?.callId || "-" },  // review due date
+                            { text: item?.callId || "-" },  // last updated on
+                            { text: item?.callId || "-" },  // feedback requested on
+                            { text: item?.callId || "-" },  // feedback requested by
+                        ];
+                        return row;
+                    }));
+                })
+                .catch((err: any) => {
+                    console.log('====== ERROR ======', err);
+                });
+        }
     }, []);
 
     useEffect(() => {
@@ -448,7 +448,7 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
             <Navbar mainTitle={"Open Reviews"} title={"Allocated Calls"} src="ActiveCalls" />
             <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px] mt-[20px]">
                 <div className="flex items-center justify-between">
-                <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
+                    <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
                         <input type="text" className="w-[100%] text-black bg-white" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
                         <img src={getBasicIcon("Search")} alt="Search" />
                     </div>
@@ -471,7 +471,7 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
                                             title: "CSV",
                                             Icon: "CSV",
                                             wrapper: (
-                                                <CSVLink data={data.result} className="" ref={ref}>
+                                                <CSVLink data={rows} className="" ref={ref}>
                                                     CSV
                                                 </CSVLink>
                                             ),
@@ -528,15 +528,15 @@ const FeedbackCallReviewsAC = ({ data }: any) => {
     )
 }
 
-export async function getServerSideProps({ query, ...params }: any) {
-    const response = await axios.get(
-        "https://salescrmbe.onrender.com/api/active-call/find-all"
-    );
-    return {
-        props: {
-            data: response.data || {},
-        },
-    };
-}
+// export async function getServerSideProps({ query, ...params }: any) {
+//     const response = await axios.get(
+//         "https://sales365.trainright.fit/api/active-call/find-all"
+//     );
+//     return {
+//         props: {
+//             data: response.data || {},
+//         },
+//     };
+// }
 
 export default FeedbackCallReviewsAC

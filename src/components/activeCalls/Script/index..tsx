@@ -99,7 +99,7 @@ const ScriptDoc = ({
             onClick={(e) => {
               axios
                 .delete(
-                  `https://salescrmbe.onrender.com/api/call-script/delete-by-id?id=${id}`
+                  `https://sales365.trainright.fit/api/call-script/delete-by-id?id=${id}`
                 )
                 .then((e) => {
                   console.log(e, "huqbfq");
@@ -407,7 +407,7 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   const refresh = () => {
     axios
       .get(
-        `https://salescrmbe.onrender.com/api/call-script/active-call?activeCallId=${data?._id}`
+        `https://sales365.trainright.fit/api/call-script/active-call?activeCallId=${data?._id}`
       )
       .then((e) => {
         console.log(setCurrScripts(e.data.result));

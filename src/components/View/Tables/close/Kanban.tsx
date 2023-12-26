@@ -13,7 +13,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   useEffect(function () {
     axios.get(
-      `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Close&${queryStr}`
+      `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`
     ).then(res => {
       console.log('================== internal LEADS FETCH =============', res.data.result);
       setItems(res?.data?.result);
@@ -23,7 +23,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   //   const getallItems = async (current: any) => {
   //     const res = await axios.get(
-  //       `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+  //       `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
   //     );
   //     const data = res.data.result;
   //     return data;
@@ -33,7 +33,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(true);
     const getItems = async () => {
       const res = await axios.get(
-        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Close`
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close`
       );
       // console.log(res, "only check here");
       const data = res?.data?.result;

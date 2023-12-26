@@ -28,7 +28,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1.result._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1.result._id}`
         )
         .then((e) => {
           setData(e.data);

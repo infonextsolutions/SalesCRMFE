@@ -86,10 +86,10 @@ export default function Open({ data, mastersData }: any) {
 export async function getServerSideProps({ query, ...params }: any) {
   try {
     const response = await axios.get(
-      "https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open"
+      "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open"
     );
     const response2 = await axios.get(
-      "https://salescrmbe.onrender.com/api/master-users/find-all"
+      "https://sales365.trainright.fit/api/master-users/find-all"
     );
     console.log('>>>>>>>>>>>>>>>>>>>>>> respose 2 <<<<<<<<<<<<<<<<<<<<<<', response2);
     return {

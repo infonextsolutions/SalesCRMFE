@@ -80,37 +80,42 @@ const RenderHeaderColumn = ({
     sort,
     onClick,
     showArrowDown,
+    show,
 }: any) => {
-    return (
-        <div
-            className={`flex items-center h-[20px] shrink-0`}
-            style={{ width: width, marginLeft: left }}
-        >
-            {/* change the color from #000 to #222 */}
-            <p
-                className="text-[#222] uppercase text-[12px] font-bold tracking-wider w-[100%] "
-                style={{
-                    textAlign: align && "center",
-                }}
+    if (show) {
+        return (
+            <div
+                className={`flex items-center h-[20px] shrink-0`}
+                style={{ width: width, marginLeft: left }}
             >
-                {text}
-            </p>
-            {showArrowDown && (
-                <Image
-                    src={getBasicIcon("Arrow Down 3")}
-                    width={20}
-                    className="ml-[3px] cursor-pointer"
-                    height={20}
-                    alt=""
-                    onClick={() => {
-                        if (onClick) {
-                            onClick();
-                        }
+                {/* change the color from #000 to #222 */}
+                <p
+                    className="text-[#222] uppercase text-[12px] font-bold tracking-wider w-[100%] "
+                    style={{
+                        textAlign: align && "center",
                     }}
-                />
-            )}
-        </div>
-    );
+                >
+                    {text}
+                </p>
+                {showArrowDown && (
+                    <Image
+                        src={getBasicIcon("Arrow Down 3")}
+                        width={20}
+                        className="ml-[3px] cursor-pointer"
+                        height={20}
+                        alt=""
+                        onClick={() => {
+                            if (onClick) {
+                                onClick();
+                            }
+                        }}
+                    />
+                )}
+            </div>
+        );
+    } else {
+        return null;
+    }
 };
 
 const RenderHeader = ({
@@ -130,6 +135,7 @@ const RenderHeader = ({
                     width={column?.width}
                     left={column?.left}
                     text={column?.text}
+                    show={column?.checked}
                 />
             ))}
         </div>
@@ -144,6 +150,7 @@ const RenderRowItem = ({
     left,
     type, // PRICE, DATETIME, DATE, TIME
     currency,
+    show,
 }: {
     text?: string,
     subText?: string,
@@ -151,16 +158,21 @@ const RenderRowItem = ({
     left?: any,
     type?: string,
     currency?: string,
+    show?: boolean,
 }) => {
-    return (
-        <div
-            className={`flex-col min-h-[20px] shrink-0`}
-            style={{ width: width, marginLeft: left }}
-        >
-            <span className='text-black'>{text}</span>
-            <span className='text-[#666]'>{subText}</span>
-        </div>
-    );
+    if (show) {
+        return (
+            <div
+                className={`flex-col min-h-[20px] shrink-0`}
+                style={{ width: width, marginLeft: left }}
+            >
+                <span className='text-black'>{text}</span>
+                <span className='text-[#666]'>{subText}</span>
+            </div>
+        );
+    } else {
+        return null;
+    }
 };
 
 
@@ -182,6 +194,7 @@ const RenderRow = ({
                         subText={rowItem?.subText}
                         width={columns?.[itemIndex]?.width}
                         left={columns?.[itemIndex]?.left}
+                        show={columns?.[itemIndex]?.checked}
                     />
                 ))}
             </div>

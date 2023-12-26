@@ -29,7 +29,7 @@ const ForgotPassword = () => {
     };
     axios
       .post(
-        "https://salescrmbe.onrender.com/api/master-users/forgotPassword",
+        "https://sales365.trainright.fit/api/master-users/forgotPassword",
         finalPayload
       )
       .then((res) => {

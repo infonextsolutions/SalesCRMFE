@@ -1,12 +1,9 @@
-import DUMMY from "@/shared/dummy";
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import dummy from "@/shared/dummy";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { useRouter } from "next/router";
 import Navbar from "@/components/app/Navbar/Navbar";
-import ScheduleCallsContainer from "@/components/calls/active-calls/Container/ScheduleCallContainer";
 import Filters from "@/views/teams/Filters";
 import Table from "@/views/teams/Table";
 import Pagination from "@/views/teams/Pagination";
@@ -19,77 +16,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const AllocatedCalls = () => {
-    const [rows, setRows] = useState([
-        [
-            {
-                text: "345XX",
-            },
-            {
-                text: "Discussion on PX features",
-            },
-            {
-                text: "12XXXX",
-            },
-            {
-                text: "Lead Info - XYZ Discussion on PX feature",
-            },
-            {
-                text: "Shraddha P.",
-                subText: "Aarti"
-            },
-            {
-                text: "John C.",
-                subText: "Sales Manager"
-            },
-            {
-                text: "Shraddha P.",
-            },
-            {
-                text: "John C.",
-                subText: "Sales Manager"
-            },
-            {
-                text: "ABC Corp.",
-                subText: "Noida"
-            },
-            {
-                text: "23 January 2023 3:00 pm",
-            },
-            {
-                text: "Product A",
-            },
-            {
-                text: "30 min",
-            },
-            {
-                text: "Engaged",
-            },
-            {
-                text: "Follow-up Call",
-            },
-            {
-                text: "---",
-            },
-            {
-                text: "Allocated",
-            },
-            {
-                text: "Open (New)",
-            },
-            {
-                text: "---",
-            },
-            {
-                text: "23 January 2023",
-            },
-            {
-                text: "23 January 2023",
-            },
-            {
-                text: "23 January 2023",
-            },
-        ],
-    ]);
+    const [rows, setRows] = useState([]);
 
     const router = useRouter();
     const [columns, setColumns] = useState([
@@ -369,39 +296,43 @@ const AllocatedCalls = () => {
     };
 
     useEffect(() => {
-        axios.get(`https://salescrmbe.onrender.com/api/qa/callForReview?qaStatus=allocated&qaId=6582bb01580a434794fa9edc`)
-            .then((res: any) => {
-                const data = res?.data?.result;
-                setRows(data?.map((item: any, index: number) => {
-                    let row = [
-                        { text: item?.callId || "-" },
-                        { text: item?.callTitle || "-" },
-                        { text: item?.leadId?.[0]?.leadId || "-" },
-                        { text: item?.leadId?.[0]?.lead_title || "-" },
-                        { text: item?.callId || "-" },  // participants
-                        { text: item?.owner?.name || "-" },  // call owner
-                        { text: item?.teamManager || "-" },  // team manager
-                        { text: item?.callId || "-" },  // client poc
-                        { text: item?.company?.[0]?.company_name || "-" },
-                        { text: item?.StartTime || "-" },  // call date & time
-                        { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
-                        { text: item?.callId || "-" },  // call duration
-                        { text: item?.callDisposiiton || "-" },  // call disposition
-                        { text: item?.callType || "-" },  // call type
-                        { text: item?.score || "-" },  // call score
-                        { text: item?.qaId?.name || "-" },  // call review type
-                        { text: item?.callId || "-" },  // call review status
-                        { text: item?.callId || "-" },  // close date
-                        { text: item?.qaAllocatedAt || "-" },  // allocated on
-                        { text: item?.callId || "-" },  // review due date
-                        { text: item?.callId || "-" },  // last updated on
-                    ];
-                    return row;
-                }));
-            })
-            .catch((err: any) => {
-                console.log('====== ERROR ======', err);
-            });
+        if (window !== undefined) {
+            console.log('__________________ useEffect _________________');
+            const userId = localStorage.getItem("user-id");
+            axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}`)
+                .then((res: any) => {
+                    const data = res?.data?.result;
+                    setRows(data?.map((item: any, index: number) => {
+                        let row = [
+                            { text: item?.callId || "-" },
+                            { text: item?.callTitle || "-" },
+                            { text: item?.leadId?.[0]?.leadId || "-" },
+                            { text: item?.leadId?.[0]?.lead_title || "-" },
+                            { text: item?.callId || "-" },  // participants
+                            { text: item?.owner?.name || "-" },  // call owner
+                            { text: item?.teamManager || "-" },  // team manager
+                            { text: item?.callId || "-" },  // client poc
+                            { text: item?.company?.[0]?.company_name || "-" },
+                            { text: item?.StartTime || "-" },  // call date & time
+                            { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
+                            { text: item?.callId || "-" },  // call duration
+                            { text: item?.callDisposiiton || "-" },  // call disposition
+                            { text: item?.callType || "-" },  // call type
+                            { text: item?.score || "-" },  // call score
+                            { text: item?.qaId?.name || "-" },  // call review type
+                            { text: item?.callId || "-" },  // call review status
+                            { text: item?.callId || "-" },  // close date
+                            { text: item?.qaAllocatedAt || "-" },  // allocated on
+                            { text: item?.callId || "-" },  // review due date
+                            { text: item?.callId || "-" },  // last updated on
+                        ];
+                        return row;
+                    }));
+                })
+                .catch((err: any) => {
+                    console.log('====== ERROR ======', err);
+                });
+        }
     }, []);
 
     useEffect(() => {
@@ -507,7 +438,7 @@ const AllocatedCalls = () => {
 
 // export async function getServerSideProps({ query, ...params }: any) {
 //     const response = await axios.get(
-//         "https://salescrmbe.onrender.com/api/active-call/find-all"
+//         "https://sales365.trainright.fit/api/active-call/find-all"
 //     );
 //     return {
 //         props: {

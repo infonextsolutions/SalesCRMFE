@@ -11,7 +11,7 @@ export const ALLOCATED_CALL = {
         {
           type: "CUSTOMTABLE",
           actions: [],
-          api: "https://salescrmbe.onrender.com/api/active-call/find-all",
+          api: "https://sales365.trainright.fit/api/active-call/find-all",
           tableItems: [
             {
               property: "callID",

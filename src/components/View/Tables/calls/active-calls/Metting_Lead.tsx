@@ -24,7 +24,7 @@ const Metting_LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   useEffect(function () {
     axios.get(
-      `https://salescrmbe.onrender.com/api/event/find-all?limit=${limit}&page=${pageNumber}${queryStr}`
+      `https://sales365.trainright.fit/api/event/find-all?limit=${limit}&page=${pageNumber}${queryStr}`
     ).then(res => {
       setItems(res?.data?.result);
       settotalLeads(res?.data?.totalRecords)
@@ -35,7 +35,7 @@ const Metting_LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://salescrmbe.onrender.com/api/event/find-all?limit=${limit}&page=${current}${queryStr}`
+      `https://sales365.trainright.fit/api/event/find-all?limit=${limit}&page=${current}${queryStr}`
     );
     const data = res.data.result;
     return data;
@@ -62,7 +62,7 @@ const Metting_LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://salescrmbe.onrender.com/api/event/find-all?${queryStr}`
+          `https://sales365.trainright.fit/api/event/find-all?${queryStr}`
         );
         // console.log(res, "only check here");
         const data = res.data.result;
@@ -102,7 +102,7 @@ const Metting_LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   const fetchItems = async (current: any) => {
     const res = await axios.get(
-      `https://salescrmbe.onrender.com/api/event/find-all?limit=${limit}&page=${current}`
+      `https://sales365.trainright.fit/api/event/find-all?limit=${limit}&page=${current}`
     );
     const data = res.data.result;
     const filtered = data.filter(

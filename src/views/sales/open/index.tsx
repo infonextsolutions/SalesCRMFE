@@ -151,7 +151,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
 
   const makecall = async () => {
     const res = await axios.post(
-      "https://salescrmbe.onrender.com/api/calling/make-call",
+      "https://sales365.trainright.fit/api/calling/make-call",
       {
         callTo: "7669481778",
       }

@@ -75,7 +75,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     };
     try {
       const response = await axios.get(
-        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open${getQueryStr()}`
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open${getQueryStr()}`
       );
       console.log(
         "======================== RESPONSE FIND-ALL ========================",

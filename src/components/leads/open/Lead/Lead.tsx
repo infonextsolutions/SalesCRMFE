@@ -661,7 +661,7 @@ const LeadContainer = ({
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${LeadData._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData._id}`
       )
       .then((e) => {
         setLeadData(e.data.result);

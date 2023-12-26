@@ -8,36 +8,43 @@ const Individual = () => {
             width: 200,
             left: 40,
             text: "Team Member",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Talk Ratio",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Longest Monologue",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Longest Customer Story",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Interactivity",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Patience",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Question Rate",
+            checked: true,
         },
     ];
 

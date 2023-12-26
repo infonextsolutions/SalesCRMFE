@@ -205,7 +205,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
 
   const UpdateCalls = () => {
     setTimeout(() => {
-      const urri = `https://salescrmbe.onrender.com/api/calling/find-by-id?id=${data._id}`;
+      const urri = `https://sales365.trainright.fit/api/calling/find-by-id?id=${data._id}`;
       axios
         .get(urri)
         .then((e) => {
@@ -308,7 +308,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
               // setList([...list, letsSee]);
               axios
                 .post(
-                  "https://salescrmbe.onrender.com/api/recording/addAndUpdateComments",
+                  "https://sales365.trainright.fit/api/recording/addAndUpdateComments",
                   {
                     callId: data._id,
                     comments: [...list, letsSee],
@@ -357,7 +357,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
                   console.log(finalList, "24111421");
                   axios
                     .post(
-                      "https://salescrmbe.onrender.com/api/recording/addAndUpdateComments",
+                      "https://sales365.trainright.fit/api/recording/addAndUpdateComments",
                       {
                         callId: data._id,
                         comments: finalList,

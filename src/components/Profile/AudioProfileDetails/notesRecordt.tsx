@@ -50,7 +50,7 @@ const Notes = ({ data, refresh }: any) => {
   const cancelNotes = (e: any) => {
     if (e) {
       // setList([...list, e]);
-      const url = "https://salescrmbe.onrender.com/api/calling/notes";
+      const url = "https://sales365.trainright.fit/api/calling/notes";
       const { title, content } = e;
       console.log(e, "please ch-11");
       axios

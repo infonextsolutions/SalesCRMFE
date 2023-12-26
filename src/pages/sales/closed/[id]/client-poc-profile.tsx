@@ -65,7 +65,7 @@ export default ClientProfile;
 
 export async function getServerSideProps({ query, params }: any) {
   const response = await axios.get(
-    `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${params.id}`
+    `https://sales365.trainright.fit/api/leads/find-by-id?id=${params.id}`
   );
   return {
     props: {

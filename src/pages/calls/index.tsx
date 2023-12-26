@@ -20,96 +20,115 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
             width: 200,
             left: 40,
             text: "Call ID",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Title",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Lead ID",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Lead Title",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Company Name",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Owner",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Team Manager",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Client POC",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Date & Time",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Product/Service",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Disposition",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Type",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Call Review Type",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Score",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Allocation Type",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Allocated On",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Allocated To",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Review Due Date",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Review Status",
+            checked: true,
         },
     ];
 
@@ -118,101 +137,121 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
             width: 200,
             left: 40,
             text: "Call ID",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Title",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Lead ID",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Lead Title",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Owner",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Team Manager",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Client POC",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Company Name",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Date & Time",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Product/Service",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Call Review Type",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Disposition",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Type",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Score",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Feedback Requested On",
+            checked: true,
         },
         {
             width: 200,
             left: 40,
             text: "Feedback Requested By",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "On Time Review",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Delay Time",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Time To Complete Review",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Review Status",
+            checked: true,
         },
     ];
 
@@ -331,7 +370,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
                 status = 'active';
                 break;
         }
-        axios.get(`https://salescrmbe.onrender.com/api/qam/callForReview?qaStatus=${status}`)
+        axios.get(`https://sales365.trainright.fit/api/qam/callForReview?qaStatus=${status}`)
             .then((res: any) => {
                 const data = res?.data?.result;
                 console.log('---------- RESPONSE ----------', data);
@@ -528,7 +567,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
 
 export async function getServerSideProps({ query, ...params }: any) {
     const response = await axios.get(
-        "https://salescrmbe.onrender.com/api/active-call/find-all"
+        "https://sales365.trainright.fit/api/active-call/find-all"
     );
     return {
         props: {

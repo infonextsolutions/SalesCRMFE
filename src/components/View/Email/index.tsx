@@ -389,7 +389,7 @@ const EmailPage = ({
       subject: e2,
       content: e3,
     };
-    const url = "https://salescrmbe.onrender.com/api/send-email";
+    const url = "https://sales365.trainright.fit/api/send-email";
     const body = {
       email: e1,
       subject: e2,
@@ -443,7 +443,7 @@ const EmailPage = ({
 
     axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data?._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`
       )
       .then((res) => {
         console.log("new result is", res);

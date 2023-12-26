@@ -540,7 +540,7 @@ const Audio = ({ data, data1 }: props) => {
   const [callData, setCallData] = useState<AudioData>(example);
 
   const callit = () => {
-    const url = "https://salescrmbe.onrender.com/api/calling/call-status";
+    const url = "https://sales365.trainright.fit/api/calling/call-status";
     if (data.leadId?._id) {
       axios
         .post(url, {
