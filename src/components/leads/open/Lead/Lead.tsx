@@ -789,14 +789,14 @@ const LeadContainer = ({
   return (
     <>
       <div
-        className="flex relative h-[50px]"
+        className="flex relative h-[auto]"
         style={{
           zIndex: 100,
         }}
       >
         <div
           // onDoubleClick={handleDoubleClick}
-          className="-z-50 pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
+          className="-z-50 pl-[10px] h-[auto] flex items-center grow border-[#ccc] border-b-[1px] "
           ref={wRef}
         >
           <LeadBox width={30} bool={selectAll} />
