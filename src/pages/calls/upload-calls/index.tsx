@@ -79,7 +79,6 @@ const Calls = ({ data }: any) => {
     //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
     //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
     XLSX.writeFile(workbook, "DataSheet.xlsx");
-    console.log("exporting", data);
   };
 
   const addExport = (e: any, e1: any) => {
@@ -92,10 +91,8 @@ const Calls = ({ data }: any) => {
 
   const [upload, setUpload] = useState(false);
   const [bool, setBool] = useState(true);
-  console.log(data, "please");
 
   const state = useSelector((state: any) => state.auth);
-  console.log(data);
   const dispatch = useAppDispatch();
 
   const [logged] = useLocalStorage("logged", "loading");

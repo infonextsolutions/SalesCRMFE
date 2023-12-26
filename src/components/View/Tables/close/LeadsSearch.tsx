@@ -49,13 +49,11 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
       const res = await axios.get(
         `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close${queryStr}`
       );
-      // console.log(res, "only check here");
       const data = res.data.result;
 
       if (search.length) {
         setpageNumber(0);
         const allItems = await getallItems(pageNumber);
-        console.log(allItems);
         setItems(allItems);
       }
       const filtered = data.filter(
@@ -67,9 +65,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
       );
 
       // const filtered = data;
-      // console.log(filtered);
       settotalLeads(filtered.length);
-      // console.log(data, search);
       const count = Math.ceil(Number(filtered.length) / limit);
       setpageCount(count);
       setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
@@ -103,7 +99,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(true);
     setpageNumber(0);
     const allItems = await fetchItems(pageNumber);
-    // console.log(allItems);
     setItems(allItems);
     setLoading(false);
   };
@@ -112,7 +107,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(true);
     setpageNumber(pageCount - 1);
     const allItems = await fetchItems(pageNumber);
-    // console.log(allItems);
     setItems(allItems);
     setLoading(false);
   };
@@ -125,9 +119,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(false);
   };
   const Leads = items;
-  // console.log("allitems ",Leads)
-  // console.log(Leads);
-  // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
 
   function sortArray(arr: any) {

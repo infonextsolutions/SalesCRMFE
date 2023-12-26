@@ -4,7 +4,6 @@ import React from "react";
 import { axisClasses } from "@mui/x-charts";
 
 const BarChartVertical = ({ title = "", data, template, options = null }: any) => {
-  console.log('------------ options -------------', options);
   const xLabels = template?.labels?.map(
     (label: string, index: number) => template?.mappings?.[label]
   );

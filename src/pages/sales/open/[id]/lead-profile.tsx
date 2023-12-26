@@ -15,13 +15,6 @@ import Navbar from "@/components/app/Navbar/Navbar";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 
 const Profile = ({ data, mastersData }: any) => {
-  // console.log("data10", data);
-
-  console.log(
-    "============================= Profile : data ==============================",
-    data,
-    mastersData
-  );
 
   const [data1, setData] = useState(data);
 

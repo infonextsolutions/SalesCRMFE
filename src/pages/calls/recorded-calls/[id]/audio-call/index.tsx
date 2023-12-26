@@ -49,8 +49,6 @@ const CallProfile = ({ data, data1 }: any) => {
     }
   };
 
-  console.log(data1, "here is audio");
-
   return (
     <>
       <NavbarWithButton
@@ -123,7 +121,6 @@ export async function getServerSideProps({ query, params }: any) {
     `https://sales365.trainright.fit/api/calling/find-by-id?id=${params.id}`
   );
 
-  console.log(response.data.result.leadId._id);
   const response1 = await axios.get(
     `https://sales365.trainright.fit/api/leads/find-by-id?id=${response.data.result.leadId._id}`
   );

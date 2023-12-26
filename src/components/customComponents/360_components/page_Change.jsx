@@ -8,7 +8,6 @@ const Selected_page = ({ component }) => {
   );
   const uniqueID = uuidv4();
 
-  console.log(component);
   const handlePageClick = (page) => {
     setSelectedPage(page.children);
   };

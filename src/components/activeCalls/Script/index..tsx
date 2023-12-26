@@ -102,11 +102,9 @@ const ScriptDoc = ({
                   `https://sales365.trainright.fit/api/call-script/delete-by-id?id=${id}`
                 )
                 .then((e) => {
-                  console.log(e, "huqbfq");
                   refresh();
                 })
                 .catch((e) => {
-                  console.log(e, "huqbfq");
                 });
             }}
             // fill={true}
@@ -241,8 +239,6 @@ const ScriptList = ({
     }, 500);
   };
 
-  console.log(moredata, "here is more");
-
   function getTitleFromURL(url: any) {
     const parts = url.split("/");
     const title = parts[parts.length - 1];
@@ -356,7 +352,6 @@ const ScriptList = ({
           </button>
         </div>
         {data?.map((item: any, i: any) => {
-          console.log(item, "please checck here", i);
           return (
             <ScriptDoc
               key={i}
@@ -391,9 +386,6 @@ const ScriptView = ({ data }: { data: any }) => {
 };
 
 const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
-  console.log(scripts, "arijit");
-  console.log(data, "arijit");
-  console.log(data?._id);
 
   const [activeTitle, setActiveTitle] = React.useState(0);
 
@@ -410,12 +402,10 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
         `https://sales365.trainright.fit/api/call-script/active-call?activeCallId=${data?._id}`
       )
       .then((e) => {
-        console.log(setCurrScripts(e.data.result));
       })
       .catch((e) => {});
   };
 
-  console.log(currScripts, "currScripts");
 
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
@@ -433,14 +423,12 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   // const [pdfText, setPdfText] = useState("");
 
   // const onDocumentLoadSuccess = ({ numPages }: any) => {
-  //   console.log("arijit");
 
   //   setNumPages(numPages);
 
   //   const loadingTask = pdfjs.getDocument({
   //     url: "https://salescrm247.s3.amazonaws.com/scripts/Get_Started_With_Smallpdf.pdf",
   //   });
-  //   console.log(loadingTask, "arijit");
   //   loadingTask.promise
   //     .then((pdf) => {
   //       const textPromises = [];

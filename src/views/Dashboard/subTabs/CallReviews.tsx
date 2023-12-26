@@ -28,7 +28,6 @@ const CallReviews = ({
     sellingData?: any,
     getSellingData?: any,
 }) => {
-    console.log('===================== TABDATA ===================', tabData);
     // SDR/BDM; Manager
     if (tabData?.key === "QA Analyst") {
         return (

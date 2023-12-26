@@ -193,10 +193,8 @@ const Step1 = ({ next, cancel }: any) => {
   const dispatch = useAppDispatch();
 
   const handleDrop = function (e: any) {
-    console.log(e, "please check here");
     if (isExcelOrCSVFile(e[0].name)) {
       // setFile(e[0]);
-      console.log(e[0]);
       const formdata = new FormData();
       formdata.append("file", e[0]);
       axios

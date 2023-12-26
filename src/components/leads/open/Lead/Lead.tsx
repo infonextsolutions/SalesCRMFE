@@ -560,7 +560,6 @@ const LeadContainer = ({
   const [call, setCall] = React.useState(false);
   const [detailShow, setDetailShow] = useState(false);
 
-  // console.log("--------------- LEAD DATA ------------------", LeadData);
   const num = Math.floor(Math.random() * 4);
   const showNotes = () => {
     setNotes(true);
@@ -667,7 +666,6 @@ const LeadContainer = ({
         setLeadData(e.data.result);
       })
       .catch((e) => {
-        console.log(e, "error occured");
       });
   };
 
@@ -684,8 +682,6 @@ const LeadContainer = ({
 
     return "on " + formattedDate;
   }
-
-  console.log(activity, "p2-33");
 
   function isISODateString(str: any) {
     // Regular expression to match ISO date string format
@@ -743,7 +739,6 @@ const LeadContainer = ({
             const item = convertISODateToCustomFormat(
               dataArray[i].call_start_time
             );
-            console.log(item, 341512);
             filteredArray.push(item);
           }
         }
@@ -761,7 +756,6 @@ const LeadContainer = ({
       const newArr = filterItemsWithSimilarParameters(e);
 
       if (newArr.length > 0) {
-        console.log(newArr, 133411);
 
         return { date: newArr[0].date, time: newArr[0].time };
       } else {
@@ -774,7 +768,6 @@ const LeadContainer = ({
 
   const contacted: any = LeadData.customerId;
   const contacts = contacted.contacts;
-  console.log(contacts, "98126192");
 
   const [showDescModal, setShowDescModal] = useState(false);
 

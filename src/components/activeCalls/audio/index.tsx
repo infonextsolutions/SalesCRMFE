@@ -534,7 +534,6 @@ const list = [
 ];
 
 const Audio = ({ data, data1 }: props) => {
-  console.log(data);
   const [check, setCheck] = useState(true);
 
   const [callData, setCallData] = useState<AudioData>(example);
@@ -548,7 +547,6 @@ const Audio = ({ data, data1 }: props) => {
           leadId: data.leadId._id,
         })
         .then((e) => {
-          console.log(e.data.result, "bc-23141");
           setCallData(e.data.result);
           setCheck(false);
         });
@@ -560,11 +558,6 @@ const Audio = ({ data, data1 }: props) => {
       callit();
     }
   });
-
-  console.log(
-    "============== CALLDATA ==============================",
-    callData
-  );
 
   return (
     <>

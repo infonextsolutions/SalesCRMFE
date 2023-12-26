@@ -19,7 +19,6 @@ function Header_360() {
     }
 
      const handleSubmit =()=>{
-    console.log(value)
   }
  
   return (

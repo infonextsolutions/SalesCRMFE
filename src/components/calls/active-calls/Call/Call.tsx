@@ -559,7 +559,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       setW(wRef.current.offsetWidth);
     }
   });
-  // console.log("calldataactive:", CallData);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });

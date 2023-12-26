@@ -14,7 +14,6 @@ function Tabbar({
     const navigate = useRouter();
 
     const handleChange = (event, newValue) => {
-        console.log('=========== HANDLE CHANGE : TAB ==========', newValue);
         if (doNavigate && urlTemp) {
             navigate.push(urlTemp.replace('{TAB}', component?.tabs?.[newValue]?.key));
         } else {

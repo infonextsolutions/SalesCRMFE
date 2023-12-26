@@ -96,7 +96,6 @@ const Login = () => {
         finalPayload
       )
       .then((res) => {
-        console.log("=========== user login ===========", res.data);
         dispatch(
           setUser1({
             _id: res.data?._id,
@@ -116,9 +115,7 @@ const Login = () => {
       })
       .catch((err) => {
         setInvalid(true);
-        console.log(err);
       });
-    // console.log(user, pass);
     // e.preventDefault();
     // api implemented
 

@@ -102,7 +102,6 @@ const NavbarWithButton = ({
           {buttons?.length > 0 && (
             <div className="flex justify-end ">
               {buttons.map((item, i) => {
-                console.log(item.list);
                 return (
                   <Button
                     dropdown={item.dropdown}

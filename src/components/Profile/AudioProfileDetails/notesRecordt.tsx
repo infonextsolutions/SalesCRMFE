@@ -26,8 +26,6 @@ const Note = ({ title, content, date }: any) => {
 const Notes = ({ data, refresh }: any) => {
   const [list, setList] = useState<any>([...data.notes]);
 
-  console.log(data.notes, "please ch-11", data);
-
   const [notes, setNotes] = React.useState(false);
   const [bool, setBool] = React.useState(true);
   const showNotes = () => {
@@ -52,7 +50,6 @@ const Notes = ({ data, refresh }: any) => {
       // setList([...list, e]);
       const url = "https://sales365.trainright.fit/api/calling/notes";
       const { title, content } = e;
-      console.log(e, "please ch-11");
       axios
         .post(url, {
           title: title,
@@ -80,7 +77,6 @@ const Notes = ({ data, refresh }: any) => {
           );
         })
         .catch((e) => {
-          console.log(e);
           dispatch(
             setError({
               show: true,
@@ -169,7 +165,6 @@ const Notes = ({ data, refresh }: any) => {
         >
           <div className="flex flex-col-reverse ">
             {list.map((item: any, i: any) => {
-              console.log(item, "che21441");
               return (
                 <Note
                   title={item.title}

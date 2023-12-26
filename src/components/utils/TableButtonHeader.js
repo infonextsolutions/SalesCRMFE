@@ -81,7 +81,6 @@ const TableButtonHeader = ({
   };
 
   const refreshData = () => {
-    console.log(refreshMethod);
     try {
       const options = {
         url: refreshDataApi,
@@ -93,12 +92,10 @@ const TableButtonHeader = ({
     } catch (error) { }
   };
 
-  console.log('>>>>>>>>>>>>>>>>>>> USER PROFILE <<<<<<<<<<<<<<<<<<<<', userProfile, parentProfile);
 
   const handleSubmit = async () => {
     const formData = finalizeRef.current.finalizeData();
     if (formData) {
-      console.log("Received validated data:", formData);
       if (Object.keys(formData).length !== 0) {
         try {
           const newFormData = new FormData();
@@ -212,7 +209,6 @@ const TableButtonHeader = ({
           });
         } catch (err) {
           setLoading(false);
-          console.log(err);
         }
       } else {
         setSnackbar({

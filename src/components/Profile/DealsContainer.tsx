@@ -104,8 +104,6 @@ const Deals = ({ data, type }: any) => {
   const [call, setCall] = React.useState(false);
   // const [detailShow, setDetailShow] = useState(false);
 
-  console.log(data?.result?._id);
-
   const showNotes = () => {
     setNotes(true);
   };

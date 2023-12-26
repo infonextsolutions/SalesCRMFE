@@ -380,7 +380,6 @@ const ExpandableRow = ({
   height,
   CallData,
 }: any) => {
-  console.log(CallData?.audio_url, 213401274214981);
   return (
     <div
       className="w-[100%] h-[100%] flex px-[40px] py-[10px] duration-300"
@@ -448,7 +447,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     }
   });
 
-  console.log(CallData, "eisvfkaevui");
 
   function convertDatetimeToCustomFormat(dateStr: any) {
     // Convert the string to a Date object

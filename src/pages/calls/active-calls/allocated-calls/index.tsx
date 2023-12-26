@@ -236,7 +236,6 @@ const AllocatedCalls = () => {
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
         XLSX.writeFile(workbook, "DataSheet.xlsx");
-        console.log("Exporting to Excel", rows);
     };
 
     const exportPDF = () => {
@@ -265,7 +264,6 @@ const AllocatedCalls = () => {
         };
 
         pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
-        console.log("Exporting to PDF", rows);
     };
 
     const addExport = (e: any, e1: any) => {
@@ -297,7 +295,6 @@ const AllocatedCalls = () => {
 
     useEffect(() => {
         if (window !== undefined) {
-            console.log('__________________ useEffect _________________');
             const userId = localStorage.getItem("user-id");
             axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}`)
                 .then((res: any) => {
@@ -330,7 +327,6 @@ const AllocatedCalls = () => {
                     }));
                 })
                 .catch((err: any) => {
-                    console.log('====== ERROR ======', err);
                 });
         }
     }, []);

@@ -313,7 +313,6 @@ const ActiveCall = ({ cancel }: any) => {
 
   const submit = () => {
     setLoading(true);
-    console.log(data, 214121);
     const formdate = new FormData();
     formdate.append("callTitle", data.callTitle);
     if (Array.isArray(data.callUrl)) {

@@ -447,11 +447,6 @@ const Events = ({
   const [allocatedCallOwner, setAllocateCallOwner] = useState("");
   const dispatch = useAppDispatch();
 
-  console.log(
-    "=================== EVENTS : LEADDATA ====================",
-    data
-  );
-
   const calculateTimeDifference = ({ fromTime, toTime }: any) => {
     const [fromHours, fromMinutes] = fromTime.split(":").map(Number);
     const [toHours, toMinutes] = toTime.split(":").map(Number);
@@ -490,12 +485,10 @@ const Events = ({
       invite: emailInvites,
       notifyBefore: eventNotifyBefore,
     };
-    console.log("asdsad", finalPayload);
 
     axios
       .post("https://sales365.trainright.fit/api/event/create", finalPayload)
       .then((e: any) => {
-        console.log("============ res 1 ==========", e);
         const { result } = e?.data;
         const payload = {
           meetLink: result?.link,
@@ -508,7 +501,6 @@ const Events = ({
             payload
           )
           .then((res: any) => {
-            console.log("============ res 2 ==========", res);
             cancel();
             dispatch(
               setSuccess({

@@ -8,7 +8,6 @@ const FindLead = () => {
 export default FindLead;
 
 export async function getServerSideProps({ query, ...params }: any) {
-  // console.log(params.limit,params.page);
   const response = await axios.get(
     "https://sales365.trainright.fit/api/leads/find-by-id"
   );

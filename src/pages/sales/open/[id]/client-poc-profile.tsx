@@ -10,7 +10,6 @@ import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 
 const ClientProfile = ({ data }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
-  console.log("******************* clientprofile *******************", data);
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }

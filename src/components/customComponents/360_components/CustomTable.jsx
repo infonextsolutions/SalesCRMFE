@@ -130,7 +130,6 @@ const RouteFilter = ({ title, initial, list }) => {
 };
 
 const Filters = ({ filters }) => {
-  console.log(filters, 214152142141);
   return (
     <div className="w-[100%] flex items-center px-[8px] mt-[10px]">
       {filters.map((item, i) => {
@@ -279,7 +278,6 @@ const Item = ({ tableItems, data }) => {
 };
 
 const Table = ({ component, data, page }) => {
-  console.log(0 >= page, 0 < (page + 1) * 10, page);
   return (
     <div
       style={{
@@ -442,7 +440,6 @@ const CustomTable = ({ component }) => {
 
       axios.get(component.api).then((e) => {
         const arr = e.data.result;
-        console.log(e.data.result);
         for (let i = 0; i < arr.length; i++) {
           arr[i] = flattenNestedObject(arr[i]);
         }
@@ -451,8 +448,6 @@ const CustomTable = ({ component }) => {
       setCheck(true);
     }
   });
-
-  console.log(data);
 
   const [page, setPage] = useState(0);
 

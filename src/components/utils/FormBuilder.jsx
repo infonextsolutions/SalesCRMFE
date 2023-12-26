@@ -30,7 +30,6 @@ const FormBuilder = forwardRef(({ fields, propsFormData }, ref) => {
         errors[field.name] = field.regexErrorMessage || "Invalid input.";
       }
     });
-    console.log('+++++ errors +++++', errors);
     setFieldErrors(errors);
     return errors;
   };
@@ -56,7 +55,6 @@ const FormBuilder = forwardRef(({ fields, propsFormData }, ref) => {
 
   const handleChange = (field, value) => {
     const errors = { ...fieldErrors };
-    console.log(field, value);
     if (field.isRequired && isValueEmpty(value)) {
       errors[field.name] =
         field.requiredErrorMessage || "This field is required.";
@@ -72,7 +70,6 @@ const FormBuilder = forwardRef(({ fields, propsFormData }, ref) => {
     }));
     // formData[field.name] !== value && propsFormData[field.name] !== value
     setFieldErrors(errors);
-    console.log(formData, errors);
   };
 
   const handleCurrencyChange = (field, existingTotal) => (e, unitType) => {
@@ -305,7 +302,6 @@ const FormBuilder = forwardRef(({ fields, propsFormData }, ref) => {
                 )}
                 {field.type === "price" && (
                   <div className={`price_inputs ${field.className}`}>
-                    {console.log(field.name)}
                     <div className="price_unit">
                       <input
                         className="inputtag input_elem normal_input number_input"

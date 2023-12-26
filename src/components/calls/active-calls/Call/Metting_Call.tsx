@@ -549,7 +549,6 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
 };
 
 const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
-  console.log(CallData, "arijit");
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -560,7 +559,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log("calldataactive:", CallData);
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });

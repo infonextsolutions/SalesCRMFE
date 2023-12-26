@@ -12,12 +12,6 @@ import axios from "axios";
 import Lead from "@/types/Leads";
 
 const ProfilePage = ({ data1, updated, mastersData }: any) => {
-  console.log(
-    "+++++++++++++++++++++++ PROFILE PAGE ++++++++++++++++++++++",
-    data1,
-    updated,
-    mastersData
-  );
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -61,10 +55,8 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
           if (updated) {
             updated();
           }
-          console.log("svfev ");
         })
         .catch((e) => {
-          console.log(e);
         });
       updated();
     }, 1000);
@@ -77,7 +69,6 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
   const filteredContactArray = checkForAllNull
     ? []
     : contacts.filter((item: any) => item !== null);
-  console.log(contacts, "Pejvfaek");
 
   const [Activities, setActivities] = useState({
     call: 0,
@@ -98,7 +89,6 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
           let emails = 0;
           let notes = 0;
           for (let i = 0; i < history.length; i++) {
-            console.log(history[i], "effeqw");
             if (history[i]?.type) {
               if (history[i].type === "note") {
                 notes++;
@@ -468,7 +458,6 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                 return scaledNum;
               }
               const random = random_number_between_1_and_7();
-              console.log("--------------- item ----------------", item);
               if (item && Object.keys(item).length !== 0) {
                 return (
                   <li className="mb-[10px]" key={i}>

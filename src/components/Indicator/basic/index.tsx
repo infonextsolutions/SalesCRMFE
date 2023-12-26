@@ -70,7 +70,6 @@ const IndicatorContainer = () => {
   ].map((item) => {
     return { title: item };
   });
-  console.log(indicator_category);
   const [addValue, setAddvalue] = useState(false);
   const [addCategory, setAddCategory] = useState(false);
   const [bool, setBool] = useState(true);
@@ -111,7 +110,6 @@ const IndicatorContainer = () => {
             light={true}
             text={indicator_type[indicatorType].title}
             click={(e1: any, e2: any) => {
-              console.log(e1, e2);
               setIndicatorCategory(0);
               setIndicatorType(e2);
             }}
@@ -132,7 +130,6 @@ const IndicatorContainer = () => {
             dark={false}
             height={39}
             click={(e1: any, e2: any) => {
-              console.log(e1, e2);
               setIndicatorCategory(e2);
             }}
             text={indicator_category[indicatorCategory].title}
@@ -150,7 +147,6 @@ const IndicatorContainer = () => {
             width={200}
             text={"Add Indicator"}
             click={(e1: any, e2: any) => {
-              console.log(e1, e2);
               if (e2 === 0) {
                 setAddCategory(true);
               } else if (e2 === 1) {

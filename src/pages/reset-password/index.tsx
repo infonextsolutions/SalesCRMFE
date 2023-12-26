@@ -27,7 +27,6 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { token } = router.query;
-  console.log("+++++++++++++++++++ TOKEN +++++++++++++++++++", token);
 
   const setLocalData = (id: any, Name: any, role: any, accessToken: any) => {
     localStorage.setItem("user-id", id);
@@ -60,10 +59,6 @@ const ResetPassword = () => {
         finalPayload
       )
       .then((res) => {
-        console.log(
-          "============ user password reset ==============",
-          res.data
-        );
         if (res?.data?.success) {
           appDispatch(
             setSuccess({
@@ -88,7 +83,6 @@ const ResetPassword = () => {
       })
       .catch((err) => {
         setInvalid(true);
-        console.log(err);
         dispatch(
           setError({
             show: true,

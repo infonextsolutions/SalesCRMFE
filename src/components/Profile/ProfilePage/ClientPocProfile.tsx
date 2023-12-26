@@ -33,11 +33,8 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
         refresh(e.data.result.customerId.name);
       })
       .catch((e) => {
-        console.log(e, "error occured");
       });
   };
-  console.log("data4:", data.result);
-  console.log("data1:", data1);
   const contacted: any = data.result.customerId;
   const contacts = contacted?.contacts ? contacted?.contacts : [];
   return (

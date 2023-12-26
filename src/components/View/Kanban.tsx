@@ -5,7 +5,6 @@ import Image from "next/image";
 import axios from "axios";
 
 const Kanban = ({ list }: KanbasProps) => {
-  // console.log(list);
   const fetchItems = async () => {
     const res = await axios.get(
       `https://sales365.trainright.fit/api/leads/find-all`

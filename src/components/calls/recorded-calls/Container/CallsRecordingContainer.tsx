@@ -84,7 +84,6 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
     //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
     XLSX.writeFile(workbook, "DataSheet.xlsx");
-    console.log("exporting", data);
   };
 
   const addExport = (e: any, e1: any) => {

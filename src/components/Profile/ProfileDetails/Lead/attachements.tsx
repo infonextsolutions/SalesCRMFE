@@ -71,11 +71,9 @@ const ScriptDoc = ({
                 // axios
                 //   .delete(`https://sales365.trainright.fit/api/call-script/delete-by-id?id=${id}`)
                 //   .then((e) => {
-                //     console.log(e, "huqbfq");
                 //     refresh();
                 //   })
                 //   .catch((e) => {
-                //     console.log(e, "huqbfq");
                 //   });
                 Del();
               }}
@@ -213,11 +211,9 @@ const Attachements = ({ data }: any) => {
           `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`
         )
         .then((e) => {
-          console.log(e.data);
           setAttachments(e.data.result.attachments);
         })
         .catch((e) => {
-          console.log(e, "error occured");
         });
     }, 1000);
   };
@@ -228,16 +224,13 @@ const Attachements = ({ data }: any) => {
           `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`
         )
         .then((e) => {
-          console.log(e.data);
           setAttachments(e.data.result.attachments);
         })
         .catch((e) => {
-          console.log(e, "error occured");
         });
     }, 2000);
   };
   const dispatch = useAppDispatch();
-  console.log(attachments);
   return (
     <>
       {notes && (
@@ -282,7 +275,6 @@ const Attachements = ({ data }: any) => {
           </button>
         </div>
         {attachments.map((item: any, i: any) => {
-          console.log(item, "please checck here", i);
           return (
             <ScriptDoc
               key={i}
@@ -296,7 +288,6 @@ const Attachements = ({ data }: any) => {
                 const arr = attachments.filter((e: any, idd: any) => {
                   return idd !== i;
                 });
-                console.log(arr, attachments, "cheuavakk vq");
                 const val: any = {
                   attachments: [...arr],
                   _id: data._id,

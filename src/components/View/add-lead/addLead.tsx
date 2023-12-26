@@ -72,7 +72,6 @@ const AddLead = ({ cancel, mastersData }: any) => {
       payload.contactDetails.moreContacts.filter(
         (contact) => Object.keys(contact).length > 0
       );
-    console.log(payload);
     // return;
     axios.post(`${API_DOMAIN}/api/leads/create`, payload).then((e) => {
       router.reload();

@@ -26,7 +26,6 @@ const PromptEdit = ({ cancel, leadid }: any) => {
             }}
             onSubmit={(values) => {
               // Handle form submission
-              console.log(values);
               // Submit logic here
               cancel();
             }}
@@ -220,7 +219,6 @@ const PromptEdit = ({ cancel, leadid }: any) => {
             }}
             onSubmit={(values) => {
               // Handle form submission
-              console.log(values);
               // Submit logic here
               cancel();
             }}
@@ -479,7 +477,6 @@ text"
             }}
             onSubmit={(values) => {
               // Handle form submission
-              console.log(values);
               // Submit logic here
               cancel();
             }}

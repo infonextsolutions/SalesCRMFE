@@ -39,7 +39,6 @@ const RecordProfile = ({
         setActiveCall(e.data.result);
       })
       .catch((e) => {
-        console.log(e, "error occured");
       });
   };
 
@@ -52,7 +51,6 @@ const RecordProfile = ({
         setData(e?.data?.result);
       })
       .catch((e) => {
-        console.log(e, "error occured");
       });
   };
 

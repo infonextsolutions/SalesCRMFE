@@ -64,7 +64,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         const res = await axios.get(
           `https://sales365.trainright.fit/api/meeting/find-all?${queryStr}`
         );
-        // console.log(res, "only check here");
         const data = res.data.result;
 
         if (search.length) {
@@ -89,9 +88,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         });
 
         // const filtered = data;
-        // console.log(filtered);
         settotalLeads(filtered.length);
-        // console.log(data, search);
         const count = Math.ceil(Number(filtered.length) / limit);
         setpageCount(count);
         setItems(
@@ -122,7 +119,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(true);
     setpageNumber(0);
     const allItems = await fetchItems(pageNumber);
-    // console.log(allItems);
     setItems(allItems);
     setLoading(false);
   };
@@ -131,7 +127,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(true);
     setpageNumber(pageCount - 1);
     const allItems = await fetchItems(pageNumber);
-    // console.log(allItems);
     setItems(allItems);
     setLoading(false);
   };
@@ -147,8 +142,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
   };
 
   const Leads = items;
-  // console.log(Leads);
-  // console.log(`limit is ${limit}`);
 
   function sortArray(arr: any) {
     return arr.sort((a: any, b: any) => a - b);
@@ -231,8 +224,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
       }
     }
   };
-
-  console.log(Leads, "please check here");
 
   return (
     <>

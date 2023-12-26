@@ -76,7 +76,6 @@ const Notes = ({ cancel, leadid, update }: any) => {
     axios
       .post(url, body)
       .then((e: any) => {
-        console.log(e);
         cancel();
         dispatch(
           setSuccess({

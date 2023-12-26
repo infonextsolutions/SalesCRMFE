@@ -24,7 +24,6 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
     currentRoute = `/${route}`;
   }
   const check = pathname === currentRoute;
-  // console.log(check, currentRoute);
 
   const [dropdown, setDropdown] = React.useState(false);
   return (
@@ -69,7 +68,6 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
             check ? "text-[#3F434A]" : "text-white"
           }  ml-[0px] font-medium text-[14px] poppins`}
           onClick={() => {
-            // console.log(currentRoute);
             push(currentRoute);
           }}
         >
@@ -79,7 +77,6 @@ const SideItem = ({ img, title, open, id, list, route }: any) => {
           <>
             <div
               onClick={() => {
-                // console.log("dropdown");
                 setDropdown(!dropdown);
               }}
               className="absolute left-[210px] z-0  w-[24px] flex items-center justify-center h-[24px] "
