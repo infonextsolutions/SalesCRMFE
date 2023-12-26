@@ -19,11 +19,11 @@ export default function Home({ data }: any) {
   // };
   const router = useRouter();
 
-  useEffect(() => {
-    if (router.pathname === "/") {
-      router.push("/dashboard");
-    }
-  }, [router.pathname]);
+  // useEffect(() => {
+  //   if (router.pathname === "/") {
+  //     router.push("/dashboard");
+  //   }
+  // }, [router.pathname]);
 
 
   return (
@@ -90,5 +90,9 @@ export async function getServerSideProps({ query, ...params }: any) {
       // TODO: Can do better error handling here by passing another property error in the component
       // data: response.data || {},
     }, // will be passed to the page component as props
+    redirect: {
+      permanent: false,
+      destination: "/dashboard"
+    }
   };
 }
