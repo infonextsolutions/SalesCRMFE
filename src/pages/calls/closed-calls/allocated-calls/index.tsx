@@ -1,12 +1,9 @@
-import DUMMY from "@/shared/dummy";
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import dummy from "@/shared/dummy";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { useRouter } from "next/router";
 import Navbar from "@/components/app/Navbar/Navbar";
-import ScheduleCallsContainer from "@/components/calls/active-calls/Container/ScheduleCallContainer";
 import Filters from "@/views/teams/Filters";
 import Table from "@/views/teams/Table";
 import Pagination from "@/views/teams/Pagination";
@@ -362,11 +359,11 @@ const AllocatedCallsCC = ({ data }: any) => {
     const ref: any = useRef();
 
     const exportXLSX = () => {
-        const worksheet = XLSX.utils.json_to_sheet(data?.result);
+        const worksheet = XLSX.utils.json_to_sheet(rows);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
         XLSX.writeFile(workbook, "DataSheet.xlsx");
-        console.log("Exporting to Excel", data);
+        console.log("Exporting to Excel", rows);
     };
 
     const exportPDF = () => {
@@ -377,7 +374,7 @@ const AllocatedCallsCC = ({ data }: any) => {
                     style: "header",
                 },
                 {
-                    text: JSON.stringify(data.result, null, 4),
+                    text: JSON.stringify(rows, null, 4),
                     style: "contentStyle",
                 },
             ],
@@ -395,7 +392,7 @@ const AllocatedCallsCC = ({ data }: any) => {
         };
 
         pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
-        console.log("Exporting to PDF", data);
+        console.log("Exporting to PDF", rows);
     };
 
     const addExport = (e: any, e1: any) => {
@@ -426,39 +423,42 @@ const AllocatedCallsCC = ({ data }: any) => {
     };
 
     useEffect(() => {
-        axios.get(`https://salescrmbe.onrender.com/api/qa/callForReview?qaStatus=closed&qaId=6582bb01580a434794fa9edc`)
-            .then((res: any) => {
-                const data = res?.data?.result;
-                setRows(data?.map((item: any, index: number) => {
-                    let row = [
-                        { text: item?.callId || "-" },
-                        { text: item?.callTitle || "-" },
-                        { text: item?.leadId?.[0]?.leadId || "-" },
-                        { text: item?.leadId?.[0]?.lead_title || "-" },
-                        { text: item?.callId || "-" },  // participants
-                        { text: item?.owner?.name || "-" },  // call owner
-                        { text: item?.teamManager || "-" },  // team manager
-                        { text: item?.callId || "-" },  // client poc
-                        { text: item?.company?.[0]?.company_name || "-" },
-                        { text: item?.StartTime || "-" },  // call date & time
-                        { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
-                        { text: item?.callId || "-" },  // call duration
-                        { text: item?.callDisposiiton || "-" },  // call disposition
-                        { text: item?.callType || "-" },  // call type
-                        { text: item?.score || "-" },  // call score
-                        { text: item?.qaId?.name || "-" },  // call review type
-                        { text: item?.callId || "-" },  // call review status
-                        { text: item?.callId || "-" },  // close date
-                        { text: item?.qaAllocatedAt || "-" },  // allocated on
-                        { text: item?.callId || "-" },  // review due date
-                        { text: item?.callId || "-" },  // last updated on
-                    ];
-                    return row;
-                }));
-            })
-            .catch((err: any) => {
-                console.log('====== ERROR ======', err);
-            });
+        if (window !== undefined) {
+            const userId = localStorage.getItem("user-id");
+            axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=closed&qaId=${userId}`)
+                .then((res: any) => {
+                    const data = res?.data?.result;
+                    setRows(data?.map((item: any, index: number) => {
+                        let row = [
+                            { text: item?.callId || "-" },
+                            { text: item?.callTitle || "-" },
+                            { text: item?.leadId?.[0]?.leadId || "-" },
+                            { text: item?.leadId?.[0]?.lead_title || "-" },
+                            { text: item?.callId || "-" },  // participants
+                            { text: item?.owner?.name || "-" },  // call owner
+                            { text: item?.teamManager || "-" },  // team manager
+                            { text: item?.callId || "-" },  // client poc
+                            { text: item?.company?.[0]?.company_name || "-" },
+                            { text: item?.StartTime || "-" },  // call date & time
+                            { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
+                            { text: item?.callId || "-" },  // call duration
+                            { text: item?.callDisposiiton || "-" },  // call disposition
+                            { text: item?.callType || "-" },  // call type
+                            { text: item?.score || "-" },  // call score
+                            { text: item?.qaId?.name || "-" },  // call review type
+                            { text: item?.callId || "-" },  // call review status
+                            { text: item?.callId || "-" },  // close date
+                            { text: item?.qaAllocatedAt || "-" },  // allocated on
+                            { text: item?.callId || "-" },  // review due date
+                            { text: item?.callId || "-" },  // last updated on
+                        ];
+                        return row;
+                    }));
+                })
+                .catch((err: any) => {
+                    console.log('====== ERROR ======', err);
+                });
+        }
     }, []);
 
     useEffect(() => {
@@ -505,7 +505,7 @@ const AllocatedCallsCC = ({ data }: any) => {
                                             title: "CSV",
                                             Icon: "CSV",
                                             wrapper: (
-                                                <CSVLink data={data.result} className="" ref={ref}>
+                                                <CSVLink data={rows} className="" ref={ref}>
                                                     CSV
                                                 </CSVLink>
                                             ),
@@ -562,15 +562,15 @@ const AllocatedCallsCC = ({ data }: any) => {
     );
 };
 
-export async function getServerSideProps({ query, ...params }: any) {
-    const response = await axios.get(
-        "https://salescrmbe.onrender.com/api/active-call/find-all"
-    );
-    return {
-        props: {
-            data: response.data || {},
-        },
-    };
-}
+// export async function getServerSideProps({ query, ...params }: any) {
+//     const response = await axios.get(
+//         "https://sales365.trainright.fit/api/active-call/find-all"
+//     );
+//     return {
+//         props: {
+//             data: response.data || {},
+//         },
+//     };
+// }
 
 export default AllocatedCallsCC;

@@ -30,7 +30,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1?.leadId?._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.leadId?._id}`
       )
       .then((e) => {
         setData(e.data);

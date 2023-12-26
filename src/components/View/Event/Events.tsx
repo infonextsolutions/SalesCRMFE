@@ -493,7 +493,7 @@ const Events = ({
     console.log("asdsad", finalPayload);
 
     axios
-      .post("https://salescrmbe.onrender.com/api/event/create", finalPayload)
+      .post("https://sales365.trainright.fit/api/event/create", finalPayload)
       .then((e: any) => {
         console.log("============ res 1 ==========", e);
         const { result } = e?.data;

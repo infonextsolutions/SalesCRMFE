@@ -74,7 +74,7 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
 
 export default DashboardPage;
 
-// https://salescrmbe.onrender.com/api/pitch-analysis/find-one
+// https://sales365.trainright.fit/api/pitch-analysis/find-one
 
 export async function getServerSideProps({ query, ...params }: any) {
   const date = {
@@ -82,15 +82,15 @@ export async function getServerSideProps({ query, ...params }: any) {
     to: "2023-07-26",
   };
   const response1 = await axios.post(
-    "https://salescrmbe.onrender.com/api/pitch-analysis/find-one",
+    "https://sales365.trainright.fit/api/pitch-analysis/find-one",
     date
   );
   const response2 = await axios.post(
-    "https://salescrmbe.onrender.com/api/script-analysis/find-one",
+    "https://sales365.trainright.fit/api/script-analysis/find-one",
     date
   );
   const response3 = await axios.post(
-    "https://salescrmbe.onrender.com/api/selling-analysis/find-one",
+    "https://sales365.trainright.fit/api/selling-analysis/find-one",
     date
   );
 

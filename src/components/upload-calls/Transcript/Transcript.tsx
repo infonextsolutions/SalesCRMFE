@@ -51,7 +51,7 @@ const Transcript = ({
   text: any;
   utterances: any;
 }) => {
-  //   url = https://salescrmbe.onrender.com/api/audio-transcript/create/by-audio-url
+  //   url = https://sales365.trainright.fit/api/audio-transcript/create/by-audio-url
   // method = post
   // body = {
   //     "audio_url":"",
@@ -117,7 +117,7 @@ const Transcript = ({
 
   // const transcriptUpdate = async () => {
   //   const res = await axios.post(
-  //     "https://salescrmbe.onrender.com/api/audio-transcript/create/by-audio-url",
+  //     "https://sales365.trainright.fit/api/audio-transcript/create/by-audio-url",
   //     {
   //       audio_url: src,
   //       leadId: data.leadId._id,

@@ -92,7 +92,7 @@ const Login = () => {
     };
     axios
       .post(
-        "https://salescrmbe.onrender.com/api/master-users/signin",
+        "https://sales365.trainright.fit/api/master-users/signin",
         finalPayload
       )
       .then((res) => {

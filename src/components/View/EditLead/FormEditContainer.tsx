@@ -97,7 +97,7 @@ const FormEditContainer = ({
                       };
                       update();
                       const response = await axios.put(
-                        "https://salescrmbe.onrender.com/api/leads/update",
+                        "https://sales365.trainright.fit/api/leads/update",
                         val
                       );
                       dispatch(
@@ -396,7 +396,7 @@ const FormEditContainer = ({
                         },
                       };
                       const response = await axios.put(
-                        "https://salescrmbe.onrender.com/api/leads/update",
+                        "https://sales365.trainright.fit/api/leads/update",
                         val
                       );
                       dispatch(
@@ -739,7 +739,7 @@ const FormEditContainer = ({
                         };
                       }
                       const response = await axios.put(
-                        "https://salescrmbe.onrender.com/api/leads/update",
+                        "https://sales365.trainright.fit/api/leads/update",
                         val
                       );
                       dispatch(

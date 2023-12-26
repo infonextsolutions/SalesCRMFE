@@ -163,7 +163,7 @@ export default CallProfile;
 
 export async function getServerSideProps({ query, params }: any) {
   const response = await axios.post(
-    `https://salescrmbe.onrender.com/api/recording/getManualRecording`,
+    `https://sales365.trainright.fit/api/recording/getManualRecording`,
     {
       transId: params.id,
     }

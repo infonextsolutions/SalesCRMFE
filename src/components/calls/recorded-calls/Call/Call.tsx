@@ -542,7 +542,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     if (CallData.leadId.length > 0) {
       axios
         .get(
-          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
         )
         .then((e: any) => {
           console.log(e);

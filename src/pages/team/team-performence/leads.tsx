@@ -82,7 +82,7 @@ export default function Open({ data }: any) {
 
 export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
-    "https://salescrmbe.onrender.com/api/leads/find-all"
+    "https://sales365.trainright.fit/api/leads/find-all"
   );
   return {
     props: {

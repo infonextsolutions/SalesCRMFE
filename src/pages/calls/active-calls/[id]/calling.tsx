@@ -111,7 +111,7 @@ const AudioProfile = ({ data, scripts }: any) => {
     formData.append("activeCallId", data1.result?._id);
     formData.append("file", audioFile);
     axios
-      .post("https://salescrmbe.onrender.com/api/recording/add-rc", formData)
+      .post("https://sales365.trainright.fit/api/recording/add-rc", formData)
       .then((e: any) => {
         setUploadModalStatus(false);
         dispatch(
@@ -136,7 +136,7 @@ const AudioProfile = ({ data, scripts }: any) => {
       sid: callRes?.Sid,
       leadId: callRes?.leadId,
     };
-    axios.post(`https://salescrmbe.onrender.com/api/calling/call-status`, payload)
+    axios.post(`https://sales365.trainright.fit/api/calling/call-status`, payload)
       .then((res: any) => {
         console.log('----------------------- CALL STATUS RES ====================', res);
       })
@@ -158,7 +158,7 @@ const AudioProfile = ({ data, scripts }: any) => {
       leadId: data?.result?.leadId?._id
     }
     axios.post(
-      `https://salescrmbe.onrender.com/api/calling/make-call?`, payload
+      `https://sales365.trainright.fit/api/calling/make-call?`, payload
     )
       .then((res: any) => {
         const call = res?.data?.result?.Call;
@@ -236,7 +236,7 @@ const AudioProfile = ({ data, scripts }: any) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data.result._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`
       )
       .then((e) => {
         setData(e.data);
@@ -433,13 +433,13 @@ const AudioProfile = ({ data, scripts }: any) => {
 export default AudioProfile;
 
 export async function getServerSideProps({ query, params }: any) {
-  // "https://salescrmbe.onrender.com/api/active-call/find-all"
+  // "https://sales365.trainright.fit/api/active-call/find-all"
   try {
     const response = await axios.get(
-      `https://salescrmbe.onrender.com/api/active-call/find-by-id?id=${params.id}`
+      `https://sales365.trainright.fit/api/active-call/find-by-id?id=${params.id}`
     );
     const another = await axios.get(
-      `https://salescrmbe.onrender.com/api/call-script/active-call?activeCallId=${response?.data?.result?._id}`
+      `https://sales365.trainright.fit/api/call-script/active-call?activeCallId=${response?.data?.result?._id}`
     );
     console.log(">>>>------->>>>>> CALLING >>>------>>>>>", response, another);
     return {

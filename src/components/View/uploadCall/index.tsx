@@ -324,8 +324,8 @@ const ActiveCall = ({ cancel }: any) => {
     }
     axios
       .post(
-        // "https://salescrmbe.onrender.com/api/recording/createManualRecording",
-        "https://salescrmbe.onrender.com/api/recording/createManualRecording",
+        // "https://sales365.trainright.fit/api/recording/createManualRecording",
+        "https://sales365.trainright.fit/api/recording/createManualRecording",
         formdate
       )
       .then(() => {

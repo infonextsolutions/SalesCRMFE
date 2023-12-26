@@ -194,7 +194,7 @@ const Deals = ({ data, type }: any) => {
   useEffect(() => {
     axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/getDeals?id=${type === "company" ? data?.result?.companyId?._id : data?.result?.customerId?._id}&type=${type}`
+        `https://sales365.trainright.fit/api/leads/getDeals?id=${type === "company" ? data?.result?.companyId?._id : data?.result?.customerId?._id}&type=${type}`
       )
       .then((response) => {
         const data = response?.data;

@@ -201,7 +201,7 @@ const Step1 = ({ next, cancel }: any) => {
       formdata.append("file", e[0]);
       axios
         .post(
-          "https://salescrmbe.onrender.com/api/leads/upload/afakfabk",
+          "https://sales365.trainright.fit/api/leads/upload/afakfabk",
           formdata
         )
         .then((e) => {

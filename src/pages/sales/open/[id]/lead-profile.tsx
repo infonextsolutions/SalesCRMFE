@@ -28,7 +28,7 @@ const Profile = ({ data, mastersData }: any) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data.result._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`
       )
       .then((e) => {
         setData(e.data);
@@ -249,10 +249,10 @@ export default Profile;
 
 export async function getServerSideProps({ query, params }: any) {
   const response = await axios.get(
-    `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${params.id}`
+    `https://sales365.trainright.fit/api/leads/find-by-id?id=${params.id}`
   );
   const response2 = await axios.get(
-    `https://salescrmbe.onrender.com/api/master-users/find-all`
+    `https://sales365.trainright.fit/api/master-users/find-all`
   );
   return {
     props: {

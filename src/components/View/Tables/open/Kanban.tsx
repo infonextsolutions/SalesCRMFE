@@ -13,7 +13,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
 
   //   const getallItems = async (current: any) => {
   //     const res = await axios.get(
-  //       `https://salescrmbe.onrender.com/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+  //       `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
   //     );
   //     const data = res.data.result;
   //     return data;
@@ -23,7 +23,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
     setLoading(true);
     const getItems = async () => {
       const res = await axios.get(
-        `https://salescrmbe.onrender.com/api/leads/find-all?leadStatus=Open`
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open`
       );
       // console.log(res, "only check here");
       const data = res.data.result;

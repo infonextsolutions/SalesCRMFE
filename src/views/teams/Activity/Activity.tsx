@@ -9,31 +9,37 @@ const Activity = () => {
             width: 200,
             left: 40,
             text: "Team Member",
+            checked: true,
         },
         {
             width: 200,
             left: 20,
             text: "Open Leads (Volume)",
+            checked: true,
         },
         {
             width: 200,
             left: 20,
             text: "Close Leads (Volume)",
+            checked: true,
         },
         {
             width: 200,
             left: 20,
             text: "Leads Won (Volume)",
+            checked: true,
         },
         {
             width: 200,
             left: 20,
             text: "Leads Lost (Volume)",
+            checked: true,
         },
         {
             width: 200,
             left: 20,
             text: "Leads Dead (Volume)",
+            checked: true,
         },
     ];
 

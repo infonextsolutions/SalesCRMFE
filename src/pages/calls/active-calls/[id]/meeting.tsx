@@ -109,7 +109,7 @@ const MeetingProfile = ({ data, scripts }: any) => {
         formData.append("activeCallId", data1.result?._id);
         formData.append("file", audioFile);
         axios
-            .post("https://salescrmbe.onrender.com/api/recording/add-rc", formData)
+            .post("https://sales365.trainright.fit/api/recording/add-rc", formData)
             .then((e: any) => {
                 setUploadModalStatus(false);
                 dispatch(
@@ -156,7 +156,7 @@ const MeetingProfile = ({ data, scripts }: any) => {
             leadId: data?.result?.leadId?._id
         }
         axios.post(
-            `https://salescrmbe.onrender.com/api/calling/make-call?`, payload
+            `https://sales365.trainright.fit/api/calling/make-call?`, payload
         )
             .then((res: any) => {
                 console.log('----------------------- CALLING RES ====================', res?.result?.Call);
@@ -224,7 +224,7 @@ const MeetingProfile = ({ data, scripts }: any) => {
     const UpdateData = async () => {
         const response = await axios
             .get(
-                `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data.result._id}`
+                `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`
             )
             .then((e) => {
                 setData(e.data);
@@ -419,13 +419,13 @@ const MeetingProfile = ({ data, scripts }: any) => {
 export default MeetingProfile;
 
 export async function getServerSideProps({ query, params }: any) {
-    // "https://salescrmbe.onrender.com/api/active-call/find-all"
+    // "https://sales365.trainright.fit/api/active-call/find-all"
     try {
         const response = await axios.get(
-            `https://salescrmbe.onrender.com/api/meeting/find-by-id?id=${params.id}`
+            `https://sales365.trainright.fit/api/meeting/find-by-id?id=${params.id}`
         );
         // const another = await axios.get(
-        //   `https://salescrmbe.onrender.com/api/meeting-script/active-call?activeCallId=${response?.data?.result?._id}`
+        //   `https://sales365.trainright.fit/api/meeting-script/active-call?activeCallId=${response?.data?.result?._id}`
         // );
         console.log(">>>>------->>>>>> CALLING >>>------>>>>>", response);
         return {

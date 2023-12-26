@@ -81,7 +81,7 @@ const Dashboard = ({ data }: any) => {
     };
     axios
       .post(
-        "https://salescrmbe.onrender.com/api/pitch-analysis/find-one",
+        "https://sales365.trainright.fit/api/pitch-analysis/find-one",
         finalPayload
       )
       .then((res) => {
@@ -102,7 +102,7 @@ const Dashboard = ({ data }: any) => {
     };
     axios
       .post(
-        "https://salescrmbe.onrender.com/api/selling-analysis/find-one",
+        "https://sales365.trainright.fit/api/selling-analysis/find-one",
         finalPayload
       )
       .then((res) => {
@@ -123,7 +123,7 @@ const Dashboard = ({ data }: any) => {
     };
     axios
       .post(
-        "https://salescrmbe.onrender.com/api/script-analysis/find-one",
+        "https://sales365.trainright.fit/api/script-analysis/find-one",
         finalPayload
       )
       .then((res) => {

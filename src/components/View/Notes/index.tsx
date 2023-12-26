@@ -72,7 +72,7 @@ const Notes = ({ cancel, leadid, update }: any) => {
       title: title,
       content: content,
     };
-    const url = "https://salescrmbe.onrender.com/api/leads/notes";
+    const url = "https://sales365.trainright.fit/api/leads/notes";
     axios
       .post(url, body)
       .then((e: any) => {

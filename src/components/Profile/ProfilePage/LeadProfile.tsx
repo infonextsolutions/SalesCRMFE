@@ -54,7 +54,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data1?._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?._id}`
         )
         .then((e) => {
           setData(e.data.result);

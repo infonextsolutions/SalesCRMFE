@@ -56,7 +56,7 @@ const ResetPassword = () => {
     };
     axios
       .post(
-        "https://salescrmbe.onrender.com/api/master-users/reset_password",
+        "https://sales365.trainright.fit/api/master-users/reset_password",
         finalPayload
       )
       .then((res) => {

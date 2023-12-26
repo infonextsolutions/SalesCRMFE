@@ -112,7 +112,7 @@ const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; d
     customerId: data?.companyId._id,
   });
   const submit = () => {
-    const url = "https://salescrmbe.onrender.com/api/leads/update";
+    const url = "https://sales365.trainright.fit/api/leads/update";
     axios
       .put(url, {
         id: data._id,

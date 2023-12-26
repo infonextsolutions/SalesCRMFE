@@ -201,7 +201,7 @@ const Coaching = ({ data }: any) => {
     if (checked) {
       axios
         .post(
-          "https://salescrmbe.onrender.com/api/indicator/getIndicatorValues",
+          "https://sales365.trainright.fit/api/indicator/getIndicatorValues",
           {
             id: data,
           }

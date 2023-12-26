@@ -84,7 +84,7 @@ const Uploads = ({ cancel, id, refresh }) => {
 
       const res = await axios
         .post(
-          `https://salescrmbe.onrender.com/api/leads/addLeadAttachments`,
+          `https://sales365.trainright.fit/api/leads/addLeadAttachments`,
           formData
         )
         .then((e) => {

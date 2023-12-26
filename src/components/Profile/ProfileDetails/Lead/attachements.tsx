@@ -69,7 +69,7 @@ const ScriptDoc = ({
               alt=""
               onClick={(e) => {
                 // axios
-                //   .delete(`https://salescrmbe.onrender.com/api/call-script/delete-by-id?id=${id}`)
+                //   .delete(`https://sales365.trainright.fit/api/call-script/delete-by-id?id=${id}`)
                 //   .then((e) => {
                 //     console.log(e, "huqbfq");
                 //     refresh();
@@ -210,7 +210,7 @@ const Attachements = ({ data }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`
         )
         .then((e) => {
           console.log(e.data);
@@ -225,7 +225,7 @@ const Attachements = ({ data }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://salescrmbe.onrender.com/api/leads/find-by-id?id=${data._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`
         )
         .then((e) => {
           console.log(e.data);
@@ -302,7 +302,7 @@ const Attachements = ({ data }: any) => {
                   _id: data._id,
                 };
                 axios
-                  .put("https://salescrmbe.onrender.com/api/leads/update", val)
+                  .put("https://sales365.trainright.fit/api/leads/update", val)
                   .then((e) => {
                     UpdateData2();
                     dispatch(

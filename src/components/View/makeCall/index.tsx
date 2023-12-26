@@ -52,7 +52,7 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
     try {
       console.log(e, data._id, data);
       const res = await axios.post(
-        "https://salescrmbe.onrender.com/api/calling/make-call",
+        "https://sales365.trainright.fit/api/calling/make-call",
         {
           callTo: e,
           leadId: data.leadId._id,
@@ -67,7 +67,7 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
   // const makecall = async (e: any) => {
   //   console.log(e,data._id);
   //   // const res = await axios.post(
-  //   //   "https://salescrmbe.onrender.com/api/calling/make-call",
+  //   //   "https://sales365.trainright.fit/api/calling/make-call",
   //   //   {
   //   //     callTo: e,
   //   //     leadId:data._id

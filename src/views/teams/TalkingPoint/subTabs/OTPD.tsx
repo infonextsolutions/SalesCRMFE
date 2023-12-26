@@ -9,16 +9,19 @@ const OTPD = () => {
             width: 200,
             left: 40,
             text: "Talking Point",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Total Duration",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Average Duration",
+            checked: true,
         },
     ];
 
@@ -27,26 +30,31 @@ const OTPD = () => {
             width: 200,
             left: 40,
             text: "Call Title",
+            checked: true,
         },
         {
             width: 120,
             left: 20,
             text: "Call Duration",
+            checked: true,
         },
         {
             width: 200,
             left: 20,
             text: "Call Date & Time",
+            checked: true,
         },
         {
             width: 200,
             left: 20,
             text: "Call Owner",
+            checked: true,
         },
         {
             width: 200,
             left: 20,
             text: "Call Participants",
+            checked: true,
         },
     ];
 
