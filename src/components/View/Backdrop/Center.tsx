@@ -70,11 +70,11 @@ const Backdrop = ({ children, bool, pad, width }: any) => {
         }}
       >
         <div
-          className="w-[100%] h-[140vh] absolute top-0 left-0 bg-black z-10 "
+          className="w-[100%] min-h-[100%] h-[100%] fixed top-0 left-0 bg-black z-10 h-100"
           style={{
             zIndex: 100,
             opacity: 0,
-          }}
+                      }}
           onClick={() => {}}
           ref={backdrop}
         ></div>
@@ -96,11 +96,11 @@ const Backdrop = ({ children, bool, pad, width }: any) => {
             animate={
               open
                 ? {
-                    clipPath: "inset(0px 0px 0% 1px)",
-                  }
+                  clipPath: "inset(0px 0px 0% 1px)",
+                }
                 : {
-                    clipPath: "inset(0px 0px 100% 1px)",
-                  }
+                  clipPath: "inset(0px 0px 100% 1px)",
+                }
             }
             transition={{
               duration: 0.5,
