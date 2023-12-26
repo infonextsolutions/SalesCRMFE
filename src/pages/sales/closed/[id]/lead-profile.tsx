@@ -14,7 +14,6 @@ import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
 
 const Profile = ({ data }: any) => {
-  // console.log("data10", data);
 
   const [data1, setData] = useState(data);
 

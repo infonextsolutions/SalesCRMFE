@@ -15,7 +15,6 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
     axios.get(
       `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`
     ).then(res => {
-      console.log('================== internal LEADS FETCH =============', res.data.result);
       setItems(res?.data?.result);
       // settotalLeads(res?.data?.totalRecords)
     });
@@ -35,7 +34,6 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
       const res = await axios.get(
         `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close`
       );
-      // console.log(res, "only check here");
       const data = res?.data?.result;
       const filtered = data.filter(
         (e: Lead) =>
@@ -47,10 +45,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
       );
 
       // const filtered = data;
-      // console.log(filtered);
       settotalLeads(filtered?.length);
-      // console.log(data, search);
-      console.log('+++++++++++++++++++++ filtered INTERNAL SEARCH KANBAN ++++++++++++++++++++', filtered);
       setItems(filtered);
     };
 
@@ -59,16 +54,12 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
   }, [search]);
 
   const Leads = items;
-  // console.log(Leads);
-  // console.log(`limit is ${limit}`);
   const [selectAll, setSelectAll] = useState(false);
 
   const stages = ["Won", "Lost", "Dead"];
   const titles = ["WON", "LOST", "DEAD"];
-  console.log(items, "please check here");
   useEffect(() => {
     items.map((e: any, i: any) => {
-      console.log(e.leadStage, i, "ccc");
     });
   }, [items]);
   return (
@@ -101,7 +92,6 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
           const res = items.filter((obj: any) => {
             return obj.leadStage.includes(stages[i]);
           });
-          console.log('>>>>>>>>>>>>>>>>>>>>>>> res : KANBAN >>>>>>>>>>>>>>>>>>>>>>', res);
           return (
             <div className="flex gap-[20px]" key={i}>
               <div className="w-[270px] shrink-0 ">
@@ -116,7 +106,6 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
                   </div>
                 </div>
                 {res.map((Item: any, i: any) => {
-                  console.log(Item, "please checkk-2314211")
                   const item = {
                     data: {
                       companyName: "ABC Corp",

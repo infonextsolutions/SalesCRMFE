@@ -18,7 +18,6 @@ const AudioProfileContainer = ({
   data,
   width,
 }: AudioProfileContainerProps) => {
-  console.log("data7:", data);
   const activeTitle = useSelector((state: any) => state.ui.current);
   const dispatch = useDispatch();
   function CallBack(childData: any) {
@@ -27,7 +26,6 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  console.log(activeTitle, "pleafgwafaw");
 
   return (
     <div

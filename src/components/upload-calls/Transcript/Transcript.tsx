@@ -59,8 +59,6 @@ const Transcript = ({
   //     "callId":"34567890876546788"
   // }
 
-  console.log(utterances);
-
   const arr: any = [];
   if (utterances?.length > 0) {
     for (let i = 0; i < utterances.length; i++) {

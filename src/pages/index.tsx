@@ -11,7 +11,6 @@ export default function Home({ data }: any) {
   const [view, setView] = React.useState(false);
 
   // const viewButtinClick = (prev: Number, current: Number) => {
-  //   // console.log(prev,current);
   //   if (current === 1) {
   //     setView(true);
   //   } else {

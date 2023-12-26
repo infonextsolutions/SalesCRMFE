@@ -51,10 +51,7 @@ const CallProfile = ({ data, data1 }: any) => {
     }
   };
 
-  console.log(data, "please");
-
   const state1 = useSelector((state: any) => state.auth);
-  console.log(data);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -107,8 +104,6 @@ const CallProfile = ({ data, data1 }: any) => {
       }
     }
   }, [state.isLoggedIn, logged]);
-
-  console.log(data, "here is audiewgebaeo");
 
   return (
     <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px]">

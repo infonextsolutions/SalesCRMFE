@@ -278,7 +278,6 @@ const EmailLayout = ({ content }: any) => {
   React.useEffect(() => {
     if (quill) {
       quill.on("text-change", () => {
-        // console.log(quillRef.current.firstChild.innerHTML);
         content(quillRef.current.firstChild.innerHTML);
       });
     }
@@ -395,7 +394,6 @@ const EmailPage = ({
       subject: e2,
       content: e3,
     };
-    console.log("newww", payload);
 
     axios
       .post(url, payload)
@@ -438,7 +436,6 @@ const EmailPage = ({
 
       // Update the state with the new email list
       setNewEmailList(updatedEmailList);
-      console.log("asdasdasdasd", updatedEmailList);
     }
 
     axios
@@ -446,10 +443,8 @@ const EmailPage = ({
         `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`
       )
       .then((res) => {
-        console.log("new result is", res);
       })
       .catch((err) => {
-        console.log(err);
       });
   }, [data]);
 

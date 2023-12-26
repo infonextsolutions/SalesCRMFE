@@ -37,7 +37,6 @@ const ChartContainer = ({ children }: any) => {
 };
 
 const ScriptBuilding = ({ script }: { script: ScriptBuilding }) => {
-  console.log(script);
   return (
     <div className="w-[100%] h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
@@ -160,7 +159,6 @@ const Loader = () => {
 };
 
 const Coaching = ({ data }: any) => {
-  console.log("-------------------- data : coaching ----------------", data);
   const [loading, setLoading] = React.useState(true);
   const [checked, setChecked] = React.useState(true);
   const [data1, setData] = useState({
@@ -207,10 +205,6 @@ const Coaching = ({ data }: any) => {
           }
         )
         .then((e) => {
-          console.log(
-            ">>>>>>>>>>>>>>>>>>>>>> data1 script selling emotion >>>>>>>>>>>>>>>>>>>>",
-            e
-          );
           setData(e.data);
           setLoading(false);
         })

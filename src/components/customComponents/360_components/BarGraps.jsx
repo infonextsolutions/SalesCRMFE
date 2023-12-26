@@ -50,7 +50,6 @@ const BarChartComp = ({ component }) => {
   // // if(dataSelector){
   // //  setDataset(dataSelector);
   // // }
-  // console.log(dataSelector);
 
 
   return (

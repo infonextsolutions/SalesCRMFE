@@ -157,7 +157,6 @@ const KanbanItem = ({ item, i, Item }: any) => {
           let emails = 0;
           let notes = 0;
           for (let i = 0; i < history?.length; i++) {
-            console.log(history[i], "effeqw");
             if (history[i]?.type) {
               if (history[i].type === "note") {
                 notes++;
@@ -191,7 +190,6 @@ const KanbanItem = ({ item, i, Item }: any) => {
           let emails = 0;
           let notes = 0;
           for (let i = 0; i < history.length; i++) {
-            console.log(history[i], "effeqw");
             if (history[i]?.type) {
               if (history[i]?.type === "note") {
                 notes++;
@@ -209,7 +207,6 @@ const KanbanItem = ({ item, i, Item }: any) => {
           });
         })
         .catch((e) => {
-          console.log(e, "error occured");
         });
     });
   };

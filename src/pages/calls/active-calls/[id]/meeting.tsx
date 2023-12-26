@@ -36,19 +36,17 @@ const MeetingProfile = ({ data, scripts }: any) => {
 
     const takeAction = (e: any, e1: any) => {
         if (e1 === 0) {
-            console.log("email");
+            // console.log("email");
         } else if (e1 === 1) {
-            console.log("meeting");
+            // console.log("meeting");
         } else if (e1 === 2) {
-            console.log("task");
+            // console.log("task");
         }
         if (e1 === 3) {
-            console.log("message");
+            // console.log("message");
         }
     };
 
-    // console.log(data.result, scripts);
-    console.log("----------------------- MeetingProfile : DATA & SCRIPTS --------------------", data, scripts);
     const handleFileChange = (event: any) => {
         setAudioFile(event?.target?.files[0]);
     };
@@ -136,10 +134,8 @@ const MeetingProfile = ({ data, scripts }: any) => {
         };
         axios.post(`api/calling/call-status`, payload)
             .then((res: any) => {
-                console.log('----------------------- CALL STATUS RES ====================', res);
             })
             .catch((err: any) => {
-                console.log('Error: ', err);
                 dispatch(
                     setError({
                         show: true,
@@ -159,11 +155,9 @@ const MeetingProfile = ({ data, scripts }: any) => {
             `https://sales365.trainright.fit/api/calling/make-call?`, payload
         )
             .then((res: any) => {
-                console.log('----------------------- CALLING RES ====================', res?.result?.Call);
                 const callData = res.data;
             })
             .catch((err: any) => {
-                console.log('Error: ', err);
                 dispatch(
                     setError({
                         show: true,
@@ -427,7 +421,6 @@ export async function getServerSideProps({ query, params }: any) {
         // const another = await axios.get(
         //   `https://sales365.trainright.fit/api/meeting-script/active-call?activeCallId=${response?.data?.result?._id}`
         // );
-        console.log(">>>>------->>>>>> CALLING >>>------>>>>>", response);
         return {
             props: {
                 // TODO: Can do better error handling here by passing another property error in the component
@@ -436,7 +429,6 @@ export async function getServerSideProps({ query, params }: any) {
             }, // will be passed to the page component as props
         };
     } catch (error) {
-        console.log("----- ERROR CALLING -----", error);
         return {
             props: {
                 // TODO: Can do better error handling here by passing another property error in the component

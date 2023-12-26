@@ -10,7 +10,6 @@ const Navigation = ({ buttons, title }: NavigationProps) => {
       {buttons?.length > 0 && (
         <div className="w-[50%] flex justify-end ">
           {buttons.map((item, i) => {
-            console.log(item.list);
             return (
               <Button
                 dropdown={item.dropdown}

@@ -128,11 +128,6 @@ const Comp = ({ component }) => {
   }
 
   const getData = (payload) => {
-    console.log(
-      "++++++++++ payload : get data ++++++++++",
-      payload,
-      component.paginatioName || component.name
-    );
     const page =
       (component.paginatioName || component.name) !== "page"
         ? sliceData?.page
@@ -183,12 +178,6 @@ const Comp = ({ component }) => {
   };
 
   const handleValueChange = (value) => {
-    console.log(
-      "--------------- HANDLE VALUE CHANGE -------------",
-      component.paginatioName || component.name,
-      value,
-      sliceData
-    );
     if ((component.paginatioName || component.name) === "Reset") {
       // reset filters
       dispatch(
@@ -213,10 +202,6 @@ const Comp = ({ component }) => {
               : value,
         })
       );
-      console.log(
-        "============ CALLING THE GET DATA ONLY IF onClickApi ==============",
-        component.onClickApi
-      );
       if (component.onClickApi) {
         getData(value);
       }
@@ -224,7 +209,6 @@ const Comp = ({ component }) => {
   };
 
   const handleLoadMore = (payload) => {
-    console.log("============== HANDLE LOAD MORE ================", payload);
     const options = {
       url: component.api,
       method: component.apiType,

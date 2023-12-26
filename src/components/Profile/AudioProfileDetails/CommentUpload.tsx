@@ -32,7 +32,6 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
     setRep((prev) => [...prev, { time: Date.now(), text: text }]);
     replied({ time: getCurrentTimeInHoursAndMinutes().time, text: text });
     setText("");
-    console.log(reply, 2412141);
   };
   return (
     <div className="border-t-[1px] border-[#ccc] py-[20px]">
@@ -129,7 +128,6 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
             <button
               onClick={() => {
                 setReply();
-                // console.log(reply)
                 setRepVis(false);
               }}
               className="relative bg-bg-red mt-[18px] rounded-xl  w-[90px] h-[30px] ml-auto font-medium tracking-wide pl-[5px] p-[5px] mr-2"
@@ -169,7 +167,6 @@ const Comments = ({ data }: any) => {
   const [list, setList] = React.useState<any>(
     data?.comments ? data.comments : []
   );
-  console.log(list, "2131");
   const [emoji, setEmoji] = useState(false);
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();
@@ -202,8 +199,6 @@ const Comments = ({ data }: any) => {
     }
   }
 
-  console.log(data, "8971241");
-
   const UpdateCalls = () => {
     setTimeout(() => {
       const urri = `https://sales365.trainright.fit/api/recording/getManualRecording`;
@@ -212,7 +207,6 @@ const Comments = ({ data }: any) => {
           transId: data._id,
         })
         .then((e) => {
-          console.log(e.data.result.comments, "314141");
         })
         .catch((e) => {});
     }, 1000);
@@ -357,7 +351,6 @@ const Comments = ({ data }: any) => {
                 replied={(e: any) => {
                   const finalList = list;
                   finalList[i].reply.push(e);
-                  console.log(finalList, "24111421");
                   axios
                     .post(
                       "https://sales365.trainright.fit/api/recording/comments/addManual",

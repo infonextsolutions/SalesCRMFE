@@ -77,13 +77,8 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
       const response = await axios.get(
         `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open${getQueryStr()}`
       );
-      console.log(
-        "======================== RESPONSE FIND-ALL ========================",
-        response
-      );
       setVisibleRecords({ ...response.data });
     } catch (error) {
-      console.log("------------------- ERROR -----------------------", error);
     }
   };
 

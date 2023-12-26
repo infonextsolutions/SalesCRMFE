@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 function useUI() {
   const ui = useSelector((state: any) => state.ui);
   const auth = useSelector((state: any) => state.auth);
-  console.log('>>>>>>>>>>>>>>>>>>>>>> UI & AUTH <<<<<<<<<<<<<<<<<<<<<', ui, auth);
   const [role, setRole] = useState("SDR");
 
   useEffect(() => {

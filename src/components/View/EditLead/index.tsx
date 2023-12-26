@@ -67,7 +67,6 @@ const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; d
   const titles = ["LEAD INFO", "CONTACT INFO", "DEAL INFO"];
   const [content, setContent] = useState<any>({});
   const router = useRouter();
-  console.log('============================== DATA ============================', data, mastersData);
   //   companyId:data.companyId._id,34
   //   company_name,
   //   company_website_url,
@@ -104,13 +103,6 @@ const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; d
   //   lead_description,
   //   source
   // );
-  console.log(data);
-  console.log({
-    id: data?._id,
-    lead_title: content.lead_title,
-    companyId: data?.companyId._id,
-    customerId: data?.companyId._id,
-  });
   const submit = () => {
     const url = "https://sales365.trainright.fit/api/leads/update";
     axios
@@ -122,7 +114,6 @@ const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; d
 
       })
       .then((e: any) => {
-        console.log(e);
       });
   };
 

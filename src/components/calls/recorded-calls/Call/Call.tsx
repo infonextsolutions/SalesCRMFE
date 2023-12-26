@@ -529,7 +529,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       setW(wRef.current.offsetWidth);
     }
   });
-  console.log(CallData, "arijit");
 
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
@@ -545,17 +544,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
         )
         .then((e: any) => {
-          console.log(e);
           setChecked(false);
           setLeadData(e.data.result);
         })
         .catch((e) => {
-          console.log(e, "err-12");
         });
     }
   };
 
-  console.log("lead data-1231", LeadData);
 
   React.useEffect(() => {
     if (checked) {
@@ -594,7 +590,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       return "-";
     }
   }
-  console.log("calldata:", CallData);
 
   function convertDatetimeToCustomFormat(dateStr: any) {
     // Convert the string to a Date object

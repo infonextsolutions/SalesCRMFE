@@ -14,11 +14,6 @@ const LeadProfileContainer = ({
   data,
   width,
 }: LeadProfileContainerProps) => {
-  console.log(
-    "+++++++++++++++++++++++++++++++ DATA : LEAD PROFILE CONTAINER +++++++++++++++++++++++++++",
-    data || "no data",
-    info || "no info"
-  );
   const [activeTitle, setActiveTitle] = useState(0);
   function CallBack(childData: any) {
     setActiveTitle(childData);
@@ -53,11 +48,6 @@ const LeadProfileContainer = ({
   const lastCallData = isCall()
     ? data?.activityId?.lastActivity
     : getLastCallData();
-
-  console.log(
-    "------------------- last call data ------------------",
-    lastCallData
-  );
 
   const formatDateTime = (timestamp: any, format = "dd mon yyyy") => {
     const date = new Date();

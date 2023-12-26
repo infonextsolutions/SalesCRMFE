@@ -64,7 +64,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         const res = await axios.get(
           `https://sales365.trainright.fit/api/active-call/find-all?${queryStr}`
         );
-        // console.log(res, "only check here");
         const data = res.data.result;
 
         if (search.length) {
@@ -72,7 +71,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           const allItems = await getallItems(pageNumber);
           setItems(allItems);
         }
-        // console.log("data: I am here", data);
         const filtered = data.filter((e: ActiveCall) => {
           const idss: any = String(convertDatetimeToCustomFormat(e.updatedAt));
           const leadid = e.leadId?.leadId;
@@ -85,9 +83,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         filtered.reverse();
 
         // const filtered = data;
-        // console.log(filtered);
         settotalLeads(filtered.length);
-        // console.log(data, search);
         const count = Math.ceil(Number(filtered.length) / limit);
         setpageCount(count);
         setItems(
@@ -96,7 +92,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
       };
       getItems();
       setLoading(false);
-      console.log("exec");
     }
   }, [limit, pageNumber, search]);
 
@@ -113,7 +108,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     );
     filtered.reverse();
     settotalLeads(filtered.length);
-    console.log("exec1");
     return filtered;
   };
 
@@ -125,7 +119,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(true);
     setpageNumber(0);
     const allItems = await fetchItems(pageNumber);
-    // console.log(allItems);
     setItems(allItems);
     setLoading(false);
   };
@@ -134,7 +127,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(true);
     setpageNumber(pageCount - 1);
     const allItems = await fetchItems(pageNumber);
-    // console.log(allItems);
     setItems(allItems);
     setLoading(false);
   };
@@ -145,16 +137,12 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
-    console.log("exec2");
     setItems(allItems);
     setLoading(false);
     setChecked(true);
   };
 
   const Leads = items;
-  console.log(Leads);
-  // console.log(Leads);
-  // console.log(`limit is ${limit}`);
 
   function sortArray(arr: any) {
     return arr.sort((a: any, b: any) => a - b);
@@ -238,14 +226,11 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     }
   };
 
-  console.log(data, "coda");
-
   return (
     <>
       <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
         <Header
           selectAll={() => {
-            console.log(selectAll);
             setSelectAll(!selectAll);
           }}
           win={() => {

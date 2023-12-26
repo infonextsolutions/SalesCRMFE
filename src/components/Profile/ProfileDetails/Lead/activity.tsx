@@ -79,9 +79,7 @@ const Activityhistory = ({ data }: { data: any }) => {
 
             <div className="w-[100%] flex flex-col-reverse">
               {history.map((item: any, i: any) => {
-                console.log(item, "arijit");
                 const date = formatDateAndTime(item.createdAt);
-                // console.log(date, "pleas1");
                 return (
                   <>
                     <div className="text-[14px] pl-[20px] mb-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffe3e170] rounded-xl justify-between">

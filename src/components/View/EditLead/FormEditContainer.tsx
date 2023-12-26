@@ -24,21 +24,11 @@ const FormEditContainer = ({
   const [activeTitle, setActiveTitle] = useState(
     window.location.pathname.split("/").pop()
   );
-  console.log(
-    "------------------------ active Title --------------------",
-    activeTitle
-  );
   // company-profile lead-profile client-profile
   function CallBack(childData: any) {
     setActiveTitle(childData);
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
-
-  console.log(
-    "+++++++++++++++++++++++ here is form data ++++++++++++++++++++++++",
-    data,
-    mastersData
-  );
 
   const dispatch = useAppDispatch();
 
@@ -79,10 +69,6 @@ const FormEditContainer = ({
                     leadCreatedBy: data?.created_by,
                   }}
                   onSubmit={async (values) => {
-                    console.log(
-                      ">>>>>>>>>>>> EIDT LEAD : ONSUBMIT VALUES >>>>>>>>>>>>",
-                      values
-                    );
                     try {
                       const val = {
                         _id: data._id,
@@ -107,7 +93,6 @@ const FormEditContainer = ({
                         })
                       );
                       // Handle success response
-                      console.log(response.data);
                       cancel(); // Close the form or perform any other action
                     } catch (error) {
                       // Handle error
@@ -369,10 +354,6 @@ const FormEditContainer = ({
                       data?.companyId?.company_socialMedia2Url,
                   }}
                   onSubmit={async (values) => {
-                    console.log(
-                      ">>>>>>>>>> EDIT COMPANY : ONSUBMIT VALUES >>>>>>>>>>",
-                      values
-                    );
                     try {
                       const val = {
                         _id: data._id,
@@ -683,10 +664,6 @@ const FormEditContainer = ({
                     primary_client_poc: true,
                   }}
                   onSubmit={async (values) => {
-                    console.log(
-                      ">>>>>>>>>> EDIT CLIENT : ONSUBMIT VALUES >>>>>>>>>>>",
-                      values
-                    );
                     try {
                       // add as contacts[] if primary_client_poc
                       let val = {};

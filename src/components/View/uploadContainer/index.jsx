@@ -69,7 +69,6 @@ const UploadAudio = ({ onChange }) => {
 
   const [error, setError] = useState({ show: false, error: "" });
   const handleDrop = function (e) {
-    console.log(e[0], "please check here");
     if (isAudioFile(e[0])) {
       setFile(e);
       onChange(e);
@@ -118,10 +117,8 @@ const UploadAudio = ({ onChange }) => {
 
       setFile(e.target.files[0]);
       setFileSelected(true);
-      console.log(e.target.files[0]);
     }
   };
-  console.log(file);
   const inputRef = React.useRef(null);
 
   const onButtonClick = () => {

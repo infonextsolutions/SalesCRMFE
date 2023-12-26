@@ -67,7 +67,6 @@
 //             }).then((res) => {
 //                 return res.json();
 //             }).then((data) => {
-//                 console.log('++++++ CHATBOT RESPONSE ++++++', data);
 //                 setReceiving(false);
 //                 if (data?.data?.isFilter) {
 //                     const resChat = {
@@ -81,16 +80,13 @@
 //                     dispatch(storeChat(resChat));
 //                 }
 //             }).catch((error) => {
-//                 console.log('====== CHATBOT ERROR ======', error);
 //             });
 //             // dispatch(callApi(options))
 //             //     .then((res) => {
-//             //         console.log('++++++ CHAT RES +++++', res, res.payload?.data);
 //             //         if (res.payload?.data) {
 
 //             //         }
 //             //     }).catch((error) => {
-//             //         console.log('----- Chat error -----', error);
 //             //     });
 //         }
 //     };

@@ -99,7 +99,6 @@ const ListingTable = ({
     return selectApiData(state, getDataApi);
   });
   const userProfile = useSelector((state) => state[PROFILE]);
-  console.log('>>>>>>>>>>>>>>>> USER PROFILE & apiStatus & getApiDataFromRedux <<<<<<<<<<<<<<<<<<<<', userProfile, apiStatus, getApiDataFromRedux);
   const navigateTo = useRouter();
   let allowedTableColumns = roleSpecificDesktopHeaders
     ? roleSpecificDesktopHeaders[userProfile.role]
@@ -208,7 +207,6 @@ const ListingTable = ({
             }
           }
           const shouldEdit = isChanged || isImgsTobeDeleted;
-          console.log('================= CHANGED ==================', isChanged, isImgsTobeDeleted, shouldEdit);
           if (!shouldEdit) {
             setSnackbar({ open: true, message: 'No field changed.', status: -1 });
             return;
@@ -358,7 +356,6 @@ const ListingTable = ({
         } catch (error) {
           setShowLoader(false);
           setSnackbar({ open: true, message: edit ? 'Edit Failed.' : 'Save Failed.', status: -1 });
-          console.log("Edit failed : listing table ", error);
         }
       } else {
         setSnackbar({
@@ -385,7 +382,6 @@ const ListingTable = ({
         refreshData();
       });
     } catch (error) {
-      console.log(error);
       setSnackbar({ open: true, message: `Deletion Failed.`, status: -1 });
     }
   };
@@ -407,7 +403,6 @@ const ListingTable = ({
         refreshData();
       });
     } catch (error) {
-      console.log(error);
       setSnackbar({ open: true, message: `Approval Failed.`, status: -1 });
     }
   };
@@ -440,7 +435,6 @@ const ListingTable = ({
         refreshData();
       });
     } catch (error) {
-      console.log(error);
       setSnackbar({ open: true, message: `Removal Failed.`, status: -1 });
     }
   };
@@ -493,7 +487,6 @@ const ListingTable = ({
       "videos",
       "virtualFiles",
     ];
-    console.log('******* current row adta **********', currentRowData);
     const currAllFiles = {};
     fileFields.forEach((field) => {
       if (currentRowData[field]) {
@@ -636,7 +629,6 @@ const ListingTable = ({
         .then((res) => {
           setSnackbar({ open: true, message: `Recommendation Successful.`, status: 0 });
         }).catch((error) => {
-          console.log('--------- ADD RECOMMENDATION ERROR ----------', error);
         });
     } else if (key === 'REMOVE' && removeActionApi) {
 

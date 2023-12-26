@@ -23,8 +23,6 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
     const val = e.target.value;
     setSearch(val);
   };
-  console.log(dummy1, "arijit");
-  console.log(data, "arijit");
   const ref: any = useRef();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -94,7 +92,6 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, "DataSheet.xlsx");
-    console.log("Exporting to Excel", data);
   };
   useEffect(() => {
     // getData();
@@ -136,7 +133,6 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
     };
 
     pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
-    console.log("Exporting to PDF", data);
   };
 
   const addExport = (e: any, e1: any) => {

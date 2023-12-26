@@ -48,7 +48,6 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
   };
 
   const handleDrop = function (e) {
-    console.log(e[0], "please check here");
     setFile(e[0]);
   };
 
@@ -60,10 +59,8 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
 
       setFile(e.target.files[0]);
       setFileSelected(true);
-      console.log(e.target.files[0]);
     }
   };
-  console.log(file);
   const inputRef = React.useRef(null);
 
   const onButtonClick = () => {
@@ -79,24 +76,12 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
       setSubmitStart(false);
       try {
         if (file) {
-          console.log(leadId);
-
-          console.log({
-            activeCallId: id,
-            title: "file-1",
-            file: file,
-            leadId: leadId,
-            userId: owners,
-          });
-
           const formData = new FormData();
           // formData.append("userId", owners);
           formData.append("leadId", leadId);
           formData.append("title", "file-1");
           formData.append("file", file);
           formData.append("activeCallId", id);
-
-          console.log(formData);
 
           const res = await axios
             .post(
@@ -113,10 +98,8 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
               );
               cancel();
             });
-          console.log(res.data);
         }
       } catch (error) {
-        console.log(error);
       }
     }
   };

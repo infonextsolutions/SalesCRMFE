@@ -70,7 +70,6 @@ const SalesClose = ({ data }: any) => {
   }, []);
 
   const viewButtinClick = (prev: Number, current: Number) => {
-    // console.log(prev,current);
     if (current === 1) {
       setView(true);
     } else {
@@ -119,7 +118,6 @@ const SalesClose = ({ data }: any) => {
     //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
     //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
     XLSX.writeFile(workbook, "DataSheet.xlsx");
-    console.log("exporting", data);
   };
 
   const addExport = (e: any, e1: any) => {

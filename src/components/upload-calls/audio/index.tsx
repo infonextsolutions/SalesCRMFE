@@ -534,7 +534,6 @@ const list = [
 ];
 
 const Audio = ({ data }: props) => {
-  console.log(data);
   const [check, setCheck] = useState(true);
 
   return (

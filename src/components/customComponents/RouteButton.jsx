@@ -20,7 +20,6 @@ export default function CustomRouteButton({
         className={component.className}
         onClick={() => {
           if (component?.form) {
-            console.log('***************** ROUTEBUTTON : component?.form **************', component);
             dispatch(
               storeUserData({
                 ...user,

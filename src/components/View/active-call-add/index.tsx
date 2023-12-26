@@ -400,7 +400,6 @@ const ActiveCall = ({
     time: "",
     date: "",
   });
-  console.log(date, "kewddgwkegwe");
 
   function combineDateTimeStrings(timeString: any, dateString: any) {
     // Check if the time string is empty
@@ -441,25 +440,10 @@ const ActiveCall = ({
   const dispatch = useAppDispatch();
 
   const submit = () => {
-    // console.log("Caling data",data)
     let timee = null;
     // if (date.date) {
     //   timee = combineDateTimeStrings(date.time, date.date);
     // }
-    // console.log(
-    //   "asddafdfa",
-    //   {
-    //     ...data,
-
-    //     call_date: date.date,
-    //     call_start_time: date.time,
-    //     // call_start_time:  timee ? timee : getCurrentTimeInHours(),
-    //     participants: data?.participants,
-    //     owner: data?.owner,
-    //   },
-    //   "ch1231",
-    //   date
-    // );
     // const owner = localStorage.getItem("")
 
     const ownerId = localStorage.getItem("user-id");
@@ -471,7 +455,6 @@ const ActiveCall = ({
       call_start_time: date.time,
       // call_start_time: timee ? timee : getCurrentTimeInHours(),
     };
-    console.log("payload", finalPayload);
     axios
       .post(
         "https://sales365.trainright.fit/api/active-call/create",
@@ -501,7 +484,6 @@ const ActiveCall = ({
 
   const list = lead
     ? lead.owners.map((i: any) => {
-        console.log(i);
         return {
           title: i.name,
           value: i._id,

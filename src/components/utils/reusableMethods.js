@@ -13,7 +13,6 @@ export const sanitizeFormData = (data) => {
       sanitizedData[key] = sanitizedData[key].value;
     }
   }
-  console.log(sanitizedData);
   return sanitizedData;
 };
 

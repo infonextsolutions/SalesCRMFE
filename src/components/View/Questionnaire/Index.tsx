@@ -452,7 +452,6 @@ const Checkbox = ({ index, question, option }: any) => {
 };
 
 const Questionnaire = ({ data, data1 }: any) => {
-  console.log(data, "98e1vf18ogis");
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<
     number | null
   >(null);
@@ -473,7 +472,6 @@ const Questionnaire = ({ data, data1 }: any) => {
           },
         ]
   );
-  console.log(finalQuestionList, questionList, 214141);
 
   const [title, setTitle] = useState("");
   const [finalTitle, setFinalTitle] = useState("");
@@ -550,7 +548,6 @@ const Questionnaire = ({ data, data1 }: any) => {
       });
     }
     if (!flag) {
-      console.log(questionList, 3141, title);
       axios
         .post(
           "https://sales365.trainright.fit/api/v2/active-call/questionnaire",
@@ -561,7 +558,6 @@ const Questionnaire = ({ data, data1 }: any) => {
           }
         )
         .then((e) => {
-          console.log(e, 12986981);
           setFinalQuestionList([...e.data.questionnaire.questionnaire]);
           setTimeout(() => {
             axios
@@ -569,7 +565,6 @@ const Questionnaire = ({ data, data1 }: any) => {
                 `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data._id}`
               )
               .then((ev: any) => {
-                console.log(ev?.data?.result?.questionnaire, 12916498187);
                 setFinalQuestionList([...ev?.data?.result?.questionnaire]);
                 dispatch(
                   setSuccess({
@@ -589,7 +584,6 @@ const Questionnaire = ({ data, data1 }: any) => {
           }, 1000);
         })
         .catch((e) => {
-          console.log(e);
           dispatch(
             setError({
               show: true,

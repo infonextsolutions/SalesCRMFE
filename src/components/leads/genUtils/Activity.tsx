@@ -220,7 +220,6 @@ const ActivityHistory = ({ width, left, random, data }: any) => {
       })} */}
 
       {arr.map((item: any, i: any) => {
-        console.log('>>>>>>>>>>>>>>>>>>>> ACTIVITY HISTORY >>>>>>>>>>>>>>>>>>>', item, i);
         return (
           <React.Fragment key={i}>
             {item === null ? (

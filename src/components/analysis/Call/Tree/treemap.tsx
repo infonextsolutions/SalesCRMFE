@@ -6,7 +6,6 @@ const SoleChart = ({ i, title, w, data }: any) => {
   const option1: any = options[i];
   const data1: any = data[i];
   const data2: any = data[i + 1];
-  console.log();
   return (
     <div
       className=" shrink-0"
@@ -31,7 +30,6 @@ const SoleChart = ({ i, title, w, data }: any) => {
 };
 
 const Charts = ({ data1 }: { data1: Root }) => {
-  console.log(data1);
 
   const data = [
     [

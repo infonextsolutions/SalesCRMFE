@@ -20,7 +20,6 @@ const AudioProfileContainer = ({
   width,
   data1,
 }: AudioProfileContainerProps) => {
-  console.log("data7:", data);
   const activeTitle = useSelector((state: any) => state.ui.current);
   const dispatch = useDispatch();
   function CallBack(childData: any) {

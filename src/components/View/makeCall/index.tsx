@@ -46,11 +46,8 @@ const AddText = ({ top, title, width, value, click }: any) => {
 
 const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
 
-  console.log(data,"check-1241412")
-
   const makecall = async (e: any) => {
     try {
-      console.log(e, data._id, data);
       const res = await axios.post(
         "https://sales365.trainright.fit/api/calling/make-call",
         {
@@ -65,7 +62,6 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
     }
   };
   // const makecall = async (e: any) => {
-  //   console.log(e,data._id);
   //   // const res = await axios.post(
   //   //   "https://sales365.trainright.fit/api/calling/make-call",
   //   //   {

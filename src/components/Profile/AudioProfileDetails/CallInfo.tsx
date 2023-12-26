@@ -22,9 +22,6 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
     }, 500);
   };
 
-  // console.log(data,"here is it");
-  console.log(data1, "please only notice this!");
-
   const [data2, setData] = useState<any>({});
 
   const UpdateData = async () => {
@@ -36,7 +33,6 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
         setData(e.data);
       })
       .catch((e) => {
-        console.log(e, "error occured");
       });
   };
 
@@ -63,7 +59,6 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
 
     return secondsDifference;
   }
-  console.log(data1, "please duvafka");
   return (
     <div>
       {edit && (

@@ -17,8 +17,6 @@ const DropSelect = ({
 
     const [options, setOptions] = useState(component.options);
 
-    console.log(component);
-    console.log(options);
 
     useEffect(() => {
         if (component.onClickApi) {
@@ -30,7 +28,6 @@ const DropSelect = ({
                 // if (res.payload?.data?.["sectorNumber"]) {
                 //     setOptions(res.payload?.data?.[component.optionKey]);
                 // }
-                console.log(res);
             });
         }
     }, []);
@@ -48,7 +45,6 @@ const DropSelect = ({
     };
 
     const value = `${component.onClickApi}?days=${selectedOption}`;
-    console.log(value);
 
     useEffect(() => {
         if (prevOption !== selectedOption) {
@@ -59,7 +55,6 @@ const DropSelect = ({
                 headers: { "Content-Type": "application/json" },
             })).then((res) => {
 
-                console.log(res);
             });
             setPrevOption(selectedOption);
         }

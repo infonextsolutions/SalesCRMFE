@@ -15,9 +15,6 @@ import {
 import axios from "axios";
 import Root from "@/types/teams";
 const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
-  console.log(filter);
-
-  // console.log(totalRecords);
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -25,12 +22,8 @@ const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
 
   useEffect(() => {
     const count = Math.ceil(Number(totalRecords) / limit);
-    // console.log(`count is ${count}`);
     setpageCount(count);
-    // console.log(count);
-    // console.log(`pageNumber is ${pageNumber} and pageCount is ${pageCount}`);
     if (pageNumber >= count && pageCount != 0) setpageNumber(0);
-    // console.log(`pageNumber is ${pageNumber} and pageCount is ${pageCount}`);
     const getItems = async () => {
       // const res = await fetch(
       //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${pageNumber}`
@@ -39,20 +32,15 @@ const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
         `https://sales365.trainright.fit/api/lead-report/find-all?limit=${limit}&page=${pageNumber}`
       );
       // const data = await res.json();
-      // console.log(data);
 
       setItems(res.data.result);
-      // console.log(data);
-      // console.log(`total records is ${items.totalRecords} and limit is ${limit}`);
 
       // if(pageCount==0) setpageCount(7);
-      // console.log(`page count is ${pageCount}`);
     };
 
     getItems();
   }, [limit, pageNumber, pageCount, totalRecords]);
 
-  // console.log(items.result);
   const fetchItems = async (current: any) => {
     // const res = await fetch(
     //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}`
@@ -60,7 +48,6 @@ const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
     const res = await axios.get(
       `https://sales365.trainright.fit/api/lead-report/find-all?limit=${limit}&page=${current}`
     );
-    // console.log(res.data,"only check this!");
     // const data = await res.json();
     return res.data.result;
   };
@@ -82,7 +69,6 @@ const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
   };
 
   const handlePageClick = async (data: any) => {
-    // console.log(data.selected);
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
@@ -90,7 +76,6 @@ const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
   };
 
   const Leads = items;
-  // console.log(Leads);
 
   return (
     <>

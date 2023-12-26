@@ -33,10 +33,6 @@ const ForgotPassword = () => {
         finalPayload
       )
       .then((res) => {
-        console.log(
-          "================= forgot password ===============",
-          res.data
-        );
         if (res?.data?.success) {
           dispatch(
             setSuccess({
@@ -48,7 +44,6 @@ const ForgotPassword = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         dispatch(
           setError({
             show: true,

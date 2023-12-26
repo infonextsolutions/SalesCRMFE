@@ -38,7 +38,6 @@ const SidebarMenu = ({component}) => {
 
   const handleClick = (name) => {
     setActive(name);
-    // console.log(`You clicked on ${name}`);
     if (name === "Call" ) {
       setDropdownOpen(!dropdownOpen);
      
@@ -55,11 +54,6 @@ const SidebarMenu = ({component}) => {
       
     }
   };
-
-
-//  console.log(component);
-//  console.log(component.items);
-
  
   return (
     <div className={` mainsidebar`}>

@@ -48,7 +48,6 @@ const Uploads = ({ cancel, id, refresh }) => {
   };
 
   const handleDrop = function (e) {
-    console.log(e[0], "please check here");
     setFile(e[0]);
   };
 
@@ -60,10 +59,8 @@ const Uploads = ({ cancel, id, refresh }) => {
 
       setFile(e.target.files[0]);
       setFileSelected(true);
-      console.log(e.target.files[0]);
     }
   };
-  console.log(file);
   const inputRef = React.useRef(null);
 
   const onButtonClick = () => {
@@ -73,7 +70,6 @@ const Uploads = ({ cancel, id, refresh }) => {
   const dispatch = useAppDispatch();
 
   const submit = async () => {
-    console.log(file, "console");
     if (file) {
       const formData = new FormData();
       // formData.append("userId", owners);

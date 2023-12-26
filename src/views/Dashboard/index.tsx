@@ -23,9 +23,6 @@ const Dashboard = ({ data }: any) => {
   const [scriptbuilderData, setScriptBuilderData] = useState([]);
   const [sellingData, setSellingData] = useState([]);
   const [pitchData, setPitchData] = useState([]);
-  console.log(data);
-  console.log(data.second);
-  console.log(data.third);
   const [startDate, setStartDate] = useState("2023-07-19");
   const [endDate, setEndDate] = useState("2023-07-26");
 
@@ -85,7 +82,6 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
-        console.log("____________ GET PITCH DATA ___________", res.data);
         setPitchData(res.data.result);
       })
       .catch((e) => {
@@ -106,7 +102,6 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
-        console.log("____________ GET SELLING DATA ___________", res.data);
         setSellingData(res.data.result);
       })
       .catch((e) => {
@@ -127,7 +122,6 @@ const Dashboard = ({ data }: any) => {
         finalPayload
       )
       .then((res) => {
-        console.log("____________ GET SCRIPT DATA ___________", res.data);
         setScriptBuilderData(res.data.result);
       })
       .catch((e) => {

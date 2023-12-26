@@ -22,8 +22,6 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   //   }, 500);
   // };
 
-  // console.log(data,"here is it");
-  console.log(data1, data, "bc-2317");
   // const [data2, setData] = useState(data1);
 
   // const UpdateData = async () => {
@@ -35,7 +33,6 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   //       setData(e.data);
   //     })
   //     .catch((e) => {
-  //       console.log(e,"error occured")
   //     });
   // };
 

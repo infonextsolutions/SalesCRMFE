@@ -107,7 +107,6 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, "DataSheet.xlsx");
-    console.log("Exporting to Excel", data);
   };
   const exportPDF = () => {
     const documentDefinition = {
@@ -135,7 +134,6 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     };
 
     pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
-    console.log("Exporting to PDF", data);
   };
   const addExport = (e: any, e1: any) => {
     if (e1 === 0) {

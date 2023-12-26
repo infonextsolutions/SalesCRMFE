@@ -350,7 +350,6 @@ const FeedbackCallReviewsCC = () => {
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
         XLSX.writeFile(workbook, "DataSheet.xlsx");
-        console.log("Exporting to Excel", rows);
     };
 
     const exportPDF = () => {
@@ -379,7 +378,6 @@ const FeedbackCallReviewsCC = () => {
         };
 
         pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
-        console.log("Exporting to PDF", rows);
     };
 
     const addExport = (e: any, e1: any) => {
@@ -445,7 +443,6 @@ const FeedbackCallReviewsCC = () => {
                     }));
                 })
                 .catch((err: any) => {
-                    console.log('====== ERROR ======', err);
                 });
         }
     }, []);

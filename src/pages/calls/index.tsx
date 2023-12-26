@@ -301,7 +301,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
 
     const generateRows = (data: any) => {
         if (subType === "allocated_call_reviews") {
-            console.log('-------------------- generateRows ------------------', data);
             setRowsACR(data?.map((item: any, index: number) => {
                 let row = [
                     { text: item?.callId || "-" },
@@ -373,10 +372,8 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         axios.get(`https://sales365.trainright.fit/api/qam/callForReview?qaStatus=${status}`)
             .then((res: any) => {
                 const data = res?.data?.result;
-                console.log('---------- RESPONSE ----------', data);
                 generateRows(data);
             }).catch((err: any) => {
-                console.log('++++++ ERROR ++++++', err);
             });
     };
 
@@ -413,7 +410,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
         XLSX.writeFile(workbook, "DataSheet.xlsx");
-        console.log("Exporting to Excel", data);
     };
 
     const exportPDF = () => {
@@ -442,7 +438,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         };
 
         pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
-        console.log("Exporting to PDF", data);
     };
 
     const addExport = (e: any, e1: any) => {
@@ -454,7 +449,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     };
 
     useEffect(() => {
-        console.log('++++++ currTab or subType CHANGED ++++++', currTab, subType)
         // call api for data with filters
     }, [currTab, subType]);
 
@@ -527,7 +521,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     };
 
     const renderACR = () => {
-        console.log('+++++++++++++++ RENDER ACR ++++++++++++++', rowsACR);
         return <Table rows={rowsACR} columns={columnsACR} />;
     };
 

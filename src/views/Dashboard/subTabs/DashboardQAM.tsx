@@ -27,7 +27,6 @@ const DashboardQAM = ({
     sellingData?: any,
     getSellingData?: any,
 }) => {
-    console.log('===================== TABDATA ===================', tabData);
     // SDR/BDM; Manager
     return (
         <div className="w-[100%] mt-4">

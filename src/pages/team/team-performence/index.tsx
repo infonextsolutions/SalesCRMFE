@@ -63,7 +63,6 @@ export default function Open({ data }: any) {
       }
     }
   }, [state.isLoggedIn, logged]);
-  console.log(data);
 
   return (
     <>
@@ -84,7 +83,6 @@ export async function getServerSideProps({ query, ...params }: any) {
   const response = await axios.get(
     "https://sales365.trainright.fit/api/lead-report/find-all?page=0&limit=10"
   );
-  console.log(response.data);
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component

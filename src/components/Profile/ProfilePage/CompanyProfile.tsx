@@ -6,7 +6,6 @@ import EditLead from "@/components/View/EditLead";
 import axios from "axios";
 
 const CompanyProfile = ({ data1, refresh }: any) => {
-  console.log("data3:", data1.result);
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -35,7 +34,6 @@ const CompanyProfile = ({ data1, refresh }: any) => {
           refresh(e.data.result.companyId.company_name);
         })
         .catch((e) => {
-          console.log(e, "error occured");
         });
     }, 1000);
   };

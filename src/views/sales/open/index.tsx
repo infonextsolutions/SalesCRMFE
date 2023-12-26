@@ -57,7 +57,6 @@ const SalesOpen = ({ data, mastersData }: props) => {
   const [view, setView] = React.useState(false);
 
   const viewButtinClick = (prev: Number, current: Number) => {
-    // console.log(prev,current);
     if (current === 1) {
       setView(true);
     } else {
@@ -98,7 +97,6 @@ const SalesOpen = ({ data, mastersData }: props) => {
   };
 
   const showPrompt = () => {
-    console.log("checking");
     setPromptVal(true);
   };
 
@@ -124,7 +122,6 @@ const SalesOpen = ({ data, mastersData }: props) => {
     }, 500);
   };
   const AddLead = (e: any, e1: any) => {
-    console.log(e1);
     if (e1 === 0) {
       showForm();
     } else if (e1 === 1) {
@@ -135,8 +132,6 @@ const SalesOpen = ({ data, mastersData }: props) => {
     }
   };
 
-  console.log(prompt, imports, "here is it");
-
   const ref: any = useRef();
 
   const exportXLSX = () => {
@@ -146,7 +141,6 @@ const SalesOpen = ({ data, mastersData }: props) => {
     //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
     //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
     XLSX.writeFile(workbook, "DataSheet.xlsx");
-    console.log("exporting", data);
   };
 
   const makecall = async () => {
