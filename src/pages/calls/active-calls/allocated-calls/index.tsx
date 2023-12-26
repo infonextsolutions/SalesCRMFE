@@ -18,7 +18,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const AllocatedCalls = ({ data }: any) => {
+const AllocatedCalls = () => {
     const [rows, setRows] = useState([
         [
             {
@@ -305,11 +305,11 @@ const AllocatedCalls = ({ data }: any) => {
     const ref: any = useRef();
 
     const exportXLSX = () => {
-        const worksheet = XLSX.utils.json_to_sheet(data?.result);
+        const worksheet = XLSX.utils.json_to_sheet(rows);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
         XLSX.writeFile(workbook, "DataSheet.xlsx");
-        console.log("Exporting to Excel", data);
+        console.log("Exporting to Excel", rows);
     };
 
     const exportPDF = () => {
@@ -320,7 +320,7 @@ const AllocatedCalls = ({ data }: any) => {
                     style: "header",
                 },
                 {
-                    text: JSON.stringify(data.result, null, 4),
+                    text: JSON.stringify(rows, null, 4),
                     style: "contentStyle",
                 },
             ],
@@ -338,7 +338,7 @@ const AllocatedCalls = ({ data }: any) => {
         };
 
         pdfMake.createPdf(documentDefinition).download("converted_data.pdf");
-        console.log("Exporting to PDF", data);
+        console.log("Exporting to PDF", rows);
     };
 
     const addExport = (e: any, e1: any) => {
@@ -367,6 +367,42 @@ const AllocatedCalls = ({ data }: any) => {
     const updateColsToView = () => {
         setShowManageCol(!showManageCol);
     };
+
+    useEffect(() => {
+        axios.get(`https://salescrmbe.onrender.com/api/qa/callForReview?qaStatus=allocated&qaId=6582bb01580a434794fa9edc`)
+            .then((res: any) => {
+                const data = res?.data?.result;
+                setRows(data?.map((item: any, index: number) => {
+                    let row = [
+                        { text: item?.callId || "-" },
+                        { text: item?.callTitle || "-" },
+                        { text: item?.leadId?.[0]?.leadId || "-" },
+                        { text: item?.leadId?.[0]?.lead_title || "-" },
+                        { text: item?.callId || "-" },  // participants
+                        { text: item?.owner?.name || "-" },  // call owner
+                        { text: item?.teamManager || "-" },  // team manager
+                        { text: item?.callId || "-" },  // client poc
+                        { text: item?.company?.[0]?.company_name || "-" },
+                        { text: item?.StartTime || "-" },  // call date & time
+                        { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
+                        { text: item?.callId || "-" },  // call duration
+                        { text: item?.callDisposiiton || "-" },  // call disposition
+                        { text: item?.callType || "-" },  // call type
+                        { text: item?.score || "-" },  // call score
+                        { text: item?.qaId?.name || "-" },  // call review type
+                        { text: item?.callId || "-" },  // call review status
+                        { text: item?.callId || "-" },  // close date
+                        { text: item?.qaAllocatedAt || "-" },  // allocated on
+                        { text: item?.callId || "-" },  // review due date
+                        { text: item?.callId || "-" },  // last updated on
+                    ];
+                    return row;
+                }));
+            })
+            .catch((err: any) => {
+                console.log('====== ERROR ======', err);
+            });
+    }, []);
 
     useEffect(() => {
         const handleBeforeHistoryChange = () => {
@@ -412,7 +448,7 @@ const AllocatedCalls = ({ data }: any) => {
                                             title: "CSV",
                                             Icon: "CSV",
                                             wrapper: (
-                                                <CSVLink data={data.result} className="" ref={ref}>
+                                                <CSVLink data={rows} className="" ref={ref}>
                                                     CSV
                                                 </CSVLink>
                                             ),
@@ -469,15 +505,15 @@ const AllocatedCalls = ({ data }: any) => {
     );
 };
 
-export async function getServerSideProps({ query, ...params }: any) {
-    const response = await axios.get(
-        "https://salescrmbe.onrender.com/api/active-call/find-all"
-    );
-    return {
-        props: {
-            data: response.data || {},
-        },
-    };
-}
+// export async function getServerSideProps({ query, ...params }: any) {
+//     const response = await axios.get(
+//         "https://salescrmbe.onrender.com/api/active-call/find-all"
+//     );
+//     return {
+//         props: {
+//             data: response.data || {},
+//         },
+//     };
+// }
 
 export default AllocatedCalls;
