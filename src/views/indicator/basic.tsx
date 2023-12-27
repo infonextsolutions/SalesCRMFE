@@ -1,16 +1,23 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import Navigation from "@/components/app/Navigation";
-import LeadsContainer from "@/components/leads/open/Container";
-import Backdrop from "@/components/View/Backdrop";
-import ImportLead from "@/components/View/import-lead/Index";
-import AddLeadForm from "@/components/View/add-lead/addLead";
-import { CSVLink } from "react-csv";
-import IndicatorContainer from "@/components/Indicator/basic";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
-import Greetings from "./Greetings";
-import CommonPage from "./CommonPage";
+import GreetingsContainer from "./indroduction/GreetingsContainer";
+import NameContainer from "./indroduction/NameContainer";
+import TitleAndRolesContainer from "./indroduction/TitleAndRolesContainer";
+import ResponsibilitiesContainer from "./indroduction/ResponsibilitiesContainer";
+import AgendaContainer from "./Agenda/AgendaContainer";
+import ReportContainer from "./Agenda/ReportContainer";
+import CompanyOverviewContainer from "./CompanyIntroduction/CompanyOverviewContainer";
+import CompanyValuePropositionContainer from "./CompanyIntroduction/CompanyValuePropositionContainer";
+import ProductContainer from "./Product/ProductContainer";
+import BenefitsContainer from "./Product/BenefitsContainer";
+import UsesContainer from "./Product/UsesContainer";
+import ProbingNeedsContainer from "./Probing/ProbingNeedsContainer";
+import ProbingChallangeContainer from "./Probing/ProbingChallangeContainer";
+import ProposingDemoContainer from "./NextSteps/ProposingDemoContainer";
+import SchedulingContainer from "./NextSteps/SchedulingContainer";
+import SolutionOfferingContainer from "./ObjectionHandling/SolutionOfferingContainer";
+import AddressConcernsContainer from "./ObjectionHandling/AddressConcernsContainer";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -100,7 +107,6 @@ const Indicator = () => {
     introductionResponsibilitiesButtons,
     setIntroductionResponsibilitiesButtons,
   ] = useState(false);
-
   const [agendaAgendaButtons, setAgendaAgendaButtons] = useState(true);
   const [agendaReportButtons, setAgendaReportButtons] = useState(false);
 
@@ -224,6 +230,8 @@ const Indicator = () => {
     setobjectionButtons("Address Concerns");
   };
 
+  console.log(productButtons);
+
   return (
     <>
       <NavbarWithButton
@@ -324,12 +332,15 @@ const Indicator = () => {
               </button>
             </div>
             <hr className="mt-4" />
-            {introductionGreetingsButtons && <Greetings />}
-            {(introductionNameButtons ||
-              introductioTitleAndRolesButtons ||
-              introductionResponsibilitiesButtons) && (
-              <CommonPage title={introductionButtons} />
-            )}
+            {introductionGreetingsButtons ? (
+              <GreetingsContainer title={introductionButtons} />
+            ) : introductionNameButtons ? (
+              <NameContainer title={introductionButtons} />
+            ) : introductioTitleAndRolesButtons ? (
+              <TitleAndRolesContainer title={introductionButtons} />
+            ) : introductionResponsibilitiesButtons ? (
+              <ResponsibilitiesContainer title={introductionButtons} />
+            ) : null}
           </div>
         )}
         {sideBarItems[1] == indicatorType && (
@@ -357,9 +368,11 @@ const Indicator = () => {
               </button>
             </div>
             <hr className="mt-4" />
-            {(agendaAgendaButtons || agendaReportButtons) && (
-              <CommonPage title={agendaButtons} />
-            )}
+            {agendaAgendaButtons ? (
+              <AgendaContainer title={agendaButtons} />
+            ) : agendaReportButtons ? (
+              <ReportContainer title={agendaButtons} />
+            ) : null}
           </div>
         )}
         {sideBarItems[2] == indicatorType && (
@@ -387,10 +400,13 @@ const Indicator = () => {
               </button>
             </div>
             <hr className="mt-4" />
-            {(companyoverviewAgendaButtons ||
-              companyPropositionReportButtons) && (
-              <CommonPage title={companyIntroductionButtons} />
-            )}
+            {companyoverviewAgendaButtons ? (
+              <CompanyOverviewContainer title={companyIntroductionButtons} />
+            ) : companyPropositionReportButtons ? (
+              <CompanyValuePropositionContainer
+                title={companyIntroductionButtons}
+              />
+            ) : null}
           </div>
         )}
         {sideBarItems[3] == indicatorType && (
@@ -428,9 +444,13 @@ const Indicator = () => {
               </button>
             </div>
             <hr className="mt-4" />
-            {(productDemoButtons ||
-              productBenefitsButtons ||
-              productUsesButtons) && <CommonPage title={productButtons} />}
+            {productDemoButtons ? (
+              <ProductContainer title={productButtons} />
+            ) : productBenefitsButtons ? (
+              <BenefitsContainer title={productButtons} />
+            ) : productUsesButtons ? (
+              <UsesContainer title={productButtons} />
+            ) : null}
           </div>
         )}
         {sideBarItems[4] == indicatorType && (
@@ -458,9 +478,11 @@ const Indicator = () => {
               </button>
             </div>
             <hr className="mt-4" />
-            {(probingNeedsButtons || probingChallangeButtons) && (
-              <CommonPage title={probingButtons} />
-            )}
+            {probingNeedsButtons ? (
+              <ProbingNeedsContainer title={probingButtons} />
+            ) : probingChallangeButtons ? (
+              <ProbingChallangeContainer title={probingButtons} />
+            ) : null}
           </div>
         )}
         {sideBarItems[5] == indicatorType && (
@@ -488,9 +510,11 @@ const Indicator = () => {
               </button>
             </div>
             <hr className="mt-4" />
-            {(nextDemoButtons || nextScheduleButtons) && (
-              <CommonPage title={nesxtStepsButtons} />
-            )}
+            {nextDemoButtons ? (
+              <ProposingDemoContainer title={nesxtStepsButtons} />
+            ) : nextScheduleButtons ? (
+              <SchedulingContainer title={nesxtStepsButtons} />
+            ) : null}
           </div>
         )}
         {sideBarItems[6] == indicatorType && (
@@ -518,9 +542,11 @@ const Indicator = () => {
               </button>
             </div>
             <hr className="mt-4" />
-            {(objectionSolutionButtons || objectionAddressButtons) && (
-              <CommonPage title={objectionButtons} />
-            )}
+            {objectionSolutionButtons ? (
+              <SolutionOfferingContainer title={objectionButtons} />
+            ) : objectionAddressButtons ? (
+              <AddressConcernsContainer title={objectionButtons} />
+            ) : null}
           </div>
         )}
       </div>
