@@ -2,7 +2,7 @@ import { getBasicIcon } from '@/utils/AssetsHelper';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react'
 
-const RenderCheckBox = ({ width, bool }: any) => {
+const RenderCheckBox = ({ width, bool, onUpdate, row }: any) => {
     const [check, setCheck] = useState(false);
     React.useEffect(() => {
         if (check) {
@@ -20,7 +20,7 @@ const RenderCheckBox = ({ width, bool }: any) => {
             className={`flex items-center justify-center h-[20px] shrink-0 `}
             style={{ width: width, flexShrink: "unset" }}
         >
-            <input type="checkbox" ref={ref} className="checkbox" />
+            <input type="checkbox" ref={ref} className="checkbox" onChange={(e) => onUpdate(e.target.value, row)} />
         </div>
     );
 };
@@ -121,14 +121,20 @@ const RenderHeaderColumn = ({
 const RenderHeader = ({
     columns,
     rows,
+    handleSelection,
 }: {
     selectAll?: boolean,
     columns?: any,
-    rows?: any
+    rows?: any,
+    handleSelection?: any,
 }) => {
+    const onSelection = (checked: boolean) => {
+        handleSelection(checked)
+    };
+
     return (
         <div className='pl-[10px] min-h-[40px] flex items-center grow border-[#ccc] border-b-[1px]'>
-            <RenderCheckBox width={30} />
+            <RenderCheckBox width={30} onUpdate={onSelection} />
             {columns?.map((column: any, index: number) => (
                 <RenderHeaderColumn
                     key={index}
@@ -179,14 +185,20 @@ const RenderRowItem = ({
 const RenderRow = ({
     rows,
     columns,
+    handleSelection,
 }: {
     rows?: any,
     columns?: any,
+    handleSelection?: any,
 }) => {
+    const onSelection = (checked: boolean, row: any) => {
+        handleSelection(checked, row);
+    };
+
     return (
         rows?.map((row: any, rowIndex: number) => (
             <div key={rowIndex} className='pl-[10px] min-h-[40px] flex items-center grow border-[#ccc] border-b-[1px]'>
-                <RenderCheckBox width={30} />
+                <RenderCheckBox width={30} onUpdate={onSelection} row={row} />
                 {row?.map((rowItem: any, itemIndex: number) => (
                     <RenderRowItem
                         key={itemIndex}
@@ -206,14 +218,16 @@ const RenderRow = ({
 const Table = ({
     columns,
     rows,
+    handleSelection,
 }: {
     columns?: any,
     rows?: any,
+    handleSelection?: any,
 }) => {
     return (
         <div className='w-[100%] mt-[20px]'>
-            <RenderHeader selectAll={false} columns={columns} />
-            <RenderRow rows={rows} columns={columns} />
+            <RenderHeader selectAll={false} columns={columns} handleSelection={handleSelection} />
+            <RenderRow rows={rows} columns={columns} handleSelection={handleSelection} />
         </div>
     )
 }
