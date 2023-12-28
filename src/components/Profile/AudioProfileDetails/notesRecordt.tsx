@@ -9,7 +9,7 @@ import { setError, setSuccess } from "@/store/ai";
 
 const Note = ({ title, content, date }: any) => {
   return (
-    <div className=" mb-[30px] w-[450px] shrink-0 mt-[5px] min-h-[200px] px-[12px] py-[28px] pb-[40px] flex flex-col bg-white border border-gray-200 rounded-lg shadow ">
+    <div className=" mb-[30px] w-[420px] shrink-0 mt-[5px] min-h-[200px] px-[12px] py-[28px] pb-[40px] flex flex-col bg-white border border-gray-200 rounded-lg shadow ">
       <div className="flex justify-between pb-4">
         <p className=" text-[18px] font-medium text-[#3F434A] capitalize">
           {title}

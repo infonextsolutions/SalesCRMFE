@@ -1,9 +1,6 @@
 import NavigationWithEditAndDeleteButtons from "@/components/app/NavigationWithEditAndDelete";
-import React, { useState } from "react";
+import React from "react";
 import IndicatorContainer from "../../IndicatorContainer";
-import Backdrop from "@/components/View/Backdrop/Center";
-import AddCategory from "@/components/Indicator/basic/addCategory";
-import Score from "@/components/Indicator/basic/Score";
 
 const SolutionOfferingContainer = ({ title }: any) => {
   const dummydata = [
@@ -29,26 +26,6 @@ const SolutionOfferingContainer = ({ title }: any) => {
     },
   ];
 
-  const [form, setForm] = useState(false);
-  const [bool, setBool] = useState(true);
-  const [score, setScore] = useState(false);
-
-  const cancelForms = () => {
-    setBool(false);
-    setTimeout(() => {
-      setForm(false);
-      setBool(true);
-    }, 500);
-  };
-
-  const cancelScores = () => {
-    setBool(false);
-    setTimeout(() => {
-      setScore(false);
-      setBool(true);
-    }, 500);
-  };
-
   return (
     <div>
       <NavigationWithEditAndDeleteButtons
@@ -58,9 +35,7 @@ const SolutionOfferingContainer = ({ title }: any) => {
             text: "Score",
             dropdown: true,
             id: 0,
-            onClick1: async () => {
-              setScore(true);
-            },
+            // click: viewButtinClick,
             light: false,
             dark: true,
             list: [],
@@ -71,26 +46,14 @@ const SolutionOfferingContainer = ({ title }: any) => {
             dropdown: true,
             id: 1,
             icon: "Plus",
-            onClick1: async () => {
-              setForm(true);
-            },
+            // click: AddLead,
             light: false,
             dark: false,
             list: [],
           },
         ]}
       />
-      <IndicatorContainer title={title} data={dummydata} />
-      {form && (
-        <Backdrop bool={bool}>
-          <AddCategory onChange={() => {}} cancel={cancelForms} />
-        </Backdrop>
-      )}
-      {score && (
-        <Backdrop bool={bool}>
-          <Score onChange={() => {}} cancel={cancelScores} />
-        </Backdrop>
-      )}
+      <IndicatorContainer dummydata={dummydata} />
     </div>
   );
 };
