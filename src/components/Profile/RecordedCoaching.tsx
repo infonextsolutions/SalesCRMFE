@@ -29,7 +29,7 @@ const ChartContainer = ({ children }: any) => {
         <p>25</p>
         <p className="mb-[20px]">0</p>
       </div>
-      <div className="w-[92%] h-[100%] flex justify-between pr-[30px] pl-[30px]">
+      <div className="w-[100%] h-[100%] flex justify-between pr-[30px] pl-[30px]">
         {children}
       </div>
     </div>
@@ -38,7 +38,7 @@ const ChartContainer = ({ children }: any) => {
 
 const ScriptBuilding = ({ script }: { script: ScriptBuilding }) => {
   return (
-    <div className="w-[100%] h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
+    <div className="w-[100%] px-6 h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Script Building Blocks
@@ -75,7 +75,7 @@ const ScriptBuilding = ({ script }: { script: ScriptBuilding }) => {
 
 const Selling = ({ selling }: { selling: SellingSkills }) => {
   return (
-    <div className="w-[100%] h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
+    <div className="w-[100%] p-6 h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Selling Skills
@@ -112,7 +112,7 @@ const Selling = ({ selling }: { selling: SellingSkills }) => {
 
 const Emotion = ({ data }: { data: Emotion }) => {
   return (
-    <div className="w-[100%] h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
+    <div className="w-[100%] p-6 h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Emotion Analysis
@@ -253,11 +253,11 @@ const Coaching = ({ data }: any) => {
             list={tabs}
           />
           {tab === 0 && (
-            <>
+            <div className="flex flex-col gap-6">
               <ScriptBuilding script={data1?.scriptBuilding} />
               <Selling selling={data1?.sellingSkills} />
               <Emotion data={data1?.emotion} />
-            </>
+            </div>
           )}
           {tab === 1 && (
             <div>

@@ -1,10 +1,9 @@
 import NavigationWithEditAndDeleteButtons from "@/components/app/NavigationWithEditAndDelete";
-import { getBasicIcon } from "@/utils/AssetsHelper";
-import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import IndicatorContainer from "../../IndicatorContainer";
-
-type Props = {};
+import Backdrop from "@/components/View/Backdrop/Center";
+import AddCategory from "@/components/Indicator/basic/addCategory";
+import Score from "@/components/Indicator/basic/Score";
 
 const CompanyOverviewContainer = ({ title }: any) => {
   const dummydata = [
@@ -29,6 +28,25 @@ const CompanyOverviewContainer = ({ title }: any) => {
     },
   ];
 
+  const [form, setForm] = useState(false);
+  const [score, setScore] = useState(false);
+  const [bool, setBool] = useState(true);
+
+  const cancelForms = () => {
+    setBool(false);
+    setTimeout(() => {
+      setForm(false);
+      setBool(true);
+    }, 500);
+  };
+  const cancelScores = () => {
+    setBool(false);
+    setTimeout(() => {
+      setScore(false);
+      setBool(true);
+    }, 500);
+  };
+
   return (
     <div>
       <NavigationWithEditAndDeleteButtons
@@ -38,7 +56,9 @@ const CompanyOverviewContainer = ({ title }: any) => {
             text: "Score",
             dropdown: true,
             id: 0,
-            // click: viewButtinClick,
+            onClick1: async () => {
+              setScore(true);
+            },
             light: false,
             dark: true,
             list: [],
@@ -49,14 +69,26 @@ const CompanyOverviewContainer = ({ title }: any) => {
             dropdown: true,
             id: 1,
             icon: "Plus",
-            // click: AddLead,
+            onClick1: async () => {
+              setForm(true);
+            },
             light: false,
             dark: false,
             list: [],
           },
         ]}
       />
-      <IndicatorContainer dummydata={dummydata} />
+      <IndicatorContainer title={title} data={dummydata} />
+      {form && (
+        <Backdrop bool={bool}>
+          <AddCategory onChange={() => {}} cancel={cancelForms} />
+        </Backdrop>
+      )}
+      {score && (
+        <Backdrop bool={bool}>
+          <Score onChange={() => {}} cancel={cancelScores} />
+        </Backdrop>
+      )}
     </div>
   );
 };
