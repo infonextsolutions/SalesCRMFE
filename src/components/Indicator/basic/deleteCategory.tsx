@@ -5,7 +5,7 @@ const DeleteCategory = ({ cancel, submit, title }: any) => {
   return (
     <div className="p-6">
       <h2 className="text-3xl font-bold text-center">
-        Are you sure you want to delete "{title}"?
+        Are you sure you want to delete &quot;{title}&quot;?
       </h2>
       <p className="bg-[#ffe3b077] mt-3 p-3">
         <span className="font-semibold">Note :</span> Associated score will also
