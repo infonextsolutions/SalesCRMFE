@@ -11,6 +11,7 @@ import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
 import { CSVLink } from "react-csv";
 import axios from 'axios';
 import { getBasicIcon } from '@/utils/AssetsHelper';
+import DropDown2 from '@/utils/Button/DropDown2';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -257,6 +258,9 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
 
     const [rowsACR, setRowsACR] = useState([]);
     const [rowsFRCR, setRowsFRCR] = useState([]);
+    const [qaList, setQaList] = useState([]);
+    const [searchAssignTo, setSearchAssignTo] = useState('');
+    const [selectedRows, setSelectedRows] = useState([]);
 
     const [currTab, setCurrTab] = useState(0);
     const [subType, setSubType] = useState("allocated_call_reviews");
@@ -381,6 +385,17 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         getData();
     }, [currTab, subType]);
 
+    useEffect(() => {
+        axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_Analyst`)
+            .then((res: any) => {
+                console.log('------------ RESPONSE ------------', res);
+                setQaList(res?.data?.result);
+            })
+            .catch((err: any) => {
+
+            });
+    }, []);
+
     const handleTabNavigation = (payload: any) => {
         setCurrTab(payload);
         setSubType("allocated_call_reviews");
@@ -452,6 +467,73 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         // call api for data with filters
     }, [currTab, subType]);
 
+    const handleSelection = (checked: boolean, row?: any) => {
+        if (row) {
+
+        } else {
+
+        }
+    };
+
+    const handleSearchAssignTo = (val: any) => {
+        setSearchAssignTo(val);
+    };
+
+    const handleAssignTo = (checked: boolean, qaId: any) => {
+        if (checked) {
+            const payload = {
+                qaId: qaId,
+                qamId: window !== undefined ? localStorage.getItem('user-id') : "",
+                callId: ""
+            };
+            axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload)
+                .then((res: any) => {
+                    console.log('----------- res ----------', res);
+                })
+                .catch((err: any) => {
+
+                });
+        }
+    };
+
+    const renderAssignToDD = () => {
+        return (
+            <div>
+                <div className='flex items-center p-[6px] border-solid border-1 border-black rounded'>
+                    <input type="text" className='bg-white outline-none text-black' placeholder='Search...' value={searchAssignTo} onInput={(e: any) => handleSearchAssignTo(e.target.value)} />
+                    <button className='flex items-center justify-center w-[20px] h-[20px]'>
+                        <img src={getBasicIcon("Search")} alt='Search' width={"20px"} height={"20px"} />
+                    </button>
+                </div>
+                <ul className=''>
+                    {
+                        searchAssignTo ? (
+                            qaList?.filter((qaItem: any, index: number) => {
+                                return qaItem?.name?.toLowerCase().includes(searchAssignTo.toLowerCase());
+                            }).map((qaItem: any, index: number) => (
+                                <li key={index}>
+                                    <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                                        <span>{qaItem?.name}</span>
+                                        <input type="checkbox" id={qaItem?._id} onChange={(e) => handleAssignTo(e.target.checked, qaItem?._id)} />
+                                    </label>
+                                </li>
+                            ))
+                        ) : (
+                            qaList?.map((qaItem: any, index: number) => (
+                                <li key={index}>
+                                    <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                                        <span>{qaItem?.name}</span>
+                                        <input type="checkbox" id={qaItem?._id} onChange={(e) => handleAssignTo(e.target.checked, qaItem?._id)} />
+                                    </label>
+                                </li>
+                            ))
+                        )
+                    }
+                </ul>
+            </div>
+        );
+    };
+
     const renderControls = () => {
         return (
             <div className='flex items-center gap-[20px]'>
@@ -459,8 +541,10 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
                     currTab === 0
                         ? (
                             <>
-                                <button className='text-black'>Assign To</button>
-                                <button className='text-black'>Auto Allocate</button>
+                                <DropDown2 text="Assign To" id={0} dropdown={true}>
+                                    {renderAssignToDD()}
+                                </DropDown2>
+                                {/* <button className='text-black'>Auto Allocate</button> */}
                             </>
                         )
                         : currTab === 1
@@ -482,7 +566,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
                             <input type="text" className="w-[100%] text-black bg-white" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." />
                             <img src={getBasicIcon("Search")} alt="Search" />
                         </div>
-                        {/* {renderControls()} */}
+                        {renderControls()}
                     </div>
                     <div className='flex items-center gap-[20px]'>
                         <NavigationWithoutTitle
