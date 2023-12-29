@@ -12,6 +12,8 @@ import { CSVLink } from "react-csv";
 import axios from 'axios';
 import { getBasicIcon } from '@/utils/AssetsHelper';
 import DropDown2 from '@/utils/Button/DropDown2';
+import { useAppDispatch } from '@/store/store';
+import { setError, setSuccess } from '@/store/ai';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -260,7 +262,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     const [rowsFRCR, setRowsFRCR] = useState([]);
     const [qaList, setQaList] = useState([]);
     const [searchAssignTo, setSearchAssignTo] = useState('');
-    const [selectedRows, setSelectedRows] = useState([]);
+    const [selectedRows, setSelectedRows] = useState<any>([]);
 
     const [currTab, setCurrTab] = useState(0);
     const [subType, setSubType] = useState("allocated_call_reviews");
@@ -307,25 +309,25 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         if (subType === "allocated_call_reviews") {
             setRowsACR(data?.map((item: any, index: number) => {
                 let row = [
-                    { text: item?.callId || "-" },
-                    { text: item?.callTitle || "-" },
-                    { text: item?.leadId?.[0]?.leadId || "-" },
-                    { text: item?.leadId?.[0]?.lead_title || "-" },
-                    { text: item?.company?.[0]?.company_name || "-" },
-                    { text: item?.owner?.[0]?.name || "-" },  // call owner
-                    { text: item?.teamManager?.name || "-" },  // team manager
-                    { text: item?.callId || "-" },  // client poc
-                    { text: item?.StartTime || "-" },  // call date & time
-                    { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
-                    { text: item?.callDisposiiton || "-" },  // call disposition
-                    { text: item?.callType || "-" },  // call type
-                    { text: item?.callId || "-" },  // call review type
-                    { text: item?.score || "-" },  // call score
-                    { text: item?.callId || "-" },  // allocation type
-                    { text: item?.qaAllocatedAt || "-" },  // allocated on
-                    { text: item?.qaId?.name || "-" },  // allocated to
-                    { text: item?.callId || "-" },  // review due date
-                    { text: item?.callId || "-" },  // call review status
+                    { text: item?.callId || "-", id: item?._id },
+                    { text: item?.callTitle || "-", id: item?._id },
+                    { text: item?.leadId?.[0]?.leadId || "-", id: item?._id },
+                    { text: item?.leadId?.[0]?.lead_title || "-", id: item?._id },
+                    { text: item?.company?.[0]?.company_name || "-", id: item?._id },
+                    { text: item?.owner?.[0]?.name || "-", id: item?._id },  // call owner
+                    { text: item?.teamManager?.name || "-", id: item?._id },  // team manager
+                    { text: item?.callId || "-", id: item?._id },  // client poc
+                    { text: item?.StartTime || "-", id: item?._id },  // call date & time
+                    { text: item?.company?.[0]?.company_product_category || "-", id: item?._id },  // product/service
+                    { text: item?.callDisposiiton || "-", id: item?._id },  // call disposition
+                    { text: item?.callType || "-", id: item?._id },  // call type
+                    { text: item?.callId || "-", id: item?._id },  // call review type
+                    { text: item?.score || "-", id: item?._id },  // call score
+                    { text: item?.callId || "-", id: item?._id },  // allocation type
+                    { text: item?.qaAllocatedAt || "-", id: item?._id },  // allocated on
+                    { text: item?.qaId?.name || "-", id: item?._id },  // allocated to
+                    { text: item?.callId || "-", id: item?._id },  // review due date
+                    { text: item?.callId || "-", id: item?._id },  // call review status
                 ];
                 return row;
             }));
@@ -388,7 +390,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     useEffect(() => {
         axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_Analyst`)
             .then((res: any) => {
-                console.log('------------ RESPONSE ------------', res);
                 setQaList(res?.data?.result);
             })
             .catch((err: any) => {
@@ -419,6 +420,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     };
 
     const ref: any = useRef();
+    const dispatch = useAppDispatch();
 
     const exportXLSX = () => {
         const worksheet = XLSX.utils.json_to_sheet(data?.result);
@@ -468,10 +470,29 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     }, [currTab, subType]);
 
     const handleSelection = (checked: boolean, row?: any) => {
+        console.log('============ HANDLE SELECTION ===========', checked, row);
         if (row) {
-
+            if (checked) {
+                setSelectedRows((currSelectedRows: any) => {
+                    return [...currSelectedRows, row?.[0]?.id];
+                });
+            } else {
+                setSelectedRows(selectedRows.filter((rowItem: any) => rowItem !== row?.[0]?.id));
+            }
         } else {
-
+            if (checked) {
+                if (subType === "allocated_call_reviews") {
+                    setSelectedRows(rowsACR?.map((rowItem: any) => {
+                        return rowItem?.[0]?.id;
+                    }));
+                } else {
+                    setSelectedRows(rowsFRCR?.map((rowItem: any) => {
+                        return rowItem?.[0]?.id;
+                    }));
+                }
+            } else {
+                setSelectedRows([]);
+            }
         }
     };
 
@@ -480,7 +501,12 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     };
 
     const handleAssignTo = (checked: boolean, qaId: any) => {
-        if (checked) {
+        if (selectedRows.length === 0) {
+            dispatch(setError({
+                show: true,
+                error: "No Selection.",
+            }));
+        } else if (checked) {
             const payload = {
                 qaId: qaId,
                 qamId: window !== undefined ? localStorage.getItem('user-id') : "",
@@ -489,9 +515,16 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
             axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload)
                 .then((res: any) => {
                     console.log('----------- res ----------', res);
+                    dispatch(setSuccess({
+                        show: true,
+                        success: "Successfully Assigned!",
+                    }));
                 })
                 .catch((err: any) => {
-
+                    dispatch(setError({
+                        show: true,
+                        error: "Error Occured!",
+                    }));
                 });
         }
     };
@@ -549,7 +582,9 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
                         )
                         : currTab === 1
                             ? (
-                                <button className='text-black'>Re-Assign To</button>
+                                <DropDown2 text="Re-Assign To" id={0} dropdown={true}>
+                                    {renderAssignToDD()}
+                                </DropDown2>
                             )
                             : null
                 }
@@ -605,11 +640,11 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     };
 
     const renderACR = () => {
-        return <Table rows={rowsACR} columns={columnsACR} />;
+        return <Table rows={rowsACR} columns={columnsACR} handleSelection={handleSelection} selectedRows={selectedRows} />;
     };
 
     const renderFRCR = () => {
-        return <Table rows={rowsFRCR} columns={columnsFRCR} />;
+        return <Table rows={rowsFRCR} columns={columnsFRCR} handleSelection={handleSelection} selectedRows={selectedRows} />;
     };
 
     const renderToggleSwitch = () => {
