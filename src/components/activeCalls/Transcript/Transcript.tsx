@@ -2,7 +2,7 @@ import Recorded from "@/types/reco-1";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Search = ({ input, change }: any) => {
   return (
@@ -58,20 +58,24 @@ const Transcript = ({
   //     "leadId":"21345678778678687",
   //     "callId":"34567890876546788"
   // }
+  // console.log('+++++++++ Transcript +++++++++', utterances);
 
+  const [Arrr, setArr] = useState<any>([]);
 
-  const arr: any = [];
-  for (let i = 0; i < utterances?.length; i++) {
-    arr.push({
-      title: utterances?.[i]?.speaker === "A" ? "A" : "B",
-      message: utterances?.[i]?.text,
-      start: utterances?.[i]?.start,
-      end: utterances?.[i]?.end,
-    });
-  }
+  useEffect(() => {
+    setArr(utterances?.map((uttrItem: any) => {
+      return {
+        title: uttrItem.speaker === "A" ? "A" : "B",
+        message: uttrItem.text,
+        start: uttrItem.start,
+        end: uttrItem.end,
+      };
+    }));
+  }, []);
 
-  const [Arrr, setArr] = useState<any>(arr);
-  // const [Arrr, setArr] = useState<any>([{ title: "speaker 1", message: text }]);
+  useEffect(() => {Arrr
+    // console.log('=========== Arrr ============', Arrr)
+  }, [Arrr]);
 
   const [input, setInput] = useState("");
 
@@ -108,7 +112,7 @@ const Transcript = ({
         change={(e: any) => {
           setInput(e.target.value);
           const str = e.target.value;
-          const newArr = arr
+          const newArr = Arrr
             .filter(
               (item: any) =>
                 item.title.toLowerCase().includes(str.toLowerCase()) ||
@@ -146,12 +150,12 @@ const Transcript = ({
                     style={{
                       color: item.title === "A" ? "#fe5143" : "#909193",
                     }}
-                    // dangerouslySetInnerHTML={{
-                    //   // __html: `00:05 ${item.title}:`,
-                    //   __html: `${convertMilliseconds(item.start)} ${
-                    //     item.title
-                    //   }:`,
-                    // }}
+                  // dangerouslySetInnerHTML={{
+                  //   // __html: `00:05 ${item.title}:`,
+                  //   __html: `${convertMilliseconds(item.start)} ${
+                  //     item.title
+                  //   }:`,
+                  // }}
                   >
                     {convertMilliseconds(item.start)}
                   </p>
@@ -160,12 +164,12 @@ const Transcript = ({
                     style={{
                       color: item.title === "A" ? "#fe5143" : "#909193",
                     }}
-                    // dangerouslySetInnerHTML={{
-                    //   // __html: `00:05 ${item.title}:`,
-                    //   __html: `${convertMilliseconds(item.start)} ${
-                    //     item.title
-                    //   }:`,
-                    // }} 
+                  // dangerouslySetInnerHTML={{
+                  //   // __html: `00:05 ${item.title}:`,
+                  //   __html: `${convertMilliseconds(item.start)} ${
+                  //     item.title
+                  //   }:`,
+                  // }} 
                   >
                     {item.title} :
                   </p>

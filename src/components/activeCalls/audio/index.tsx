@@ -533,12 +533,12 @@ const list = [
   },
 ];
 
-const Audio = ({ data, data1 }: props) => {
+const Audio = ({ data, data1, data2 }: any) => {
   const [check, setCheck] = useState(true);
 
-  console.log('==================== data : audio ===================', data);
+  console.log('==================== data : audio ===================', data, data2);
 
-  const [callData, setCallData] = useState<AudioData>(example);
+  const [callData, setCallData] = useState<AudioData>(data2);
 
   const callit = () => {
     const url = "https://sales365.trainright.fit/api/calling/call-status";
@@ -558,7 +558,7 @@ const Audio = ({ data, data1 }: props) => {
 
   React.useEffect(() => {
     if (check) {
-      callit();
+      // callit();
     }
   });
 
@@ -575,7 +575,7 @@ const Audio = ({ data, data1 }: props) => {
       {/* <CallPlayer /> */}
       {data.Status === "completed" && (
         <>
-          <AudioPlayer src={data.RecordingUrl} />
+          <AudioPlayer src={data?.RecordingUrl} />
           <div className="w-full mt-[30px] mb-[30px] bg-white rounded-xl p-7 ">
             <div className="flex gap-8 justify-between items-center">
               <h1 className="text-[16px] w-[172px] font-medium text-black capitalize mb-[10px]">
@@ -618,7 +618,7 @@ const Audio = ({ data, data1 }: props) => {
       )}
       {data.Status === "in-progress" && (
         <>
-          <AudioPlayer src={data.RecordingUrl} />
+          <AudioPlayer src={data?.RecordingUrl} />
           <div className="w-full mt-[30px] mb-[30px] px-[38px] bg-white rounded-xl">
             <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
               call data
@@ -650,10 +650,10 @@ const Audio = ({ data, data1 }: props) => {
           <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
           <Tracker title={"Topics"} list={list} color={"#0090FF"} />
           <Transcript
-            src={data.RecordingUrl}
+            src={data?.RecordingUrl}
             data={data}
-            utterances={callData.transcriptId.utterances}
-            text={callData.transcriptId.text}
+            utterances={callData?.transcriptId?.utterances}
+            text={callData?.transcriptId?.text}
           />
         </>
       )}

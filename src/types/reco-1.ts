@@ -26,7 +26,7 @@ export default interface Root {
     call_title:string;
     createdAt: string
     updatedAt: string
-    transcriptId: string
+    transcriptId: any
   }
   
   export interface LeadId {
