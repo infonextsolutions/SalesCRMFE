@@ -153,7 +153,7 @@ const RenderRow = ({
     return (
         rows?.map((row: any, rowIndex: number) => (
             <div key={rowIndex} className='pl-[10px] min-h-[40px] flex items-center grow border-[#ccc] border-b-[1px]'>
-                <RenderCheckBox width={30} onUpdate={onSelection} row={row} bool={selectedRows.includes(row?.[0]?.id)} />
+                <RenderCheckBox width={30} onUpdate={onSelection} row={row} bool={selectedRows ? selectedRows?.includes(row?.[0]?.id) : false} />
                 {row?.map((rowItem: any, itemIndex: number) => (
                     <RenderRowItem
                         key={itemIndex}
