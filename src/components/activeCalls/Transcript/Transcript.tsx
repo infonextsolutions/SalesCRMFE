@@ -61,53 +61,15 @@ const Transcript = ({
 
 
   const arr: any = [];
-  for (let i = 0; i < utterances.length; i++) {
+  for (let i = 0; i < utterances?.length; i++) {
     arr.push({
-      title: utterances[i].speaker === "A" ? "A" : "B",
-      message: utterances[i].text,
-      start: utterances[i].start,
-      end: utterances[i].end,
+      title: utterances?.[i]?.speaker === "A" ? "A" : "B",
+      message: utterances?.[i]?.text,
+      start: utterances?.[i]?.start,
+      end: utterances?.[i]?.end,
     });
   }
 
-  const arrr: any = [
-    {
-      title: "Interviewer",
-      message: "We are talking with Jenny. So what is your current occupation?",
-    },
-    {
-      title: "Interviewee",
-      message: "I am an assistant director [???] basically [???].",
-    },
-    {
-      title: "Interviewer",
-      message: " And so how long you have been in this particular position?",
-    },
-    {
-      title: "Interviewee",
-      message: "I am in this particular position - it has been 4 years.",
-    },
-    {
-      title: "Interviewer",
-      message:
-        "Are you able to briefly describe your work or career history to date?",
-    },
-    {
-      title: "Interviewee",
-      message:
-        "My career has been, it initially started with a lot of clinical roles in very different areas of specialization within the nursing [???] induinputy and [???] plastics [???] to whole different variety and then I moved into rehabs. I was [???] for 15 years and then basically moved into management role when I was 26 and had been working in the management role for the last 27 years and yeah, about 20 years I have been working in management, and basically did a rehab degree in rehab counseling, which I think played a [???], so [???] sort of varying delay in some respects from the traditional clinical role of nursing.",
-    },
-    {
-      title: "Interviewer",
-      message:
-        "Yeah, sort of I guess first thing [???] broadly speaking, why did you choose to go into nursing?",
-    },
-    {
-      title: "Interviewee",
-      message:
-        "Because I was paid to train and employed at the same time. In the 70s, things were very different in [???] of jobs and employment...",
-    },
-  ];
   const [Arrr, setArr] = useState<any>(arr);
   // const [Arrr, setArr] = useState<any>([{ title: "speaker 1", message: text }]);
 
@@ -203,7 +165,7 @@ const Transcript = ({
                     //   __html: `${convertMilliseconds(item.start)} ${
                     //     item.title
                     //   }:`,
-                    // }}
+                    // }} 
                   >
                     {item.title} :
                   </p>

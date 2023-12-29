@@ -360,26 +360,27 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     };
 
     const getData = () => {
-        let status = '';
+        let endpoint = '';
         switch (currTab) {
             case 0:
-                status = 'allocated';
+                endpoint = `https://sales365.trainright.fit/api/recording/find-all`;
                 break;
             case 1:
-                status = 'active';
+                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
                 break;
             case 2:
-                status = 'closed';
+                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed`;
                 break;
             default:
-                status = 'active';
+                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated`;
                 break;
         }
-        axios.get(`https://sales365.trainright.fit/api/qam/callForReview?qaStatus=${status}`)
+        axios.get(endpoint)
             .then((res: any) => {
                 const data = res?.data?.result;
                 generateRows(data);
-            }).catch((err: any) => {
+            })
+            .catch((err: any) => {
             });
     };
 
@@ -470,7 +471,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     }, [currTab, subType]);
 
     const handleSelection = (checked: boolean, row?: any) => {
-        console.log('============ HANDLE SELECTION ===========', checked, row);
         if (row) {
             if (checked) {
                 setSelectedRows((currSelectedRows: any) => {
@@ -511,7 +511,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
                 show: true,
                 success: "Assigning...",
             }));
-            console.log('-------------- SELECTION ------------', selectedRows);
             const assigningPromise = selectedRows.map((selectedRow: any) => {
                 const payload = {
                     qaId: qaId,
@@ -522,7 +521,6 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
             });
             Promise.all(assigningPromise)
                 .then((res: any) => {
-                    console.log('----------- res ----------', res);
                     dispatch(setSuccess({
                         show: true,
                         success: "Successfully Assigned!",

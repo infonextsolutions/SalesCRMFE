@@ -437,7 +437,7 @@ const CallHolder = ({ click }: any) => {
 const CallPlayer = () => {
   const [playing, setPlaying] = React.useState(false);
   const ref: any = useRef();
-  React.useEffect(() => {});
+  React.useEffect(() => { });
 
   return (
     <div className="w-[100%] h-[100px] mb-[100px] mt-[20px] px-[40px]">
@@ -447,7 +447,7 @@ const CallPlayer = () => {
       <audio src="/poor-audio.ogg" ref={ref}></audio>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
         <div className="h-[100%] w-[40%] bg-bg-red rounded-l-[3px] relative">
-          <CallHolder click={() => {}} />
+          <CallHolder click={() => { }} />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
           15:53/30:00
@@ -536,6 +536,8 @@ const list = [
 const Audio = ({ data, data1 }: props) => {
   const [check, setCheck] = useState(true);
 
+  console.log('==================== data : audio ===================', data);
+
   const [callData, setCallData] = useState<AudioData>(example);
 
   const callit = () => {
@@ -548,6 +550,7 @@ const Audio = ({ data, data1 }: props) => {
         })
         .then((e) => {
           setCallData(e.data.result);
+          console.log('--------------- setCallData --------------', e.data.result);
           setCheck(false);
         });
     }
@@ -570,7 +573,7 @@ const Audio = ({ data, data1 }: props) => {
         <img src="/video.svg" className="w-full rounded-2xl" alt="" />
       </div> */}
       {/* <CallPlayer /> */}
-      {callData.Status === "completed" && (
+      {data.Status === "completed" && (
         <>
           <AudioPlayer src={data.RecordingUrl} />
           <div className="w-full mt-[30px] mb-[30px] bg-white rounded-xl p-7 ">
@@ -607,13 +610,13 @@ const Audio = ({ data, data1 }: props) => {
             <Transcript
               src={data.RecordingUrl}
               data={data}
-              utterances={callData.transcriptId.utterances}
-              text={callData.transcriptId.text}
+              utterances={callData?.transcriptId?.utterances}
+              text={callData?.transcriptId?.text}
             />
           </div>
         </>
       )}
-      {callData.Status === "in-progress" && (
+      {data.Status === "in-progress" && (
         <>
           <AudioPlayer src={data.RecordingUrl} />
           <div className="w-full mt-[30px] mb-[30px] px-[38px] bg-white rounded-xl">
@@ -654,7 +657,7 @@ const Audio = ({ data, data1 }: props) => {
           />
         </>
       )}
-      {callData.Status === "no-answer" && (
+      {data.Status === "no-answer" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
@@ -665,7 +668,7 @@ const Audio = ({ data, data1 }: props) => {
           </div>
         </>
       )}
-      {callData.Status === "failed" && (
+      {data.Status === "failed" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
@@ -675,7 +678,7 @@ const Audio = ({ data, data1 }: props) => {
           </div>
         </>
       )}
-      {callData.Status === "loading" && (
+      {data.Status === "loading" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
