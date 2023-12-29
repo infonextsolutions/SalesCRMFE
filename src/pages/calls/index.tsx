@@ -507,12 +507,20 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
                 error: "No Selection.",
             }));
         } else if (checked) {
-            const payload = {
-                qaId: qaId,
-                qamId: window !== undefined ? localStorage.getItem('user-id') : "",
-                callId: ""
-            };
-            axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload)
+            dispatch(setSuccess({
+                show: true,
+                success: "Assigning...",
+            }));
+            console.log('-------------- SELECTION ------------', selectedRows);
+            const assigningPromise = selectedRows.map((selectedRow: any) => {
+                const payload = {
+                    qaId: qaId,
+                    qamId: window !== undefined ? localStorage.getItem('user-id') : "",
+                    callId: selectedRow
+                };
+                return axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload);
+            });
+            Promise.all(assigningPromise)
                 .then((res: any) => {
                     console.log('----------- res ----------', res);
                     dispatch(setSuccess({
