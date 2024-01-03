@@ -589,7 +589,7 @@ const Audio = ({ data, data1, data2 }: any) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-gray-600 text-[14px]">Participant 1:-</p>
+                <p className="text-gray-600 text-[14px]">Participant 1: A</p>
               </div>
               <div className="w-full gap-2 flex items-center mt-[6px]">
                 <Image
@@ -599,12 +599,12 @@ const Audio = ({ data, data1, data2 }: any) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-[#909193] text-[14px]">Participant 2:-</p>
+                <p className="text-gray-600 text-[14px]">Participant 2: B</p>
               </div>
             </div>
-            <Tracker title={"John"} list={list} color={"#4091FF"} />
-            <Tracker title={"Shraddha"} list={list} color={"#FE5143"} />
-            <Tracker title={"Topics"} list={list} color={"#434343"} />
+            <Tracker title={"A"} list={list} color={"#4091FF"} />
+            <Tracker title={"B"} list={list} color={"#FE5143"} />
+            {/* <Tracker title={"Topics"} list={list} color={"#434343"} /> */}
           </div>
           <div className="bg-white rounded-lg pb-4">
             <Transcript
@@ -631,7 +631,7 @@ const Audio = ({ data, data1, data2 }: any) => {
                 width={10}
                 height={10}
               />
-              <p className="text-[#304FFD] text-[14px]">Participant 1:John</p>
+              <p className="text-[#304FFD] text-[14px]">Participant 1: A</p>
             </div>
             <div className="w-full flex items-center mt-[6px]">
               <Image
@@ -641,14 +641,12 @@ const Audio = ({ data, data1, data2 }: any) => {
                 width={10}
                 height={10}
               />
-              <p className="text-[#FF965D] text-[14px]">
-                Participant 2:Shraddha
-              </p>
+              <p className="text-[#FF965D] text-[14px]">Participant 2: B</p>
             </div>
           </div>
-          <Tracker title={"John"} list={list} color={"#304FFD"} />
-          <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
-          <Tracker title={"Topics"} list={list} color={"#0090FF"} />
+          <Tracker title={"A"} list={list} color={"#304FFD"} />
+          <Tracker title={"B"} list={list} color={"#FF965D"} />
+          {/* <Tracker title={"Topics"} list={list} color={"#0090FF"} /> */}
           <Transcript
             src={data?.RecordingUrl}
             data={data}
@@ -662,7 +660,7 @@ const Audio = ({ data, data1, data2 }: any) => {
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
             <h1 className="text-[16px] font-medium text-[#888] text-center  capitalize mb-[10px]">
-              Sorry, there is no recording or transcript as the Call Was&apos;nt
+              Sorry, there is no recording or transcript as the Call Wasn&apos;t
               Answered
             </h1>
           </div>

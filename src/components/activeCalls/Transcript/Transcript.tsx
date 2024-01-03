@@ -21,7 +21,7 @@ const Search = ({ input, change }: any) => {
           <input
             type="text"
             value={input}
-            onChange={change}
+            onInput={change}
             className="w-[100%] font-medium h-[32px] bg-white outline-0 text-black "
             placeholder="Search Transcript..."
           />
@@ -60,20 +60,28 @@ const Transcript = ({
   // }
   // console.log('+++++++++ Transcript +++++++++', utterances);
 
+  const [superArr, setSuperArr] = useState<any>([]);
   const [Arrr, setArr] = useState<any>([]);
 
-  useEffect(() => {
-    setArr(utterances?.map((uttrItem: any) => {
+  const initializeArrr = () => {
+    const py = utterances?.map((uttrItem: any) => {
       return {
         title: uttrItem.speaker === "A" ? "A" : "B",
         message: uttrItem.text,
         start: uttrItem.start,
         end: uttrItem.end,
       };
-    }));
+    })
+    setArr(py);
+    setSuperArr(py);
+  };
+
+  useEffect(() => {
+    initializeArrr();
   }, []);
 
-  useEffect(() => {Arrr
+  useEffect(() => {
+    Arrr
     // console.log('=========== Arrr ============', Arrr)
   }, [Arrr]);
 
@@ -112,30 +120,33 @@ const Transcript = ({
         change={(e: any) => {
           setInput(e.target.value);
           const str = e.target.value;
-          const newArr = Arrr
+          const newArr = superArr
             .filter(
               (item: any) =>
-                item.title.toLowerCase().includes(str.toLowerCase()) ||
-                item.message.toLowerCase().includes(str.toLowerCase())
+                (item.message.toLowerCase().includes(str.toLowerCase()))
             )
             .map((item: any) => {
               let newTitle = item.title.replace(
                 new RegExp(str, "gi"),
                 (match: any) =>
-                  `<mark style="background: #304ffd ; color: white;">${match}</mark>`
+                  `<mark style="background: #304ffd; color: white;">${match}</mark>`
               );
               let newBody = item.message.replace(
                 new RegExp(str, "gi"),
                 (match: any) =>
-                  `<mark style="background:#304ffd ; color: white;">${match}</mark>`
+                  `<mark style="background:#304ffd; color: white;">${match}</mark>`
               );
               return {
                 ...item,
-                title: newTitle,
+                // title: newTitle,
                 message: newBody,
               };
             });
-          setArr(newArr);
+          if (str !== "") {
+            setArr(newArr);
+          } else {
+            initializeArrr();
+          }
         }}
         input={input}
       />

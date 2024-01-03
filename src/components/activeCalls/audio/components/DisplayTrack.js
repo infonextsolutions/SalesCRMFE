@@ -8,14 +8,16 @@ const DisplayTrack = ({
   setDuration,
   progressBarRef,
   handleNext,
+  speed = 1,
 }) => {
   const onLoadedMetadata = () => {
+    audioRef.current.playbackRate = speed;
     const seconds = audioRef.current.duration;
     setDuration(seconds);
     progressBarRef.current.max = seconds;
   };
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     onLoadedMetadata();
   })
   return (
