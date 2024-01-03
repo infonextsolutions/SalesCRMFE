@@ -390,7 +390,7 @@ const ActiveCall = ({
     call_new_participant_title: "",
     call_new_participant_name: "",
     call_new_participant_designation: "",
-    participants: "",
+    participants: lead?.customerId?._id || "",
   });
 
   function getCurrentTimeInHours() {
@@ -624,12 +624,12 @@ const ActiveCall = ({
           {
             title: "Choose Participants",
             val: 0,
-            selected: true,
+            selected: false,
           },
           {
             title: lead?.customerId?.customer_name,
             val: lead?.customerId?._id,
-            selected: false,
+            selected: true,
           },
           // ...list,
         ]}
