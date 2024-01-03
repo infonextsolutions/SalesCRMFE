@@ -1,61 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
-import GreetingsContainer from "./indroduction/GreetingsContainer";
-import NameContainer from "./indroduction/NameContainer";
-import TitleAndRolesContainer from "./indroduction/TitleAndRolesContainer";
-import ResponsibilitiesContainer from "./indroduction/ResponsibilitiesContainer";
-import AgendaContainer from "./Agenda/AgendaContainer";
-import ReportContainer from "./Agenda/ReportContainer";
-import CompanyOverviewContainer from "./CompanyIntroduction/CompanyOverviewContainer";
-import CompanyValuePropositionContainer from "./CompanyIntroduction/CompanyValuePropositionContainer";
-import ProductContainer from "./Product/ProductContainer";
-import BenefitsContainer from "./Product/BenefitsContainer";
-import UsesContainer from "./Product/UsesContainer";
-import ProbingNeedsContainer from "./Probing/ProbingNeedsContainer";
-import ProbingChallangeContainer from "./Probing/ProbingChallangeContainer";
-import ProposingDemoContainer from "./NextSteps/ProposingDemoContainer";
-import SchedulingContainer from "./NextSteps/SchedulingContainer";
-import SolutionOfferingContainer from "./ObjectionHandling/SolutionOfferingContainer";
-import AddressConcernsContainer from "./ObjectionHandling/AddressConcernsContainer";
+import Backdrop from "@/components/View/Backdrop";
+import Navigator from "@/utils/customNavigator";
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Navigation from "@/components/app/Navigation";
+import Image from "next/image";
 
-const dummyItem = {
-  companyName: "ABC Corp",
-  companyAddress: "Noida, UP",
-  poc: "Shraddha P.",
-  pocJob: "Sales Manager",
-  names: "Anil L., Paul G., Rekha",
-  lastActivity: "Email sent on 23 Jan 2023",
-  dealSize: "11000",
-  product: "Product A",
-  calls: 5,
-  docs: 2,
-  chats: 5,
-  mails: 5,
-  meetings: 5,
-  tasks: 5,
-};
-
-const Dummy = [
-  { id: 1, type: "enquiry", data: dummyItem },
-  { id: 2, type: "enquiry", data: dummyItem },
-  { id: 3, type: "enquiry", data: dummyItem },
-  { id: 4, type: "interaction", data: dummyItem },
-  { id: 5, type: "interaction", data: dummyItem },
-  { id: 6, type: "interaction", data: dummyItem },
-  { id: 7, type: "interaction", data: dummyItem },
-  { id: 8, type: "proposal", data: dummyItem },
-  { id: 9, type: "proposal", data: dummyItem },
-  { id: 10, type: "proposal", data: dummyItem },
-  { id: 11, type: "win", data: dummyItem },
-  { id: 12, type: "win", data: dummyItem },
-  { id: 13, type: "win", data: dummyItem },
-  { id: 14, type: "Lost", data: dummyItem },
-  { id: 15, type: "Dead", data: dummyItem },
-  { id: 16, type: "Dead", data: dummyItem },
-  { id: 17, type: "Dead", data: dummyItem },
-  { id: 18, type: "Dead", data: dummyItem },
-];
 
 const sideBarItems = [
   "Introduction",
@@ -69,6 +20,237 @@ const sideBarItems = [
 
 const Indicator = () => {
   const router = useRouter();
+
+  const [currIndicatorValues, setCurrIndicatorValues] = useState<any>([
+    {
+      id: 1,
+      key: "1",
+      label: "Hi",
+      alternative_values: [
+        {
+          id: 1,
+          value: "Hey",
+        },
+        {
+          id: 2,
+          value: "Hello",
+        },
+        {
+          id: 3,
+          value: "Hey There",
+        },
+      ],
+      scoreWeightage: 1,
+    },
+    {
+      id: 2,
+      key: "2",
+      label: "Hi",
+      alternative_values: [
+        {
+          id: 1,
+          value: "Hey",
+        },
+        {
+          id: 2,
+          value: "Hello",
+        },
+        {
+          id: 3,
+          value: "Hey There",
+        },
+      ],
+      scoreWeightage: 1,
+    },
+    {
+      id: 3,
+      key: "3",
+      label: "Hi",
+      alternative_values: [
+        {
+          id: 1,
+          value: "Hey",
+        },
+        {
+          id: 2,
+          value: "Hello",
+        },
+        {
+          id: 3,
+          value: "Hey There",
+        },
+      ],
+      scoreWeightage: 1,
+    },
+    {
+      id: 4,
+      key: "4",
+      label: "Hi",
+      alternative_values: [
+        {
+          id: 1,
+          value: "Hey",
+        },
+        {
+          id: 2,
+          value: "Hello",
+        },
+        {
+          id: 3,
+          value: "Hey There",
+        },
+      ],
+      scoreWeightage: 1,
+    },
+  ]);
+
+  const [indicatorTypes, setIndicatorTypes] = useState([
+    {
+      key: "introduction",
+      label: "Introduction",
+      scoreWeightage: 8,
+      edit: false,
+      categories: [
+        {
+          key: "greetings",
+          label: "Greetings",
+          scoreWeightage: 8,
+        },
+        {
+          key: "name",
+          label: "Name",
+          scoreWeightage: 8,
+        },
+        {
+          key: "title_and_roles",
+          label: "Title and Roles",
+          scoreWeightage: 8,
+        },
+        {
+          key: "responsibilities",
+          label: "Responsibilities",
+          scoreWeightage: 8,
+        },
+      ],
+    },
+    {
+      key: "agenda_setting",
+      label: "Agenda Setting",
+      scoreWeightage: 8,
+      edit: false,
+      categories: [
+        {
+          key: "agenda",
+          label: "Agenda",
+          scoreWeightage: 8,
+        },
+        {
+          key: "report_building",
+          label: "Report Building",
+          scoreWeightage: 8,
+        },
+      ],
+    },
+    {
+      key: "company_intro",
+      label: "Company Introduction",
+      scoreWeightage: 8,
+      edit: false,
+      categories: [
+        {
+          key: "company_overview",
+          label: "Company Overview",
+          scoreWeightage: 8,
+        },
+        {
+          key: "value_proposition",
+          label: "Value Proposition",
+          scoreWeightage: 8,
+        },
+      ],
+    },
+    {
+      key: "product_service",
+      label: "Product/Service",
+      scoreWeightage: 8,
+      edit: false,
+      categories: [
+        {
+          key: "product_demo",
+          label: "Product Demo/Information",
+          scoreWeightage: 8,
+        },
+        {
+          key: "benefits",
+          label: "Benefits",
+          scoreWeightage: 8,
+        },
+        {
+          key: "use_cases",
+          label: "Use Cases",
+          scoreWeightage: 8,
+        },
+      ],
+    },
+    {
+      key: "probing",
+      label: "Probing",
+      scoreWeightage: 8,
+      edit: false,
+      categories: [
+        {
+          key: "identifying_needs",
+          label: "Identifying Needs",
+          scoreWeightage: 8,
+        },
+        {
+          key: "understanding_challenges",
+          label: "Understanding Challenges",
+          scoreWeightage: 8,
+        },
+      ],
+    },
+    {
+      key: "next_step_discussion",
+      label: "Next Steps Discussion",
+      scoreWeightage: 8,
+      edit: false,
+      categories: [
+        {
+          key: "proposing_demo",
+          label: "Proposing Demo",
+          scoreWeightage: 8,
+        },
+        {
+          key: "scheduling_follow_up",
+          label: "Scheduling Follow-Up",
+          scoreWeightage: 8,
+        },
+      ],
+    },
+    {
+      key: "objecting_handling",
+      label: "Objecting Handling",
+      scoreWeightage: 8,
+      edit: false,
+      categories: [
+        {
+          key: "solution_offering",
+          label: "Solution Offering",
+          scoreWeightage: 8,
+        },
+        {
+          key: "address_concerns",
+          label: "Address Concerns",
+          scoreWeightage: 8,
+        },
+      ],
+    },
+
+  ]);
+
+  const [currIndicatorType, setCurrIndicatorType] = useState(0);
+  const [currIndicatorCategory, setCurrIndicatorCategory] = useState(0);
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
@@ -86,174 +268,517 @@ const Indicator = () => {
     };
   }, []);
 
-  const [indicatorType, setIndicatorType] = useState(sideBarItems[0]);
-  const [introductionButtons, setIntroductionButtons] = useState("Greetings");
-  const [agendaButtons, setAgendaButtons] = useState("Agenda");
-  const [companyIntroductionButtons, setcompanyIntroductionButtons] =
-    useState("Company overview");
-  const [productButtons, setProductButtons] = useState(
-    "Product Demo/Information"
-  );
-  const [probingButtons, setProbingButtons] = useState("Identifying Needs");
-  const [nesxtStepsButtons, setNextStepsButtons] = useState("Proposing Demo");
-  const [objectionButtons, setobjectionButtons] = useState("Solution offering");
+  const [delPopup, setDelPopup] = useState<any>({ open: false, payload: {} });
+  const [indicatorSetting, setIndicatorSetting] = useState(false);
+  const [indicatorCategoryScoring, setIndicatorCategoryScoring] = useState<any>({ open: false, payload: {} });
+  const [indicatorValueScoring, setIndicatorValueScoring] = useState<any>({ open: false, payload: {} });
+  const [editIndicatorCategory, setEditIndicatorCategory] = useState<any>({ open: false, payload: {} });
+  const [newIndicatorCategory, setNewIndicatorCategory] = useState<any>({ open: false, payload: {} });
+  const [editIndicatorValue, setEditIndicatorValue] = useState<any>({ open: false, payload: {} });
+  const [newIndicatorValue, setNewIndicatorValue] = useState<any>({ open: false, payload: {} });
+  const [currICTab, setCurrICTab] = useState(0);
+  const [ICTabs, setICTabs] = useState([
+    { id: 0, title: "Score Settings" },
+    { id: 1, title: "Time Settings" },
+  ]);
 
-  const [introductionGreetingsButtons, setIntroductionGreetingsButtons] =
-    useState(true);
-  const [introductionNameButtons, setIntroductionNameButtons] = useState(false);
-  const [introductioTitleAndRolesButtons, setIntroductionTitleAndRolesButtons] =
-    useState(false);
-  const [
-    introductionResponsibilitiesButtons,
-    setIntroductionResponsibilitiesButtons,
-  ] = useState(false);
-  const [agendaAgendaButtons, setAgendaAgendaButtons] = useState(true);
-  const [agendaReportButtons, setAgendaReportButtons] = useState(false);
-
-  const [companyoverviewAgendaButtons, setCompanyoverviewButtons] =
-    useState(true);
-  const [companyPropositionReportButtons, setcompanyPropositionButtons] =
-    useState(false);
-
-  const [productDemoButtons, setProductDemoButtons] = useState(true);
-  const [productBenefitsButtons, setProductBenefitsButtons] = useState(false);
-  const [productUsesButtons, setProductUsesButtons] = useState(false);
-
-  const [probingNeedsButtons, setProbingNeedsButtons] = useState(true);
-  const [probingChallangeButtons, setProbingChallangeButtons] = useState(false);
-
-  const [nextDemoButtons, setNextDemoButtons] = useState(true);
-  const [nextScheduleButtons, setNextScheduleButtons] = useState(false);
-
-  const [objectionSolutionButtons, setobjectionSolutionButtons] =
-    useState(true);
-  const [objectionAddressButtons, setobjectionAddressButtons] = useState(false);
-
-  const gotoNameTab = () => {
-    setIntroductionNameButtons(true);
-    setIntroductionGreetingsButtons(false);
-    setIntroductionTitleAndRolesButtons(false);
-    setIntroductionResponsibilitiesButtons(false);
-    setIntroductionButtons("Name");
-  };
-  const gotoTitleTab = () => {
-    setIntroductionTitleAndRolesButtons(true);
-    setIntroductionNameButtons(false);
-    setIntroductionGreetingsButtons(false);
-    setIntroductionResponsibilitiesButtons(false);
-    setIntroductionButtons("Title and Roles");
-  };
-  const gotoResponsibilitiesTab = () => {
-    setIntroductionResponsibilitiesButtons(true);
-    setIntroductionTitleAndRolesButtons(false);
-    setIntroductionNameButtons(false);
-    setIntroductionGreetingsButtons(false);
-    setIntroductionButtons("Responsibilities");
-  };
-  const gotoGreetingsTab = () => {
-    setIntroductionGreetingsButtons(true);
-    setIntroductionResponsibilitiesButtons(false);
-    setIntroductionTitleAndRolesButtons(false);
-    setIntroductionNameButtons(false);
-    setIntroductionButtons("Greetings");
+  const handleIndicatorSettingClick = () => {
+    console.log('handle indicator click')
+    setIndicatorSetting(!indicatorSetting);
   };
 
-  const gotoAgendaTab = () => {
-    setAgendaAgendaButtons(true);
-    setAgendaReportButtons(false);
-    setAgendaButtons("Agenda");
-  };
-  const gotoReportBuildingTab = () => {
-    setAgendaReportButtons(true);
-    setAgendaAgendaButtons(false);
-    setAgendaButtons("Report Building");
+  const handleICTabNavigation = (val: any) => {
+    setCurrICTab(val);
   };
 
-  const gotooverviewTab = () => {
-    setCompanyoverviewButtons(true);
-    setcompanyPropositionButtons(false);
-    setcompanyIntroductionButtons("Company overview");
-  };
-  const gotoPropositionTab = () => {
-    setcompanyPropositionButtons(true);
-    setCompanyoverviewButtons(false);
-    setcompanyIntroductionButtons("Value Proposition");
+  const cancelDelete = () => {
+    setDelPopup({ open: !delPopup.open, payload: {} });
   };
 
-  const gotoDemoTab = () => {
-    setProductDemoButtons(true);
-    setcompanyPropositionButtons(false);
-    setProductUsesButtons(false);
-    setProductButtons("Product Demo/Information");
-  };
-  const gotoBenefitsTab = () => {
-    setProductBenefitsButtons(true);
-    setProductDemoButtons(false);
-    setProductUsesButtons(false);
-    setProductButtons("Benefits");
-  };
-  const gotoUsesTab = () => {
-    setProductUsesButtons(true);
-    setProductDemoButtons(false);
-    setProductBenefitsButtons(false);
-    setProductButtons("Use Cases");
-  };
-
-  const gotoNeedsTab = () => {
-    setProbingNeedsButtons(true);
-    setProbingChallangeButtons(false);
-    setProbingButtons("Identifying Needs");
-  };
-  const gotoChallengesTab = () => {
-    setProbingChallangeButtons(true);
-    setProbingNeedsButtons(false);
-    setProbingButtons("Understanding Challanges");
-  };
-  const gotoNextDemoTab = () => {
-    setNextDemoButtons(true);
-    setNextScheduleButtons(false);
-    setNextStepsButtons("Proposing Demo");
-  };
-  const gotoScheduleTab = () => {
-    setNextScheduleButtons(true);
-    setNextDemoButtons(false);
-    setNextStepsButtons("Scheduling Follow-up");
-  };
-  const gotoofferingTab = () => {
-    setobjectionSolutionButtons(true);
-    setobjectionAddressButtons(false);
-    setobjectionButtons("Solution offering");
-  };
-  const gotoAddressTab = () => {
-    setobjectionAddressButtons(true);
-    setobjectionSolutionButtons(false);
-    setobjectionButtons("Address Concerns");
+  const handleISCancel = () => {
+    if (currICTab === 0) {
+      let isEdit = false;
+      indicatorTypes?.forEach((item: any) => {
+        if (item?.edit) {
+          isEdit = true;
+        }
+      });
+      if (isEdit) {
+        setIndicatorTypes((currIndicatorTypes: any) => {
+          return currIndicatorTypes?.map((item: any) => {
+            if (item?.key === "") {
+              return null;
+            } else {
+              return { ...item, edit: false };
+            }
+          });
+        });
+      } else {
+        setIndicatorSetting(false);
+      }
+    } else {
+      setIndicatorSetting(false);
+    }
   };
 
-  console.log(productButtons);
+  const getScoreWeightageSum = (type?: "CATEGORY" | "VALUE" | null) => {
+    if (type === "CATEGORY") {
+      return indicatorTypes?.[currIndicatorType]?.categories?.reduce((acc: number, item: any) => {
+        return acc + item?.scoreWeightage;
+      }, 0);
+    } else if (type === "VALUE") {
+      return currIndicatorValues?.reduce((acc: number, item: any) => {
+        return acc + item?.scoreWeightage;
+      }, 0);
+    } else {
+      return indicatorTypes?.reduce((acc: number, item: any) => {
+        return acc + item?.scoreWeightage;
+      }, 0);
+    }
+  };
+
+  const addNewIndicatorType = () => {
+    setIndicatorTypes([...indicatorTypes, { key: "", label: "", scoreWeightage: 0, edit: true, categories: [] }]);
+  };
+
+  const addNewIndicatorCategory = () => {
+    setIndicatorTypes((currTypes: any) => {
+      return currTypes?.map((typeItem: any, typeIdx: number) => {
+        if (typeIdx === currIndicatorType) {
+          return {
+            ...typeItem,
+            categories: [...typeItem.categories, { key: "", label: "", scoreWeightage: 0, edit: true }]
+          };
+        } else {
+          return typeItem;
+        }
+      });
+    });
+  };
+
+  const addNewIndicatorValue = () => {
+    setCurrIndicatorValues([...currIndicatorValues, { key: "", label: "", scoreWeightage: 0, alternative_values: [], edit: true }]);
+  };
+
+  const delIndicatorType = (payload: any) => {
+    const { key, id } = payload;
+    setIndicatorTypes((currIndicatorTypes: any) => {
+      return currIndicatorTypes?.filter((item: any) => item?.key !== key);
+    });
+  };
+
+  const delIndicatorCategory = (payload: any) => {
+    const { key } = payload;
+    setIndicatorTypes((currTypes: any) => {
+      return currTypes?.map((typeItem: any, typeIdx: number) => {
+        if (typeIdx === currIndicatorType) {
+          return {
+            ...typeItem,
+            categories: typeItem?.categories?.filter((item: any) => item.key !== key)
+          };
+        } else {
+          return typeItem;
+        }
+      });
+    });
+  };
+
+  const delIndicatorValueFromTable = (payload: any) => {
+    const { key } = payload;
+    setCurrIndicatorValues((currValues: any) => {
+      return currValues?.filter((item: any) => item?.key !== key);
+    });
+  };
+
+  const delIndicatorValue = (payload: any) => {
+    const { key } = payload;
+    setDelPopup({ open: true, payload: { key: key } });
+  };
+
+  const editIndicatorType = (payload: any) => {
+    const { key, id } = payload;
+    setIndicatorTypes((currIndicatorTypes: any) => {
+      return currIndicatorTypes?.map((item: any) => {
+        if (item?.key === key) {
+          return { ...item, edit: true };
+        } else {
+          return item;
+        }
+      });
+    });
+  };
+
+  const handleEditIndicatorCategory = (payload: any) => {
+    const { key } = payload;
+    setIndicatorTypes((currIndicatorTypes: any) => {
+      return currIndicatorTypes?.map((item: any, typeIdx: number) => {
+        if (typeIdx === currIndicatorType) {
+          return item?.categories?.map((categoryItem: any, categoryIndex: number) => {
+            if (categoryItem?.key === key) {
+              return { ...categoryItem, edit: true };
+            } else {
+              return categoryItem;
+            }
+          });
+        } else {
+          return item;
+        }
+      });
+    });
+  };
+
+  const handleEditIndicatorValueFromTable = (payload: any) => {
+    const { key, id } = payload;
+    setCurrIndicatorValues((currValues: any) => {
+      return currValues?.map((item: any) => {
+        if (item?.key === key) {
+          return { ...item, edit: true };
+        } else {
+          return item;
+        }
+      });
+    });
+  };
+
+  const handleEditIndicatorValue = (payload: any) => {
+    const { key } = payload;
+    setEditIndicatorValue({ open: true, payload: {} });
+  };
+
+  const handleAdd = (prev: any, next: any) => {
+    console.log('handle add', next);
+    if (next === 0) {
+      setNewIndicatorCategory({ open: true });
+    } else if (next === 1) {
+      setNewIndicatorValue({ open: true });
+    }
+  };
+
+  const handleAddScore = (prev: any, next: any) => {
+    console.log('handle add score', next);
+    if (next === 0) {
+      setIndicatorCategoryScoring({ open: true });
+    } else if (next === 1) {
+      setIndicatorValueScoring({ open: true });
+    }
+  };
+
+  const formatString = (payload: any, type: "SEPARATE" | "COMBINE" = "SEPARATE") => {
+    if (type === "SEPARATE") {
+      return payload.split(",");
+    } else {
+      return payload?.join(",");
+    }
+  };
+
+  const scoreSettingTab = () => {
+    return (
+      <div className="w-[100%] text-black px-[30px] pt-[20px]">
+        <table className="w-[100%]">
+          <tr>
+            <th className="text-left">Indicator Type</th>
+            <th className="text-left"></th>
+            <th className="text-left">Score Weightage<br />(out of 100)</th>
+            <th className="text-left"></th>
+          </tr>
+          {indicatorTypes?.map((indicatorType: any, index: number) => (
+            <tr key={index}>
+              <td>
+                <input type="text" value={indicatorType?.label} className={`bg-white ${indicatorType?.edit ? "border-2 border-black-900" : ""}`} disabled={!indicatorType?.edit} />
+              </td>
+              <td className="">
+                {!indicatorType?.edit && (
+                  <button className="" onClick={() => editIndicatorType({ key: indicatorType?.key })}>
+                    <img src={getBasicIcon("Edit")} alt="Edit" className="" />
+                  </button>
+                )}
+              </td>
+              <td>
+                <input type="text" className={`bg-white w-[80px] ${indicatorType?.edit ? "border-2 border-black-900" : ""}`} value={indicatorType?.scoreWeightage} disabled={!indicatorType?.edit} />
+              </td>
+              <td>
+                <button className="" onClick={() => delIndicatorType({ key: indicatorType?.key })}>
+                  <img src={getBasicIcon("Delete")} alt="Delete" className="" />
+                </button>
+              </td>
+            </tr>
+          ))}
+          <tr>
+            <td>
+              <button className="text-black text-[14px]" onClick={addNewIndicatorType}>Add New Indicator Type</button>
+            </td>
+            <td></td>
+            <td>
+              <span className="text-green">Sum: {getScoreWeightageSum()}</span>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    );
+  };
+
+  const timeSettingTab = () => {
+    return (
+      <div className="w-[100%] text-black px-[30px] pt-[20px]">
+        <table className="w-[100%]">
+          <tr>
+            <th className="text-left">Indicator Type</th>
+            <th className="text-left">Start Time (MM:SS)</th>
+            <th className="text-left">End Time (MM:SS)</th>
+          </tr>
+          {indicatorTypes?.map((indicatorType: any, index: number) => (
+            <tr key={index} className="">
+              <td>{indicatorType?.label}</td>
+              <td className="">
+                <input type="text" className="w-[50px] mr-[6px] bg-white" value={indicatorType?.startTimeMin || "00"} />
+                <input type="text" className="w-[50px] bg-white" value={indicatorType?.startTimeSec || "00"} />
+              </td>
+              <td className="">
+                <input type="text" className="w-[50px] bg-white mr-[6px]" value={indicatorType?.endTimeMin || "00"} />
+                <input type="text" className="w-[50px] bg-white" value={indicatorType?.endTimeSec || "00"} />
+              </td>
+            </tr>
+          ))}
+        </table>
+      </div>
+    );
+  };
 
   return (
     <>
+      {indicatorSetting && (
+        <Backdrop>
+          <div className="">
+            <Navigator width={false} callback={handleICTabNavigation} current={currICTab} list={ICTabs} />
+            {currICTab === 0 ? scoreSettingTab() : timeSettingTab()}
+            <div className="text-black w-[100%] flex justify-end gap-[20px] p-[40px]">
+              <button className="">Save</button>
+              <button className="" onClick={handleISCancel}>Cancel</button>
+            </div>
+          </div>
+        </Backdrop>
+      )}
+      {indicatorCategoryScoring.open && (
+        <Backdrop>
+          <div className="w-[100%] text-black px-[30px] pt-[20px]">
+            <h2 className="text-[24px] font-medium">Indicator Category Scoring</h2>
+            <table className="w-[100%]">
+              <tr>
+                <th className="text-left">Indicator Category</th>
+                <th className="text-left"></th>
+                <th className="text-left">Score Weightage<br />(out of 100)</th>
+                <th className="text-left"></th>
+              </tr>
+              {indicatorTypes?.[currIndicatorType]?.categories?.map((categoryItem: any, index: number) => (
+                <tr key={index}>
+                  <td>
+                    <input type="text" value={categoryItem?.label} className={`bg-white ${categoryItem?.edit ? "border-2 border-black-900" : ""}`} disabled={!categoryItem?.edit} />
+                  </td>
+                  <td className="">
+                    {!categoryItem?.edit && (
+                      <button className="" onClick={() => handleEditIndicatorCategory({ key: categoryItem?.key })}>
+                        <img src={getBasicIcon("Edit")} alt="Edit" className="" />
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    <input type="text" className={`bg-white w-[80px] ${categoryItem?.edit ? "border-2 border-black-900" : ""}`} value={categoryItem?.scoreWeightage} disabled={!categoryItem?.edit} />
+                  </td>
+                  <td>
+                    <button className="" onClick={() => delIndicatorCategory({ key: categoryItem?.key })}>
+                      <img src={getBasicIcon("Delete")} alt="Delete" className="" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td>
+                  <button className="text-black text-[14px]" onClick={addNewIndicatorCategory}>Add New Indicator Category</button>
+                </td>
+                <td></td>
+                <td>
+                  <span className="text-green">Sum: {getScoreWeightageSum("CATEGORY")}</span>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+            <div className="text-black w-[100%] flex justify-end gap-[20px] p-[40px]">
+              <button className="">Save</button>
+              <button className="" onClick={() => setIndicatorCategoryScoring({ open: false })}>Cancel</button>
+            </div>
+          </div>
+        </Backdrop>
+      )}
+      {indicatorValueScoring.open && (
+        <Backdrop>
+          <div className="w-[100%] text-black px-[30px] pt-[20px]">
+            <table className="w-[100%]">
+              <tr>
+                <th className="text-left">Indicator Value</th>
+                <th className="text-left"></th>
+                <th className="text-left">Score Weightage<br />(out of 100)</th>
+                <th className="text-left"></th>
+              </tr>
+              {currIndicatorValues?.map((valueItem: any, index: number) => (
+                <tr key={index}>
+                  <td>
+                    <input type="text" value={valueItem?.label} className={`bg-white ${valueItem?.edit ? "border-2 border-black-900" : ""}`} disabled={!valueItem?.edit} />
+                  </td>
+                  <td className="">
+                    {!valueItem?.edit && (
+                      <button className="" onClick={() => handleEditIndicatorValueFromTable({ key: valueItem?.key })}>
+                        <img src={getBasicIcon("Edit")} alt="Edit" className="" />
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    <input type="text" className={`bg-white w-[80px] ${valueItem?.edit ? "border-2 border-black-900" : ""}`} value={valueItem?.scoreWeightage} disabled={!valueItem?.edit} />
+                  </td>
+                  <td>
+                    <button className="" onClick={() => delIndicatorValueFromTable({ key: valueItem?.key })}>
+                      <img src={getBasicIcon("Delete")} alt="Delete" className="" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td>
+                  <button className="text-black text-[14px]" onClick={addNewIndicatorValue}>Add New Indicator Value</button>
+                </td>
+                <td></td>
+                <td>
+                  <span className="text-green">Sum: {getScoreWeightageSum("VALUE")}</span>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+            <div className="text-black w-[100%] flex justify-end gap-[20px] p-[40px]">
+              <button className="">Save</button>
+              <button className="" onClick={() => setIndicatorValueScoring({ open: false })}>Cancel</button>
+            </div>
+          </div>
+        </Backdrop>
+      )}
+      {delPopup.open && (
+        <Backdrop>
+          <div className="p-[40px] text-black">
+            <h2 className="">Are you sure you want to delete {`"${delPopup?.payload?.key}"`}?</h2>
+            <p className="text-black text-[12px] ">
+              <span className="font-bold">Note: </span>
+              <span>Associated score will also be deleted and will be equally distributed for other indicator types.</span>
+            </p>
+            <div className="text-black w-[100%] flex justify-end gap-[20px]">
+              <button className="" onClick={cancelDelete}>Cancel</button>
+              <button className="">Delete</button>
+            </div>
+          </div>
+        </Backdrop>
+      )}
+      {editIndicatorValue.open && (
+        <Backdrop>
+          <div className="text-black p-[40px]">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[24px] font-medium">Edit Indicator Value</h2>
+              <button onClick={() => setEditIndicatorValue({ open: false, payload: {} })}>
+                <img src={getBasicIcon("Cross")} alt="close" />
+              </button>
+            </div>
+            <div className="">
+              <div className="flex flex-col mt-[14px]">
+                <label htmlFor="iv" className="">Indicator Value Name</label>
+                <input type="text" className="bg-white border-[2px]" id="iv" />
+              </div>
+              <div className="flex flex-col mt-[14px]">
+                <label htmlFor="avftiv" className="">Alternate Values for the Indicator Value</label>
+                <input type="text" className="bg-white border-[2px]" id="avftiv" placeholder="Enter comma-separated values" />
+              </div>
+            </div>
+            <div className="flex w-[100%] justify-end mt-[30px]">
+              <button className="">Create</button>
+            </div>
+          </div>
+        </Backdrop>
+      )}
+      {newIndicatorValue.open && (
+        <Backdrop>
+          <div className="text-black p-[40px]">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[24px] font-medium">New Indicator Value</h2>
+              <button onClick={() => setNewIndicatorValue({ open: false, payload: {} })}>
+                <img src={getBasicIcon("Cross")} alt="close" />
+              </button>
+            </div>
+            <div className="">
+              <div className="flex flex-col mt-[14px]">
+                <label htmlFor="iv" className="">Indicator Value Name</label>
+                <input type="text" className="bg-white border-[2px]" id="iv" placeholder="Name" />
+              </div>
+              <div className="flex flex-col mt-[14px]">
+                <label htmlFor="avftiv" className="">Alternate Values for the Indicator Value</label>
+                <input type="text" className="bg-white border-[2px]" id="avftiv" placeholder="Enter comma-separated values" />
+              </div>
+            </div>
+            <div className="flex w-[100%] justify-end mt-[30px]">
+              <button className="">Create</button>
+            </div>
+          </div>
+        </Backdrop>
+      )}
+      {editIndicatorCategory.open && (
+        <Backdrop>
+          <div className="text-black p-[40px]">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[24px] font-medium">Edit Indicator Category</h2>
+              <button onClick={() => setEditIndicatorCategory({ open: false, payload: {} })}>
+                <img src={getBasicIcon("Cross")} alt="close" />
+              </button>
+            </div>
+            <div className="">
+              <div className="flex flex-col mt-[14px]">
+                <label htmlFor="iv" className="">Indicator Category Name</label>
+                <input type="text" className="bg-white border-[2px]" id="iv" value={editIndicatorCategory?.payload?.value} />
+              </div>
+            </div>
+            <div className="flex w-[100%] justify-end mt-[30px]">
+              <button className="">Save</button>
+            </div>
+          </div>
+        </Backdrop>
+      )}
+      {newIndicatorCategory.open && (
+        <Backdrop>
+          <div className="text-black p-[40px]">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[24px] font-medium">New Indicator Category</h2>
+              <button onClick={() => setNewIndicatorCategory({ open: false, payload: {} })}>
+                <img src={getBasicIcon("Cross")} alt="close" />
+              </button>
+            </div>
+            <div className="">
+              <div className="flex flex-col mt-[14px]">
+                <label htmlFor="iv" className="">Indicator Category Name</label>
+                <input type="text" className="bg-white border-[2px]" id="iv" value={editIndicatorCategory?.payload?.value} placeholder="Name" />
+              </div>
+              <div className="flex flex-col mt-[14px]">
+                <label htmlFor="iv" className="">Add New Indicator Value</label>
+                <input type="text" className="bg-white border-[2px]" id="iv" value={editIndicatorCategory?.payload?.value} placeholder="Name" />
+              </div>
+              <div className="flex flex-col mt-[14px]">
+                <label htmlFor="iv" className="">Alternatives</label>
+                <input type="text" className="bg-white border-[2px]" id="iv" value={editIndicatorCategory?.payload?.value} placeholder="Enter Comma-separated values" />
+              </div>
+            </div>
+            <div className="flex w-[100%] justify-end mt-[30px]">
+              <button className="">Create</button>
+            </div>
+          </div>
+        </Backdrop>
+      )}
       <NavbarWithButton
         src="Indicators"
-        mainTitle={`Indicators > ${indicatorType}`}
-        title={
-          indicatorType == sideBarItems[0]
-            ? introductionButtons
-            : indicatorType == sideBarItems[1]
-            ? agendaButtons
-            : indicatorType == sideBarItems[2]
-            ? companyIntroductionButtons
-            : indicatorType == sideBarItems[3]
-            ? productButtons
-            : indicatorType == sideBarItems[4]
-            ? probingButtons
-            : indicatorType == sideBarItems[5]
-            ? nesxtStepsButtons
-            : indicatorType == sideBarItems[6]
-            ? objectionButtons
-            : ""
-        }
+        mainTitle={`Indicators > ${indicatorTypes?.[currIndicatorType]?.label}`}
+        title={indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label}
         buttons={[
           {
             text: "Indicator Settings",
@@ -262,7 +787,7 @@ const Indicator = () => {
             icon: "Settings",
             light: false,
             dark: true,
-            // click: addCall,
+            onClick1: handleIndicatorSettingClick,
             list: [],
           },
         ]}
@@ -272,283 +797,119 @@ const Indicator = () => {
           <h2 className="bg-[#909193] text-white font-bold text-xl p-4 px-12 rounded-tl-2xl">
             Indicator Types
           </h2>
-          <ul className="flex flex-col gap-4 items-center">
-            {sideBarItems.map((item) => (
+          <ul className="flex flex-col gap-4 items-center text-black">
+            {indicatorTypes.map((item: any, index: number) => (
               <li
-                key={item}
-                onClick={() => setIndicatorType(item)}
-                value={item}
-                className={`${
-                  indicatorType == item ? "text-bg-red" : ""
-                } font-medium cursor-pointer`}
+                key={index}
+                onClick={() => setCurrIndicatorType(index)}
+                value={item?.key}
+                className={`${currIndicatorType == index ? "text-bg-red" : ""
+                  } font-medium cursor-pointer`}
               >
-                {item}
+                {item?.label}
               </li>
             ))}
           </ul>
         </div>
-        {sideBarItems[0] == indicatorType && (
-          <div className="bg-[#fe50430c] p-4 w-[80%]">
-            <div className="w-[70%] flex items-start justify-between ">
+
+        <div className="bg-[#fe50430c] p-4 w-[80%]">
+          <div className="w-[70%] flex items-start justify-between ">
+            {indicatorTypes?.[currIndicatorType]?.categories?.map((it: any, index: number) => (
               <button
-                onClick={gotoGreetingsTab}
+                key={index}
+                onClick={() => { setCurrIndicatorCategory(index) }}
                 className={
-                  introductionGreetingsButtons
+                  currIndicatorCategory === index
                     ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
                     : "text-black font-medium text-md px-7 py-2"
                 }
               >
-                Grretings
+                {it?.label}
               </button>
-              <button
-                onClick={gotoNameTab}
-                className={
-                  introductionNameButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Name
-              </button>
-              <button
-                onClick={gotoTitleTab}
-                className={
-                  introductioTitleAndRolesButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Title and Roles
-              </button>
-              <button
-                onClick={gotoResponsibilitiesTab}
-                className={
-                  introductionResponsibilitiesButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Responsibilities
-              </button>
-            </div>
-            <hr className="mt-4" />
-            {introductionGreetingsButtons ? (
-              <GreetingsContainer title={introductionButtons} />
-            ) : introductionNameButtons ? (
-              <NameContainer title={introductionButtons} />
-            ) : introductioTitleAndRolesButtons ? (
-              <TitleAndRolesContainer title={introductionButtons} />
-            ) : introductionResponsibilitiesButtons ? (
-              <ResponsibilitiesContainer title={introductionButtons} />
-            ) : null}
+            ))}
           </div>
-        )}
-        {sideBarItems[1] == indicatorType && (
-          <div className="bg-[#fe50430c] p-4 w-[80%]">
-            <div className="w-[70%] flex items-start justify-between ">
-              <button
-                onClick={gotoAgendaTab}
-                className={
-                  agendaAgendaButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Agenda
-              </button>
-              <button
-                onClick={gotoReportBuildingTab}
-                className={
-                  agendaReportButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Report Bulding
-              </button>
+          <hr className="mt-4" />
+          <Navigation
+            title={"Greetings"}
+            buttons={[
+              {
+                text: "Score",
+                dropdown: true,
+                id: 0,
+                click: handleAddScore,
+                light: false,
+                dark: true,
+                list: [{ id: 0, title: "Indicator Category Score" }, { id: 1, title: "Indicator Value Score" }],
+                value: 0,
+              },
+              {
+                text: "Add",
+                dropdown: true,
+                id: 1,
+                icon: "Plus",
+                click: handleAdd,
+                light: false,
+                dark: false,
+                list: [{ id: 0, title: "Indicator Category" }, { id: 1, title: "Indicator Value" }],
+              },
+            ]}
+          />
+          <div>
+            <div className="flex justify-between w-[80%]">
+              <h4 className="text-gray-600 font-semibold">Indicator Value</h4>
+              <h4 className="text-gray-600 font-semibold">Alternative Values</h4>
+              <h4 className="text-gray-600 font-semibold">Score</h4>
             </div>
-            <hr className="mt-4" />
-            {agendaAgendaButtons ? (
-              <AgendaContainer title={agendaButtons} />
-            ) : agendaReportButtons ? (
-              <ReportContainer title={agendaButtons} />
-            ) : null}
+            <hr className="mt-2" />
+
+            {currIndicatorValues?.map((data: any, index: number) => (
+              <div key={data.id}>
+                <div className=" w-[99%] flex justify-between">
+                  <div className=" h-[auto] flex justify-between w-[80%] py-4">
+                    <h4 className="text-gray-600 font-semibold">
+                      {data.label}
+                    </h4>
+                    <div className="flex flex-col gap-3">
+                      {data.alternative_values.map((item: any) => (
+                        <h4 key={item.id} className="text-gray-600 font-semibold">
+                          {item.value}
+                        </h4>
+                      ))}
+                    </div>
+                    <h4 className="text-gray-600 font-semibold">{data.scoreWeightage}</h4>
+                  </div>
+                  <div className="flex gap-4 w-[10%] h-[62px]">
+                    <button className="w-[20px] h-[20px]" onClick={() => handleEditIndicatorValue({ key: index })}>
+                      <Image
+                        src={getBasicIcon("Edit")}
+                        alt=""
+                        // fill={true}
+                        width={30}
+                        height={30}
+                        style={{
+                          objectFit: "contain",
+                        }}
+                      />
+                    </button>
+                    <button className="w-[20px] h-[20px]" onClick={() => delIndicatorValue({ key: index })}>
+                      <Image
+                        src={getBasicIcon("Delete")}
+                        alt=""
+                        // fill={true}
+                        width={30}
+                        height={30}
+                        style={{
+                          objectFit: "contain",
+                        }}
+                      />
+                    </button>
+                  </div>
+                </div>
+                <hr />
+              </div>
+            ))}
           </div>
-        )}
-        {sideBarItems[2] == indicatorType && (
-          <div className="bg-[#fe50430c] p-4 w-[80%]">
-            <div className="w-[70%] flex items-start justify-between ">
-              <button
-                onClick={gotooverviewTab}
-                className={
-                  companyoverviewAgendaButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Company overview
-              </button>
-              <button
-                onClick={gotoPropositionTab}
-                className={
-                  companyPropositionReportButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Value Proposition
-              </button>
-            </div>
-            <hr className="mt-4" />
-            {companyoverviewAgendaButtons ? (
-              <CompanyOverviewContainer title={companyIntroductionButtons} />
-            ) : companyPropositionReportButtons ? (
-              <CompanyValuePropositionContainer
-                title={companyIntroductionButtons}
-              />
-            ) : null}
-          </div>
-        )}
-        {sideBarItems[3] == indicatorType && (
-          <div className="bg-[#fe50430c] p-4 w-[80%]">
-            <div className="w-[70%] flex items-start justify-between ">
-              <button
-                onClick={gotoDemoTab}
-                className={
-                  productDemoButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Product Demo/Information
-              </button>
-              <button
-                onClick={gotoBenefitsTab}
-                className={
-                  productBenefitsButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Benefits
-              </button>
-              <button
-                onClick={gotoUsesTab}
-                className={
-                  productUsesButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Use Cases
-              </button>
-            </div>
-            <hr className="mt-4" />
-            {productDemoButtons ? (
-              <ProductContainer title={productButtons} />
-            ) : productBenefitsButtons ? (
-              <BenefitsContainer title={productButtons} />
-            ) : productUsesButtons ? (
-              <UsesContainer title={productButtons} />
-            ) : null}
-          </div>
-        )}
-        {sideBarItems[4] == indicatorType && (
-          <div className="bg-[#fe50430c] p-4 w-[80%]">
-            <div className="w-[70%] flex items-start justify-between ">
-              <button
-                onClick={gotoNeedsTab}
-                className={
-                  probingNeedsButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Identifying Needs
-              </button>
-              <button
-                onClick={gotoChallengesTab}
-                className={
-                  probingChallangeButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Understanding Challanges
-              </button>
-            </div>
-            <hr className="mt-4" />
-            {probingNeedsButtons ? (
-              <ProbingNeedsContainer title={probingButtons} />
-            ) : probingChallangeButtons ? (
-              <ProbingChallangeContainer title={probingButtons} />
-            ) : null}
-          </div>
-        )}
-        {sideBarItems[5] == indicatorType && (
-          <div className="bg-[#fe50430c] p-4 w-[80%]">
-            <div className="w-[70%] flex items-start justify-between ">
-              <button
-                onClick={gotoNextDemoTab}
-                className={
-                  nextDemoButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Proposing Demo
-              </button>
-              <button
-                onClick={gotoScheduleTab}
-                className={
-                  nextScheduleButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Scheduling Follow-up
-              </button>
-            </div>
-            <hr className="mt-4" />
-            {nextDemoButtons ? (
-              <ProposingDemoContainer title={nesxtStepsButtons} />
-            ) : nextScheduleButtons ? (
-              <SchedulingContainer title={nesxtStepsButtons} />
-            ) : null}
-          </div>
-        )}
-        {sideBarItems[6] == indicatorType && (
-          <div className="bg-[#fe50430c] p-4 w-[80%]">
-            <div className="w-[70%] flex items-start justify-between ">
-              <button
-                onClick={gotoofferingTab}
-                className={
-                  objectionSolutionButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Solution offering
-              </button>
-              <button
-                onClick={gotoAddressTab}
-                className={
-                  objectionAddressButtons
-                    ? "focus:outline-none text-white bg-bg-red  font-medium rounded-lg text-md px-7 py-2"
-                    : "text-black font-medium text-md px-7 py-2"
-                }
-              >
-                Address Concerns
-              </button>
-            </div>
-            <hr className="mt-4" />
-            {objectionSolutionButtons ? (
-              <SolutionOfferingContainer title={objectionButtons} />
-            ) : objectionAddressButtons ? (
-              <AddressConcernsContainer title={objectionButtons} />
-            ) : null}
-          </div>
-        )}
+        </div>
       </div>
     </>
   );
