@@ -8,16 +8,6 @@ import Navigation from "@/components/app/Navigation";
 import Image from "next/image";
 
 
-const sideBarItems = [
-  "Introduction",
-  "Agenda Setting",
-  "Company Introduction",
-  "Product/Service",
-  "Probing",
-  "Next Steps Discussion",
-  "Objection Handling",
-];
-
 const Indicator = () => {
   const router = useRouter();
 
@@ -891,7 +881,7 @@ const Indicator = () => {
                         }}
                       />
                     </button>
-                    <button className="w-[20px] h-[20px]" onClick={() => delIndicatorValue({ key: index })}>
+                    <button className="w-[20px] h-[20px]" onClick={() => delIndicatorValue({ key: currIndicatorValues[index]?.label })}>
                       <Image
                         src={getBasicIcon("Delete")}
                         alt=""
