@@ -18,6 +18,7 @@ const AudioPlayer = ({ src }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
+  const [speed, setSpeed] = useState(1);
 
   // reference
   const audioRef = useRef();
@@ -42,9 +43,9 @@ const AudioPlayer = ({ src }) => {
               Call Player
             </p>
             <div className="flex items-center gap-6">
-              <h4 className="text-gray-600">Speed 1X : </h4>
+              <h4 className="text-gray-600">Speed {speed}X : </h4>
               <div className="volume ">
-                <button onClick={() => setMuteVolume((prev) => !prev)}>
+                {/* <button onClick={() => setMuteVolume((prev) => !prev)}>
                   <Image
                     src={getBasicIcon("volume_gray")}
                     style={{
@@ -55,17 +56,18 @@ const AudioPlayer = ({ src }) => {
                     height={13}
                     className="mr-[9px] cursor-pointer"
                   />
-                </button>
+                </button> */}
                 <input
                   type="range"
-                  className="diff  "
-                  min={0}
-                  max={100}
-                  value={volume}
+                  className="diff"
+                  min={0.5}
+                  max={2}
+                  step={0.5}
+                  value={speed}
                   style={{
-                    background: `linear-gradient(to right, #909193  ${volume}%, #ccc ${volume}%)`,
+                    background: `linear-gradient(to right, #909193  ${0 * 100}%, #ccc ${0 * 100}%)`,
                   }}
-                  onChange={(e) => setVolume(e.target.value)}
+                  onChange={(e) => setSpeed(e.target.value)}
                 />
               </div>
             </div>
@@ -95,6 +97,7 @@ const AudioPlayer = ({ src }) => {
               setDuration,
               progressBarRef,
               handleNext,
+              speed,
             }}
           />
         </div>
