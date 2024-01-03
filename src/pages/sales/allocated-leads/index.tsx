@@ -89,7 +89,7 @@ export async function getServerSideProps({ query, ...params }: any) {
     const response = await axios.get(
       "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open"
     );
-    const response2 = await axios.get(
+    const response2 = await axios.get(  
       "https://sales365.trainright.fit/api/master-users/find-all"
     );
     return {
