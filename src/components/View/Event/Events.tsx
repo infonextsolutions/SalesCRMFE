@@ -366,8 +366,8 @@ const DateContainer = ({
           setEventFromDate={setEventFromDate}
           setEventToDate={setEventToDate}
           setEventToTime={setEventToTime}
-          // timeFunc={setEventFromTime}
-          // dateFunc={setEventFromDate}
+        // timeFunc={setEventFromTime}
+        // dateFunc={setEventFromDate}
         />
         <div className="w-[30px] h-[1px] bg-[#ccc]" />
         <DateTime
@@ -376,8 +376,8 @@ const DateContainer = ({
           setEventFromDate={setEventFromDate}
           setEventToDate={setEventToDate}
           setEventToTime={setEventToTime}
-          // timeFunc={setEventToTime}
-          // dateFunc={setEventToTime}
+        // timeFunc={setEventToTime}
+        // dateFunc={setEventToTime}
         />
       </div>
     </div>
@@ -465,6 +465,8 @@ const Events = ({
     setTimeDifference(timeDifference.toString());
     const emailInvites = eventInvites.split(",");
 
+    const ownerId = localStorage.getItem("user-id");
+
     const finalPayload = {
       type: eventType,
       title: eventTitle,
@@ -480,7 +482,7 @@ const Events = ({
       link: link,
       leadId: leadid,
       callParticipant: eventCallParticipants,
-      allocatedOwner: allocatedCallOwner,
+      allocatedOwner: allocatedCallOwner || ownerId,
       // companyName: "ABC",
       invite: emailInvites,
       notifyBefore: eventNotifyBefore,
@@ -613,12 +615,12 @@ const Events = ({
           {
             title: "Choose Call Owner",
             val: 0,
-            selected: true,
+            selected: false,
           },
           {
             title: loggedInUser,
-            val: 1,
-            selected: false,
+            val: loggedInUser,
+            selected: true,
           },
         ]}
       />
@@ -669,12 +671,12 @@ const Events = ({
           {
             title: "Choose Call Participants",
             val: 0,
-            selected: true,
+            selected: false,
           },
           {
-            title: clientPOCName,
-            val: 0,
-            selected: false,
+            title: data?.customerId?.customer_name,
+            val: data?.customerId?._id,
+            selected: true,
           },
         ]}
       />
