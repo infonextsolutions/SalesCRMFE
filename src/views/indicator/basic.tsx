@@ -403,13 +403,14 @@ const Indicator = () => {
     setIndicatorTypes((currIndicatorTypes: any) => {
       return currIndicatorTypes?.map((item: any, typeIdx: number) => {
         if (typeIdx === currIndicatorType) {
-          return item?.categories?.map((categoryItem: any, categoryIndex: number) => {
+          const newCategories = item?.categories?.map((categoryItem: any, categoryIndex: number) => {
             if (categoryItem?.key === key) {
               return { ...categoryItem, edit: true };
             } else {
               return categoryItem;
             }
           });
+          return { ...item, categories: newCategories };
         } else {
           return item;
         }
