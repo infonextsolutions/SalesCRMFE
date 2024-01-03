@@ -6,10 +6,14 @@ import Navigator from "@/utils/customNavigator";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Navigation from "@/components/app/Navigation";
 import Image from "next/image";
+import axios from "axios";
 
 
 const Indicator = () => {
   const router = useRouter();
+
+  const [apiData, setApiData] = useState([]);
+  const [valuesApiData, setValuesApiData] = useState([]);
 
   const [currIndicatorValues, setCurrIndicatorValues] = useState<any>([
     {
@@ -242,22 +246,6 @@ const Indicator = () => {
   const [currIndicatorType, setCurrIndicatorType] = useState(0);
   const [currIndicatorCategory, setCurrIndicatorCategory] = useState(0);
 
-  useEffect(() => {
-    const handleBeforeHistoryChange = () => {
-      router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
-      router.beforePopState(() => {
-        router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
-        return true;
-      });
-    };
-
-    handleBeforeHistoryChange();
-
-    return () => {
-      router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
-    };
-  }, []);
-
   const [delPopup, setDelPopup] = useState<any>({ open: false, payload: {} });
   const [indicatorSetting, setIndicatorSetting] = useState(false);
   const [indicatorCategoryScoring, setIndicatorCategoryScoring] = useState<any>({ open: false, payload: {} });
@@ -271,6 +259,106 @@ const Indicator = () => {
     { id: 0, title: "Score Settings" },
     { id: 1, title: "Time Settings" },
   ]);
+
+  const getTypes = () => {
+    axios.get(
+      "https://sales365.trainright.fit/api/indicator/find-all?page=0&limit=10"
+    )
+      .then((res: any) => {
+        console.log('============ indicator : data ============', res);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  const getTypesById = () => {
+    axios.get(
+      "https://sales365.trainright.fit/api/indicator/find-by-id?id=655df2c7ea10b7931bebd39d"
+    )
+      .then((res: any) => {
+        console.log('============ indicator : data ============', res);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  const getValues = () => {
+    axios.get(
+      "https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=65782fb3cae5f857818476dd"
+    )
+      .then((res: any) => {
+        console.log('============ indicator : data ============', res);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  const deleteIndicatorById = () => {
+    axios.delete(
+      "https://sales365.trainright.fit/api/indicator/delete-by-id?id=655df4fcea10b7931bebd3a3"
+    )
+      .then((res: any) => {
+        console.log('============ indicator : data ============', res);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  const updateIndicator = () => {
+    // body
+    // "raw": "{\n  \"type\": \"Opening\",\n  \"category\": \"Greeting\",\n  \"value\": \"hi\",\n  \"alternative\": \"testing\",\n  \"comparisionType\": \"testing\",\n  \"timeRestriction\": \"testing\",\n  \"speaker\": \"tester\",\n   \"_id\": \"655e0591aa8a5ee2b48810cc\"\n}",
+    axios.put(
+      "https://sales365.trainright.fit/api/indicator/update"
+    )
+      .then((res: any) => {
+        console.log('============ indicator : data ============', res);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  const createIndicator = () => {
+    // body
+    // "{\n  \"type\": \"CLosing\",\n  \"category\": \"Greeting\",\n  \"value\": \"hii\",\n  \"alternative\": \"testing\",\n  \"comparisionType\": \"testing\",\n  \"timeRestriction\": \"testing\",\n  \"speaker\": \"tester\"\n}"
+    axios.post(
+      "https://sales365.trainright.fit/api/indicator/create"
+    )
+      .then((res: any) => {
+        console.log('============ indicator : data ============', res);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  useEffect(() => {
+    getTypes();
+  }, []);
+
+  useEffect(() => {
+
+  }, [currIndicatorType, currIndicatorCategory, currIndicatorValues]);
+
+  // useEffect(() => {
+  //   const handleBeforeHistoryChange = () => {
+  //     router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
+  //     router.beforePopState(() => {
+  //       router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
+  //       return true;
+  //     });
+  //   };
+
+  //   handleBeforeHistoryChange();
+
+  //   return () => {
+  //     router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
+  //   };
+  // }, []);
 
   const handleIndicatorSettingClick = () => {
     console.log('handle indicator click')
@@ -907,7 +995,3 @@ const Indicator = () => {
 };
 
 export default Indicator;
-
-interface props {
-  data: any;
-}
