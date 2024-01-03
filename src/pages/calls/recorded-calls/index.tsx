@@ -8,43 +8,6 @@ import Navbar from "@/components/app/Navbar/Navbar";
 import CallsRecordingContainer from "@/components/calls/recorded-calls/Container/CallsRecordingContainer";
 import MeetingRecordingContainer from "@/components/calls/recorded-calls/Container/MeetingRecordingContainer";
 
-const dummyItem = {
-  companyName: "ABC Corp",
-  companyAddress: "Noida, UP",
-  poc: "Shraddha P.",
-  pocJob: "Sales Manager",
-  names: "Anil L., Paul G., Rekha",
-  lastActivity: "Email sent on 23 Jan 2023",
-  dealSize: "11000",
-  product: "Product A",
-  calls: 5,
-  docs: 2,
-  chats: 5,
-  mails: 5,
-  meetings: 5,
-  tasks: 5,
-};
-
-const Dummy = [
-  { id: 1, type: "enquiry", data: dummyItem },
-  { id: 2, type: "enquiry", data: dummyItem },
-  { id: 3, type: "enquiry", data: dummyItem },
-  { id: 4, type: "interaction", data: dummyItem },
-  { id: 5, type: "interaction", data: dummyItem },
-  { id: 6, type: "interaction", data: dummyItem },
-  { id: 7, type: "interaction", data: dummyItem },
-  { id: 8, type: "proposal", data: dummyItem },
-  { id: 9, type: "proposal", data: dummyItem },
-  { id: 10, type: "proposal", data: dummyItem },
-  { id: 11, type: "win", data: dummyItem },
-  { id: 12, type: "win", data: dummyItem },
-  { id: 13, type: "win", data: dummyItem },
-  { id: 14, type: "Lost", data: dummyItem },
-  { id: 15, type: "Dead", data: dummyItem },
-  { id: 16, type: "Dead", data: dummyItem },
-  { id: 17, type: "Dead", data: dummyItem },
-  { id: 18, type: "Dead", data: dummyItem },
-];
 
 const Calls = ({ data }: any) => {
   const [recodedCalls, setRecordedCalls] = useState(true);
