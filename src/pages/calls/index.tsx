@@ -361,19 +361,23 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
 
     const getData = () => {
         let endpoint = '';
-        switch (currTab) {
-            case 0:
-                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
-                break;
-            case 1:
-                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated`;
-                break;
-            case 2:
-                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed`;
-                break;
-            default:
-                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
-                break;
+        if (subType === "feedback_requested_call_reviews") {
+            endpoint = `https://sales365.trainright.fit/api/qa/findRequestFeedBack`;
+        } else {
+            switch (currTab) {
+                case 0:
+                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
+                    break;
+                case 1:
+                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated`;
+                    break;
+                case 2:
+                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed`;
+                    break;
+                default:
+                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
+                    break;
+            }
         }
         axios.get(endpoint)
             .then((res: any) => {
