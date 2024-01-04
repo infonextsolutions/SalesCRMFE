@@ -363,16 +363,16 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         let endpoint = '';
         switch (currTab) {
             case 0:
-                endpoint = `https://sales365.trainright.fit/api/recording/find-all`;
+                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
                 break;
             case 1:
-                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
+                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated`;
                 break;
             case 2:
                 endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed`;
                 break;
             default:
-                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated`;
+                endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
                 break;
         }
         axios.get(endpoint)
