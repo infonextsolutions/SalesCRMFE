@@ -158,6 +158,7 @@ const Indicator = () => {
   const [valuesApiData, setValuesApiData] = useState([]);
 
   const [indicatorTypes, setIndicatorTypes] = useState<any>([]);
+  const [itClone, setItClone] = useState<any>([]);
 
   const [currIndicatorType, setCurrIndicatorType] = useState(0);
   const [currIndicatorCategory, setCurrIndicatorCategory] = useState(0);
@@ -230,6 +231,7 @@ const Indicator = () => {
       }
     });
     setIndicatorTypes(newIndicators);
+    setItClone(newIndicators);
   };
 
   const getTypes = () => {
@@ -1128,8 +1130,8 @@ const Indicator = () => {
       )}
       <NavbarWithButton
         src="Indicators"
-        mainTitle={`Indicators > ${indicatorTypes?.[currIndicatorType]?.label}`}
-        title={indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label}
+        mainTitle={`Indicators > ${itClone?.[currIndicatorType]?.label}`}
+        title={itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label}
         buttons={[
           {
             text: "Indicator Settings",
@@ -1149,7 +1151,7 @@ const Indicator = () => {
             Indicator Types
           </h2>
           <ul className="flex flex-col gap-4 items-center text-black">
-            {indicatorTypes.map((item: any, index: number) => (
+            {itClone?.map((item: any, index: number) => (
               <li
                 key={index}
                 onClick={() => setCurrIndicatorType(index)}
@@ -1165,7 +1167,7 @@ const Indicator = () => {
 
         <div className="bg-[#fe50430c] p-4 w-[80%]">
           <div className="w-[70%] flex items-start justify-between ">
-            {indicatorTypes?.[currIndicatorType]?.categories?.map((it: any, index: number) => (
+            {itClone?.[currIndicatorType]?.categories?.map((it: any, index: number) => (
               <button
                 key={index}
                 onClick={() => { setCurrIndicatorCategory(index) }}
@@ -1181,7 +1183,7 @@ const Indicator = () => {
           </div>
           <hr className="mt-4" />
           <Navigation
-            title={indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label}
+            title={itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label}
             buttons={[
               {
                 text: "Score",
@@ -1204,7 +1206,7 @@ const Indicator = () => {
                 list: [{ id: 0, title: "Indicator Category" }, { id: 1, title: "Indicator Value" }],
               },
             ]}
-            leftBtns={[
+            leftBtns={(itClone?.[currIndicatorType]?.categories?.length !== 0 && itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label !== "") ? [
               {
                 icon: "Edit",
                 dropdown: false,
@@ -1216,7 +1218,7 @@ const Indicator = () => {
                   setEditIndicatorCategory({
                     open: true,
                     payload: {
-                      value: indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label
+                      value: itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label
                     }
                   });
                 },
@@ -1229,7 +1231,7 @@ const Indicator = () => {
                 list: [],
                 onClick1: () => handleDeleteIndicatorCategory({ key: currIndicatorCategory }),
               }
-            ]}
+            ] : []}
           />
           <div>
             <div className="flex justify-between w-[80%]">
@@ -1239,7 +1241,7 @@ const Indicator = () => {
             </div>
             <hr className="mt-2" />
 
-            {indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.values?.map((data: any, index: number) => (
+            {itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.values?.map((data: any, index: number) => (
               <div key={index}>
                 <div className=" w-[99%] flex justify-between">
                   <div className=" h-[auto] flex justify-between w-[80%] py-4">
