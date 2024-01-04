@@ -10,7 +10,8 @@ import Navbar from "@/components/app/Navbar/Navbar";
 
 const SalesOpen = React.lazy(() => import("@/views/sales/open"));
 
-export default function Open({ data, mastersData }: any) {
+export default function Open({ mastersData }: any) {
+  const [data, setData] = useState<any>({});
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -22,18 +23,14 @@ export default function Open({ data, mastersData }: any) {
   const [accessToken] = useLocalStorage("access-token", "no-token")
 
   React.useEffect(() => {
-    const doACall = async () => {
-      // const res = axios.post(
-      //   `https://${ExotelKey}:${ExotelToken}@api.exotel.com/v3/accounts/westoryboard1/calls`,
-      //   {
-      //     from: {
-      //       contact_uri: "+9199XXXXXXX",
-      //       state_management: "true",
-      //     },
-      //   }
-      // );
-    };
-    // doACall();
+    const userId = window !== undefined ? localStorage.getItem("user-id") : ""
+    axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}`)
+      .then((res: any) => {
+        setData(res?.data);
+      })
+      .catch((err: any) => {
+
+      });
   }, []);
 
   React.useEffect(() => {
@@ -89,7 +86,7 @@ export async function getServerSideProps({ query, ...params }: any) {
     const response = await axios.get(
       "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open"
     );
-    const response2 = await axios.get(  
+    const response2 = await axios.get(
       "https://sales365.trainright.fit/api/master-users/find-all"
     );
     return {
