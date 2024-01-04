@@ -181,7 +181,6 @@ const Indicator = () => {
   const dispatch = useAppDispatch();
 
   const formatData = (data: any) => {
-    console.log('============ indicator : data ============', data);
     const newIndicators: any = [];
     data?.result?.forEach((item: any) => {
       let typeIdx = -1;
@@ -309,6 +308,7 @@ const Indicator = () => {
           // setIndicatorSetting(false);
         } else if (type === "CATEGORY") {
           setIndicatorCategoryScoring({ open: false, payload: {} });
+          setEditIndicatorCategory({ open: false, payload: {} });
         } else if (type === "VALUE") {
           setEditIndicatorValue({ open: false, payload: {} });
         }
@@ -367,6 +367,18 @@ const Indicator = () => {
           comparisonType: "",
           speaker: "",
         }, "INDICATOR");
+      } else if (indicatorType?.edit) {
+        updateIndicator({
+          _id: indicatorType.oid,
+          type: indicatorType.label,
+          category: indicatorType.category,
+          value: indicatorType.value,
+          alternative: indicatorType.alternatives,
+          score: indicatorType.scoreWeightage,
+          timeRestriction: "",
+          comparisonType: "",
+          speaker: "",
+        }, "INDICATOR");
       }
     });
   };
@@ -398,7 +410,6 @@ const Indicator = () => {
   };
 
   const setNewIndicatorTypeData = (idx: number, key: string, value: string) => {
-    console.log('-------------- value ------------', value);
     setIndicatorTypes((currIndicatorTypes: any) => {
       return currIndicatorTypes?.map((currIndicator: any, index: number) => {
         if (index === idx) {
@@ -722,14 +733,18 @@ const Indicator = () => {
 
   const handleEditIndicatorType = (payload: any) => {
     const { key } = payload;
-    // setCurrIndicatorValue(key);
-    // setEditIndicatorValue({
-    //   open: true, payload: {
-    //     key: key,
-    //     value: indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.values?.[key]?.key,
-    //     alternatives: indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.values?.[key]?.alternatives,
-    //   }
-    // });
+    setIndicatorTypes((currTypes: any) => {
+      return currTypes?.map((typeItem: any, typeIdx: number) => {
+        if (typeIdx === key) {
+          return {
+            ...typeItem,
+            edit: true,
+          }
+        } else {
+          return typeItem;
+        }
+      });
+    });
   };
 
   const handleEditIndicatorValue = (payload: any) => {
@@ -1048,7 +1063,7 @@ const Indicator = () => {
             <div className="">
               <div className="flex flex-col mt-[14px]">
                 <label htmlFor="iv" className="">Indicator Category Name</label>
-                <input type="text" className="bg-white border-[2px]" id="iv" value={editIndicatorCategory?.payload?.value} onInput={(e: any) => handleEditIndicatorCategoryData({ key: currIndicatorCategory, value: e.target.value })} />
+                <input type="text" className="bg-white border-[2px]" id="iv" value={indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label} onInput={(e: any) => handleEditIndicatorCategoryData({ key: currIndicatorCategory, value: e.target.value })} />
               </div>
             </div>
             <div className="flex w-[100%] justify-end mt-[30px]">
