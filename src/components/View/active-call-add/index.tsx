@@ -368,7 +368,6 @@ const ActiveCall = ({
   lead,
   clientPOCName,
 }: any) => {
-  console.log('============== lead =============', lead);
   function generateUniqueId() {
     const timestamp: any = Date.now().toString(36); // Convert timestamp to base36 string
     const randomNum = Math.random().toString(36).substr(2, 5); // Generate random number and take 5 characters starting from index 2

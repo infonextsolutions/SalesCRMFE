@@ -8,7 +8,7 @@ import BigSpinner from "@/components/loader/BigSpinner";
 import { ExotelKey, ExotelToken } from "@/utils/urlHelper";
 import Navbar from "@/components/app/Navbar/Navbar";
 
-const SalesOpen = React.lazy(() => import("@/views/sales/open"));
+const SalesOpen = React.lazy(() => import("@/views/sales/allocated"));
 
 export default function Open({ mastersData }: any) {
   const [data, setData] = useState<any>({});
