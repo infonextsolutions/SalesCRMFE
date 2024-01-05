@@ -1216,7 +1216,7 @@ const Indicator = () => {
                 click: handleAdd,
                 light: false,
                 dark: false,
-                list: [{ id: 0, title: "Indicator Category" }, { id: 1, title: "Indicator Value" }],
+                list: (itClone?.[currIndicatorType]?.categories?.length !== 0 && itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label !== "") ? [{ id: 0, title: "Indicator Category" }, { id: 1, title: "Indicator Value" }] : [{ id: 0, title: "Indicator Category" }],
               },
             ]}
             leftBtns={(itClone?.[currIndicatorType]?.categories?.length !== 0 && itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.label !== "") ? [
