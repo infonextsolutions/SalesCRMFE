@@ -60,7 +60,7 @@ const AddText = ({ title, place, change }: any) => {
   );
 };
 
-const AddCategory = ({ cancel }: any) => {
+const AddCategory = ({ cancel, submit, onInput }: any) => {
   const [data, setData] = useState({
     indicator_category: "",
     indicator_value: "",
