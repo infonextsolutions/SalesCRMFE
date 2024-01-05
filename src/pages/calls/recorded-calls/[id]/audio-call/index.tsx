@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "@/components/app/Navigation";
 import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
 import dummy from "@/shared/dummy";
@@ -20,8 +20,34 @@ const CallProfile = ({ data, data1, data2 }: any) => {
   const [snippet, setSnippet] = useState(false);
   const [bool, setBool] = useState(true);
 
-  const [userId, setUserId] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
-  const [userRole, setUserRole] = useState(window !== undefined ? localStorage.getItem("user-role") : "");
+  const [userId, setUserId] = useState<any>("");
+  // const [userRole, setUserRole] = useState(window !== undefined ? localStorage.getItem("user-role") : "");
+  const [qams, setQams] = useState<any>([]);
+
+  const getAllQAM = () => {
+    axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_manager`)
+      .then((res: any) => {
+        setQams(res?.data?.result?.map((qamItem: any, index: number) => {
+          return {
+            title: qamItem.name,
+            _id: qamItem?._id,
+            name: qamItem.name,
+            email: qamItem?.email,
+            roles: qamItem?.roles,
+          };
+        }));
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setUserId(localStorage.getItem("user-id") || "");
+    }
+    getAllQAM();
+  }, []);
 
   const state = useSelector((state: any) => state.ui);
   const appDispatch = useAppDispatch();
@@ -55,12 +81,12 @@ const CallProfile = ({ data, data1, data2 }: any) => {
     }
   };
 
-  const handleRequestFeedback = () => {
+  const handleRequestFeedback = (prev: any, next: any) => {
     axios.post(
       `https://sales365.trainright.fit/api/qa/requestFeedBack`,
       {
         qaId: userId,
-        qamId: "",
+        qamId: qams?.[next]?._id,
         callId: data?.result?._id,
       }
     )
@@ -68,7 +94,7 @@ const CallProfile = ({ data, data1, data2 }: any) => {
         console.log('--------- res : request feedback ---------', res);
         appDispatch(setSuccess({
           show: true,
-          succes: "Feedback requested successfully.",
+          success: "Feedback requested successfully.",
         }))
       })
       .catch((err: any) => {
@@ -90,8 +116,8 @@ const CallProfile = ({ data, data1, data2 }: any) => {
             light: false,
             dark: false,
             // icon: "",
-            list: [],
-            onClick1: handleRequestFeedback,
+            list: qams,
+            click: handleRequestFeedback,
           },
           {
             text: "Share",
