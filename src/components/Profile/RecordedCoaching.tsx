@@ -1,3 +1,5 @@
+import { setError, setSuccess } from "@/store/ai";
+import { useAppDispatch } from "@/store/store";
 import ButtonDropDown from "@/utils/Button/Button";
 import Navigator from "@/utils/customNavigator";
 import axios from "axios";
@@ -46,28 +48,28 @@ const ScriptBuilding = ({ script }: { script: ScriptBuilding }) => {
       </div>
       <ChartContainer>
         {/* percent={`${script.closing}%`} */}
-        <Chart title={"Opening"} percent={`${script.Opening}%`} />
+        <Chart title={"Opening"} percent={`${script?.Opening}%`} />
         <Chart
           title={"Lead Qualififcation"}
-          percent={`${script["Lead Qualification"]}%`}
+          percent={`${script?.["Lead Qualification"]}%`}
         />
         <Chart
           title={"Need Discovery"}
-          percent={`${script["Need Discovery"]}%`}
+          percent={`${script?.["Need Discovery"]}%`}
         />
         <Chart
           title={"Key Value Proposition"}
-          percent={`${script["Key Value Proposition"]}%`}
+          percent={`${script?.["Key Value Proposition"]}%`}
         />
         <Chart
           title={"Product Knowledge"}
-          percent={`${script["Product Knowledge"]}%`}
+          percent={`${script?.["Product Knowledge"]}%`}
         />
         <Chart
           title={"Price Discussion"}
-          percent={`${script["Price Discussion"]}%`}
+          percent={`${script?.["Price Discussion"]}%`}
         />
-        <Chart title={"Closing"} percent={`${script.Closing}%`} />
+        <Chart title={"Closing"} percent={`${script?.Closing}%`} />
       </ChartContainer>
     </div>
   );
@@ -84,27 +86,27 @@ const Selling = ({ selling }: { selling: SellingSkills }) => {
       <ChartContainer>
         <Chart
           title={"Consultative Selling"}
-          percent={`${selling["Consultative Selling"]}%`}
+          percent={`${selling?.["Consultative Selling"]}%`}
         />
-        <Chart title={"Empathy"} percent={`${selling.Empathy}%`} />
+        <Chart title={"Empathy"} percent={`${selling?.Empathy}%`} />
         <Chart
           title={"Listening Skills"}
-          percent={`${selling["Listening Skills"]}%`}
+          percent={`${selling?.["Listening Skills"]}%`}
         />
-        <Chart title={"Confidence"} percent={`${selling.Confidence}%`} />
+        <Chart title={"Confidence"} percent={`${selling?.Confidence}%`} />
         <Chart
           title={"Urgency Creation"}
-          percent={`${selling["Urgency Creation"]}%`}
+          percent={`${selling?.["Urgency Creation"]}%`}
         />
         <Chart
           title={"Positive Energy"}
-          percent={`${selling["Positive Energy"]}%`}
+          percent={`${selling?.["Positive Energy"]}%`}
         />
         <Chart
           title={"Rapport Building"}
-          percent={`${selling["Rapport Building"]}%`}
+          percent={`${selling?.["Rapport Building"]}%`}
         />
-        <Chart title={"Politeness"} percent={`${selling.Politeness}%`} />
+        <Chart title={"Politeness"} percent={`${selling?.Politeness}%`} />
       </ChartContainer>
     </div>
   );
@@ -119,14 +121,14 @@ const Emotion = ({ data }: { data: Emotion }) => {
         </h1>
       </div>
       <ChartContainer>
-        <Chart title={"Joy"} percent={`${data.Joy}%`} />
-        <Chart title={"Trust"} percent={`${data.Trust}%`} />
-        <Chart title={"Politeness"} percent={`${data.Politeness}%`} />
-        <Chart title={"Satisfaction"} percent={`${data.Satisfaction}%`} />
-        <Chart title={"Curiosity"} percent={`${data.Curiosity}%`} />
+        <Chart title={"Joy"} percent={`${data?.Joy}%`} />
+        <Chart title={"Trust"} percent={`${data?.Trust}%`} />
+        <Chart title={"Politeness"} percent={`${data?.Politeness}%`} />
+        <Chart title={"Satisfaction"} percent={`${data?.Satisfaction}%`} />
+        <Chart title={"Curiosity"} percent={`${data?.Curiosity}%`} />
         {/* <Chart title={"Confidence"}  percent={`${data.}%`} /> */}
         {/* <Chart title={"Empathy"} percent={`${data.}%`} /> */}
-        <Chart title={"Assertivenss"} percent={`${data.Assertiveness}%`} />
+        <Chart title={"Assertivenss"} percent={`${data?.Assertiveness}%`} />
       </ChartContainer>
     </div>
   );
@@ -159,6 +161,8 @@ const Loader = () => {
 };
 
 const Coaching = ({ data }: any) => {
+  console.log('++++++++++++++++ data ++++++++++++++++', data);
+  const [userId, setUserId] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
   const [loading, setLoading] = React.useState(true);
   const [checked, setChecked] = React.useState(true);
   const [data1, setData] = useState({
@@ -190,6 +194,7 @@ const Coaching = ({ data }: any) => {
       Assertiveness: 0,
     },
   });
+  const appDispatch = useAppDispatch();
   const [tab, setTab] = useState<any>(0);
   const tabs = [
     { id: 0, title: "Auto" },
@@ -198,23 +203,42 @@ const Coaching = ({ data }: any) => {
   useEffect(() => {
     if (checked) {
       axios
-        .post(
-          "https://sales365.trainright.fit/api/indicator/getIndicatorValues",
-          {
-            id: data,
-          }
+        .get(
+          `https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=${userId}`
         )
         .then((e) => {
           setData(e.data);
           setLoading(false);
         })
-        .catch((e) => {});
+        .catch((e) => { });
       setChecked(false);
     }
   });
   const handleCallback = (payload: any) => {
     setTab(payload);
   };
+
+  const handleScoreSubmit = () => {
+    axios.post(
+      `https://sales365.trainright.fit/`,
+      {
+
+      }
+    )
+      .then((res: any) => {
+        appDispatch(setSuccess({
+          show: true,
+          success: "Call Scored Successfully."
+        }));
+      })
+      .catch((err: any) => {
+        appDispatch(setError({
+          show: true,
+          error: "Score Submission failed."
+        }))
+      });
+  };
+
   return (
     <div className="w-[100%] ">
       {loading ? (
@@ -474,7 +498,9 @@ const Coaching = ({ data }: any) => {
                 </div>
               </div>
 
-              <div className="form_btns"></div>
+              <div className="form_btns w-[100%] flex justify-end">
+                <button className="p-[10px] text-[16px]" onClick={handleScoreSubmit}>Submit</button>
+              </div>
             </div>
           )}
         </>
