@@ -15,11 +15,14 @@ import EngagementReports from "./subTabs/EngagementReports";
 import CallReviews from "./subTabs/CallReviews";
 import DashboardQAM from "./subTabs/DashboardQAM";
 import Scoring from "./subTabs/Scoring";
+import { useSelector } from "react-redux";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 // const Dashboard = ({ data }: any) => {
 const Dashboard = ({ data }: any) => {
+  const auth = useSelector((state: any) => state.auth);
+  console.log('++++++++++++++++ auth ++++++++++++++++++', auth);
   const [scriptbuilderData, setScriptBuilderData] = useState([]);
   const [sellingData, setSellingData] = useState([]);
   const [pitchData, setPitchData] = useState([]);
@@ -29,6 +32,62 @@ const Dashboard = ({ data }: any) => {
   const [tabs, setTabs] = useState<any>([]);
   const [currTab, setCurrTab] = useState(0);
   const [role, setRole] = useState<any>("SDR");
+  const [userId, setUserId] = useState(window !== undefined ? (localStorage.getItem("user-id") || auth?._id) : "6456622b0c64d0311911136c");
+  const [daysSpan, setDaysSpan] = useState(7);
+
+  const [dealAnalyticsData, setDealAnalyticsData] = useState({});
+  const [avgCallScoresData, setAvgCallScoresData] = useState({});
+  const [noOfQuesAskedData, setNoOfQuesAsked] = useState({});
+
+  const getDealAnalyticsData = () => {
+    axios.get(
+      `https://sales365.trainright.fit/api/dashboard/dealAnalytics?userId=${userId}`
+    )
+      .then((res: any) => {
+        setDealAnalyticsData({ average: res.data.average, result: res.data.result });
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  const getAvgCallScores = () => {
+    axios.get(
+      `https://sales365.trainright.fit/api/dashboard/averageCallScores?userId=${userId}`
+    )
+      .then((res: any) => {
+        let formattedData: any = {};
+        res?.data?.result?.forEach((item: any) => {
+          formattedData[item?.label?.replaceAll(" ", "_")] = item?.value;
+        });
+        setAvgCallScoresData(formattedData);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  const getNoOfQuesAsked = () => {
+    axios.get(
+      `https://sales365.trainright.fit/api/dashboard/numberOfQuestionsAsked?userId=${userId}`
+    )
+      .then((res: any) => {
+        let formattedData: any = {};
+        res?.data?.result?.forEach((item: any) => {
+          formattedData[item?.label?.replaceAll(" ", "_")] = item?.value;
+        });
+        setNoOfQuesAsked(formattedData);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  useEffect(() => {
+    getDealAnalyticsData();
+    getAvgCallScores();
+    getNoOfQuesAsked();
+  }, []);
 
   useEffect(() => {
     setRole(localStorage.getItem("user-role"));
@@ -190,13 +249,39 @@ const Dashboard = ({ data }: any) => {
     }
   };
 
+  const handleDaysSpan = (prev: any, next: any) => {
+    switch (next) {
+      case 0:
+        setDaysSpan(7);
+        break;
+      case 1:
+        setDaysSpan(15);
+        break;
+      case 2:
+        setDaysSpan(30);
+        break;
+    }
+  };
+
   const renderTab0 = () => {
     if (role === "QA Analyst") {
-      return <CallReviews tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} />;
+      return <CallReviews tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} noOfQuesAsked={noOfQuesAskedData} />;
     } else if (role === "QA manager") {
-      return <DashboardQAM tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} />
+      return <DashboardQAM
+        tabData={tabs[currTab]}
+        sellingData={sellingData}
+        getSellingData={getSellingData}
+        noOfQuesAsked={noOfQuesAskedData}
+      />
     } else {
-      return <SalesPerformance tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} />;
+      return <SalesPerformance
+        tabData={tabs[currTab]}
+        sellingData={sellingData}
+        getSellingData={getSellingData}
+        avgCallScores={avgCallScoresData}
+        noOfQuesAsked={noOfQuesAskedData}
+        dealAnalytics={dealAnalyticsData}
+      />;
     }
   };
 
@@ -215,7 +300,7 @@ const Dashboard = ({ data }: any) => {
           title=""
           buttons={[
             {
-              text: "Last 7 days",
+              text: `Last ${daysSpan} days`,
               dropdown: true,
               id: 1,
               dark: true,
@@ -225,6 +310,7 @@ const Dashboard = ({ data }: any) => {
                 { title: "Last 15 days", Icon: "" },
                 { title: "Last 30 days", Icon: "" },
               ],
+              click: handleDaysSpan
             },
             {
               text: "",
