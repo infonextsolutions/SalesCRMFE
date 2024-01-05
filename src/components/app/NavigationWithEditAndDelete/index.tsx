@@ -7,36 +7,32 @@ import React from "react";
 const NavigationWithEditAndDeleteButtons = ({
   buttons,
   title,
+  leftBtns,
 }: NavigationProps) => {
-  console.log(buttons);
+  console.log(leftBtns, "arijit");
   const arr = [];
   return (
     <div className="w-[100%] min-h-[100px] flex items-center justify-between">
       <div className="flex w-[50%] gap-6 items-center">
         <h1 className=" text-[#3F434A] font-medium text-3xl">{title}</h1>
         <div className="flex gap-1">
-          <Image
-            className="cursor-pointer"
-            src={getBasicIcon("Edit")}
-            alt=""
-            // fill={true}
-            width={25}
-            height={25}
-            style={{
-              objectFit: "contain",
-            }}
-          />{" "}
-          <Image
-            className="cursor-pointer"
-            src={getBasicIcon("Delete")}
-            alt=""
-            // fill={true}
-            width={25}
-            height={25}
-            style={{
-              objectFit: "contain",
-            }}
-          />
+          {leftBtns?.map((item: any, i: number) => {
+            return (
+              <Button
+                dropdown={item.dropdown}
+                click={item.click}
+                value={item.value}
+                list={item.list}
+                icon={item.icon}
+                text={item?.text}
+                id={item.id}
+                onClick1={item.onClick1}
+                key={i}
+                light={item.light}
+                dark={item.dark}
+              />
+            );
+          })}
         </div>
       </div>
       {buttons?.length > 0 && (
@@ -70,4 +66,5 @@ interface NavigationProps {
   buttons: ButtonProps[];
   children?: JSX.Element[] | JSX.Element;
   title: String;
+  leftBtns: any;
 }
