@@ -10,6 +10,8 @@ import FullCall from "@/components/View/full-call";
 import CallSnippet from "@/components/View/call-snippet";
 import Navbar from "@/components/app/Navbar/Navbar";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
+import { useAppDispatch } from "@/store/store";
+import { setError, setSuccess } from "@/store/ai";
 //Manya will make this page
 
 const CallProfile = ({ data, data1, data2 }: any) => {
@@ -18,7 +20,11 @@ const CallProfile = ({ data, data1, data2 }: any) => {
   const [snippet, setSnippet] = useState(false);
   const [bool, setBool] = useState(true);
 
+  const [userId, setUserId] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
+  const [userRole, setUserRole] = useState(window !== undefined ? localStorage.getItem("user-role") : "");
+
   const state = useSelector((state: any) => state.ui);
+  const appDispatch = useAppDispatch();
 
   const showFull = () => {
     setFullCall(true);
@@ -49,6 +55,30 @@ const CallProfile = ({ data, data1, data2 }: any) => {
     }
   };
 
+  const handleRequestFeedback = () => {
+    axios.post(
+      `https://sales365.trainright.fit/api/qa/requestFeedBack`,
+      {
+        qaId: userId,
+        qamId: "",
+        callId: data?.result?._id,
+      }
+    )
+      .then((res: any) => {
+        console.log('--------- res : request feedback ---------', res);
+        appDispatch(setSuccess({
+          show: true,
+          succes: "Feedback requested successfully.",
+        }))
+      })
+      .catch((err: any) => {
+        appDispatch(setError({
+          show: true,
+          error: "Feedback request failed."
+        }))
+      });
+  };
+
   return (
     <>
       <NavbarWithButton
@@ -61,9 +91,7 @@ const CallProfile = ({ data, data1, data2 }: any) => {
             dark: false,
             // icon: "",
             list: [],
-            // onClick1: async () => {
-            //   setCallModal(true);
-            // },
+            onClick1: handleRequestFeedback,
           },
           {
             text: "Share",
