@@ -20,10 +20,16 @@ const SalesPerformance = ({
     tabData,
     sellingData,
     getSellingData,
+    avgCallScores,
+    noOfQuesAsked,
+    dealAnalytics,
 }: {
     tabData?: any,
     sellingData?: any,
     getSellingData?: any,
+    avgCallScores?: any,
+    noOfQuesAsked?: any,
+    dealAnalytics?: any,
 }) => {
     // SDR/BDM; Manager
     if (tabData?.key === "Manager") {
@@ -67,7 +73,7 @@ const SalesPerformance = ({
                         <BarChartVertical
                             title="Average Call Score"
                             template={AvgCallScore}
-                            data={avgCallScore}
+                            data={avgCallScores}
                             options={[
                                 { key: "", label: "Select Team Members" },
                                 { key: "", label: "John C." },
@@ -79,7 +85,7 @@ const SalesPerformance = ({
                         <BarChartVertical
                             title="Number of Questions Asked"
                             template={NoOfQuesAsked}
-                            data={avgCallScore}
+                            data={noOfQuesAsked}
                             options={[
                                 { key: "", label: "Select Team Members" },
                                 { key: "", label: "John C." },
@@ -88,7 +94,7 @@ const SalesPerformance = ({
                                 { key: "", label: "Jacob Wilson" },
                             ]}
                         />
-                        <DealAnalysis />
+                        <DealAnalysis dealAnalytics={dealAnalytics} />
                     </div>
                     <div className="w-[46%] flex flex-col gap-6">
                         <Leaderboard />
@@ -143,12 +149,12 @@ const SalesPerformance = ({
                         <BarChartVertical
                             title="Average Call Score"
                             template={AvgCallScore}
-                            data={avgCallScore}
+                            data={avgCallScores}
                         />
                         <BarChartVertical
                             title="Number of Questions Asked"
                             template={NoOfQuesAsked}
-                            data={avgCallScore}
+                            data={noOfQuesAsked}
                         />
                         <StageWiseAnalysis
                             getSellingData={getSellingData}
@@ -163,7 +169,7 @@ const SalesPerformance = ({
                             template={HighIntentCallVolume}
                             data={highIntentCallVolume}
                         />
-                        <DealAnalysis />
+                        <DealAnalysis dealAnalytics={dealAnalytics} />
                     </div>
                 </div>
             </div>

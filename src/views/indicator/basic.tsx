@@ -178,6 +178,7 @@ const Indicator = () => {
     { id: 0, title: "Score Settings" },
     { id: 1, title: "Time Settings" },
   ]);
+  const [scoreSettingSave, setScoreSettingSave] = useState<any>(true);
 
   const dispatch = useAppDispatch();
 
@@ -578,17 +579,21 @@ const Indicator = () => {
 
   const getScoreWeightageSum = (type?: "CATEGORY" | "VALUE" | null) => {
     if (type === "CATEGORY") {
-      return indicatorTypes?.[currIndicatorType]?.categories?.reduce((acc: number, item: any) => {
+      const sum = indicatorTypes?.[currIndicatorType]?.categories?.reduce((acc: number, item: any) => {
         return acc + item?.scoreWeightage;
       }, 0);
+      return sum;
     } else if (type === "VALUE") {
-      return indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.values?.reduce((acc: number, item: any) => {
+      const sum = indicatorTypes?.[currIndicatorType]?.categories?.[currIndicatorCategory]?.values?.reduce((acc: number, item: any) => {
         return acc + item?.scoreWeightage;
       }, 0);
+      return sum;
     } else {
-      return indicatorTypes?.reduce((acc: number, item: any) => {
+      const sum = indicatorTypes?.reduce((acc: number, item: any) => {
         return acc + item?.scoreWeightage;
       }, 0);
+      // setScoreSettingSave(sum === 100);
+      return sum;
     }
   };
 
@@ -823,75 +828,87 @@ const Indicator = () => {
 
   const scoreSettingTab = () => {
     return (
-      <div className="w-[100%] text-black px-[30px] pt-[20px]">
-        <table className="w-[100%]">
-          <tr>
-            <th className="text-left">Indicator Type</th>
-            <th className="text-left"></th>
-            <th className="text-left">Score Weightage<br />(out of 100)</th>
-            <th className="text-left"></th>
-          </tr>
-          {indicatorTypes?.map((indicatorType: any, index: number) => (
-            <tr key={index}>
-              <td>
-                <input type="text" value={indicatorType?.label} className={`bg-white ${indicatorType?.edit ? "border-2 border-black-900" : ""}`} disabled={!indicatorType?.edit} onInput={(e: any) => setNewIndicatorTypeData(index, "type", e.target.value)} />
-              </td>
-              <td className="">
-                {!indicatorType?.edit && (
-                  <button className="" onClick={() => handleEditIndicatorType({ key: index })}>
-                    <img src={getBasicIcon("Edit")} alt="Edit" className="" />
-                  </button>
-                )}
-              </td>
-              <td>
-                <input type="text" className={`bg-white w-[80px] ${indicatorType?.edit ? "border-2 border-black-900" : ""}`} value={indicatorType?.scoreWeightage} disabled={!indicatorType?.edit} onInput={(e: any) => setNewIndicatorTypeData(index, "score", e.target.value)} />
-              </td>
-              <td>
-                <button className="" onClick={() => handleDeleteIndicatorType({ key: index })}>
-                  <img src={getBasicIcon("Delete")} alt="Delete" className="" />
-                </button>
-              </td>
+      <>
+        <div className="w-[100%] text-black px-[30px] pt-[20px]">
+          <table className="w-[100%]">
+            <tr>
+              <th className="text-left">Indicator Type</th>
+              <th className="text-left"></th>
+              <th className="text-left">Score Weightage<br />(out of 100)</th>
+              <th className="text-left"></th>
             </tr>
-          ))}
-          <tr>
-            <td>
-              <button className="text-black text-[14px]" onClick={addNewIndicatorType}>Add New Indicator Type</button>
-            </td>
-            <td></td>
-            <td>
-              <span className="text-green">Sum: {getScoreWeightageSum()}</span>
-            </td>
-            <td></td>
-          </tr>
-        </table>
-      </div>
+            {indicatorTypes?.map((indicatorType: any, index: number) => (
+              <tr key={index}>
+                <td>
+                  <input type="text" value={indicatorType?.label} className={`bg-white ${indicatorType?.edit ? "border-2 border-black-900" : ""}`} disabled={!indicatorType?.edit} onInput={(e: any) => setNewIndicatorTypeData(index, "type", e.target.value)} />
+                </td>
+                <td className="">
+                  {!indicatorType?.edit && (
+                    <button className="" onClick={() => handleEditIndicatorType({ key: index })}>
+                      <img src={getBasicIcon("Edit")} alt="Edit" className="" />
+                    </button>
+                  )}
+                </td>
+                <td>
+                  <input type="text" className={`bg-white w-[80px] ${indicatorType?.edit ? "border-2 border-black-900" : ""}`} value={indicatorType?.scoreWeightage} disabled={!indicatorType?.edit} onInput={(e: any) => setNewIndicatorTypeData(index, "score", e.target.value)} />
+                </td>
+                <td>
+                  <button className="" onClick={() => handleDeleteIndicatorType({ key: index })}>
+                    <img src={getBasicIcon("Delete")} alt="Delete" className="" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <td>
+                <button className="text-black text-[14px]" onClick={addNewIndicatorType}>Add New Indicator Type</button>
+              </td>
+              <td></td>
+              <td>
+                <span className="text-green">Sum: {getScoreWeightageSum()}</span>
+              </td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div className="text-black w-[100%] flex justify-end gap-[20px] p-[40px]">
+          <button className="" onClick={handleNewIndicatorType} disabled={!scoreSettingSave}>Save</button>
+          <button className="" onClick={handleISCancel}>Cancel</button>
+        </div>
+      </>
     );
   };
 
   const timeSettingTab = () => {
     return (
-      <div className="w-[100%] text-black px-[30px] pt-[20px]">
-        <table className="w-[100%]">
-          <tr>
-            <th className="text-left">Indicator Type</th>
-            <th className="text-left">Start Time (MM:SS)</th>
-            <th className="text-left">End Time (MM:SS)</th>
-          </tr>
-          {indicatorTypes?.map((indicatorType: any, index: number) => (
-            <tr key={index} className="">
-              <td>{indicatorType?.label}</td>
-              <td className="">
-                <input type="text" className="w-[50px] mr-[6px] bg-white" value={indicatorType?.startTimeMin || "00"} />
-                <input type="text" className="w-[50px] bg-white" value={indicatorType?.startTimeSec || "00"} />
-              </td>
-              <td className="">
-                <input type="text" className="w-[50px] bg-white mr-[6px]" value={indicatorType?.endTimeMin || "00"} />
-                <input type="text" className="w-[50px] bg-white" value={indicatorType?.endTimeSec || "00"} />
-              </td>
+      <>
+        <div className="w-[100%] text-black px-[30px] pt-[20px]">
+          <table className="w-[100%]">
+            <tr>
+              <th className="text-left">Indicator Type</th>
+              <th className="text-left">Start Time (MM:SS)</th>
+              <th className="text-left">End Time (MM:SS)</th>
             </tr>
-          ))}
-        </table>
-      </div>
+            {indicatorTypes?.map((indicatorType: any, index: number) => (
+              <tr key={index} className="">
+                <td>{indicatorType?.label}</td>
+                <td className="">
+                  <input type="text" className="w-[50px] mr-[6px] bg-white" value={indicatorType?.startTimeMin || "00"} />
+                  <input type="text" className="w-[50px] bg-white" value={indicatorType?.startTimeSec || "00"} />
+                </td>
+                <td className="">
+                  <input type="text" className="w-[50px] bg-white mr-[6px]" value={indicatorType?.endTimeMin || "00"} />
+                  <input type="text" className="w-[50px] bg-white" value={indicatorType?.endTimeSec || "00"} />
+                </td>
+              </tr>
+            ))}
+          </table>
+        </div>
+        <div className="text-black w-[100%] flex justify-end gap-[20px] p-[40px]">
+          <button className="" onClick={handleNewIndicatorType}>Save</button>
+          <button className="" onClick={handleISCancel}>Cancel</button>
+        </div>
+      </>
     );
   };
 
@@ -902,10 +919,6 @@ const Indicator = () => {
           <div className="">
             <Navigator width={false} callback={handleICTabNavigation} current={currICTab} list={ICTabs} />
             {currICTab === 0 ? scoreSettingTab() : timeSettingTab()}
-            <div className="text-black w-[100%] flex justify-end gap-[20px] p-[40px]">
-              <button className="" onClick={handleNewIndicatorType}>Save</button>
-              <button className="" onClick={handleISCancel}>Cancel</button>
-            </div>
           </div>
         </Backdrop>
       )}

@@ -1,12 +1,10 @@
 import React from 'react'
 import DealsCard from "@/components/customComponents/360_components/cardDeals";
-import StageWiseAnalysis from "@/components/analysis/Call/Charts/StageWiseAnalysis";
 import BarChartVertical from '@/components/analysis/Call/Charts/BarChartVertical';
 import EmotionalAnalysisComp from "@/components/customComponents/360_components/SRM_Bdm_Dashboard/Emotional_Analysis";
 import NoiseAndVolumeChart from '@/components/analysis/Call/Charts/NoiseAndVolumeChart';
 import CallSentiment from '@/components/customComponents/360_components/CallSentiment';
 import {
-    AvgCallScore,
     NoOfQuesAsked,
     SellingSkills,
     HighIntentCallVolume,
@@ -22,10 +20,12 @@ const DashboardQAM = ({
     tabData,
     sellingData,
     getSellingData,
+    noOfQuesAsked,
 }: {
     tabData?: any,
     sellingData?: any,
     getSellingData?: any,
+    noOfQuesAsked?: any,
 }) => {
     // SDR/BDM; Manager
     return (
@@ -108,7 +108,7 @@ const DashboardQAM = ({
                     <BarChartVertical
                         title="Number of Questions Asked"
                         template={NoOfQuesAsked}
-                        data={avgCallScore}
+                        data={noOfQuesAsked}
                         options={[
                             { key: "", label: "Select Sales Rep" },
                             { key: "", label: "John C." },

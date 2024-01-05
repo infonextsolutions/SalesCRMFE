@@ -23,10 +23,12 @@ const CallReviews = ({
     tabData,
     sellingData,
     getSellingData,
+    noOfQuesAsked,
 }: {
     tabData?: any,
     sellingData?: any,
     getSellingData?: any,
+    noOfQuesAsked?: any,
 }) => {
     // SDR/BDM; Manager
     if (tabData?.key === "QA Analyst") {
@@ -109,7 +111,7 @@ const CallReviews = ({
                         <BarChartVertical
                             title="Number of Questions Asked"
                             template={NoOfQuesAsked}
-                            data={avgCallScore}
+                            data={noOfQuesAsked}
                             options={[
                                 { key: "", label: "Select Sales Rep" },
                                 { key: "", label: "John C." },
