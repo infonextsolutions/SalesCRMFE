@@ -200,6 +200,62 @@ const Coaching = ({ data }: any) => {
     { id: 0, title: "Auto" },
     { id: 1, title: "Manual" },
   ];
+
+  const [scoreQuestions, setScoreQuestions] = useState([
+    {
+      label: "Client Introduction",
+      key: "client_introduction",
+      value: "",
+      options: [
+        { key: "0", value: 0, label: "No introduction or insufficient information about the client." },
+        { key: "1", value: 2, label: "Basic information provided, but lacks personalization or relevant details." },
+        { key: "2", value: 4, label: "Adequate introduction with some personalization and relevant details about the client." },
+        { key: "3", value: 5, label: "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry." },
+        { key: "4", value: "NA", label: "Not applicable." },
+      ]
+    },
+    {
+      label: "Service Offerings",
+      key: "service_offerings",
+      value: "",
+      options: [
+        { key: "0", value: 0, label: "No mention or unclear explanation of the service offerings." },
+        { key: "1", value: 2, label: "Basic description of the service offerings, but lacks clarity or fails to highlight key benefits." },
+        { key: "2", value: 4, label: "Clear explanation of the service offerings with an emphasis on key benefits and value proposition." },
+        { key: "3", value: 5, label: "Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits." },
+        { key: "4", value: "NA", label: "Not applicable." },
+      ]
+    },
+    {
+      label: "Purpose of Call",
+      key: "purpose_of_call",
+      value: "",
+      options: [
+        { key: "0", value: 0, label: "No introduction or insufficient information about the client." },
+        { key: "1", value: 2, label: "Basic information provided, but lacks personalization or relevant details." },
+        { key: "2", value: 4, label: "Adequate introduction with some personalization and relevant details about the client." },
+        { key: "3", value: 5, label: "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry." },
+        { key: "4", value: "NA", label: "Not applicable." },
+      ]
+    }
+  ]);
+
+  const updateScoreItem = (checked: any, quesItemIdx: any, val: any) => {
+    console.log('-------------- update score item ------------', checked, quesItemIdx, val);
+    setScoreQuestions((currScoreQues: any) => {
+      return currScoreQues?.map((scoreQuesItem: any, index: number) => {
+        if (index === quesItemIdx) {
+          return {
+            ...scoreQuesItem,
+            value: val,
+          }
+        } else {
+          return scoreQuesItem;
+        }
+      });
+    });
+  };
+
   useEffect(() => {
     if (checked) {
       axios
@@ -219,10 +275,18 @@ const Coaching = ({ data }: any) => {
   };
 
   const handleScoreSubmit = () => {
+    const finalScore = scoreQuestions?.reduce((acc: any, item: any) => {
+      if (item.value !== "" || item.value !== "NA") {
+        return acc + item.value;
+      } else {
+        return acc + 0;
+      }
+    }, 0);
     axios.post(
-      `https://sales365.trainright.fit/`,
+      `https://sales365.trainright.fit/api/qa/updateCallScore`,
       {
-
+        score: finalScore,
+        callId: data?._id,
       }
     )
       .then((res: any) => {
@@ -285,218 +349,37 @@ const Coaching = ({ data }: any) => {
           )}
           {tab === 1 && (
             <div>
-              <div className="fieldset mt-[24px]">
-                <span className="text-[16px] font-bold mb-[16px]">
-                  Client Introduction
-                </span>
-                <div>
-                  <div>
-                    <label htmlFor="client_intro_mark0">
-                      <input
-                        type="radio"
-                        id="client_intro_mark0"
-                        name="client_intro"
-                      />
-                      <span>
-                        <span className="font-medium">0 marks:</span>No
-                        introduction or insufficient information about the
-                        client.
-                      </span>
-                    </label>
+              {
+                scoreQuestions?.map((quesItem: any, index: number) => (
+                  <div className="fieldset mt-[24px]" key={index}>
+                    <span className="text-[16px] font-bold mb-[16px]">
+                      {quesItem?.label}
+                    </span>
+                    <div>
+                      {
+                        quesItem?.options?.map((optionItem: any, opIdx: number) => (
+                          <div key={opIdx}>
+                            <label htmlFor={quesItem?.key + optionItem?.key}>
+                              <input
+                                type="radio"
+                                id={quesItem?.key + optionItem?.key}
+                                name={quesItem?.key}
+                                onChange={(e) => updateScoreItem(e.target.checked, index, optionItem?.value)}
+                              />
+                              <span>
+                                {optionItem?.value !== "NA" && (
+                                  <span className="font-medium">{optionItem?.value} marks:</span>
+                                )}
+                                {optionItem?.label}
+                              </span>
+                            </label>
+                          </div>
+                        ))
+                      }
+                    </div>
                   </div>
-                  <div>
-                    <label htmlFor="client_intro_mark2">
-                      <input
-                        type="radio"
-                        id="client_intro_mark2"
-                        name="client_intro"
-                      />
-                      <span>
-                        <span className="font-medium">2 marks:</span>Basic
-                        information provided, but lacks personalization or
-                        relevant details.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="client_intro_mark4">
-                      <input
-                        type="radio"
-                        id="client_intro_mark4"
-                        name="client_intro"
-                      />
-                      <span>
-                        <span className="font-medium">4 marks:</span>Adequate
-                        introduction with some personalization and relevant
-                        details about the client.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="client_intro_mark5">
-                      <input
-                        type="radio"
-                        id="client_intro_mark5"
-                        name="client_intro"
-                      />
-                      <span>
-                        <span className="font-medium">5 marks:</span>Execellent
-                        introduction that demonstrates a strong understanding of
-                        the client&apos;s background, industry.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="client_intro_na">
-                      <input
-                        type="radio"
-                        id="client_intro_na"
-                        name="client_intro"
-                      />
-                      <span>Not applicable.</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div className="fieldset mt-[24px]">
-                <span className="text-[16px] font-bold mb-[16px]">
-                  Service Offerings
-                </span>
-                <div>
-                  <div>
-                    <label htmlFor="so_mark0">
-                      <input
-                        type="radio"
-                        id="so_mark0"
-                        name="service_offerings"
-                      />
-                      <span>
-                        <span className="font-medium">0 marks:</span>No mention
-                        or unclear explanation of the service offerings.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="so_mark2">
-                      <input
-                        type="radio"
-                        id="so_mark2"
-                        name="service_offerings"
-                      />
-                      <span>
-                        <span className="font-medium">2 marks:</span>Basic
-                        description of the service offerings, but lacks clarity
-                        or fails to highlight key benefits.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="so_mark4">
-                      <input
-                        type="radio"
-                        id="so_mark4"
-                        name="service_offerings"
-                      />
-                      <span>
-                        <span className="font-medium">4 marks:</span>Clear
-                        explanation of the service offerings with an emphasis on
-                        key benefits and value proposition.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="so_mark5">
-                      <input
-                        type="radio"
-                        id="so_mark5"
-                        name="service_offerings"
-                      />
-                      <span>
-                        <span className="font-medium">5 marks:</span>Detailed
-                        and persuasive presentation of the service offerings,
-                        highlighting specific features, benefits.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="so_na">
-                      <input type="radio" id="so_na" name="service_offerings" />
-                      <span>Not applicable.</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div className="fieldset mt-[24px]">
-                <span className="text-[16px] font-bold mb-[16px]">
-                  Purpose of Call
-                </span>
-                <div>
-                  <div>
-                    <label htmlFor="pc_mark0">
-                      <input
-                        type="radio"
-                        id="pc_mark0"
-                        name="purpose_of_call"
-                      />
-                      <span>
-                        <span className="font-medium">0 marks:</span>No
-                        introduction or insufficient information about the
-                        client.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="pc_mark2">
-                      <input
-                        type="radio"
-                        id="pc_mark2"
-                        name="purpose_of_call"
-                      />
-                      <span>
-                        <span className="font-medium">2 marks:</span>Basic
-                        information provided, but lacks personalization or
-                        relevant details.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="pc_mark4">
-                      <input
-                        type="radio"
-                        id="pc_mark4"
-                        name="purpose_of_call"
-                      />
-                      <span>
-                        <span className="font-medium">4 marks:</span>Adequate
-                        introduction with some personalization and relevant
-                        details about the client.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="pc_mark5">
-                      <input
-                        type="radio"
-                        id="pc_mark5"
-                        name="purpose_of_call"
-                      />
-                      <span>
-                        <span className="font-medium">5 marks:</span>Execellent
-                        introduction that demonstrates a strong understanding of
-                        the client&apos;s background, industry.
-                      </span>
-                    </label>
-                  </div>
-                  <div>
-                    <label htmlFor="pc_na">
-                      <input type="radio" id="pc_na" name="purpose_of_call" />
-                      <span>Not applicable.</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
+                ))
+              }
 
               <div className="form_btns w-[100%] flex justify-end">
                 <button className="p-[10px] text-[16px]" onClick={handleScoreSubmit}>Submit</button>
