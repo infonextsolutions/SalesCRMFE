@@ -2,7 +2,7 @@ import { getBasicIcon } from '@/utils/AssetsHelper';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react'
 
-const RenderCheckBox = ({ width, bool }: any) => {
+const RenderCheckBox = ({ width, bool, onUpdate, row }: any) => {
     const [check, setCheck] = useState(false);
     React.useEffect(() => {
         if (check) {
@@ -20,54 +20,7 @@ const RenderCheckBox = ({ width, bool }: any) => {
             className={`flex items-center justify-center h-[20px] shrink-0 `}
             style={{ width: width, flexShrink: "unset" }}
         >
-            <input type="checkbox" ref={ref} className="checkbox" />
-        </div>
-    );
-};
-
-const LeadItem = ({
-    width,
-    text,
-    left,
-    align,
-    textLeft,
-    link,
-    click,
-    route,
-    onClick,
-    color,
-    weight,
-}: any) => {
-    return (
-        <div
-            className={`flex items-center h-[20px] shrink-0`}
-            style={{ width: width, marginLeft: left }}
-        >
-            {link ? (
-                <a
-                    className=" text-[13px] tracking-wide"
-                    style={{
-                        textAlign: align && "center",
-                        marginLeft: textLeft && `${textLeft}px`,
-                        color: color ? color : "#8A9099",
-                    }}
-                >
-                    {text ? text : "-"}
-                </a>
-            ) : (
-                <p
-                    className="text-[13px] tracking-wide cursor-pointer"
-                    style={{
-                        textAlign: align && "center",
-                        marginLeft: textLeft && `${textLeft}px`,
-                        color: color ? color : "#8A9099",
-                        fontWeight: weight ? weight : 500,
-                    }}
-                    onClick={() => { }}
-                >
-                    {text ? text : "-"}
-                </p>
-            )}
+            <input type="checkbox" ref={ref} className="checkbox" onChange={(e) => onUpdate(e.target.checked, row)} />
         </div>
     );
 };
@@ -121,14 +74,20 @@ const RenderHeaderColumn = ({
 const RenderHeader = ({
     columns,
     rows,
+    handleSelection,
 }: {
     selectAll?: boolean,
     columns?: any,
-    rows?: any
+    rows?: any,
+    handleSelection?: any,
 }) => {
+    const onSelection = (checked: boolean) => {
+        handleSelection(checked)
+    };
+
     return (
         <div className='pl-[10px] min-h-[40px] flex items-center grow border-[#ccc] border-b-[1px]'>
-            <RenderCheckBox width={30} />
+            <RenderCheckBox width={30} onUpdate={onSelection} />
             {columns?.map((column: any, index: number) => (
                 <RenderHeaderColumn
                     key={index}
@@ -179,14 +138,22 @@ const RenderRowItem = ({
 const RenderRow = ({
     rows,
     columns,
+    handleSelection,
+    selectedRows,
 }: {
     rows?: any,
     columns?: any,
+    handleSelection?: any,
+    selectedRows?: any,
 }) => {
+    const onSelection = (checked: boolean, row: any) => {
+        handleSelection(checked, row);
+    };
+
     return (
         rows?.map((row: any, rowIndex: number) => (
             <div key={rowIndex} className='pl-[10px] min-h-[40px] flex items-center grow border-[#ccc] border-b-[1px]'>
-                <RenderCheckBox width={30} />
+                <RenderCheckBox width={30} onUpdate={onSelection} row={row} bool={selectedRows ? selectedRows?.includes(row?.[0]?.id) : false} />
                 {row?.map((rowItem: any, itemIndex: number) => (
                     <RenderRowItem
                         key={itemIndex}
@@ -206,14 +173,18 @@ const RenderRow = ({
 const Table = ({
     columns,
     rows,
+    handleSelection,
+    selectedRows,
 }: {
     columns?: any,
     rows?: any,
+    handleSelection?: any,
+    selectedRows?: any,
 }) => {
     return (
         <div className='w-[100%] mt-[20px]'>
-            <RenderHeader selectAll={false} columns={columns} />
-            <RenderRow rows={rows} columns={columns} />
+            <RenderHeader selectAll={false} columns={columns} handleSelection={handleSelection} />
+            <RenderRow rows={rows} columns={columns} handleSelection={handleSelection} selectedRows={selectedRows} />
         </div>
     )
 }

@@ -4,7 +4,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const DropItems = ({ title, list, top, change, customerId }: any) => {
@@ -51,9 +51,9 @@ const DropItemsNew = ({ title, list, top, change, customerId }: any) => {
   return (
     <div
       className="w-[100%] flex items-center gap-1"
-      // style={{
-      //   marginTop: top,
-      // }}
+    // style={{
+    //   marginTop: top,
+    // }}
     >
       <p className="block text-sm font-medium text-[#8a9099] tracking-wide">
         {title}
@@ -383,11 +383,13 @@ const ActiveCall = ({
     call_date: "",
     call_start_time: getCurrentTimeInHours(),
     // company_name: companyName,
+    owner: "",
     call_type: "",
     call_new_participant_number: "",
     call_new_participant_title: "",
     call_new_participant_name: "",
     call_new_participant_designation: "",
+    participants: lead?.customerId?._id || "",
   });
 
   function getCurrentTimeInHours() {
@@ -484,16 +486,20 @@ const ActiveCall = ({
 
   const list = lead
     ? lead.owners.map((i: any) => {
-        return {
-          title: i.name,
-          value: i._id,
-          selected: false,
-          _id: i._id,
-        };
-      })
+      return {
+        title: i.name,
+        value: i._id,
+        selected: false,
+        _id: i._id,
+      };
+    })
     : [];
   const state = useSelector((state: any) => state.auth);
-  const loggedInUser = localStorage.getItem("user-name")?.split("@")[0];
+  const loggedInUser = localStorage.getItem("user-name");
+
+  useEffect(() => {
+    setData({ ...data, owner: loggedInUser });
+  }, [loggedInUser]);
 
   return (
     <div className="w-[100%] h-[100%] py-[30px] pl-[40px] pr-[40px]  relative">
@@ -580,7 +586,7 @@ const ActiveCall = ({
             val: 0,
             selected: false,
           },
-          ...list,
+          // ...list,
         ]}
         change={(e: any) => {
           setData({ ...data, call_type: e });
@@ -591,18 +597,18 @@ const ActiveCall = ({
         title="Allocate Call Owner"
         top={20}
         list={[
-          {
-            title: "Choose Call Owner",
-            val: 0,
-            selected: true,
-          },
+          // {
+          //   title: "Choose Call Owner",
+          //   val: 0,
+          //   selected: false,
+          // },
           {
             // title: `${state?.user.name.split("@")[0]}`,
             title: loggedInUser,
-            val: 0,
-            selected: false,
+            val: loggedInUser,
+            selected: true,
           },
-          ...list,
+          // ...list,
         ]}
         change={(e: any) => {
           setData({ ...data, owner: e });
@@ -617,16 +623,17 @@ const ActiveCall = ({
           {
             title: "Choose Participants",
             val: 0,
-            selected: true,
-          },
-          {
-            title: clientPOCName,
-            val: "0",
             selected: false,
           },
-          ...list,
+          {
+            title: lead?.customerId?.customer_name,
+            val: lead?.customerId?._id,
+            selected: true,
+          },
+          // ...list,
         ]}
         change={(e: any) => {
+          console.log('++++++++ set participants ++++++++++', e)
           setData({ ...data, participants: e });
         }}
       />
@@ -651,17 +658,17 @@ const ActiveCall = ({
               },
               {
                 title: "Mr",
-                val: 0,
+                val: "Mr",
                 selected: false,
               },
               {
                 title: "Mrs",
-                val: 0,
+                val: "Mrs",
                 selected: false,
               },
               {
                 title: "Miss",
-                val: 0,
+                val: "Miss",
                 selected: false,
               },
               // ...list,

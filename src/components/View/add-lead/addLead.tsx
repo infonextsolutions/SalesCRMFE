@@ -74,6 +74,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
       );
     // return;
     axios.post(`${API_DOMAIN}/api/leads/create`, payload).then((e) => {
+      setLoading(false);
       router.reload();
       cancel();
     });

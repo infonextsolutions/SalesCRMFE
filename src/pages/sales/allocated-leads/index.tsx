@@ -8,9 +8,10 @@ import BigSpinner from "@/components/loader/BigSpinner";
 import { ExotelKey, ExotelToken } from "@/utils/urlHelper";
 import Navbar from "@/components/app/Navbar/Navbar";
 
-const SalesOpen = React.lazy(() => import("@/views/sales/open"));
+const SalesOpen = React.lazy(() => import("@/views/sales/allocated"));
 
-export default function Open({ data, mastersData }: any) {
+export default function Open({ mastersData }: any) {
+  const [data, setData] = useState<any>({});
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -22,18 +23,14 @@ export default function Open({ data, mastersData }: any) {
   const [accessToken] = useLocalStorage("access-token", "no-token")
 
   React.useEffect(() => {
-    const doACall = async () => {
-      // const res = axios.post(
-      //   `https://${ExotelKey}:${ExotelToken}@api.exotel.com/v3/accounts/westoryboard1/calls`,
-      //   {
-      //     from: {
-      //       contact_uri: "+9199XXXXXXX",
-      //       state_management: "true",
-      //     },
-      //   }
-      // );
-    };
-    // doACall();
+    const userId = window !== undefined ? localStorage.getItem("user-id") : ""
+    axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}`)
+      .then((res: any) => {
+        setData(res?.data);
+      })
+      .catch((err: any) => {
+
+      });
   }, []);
 
   React.useEffect(() => {
@@ -66,9 +63,11 @@ export default function Open({ data, mastersData }: any) {
     }
   }, [state.isLoggedIn, logged]);
 
+  // 
+
   return (
     <>
-      <Navbar mainTitle="Sales" title="open Leads" src="salesIcon" />
+      <Navbar mainTitle="Sales" title="Allocated Leads" src="salesIcon" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />

@@ -2,8 +2,8 @@ import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState, Suspense } from "react";
-import LeadContainer from "@/components/leads/open/Lead/Lead";
-import Header from "@/components/calls/recorded-calls/Header/Header";
+import LeadContainer from "@/components/leads/allocated/Lead/Lead";
+import Header from "@/components/leads/allocated/Header/Header";
 import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import {
@@ -14,21 +14,20 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-import ActiveCall from "@/types/recorded-call";
-import CallContainer from "@/components/calls/recorded-calls/Call/Call";
+
 const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
+  const [qaid, setQaid] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
-  const [selectAll, setSelectAll] = useState(false);
 
   useEffect(
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${pageNumber}${queryStr}`
+          `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${pageNumber}${queryStr}`
         )
         .then((res) => {
           setItems(res?.data?.result);
@@ -42,76 +41,59 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${current}${queryStr}"`
+      `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}${queryStr}`
     );
     const data = res.data.result;
     return data;
   };
   const [loading, setLoading] = React.useState(false);
-  const [checked, setChecked] = React.useState(true);
-  function convertDatetimeToCustomFormat(dateStr: any) {
-    // Convert the string to a Date object
-    const dt: any = new Date(dateStr);
-
-    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
-    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
-    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
-
-    return secondsDifference;
-  }
   useEffect(() => {
-    if (checked) {
-      setLoading(true);
-      const count = Math.ceil(Number(totalRecords) / limit);
+    setLoading(true);
+    const count = Math.ceil(Number(totalRecords) / limit);
+    setpageCount(count);
+    if (pageNumber >= count && pageCount != 0) setpageNumber(0);
+    const getItems = async () => {
+      const res = await axios.get(
+        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${queryStr}`
+      );
+      const data = res.data.result;
+
+      if (search.length) {
+        setpageNumber(0);
+        const allItems = await getallItems(pageNumber);
+        setItems(allItems);
+      }
+      const filtered = data.filter(
+        (e: Lead) =>
+          e?.leadId?.includes(search) ||
+          e.lead_title?.includes(search) ||
+          e.companyId.company_name?.includes(search) ||
+          e.customer_name?.includes(search)
+      );
+
+      // const filtered = data;
+      settotalLeads(filtered.length);
+      const count = Math.ceil(Number(filtered.length) / limit);
       setpageCount(count);
-      if (pageNumber >= count && pageCount != 0) setpageNumber(0);
-      const getItems = async () => {
-        const res = await axios.get(
-          `https://sales365.trainright.fit/api/recording/find-all?${queryStr}`
-        );
-        const data = res.data.result;
+      setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
+    };
 
-        if (search.length) {
-          setpageNumber(0);
-          const allItems = await getallItems(pageNumber);
-          setItems(allItems);
-        }
-
-        const filtered = data.filter((e: ActiveCall) => {
-          const idss: any = String(convertDatetimeToCustomFormat(e.updatedAt));
-          const leadid = e.leadId.length > 0 ? e.leadId[0].leadId : "-";
-          const call_title: any = e;
-          const title =
-            call_title?.active_calls?.length > 0
-              ? call_title?.active_calls[0].call_title
-              : "";
-          return (
-            idss.includes(search) ||
-            leadid.includes(search) ||
-            title.includes(search)
-          );
-        });
-
-        // const filtered = data;
-        settotalLeads(filtered.length);
-        const count = Math.ceil(Number(filtered.length) / limit);
-        setpageCount(count);
-        setItems(
-          filtered.slice(pageNumber * limit, pageNumber * limit + limit)
-        );
-      };
-
-      getItems();
-      setLoading(false);
-    }
+    getItems();
+    setLoading(false);
   }, [limit, pageNumber, search]);
 
   const fetchItems = async (current: any) => {
     const res = await axios.get(
-      `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${current}`
+      `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}`
     );
     const data = res.data.result;
-    const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
+    const filtered = data.filter(
+      (e: Lead) =>
+        e?.leadId?.includes(search) ||
+        e.lead_title?.includes(search) ||
+        e.companyId.company_name?.includes(search) ||
+        e.customer_name?.includes(search)
+    );
     settotalLeads(filtered.length);
     return filtered;
   };
@@ -136,17 +118,15 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(false);
   };
   const handlePageClick = async (data: any) => {
-    setChecked(false);
     setLoading(true);
     let current = data.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
     setItems(allItems);
     setLoading(false);
-    setChecked(true);
   };
-
   const Leads = items;
+  const [selectAll, setSelectAll] = useState(false);
 
   function sortArray(arr: any) {
     return arr.sort((a: any, b: any) => a - b);
@@ -230,10 +210,9 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     }
   };
 
-
   return (
     <>
-      <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
+      <div className=" mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
         <Header
           selectAll={() => {
             setSelectAll(!selectAll);
@@ -270,15 +249,24 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         {loading ? (
           <Spinner />
         ) : (
+          // ) : (
+
           Leads != null &&
-          Leads?.map((item: ActiveCall, i: any) => {
+          Leads.map((item: Lead, ind: any) => {
             return (
-              <CallContainer
-                key={item._id}
-                id={item._id}
-                CallData={item}
-                last={Leads.length - 1 === i}
+              <LeadContainer
                 selectAll={selectAll}
+                key={item._id}
+                index={ind}
+                id={item._id}
+                company={item.companyId}
+                customer={item.customerId}
+                leadStage={item.leadStage}
+                leadStatus={item.leadStatus}
+                custom={item.customer_name}
+                LeadData={item}
+                owners={item.owners}
+                last={Leads.length - 1 === ind}
               />
             );
           })
@@ -301,36 +289,30 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
               <option value="13">13</option> */}
             </select>
             <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${
-                (pageNumber + 1) * limit > totalLeads
-                  ? totalLeads
-                  : (pageNumber + 1) * limit
-              } of ${totalLeads}`}
+              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${(pageNumber + 1) * limit > totalLeads
+                ? totalLeads
+                : (pageNumber + 1) * limit
+                } of ${totalLeads}`}
             </p>
           </div>
           <div className="flex justify-center my-[45px] ">
             <div
-              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${
-                pageNumber === 0
-                  ? "bg-[#f5f5f5] opacity-30 cursor-auto"
-                  : "bg-[#e8ebfd] cursor-pointer"
-              }`}
+              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === 0 ? "" : "bg-[#ffccbb] cursor-pointer"
+                }`}
               onClick={setFirstPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != 0 ? "svg-blue" : ""
-                } rotate-180 translate-x-[6px]`}
+                className={`${pageNumber != 0 ? "svg-red" : ""
+                  } rotate-180 translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != 0 ? "svg-blue" : ""
-                } rotate-180 translate-x-[-6px]`}
+                className={`${pageNumber != 0 ? "svg-red" : ""
+                  } rotate-180 translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}
@@ -369,45 +351,38 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
               containerClassName={"text-black flex justify-center gap-[8px]"}
               pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
               pageLinkClassName={``}
-              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-                pageNumber === 0 ? "" : "bg-[#ffad9f]"
-              }`}
-              previousLinkClassName={`flex justify-center ${
-                pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
-              }`}
-              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-                pageNumber === pageCount - 1 ? "" : "bg-[#ffad9f]"
-              }`}
-              nextLinkClassName={`flex justify-center ${
-                pageNumber === pageCount - 1 ? "cursor-auto" : ""
-              }`}
+              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === 0 ? "" : "bg-[#ffad9f]"
+                }`}
+              previousLinkClassName={`flex justify-center ${pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
+                }`}
+              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === pageCount - 1 ? "" : "bg-[#ffad9f]"
+                }`}
+              nextLinkClassName={`flex justify-center ${pageNumber === pageCount - 1 ? "cursor-auto" : ""
+                }`}
               breakClassName={""}
               breakLinkClassName={""}
               forcePage={pageNumber}
               activeClassName={`bg-bg-red text-[#fff] rounded-[10px]`}
             />
             <div
-              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${
-                pageNumber === pageCount - 1
-                  ? ""
-                  : "bg-[#e8ebfd] cursor-pointer"
-              }`}
+              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === pageCount - 1
+                ? ""
+                : "bg-[#ffccbb] cursor-pointer"
+                }`}
               onClick={setLastPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != pageCount - 1 ? "svg-red" : ""
-                } translate-x-[6px]`}
+                className={`${pageNumber != pageCount - 1 ? "svg-red" : ""
+                  } translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${
-                  pageNumber != pageCount - 1 ? "svg-red" : ""
-                } translate-x-[-6px]`}
+                className={`${pageNumber != pageCount - 1 ? "svg-red" : ""
+                  } translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}
@@ -416,49 +391,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           </div>
         </div>
       )}
-
-      {/* <div className="flex h-[80px] items-center justify-between ">
-        <div className="flex items-center">
-          <ButtonDropDown
-            width={80}
-            text={"10"}
-            id={1}
-            light={true}
-            dropdown={true}
-            list={[
-              { title: 10 },
-              { title: 11 },
-              { title: 12 },
-              { title: 13},
-              { title: 14},
-              { title: 15 },
-              { title: 16 },
-              { title: 17},
-              { title: 18 },
-              { title: 19 },
-              { title: 20 },
-            ]}
-            border={true}
-            height={40}
-            dropDirection={true}
-            tight={true}
-          />
-          <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-            Showing 1-10 of 100
-          </p>
-        </div>
-        <div className="flex mr-[10%]">
-          <SmallButton leftDblIcon={true} theme={2} left={10} />
-          <SmallButton leftIcon={true} theme={2} left={10} />
-          <SmallButton text={"1"} theme={1} left={10} />
-          <SmallButton text={"2"} theme={3} />
-          <SmallButton text={"3"} theme={3} />
-          <SmallButton text={"..."} theme={3} />
-          <SmallButton text={"5"} theme={3} />
-          <SmallButton RightDblIcon={true} theme={4} left={10} />
-          <SmallButton RightIcon={true} theme={4} left={10} />
-        </div>
-      </div> */}
       <div className="h-[10px] w-full"></div>
     </>
   );

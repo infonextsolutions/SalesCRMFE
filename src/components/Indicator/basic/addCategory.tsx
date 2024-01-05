@@ -3,6 +3,43 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import Image from "next/image";
 import React, { useState } from "react";
 
+const DropItems = ({ title, list, top, change }: any) => {
+  return (
+    <div
+      className="w-[100%] "
+      style={{
+        marginTop: top,
+      }}
+    >
+      <p className="block mb-2 text-sm font-medium text-[#8a9099] tracking-wide">
+        {title}
+      </p>
+      <select
+        id="countries"
+        onChange={(e: any) => {
+          change(e.target.value);
+        }}
+        className=" border border-gray-300 outline-none text-gray-900 text-sm rounded-2xl tracking-wide text-[#3F434A] font-medium  block w-full p-2.5 bg-white"
+      >
+        {list.map((item: any, i: any) => {
+          return (
+            <option
+              key={i}
+              onClick={() => {
+                change(item.value);
+              }}
+              value={item.value}
+              selected={item.selected}
+            >
+              {item.title}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
+
 const AddText = ({ title, place, change }: any) => {
   return (
     <div className="w-[100%]  mb-[15px]">
@@ -23,11 +60,16 @@ const AddText = ({ title, place, change }: any) => {
   );
 };
 
-const AddCategory = ({ cancel, onChange }: any) => {
+const AddCategory = ({ cancel }: any) => {
   const [data, setData] = useState({
     indicator_category: "",
     indicator_value: "",
     alternatives: "",
+    indicator_type: "",
+    moreAlternatives: "",
+    comparision_type: "",
+    time_restriction: "",
+    speaker: "",
   });
 
   return (
@@ -70,11 +112,11 @@ const AddCategory = ({ cancel, onChange }: any) => {
           setData({ ...data, alternatives: e });
         }}
       />
-      <div className="w-[100%] mt-12 flex justify-end">
+      <div className="w-[100%] flex justify-end">
         <SimpleButton
           theme={1}
           click={() => {}}
-          text={"Create"}
+          text={"Save"}
           left={20}
           right={0}
         />

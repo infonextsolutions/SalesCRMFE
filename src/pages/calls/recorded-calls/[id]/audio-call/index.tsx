@@ -12,7 +12,7 @@ import Navbar from "@/components/app/Navbar/Navbar";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 //Manya will make this page
 
-const CallProfile = ({ data, data1 }: any) => {
+const CallProfile = ({ data, data1, data2 }: any) => {
   const titles = ["CALL INFO", "COMMENTS & NOTES", "COACHING"];
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
@@ -105,7 +105,7 @@ const CallProfile = ({ data, data1 }: any) => {
             info={dummy.audioCallDetails}
           />
           <div className="w-[58%] min-h-[50vh] ">
-            <Audio data={data.result} data1={data1.result} />
+            <Audio data={data.result} data1={data1.result} data2={data2.result} />
           </div>
         </div>
         {/* write your code here for profile page manya! */}
@@ -125,11 +125,16 @@ export async function getServerSideProps({ query, params }: any) {
     `https://sales365.trainright.fit/api/leads/find-by-id?id=${response.data.result.leadId._id}`
   );
 
+  const response2 = await axios.post(
+    `https://sales365.trainright.fit/api/calling/call-status`, { sid: response.data.result.Sid, leadId: response.data.result.leadId._id }
+  );
+
   return {
     props: {
       // TODO: Can do better error handling here by passing another property error in the component
       data: response.data || {},
       data1: response1.data || {},
+      data2: response2.data || {},
     }, // will be passed to the page component as props
   };
 }

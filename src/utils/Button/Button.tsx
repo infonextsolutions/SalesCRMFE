@@ -115,7 +115,7 @@ const ButtonDropDown = ({
           </div>
         </div>
       )}
-      {text.length > 0 && (
+      {text?.length > 0 && (
         <p
           className={`whitespace-nowrap tracking-wider font-medium text-[14px] ${
             light ? "pl-[4px] pr-[4px]" : "pl-[20px] pr-[10px]"

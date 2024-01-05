@@ -28,7 +28,8 @@ function useUI() {
           title: "Sales",
           route: "sales",
           list: [
-            { title: "Open", route: "open" },
+            { title: "Leads to Allocate", route: "leads-to-allocate" },
+            { title: "Allocated Leads", route: "allocated-leads" },
             { title: "Closed", route: "closed" },
           ],
           icon: "salesIcon",

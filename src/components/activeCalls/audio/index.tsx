@@ -437,7 +437,7 @@ const CallHolder = ({ click }: any) => {
 const CallPlayer = () => {
   const [playing, setPlaying] = React.useState(false);
   const ref: any = useRef();
-  React.useEffect(() => {});
+  React.useEffect(() => { });
 
   return (
     <div className="w-[100%] h-[100px] mb-[100px] mt-[20px] px-[40px]">
@@ -447,7 +447,7 @@ const CallPlayer = () => {
       <audio src="/poor-audio.ogg" ref={ref}></audio>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
         <div className="h-[100%] w-[40%] bg-bg-red rounded-l-[3px] relative">
-          <CallHolder click={() => {}} />
+          <CallHolder click={() => { }} />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
           15:53/30:00
@@ -533,10 +533,12 @@ const list = [
   },
 ];
 
-const Audio = ({ data, data1 }: props) => {
+const Audio = ({ data, data1, data2 }: any) => {
   const [check, setCheck] = useState(true);
 
-  const [callData, setCallData] = useState<AudioData>(example);
+  console.log('==================== data : audio ===================', data, data2);
+
+  const [callData, setCallData] = useState<AudioData>(data2);
 
   const callit = () => {
     const url = "https://sales365.trainright.fit/api/calling/call-status";
@@ -548,6 +550,7 @@ const Audio = ({ data, data1 }: props) => {
         })
         .then((e) => {
           setCallData(e.data.result);
+          console.log('--------------- setCallData --------------', e.data.result);
           setCheck(false);
         });
     }
@@ -555,7 +558,7 @@ const Audio = ({ data, data1 }: props) => {
 
   React.useEffect(() => {
     if (check) {
-      callit();
+      // callit();
     }
   });
 
@@ -570,9 +573,9 @@ const Audio = ({ data, data1 }: props) => {
         <img src="/video.svg" className="w-full rounded-2xl" alt="" />
       </div> */}
       {/* <CallPlayer /> */}
-      {callData.Status === "completed" && (
+      {data.Status === "completed" && (
         <>
-          <AudioPlayer src={data.RecordingUrl} />
+          <AudioPlayer src={data?.RecordingUrl} />
           <div className="w-full mt-[30px] mb-[30px] bg-white rounded-xl p-7 ">
             <div className="flex gap-8 justify-between items-center">
               <h1 className="text-[16px] w-[172px] font-medium text-black capitalize mb-[10px]">
@@ -586,7 +589,7 @@ const Audio = ({ data, data1 }: props) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-gray-600 text-[14px]">Participant 1:-</p>
+                <p className="text-gray-600 text-[14px]">Participant 1: A</p>
               </div>
               <div className="w-full gap-2 flex items-center mt-[6px]">
                 <Image
@@ -596,26 +599,26 @@ const Audio = ({ data, data1 }: props) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-[#909193] text-[14px]">Participant 2:-</p>
+                <p className="text-gray-600 text-[14px]">Participant 2: B</p>
               </div>
             </div>
-            <Tracker title={"John"} list={list} color={"#4091FF"} />
-            <Tracker title={"Shraddha"} list={list} color={"#FE5143"} />
-            <Tracker title={"Topics"} list={list} color={"#434343"} />
+            <Tracker title={"A"} list={list} color={"#4091FF"} />
+            <Tracker title={"B"} list={list} color={"#FE5143"} />
+            {/* <Tracker title={"Topics"} list={list} color={"#434343"} /> */}
           </div>
           <div className="bg-white rounded-lg pb-4">
             <Transcript
               src={data.RecordingUrl}
               data={data}
-              utterances={callData.transcriptId.utterances}
-              text={callData.transcriptId.text}
+              utterances={callData?.transcriptId?.utterances}
+              text={callData?.transcriptId?.text}
             />
           </div>
         </>
       )}
-      {callData.Status === "in-progress" && (
+      {data.Status === "in-progress" && (
         <>
-          <AudioPlayer src={data.RecordingUrl} />
+          <AudioPlayer src={data?.RecordingUrl} />
           <div className="w-full mt-[30px] mb-[30px] px-[38px] bg-white rounded-xl">
             <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
               call data
@@ -628,7 +631,7 @@ const Audio = ({ data, data1 }: props) => {
                 width={10}
                 height={10}
               />
-              <p className="text-[#304FFD] text-[14px]">Participant 1:John</p>
+              <p className="text-[#304FFD] text-[14px]">Participant 1: A</p>
             </div>
             <div className="w-full flex items-center mt-[6px]">
               <Image
@@ -638,34 +641,32 @@ const Audio = ({ data, data1 }: props) => {
                 width={10}
                 height={10}
               />
-              <p className="text-[#FF965D] text-[14px]">
-                Participant 2:Shraddha
-              </p>
+              <p className="text-[#FF965D] text-[14px]">Participant 2: B</p>
             </div>
           </div>
-          <Tracker title={"John"} list={list} color={"#304FFD"} />
-          <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
-          <Tracker title={"Topics"} list={list} color={"#0090FF"} />
+          <Tracker title={"A"} list={list} color={"#304FFD"} />
+          <Tracker title={"B"} list={list} color={"#FF965D"} />
+          {/* <Tracker title={"Topics"} list={list} color={"#0090FF"} /> */}
           <Transcript
-            src={data.RecordingUrl}
+            src={data?.RecordingUrl}
             data={data}
-            utterances={callData.transcriptId.utterances}
-            text={callData.transcriptId.text}
+            utterances={callData?.transcriptId?.utterances}
+            text={callData?.transcriptId?.text}
           />
         </>
       )}
-      {callData.Status === "no-answer" && (
+      {data.Status === "no-answer" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
             <h1 className="text-[16px] font-medium text-[#888] text-center  capitalize mb-[10px]">
-              Sorry, there is no recording or transcript as the Call Was&apos;nt
+              Sorry, there is no recording or transcript as the Call Wasn&apos;t
               Answered
             </h1>
           </div>
         </>
       )}
-      {callData.Status === "failed" && (
+      {data.Status === "failed" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
@@ -675,7 +676,7 @@ const Audio = ({ data, data1 }: props) => {
           </div>
         </>
       )}
-      {callData.Status === "loading" && (
+      {data.Status === "loading" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">

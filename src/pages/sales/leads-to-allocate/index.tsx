@@ -68,7 +68,7 @@ export default function Open({ data, mastersData }: any) {
 
   return (
     <>
-      <Navbar mainTitle="Sales" title="open Leads" src="salesIcon" />
+      <Navbar mainTitle="Sales" title="Leads to Allocate" src="salesIcon" />
       <Suspense fallback={<BigSpinner />}>
         {!state.isLoggedIn || logged === null ? (
           <BigSpinner />

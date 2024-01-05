@@ -43,7 +43,7 @@ const AudioProfileContainer = ({
       }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
     >
       {data1?.companyId?.company_name && (
-        <div className="w-[100%] flex justify-around">
+        <div className="w-[90%] flex justify-around">
           <div className="flex gap-2 text-[black]">
             <Image
               src={getBasicIcon("buildingIcon")}
@@ -79,18 +79,6 @@ const AudioProfileContainer = ({
               height={25}
             />
             {formattedTime}
-          </div>
-          <div className="flex gap-2 text-[black]">
-            <Image
-              src={getBasicIcon("stopwatch")}
-              style={{
-                zIndex: 10,
-              }}
-              alt=""
-              width={25}
-              height={25}
-            />
-            30 min
           </div>
         </div>
       )}
