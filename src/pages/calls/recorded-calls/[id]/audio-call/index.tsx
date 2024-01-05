@@ -21,7 +21,7 @@ const CallProfile = ({ data, data1, data2 }: any) => {
   const [bool, setBool] = useState(true);
 
   const [userId, setUserId] = useState<any>("");
-  // const [userRole, setUserRole] = useState(window !== undefined ? localStorage.getItem("user-role") : "");
+  const [userRole, setUserRole] = useState("");
   const [qams, setQams] = useState<any>([]);
 
   const getAllQAM = () => {
@@ -45,6 +45,7 @@ const CallProfile = ({ data, data1, data2 }: any) => {
   useEffect(() => {
     if (window !== undefined) {
       setUserId(localStorage.getItem("user-id") || "");
+      setUserRole(localStorage.getItem("user-role") || "");
     }
     getAllQAM();
   }, []);
@@ -91,7 +92,6 @@ const CallProfile = ({ data, data1, data2 }: any) => {
       }
     )
       .then((res: any) => {
-        console.log('--------- res : request feedback ---------', res);
         appDispatch(setSuccess({
           show: true,
           success: "Feedback requested successfully.",
