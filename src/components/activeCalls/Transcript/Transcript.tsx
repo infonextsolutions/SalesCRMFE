@@ -152,7 +152,7 @@ const Transcript = ({
       />
       <div className="pt-3">
         <div className="px-4">
-          {Arrr.map((item: any, i: any) => {
+          {Arrr?.map((item: any, i: any) => {
             return (
               <React.Fragment key={i}>
                 <div className="flex  my-[8px] ">
