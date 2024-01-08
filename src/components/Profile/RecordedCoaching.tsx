@@ -208,9 +208,9 @@ const Coaching = ({ data, refresh }: any) => {
       value: "",
       options: [
         { key: "0", value: 0, label: "No introduction or insufficient information about the client." },
-        { key: "1", value: 2, label: "Basic information provided, but lacks personalization or relevant details." },
-        { key: "2", value: 4, label: "Adequate introduction with some personalization and relevant details about the client." },
-        { key: "3", value: 5, label: "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry." },
+        { key: "1", value: 10, label: "Basic information provided, but lacks personalization or relevant details." },
+        { key: "2", value: 20, label: "Adequate introduction with some personalization and relevant details about the client." },
+        { key: "3", value: 25, label: "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry." },
         { key: "4", value: "NA", label: "Not applicable." },
       ]
     },
@@ -220,9 +220,9 @@ const Coaching = ({ data, refresh }: any) => {
       value: "",
       options: [
         { key: "0", value: 0, label: "No mention or unclear explanation of the service offerings." },
-        { key: "1", value: 2, label: "Basic description of the service offerings, but lacks clarity or fails to highlight key benefits." },
-        { key: "2", value: 4, label: "Clear explanation of the service offerings with an emphasis on key benefits and value proposition." },
-        { key: "3", value: 5, label: "Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits." },
+        { key: "1", value: 10, label: "Basic description of the service offerings, but lacks clarity or fails to highlight key benefits." },
+        { key: "2", value: 20, label: "Clear explanation of the service offerings with an emphasis on key benefits and value proposition." },
+        { key: "3", value: 25, label: "Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits." },
         { key: "4", value: "NA", label: "Not applicable." },
       ]
     },
@@ -232,12 +232,24 @@ const Coaching = ({ data, refresh }: any) => {
       value: "",
       options: [
         { key: "0", value: 0, label: "No introduction or insufficient information about the client." },
-        { key: "1", value: 2, label: "Basic information provided, but lacks personalization or relevant details." },
-        { key: "2", value: 4, label: "Adequate introduction with some personalization and relevant details about the client." },
-        { key: "3", value: 5, label: "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry." },
+        { key: "1", value: 10, label: "Basic information provided, but lacks personalization or relevant details." },
+        { key: "2", value: 20, label: "Adequate introduction with some personalization and relevant details about the client." },
+        { key: "3", value: 25, label: "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry." },
         { key: "4", value: "NA", label: "Not applicable." },
       ]
-    }
+    },
+    {
+      label: "Service Offerings",
+      key: "service_offerings_2",
+      value: "",
+      options: [
+        { key: "0", value: 0, label: "No mention or unclear explanation of the service offerings." },
+        { key: "1", value: 10, label: "Basic description of the service offerings, but lacks clarity or fails to highlight key benefits." },
+        { key: "2", value: 20, label: "Clear explanation of the service offerings with an emphasis on key benefits and value proposition." },
+        { key: "3", value: 25, label: "Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits." },
+        { key: "4", value: "NA", label: "Not applicable." },
+      ]
+    },
   ]);
 
   const updateScoreItem = (checked: any, quesItemIdx: any, val: any) => {
@@ -304,7 +316,7 @@ const Coaching = ({ data, refresh }: any) => {
   };
 
   return (
-    <div className="w-[100%] ">
+    <div className="w-[100%]">
       {loading ? (
         <Loader />
       ) : (

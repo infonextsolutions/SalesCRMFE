@@ -573,7 +573,7 @@ const Audio = ({ data, data1, data2 }: any) => {
         <img src="/video.svg" className="w-full rounded-2xl" alt="" />
       </div> */}
       {/* <CallPlayer /> */}
-      {data.Status === "completed" && (
+      {data?.Status === "completed" && (
         <>
           <AudioPlayer src={data?.RecordingUrl} />
           <div className="w-full mt-[30px] mb-[30px] bg-white rounded-xl p-7 ">
@@ -616,7 +616,7 @@ const Audio = ({ data, data1, data2 }: any) => {
           </div>
         </>
       )}
-      {data.Status === "in-progress" && (
+      {data?.Status === "in-progress" && (
         <>
           <AudioPlayer src={data?.RecordingUrl} />
           <div className="w-full mt-[30px] mb-[30px] px-[38px] bg-white rounded-xl">
@@ -655,7 +655,7 @@ const Audio = ({ data, data1, data2 }: any) => {
           />
         </>
       )}
-      {data.Status === "no-answer" && (
+      {data?.Status === "no-answer" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
@@ -666,7 +666,7 @@ const Audio = ({ data, data1, data2 }: any) => {
           </div>
         </>
       )}
-      {data.Status === "failed" && (
+      {data?.Status === "failed" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
@@ -676,7 +676,7 @@ const Audio = ({ data, data1, data2 }: any) => {
           </div>
         </>
       )}
-      {data.Status === "loading" && (
+      {data?.Status === "loading" && (
         <>
           {/* <AudioPlayer src={data.RecordingUrl} /> */}
           <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
