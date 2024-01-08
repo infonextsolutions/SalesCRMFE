@@ -160,7 +160,7 @@ const Loader = () => {
   );
 };
 
-const Coaching = ({ data }: any) => {
+const Coaching = ({ data, refresh }: any) => {
   console.log('++++++++++++++++ data ++++++++++++++++', data);
   const [userId, setUserId] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
   const [loading, setLoading] = React.useState(true);
@@ -241,7 +241,6 @@ const Coaching = ({ data }: any) => {
   ]);
 
   const updateScoreItem = (checked: any, quesItemIdx: any, val: any) => {
-    console.log('-------------- update score item ------------', checked, quesItemIdx, val);
     setScoreQuestions((currScoreQues: any) => {
       return currScoreQues?.map((scoreQuesItem: any, index: number) => {
         if (index === quesItemIdx) {
@@ -294,6 +293,7 @@ const Coaching = ({ data }: any) => {
           show: true,
           success: "Call Scored Successfully."
         }));
+        refresh();
       })
       .catch((err: any) => {
         appDispatch(setError({
@@ -327,7 +327,7 @@ const Coaching = ({ data }: any) => {
               {tab === 1 && (
                 <div className="w-[120px] flex flex-col items-center px-[6px]">
                   <span className="text-yellow">
-                    {data?.CallScore || "Not Scored"}
+                    {data?.score || "Not Scored"}
                   </span>
                   <span className="text-[16px] font-medium">Call Score</span>
                 </div>
