@@ -3,7 +3,7 @@ import React from "react";
 
 const DeleteCategory = ({ cancel, submit, title }: any) => {
   return (
-    <div className="p-6">
+    <div className="p-6 text-black">
       <h2 className="text-3xl font-bold text-center">
         Are you sure you want to delete &quot;{title}&quot;?
       </h2>
@@ -16,7 +16,7 @@ const DeleteCategory = ({ cancel, submit, title }: any) => {
         <SimpleButton
           theme={2}
           click={cancel}
-          text={"Cencel"}
+          text={"Cancel"}
           left={20}
           right={0}
         />
