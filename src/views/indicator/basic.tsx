@@ -44,8 +44,8 @@ const AddScore = ({
   handleDeleteIndicatorType,
 }: any) => {
   return (
-    <div className="flex items-center px-8 mt-4 gap-20 ">
-      <div className="flex items-center">
+    <div className="flex items-center px-8 mt-4 gap-20">
+      <div className="flex items-center gap-6">
         <div className="">
           <input
             value={typeValue}
@@ -70,14 +70,14 @@ const AddScore = ({
           />
         )}
       </div>
-      <div className="flex gap-12">
-        <div className="w-[70px]">
+      <div className="flex gap-6">
+        <div className="w-[100px]">
           <input
             value={scoreValue}
             disabled={disabled}
             onInput={handleChangeScore}
             type="text"
-            className={`outline-none ${!disabled ? "border-2 w-[100px] rounded-xl px-8 py-1" : ""}`}
+            className={`outline-none ${!disabled ? "border-2 w-[100px] rounded-xl px-8 py-1" : "w-[100px]"}`}
           />
         </div>
         {disabled && (
@@ -613,12 +613,12 @@ const Indicator = () => {
       if (isEdit) {
         setIndicatorTypes((currIndicatorTypes: any) => {
           return currIndicatorTypes?.map((item: any) => {
-            if (item?.key === "") {
+            if (item?.key === "" || item?.label === "") {
               return null;
             } else {
               return { ...item, edit: false };
             }
-          });
+          }).filter((item: any) => item !== null);
         });
       } else {
         setBool(false);
@@ -634,7 +634,7 @@ const Indicator = () => {
     if (type === "CATEGORY") {
       const sum = indicatorTypes?.[currIndicatorType]?.categories?.reduce(
         (acc: number, item: any) => {
-          return acc + item?.scoreWeightage;
+          return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
         },
         0
       );
@@ -643,12 +643,12 @@ const Indicator = () => {
       const sum = indicatorTypes?.[currIndicatorType]?.categories?.[
         currIndicatorCategory
       ]?.values?.reduce((acc: number, item: any) => {
-        return acc + item?.scoreWeightage;
+        return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
       }, 0);
       return sum;
     } else {
       const sum = indicatorTypes?.reduce((acc: number, item: any) => {
-        return acc + item?.scoreWeightage;
+        return acc + (isNaN(item?.scoreWeightage) ? 0 : item?.scoreWeightage);
       }, 0);
       // setScoreSettingSave(sum === 100);
       return sum;
@@ -958,8 +958,8 @@ const Indicator = () => {
               />
             </div>
           ))}
-          <div className="px-8 flex mt-4">
-            <div className="w-3/4">
+          <div className="px-8 flex mt-4 gap-20">
+            <div className="w-[50%]">
               <button
                 className=" mt-2 text-sm cursor-pointer text-[#304FFD]"
                 onClick={addNewIndicatorType}
@@ -967,7 +967,7 @@ const Indicator = () => {
                 Add New Indicator Type
               </button>
             </div>
-            <span className="text-green-500 mt-2 w-[60px]">
+            <span className="text-green-500 mt-2 w-[120px]">
               Sum: {getScoreWeightageSum()}
             </span>
           </div>
