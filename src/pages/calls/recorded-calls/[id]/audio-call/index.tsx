@@ -12,9 +12,13 @@ import Navbar from "@/components/app/Navbar/Navbar";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
+import { useRouter } from "next/router";
 //Manya will make this page
 
 const CallProfile = ({ data, data1, data2 }: any) => {
+  const [dataNew, setDataNew] = useState<any>(data);
+  const [dataNew1, setDataNew1] = useState<any>(data1);
+  const [dataNew2, setDataNew2] = useState<any>(data2);
   const titles = ["CALL INFO", "COMMENTS & NOTES", "COACHING"];
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
@@ -23,6 +27,30 @@ const CallProfile = ({ data, data1, data2 }: any) => {
   const [userId, setUserId] = useState<any>("");
   const [userRole, setUserRole] = useState("");
   const [qams, setQams] = useState<any>([]);
+
+  const router = useRouter();
+  const { id } = router.query;
+
+  const refreshData = () => {
+    axios.get(`https://sales365.trainright.fit/api/calling/find-by-id?id=${id}`)
+      .then((res: any) => {
+        setDataNew(res.data);
+        axios.get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`)
+          .then((res2: any) => {
+            setDataNew1(res2.data);
+          });
+        axios.post(
+          `https://sales365.trainright.fit/api/calling/call-status`,
+          { sid: res.data.result.Sid, leadId: res.data.result.leadId._id }
+        )
+          .then((res3: any) => {
+            setDataNew2(res3.data);
+          });
+      })
+      .catch((err: any) => {
+
+      });
+  };
 
   const getAllQAM = () => {
     axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_manager`)
@@ -95,7 +123,8 @@ const CallProfile = ({ data, data1, data2 }: any) => {
         appDispatch(setSuccess({
           show: true,
           success: "Feedback requested successfully.",
-        }))
+        }));
+        refreshData();
       })
       .catch((err: any) => {
         appDispatch(setError({
@@ -108,7 +137,21 @@ const CallProfile = ({ data, data1, data2 }: any) => {
   return (
     <>
       <NavbarWithButton
-        buttons={[
+        buttons={dataNew?.result?.qaFeedbackReq === "requested" ? [
+          {
+            text: "Share",
+            dropdown: true,
+            id: 1,
+            icon: "Share",
+            light: false,
+            dark: true,
+            click: addCall,
+            list: [
+              { title: "Full Call", Icon: "Phone" },
+              { title: "Call Snippet", Icon: "Mail" },
+            ],
+          },
+        ] : [
           {
             text: "Request Feedback",
             dropdown: true,
@@ -140,7 +183,7 @@ const CallProfile = ({ data, data1, data2 }: any) => {
       <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px] pt-6">
         {fullCall && (
           <Backdrop bool={bool} width={"60%"} pad={"50px 0"}>
-            <FullCall cancel={cancelFull} data={data.result} />
+            <FullCall cancel={cancelFull} data={dataNew.result} />
           </Backdrop>
         )}
         {snippet && (
@@ -150,16 +193,17 @@ const CallProfile = ({ data, data1, data2 }: any) => {
         )}
         <div className="w-[100%] flex gap-[8px] mb-[100px] ">
           <AudioProfileContainer
-            data={data.result}
+            data={dataNew.result}
             width={"42%"}
             titles={titles}
             check={true}
             current={0}
-            data1={data1.result}
+            data1={dataNew1.result}
             info={dummy.audioCallDetails}
+            refresh={refreshData}
           />
           <div className="w-[58%] min-h-[50vh] ">
-            <Audio data={data.result} data1={data1.result} data2={data2.result} />
+            <Audio data={dataNew.result} data1={dataNew1.result} data2={dataNew2.result} refresh={refreshData} />
           </div>
         </div>
         {/* write your code here for profile page manya! */}

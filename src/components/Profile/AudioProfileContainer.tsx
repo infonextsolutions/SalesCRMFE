@@ -19,6 +19,7 @@ const AudioProfileContainer = ({
   data,
   width,
   data1,
+  refresh,
 }: AudioProfileContainerProps) => {
   const activeTitle = useSelector((state: any) => state.ui.current);
   const dispatch = useDispatch();
@@ -38,9 +39,8 @@ const AudioProfileContainer = ({
 
   return (
     <div
-      className={`w-[${
-        width ? width : "100%"
-      }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
+      className={`w-[${width ? width : "100%"
+        }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
     >
       {data1?.companyId?.company_name && (
         <div className="w-[90%] flex justify-around">
@@ -97,7 +97,7 @@ const AudioProfileContainer = ({
           {activeTitle === 1 && (
             <CommentsAndNotes data={data} notesData={data} />
           )}
-          {activeTitle === 2 && <Coaching data={data} />}
+          {activeTitle === 2 && <Coaching data={data} refresh={refresh} />}
         </div>
       </div>
     </div>
@@ -112,4 +112,5 @@ interface AudioProfileContainerProps {
   [key: string]: any;
   check: Boolean;
   data: Recorded;
+  refresh?: any;
 }
