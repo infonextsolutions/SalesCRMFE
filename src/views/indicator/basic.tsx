@@ -613,7 +613,7 @@ const Indicator = () => {
       if (isEdit) {
         setIndicatorTypes((currIndicatorTypes: any) => {
           return currIndicatorTypes?.map((item: any) => {
-            if (item?.key === "" || item?.label === "") {
+            if (item?.oid === undefined) {
               return null;
             } else {
               return { ...item, edit: false };
