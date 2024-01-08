@@ -13,149 +13,7 @@ import EditCategory from "@/components/Indicator/basic/editCategory";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import NavigationWithEditAndDeleteButtons from "@/components/app/NavigationWithEditAndDelete";
 
-const dummyIndicators = [
-  {
-    key: "introduction",
-    label: "Introduction",
-    scoreWeightage: 8,
-    edit: false,
-    categories: [
-      {
-        key: "greetings",
-        label: "Greetings",
-        scoreWeightage: 8,
-      },
-      {
-        key: "name",
-        label: "Name",
-        scoreWeightage: 8,
-      },
-      {
-        key: "title_and_roles",
-        label: "Title and Roles",
-        scoreWeightage: 8,
-      },
-      {
-        key: "responsibilities",
-        label: "Responsibilities",
-        scoreWeightage: 8,
-      },
-    ],
-  },
-  {
-    key: "agenda_setting",
-    label: "Agenda Setting",
-    scoreWeightage: 8,
-    edit: false,
-    categories: [
-      {
-        key: "agenda",
-        label: "Agenda",
-        scoreWeightage: 8,
-      },
-      {
-        key: "report_building",
-        label: "Report Building",
-        scoreWeightage: 8,
-      },
-    ],
-  },
-  {
-    key: "company_intro",
-    label: "Company Introduction",
-    scoreWeightage: 8,
-    edit: false,
-    categories: [
-      {
-        key: "company_overview",
-        label: "Company Overview",
-        scoreWeightage: 8,
-      },
-      {
-        key: "value_proposition",
-        label: "Value Proposition",
-        scoreWeightage: 8,
-      },
-    ],
-  },
-  {
-    key: "product_service",
-    label: "Product/Service",
-    scoreWeightage: 8,
-    edit: false,
-    categories: [
-      {
-        key: "product_demo",
-        label: "Product Demo/Information",
-        scoreWeightage: 8,
-      },
-      {
-        key: "benefits",
-        label: "Benefits",
-        scoreWeightage: 8,
-      },
-      {
-        key: "use_cases",
-        label: "Use Cases",
-        scoreWeightage: 8,
-      },
-    ],
-  },
-  {
-    key: "probing",
-    label: "Probing",
-    scoreWeightage: 8,
-    edit: false,
-    categories: [
-      {
-        key: "identifying_needs",
-        label: "Identifying Needs",
-        scoreWeightage: 8,
-      },
-      {
-        key: "understanding_challenges",
-        label: "Understanding Challenges",
-        scoreWeightage: 8,
-      },
-    ],
-  },
-  {
-    key: "next_step_discussion",
-    label: "Next Steps Discussion",
-    scoreWeightage: 8,
-    edit: false,
-    categories: [
-      {
-        key: "proposing_demo",
-        label: "Proposing Demo",
-        scoreWeightage: 8,
-      },
-      {
-        key: "scheduling_follow_up",
-        label: "Scheduling Follow-Up",
-        scoreWeightage: 8,
-      },
-    ],
-  },
-  {
-    key: "objecting_handling",
-    label: "Objecting Handling",
-    scoreWeightage: 8,
-    edit: false,
-    categories: [
-      {
-        key: "solution_offering",
-        label: "Solution Offering",
-        scoreWeightage: 8,
-      },
-      {
-        key: "address_concerns",
-        label: "Address Concerns",
-        scoreWeightage: 8,
-      },
-    ],
-  },
-];
+
 const AddText = ({ title, place, change, value }: any) => {
   return (
     <div className="w-[100%]  mb-[15px]">
@@ -174,6 +32,8 @@ const AddText = ({ title, place, change, value }: any) => {
     </div>
   );
 };
+
+
 const AddScore = ({
   typeValue,
   scoreValue,
@@ -184,7 +44,7 @@ const AddScore = ({
   handleDeleteIndicatorType,
 }: any) => {
   return (
-    <div className="flex items-center px-8 mt-4 gap-52 ">
+    <div className="flex items-center px-8 mt-4 gap-20 ">
       <div className="flex items-center">
         <div className="">
           <input
@@ -217,9 +77,8 @@ const AddScore = ({
             disabled={disabled}
             onInput={handleChangeScore}
             type="text"
-            className={`outline-none ${
-              !disabled ? "border-2 w-[90px] rounded-xl px-8 py-1" : ""
-            }`}
+            className={`outline-none ${!disabled ? "border-2 w-[90px] rounded-xl px-8 py-1" : ""
+              }`}
           />
         </div>
 
@@ -241,6 +100,8 @@ const AddScore = ({
     </div>
   );
 };
+
+
 const Indicator = () => {
   const [apiData, setApiData] = useState([]);
   const [valuesApiData, setValuesApiData] = useState([]);
@@ -355,7 +216,6 @@ const Indicator = () => {
         formatData(res.data);
       })
       .catch((err: any) => {
-        console.log("------ getTypes : error ------", err);
       });
   };
 
@@ -365,7 +225,7 @@ const Indicator = () => {
       .then((res: any) => {
         console.log("============ indicator : data ============", res);
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   };
 
   const getValues = () => {
@@ -376,7 +236,7 @@ const Indicator = () => {
       .then((res: any) => {
         console.log("============ indicator : data ============", res);
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   };
 
   const deleteIndicatorById = (
@@ -703,6 +563,7 @@ const Indicator = () => {
   useEffect(() => {
     setCurrIndicatorCategory(0);
   }, [currIndicatorType]);
+
   //   const handleBeforeHistoryChange = () => {
   //     router.events.on("beforeHistoryChange", handleBeforeHistoryChange);
   //     router.beforePopState(() => {
@@ -1031,7 +892,6 @@ const Indicator = () => {
   };
 
   const handleAdd = (prev: any, next: any) => {
-    console.log("handle add", next);
     if (next === 0) {
       setBool(true);
       setNewIndicatorCategory({ open: true });
@@ -1042,7 +902,6 @@ const Indicator = () => {
   };
 
   const handleAddScore = (prev: any, next: any) => {
-    console.log("handle add score", next);
     if (next === 0) {
       setBool(true);
       setIndicatorCategoryScoring({ open: true });
@@ -1200,7 +1059,7 @@ const Indicator = () => {
     <>
       {indicatorSetting && (
         <Backdrop bool={bool}>
-          <div className="">
+          <div className="text-black">
             <Navigator
               width={false}
               callback={handleICTabNavigation}
@@ -1238,7 +1097,7 @@ const Indicator = () => {
                           value: e.target.value,
                         })
                       }
-                      handleChangeScore={(e: any) => {}}
+                      handleChangeScore={(e: any) => { }}
                       handleEditIndicatorType={() =>
                         handleEditIndicatorCategoryData({ key: index })
                       }
@@ -1310,7 +1169,7 @@ const Indicator = () => {
                         value: e.target.value,
                       })
                     }
-                    handleChangeScore={(e: any) => {}}
+                    handleChangeScore={(e: any) => { }}
                     handleEditIndicatorType={() =>
                       handleEditIndicatorValue({ key: index })
                     }
@@ -1619,9 +1478,8 @@ const Indicator = () => {
                 key={index}
                 onClick={() => setCurrIndicatorType(index)}
                 value={item?.key}
-                className={`${
-                  currIndicatorType == index ? "text-bg-red" : ""
-                } font-medium cursor-pointer`}
+                className={`${currIndicatorType == index ? "text-bg-red" : ""
+                  } font-medium cursor-pointer`}
               >
                 {item?.label}
               </li>
@@ -1663,10 +1521,17 @@ const Indicator = () => {
                 click: handleAddScore,
                 light: false,
                 dark: true,
-                list: [
-                  { id: 0, title: "Indicator Category Score" },
-                  { id: 1, title: "Indicator Value Score" },
-                ],
+                list: itClone?.[currIndicatorType]?.categories?.length !== 0 &&
+                  itClone?.[currIndicatorType]?.categories?.[
+                    currIndicatorCategory
+                  ]?.label !== ""
+                  ? [
+                    { id: 0, title: "Indicator Category Score" },
+                    { id: 1, title: "Indicator Value Score" },
+                  ]
+                  : [
+                    { id: 0, title: "Indicator Category Score" },
+                  ],
                 value: 0,
               },
               {
@@ -1679,57 +1544,57 @@ const Indicator = () => {
                 dark: false,
                 list:
                   itClone?.[currIndicatorType]?.categories?.length !== 0 &&
-                  itClone?.[currIndicatorType]?.categories?.[
-                    currIndicatorCategory
-                  ]?.label !== ""
+                    itClone?.[currIndicatorType]?.categories?.[
+                      currIndicatorCategory
+                    ]?.label !== ""
                     ? [
-                        { id: 0, title: "Indicator Category" },
-                        { id: 1, title: "Indicator Value" },
-                      ]
+                      { id: 0, title: "Indicator Category" },
+                      { id: 1, title: "Indicator Value" },
+                    ]
                     : [{ id: 0, title: "Indicator Category" }],
               },
             ]}
             leftBtns={
               itClone?.[currIndicatorType]?.categories?.length !== 0 &&
-              itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]
-                ?.label !== ""
+                itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]
+                  ?.label !== ""
                 ? [
-                    {
-                      icon: "Edit",
-                      dropdown: false,
-                      id: 1,
-                      dark: false,
-                      light: true,
-                      list: [],
-                      onClick1: () => {
-                        handleEditIndicatorCategoryData({
-                          key: currIndicatorCategory,
-                        });
-                        setBool(true);
-                        setEditIndicatorCategory({
-                          open: true,
-                          payload: {
-                            value:
-                              itClone?.[currIndicatorType]?.categories?.[
-                                currIndicatorCategory
-                              ]?.label,
-                          },
-                        });
-                      },
+                  {
+                    icon: "Edit",
+                    dropdown: false,
+                    id: 1,
+                    dark: false,
+                    light: true,
+                    list: [],
+                    onClick1: () => {
+                      handleEditIndicatorCategoryData({
+                        key: currIndicatorCategory,
+                      });
+                      setBool(true);
+                      setEditIndicatorCategory({
+                        open: true,
+                        payload: {
+                          value:
+                            itClone?.[currIndicatorType]?.categories?.[
+                              currIndicatorCategory
+                            ]?.label,
+                        },
+                      });
                     },
-                    {
-                      icon: "Delete",
-                      dropdown: false,
-                      id: 2,
-                      dark: false,
-                      light: true,
-                      list: [],
-                      onClick1: () =>
-                        handleDeleteIndicatorCategory({
-                          key: currIndicatorCategory,
-                        }),
-                    },
-                  ]
+                  },
+                  {
+                    icon: "Delete",
+                    dropdown: false,
+                    id: 2,
+                    dark: false,
+                    light: true,
+                    list: [],
+                    onClick1: () =>
+                      handleDeleteIndicatorCategory({
+                        key: currIndicatorCategory,
+                      }),
+                  },
+                ]
                 : []
             }
           />
