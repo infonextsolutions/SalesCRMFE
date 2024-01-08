@@ -57,7 +57,7 @@ const AddScore = ({
         </div>{" "}
         {disabled && (
           <Image
-            className="cursor-pointer "
+            className="cursor-pointer"
             src={getBasicIcon("Edit")}
             alt=""
             // fill={true}
@@ -71,17 +71,15 @@ const AddScore = ({
         )}
       </div>
       <div className="flex gap-12">
-        <div className="w-[50px]">
+        <div className="w-[70px]">
           <input
             value={scoreValue}
             disabled={disabled}
             onInput={handleChangeScore}
             type="text"
-            className={`outline-none ${!disabled ? "border-2 w-[90px] rounded-xl px-8 py-1" : ""
-              }`}
+            className={`outline-none ${!disabled ? "border-2 w-[100px] rounded-xl px-8 py-1" : ""}`}
           />
         </div>
-
         {disabled && (
           <Image
             className="cursor-pointer "
@@ -197,6 +195,13 @@ const Indicator = () => {
               key: item?.category,
               label: item?.category,
               scoreWeightage: 1,
+              values: [{
+                oid: item._id,
+                key: item.value,
+                label: item.value,
+                alternatives: item.alternative,
+                scoreWeightage: parseInt(item?.score || "0"),
+              }]
             },
           ],
         });
@@ -928,7 +933,7 @@ const Indicator = () => {
         <div className="flex justify-between mt-4 pl-8 pr-16">
           <h4 className="font-bold text-center">Indicator Type</h4>
           <h4 className="font-bold text-center">
-            Score Weightage <br /> (Out of 100 )
+            Score Weightage <br /> (Out of 100)
           </h4>
         </div>
         <div>
@@ -936,7 +941,7 @@ const Indicator = () => {
             <div key={index} className="w-[100%]">
               <AddScore
                 typeValue={indicatorType?.label}
-                scoreValue={indicatorType?.scoreWeightage}
+                scoreValue={indicatorType?.scoreWeightage?.toString()}
                 disabled={!indicatorType?.edit}
                 handleChangeType={(e: any) =>
                   setNewIndicatorTypeData(index, "type", e.target.value)
