@@ -1,12 +1,35 @@
 import Navigation from "@/components/app/Navigation";
 import Deals from "@/components/Profile/DealsContainer";
 import ProfilePage from "@/components/Profile/ProfilePage/CompanyProfile";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "@/components/app/Navbar/Navbar";
+import { useRouter } from "next/router";
 
-const CompanyProfile = ({ data }: any) => {
-  const [title, setTitle] = React.useState(data.result.companyId.company_name);
+const CompanyProfile = () => {
+  const [data, setData] = useState<any>({});
+  const [accessToken, setAccessToken] = useState<any>("");
+  const router = useRouter();
+  const { id } = router.query;
+  const [title, setTitle] = React.useState(data?.result?.companyId?.company_name);
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
+  useEffect(() => {
+    axios.get(
+      `https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
+      headers: { Authorization: accessToken }
+    }
+    )
+      .then((res: any) => {
+        setData(res.data);
+        setTitle(res?.data?.result?.companyId?.company_name)
+      });
+  }, [accessToken]);
 
   return (
     <>
@@ -54,14 +77,14 @@ const CompanyProfile = ({ data }: any) => {
 
 export default CompanyProfile;
 
-export async function getServerSideProps({ query, params }: any) {
-  const response = await axios.get(
-    `https://sales365.trainright.fit/api/leads/find-by-id?id=${params.id}`
-  );
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-    }, // will be passed to the page component as props
-  };
-}
+// export async function getServerSideProps({ query, params }: any) {
+//   const response = await axios.get(
+//     ``
+//   );
+//   return {
+//     props: {
+//       // TODO: Can do better error handling here by passing another property error in the component
+//       data: response.data || {},
+//     }, // will be passed to the page component as props
+//   };
+// }

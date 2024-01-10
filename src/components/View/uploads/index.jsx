@@ -70,6 +70,13 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
   const dispatch = useAppDispatch();
 
   const [submitStart, setSubmitStart] = useState(true);
+  const [accessToken, setAccessToken] = useState < string > ("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const submit = async () => {
     if (submitStart) {
@@ -86,7 +93,8 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
           const res = await axios
             .post(
               `https://sales365.trainright.fit/api/call-script/create?activeCallId=${id}`,
-              formData
+              formData,
+              { headers: { Authorization: accessToken } }
             )
             .then((e) => {
               refresh();

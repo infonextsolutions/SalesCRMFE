@@ -18,6 +18,13 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
   const [items, setItems]: any = useState([]);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   useEffect(() => {
     const count = Math.ceil(Number(totalRecords) / limit);
@@ -28,7 +35,11 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
       //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${pageNumber}`
       // );
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${pageNumber}`
+        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${pageNumber}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       );
       // const data = await res.json();
 
@@ -45,7 +56,11 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
     //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}`
     // );
     const res = await axios.get(
-      `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}`
+      `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
     );
     // const data = await res.json();
     return res.data.result;
@@ -121,25 +136,22 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
         </div>
         <div className="flex justify-center my-[45px] ">
           <div
-            className={`flex justify-center mr-[8px] h-[40px] w-[40px] cursor-pointer rounded-[10px] ${
-              pageNumber === 0 ? "bg-[#f5f5f5]" : "bg-[#e8ebfd]"
-            }`}
+            className={`flex justify-center mr-[8px] h-[40px] w-[40px] cursor-pointer rounded-[10px] ${pageNumber === 0 ? "bg-[#f5f5f5]" : "bg-[#e8ebfd]"
+              }`}
             onClick={setFirstPage}
           >
             <Image
               src={getBasicIcon("Arrow-Right 2")}
-              className={`${
-                pageNumber != 0 ? "svg-blue" : ""
-              } rotate-180 translate-x-[6px]`}
+              className={`${pageNumber != 0 ? "svg-blue" : ""
+                } rotate-180 translate-x-[6px]`}
               alt=""
               width={18}
               height={18}
             />
             <Image
               src={getBasicIcon("Arrow-Right 2")}
-              className={`${
-                pageNumber != 0 ? "svg-blue" : ""
-              } rotate-180 translate-x-[-6px]`}
+              className={`${pageNumber != 0 ? "svg-blue" : ""
+                } rotate-180 translate-x-[-6px]`}
               alt=""
               width={18}
               height={18}
@@ -178,43 +190,36 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
             containerClassName={"text-black flex justify-center gap-[8px]"}
             pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
             pageLinkClassName={``}
-            previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-              pageNumber === 0 ? "bg-[#f5f5f5]" : "bg-[#e8ebfd]"
-            }`}
-            previousLinkClassName={`flex justify-center ${
-              pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
-            }`}
-            nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
-              pageNumber === pageCount - 1 ? "bg-[#f5f5f5]" : "bg-[#e8ebfd]"
-            }`}
-            nextLinkClassName={`flex justify-center ${
-              pageNumber === pageCount - 1 ? "cursor-auto" : ""
-            }`}
+            previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === 0 ? "bg-[#f5f5f5]" : "bg-[#e8ebfd]"
+              }`}
+            previousLinkClassName={`flex justify-center ${pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
+              }`}
+            nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === pageCount - 1 ? "bg-[#f5f5f5]" : "bg-[#e8ebfd]"
+              }`}
+            nextLinkClassName={`flex justify-center ${pageNumber === pageCount - 1 ? "cursor-auto" : ""
+              }`}
             breakClassName={""}
             breakLinkClassName={""}
             forcePage={pageNumber}
             activeClassName={`bg-bg-red text-[#fff] rounded-[10px]`}
           />
           <div
-            className={`flex justify-center ml-[8px] h-[40px] w-[40px] cursor-pointer rounded-[10px] ${
-              pageNumber === pageCount - 1 ? "bg-[#f5f5f5]" : "bg-[#e8ebfd]"
-            }`}
+            className={`flex justify-center ml-[8px] h-[40px] w-[40px] cursor-pointer rounded-[10px] ${pageNumber === pageCount - 1 ? "bg-[#f5f5f5]" : "bg-[#e8ebfd]"
+              }`}
             onClick={setLastPage}
           >
             <Image
               src={getBasicIcon("Arrow-Right 2")}
-              className={`${
-                pageNumber != pageCount - 1 ? "svg-red" : ""
-              } translate-x-[6px]`}
+              className={`${pageNumber != pageCount - 1 ? "svg-red" : ""
+                } translate-x-[6px]`}
               alt=""
               width={18}
               height={18}
             />
             <Image
               src={getBasicIcon("Arrow-Right 2")}
-              className={`${
-                pageNumber != pageCount - 1 ? "svg-red" : ""
-              } translate-x-[-6px]`}
+              className={`${pageNumber != pageCount - 1 ? "svg-red" : ""
+                } translate-x-[-6px]`}
               alt=""
               width={18}
               height={18}

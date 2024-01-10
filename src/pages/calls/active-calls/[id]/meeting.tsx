@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "@/components/app/Navigation";
 import ProfilePage from "@/components/Profile/ProfilePage/LeadProfile";
 import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
@@ -14,11 +14,13 @@ import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import EmailPage from "@/components/View/Email";
 import Notes from "@/components/View/Notes";
 import Messages from "@/components/View/messages";
+import { useRouter } from "next/router";
 //Manya will make this page
 
-const MeetingProfile = ({ data, scripts }: any) => {
+const MeetingProfile = () => {
     const titles = ["LEAD INFO", "ACTIVITY HISTORY", "NOTES"];
-
+    const [data, setDataa] = useState<any>({});
+    const [accessToken, setAccessToken] = useState<any>("");
     const [make, setCall] = useState(false);
     const [bool, setBool] = useState(true);
     const [audioFile, setAudioFile] = useState(null);
@@ -33,6 +35,27 @@ const MeetingProfile = ({ data, scripts }: any) => {
             setBool(true);
         }, 500);
     };
+    const router = useRouter();
+    const { id } = router.query;
+    useEffect(() => {
+        if (window !== undefined) {
+            setAccessToken(localStorage.getItem("access-token") || "");
+        }
+    }, []);
+
+    useEffect(() => {
+        try {
+            axios.get(
+                `https://sales365.trainright.fit/api/meeting/find-by-id?id=${id}`, {
+                headers: { Authorization: accessToken }
+            }
+            ).then((res1: any) => {
+                setDataa(res1.data);
+            });
+        } catch (error) {
+
+        }
+    }, [accessToken]);
 
     const takeAction = (e: any, e1: any) => {
         if (e1 === 0) {
@@ -107,7 +130,7 @@ const MeetingProfile = ({ data, scripts }: any) => {
         formData.append("activeCallId", data1.result?._id);
         formData.append("file", audioFile);
         axios
-            .post("https://sales365.trainright.fit/api/recording/add-rc", formData)
+            .post("https://sales365.trainright.fit/api/recording/add-rc", formData, { headers: { Authorization: accessToken } })
             .then((e: any) => {
                 setUploadModalStatus(false);
                 dispatch(
@@ -132,7 +155,7 @@ const MeetingProfile = ({ data, scripts }: any) => {
             sid: callRes?.Sid,
             leadId: callRes?.leadId,
         };
-        axios.post(`api/calling/call-status`, payload)
+        axios.post(`api/calling/call-status`, payload, { headers: { Authorization: accessToken } })
             .then((res: any) => {
             })
             .catch((err: any) => {
@@ -152,7 +175,7 @@ const MeetingProfile = ({ data, scripts }: any) => {
             leadId: data?.result?.leadId?._id
         }
         axios.post(
-            `https://sales365.trainright.fit/api/calling/make-call?`, payload
+            `https://sales365.trainright.fit/api/calling/make-call?`, payload, { headers: { Authorization: accessToken } }
         )
             .then((res: any) => {
                 const callData = res.data;
@@ -218,7 +241,9 @@ const MeetingProfile = ({ data, scripts }: any) => {
     const UpdateData = async () => {
         const response = await axios
             .get(
-                `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`
+                `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`, {
+                headers: { Authorization: accessToken }
+            }
             )
             .then((e) => {
                 setData(e.data);
@@ -401,7 +426,7 @@ const MeetingProfile = ({ data, scripts }: any) => {
                         data1={data?.result}
                     />
                     <div className="w-[58%] min-h-[50vh] bg-white rounded-xl">
-                        <Script data={data?.result} scripts={scripts} />
+                        <Script data={data?.result} scripts={{}} />
                     </div>
                 </div>
                 {/* write your code here for profile page manya! */}
@@ -412,29 +437,29 @@ const MeetingProfile = ({ data, scripts }: any) => {
 
 export default MeetingProfile;
 
-export async function getServerSideProps({ query, params }: any) {
-    // "https://sales365.trainright.fit/api/active-call/find-all"
-    try {
-        const response = await axios.get(
-            `https://sales365.trainright.fit/api/meeting/find-by-id?id=${params.id}`
-        );
-        // const another = await axios.get(
-        //   `https://sales365.trainright.fit/api/meeting-script/active-call?activeCallId=${response?.data?.result?._id}`
-        // );
-        return {
-            props: {
-                // TODO: Can do better error handling here by passing another property error in the component
-                data: response.data || {},
-                // scripts: another.data || {},
-            }, // will be passed to the page component as props
-        };
-    } catch (error) {
-        return {
-            props: {
-                // TODO: Can do better error handling here by passing another property error in the component
-                // data: response.data || {},
-                // scripts: another.data || {},
-            }, // will be passed to the page component as props
-        };
-    }
-}
+// export async function getServerSideProps({ query, params }: any) {
+//     // "https://sales365.trainright.fit/api/active-call/find-all"
+//     try {
+//         const response = await axios.get(
+//             `https://sales365.trainright.fit/api/meeting/find-by-id?id=${params.id}`
+//         );
+//         // const another = await axios.get(
+//         //   `https://sales365.trainright.fit/api/meeting-script/active-call?activeCallId=${response?.data?.result?._id}`
+//         // );
+//         return {
+//             props: {
+//                 // TODO: Can do better error handling here by passing another property error in the component
+//                 data: response.data || {},
+//                 // scripts: another.data || {},
+//             }, // will be passed to the page component as props
+//         };
+//     } catch (error) {
+//         return {
+//             props: {
+//                 // TODO: Can do better error handling here by passing another property error in the component
+//                 // data: response.data || {},
+//                 // scripts: another.data || {},
+//             }, // will be passed to the page component as props
+//         };
+//     }
+// }

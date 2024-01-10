@@ -252,6 +252,14 @@ const Coaching = ({ data, refresh }: any) => {
     },
   ]);
 
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
   const updateScoreItem = (checked: any, quesItemIdx: any, val: any) => {
     setScoreQuestions((currScoreQues: any) => {
       return currScoreQues?.map((scoreQuesItem: any, index: number) => {
@@ -271,7 +279,11 @@ const Coaching = ({ data, refresh }: any) => {
     if (checked) {
       axios
         .get(
-          `https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=${userId}`
+          `https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=${userId}`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
         )
         .then((e) => {
           setData(e.data);
@@ -280,7 +292,8 @@ const Coaching = ({ data, refresh }: any) => {
         .catch((e) => { });
       setChecked(false);
     }
-  });
+  }, [accessToken]);
+
   const handleCallback = (payload: any) => {
     setTab(payload);
   };
@@ -298,6 +311,10 @@ const Coaching = ({ data, refresh }: any) => {
       {
         score: finalScore,
         callId: data?._id,
+      }, {
+        headers: {
+          Authorization: accessToken
+        }
       }
     )
       .then((res: any) => {

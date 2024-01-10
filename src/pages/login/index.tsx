@@ -93,7 +93,7 @@ const Login = () => {
     axios
       .post(
         "https://sales365.trainright.fit/api/master-users/signin",
-        finalPayload
+        finalPayload, { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         dispatch(

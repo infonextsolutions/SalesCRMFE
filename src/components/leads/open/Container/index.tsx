@@ -36,6 +36,13 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     setSearch(val);
   };
   const state = useSelector((state: any) => state.auth);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const getQueryStr = () => {
     let queryStr = "";
@@ -75,7 +82,11 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open${getQueryStr()}`
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open${getQueryStr()}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       );
       setVisibleRecords({ ...response.data });
     } catch (error) {

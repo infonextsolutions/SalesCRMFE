@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import SimpleButton from "@/utils/Button/SimpleButton";
@@ -194,21 +194,31 @@ const Attachements = ({ data }: any) => {
     const minutes = istTime.getUTCMinutes();
 
     // Format the time part (hours and minutes) in 12-hour clock format with AM/PM indicator
-    let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${
-      hours >= 12 ? "PM" : "AM"
-    }`;
+    let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"
+      }`;
 
     // Format the date and time as desired
     return `${day} ${month} ${year}, ${timeStr}`;
   }
 
   const [attachments, setAttachments] = useState(data.attachments);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const UpdateData = async () => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
         )
         .then((e) => {
           setAttachments(e.data.result.attachments);
@@ -221,7 +231,9 @@ const Attachements = ({ data }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`, {
+          headers: { Authorization: accessToken }
+        }
         )
         .then((e) => {
           setAttachments(e.data.result.attachments);
@@ -293,7 +305,7 @@ const Attachements = ({ data }: any) => {
                   _id: data._id,
                 };
                 axios
-                  .put("https://sales365.trainright.fit/api/leads/update", val)
+                  .put("https://sales365.trainright.fit/api/leads/update", val, { headers: { Authorization: accessToken } })
                   .then((e) => {
                     UpdateData2();
                     dispatch(
@@ -303,7 +315,7 @@ const Attachements = ({ data }: any) => {
                       })
                     );
                   })
-                  .catch((e) => {});
+                  .catch((e) => { });
               }}
               refresh={() => {
                 UpdateData();

@@ -1,6 +1,6 @@
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useAppDispatch } from "@/store/store";
@@ -66,6 +66,14 @@ const Notes = ({ cancel, leadid, update }: any) => {
 
   const dispatch = useAppDispatch();
 
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
+
   const submit = () => {
     const body = {
       leadId: leadid,
@@ -74,7 +82,7 @@ const Notes = ({ cancel, leadid, update }: any) => {
     };
     const url = "https://sales365.trainright.fit/api/leads/notes";
     axios
-      .post(url, body)
+      .post(url, body, { headers: { Authorization: accessToken } })
       .then((e: any) => {
         cancel();
         dispatch(

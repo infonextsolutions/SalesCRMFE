@@ -124,10 +124,17 @@ const KanbanItem = ({ item, i, Item }: any) => {
     if (wRef.current) {
       setW(wRef.current.offsetWidth);
     }
-  });
+  }, []);
 
   const activities: any = Item;
   const activity = activities?.activityId;
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   function convertToFormattedDate(dateString: any) {
     const dateObject = new Date(dateString);
@@ -176,13 +183,17 @@ const KanbanItem = ({ item, i, Item }: any) => {
       }
       setCheck(true);
     }
-  });
+  }, []);
 
   const update = async () => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${Item._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${Item._id}`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
         )
         .then((e) => {
           const history = e.data.result.activityId.history;

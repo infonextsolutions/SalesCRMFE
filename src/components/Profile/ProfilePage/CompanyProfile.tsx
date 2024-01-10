@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import Backdrop from "@/components/View/Backdrop/Center";
@@ -22,12 +22,23 @@ const CompanyProfile = ({ data1, refresh }: any) => {
   };
 
   const [data, setData] = useState(data1);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const UpdateData = async () => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1.result._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1.result._id}`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
         )
         .then((e) => {
           setData(e.data);

@@ -99,7 +99,7 @@ const Dashboard = ({ data }: any) => {
     if (window !== undefined) {
       setAccessToken(localStorage.getItem("access-token"));
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (window !== undefined) {
@@ -158,7 +158,7 @@ const Dashboard = ({ data }: any) => {
     axios
       .post(
         "https://sales365.trainright.fit/api/pitch-analysis/find-one",
-        finalPayload
+        finalPayload, { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         setPitchData(res.data.result);
@@ -178,7 +178,7 @@ const Dashboard = ({ data }: any) => {
     axios
       .post(
         "https://sales365.trainright.fit/api/selling-analysis/find-one",
-        finalPayload
+        finalPayload, { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         setSellingData(res.data.result);
@@ -198,7 +198,7 @@ const Dashboard = ({ data }: any) => {
     axios
       .post(
         "https://sales365.trainright.fit/api/script-analysis/find-one",
-        finalPayload
+        finalPayload, { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         setScriptBuilderData(res.data.result);

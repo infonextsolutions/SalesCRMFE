@@ -5,7 +5,7 @@ import Lead, { CompanyId, CustomerId, Owner } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ActivityHistory from "../../genUtils/Activity";
 import Notes1 from "@/components/View/NotesSalesView";
@@ -119,9 +119,8 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -656,11 +655,22 @@ const LeadContainer = ({
   const ref: any = useRef();
 
   const [LeadData1, setLeadData] = useState(LeadData);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData._id}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       )
       .then((e) => {
         setLeadData(e.data.result);

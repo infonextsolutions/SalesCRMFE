@@ -378,6 +378,14 @@ const EmailPage = ({
   ];
   const [newEmailList, setNewEmailList] = useState<any>([emailList]);
   const dispatch = useAppDispatch();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
+
   const submit = (e1: any, e2: any, e3: any) => {
     const payload = {
       _id: data?._id,
@@ -396,7 +404,7 @@ const EmailPage = ({
     };
 
     axios
-      .post(url, payload)
+      .post(url, payload, { headers: { Authorization: accessToken } })
       .then((e) => {
         cancel();
         refresh({ selected: 1 });
@@ -440,13 +448,17 @@ const EmailPage = ({
 
     axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       )
       .then((res) => {
       })
       .catch((err) => {
       });
-  }, [data]);
+  }, [data, accessToken]);
 
   return (
     <div className="w-[100%] h-[100%]  py-[30px] pl-[40px] pr-[40px]  relative">

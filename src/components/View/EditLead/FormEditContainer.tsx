@@ -1,6 +1,6 @@
 import Navigator from "@/utils/customNavigator";
 import SimpleButton from "@/utils/Button/SimpleButton";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import { LeadId } from "@/types/leadId";
@@ -31,12 +31,18 @@ const FormEditContainer = ({
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
   const dispatch = useAppDispatch();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   return (
     <div
-      className={`w-[${
-        width ? width : "100%"
-      }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
+      className={`w-[${width ? width : "100%"
+        }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
     >
       {/* <Navigator callback={CallBack} current={current} list={list} /> */}
       <h1 className="w-[100%] text-[#3F434A] text-center pt-[10px] font-medium text-3xl">
@@ -84,7 +90,7 @@ const FormEditContainer = ({
                       update();
                       const response = await axios.put(
                         "https://sales365.trainright.fit/api/leads/update",
-                        val
+                        val, { headers: { Authorization: accessToken } }
                       );
                       dispatch(
                         setSuccess({
@@ -281,7 +287,7 @@ const FormEditContainer = ({
                                 -- Select Lead Stage --
                               </option>
                               {data.leadStatus === "open" ||
-                              data.leadStatus === "Open" ? (
+                                data.leadStatus === "Open" ? (
                                 <>
                                   <option value="Enquiry">Enquiry</option>
                                   <option value="Interaction">
@@ -378,7 +384,7 @@ const FormEditContainer = ({
                       };
                       const response = await axios.put(
                         "https://sales365.trainright.fit/api/leads/update",
-                        val
+                        val, { headers: { Authorization: accessToken } }
                       );
                       dispatch(
                         setSuccess({
@@ -717,7 +723,7 @@ const FormEditContainer = ({
                       }
                       const response = await axios.put(
                         "https://sales365.trainright.fit/api/leads/update",
-                        val
+                        val, { headers: { Authorization: accessToken } }
                       );
                       dispatch(
                         setSuccess({

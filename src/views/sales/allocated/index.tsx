@@ -133,6 +133,13 @@ const SalesOpen = ({ data, mastersData }: props) => {
   };
 
   const ref: any = useRef();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const exportXLSX = () => {
     const worksheet = XLSX.utils.json_to_sheet(data?.result);
@@ -148,7 +155,8 @@ const SalesOpen = ({ data, mastersData }: props) => {
       "https://sales365.trainright.fit/api/calling/make-call",
       {
         callTo: "7669481778",
-      }
+      },
+      { headers: { Authorization: accessToken } }
     );
   };
 

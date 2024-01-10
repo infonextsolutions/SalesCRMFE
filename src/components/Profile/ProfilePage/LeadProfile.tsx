@@ -37,6 +37,13 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
   }
 
   const [data, setData] = useState<Lead>(data1);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   // const domain = extractDomain(data.companyId?.company_website_url);
 
@@ -48,7 +55,11 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?._id}`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
         )
         .then((e) => {
           setData(e.data.result);

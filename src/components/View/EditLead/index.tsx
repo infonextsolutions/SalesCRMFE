@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import { LeadId } from "@/types/leadId";
@@ -67,6 +67,13 @@ const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; d
   const titles = ["LEAD INFO", "CONTACT INFO", "DEAL INFO"];
   const [content, setContent] = useState<any>({});
   const router = useRouter();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
   //   companyId:data.companyId._id,34
   //   company_name,
   //   company_website_url,
@@ -112,7 +119,7 @@ const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; d
         companyId: data.companyId._id,
         customerId: data.customerId._id,
 
-      })
+      }, { headers: { Authorization: accessToken } })
       .then((e: any) => {
       });
   };

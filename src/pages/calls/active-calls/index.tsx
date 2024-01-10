@@ -53,7 +53,7 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const Calls = ({ data }: any) => {
+const Calls = () => {
   const [scheduleCalls, setScheduleCalls] = useState(true);
   const [scheduleMeeting, setScheduleMeeting] = useState(false);
   const [role, setRole] = useState<any>("");
@@ -82,6 +82,28 @@ const Calls = ({ data }: any) => {
       router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
     };
   }, []);
+
+  const [accessToken, setAccessToken] = useState<any>("");
+  const [data, setData] = useState<any>({});
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
+
+  useEffect(() => {
+    axios.get(
+      "https://sales365.trainright.fit/api/active-call/find-all", {
+      headers: {
+        Authorization: accessToken
+      }
+    }
+    ).then((res: any) => {
+      setData(res?.data);
+    }).catch((err: any) => {
+    });
+  }, [accessToken]);
 
   const exportXLSX = () => {
     const worksheet = XLSX.utils.json_to_sheet(data.result);
@@ -177,15 +199,13 @@ const Calls = ({ data }: any) => {
   );
 };
 
-export async function getServerSideProps({ query, ...params }: any) {
-  const response = await axios.get(
-    "https://sales365.trainright.fit/api/active-call/find-all"
-  );
-  return {
-    props: {
-      data: response.data || {},
-    },
-  };
-}
+// export async function getServerSideProps({ query, ...params }: any) {
+//   const response = await ;
+//   return {
+//     props: {
+//       data: response.data || {},
+//     },
+//   };
+// }
 
 export default Calls;

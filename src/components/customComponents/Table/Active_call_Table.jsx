@@ -21,10 +21,21 @@ const LeadsTable = ({ totalRecords, search }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [loading, setLoading] = React.useState(false);
   const [checked, setChecked] = useState(true);
+  const [accessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const getallItems = async (current) => {
     const res = await axios.get(
-      `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}`
+      `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
     );
     const data = res.data.result;
     return data;
@@ -45,7 +56,11 @@ const LeadsTable = ({ totalRecords, search }) => {
       if (pageNumber >= count && pageCount !== 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/active-call/find-all`
+          `https://sales365.trainright.fit/api/active-call/find-all`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
         );
         const data = res.data.result;
 
@@ -80,7 +95,7 @@ const LeadsTable = ({ totalRecords, search }) => {
     <>
       <div className="mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
         <Header
-          // Pass props and functions to Header component if required
+        // Pass props and functions to Header component if required
         />
         {loading ? (
           <Spinner />

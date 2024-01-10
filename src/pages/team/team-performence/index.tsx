@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -8,9 +8,11 @@ import BigSpinner from "@/components/loader/BigSpinner";
 
 const Performence = React.lazy(() => import("@/views/team/Team-performence"));
 
-export default function Open({ data }: any) {
+export default function Open() {
+  const [data, setData] = useState<any>({});
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
+  const [accessToken, setAccessToken] = useState<any>("");
 
   const dispatch = useDispatch();
 
@@ -18,6 +20,24 @@ export default function Open({ data }: any) {
   const [id] = useLocalStorage("user-id", "not-loaded");
   const [name] = useLocalStorage("user-name", "not-loaded");
   const [role] = useLocalStorage("user-role", "not-loaded");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
+  useEffect(() => {
+    axios.get(
+      "https://sales365.trainright.fit/api/lead-report/find-all?page=0&limit=10", {
+      headers: {
+        Authorization: accessToken
+      }
+    }
+    ).then((res: any) => {
+      setData(res.data);
+    });
+  }, [accessToken]);
 
   React.useEffect(() => {
     const doACall = async () => {
@@ -79,14 +99,14 @@ export default function Open({ data }: any) {
   );
 }
 
-export async function getServerSideProps({ query, ...params }: any) {
-  const response = await axios.get(
-    "https://sales365.trainright.fit/api/lead-report/find-all?page=0&limit=10"
-  );
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-    }, // will be passed to the page component as props
-  };
-}
+// export async function getServerSideProps({ query, ...params }: any) {
+//   const response = await axios.get(
+//     ""
+//   );
+//   return {
+//     props: {
+//       // TODO: Can do better error handling here by passing another property error in the component
+//       data: response.data || {},
+//     }, // will be passed to the page component as props
+//   };
+// }

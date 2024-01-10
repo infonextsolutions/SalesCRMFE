@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Logo from "@/components/app/Sidebar/SidebarLogo";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,13 @@ const SignupSchema = Yup.object().shape({
 const ForgotPassword = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const submit = ({ user }: any) => {
     const finalPayload = {
@@ -30,7 +37,7 @@ const ForgotPassword = () => {
     axios
       .post(
         "https://sales365.trainright.fit/api/master-users/forgotPassword",
-        finalPayload
+        finalPayload, { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         if (res?.data?.success) {

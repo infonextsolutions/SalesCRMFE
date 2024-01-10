@@ -13,20 +13,52 @@ import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
+import { useRouter } from "next/router";
 
-const Profile = ({ data, mastersData }: any) => {
-
+const Profile = () => {
+  const [data, setData1] = useState<any>({});
+  const [mastersData, setMastersData] = useState<any>({});
   const [data1, setData] = useState(data);
+  const [accessToken, setAccessToken] = useState<any>("");
+  const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
+  useEffect(() => {
+    axios.get(
+      `https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
+    ).then((res: any) => {
+      setData1(res.data);
+    });
+    axios.get(
+      "https://sales365.trainright.fit/api/master-users/find-all", {
+      headers: { Authorization: accessToken }
+    }
+    ).then((res: any) => {
+      setMastersData(res.data);
+    });
+  }, [accessToken]);
 
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`, {
+        headers: { Authorization: accessToken }
+      }
       )
       .then((e) => {
         setData(e.data);
       })
-      .catch(() => {});
+      .catch(() => { });
   };
   const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS"];
 
@@ -240,18 +272,18 @@ const Profile = ({ data, mastersData }: any) => {
 
 export default Profile;
 
-export async function getServerSideProps({ query, params }: any) {
-  const response = await axios.get(
-    `https://sales365.trainright.fit/api/leads/find-by-id?id=${params.id}`
-  );
-  const response2 = await axios.get(
-    `https://sales365.trainright.fit/api/master-users/find-all`
-  );
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-      mastersData: response2?.data || {},
-    }, // will be passed to the page component as props
-  };
-}
+// export async function getServerSideProps({ query, params }: any) {
+//   const response = await axios.get(
+//     ``
+//   );
+//   const response2 = await axios.get(
+//     ``
+//   );
+//   return {
+//     props: {
+//       // TODO: Can do better error handling here by passing another property error in the component
+//       data: response.data || {},
+//       mastersData: response2?.data || {},
+//     }, // will be passed to the page component as props
+//   };
+// }

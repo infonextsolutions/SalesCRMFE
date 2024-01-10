@@ -29,11 +29,22 @@ const RecordProfile = ({
 
   const [data2, setData] = useState<any>({});
   const [activeCall, setActiveCall] = useState(data1);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const UpdateCall = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data1?._id}`
+        `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data1?._id}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       )
       .then((e) => {
         setActiveCall(e.data.result);
@@ -45,7 +56,11 @@ const RecordProfile = ({
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.leadId?._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.leadId?._id}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       )
       .then((e) => {
         setData(e?.data?.result);
@@ -73,9 +88,8 @@ const RecordProfile = ({
 
   return (
     <div
-      className={`w-[${
-        width ? width : "100%"
-      }]  bg-[#ffe3e170] rounded-xl p-[15px] pt-[30px]`}
+      className={`w-[${width ? width : "100%"
+        }]  bg-[#ffe3e170] rounded-xl p-[15px] pt-[30px]`}
     >
       {live && (
         <div className="h-[440px] bg-[#EDEDED] flex justify-center items-center text-[#000000]">

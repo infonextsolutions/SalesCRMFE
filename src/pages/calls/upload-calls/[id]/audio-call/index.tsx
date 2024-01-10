@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "@/components/app/Navigation";
 import AudioProfileContainer from "@/components/Profile/UploadProfileContainer";
 import dummy from "@/shared/dummy";
@@ -14,13 +14,39 @@ import { useRouter } from "next/router";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
 //Manya will make this page
 
-const CallProfile = ({ data, data1 }: any) => {
+const CallProfile = () => {
   const titles = ["CALL INFO", "COMMENTS", "NOTES", "COACHING"];
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
   const [bool, setBool] = useState(true);
+  const [data, setData] = useState<any>({});
+  const [data1, setData1] = useState<any>({});
+  const [accessToken, setAccessToken] = useState<any>("");
 
   const state = useSelector((state: any) => state.ui);
+  const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      axios.post(
+        `https://sales365.trainright.fit/api/recording/getManualRecording`,
+        {
+          transId: id,
+        }, { headers: { Authorization: accessToken } }
+      ).then((res: any) => {
+        setData(res.data);
+      });
+    } catch (error) {
+
+    }
+  }, [accessToken]);
 
   const showFull = () => {
     setFullCall(true);
@@ -53,10 +79,9 @@ const CallProfile = ({ data, data1 }: any) => {
 
   const state1 = useSelector((state: any) => state.auth);
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   const [logged] = useLocalStorage("logged", "loading");
-  const [id] = useLocalStorage("user-id", "not-loaded");
+  const [userId] = useLocalStorage("user-id", "not-loaded");
   const [name] = useLocalStorage("user-name", "not-loaded");
   const [role] = useLocalStorage("user-role", "not-loaded");
 
@@ -78,16 +103,16 @@ const CallProfile = ({ data, data1 }: any) => {
   React.useEffect(() => {
     if (!state1.isLoggedIn) {
       if (logged === "loading" || logged === "loggedIn") {
-        if (id === null || name === null || role === null) {
+        if (userId === null || name === null || role === null) {
           router.push("/login");
         }
-        if (id && name && role) {
+        if (userId && name && role) {
           if (
-            id !== "not-loaded" &&
+            userId !== "not-loaded" &&
             name !== "not-loaded" &&
             role !== "not-loaded"
           ) {
-            dispatch(setUser1({ _id: id, User: name, Role: role }));
+            dispatch(setUser1({ _id: userId, User: name, Role: role }));
             dispatch(setLoggedInStatus(true));
           }
         }
@@ -95,7 +120,7 @@ const CallProfile = ({ data, data1 }: any) => {
         router.push("/login");
       }
     }
-  }, [id, name, role, logged]);
+  }, [userId, name, role, logged]);
 
   React.useEffect(() => {
     if (!state.isLoggedIn) {
@@ -156,19 +181,19 @@ const CallProfile = ({ data, data1 }: any) => {
 
 export default CallProfile;
 
-export async function getServerSideProps({ query, params }: any) {
-  const response = await axios.post(
-    `https://sales365.trainright.fit/api/recording/getManualRecording`,
-    {
-      transId: params.id,
-    }
-  );
+// export async function getServerSideProps({ query, params }: any) {
+//   const response = await axios.post(
+//     `https://sales365.trainright.fit/api/recording/getManualRecording`,
+//     {
+//       transId: params.id,
+//     }
+//   );
 
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data.data || {},
-      data1: {},
-    }, // will be passed to the page component as props
-  };
-}
+//   return {
+//     props: {
+//       // TODO: Can do better error handling here by passing another property error in the component
+//       data: response.data.data || {},
+//       data1: {},
+//     }, // will be passed to the page component as props
+//   };
+// }

@@ -36,6 +36,13 @@ const Notes = ({ data, refresh }: any) => {
   });
 
   const containerRef: any = useRef();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -56,7 +63,7 @@ const Notes = ({ data, refresh }: any) => {
           title: title,
           content: content,
           recordingId: data._id,
-        })
+        }, { headers: { Authorization: accessToken } })
         .then((e) => {
           if (containerRef.current) {
             containerRef.current.scrollTop = 0; // Set scrollTop to 0 to scroll to the top

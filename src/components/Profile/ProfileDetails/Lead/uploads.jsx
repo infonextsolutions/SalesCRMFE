@@ -68,6 +68,13 @@ const Uploads = ({ cancel, id, refresh }) => {
   };
 
   const dispatch = useAppDispatch();
+  const [accessToken, setAccessToken] = useState < string > ("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const submit = async () => {
     if (file) {
@@ -81,7 +88,8 @@ const Uploads = ({ cancel, id, refresh }) => {
       const res = await axios
         .post(
           `https://sales365.trainright.fit/api/leads/addLeadAttachments`,
-          formData
+          formData,
+          { headers: { Authorization: accessToken } }
         )
         .then((e) => {
           refresh();
@@ -93,7 +101,7 @@ const Uploads = ({ cancel, id, refresh }) => {
           );
           cancel();
         })
-        .catch((e) => {});
+        .catch((e) => { });
     }
   };
 

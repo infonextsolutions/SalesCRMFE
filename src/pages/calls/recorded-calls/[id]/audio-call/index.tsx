@@ -15,10 +15,10 @@ import { setError, setSuccess } from "@/store/ai";
 import { useRouter } from "next/router";
 //Manya will make this page
 
-const CallProfile = ({ data, data1, data2 }: any) => {
-  const [dataNew, setDataNew] = useState<any>(data);
-  const [dataNew1, setDataNew1] = useState<any>(data1);
-  const [dataNew2, setDataNew2] = useState<any>(data2);
+const CallProfile = () => {
+  const [dataNew, setDataNew] = useState<any>({});
+  const [dataNew1, setDataNew1] = useState<any>({});
+  const [dataNew2, setDataNew2] = useState<any>({});
   const titles = ["CALL INFO", "COMMENTS & NOTES", "COACHING"];
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
@@ -30,18 +30,26 @@ const CallProfile = ({ data, data1, data2 }: any) => {
 
   const router = useRouter();
   const { id } = router.query;
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const refreshData = () => {
-    axios.get(`https://sales365.trainright.fit/api/calling/find-by-id?id=${id}`)
+    axios.get(`https://sales365.trainright.fit/api/calling/find-by-id?id=${id}`, { headers: { Authorization: accessToken } })
       .then((res: any) => {
         setDataNew(res.data);
-        axios.get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`)
+        axios.get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`, { headers: { Authorization: accessToken } })
           .then((res2: any) => {
             setDataNew1(res2.data);
           });
         axios.post(
           `https://sales365.trainright.fit/api/calling/call-status`,
-          { sid: res.data.result.Sid, leadId: res.data.result.leadId._id }
+          { sid: res.data.result.Sid, leadId: res.data.result.leadId._id },
+          { headers: { Authorization: accessToken } }
         )
           .then((res3: any) => {
             setDataNew2(res3.data);
@@ -52,8 +60,12 @@ const CallProfile = ({ data, data1, data2 }: any) => {
       });
   };
 
+  useEffect(() => {
+    refreshData();
+  }, [accessToken]);
+
   const getAllQAM = () => {
-    axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_manager`)
+    axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_manager`, { headers: { Authorization: accessToken } })
       .then((res: any) => {
         setQams(res?.data?.result?.map((qamItem: any, index: number) => {
           return {
@@ -116,8 +128,9 @@ const CallProfile = ({ data, data1, data2 }: any) => {
       {
         qaId: userId,
         qamId: qams?.[next]?._id,
-        callId: data?.result?._id,
-      }
+        callId: dataNew?.result?._id,
+      },
+      { headers: { Authorization: accessToken } }
     )
       .then((res: any) => {
         appDispatch(setSuccess({
@@ -214,25 +227,25 @@ const CallProfile = ({ data, data1, data2 }: any) => {
 
 export default CallProfile;
 
-export async function getServerSideProps({ query, params }: any) {
-  const response = await axios.get(
-    `https://sales365.trainright.fit/api/calling/find-by-id?id=${params.id}`
-  );
+// export async function getServerSideProps({ query, params }: any) {
+//   const response = await axios.get(
+//     `https://sales365.trainright.fit/api/calling/find-by-id?id=${params.id}`
+//   );
 
-  const response1 = await axios.get(
-    `https://sales365.trainright.fit/api/leads/find-by-id?id=${response.data.result.leadId._id}`
-  );
+//   const response1 = await axios.get(
+//     `https://sales365.trainright.fit/api/leads/find-by-id?id=${response.data.result.leadId._id}`
+//   );
 
-  const response2 = await axios.post(
-    `https://sales365.trainright.fit/api/calling/call-status`, { sid: response.data.result.Sid, leadId: response.data.result.leadId._id }
-  );
+//   const response2 = await axios.post(
+//     `https://sales365.trainright.fit/api/calling/call-status`, { sid: response.data.result.Sid, leadId: response.data.result.leadId._id }
+//   );
 
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-      data1: response1.data || {},
-      data2: response2.data || {},
-    }, // will be passed to the page component as props
-  };
-}
+//   return {
+//     props: {
+//       // TODO: Can do better error handling here by passing another property error in the component
+//       data: response.data || {},
+//       data1: response1.data || {},
+//       data2: response2.data || {},
+//     }, // will be passed to the page component as props
+//   };
+// }

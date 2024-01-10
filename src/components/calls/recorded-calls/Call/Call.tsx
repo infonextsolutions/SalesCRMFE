@@ -4,7 +4,7 @@ import ActiveCall from "@/types/recorded-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import Lead, { Owner } from "@/types/Leads";
 import axios from "axios";
@@ -548,11 +548,23 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
 
   const [checked, setChecked] = useState(true);
   const [LeadData, setLeadData] = useState<any>(example);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
   const GetLeadData = () => {
     if (CallData.leadId.length > 0) {
       axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData.leadId[0]._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData.leadId[0]._id}`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
         )
         .then((e: any) => {
           setChecked(false);
@@ -569,7 +581,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       GetLeadData();
       setChecked(false);
     }
-  });
+  }, [accessToken]);
 
   function convertTimestampToTime(timestamp: string) {
     const dateTime = new Date(timestamp);
