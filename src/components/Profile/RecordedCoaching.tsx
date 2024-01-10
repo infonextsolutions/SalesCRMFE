@@ -161,8 +161,8 @@ const Loader = () => {
 };
 
 const Coaching = ({ data, refresh }: any) => {
-  console.log('++++++++++++++++ data ++++++++++++++++', data);
   const [userId, setUserId] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
+  const [userRole, setUserRole] = useState(window !== undefined ? localStorage.getItem("user-role") : "");
   const [loading, setLoading] = React.useState(true);
   const [checked, setChecked] = React.useState(true);
   const [data1, setData] = useState({
@@ -359,7 +359,7 @@ const Coaching = ({ data, refresh }: any) => {
               <Emotion data={data1?.emotion} />
             </>
           )}
-          {tab === 1 && (
+          {(tab === 1 && userRole === "QA Analyst") && (
             <div>
               {
                 scoreQuestions?.map((quesItem: any, index: number) => (
