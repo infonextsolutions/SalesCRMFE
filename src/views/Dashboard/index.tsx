@@ -22,7 +22,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 // const Dashboard = ({ data }: any) => {
 const Dashboard = ({ data }: any) => {
   const auth = useSelector((state: any) => state.auth);
-  console.log('++++++++++++++++ auth ++++++++++++++++++', auth);
+  const [accessToken, setAccessToken] = useState<any>("");
   const [scriptbuilderData, setScriptBuilderData] = useState([]);
   const [sellingData, setSellingData] = useState([]);
   const [pitchData, setPitchData] = useState([]);
@@ -41,7 +41,11 @@ const Dashboard = ({ data }: any) => {
 
   const getDealAnalyticsData = () => {
     axios.get(
-      `https://sales365.trainright.fit/api/dashboard/dealAnalytics?userId=${userId}`
+      `https://sales365.trainright.fit/api/dashboard/dealAnalytics?userId=${userId}`, {
+      headers: {
+        Authorization: `${accessToken}`
+      }
+    }
     )
       .then((res: any) => {
         setDealAnalyticsData({ average: res.data.average, result: res.data.result });
@@ -53,7 +57,11 @@ const Dashboard = ({ data }: any) => {
 
   const getAvgCallScores = () => {
     axios.get(
-      `https://sales365.trainright.fit/api/dashboard/averageCallScores?userId=${userId}`
+      `https://sales365.trainright.fit/api/dashboard/averageCallScores?userId=${userId}`, {
+      headers: {
+        Authorization: `${accessToken}`
+      }
+    }
     )
       .then((res: any) => {
         let formattedData: any = {};
@@ -69,7 +77,11 @@ const Dashboard = ({ data }: any) => {
 
   const getNoOfQuesAsked = () => {
     axios.get(
-      `https://sales365.trainright.fit/api/dashboard/numberOfQuestionsAsked?userId=${userId}`
+      `https://sales365.trainright.fit/api/dashboard/numberOfQuestionsAsked?userId=${userId}`, {
+      headers: {
+        Authorization: `${accessToken}`
+      }
+    }
     )
       .then((res: any) => {
         let formattedData: any = {};
@@ -84,10 +96,18 @@ const Dashboard = ({ data }: any) => {
   };
 
   useEffect(() => {
-    getDealAnalyticsData();
-    getAvgCallScores();
-    getNoOfQuesAsked();
-  }, []);
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  });
+
+  useEffect(() => {
+    if (window !== undefined) {
+      getDealAnalyticsData();
+      getAvgCallScores();
+      getNoOfQuesAsked();
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     setRole(localStorage.getItem("user-role"));
