@@ -1,7 +1,7 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import EmojiPicker from "emoji-picker-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
@@ -167,6 +167,14 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
   const [text, setText] = React.useState("");
   const [list, setList] = React.useState<any>(data?.comments);
   const [emoji, setEmoji] = useState(false);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();
     let hours: any = now.getHours();
@@ -184,6 +192,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
       timeInms: now,
     };
   }
+
   function timeToHoursAgo(timestamp: any) {
     const currentTime = Date.now();
     const timeDiff = currentTime - timestamp;
@@ -203,10 +212,10 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
     setTimeout(() => {
       const urri = `https://sales365.trainright.fit/api/calling/find-by-id?id=${data._id}`;
       axios
-        .get(urri)
+        .get(urri, { headers: { Authorization: accessToken } })
         .then((e) => {
         })
-        .catch((e) => {});
+        .catch((e) => { });
     }, 1000);
   };
 
@@ -307,7 +316,8 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
                   {
                     callId: data._id,
                     comments: [...list, letsSee],
-                  }
+                  },
+                  { headers: { Authorization: accessToken } }
                 )
                 .then((e) => {
                   UpdateCalls();
@@ -355,7 +365,8 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
                       {
                         callId: data._id,
                         comments: finalList,
-                      }
+                      },
+                      { headers: { Authorization: accessToken } }
                     )
                     .then((e) => {
                       UpdateCalls();

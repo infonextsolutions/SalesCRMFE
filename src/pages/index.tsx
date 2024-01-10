@@ -2,7 +2,7 @@ import Navigation from "@/components/app/Navigation";
 import LeadsContainer from "@/components/leads/open/Container";
 import Table from "@/components/View/Tables/Leads";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DUMMY from "@/shared/dummy";
 import KanbanContainer from "@/components/View/Kanban";
 import { useRouter } from "next/router";

@@ -22,12 +22,23 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
   const [limit, setLimit]: any = useState(10);
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   useEffect(
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${pageNumber}${queryStr}`
+          `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${pageNumber}${queryStr}`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
         )
         .then((res) => {
           setItems(res?.data?.result);
@@ -41,7 +52,11 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   const getallItems = async (current: any) => {
     const res = await axios.get(
-      `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}${queryStr}`
+      `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}${queryStr}`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
     );
     const data = res.data.result;
     return data;
@@ -54,7 +69,11 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     if (pageNumber >= count && pageCount != 0) setpageNumber(0);
     const getItems = async () => {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${queryStr}`
+        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${queryStr}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       );
       const data = res.data.result;
 
@@ -84,7 +103,11 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   const fetchItems = async (current: any) => {
     const res = await axios.get(
-      `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}`
+      `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}`, {
+        headers: {
+          Authorization: accessToken
+        }
+    }
     );
     const data = res.data.result;
     const filtered = data.filter(

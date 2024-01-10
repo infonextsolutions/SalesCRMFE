@@ -4,7 +4,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UploadAudio from "../uploadContainer/index";
 import { useDispatch } from "react-redux";
 
@@ -310,6 +310,13 @@ const ActiveCall = ({ cancel }: any) => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const submit = () => {
     setLoading(true);
@@ -325,7 +332,8 @@ const ActiveCall = ({ cancel }: any) => {
       .post(
         // "https://sales365.trainright.fit/api/recording/createManualRecording",
         "https://sales365.trainright.fit/api/recording/createManualRecording",
-        formdate
+        formdate,
+        { headers: { Authorization: accessToken } }
       )
       .then(() => {
         dispatch(

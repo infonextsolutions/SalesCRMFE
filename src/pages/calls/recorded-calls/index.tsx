@@ -9,11 +9,32 @@ import CallsRecordingContainer from "@/components/calls/recorded-calls/Container
 import MeetingRecordingContainer from "@/components/calls/recorded-calls/Container/MeetingRecordingContainer";
 
 
-const Calls = ({ data }: any) => {
+const Calls = () => {
   const [recodedCalls, setRecordedCalls] = useState(true);
   const [recodedMeeting, setRecodedMeeting] = useState(false);
-
+  const [data, setData] = useState({});
+  const [accessToken, setAccessToken] = useState<string>("");
   const router = useRouter();
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      axios.get(
+        "https://sales365.trainright.fit/api/recording/find-all", {
+        headers: { Authorization: accessToken }
+      }
+      ).then((res: any) => {
+        setData(res.data);
+      });
+    } catch (error) {
+
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
@@ -86,16 +107,16 @@ const Calls = ({ data }: any) => {
   );
 };
 
-export async function getServerSideProps({ query, ...params }: any) {
-  const response = await axios.get(
-    "https://sales365.trainright.fit/api/recording/find-all"
-  );
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-    }, // will be passed to the page component as props
-  };
-}
+// export async function getServerSideProps({ query, ...params }: any) {
+//   const response = await axios.get(
+//     "https://sales365.trainright.fit/api/recording/find-all"
+//   );
+//   return {
+//     props: {
+//       // TODO: Can do better error handling here by passing another property error in the component
+//       data: response.data || {},
+//     }, // will be passed to the page component as props
+//   };
+// }
 
 export default Calls;

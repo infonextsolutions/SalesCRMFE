@@ -4,14 +4,18 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = React.lazy(() => import("@/views/Dashboard/index"));
 
-const DashboardPage = ({ data1, data2, data3 }: any) => {
+const DashboardPage = () => {
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
+  const [data1, setData1] = useState<any>({});
+  const [data2, setData2] = useState<any>({});
+  const [data3, setData3] = useState<any>({});
+  const [accessToken, setAccessToken] = useState<any>("");
 
   const dispatch = useDispatch();
 
@@ -19,6 +23,45 @@ const DashboardPage = ({ data1, data2, data3 }: any) => {
   const [id] = useLocalStorage("user-id", "not-loaded");
   const [name] = useLocalStorage("user-name", "not-loaded");
   const [role] = useLocalStorage("user-role", "not-loaded");
+
+  const date = {
+    from: "2023-07-19",
+    to: "2023-07-26",
+  };
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      axios.post(
+        "https://sales365.trainright.fit/api/pitch-analysis/find-one",
+        date, { headers: { Authorization: accessToken } }
+      )
+        .then((res: any) => {
+          setData1(res.data);
+        });
+      axios.post(
+        "https://sales365.trainright.fit/api/script-analysis/find-one",
+        date, { headers: { Authorization: accessToken } }
+      )
+        .then((res: any) => {
+          setData2(res.data);
+        });
+      axios.post(
+        "https://sales365.trainright.fit/api/selling-analysis/find-one",
+        date, { headers: { Authorization: accessToken } }
+      )
+        .then((res: any) => {
+          setData2(res.data);
+        });
+    } catch (error) {
+
+    }
+  }, [accessToken]);
 
   React.useEffect(() => {
     if (!state.isLoggedIn) {
@@ -74,30 +117,27 @@ export default DashboardPage;
 
 // https://sales365.trainright.fit/api/pitch-analysis/find-one
 
-export async function getServerSideProps({ query, ...params }: any) {
-  const date = {
-    from: "2023-07-19",
-    to: "2023-07-26",
-  };
-  const response1 = await axios.post(
-    "https://sales365.trainright.fit/api/pitch-analysis/find-one",
-    date
-  );
-  const response2 = await axios.post(
-    "https://sales365.trainright.fit/api/script-analysis/find-one",
-    date
-  );
-  const response3 = await axios.post(
-    "https://sales365.trainright.fit/api/selling-analysis/find-one",
-    date
-  );
+// export async function getServerSideProps({ query, ...params }: any) {
 
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data1: response1.data || {},
-      data2: response2.data || {},
-      data3: response3.data || {},
-    }, // will be passed to the page component as props
-  };
-}
+//   const response1 = await axios.post(
+//     "https://sales365.trainright.fit/api/pitch-analysis/find-one",
+//     date
+//   );
+//   const response2 = await axios.post(
+//     "https://sales365.trainright.fit/api/script-analysis/find-one",
+//     date
+//   );
+//   const response3 = await axios.post(
+//     "https://sales365.trainright.fit/api/selling-analysis/find-one",
+//     date
+//   );
+
+//   return {
+//     props: {
+//       // TODO: Can do better error handling here by passing another property error in the component
+//       data1: response1.data || {},
+//       data2: response2.data || {},
+//       data3: response3.data || {},
+//     }, // will be passed to the page component as props
+//   };
+// }

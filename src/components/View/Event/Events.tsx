@@ -3,7 +3,7 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import { create } from "domain";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 
@@ -446,6 +446,13 @@ const Events = ({
   const [eventInvites, setEventInvites] = useState("");
   const [allocatedCallOwner, setAllocateCallOwner] = useState("");
   const dispatch = useAppDispatch();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const calculateTimeDifference = ({ fromTime, toTime }: any) => {
     const [fromHours, fromMinutes] = fromTime.split(":").map(Number);
@@ -489,7 +496,7 @@ const Events = ({
     };
 
     axios
-      .post("https://sales365.trainright.fit/api/event/create", finalPayload)
+      .post("https://sales365.trainright.fit/api/event/create", finalPayload, { headers: { Authorization: accessToken } })
       .then((e: any) => {
         const { result } = e?.data;
         const payload = {
@@ -500,7 +507,8 @@ const Events = ({
         axios
           .post(
             "https://user-details-sut4.onrender.com/save_user_info",
-            payload
+            payload,
+            { headers: { Authorization: accessToken } }
           )
           .then((res: any) => {
             cancel();

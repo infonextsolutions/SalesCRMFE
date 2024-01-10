@@ -2,7 +2,7 @@ import { setError, setSuccess } from "@/store/ai";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const AddText = ({ top, title, width, change, index }: any) => {
@@ -464,13 +464,13 @@ const Questionnaire = ({ data, data1 }: any) => {
     data?.questionnaire
       ? data?.questionnaire
       : [
-          {
-            question: "",
-            answerType: "",
-            answer: "",
-            option: [{ title: "", selected: false }],
-          },
-        ]
+        {
+          question: "",
+          answerType: "",
+          answer: "",
+          option: [{ title: "", selected: false }],
+        },
+      ]
   );
 
   const [title, setTitle] = useState("");
@@ -537,6 +537,13 @@ const Questionnaire = ({ data, data1 }: any) => {
   };
 
   const dispatch = useDispatch();
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
   const handleSave = () => {
     let flag = false;
     // Handle saving the form data
@@ -555,14 +562,22 @@ const Questionnaire = ({ data, data1 }: any) => {
             id: data._id,
             questionnaire: questionList,
             title: title,
+          }, {
+          headers: {
+            Authorization: accessToken
           }
+        }
         )
         .then((e) => {
           setFinalQuestionList([...e.data.questionnaire.questionnaire]);
           setTimeout(() => {
             axios
               .get(
-                `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data._id}`
+                `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data._id}`, {
+                headers: {
+                  Authorization: accessToken
+                }
+              }
               )
               .then((ev: any) => {
                 setFinalQuestionList([...ev?.data?.result?.questionnaire]);

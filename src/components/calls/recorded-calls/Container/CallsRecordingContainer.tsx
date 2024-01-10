@@ -20,6 +20,13 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   const [callType, setCallType] = useState("");
   const [callDisposition, setCallDisposition] = useState("");
   const [queryStr, setQueryStr] = useState("");
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
@@ -71,7 +78,8 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 
     const response = await axios.post(
       "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
-      payload
+      payload,
+      { headers: { Authorization: accessToken } }
     );
     dummy1 = { ...response.data };
   };

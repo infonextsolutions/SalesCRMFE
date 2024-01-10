@@ -357,6 +357,13 @@ const AllocatedCallsCC = ({ data }: any) => {
     });
 
     const ref: any = useRef();
+    const [accessToken, setAccessToken] = useState<any>("");
+
+    useEffect(() => {
+        if (window !== undefined) {
+            setAccessToken(localStorage.getItem("access-token"));
+        }
+    }, []);
 
     const exportXLSX = () => {
         const worksheet = XLSX.utils.json_to_sheet(rows);
@@ -423,7 +430,7 @@ const AllocatedCallsCC = ({ data }: any) => {
     useEffect(() => {
         if (window !== undefined) {
             const userId = localStorage.getItem("user-id");
-            axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=closed&qaId=${userId}`)
+            axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=closed&qaId=${userId}`, { headers: { Authorization: accessToken } })
                 .then((res: any) => {
                     const data = res?.data?.result;
                     setRows(data?.map((item: any, index: number) => {
@@ -456,7 +463,7 @@ const AllocatedCallsCC = ({ data }: any) => {
                 .catch((err: any) => {
                 });
         }
-    }, []);
+    }, [accessToken]);
 
     useEffect(() => {
         const handleBeforeHistoryChange = () => {

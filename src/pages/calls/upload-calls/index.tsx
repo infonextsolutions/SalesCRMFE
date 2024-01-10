@@ -52,8 +52,32 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const Calls = ({ data }: any) => {
+const Calls = () => {
   const router = useRouter();
+  const [data, setData] = useState<any>({});
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      axios.get(
+        "https://sales365.trainright.fit/api/recording/getManualRecordingList", {
+        headers: {
+          Authorization: accessToken
+        }
+      }
+      ).then((res: any) => {
+        setData(res.data);
+      });
+    } catch (error) {
+
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
@@ -87,7 +111,7 @@ const Calls = ({ data }: any) => {
     }
   };
 
-  const AddLead = () => {};
+  const AddLead = () => { };
 
   const [upload, setUpload] = useState(false);
   const [bool, setBool] = useState(true);
@@ -215,16 +239,16 @@ const Calls = ({ data }: any) => {
   );
 };
 
-export async function getServerSideProps({ query, ...params }: any) {
-  const response = await axios.get(
-    "https://sales365.trainright.fit/api/recording/getManualRecordingList"
-  );
-  return {
-    props: {
-      // TODO: Can do better error handling here by passing another property error in the component
-      data: response.data || {},
-    }, // will be passed to the page component as props
-  };
-}
+// export async function getServerSideProps({ query, ...params }: any) {
+//   const response = await axios.get(
+//     "https://sales365.trainright.fit/api/recording/getManualRecordingList"
+//   );
+//   return {
+//     props: {
+//       // TODO: Can do better error handling here by passing another property error in the component
+//       data: response.data || {},
+//     }, // will be passed to the page component as props
+//   };
+// }
 
 export default Calls;

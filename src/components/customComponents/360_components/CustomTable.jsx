@@ -238,6 +238,7 @@ const Item = ({ tableItems, data }) => {
       return `${minutes} mins`;
     }
   }
+
   return (
     <div className="flex   h-[50px] items-center relative   ">
       <div className="flex h-[50px] items-center border-[#C0C2C6] border-b-[1px]">
@@ -419,6 +420,14 @@ const Pagination = ({ page, total, setPage }) => {
 const CustomTable = ({ component }) => {
   const [data, setData] = useState([]);
   const [check, setCheck] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
   useEffect(() => {
     if (!check) {
       function flattenNestedObject(obj, prefix = "") {
@@ -438,7 +447,7 @@ const CustomTable = ({ component }) => {
         return flattened;
       }
 
-      axios.get(component.api).then((e) => {
+      axios.get(component.api, { headers: { Authorization: accessToken } }).then((e) => {
         const arr = e.data.result;
         for (let i = 0; i < arr.length; i++) {
           arr[i] = flattenNestedObject(arr[i]);

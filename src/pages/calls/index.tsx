@@ -17,7 +17,7 @@ import { setError, setSuccess } from '@/store/ai';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const CallsPage = ({ data = [{}, {}] }: any) => {
+const CallsPage = () => {
     const columnsACR = [
         {
             width: 200,
@@ -272,6 +272,24 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
         { id: 1, title: "Active Calls" },
         { id: 2, title: "Closed Calls" },
     ]);
+    const [accessToken, setAccessToken] = useState<any>("");
+
+    useEffect(() => {
+        if (window !== undefined) {
+            setAccessToken(localStorage.getItem("access-token"));
+        }
+    }, []);
+
+    const [data, setData] = useState<any>([{}, {}]);
+    useEffect(() => {
+        axios.get(
+            "https://sales365.trainright.fit/api/active-call/find-all", {
+            headers: { Authorization: accessToken }
+        }
+        ).then((res: any) => {
+            setData(res?.data);
+        });
+    }, [accessToken]);
 
     const [filters, setFilters] = useState({
         callStartAndEndDate: {
@@ -379,7 +397,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
                     break;
             }
         }
-        axios.get(endpoint)
+        axios.get(endpoint, { headers: { Authorization: accessToken } })
             .then((res: any) => {
                 const data = res?.data?.result;
                 generateRows(data);
@@ -393,7 +411,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     }, [currTab, subType]);
 
     useEffect(() => {
-        axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_Analyst`)
+        axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_Analyst`, { headers: { Authorization: accessToken } })
             .then((res: any) => {
                 setQaList(res?.data?.result);
             })
@@ -521,7 +539,7 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
                     qamId: window !== undefined ? localStorage.getItem('user-id') : "",
                     callId: selectedRow
                 };
-                return axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload);
+                return axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload, {headers: {Authorization: accessToken}});
             });
             Promise.all(assigningPromise)
                 .then((res: any) => {
@@ -687,15 +705,15 @@ const CallsPage = ({ data = [{}, {}] }: any) => {
     )
 }
 
-export async function getServerSideProps({ query, ...params }: any) {
-    const response = await axios.get(
-        "https://sales365.trainright.fit/api/active-call/find-all"
-    );
-    return {
-        props: {
-            data: response.data || {},
-        },
-    };
-}
+// export async function getServerSideProps({ query, ...params }: any) {
+//     const response = await axios.get(
+//         "https://sales365.trainright.fit/api/active-call/find-all"
+//     );
+//     return {
+//         props: {
+//             data: response.data || {},
+//         },
+//     };
+// }
 
 export default CallsPage

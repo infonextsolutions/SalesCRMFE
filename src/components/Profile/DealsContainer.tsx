@@ -188,11 +188,22 @@ const Deals = ({ data, type }: any) => {
   const [openDeals, setOpenDeals] = useState<any>(null);
   const [closedDeals, setClosedDeals] = useState<any>(null);
   const [interest, setInterest] = useState<any>(null);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   useEffect(() => {
     axios
       .get(
-        `https://sales365.trainright.fit/api/leads/getDeals?id=${type === "company" ? data?.result?.companyId?._id : data?.result?.customerId?._id}&type=${type}`
+        `https://sales365.trainright.fit/api/leads/getDeals?id=${type === "company" ? data?.result?.companyId?._id : data?.result?.customerId?._id}&type=${type}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       )
       .then((response) => {
         const data = response?.data;
@@ -201,7 +212,7 @@ const Deals = ({ data, type }: any) => {
         setInterest(data?.intrest);
       })
       .catch((error) => console.error("Error fetching data: ", error));
-  }, []);
+  }, [accessToken]);
 
   return (
     <div className="">

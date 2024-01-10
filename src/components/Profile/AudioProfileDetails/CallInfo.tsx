@@ -23,11 +23,22 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
   };
 
   const [data2, setData] = useState<any>({});
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.leadId?._id}`
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.leadId?._id}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       )
       .then((e) => {
         setData(e.data);

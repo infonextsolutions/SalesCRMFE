@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Tracker from "../conversation-tracker";
 import Transcript from "../Transcript/Transcript";
 import { getBasicIcon } from "@/utils/AssetsHelper";
@@ -536,9 +536,14 @@ const list = [
 const Audio = ({ data, data1, data2 }: any) => {
   const [check, setCheck] = useState(true);
 
-  console.log('==================== data : audio ===================', data, data2);
-
   const [callData, setCallData] = useState<AudioData>(data2);
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const callit = () => {
     const url = "https://sales365.trainright.fit/api/calling/call-status";
@@ -547,7 +552,7 @@ const Audio = ({ data, data1, data2 }: any) => {
         .post(url, {
           sid: data.Sid,
           leadId: data.leadId._id,
-        })
+        }, { headers: { Authorization: accessToken } })
         .then((e) => {
           setCallData(e.data.result);
           console.log('--------------- setCallData --------------', e.data.result);

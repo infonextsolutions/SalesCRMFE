@@ -1,7 +1,7 @@
 import { ActiveCall } from "@/types/active-call";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const AddText = ({ top, title, width, value, click }: any) => {
   const [input, setInput] = useState<any>("");
@@ -45,6 +45,13 @@ const AddText = ({ top, title, width, value, click }: any) => {
 };
 
 const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const makecall = async (e: any) => {
     try {
@@ -53,8 +60,9 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
         {
           callTo: e,
           leadId: data.leadId._id,
-          id:data._id
-        }
+          id: data._id
+        },
+        { headers: { Authorization: accessToken } }
       );
       cancel();
     } catch (err) {
@@ -87,7 +95,7 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
             top={"10px"}
             title="Phone"
             value="8076166051"
-            change={(e: any) => {}}
+            change={(e: any) => { }}
             click={() => {
               makecall("8076166051");
             }}

@@ -37,6 +37,13 @@ const ScriptDoc = ({
   };
 
   const [btn, setbtn] = useState(false);
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const handleView = () => {
     setSelected(!selected);
@@ -99,7 +106,7 @@ const ScriptDoc = ({
             onClick={(e) => {
               axios
                 .delete(
-                  `https://sales365.trainright.fit/api/call-script/delete-by-id?id=${id}`
+                  `https://sales365.trainright.fit/api/call-script/delete-by-id?id=${id}`, { headers: { Authorization: accessToken } }
                 )
                 .then((e) => {
                   refresh();
@@ -194,9 +201,8 @@ export function convertDatetime(inputStr: any) {
   const minutes = istTime.getUTCMinutes();
 
   // Format the time part (hours and minutes) in 12-hour clock format with AM/PM indicator
-  let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${
-    hours >= 12 ? "PM" : "AM"
-  }`;
+  let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"
+    }`;
 
   // Format the date and time as desired
   return `${day} ${month} ${year}, ${timeStr}`;
@@ -395,15 +401,26 @@ const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
   const [currScripts, setCurrScripts] = useState<any[]>(scripts?.result);
 
   const [selected, setSelected] = useState(false);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const refresh = () => {
     axios
       .get(
-        `https://sales365.trainright.fit/api/call-script/active-call?activeCallId=${data?._id}`
+        `https://sales365.trainright.fit/api/call-script/active-call?activeCallId=${data?._id}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       )
       .then((e) => {
       })
-      .catch((e) => {});
+      .catch((e) => { });
   };
 
 

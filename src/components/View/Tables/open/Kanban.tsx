@@ -10,6 +10,13 @@ import KanbanItem from "./KanbanItems";
 const KanbanTable = ({ totalRecords, search }: TableProps) => {
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   //   const getallItems = async (current: any) => {
   //     const res = await axios.get(
@@ -23,7 +30,11 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
     setLoading(true);
     const getItems = async () => {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open`
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       );
       const data = res.data.result;
       const filtered = data.filter(
@@ -42,7 +53,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
 
     getItems();
     setLoading(false);
-  }, [search]);
+  }, [search, accessToken]);
 
   const Leads = items;
   const [selectAll, setSelectAll] = useState(false);

@@ -26,6 +26,13 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   const [callDisposition, setCallDisposition] = useState("");
   const [location, setLocation] = useState("");
   const [queryStr, setQueryStr] = useState("");
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const onChange = (e: any) => {
     const val = e.target.value;
@@ -82,7 +89,8 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 
     const response = await axios.post(
       "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
-      payload
+      payload,
+      { headers: { Authorization: accessToken } }
     );
     dummy1 = { ...response.data };
   };

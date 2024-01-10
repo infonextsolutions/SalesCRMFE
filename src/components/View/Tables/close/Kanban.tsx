@@ -10,15 +10,26 @@ import KanbanItem from "./KanbanItems";
 const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   useEffect(function () {
     axios.get(
-      `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`
+      `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
     ).then(res => {
       setItems(res?.data?.result);
       // settotalLeads(res?.data?.totalRecords)
     });
-  }, [queryStr]);
+  }, [queryStr, accessToken]);
 
   //   const getallItems = async (current: any) => {
   //     const res = await axios.get(
@@ -32,7 +43,11 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
     setLoading(true);
     const getItems = async () => {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close`
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       );
       const data = res?.data?.result;
       const filtered = data.filter(

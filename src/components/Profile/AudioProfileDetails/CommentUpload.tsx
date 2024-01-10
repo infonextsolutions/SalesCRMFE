@@ -1,7 +1,7 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import EmojiPicker from "emoji-picker-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
@@ -168,6 +168,14 @@ const Comments = ({ data }: any) => {
     data?.comments ? data.comments : []
   );
   const [emoji, setEmoji] = useState(false);
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
+
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();
     let hours: any = now.getHours();
@@ -205,10 +213,10 @@ const Comments = ({ data }: any) => {
       axios
         .post(urri, {
           transId: data._id,
-        })
+        }, { headers: { Authorization: accessToken } })
         .then((e) => {
         })
-        .catch((e) => {});
+        .catch((e) => { });
     }, 1000);
   };
 
@@ -310,7 +318,8 @@ const Comments = ({ data }: any) => {
                   {
                     recordingId: data._id,
                     comments: [...list, letsSee],
-                  }
+                  },
+                  { headers: { Authorization: accessToken } }
                 )
                 .then((e) => {
                   UpdateCalls();
@@ -357,7 +366,8 @@ const Comments = ({ data }: any) => {
                       {
                         recordingId: data._id,
                         comments: finalList,
-                      }
+                      },
+                      { headers: { Authorization: accessToken } }
                     )
                     .then((e) => {
                       UpdateCalls();

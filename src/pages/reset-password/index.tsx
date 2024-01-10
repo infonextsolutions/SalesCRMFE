@@ -56,7 +56,7 @@ const ResetPassword = () => {
     axios
       .post(
         "https://sales365.trainright.fit/api/master-users/reset_password",
-        finalPayload
+        finalPayload, { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         if (res?.data?.success) {

@@ -5,7 +5,7 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Dropzone from "react-dropzone";
 
@@ -189,6 +189,13 @@ const Step1 = ({ next, cancel }: any) => {
     show: false,
     error: "",
   });
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const dispatch = useAppDispatch();
 
@@ -200,7 +207,8 @@ const Step1 = ({ next, cancel }: any) => {
       axios
         .post(
           "https://sales365.trainright.fit/api/leads/upload/afakfabk",
-          formdata
+          formdata,
+          { headers: { Authorization: accessToken } }
         )
         .then((e) => {
           dispatch(

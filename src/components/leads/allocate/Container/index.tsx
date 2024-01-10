@@ -35,6 +35,13 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     setSearch(val);
   };
   const state = useSelector((state: any) => state.auth);
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
 
   const getQueryStr = () => {
     let queryStr = "";
@@ -74,7 +81,11 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`
+        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`, {
+        headers: {
+          Authorization: accessToken
+        }
+      }
       );
       setVisibleRecords({ ...response.data });
     } catch (error) {
@@ -84,7 +95,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   useEffect(() => {
     // getData();
     getQueryStr();
-  }, [status, stage, product, leadSource, startDate, endDate]);
+  }, [status, stage, product, leadSource, startDate, endDate, accessToken]);
 
   return (
     <div className="w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">

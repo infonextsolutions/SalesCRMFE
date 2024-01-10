@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getBasicIcon } from "../../utils/AssetsHelper";
 import Button, { ButtonProps } from "@/utils/Button/Button";
 import Image from "next/image";
 import axios from "axios";
 
 const Kanban = ({ list }: KanbasProps) => {
+  const [accessToken, setAccessToken] = useState<any>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token"));
+    }
+  }, []);
+
   const fetchItems = async () => {
     const res = await axios.get(
-      `https://sales365.trainright.fit/api/leads/find-all`
+      `https://sales365.trainright.fit/api/leads/find-all`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
     );
   };
+  
   fetchItems();
   const leads = ["enquiry", "interaction", "proposal", "win", "Lost", "Dead"];
   const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WIN", "LOST", "DEAD"];

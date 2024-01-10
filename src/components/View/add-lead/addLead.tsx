@@ -2,7 +2,7 @@ import { API_DOMAIN } from "@/constants/api";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const AddText = ({ key, top, title, width, change, required }: any) => {
   return (
@@ -42,6 +42,13 @@ const AddLead = ({ cancel, mastersData }: any) => {
   const [showMoreContactButton2, setShowMoreContactButton2] = useState(true);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const hadleMoreContactButton1 = () => {
     setMoreContact1(true);
@@ -73,7 +80,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
         (contact) => Object.keys(contact).length > 0
       );
     // return;
-    axios.post(`${API_DOMAIN}/api/leads/create`, payload).then((e) => {
+    axios.post(`${API_DOMAIN}/api/leads/create`, payload, { headers: { Authorization: accessToken } }).then((e) => {
       setLoading(false);
       router.reload();
       cancel();

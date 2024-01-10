@@ -440,6 +440,13 @@ const ActiveCall = ({
   }
 
   const dispatch = useAppDispatch();
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setAccessToken(localStorage.getItem("access-token") || "");
+    }
+  }, []);
 
   const submit = () => {
     let timee = null;
@@ -460,7 +467,8 @@ const ActiveCall = ({
     axios
       .post(
         "https://sales365.trainright.fit/api/active-call/create",
-        finalPayload
+        finalPayload,
+        { headers: { Authorization: accessToken } }
       )
       .then((e: any) => {
         cancel();
