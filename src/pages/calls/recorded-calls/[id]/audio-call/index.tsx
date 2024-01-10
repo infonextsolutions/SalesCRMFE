@@ -227,25 +227,11 @@ const CallProfile = () => {
 
 export default CallProfile;
 
-// export async function getServerSideProps({ query, params }: any) {
-//   const response = await axios.get(
-//     `https://sales365.trainright.fit/api/calling/find-by-id?id=${params.id}`
-//   );
-
-//   const response1 = await axios.get(
-//     `https://sales365.trainright.fit/api/leads/find-by-id?id=${response.data.result.leadId._id}`
-//   );
-
-//   const response2 = await axios.post(
-//     `https://sales365.trainright.fit/api/calling/call-status`, { sid: response.data.result.Sid, leadId: response.data.result.leadId._id }
-//   );
-
-//   return {
-//     props: {
-//       // TODO: Can do better error handling here by passing another property error in the component
-//       data: response.data || {},
-//       data1: response1.data || {},
-//       data2: response2.data || {},
-//     }, // will be passed to the page component as props
-//   };
-// }
+export async function getServerSideProps({ query, params }: any) {
+  return {
+    props: {
+      // TODO: Can do better error handling here by passing another property error in the component
+      data: {},
+    }, // will be passed to the page component as props
+  };
+}

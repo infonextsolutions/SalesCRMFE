@@ -1,11 +1,7 @@
-import Navigation from "@/components/app/Navigation";
 import Deals from "@/components/Profile/DealsContainer";
 import ProfilePage from "@/components/Profile/ProfilePage/ClientPocProfile";
-import { getBasicIcon } from "@/utils/AssetsHelper";
-import Navigator from "@/utils/customNavigator";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Navbar from "@/components/app/Navbar/Navbar";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import { useRouter } from "next/router";
 
@@ -92,14 +88,11 @@ const ClientProfile = () => {
 
 export default ClientProfile;
 
-// export async function getServerSideProps({ query, params }: any) {
-//   const response = await axios.get(
-//     ``
-//   );
-//   return {
-//     props: {
-//       // TODO: Can do better error handling here by passing another property error in the component
-//       data: response.data || {},
-//     }, // will be passed to the page component as props
-//   };
-// }
+export async function getServerSideProps({ query, params }: any) {
+  return {
+    props: {
+      // TODO: Can do better error handling here by passing another property error in the component
+      data: {},
+    }, // will be passed to the page component as props
+  };
+}
