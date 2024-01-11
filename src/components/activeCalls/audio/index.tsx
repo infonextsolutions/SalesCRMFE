@@ -546,7 +546,7 @@ const Audio = ({ data, data1, data2 }: any) => {
   }, []);
 
   useEffect(() => {
-    setCallData(data2)
+    setCallData(data2);
   }, [data2]);
 
   const callit = () => {
@@ -559,7 +559,7 @@ const Audio = ({ data, data1, data2 }: any) => {
         }, { headers: { Authorization: accessToken } })
         .then((e) => {
           setCallData(e.data.result);
-          console.log('--------------- setCallData --------------', e.data.result);
+          // console.log('--------------- setCallData --------------', e.data.result);
           setCheck(false);
         }).catch((e: any) => { });
     }
@@ -569,7 +569,7 @@ const Audio = ({ data, data1, data2 }: any) => {
     if (check) {
       // callit();
     }
-  });
+  }, []);
 
   return (
     <>

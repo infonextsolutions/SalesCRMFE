@@ -78,7 +78,7 @@ const Transcript = ({
 
   useEffect(() => {
     initializeArrr();
-  }, []);
+  }, [src, data, text, utterances]);
 
   useEffect(() => {
     Arrr
