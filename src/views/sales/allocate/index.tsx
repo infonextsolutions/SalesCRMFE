@@ -152,7 +152,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
 
   const makecall = async () => {
     try {
-      
+
       const res = await axios.post(
         "https://sales365.trainright.fit/api/calling/make-call",
         {
@@ -161,7 +161,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
         { headers: { Authorization: accessToken } }
       );
     } catch (error) {
-      
+
     }
   };
 
