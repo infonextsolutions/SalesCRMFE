@@ -142,17 +142,17 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
       )}
       {reply?.length > 0 && (
         <>
-          {reply.map((item: any, i: any) => {
+          {reply?.map((item: any, i: any) => {
             return (
               <>
                 <div className="flex items-center justify-between mt-2 ml-4">
                   <h3 className="text-sm text-black  ml-8  font-medium ">-</h3>
                   <p className="text-sm text-gray-600 mr-10  font-medium  ">
-                    {item.time}
+                    {item?.time}
                   </p>
                 </div>
                 <p className="ml-12 text-[#3F434A] font-small text-black-500  font-medium ">
-                  {item.text}
+                  {item?.text}
                 </p>
               </>
             );
@@ -347,15 +347,15 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
         </button>
         <hr className="border-t-4 border-gray-300 mt-4" />
         <div className="my-4 overflow-y-auto custom-scroll-black ">
-          {list.map((item: any, i: any) => {
+          {list?.map((item: any, i: any) => {
             return (
               <Comment
                 key={i}
-                user={item.user}
-                content={item.content}
-                last={item.last}
-                time={item.time}
-                reply={item.reply}
+                user={item?.user}
+                content={item?.content}
+                last={item?.last}
+                time={item?.time}
+                reply={item?.reply}
                 replied={(e: any) => {
                   const finalList = list;
                   finalList[i].reply.push(e);
