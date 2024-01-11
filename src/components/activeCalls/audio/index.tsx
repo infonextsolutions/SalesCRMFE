@@ -557,7 +557,7 @@ const Audio = ({ data, data1, data2 }: any) => {
           setCallData(e.data.result);
           console.log('--------------- setCallData --------------', e.data.result);
           setCheck(false);
-        });
+        }).catch((e: any) => { });
     }
   };
 

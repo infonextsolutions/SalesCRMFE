@@ -37,7 +37,7 @@ export default function Open() {
     )
       .then((res: any) => {
         setMastersData(res.data);
-      });
+      }).catch((e: any) => { });
   }, [accessToken]);
 
   React.useEffect(() => {

@@ -418,8 +418,8 @@ const EmailPage = ({
   };
 
   useEffect(() => {
-    if (data && data.customerId) {
-      const { customer_name, customer_email, contacts } = data.customerId;
+    if (data && data?.customerId) {
+      const { customer_name, customer_email, contacts } = data?.customerId;
 
       const updatedEmailList = []; // Create an empty array to store new values
 

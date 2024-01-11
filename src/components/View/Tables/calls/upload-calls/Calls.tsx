@@ -32,15 +32,20 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
   }, []);
 
   const getallItems = async (current: any) => {
-    const res = await axios.get(
-      `https://sales365.trainright.fit/api/recording/getManualRecordingList?limit=${limit}&page=${current}"`, {
-      headers: {
-        Authorization: accessToken
+    try {
+
+      const res = await axios.get(
+        `https://sales365.trainright.fit/api/recording/getManualRecordingList?limit=${limit}&page=${current}"`, {
+        headers: {
+          Authorization: accessToken
+        }
       }
+      );
+      const data = res.data.result;
+      return data;
+    } catch (error) {
+      return {}
     }
-    );
-    const data = res.data.result;
-    return data;
   };
   const [loading, setLoading] = React.useState(false);
   const [checked, setChecked] = React.useState(true);
@@ -55,57 +60,67 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
     return secondsDifference;
   }
   useEffect(() => {
-    if (checked) {
-      setLoading(true);
-      const count = Math.ceil(Number(totalRecords) / limit);
-      setpageCount(count);
-      if (pageNumber >= count && pageCount != 0) setpageNumber(0);
-      const getItems = async () => {
-        const res = await axios.get(
-          `https://sales365.trainright.fit/api/recording/getManualRecordingList`, {
-          headers: {
-            Authorization: accessToken
-          }
-        }
-        );
-        const data = res.data.result;
+    try {
 
-        if (search.length) {
-          setpageNumber(0);
-          const allItems = await getallItems(pageNumber);
-          setItems(allItems);
-        }
-
-        const filtered = data.filter((e: any) => {
-          return e._id.includes(search);
-        });
-
-        // const filtered = data;
-        settotalLeads(filtered.length);
-        const count = Math.ceil(Number(filtered.length) / limit);
+      if (checked) {
+        setLoading(true);
+        const count = Math.ceil(Number(totalRecords) / limit);
         setpageCount(count);
-        setItems(
-          filtered.slice(pageNumber * limit, pageNumber * limit + limit)
-        );
-      };
+        if (pageNumber >= count && pageCount != 0) setpageNumber(0);
+        const getItems = async () => {
+          const res = await axios.get(
+            `https://sales365.trainright.fit/api/recording/getManualRecordingList`, {
+            headers: {
+              Authorization: accessToken
+            }
+          }
+          );
+          const data = res.data.result;
 
-      getItems();
-      setLoading(false);
+          if (search.length) {
+            setpageNumber(0);
+            const allItems = await getallItems(pageNumber);
+            setItems(allItems);
+          }
+
+          const filtered = data.filter((e: any) => {
+            return e._id.includes(search);
+          });
+
+          // const filtered = data;
+          settotalLeads(filtered.length);
+          const count = Math.ceil(Number(filtered.length) / limit);
+          setpageCount(count);
+          setItems(
+            filtered.slice(pageNumber * limit, pageNumber * limit + limit)
+          );
+        };
+
+        getItems();
+        setLoading(false);
+      }
+    } catch (error) {
+
     }
-  }, [limit, pageNumber, search]);
+  }, [limit, pageNumber, search, accessToken]);
 
   const fetchItems = async (current: any) => {
-    const res = await axios.get(
-      `https://sales365.trainright.fit/api/recording/getManualRecordingList?limit=${limit}&page=${current}`, {
-      headers: {
-        Authorization: accessToken
+    try {
+
+      const res = await axios.get(
+        `https://sales365.trainright.fit/api/recording/getManualRecordingList?limit=${limit}&page=${current}`, {
+        headers: {
+          Authorization: accessToken
+        }
       }
+      );
+      const data = res.data.result;
+      const filtered = data.filter((e: any) => e._id.includes(search));
+      settotalLeads(filtered.length);
+      return filtered;
+    } catch (error) {
+
     }
-    );
-    const data = res.data.result;
-    const filtered = data.filter((e: any) => e._id.includes(search));
-    settotalLeads(filtered.length);
-    return filtered;
   };
 
   const handleChange = (e: any) => {

@@ -38,14 +38,14 @@ const Profile = () => {
     }
     ).then((res: any) => {
       setData1(res.data);
-    });
+    }).catch((e: any) => { });
     axios.get(
       "https://sales365.trainright.fit/api/master-users/find-all", {
       headers: { Authorization: accessToken }
     }
     ).then((res: any) => {
       setMastersData(res.data);
-    });
+    }).catch((e: any) => { });
   }, [accessToken]);
 
   const UpdateData = async () => {
@@ -150,123 +150,89 @@ const Profile = () => {
   };
 
   return (
-    <div className="bg-white">
-      <NavbarWithButton
-        mainTitle="Sales > Open"
-        title={`${data1?.result?.lead_title} - Info`}
-        src="manageLeadsIcon"
-        buttons={[
-          {
-            text: "Action",
-            dropdown: true,
-            id: 1,
-            dark: true,
-            light: false,
-            click: AddLead,
-            list: [
-              { title: "Call", Icon: "Phone" },
-              { title: "Email", Icon: "Mail" },
-              { title: "Event", Icon: "Calendar" },
-              { title: "Add note", Icon: "Tasks" },
-              { title: "Message", Icon: "Chat" },
-            ],
-          },
-        ]}
-      />
-      <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px] pt-6">
-        {notes && (
-          <Backdrop bool={bool}>
-            <Notes
-              cancel={cancelNotes}
-              update={UpdateData}
-              leadid={data?.result?._id}
-            />
-          </Backdrop>
-        )}
-        {events && (
-          <Backdrop bool={bool} pad={"50px 0"}>
-            <Events
-              cancel={cancelEvents}
-              companyName={data1?.result?.companyId?.company_name}
-              data={data1}
-            />
-          </Backdrop>
-        )}
-        {emails && (
-          <Backdrop bool={bool} pad={"50px 0"}>
-            <EmailPage
-              refresh={(e: any) => {
-                UpdateData();
-              }}
-              cancel={cancelEmails}
-              data={data1?.result}
-              leadIdResult={data1?.result._id}
-            />
-          </Backdrop>
-        )}
-        {messages && (
-          <Backdrop bool={bool} pad={"50px 0"}>
-            <Messages
-              cancel={cancelMessages}
-              companyName={data1?.result?.companyId?.company_name}
-              data={data1}
-            />
-          </Backdrop>
-        )}
-        {call && (
-          <Backdrop bool={bool} pad={"50px 0"}>
-            <ActiveCall
-              cancel={cancelCall}
-              id={data1?.result?._id}
-              refresh={() => {
-                UpdateData();
-              }}
-              companyId={data1?.result?.companyId?._id}
-              companyName={data1?.result?.companyId?.company_name}
-              lead={data1?.result}
-              customerId={data1?.result?.customerId?._id}
-            />
-          </Backdrop>
-        )}
-        {/* <Navigation
-          title=
-          buttons={[
-            {
-              text: "Take Action",
-              dropdown: true,
-              id: 1,
-              icon: "Plus",
-              click: AddLead,
-              dark: true,
-              light: false,
-              list: [
-                { title: "Call", Icon: "Phone" },
-                { title: "Email", Icon: "Mail" },
-                { title: "Event", Icon: "Calendar" },
-                { title: "Add note", Icon: "Tasks" },
-                { title: "Message", Icon: "Chat" },
-              ],
-            },
-          ]}
-        /> */}
-        <div className="w-[100%] flex gap-[25px] mb-[100px] ">
-          <div className="w-[340px] min-h-[70vh] bg-[#ffe3e170] rounded-xl shrink-0 p-[20px]">
-            <ProfilePage
-              updated={UpdateData}
-              data1={data?.result}
-              mastersData={mastersData}
-            />
-          </div>
-          <LeadProfileContainer
-            data={data1?.result}
-            titles={titles}
-            current={0}
-            info={dummy.leadInfo}
-          />
-        </div>
-        {/* write your code here for profile page manya! */}
-      </div>
-    </div>
+    <></>
+    // <div className="bg-white">
+    //   <NavbarWithButton
+    //     mainTitle="Sales > Open"
+    //     title={`${data1?.result?.lead_title} - Info`}
+    //     src="manageLeadsIcon"
+    //     buttons={[
+    //       {
+    //         text: "Action",
+    //         dropdown: true,
+    //         id: 1,
+    //         dark: true,
+    //         light: false,
+    //         click: AddLead,
+    //         list: [
+    //           { title: "Call", Icon: "Phone" },
+    //           { title: "Email", Icon: "Mail" },
+    //           { title: "Event", Icon: "Calendar" },
+    //           { title: "Add note", Icon: "Tasks" },
+    //           { title: "Message", Icon: "Chat" },
+    //         ],
+    //       },
+    //     ]}
+    //   />
+    //   <div className="w-[100%] min-h-[90vh] pl-[20px] pr-[20px] pt-6">
+    //     {notes && (
+    //       <Backdrop bool={bool}>
+    //         <Notes
+    //           cancel={cancelNotes}
+    //           update={UpdateData}
+    //           leadid={data?.result?._id}
+    //         />
+    //       </Backdrop>
+    //     )}
+    //     {events && (
+    //       <Backdrop bool={bool} pad={"50px 0"}>
+    //         <Events
+    //           cancel={cancelEvents}
+    //           companyName={data1?.result?.companyId?.company_name}
+    //           data={data1}
+    //         />
+    //       </Backdrop>
+    //     )}
+    //     {emails && (
+    //       <Backdrop bool={bool} pad={"50px 0"}>
+    //         <EmailPage
+    //           refresh={(e: any) => {
+    //             UpdateData();
+    //           }}
+    //           cancel={cancelEmails}
+    //           data={data1?.result}
+    //           leadIdResult={data1?.result._id}
+    //         />
+    //       </Backdrop>
+    //     )}
+    //     {messages && (
+    //       <Backdrop bool={bool} pad={"50px 0"}>
+    //         <Messages
+    //           cancel={cancelMessages}
+    //           companyName={data1?.result?.companyId?.company_name}
+    //           data={data1}
+    //         />
+    //       </Backdrop>
+    //     )}
+    //     {call && (
+    //       <Backdrop bool={bool} pad={"50px 0"}>
+    //         <ActiveCall
+    //           cancel={cancelCall}
+    //           id={data1?.result?._id}
+    //           refresh={() => {
+    //             UpdateData();
+    //           }}
+    //           companyId={data1?.result?.companyId?._id}
+    //           companyName={data1?.result?.companyId?.company_name}
+    //           lead={data1?.result}
+    //           customerId={data1?.result?.customerId?._id}
+    //         />
+    //       </Backdrop>
+    //     )}
+    //     <div className="w-[100%] flex gap-[25px] mb-[100px] ">
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

@@ -151,13 +151,18 @@ const SalesOpen = ({ data, mastersData }: props) => {
   };
 
   const makecall = async () => {
-    const res = await axios.post(
-      "https://sales365.trainright.fit/api/calling/make-call",
-      {
-        callTo: "7669481778",
-      },
-      { headers: { Authorization: accessToken } }
-    );
+    try {
+      
+      const res = await axios.post(
+        "https://sales365.trainright.fit/api/calling/make-call",
+        {
+          callTo: "7669481778",
+        },
+        { headers: { Authorization: accessToken } }
+      );
+    } catch (error) {
+      
+    }
   };
 
   const addExport = (e: any, e1: any) => {

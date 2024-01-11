@@ -30,15 +30,19 @@ const LeadsTable = ({ totalRecords, search }) => {
   }, []);
 
   const getallItems = async (current) => {
-    const res = await axios.get(
-      `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}`, {
-      headers: {
-        Authorization: accessToken
+    try {
+      const res = await axios.get(
+        `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}`, {
+        headers: {
+          Authorization: accessToken
+        }
       }
+      );
+      const data = res.data.result;
+      return data;
+    } catch (error) {
+      return {};
     }
-    );
-    const data = res.data.result;
-    return data;
   };
 
   function convertDatetimeToCustomFormat(dateStr) {
@@ -49,45 +53,49 @@ const LeadsTable = ({ totalRecords, search }) => {
   }
 
   useEffect(() => {
-    if (checked) {
-      setLoading(true);
-      const count = Math.ceil(Number(totalRecords) / limit);
-      setpageCount(count);
-      if (pageNumber >= count && pageCount !== 0) setpageNumber(0);
-      const getItems = async () => {
-        const res = await axios.get(
-          `https://sales365.trainright.fit/api/active-call/find-all`, {
-          headers: {
-            Authorization: accessToken
-          }
-        }
-        );
-        const data = res.data.result;
-
-        if (search.length) {
-          setpageNumber(0);
-          const allItems = await getallItems(pageNumber);
-          setItems(allItems);
-        }
-        const filtered = data.filter((e) => {
-          const idss = String(convertDatetimeToCustomFormat(e.updatedAt));
-          const leadid = e.leadId?.leadId;
-          return (
-            idss.includes(search) ||
-            leadid.includes(search) ||
-            e.call_title.includes(search)
-          );
-        });
-        filtered.reverse();
-        settotalLeads(filtered.length);
-        const count = Math.ceil(Number(filtered.length) / limit);
+    try {
+      if (checked) {
+        setLoading(true);
+        const count = Math.ceil(Number(totalRecords) / limit);
         setpageCount(count);
-        setItems(
-          filtered.slice(pageNumber * limit, pageNumber * limit + limit)
-        );
-      };
-      getItems();
-      setLoading(false);
+        if (pageNumber >= count && pageCount !== 0) setpageNumber(0);
+        const getItems = async () => {
+          const res = await axios.get(
+            `https://sales365.trainright.fit/api/active-call/find-all`, {
+            headers: {
+              Authorization: accessToken
+            }
+          }
+          );
+          const data = res.data.result;
+
+          if (search.length) {
+            setpageNumber(0);
+            const allItems = await getallItems(pageNumber);
+            setItems(allItems);
+          }
+          const filtered = data.filter((e) => {
+            const idss = String(convertDatetimeToCustomFormat(e.updatedAt));
+            const leadid = e.leadId?.leadId;
+            return (
+              idss.includes(search) ||
+              leadid.includes(search) ||
+              e.call_title.includes(search)
+            );
+          });
+          filtered.reverse();
+          settotalLeads(filtered.length);
+          const count = Math.ceil(Number(filtered.length) / limit);
+          setpageCount(count);
+          setItems(
+            filtered.slice(pageNumber * limit, pageNumber * limit + limit)
+          );
+        };
+        getItems();
+        setLoading(false);
+      }
+    } catch (error) {
+
     }
   }, [limit, pageNumber, search]);
 

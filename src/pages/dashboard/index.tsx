@@ -43,21 +43,21 @@ const DashboardPage = () => {
       )
         .then((res: any) => {
           setData1(res.data);
-        });
+        }).catch((e: any) => { });
       axios.post(
         "https://sales365.trainright.fit/api/script-analysis/find-one",
         date, { headers: { Authorization: accessToken } }
       )
         .then((res: any) => {
           setData2(res.data);
-        });
+        }).catch((e: any) => { });
       axios.post(
         "https://sales365.trainright.fit/api/selling-analysis/find-one",
         date, { headers: { Authorization: accessToken } }
       )
         .then((res: any) => {
           setData2(res.data);
-        });
+        }).catch((e: any) => { });
     } catch (error) {
 
     }

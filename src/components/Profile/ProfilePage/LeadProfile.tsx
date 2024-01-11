@@ -12,6 +12,7 @@ import axios from "axios";
 import Lead from "@/types/Leads";
 
 const ProfilePage = ({ data1, updated, mastersData }: any) => {
+  console.log('============================ ProfilePage =========================', data1, mastersData);
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -73,13 +74,13 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
     }, 1000);
   };
 
-  const contacted: any = data.customerId;
-  const contacts = contacted.contacts;
+  const contacted: any = data?.customerId;
+  const contacts = contacted?.contacts;
 
-  const checkForAllNull = contacts.every((item: any) => item === null);
+  const checkForAllNull = contacts?.every((item: any) => item === null);
   const filteredContactArray = checkForAllNull
     ? []
-    : contacts.filter((item: any) => item !== null);
+    : contacts?.filter((item: any) => item !== null);
 
   const [Activities, setActivities] = useState({
     call: 0,
@@ -101,9 +102,9 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
           let notes = 0;
           for (let i = 0; i < history.length; i++) {
             if (history[i]?.type) {
-              if (history[i].type === "note") {
+              if (history[i]?.type === "note") {
                 notes++;
-              } else if (history[i].type === "email") {
+              } else if (history[i]?.type === "email") {
                 emails++;
               }
             } else {
@@ -174,7 +175,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                 }}
               />
               <p className="block cursor-pointer text-lg leading-[10px ] font-semibold ml-[-6px] text-[14px] text-black hover:text-bg-red">
-                Lead id - {data.leadId}
+                Lead id - {data?.leadId}
               </p>
             </div>
             <Image
@@ -393,13 +394,13 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
           />
           <div className="ml-3">
             <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-wide text-[#000] -900 font-normal">
-              {data.customerId.customer_name}
+              {data?.customerId?.customer_name}
             </h2>
             <a
               href="#0"
               className="block text-xs text-[14px] text-[#000] -500 tracking-wide hover:text-indigo-500"
             >
-              {data.customerId.customer_designation}
+              {data?.customerId?.customer_designation}
             </a>
           </div>
         </div>
@@ -407,19 +408,19 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[-22px] leading-[21px]">
           <p className="text-sm font-medium">Gender</p>
           <p className="text-sm font-semibold text-black">
-            {data.customerId.customer_gender}
+            {data?.customerId?.customer_gender}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Phone</p>
           <p className="text-sm font-semibold text-black">
-            {data.customerId.customer_contact}
+            {data?.customerId?.customer_contact}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Email</p>
           <p className="text-sm font-semibold text-black">
-            {data.customerId.customer_email}
+            {data?.customerId?.customer_email}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">

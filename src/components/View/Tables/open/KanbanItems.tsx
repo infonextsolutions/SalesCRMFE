@@ -182,7 +182,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${Item._id}`
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${Item?._id}`
         )
         .then((e) => {
           const history = e.data.result.activityId.history;

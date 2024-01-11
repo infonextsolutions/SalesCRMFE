@@ -36,7 +36,7 @@ const Profile = () => {
       .then((res: any) => {
         setData1(res.data);
         setData(res.data);
-      });
+      }).catch((e: any) => { });
   }, [accessToken]);
 
   const UpdateData = async () => {

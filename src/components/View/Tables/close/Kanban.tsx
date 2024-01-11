@@ -28,7 +28,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
     ).then(res => {
       setItems(res?.data?.result);
       // settotalLeads(res?.data?.totalRecords)
-    });
+    }).catch((e: any) => { });
   }, [queryStr, accessToken]);
 
   //   const getallItems = async (current: any) => {
@@ -40,32 +40,37 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
   //   };
   const [loading, setLoading] = React.useState(false);
   useEffect(() => {
-    setLoading(true);
-    const getItems = async () => {
-      const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close`, {
-        headers: {
-          Authorization: accessToken
+    try {
+      setLoading(true);
+      const getItems = async () => {
+        const res = await axios.get(
+          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close`, {
+          headers: {
+            Authorization: accessToken
+          }
         }
-      }
-      );
-      const data = res?.data?.result;
-      const filtered = data.filter(
-        (e: Lead) =>
-          e.companyId?.company_name?.includes(search) ||
-          e.customerId?.name?.includes(search) ||
-          e.potential_deal_size?.includes(search) ||
-          e?.lead_title?.includes(search) ||
-          e?.leadId?.includes(search)
-      );
+        );
+        const data = res?.data?.result;
+        const filtered = data.filter(
+          (e: Lead) =>
+            e.companyId?.company_name?.includes(search) ||
+            e.customerId?.name?.includes(search) ||
+            e.potential_deal_size?.includes(search) ||
+            e?.lead_title?.includes(search) ||
+            e?.leadId?.includes(search)
+        );
 
-      // const filtered = data;
-      settotalLeads(filtered?.length);
-      setItems(filtered);
-    };
+        // const filtered = data;
+        settotalLeads(filtered?.length);
+        setItems(filtered);
+      };
 
-    getItems();
-    setLoading(false);
+      getItems();
+      setLoading(false);
+
+    } catch (error) {
+
+    }
   }, [search]);
 
   const Leads = items;

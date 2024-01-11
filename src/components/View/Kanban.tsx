@@ -14,15 +14,19 @@ const Kanban = ({ list }: KanbasProps) => {
   }, []);
 
   const fetchItems = async () => {
-    const res = await axios.get(
-      `https://sales365.trainright.fit/api/leads/find-all`, {
-      headers: {
-        Authorization: accessToken
+    try {
+      const res = await axios.get(
+        `https://sales365.trainright.fit/api/leads/find-all`, {
+        headers: {
+          Authorization: accessToken
+        }
       }
+      );
+    } catch (error) {
+
     }
-    );
   };
-  
+
   fetchItems();
   const leads = ["enquiry", "interaction", "proposal", "win", "Lost", "Dead"];
   const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WIN", "LOST", "DEAD"];

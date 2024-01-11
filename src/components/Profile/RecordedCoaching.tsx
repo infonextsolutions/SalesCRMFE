@@ -276,21 +276,25 @@ const Coaching = ({ data, refresh }: any) => {
   };
 
   useEffect(() => {
-    if (checked) {
-      axios
-        .get(
-          `https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=${userId}`, {
-          headers: {
-            Authorization: accessToken
+    try {
+      if (checked) {
+        axios
+          .get(
+            `https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=${userId}`, {
+            headers: {
+              Authorization: accessToken
+            }
           }
-        }
-        )
-        .then((e) => {
-          setData(e.data);
-          setLoading(false);
-        })
-        .catch((e) => { });
-      setChecked(false);
+          )
+          .then((e) => {
+            setData(e.data);
+            setLoading(false);
+          })
+          .catch((e) => { });
+        setChecked(false);
+      }
+    } catch (error) {
+
     }
   }, [accessToken]);
 
@@ -312,10 +316,10 @@ const Coaching = ({ data, refresh }: any) => {
         score: finalScore,
         callId: data?._id,
       }, {
-        headers: {
-          Authorization: accessToken
-        }
+      headers: {
+        Authorization: accessToken
       }
+    }
     )
       .then((res: any) => {
         appDispatch(setSuccess({

@@ -428,40 +428,45 @@ const AllocatedCallsCC = ({ data }: any) => {
     };
 
     useEffect(() => {
-        if (window !== undefined) {
-            const userId = localStorage.getItem("user-id");
-            axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=closed&qaId=${userId}`, { headers: { Authorization: accessToken } })
-                .then((res: any) => {
-                    const data = res?.data?.result;
-                    setRows(data?.map((item: any, index: number) => {
-                        let row = [
-                            { text: item?.callId || "-" },
-                            { text: item?.callTitle || "-" },
-                            { text: item?.leadId?.[0]?.leadId || "-" },
-                            { text: item?.leadId?.[0]?.lead_title || "-" },
-                            { text: item?.callId || "-" },  // participants
-                            { text: item?.owner?.name || "-" },  // call owner
-                            { text: item?.teamManager || "-" },  // team manager
-                            { text: item?.callId || "-" },  // client poc
-                            { text: item?.company?.[0]?.company_name || "-" },
-                            { text: item?.StartTime || "-" },  // call date & time
-                            { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
-                            { text: item?.callId || "-" },  // call duration
-                            { text: item?.callDisposiiton || "-" },  // call disposition
-                            { text: item?.callType || "-" },  // call type
-                            { text: item?.score || "-" },  // call score
-                            { text: item?.qaId?.name || "-" },  // call review type
-                            { text: item?.callId || "-" },  // call review status
-                            { text: item?.callId || "-" },  // close date
-                            { text: item?.qaAllocatedAt || "-" },  // allocated on
-                            { text: item?.callId || "-" },  // review due date
-                            { text: item?.callId || "-" },  // last updated on
-                        ];
-                        return row;
-                    }));
-                })
-                .catch((err: any) => {
-                });
+        try {
+            
+            if (window !== undefined) {
+                const userId = localStorage.getItem("user-id");
+                axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=closed&qaId=${userId}`, { headers: { Authorization: accessToken } })
+                    .then((res: any) => {
+                        const data = res?.data?.result;
+                        setRows(data?.map((item: any, index: number) => {
+                            let row = [
+                                { text: item?.callId || "-" },
+                                { text: item?.callTitle || "-" },
+                                { text: item?.leadId?.[0]?.leadId || "-" },
+                                { text: item?.leadId?.[0]?.lead_title || "-" },
+                                { text: item?.callId || "-" },  // participants
+                                { text: item?.owner?.name || "-" },  // call owner
+                                { text: item?.teamManager || "-" },  // team manager
+                                { text: item?.callId || "-" },  // client poc
+                                { text: item?.company?.[0]?.company_name || "-" },
+                                { text: item?.StartTime || "-" },  // call date & time
+                                { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
+                                { text: item?.callId || "-" },  // call duration
+                                { text: item?.callDisposiiton || "-" },  // call disposition
+                                { text: item?.callType || "-" },  // call type
+                                { text: item?.score || "-" },  // call score
+                                { text: item?.qaId?.name || "-" },  // call review type
+                                { text: item?.callId || "-" },  // call review status
+                                { text: item?.callId || "-" },  // close date
+                                { text: item?.qaAllocatedAt || "-" },  // allocated on
+                                { text: item?.callId || "-" },  // review due date
+                                { text: item?.callId || "-" },  // last updated on
+                            ];
+                            return row;
+                        }));
+                    })
+                    .catch((err: any) => {
+                    });
+            }
+        } catch (error) {
+            
         }
     }, [accessToken]);
 

@@ -210,7 +210,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
 
   const UpdateCalls = () => {
     setTimeout(() => {
-      const urri = `https://sales365.trainright.fit/api/calling/find-by-id?id=${data._id}`;
+      const urri = `https://sales365.trainright.fit/api/calling/find-by-id?id=${data?._id}`;
       axios
         .get(urri, { headers: { Authorization: accessToken } })
         .then((e) => {

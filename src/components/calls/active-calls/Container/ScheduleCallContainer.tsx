@@ -67,24 +67,29 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
   };
 
   const getData = async () => {
-    const payload = {
-      companyName,
-      product,
-      callOwner,
-      callType,
-      search,
-      date: {
-        from: startDate,
-        to: endDate,
-      },
-    };
+    try {
 
-    const response = await axios.post(
-      "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
-      payload,
-      { headers: { Authorization: accessToken } }
-    );
-    dummy1 = { ...response.data };
+      const payload = {
+        companyName,
+        product,
+        callOwner,
+        callType,
+        search,
+        date: {
+          from: startDate,
+          to: endDate,
+        },
+      };
+
+      const response = await axios.post(
+        "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
+        payload,
+        { headers: { Authorization: accessToken } }
+      );
+      dummy1 = { ...response.data };
+    } catch (error) {
+
+    }
   };
 
   const exportXLSX = () => {

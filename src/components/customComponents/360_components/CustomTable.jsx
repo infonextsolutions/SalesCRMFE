@@ -447,13 +447,13 @@ const CustomTable = ({ component }) => {
         return flattened;
       }
 
-      axios.get(component.api, { headers: { Authorization: accessToken } }).then((e) => {
+      axios.get(component?.api, { headers: { Authorization: accessToken } }).then((e) => {
         const arr = e.data.result;
-        for (let i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr?.length; i++) {
           arr[i] = flattenNestedObject(arr[i]);
         }
         setData(arr);
-      });
+      }).catch(()=> {});
       setCheck(true);
     }
   });

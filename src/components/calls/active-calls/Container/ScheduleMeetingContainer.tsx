@@ -71,25 +71,30 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
   };
 
   const getData = async () => {
-    const payload = {
-      companyName,
-      product,
-      callOwner,
-      callType,
-      search,
-      location,
-      date: {
-        from: startDate,
-        to: endDate,
-      },
-    };
-
-    const response = await axios.post(
-      "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
-      payload,
-      { headers: { Authorization: accessToken } }
-    );
-    dummy1 = { ...response.data };
+    try {
+      
+      const payload = {
+        companyName,
+        product,
+        callOwner,
+        callType,
+        search,
+        location,
+        date: {
+          from: startDate,
+          to: endDate,
+        },
+      };
+  
+      const response = await axios.post(
+        "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
+        payload,
+        { headers: { Authorization: accessToken } }
+      );
+      dummy1 = { ...response.data };
+    } catch (error) {
+      
+    }
   };
 
   // useEffect(() => {

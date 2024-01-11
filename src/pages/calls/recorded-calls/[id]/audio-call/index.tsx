@@ -45,7 +45,7 @@ const CallProfile = () => {
         axios.get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`, { headers: { Authorization: accessToken } })
           .then((res2: any) => {
             setDataNew1(res2.data);
-          });
+          }).catch((e: any) => { });
         axios.post(
           `https://sales365.trainright.fit/api/calling/call-status`,
           { sid: res.data.result.Sid, leadId: res.data.result.leadId._id },
@@ -53,7 +53,7 @@ const CallProfile = () => {
         )
           .then((res3: any) => {
             setDataNew2(res3.data);
-          });
+          }).catch((e: any) => { });
       })
       .catch((err: any) => {
 

@@ -241,7 +241,7 @@ const MeetingProfile = () => {
     const UpdateData = async () => {
         const response = await axios
             .get(
-                `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`, {
+                `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?.result?._id}`, {
                 headers: { Authorization: accessToken }
             }
             )

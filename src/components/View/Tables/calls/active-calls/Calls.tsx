@@ -32,7 +32,6 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
   useEffect(function () {
     try {
       if (window !== undefined) {
-        console.log('------------------- accessToken ---------------', accessToken);
         axios.get(
           `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${pageNumber}${queryStr}`, {
           headers: {

@@ -73,7 +73,7 @@ const Calls = () => {
       }
       ).then((res: any) => {
         setData(res.data);
-      });
+      }).catch((e: any) => { });
     } catch (error) {
 
     }

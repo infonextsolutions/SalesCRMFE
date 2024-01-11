@@ -43,43 +43,81 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           settotalLeads(res?.data?.totalRecords);
           const count = Math.ceil(Number(res?.data?.totalRecords) / limit);
           setpageCount(count);
-        });
+        }).catch((e: any) => { });
     },
-    [queryStr]
+    [queryStr, accessToken]
   );
 
   const getallItems = async (current: any) => {
-    const res = await axios.get(
-      `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}${queryStr}`, {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    );
-    const data = res.data.result;
-    return data;
-  };
-  const [loading, setLoading] = React.useState(false);
-  useEffect(() => {
-    setLoading(true);
-    const count = Math.ceil(Number(totalRecords) / limit);
-    setpageCount(count);
-    if (pageNumber >= count && pageCount != 0) setpageNumber(0);
-    const getItems = async () => {
+    try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${queryStr}`, {
+        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}${queryStr}`, {
         headers: {
           Authorization: accessToken
         }
       }
       );
       const data = res.data.result;
+      return data;
+    } catch (error) {
 
-      if (search.length) {
-        setpageNumber(0);
-        const allItems = await getallItems(pageNumber);
-        setItems(allItems);
+    }
+  };
+  const [loading, setLoading] = React.useState(false);
+  useEffect(() => {
+    try {
+
+      setLoading(true);
+      const count = Math.ceil(Number(totalRecords) / limit);
+      setpageCount(count);
+      if (pageNumber >= count && pageCount != 0) setpageNumber(0);
+      const getItems = async () => {
+        const res = await axios.get(
+          `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${queryStr}`, {
+          headers: {
+            Authorization: accessToken
+          }
+        }
+        );
+        const data = res.data.result;
+
+        if (search.length) {
+          setpageNumber(0);
+          const allItems = await getallItems(pageNumber);
+          setItems(allItems);
+        }
+        const filtered = data.filter(
+          (e: Lead) =>
+            e?.leadId?.includes(search) ||
+            e.lead_title?.includes(search) ||
+            e.companyId.company_name?.includes(search) ||
+            e.customer_name?.includes(search)
+        );
+
+        // const filtered = data;
+        settotalLeads(filtered.length);
+        const count = Math.ceil(Number(filtered.length) / limit);
+        setpageCount(count);
+        setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
+      };
+
+      getItems();
+      setLoading(false);
+    } catch (error) {
+
+    }
+  }, [limit, pageNumber, search, accessToken]);
+
+  const fetchItems = async (current: any) => {
+    try {
+      const res = await axios.get(
+        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}`, {
+        headers: {
+          Authorization: accessToken
+        }
       }
+      );
+      const data = res.data.result;
       const filtered = data.filter(
         (e: Lead) =>
           e?.leadId?.includes(search) ||
@@ -87,36 +125,11 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           e.companyId.company_name?.includes(search) ||
           e.customer_name?.includes(search)
       );
-
-      // const filtered = data;
       settotalLeads(filtered.length);
-      const count = Math.ceil(Number(filtered.length) / limit);
-      setpageCount(count);
-      setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
-    };
-
-    getItems();
-    setLoading(false);
-  }, [limit, pageNumber, search]);
-
-  const fetchItems = async (current: any) => {
-    const res = await axios.get(
-      `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}`, {
-      headers: {
-        Authorization: accessToken
-      }
+      return filtered;
+    } catch (error) {
+      return {};
     }
-    );
-    const data = res.data.result;
-    const filtered = data.filter(
-      (e: Lead) =>
-        e?.leadId?.includes(search) ||
-        e.lead_title?.includes(search) ||
-        e.companyId.company_name?.includes(search) ||
-        e.customer_name?.includes(search)
-    );
-    settotalLeads(filtered.length);
-    return filtered;
   };
 
   const handleChange = (e: any) => {

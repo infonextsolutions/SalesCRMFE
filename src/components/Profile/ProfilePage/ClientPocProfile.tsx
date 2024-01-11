@@ -33,7 +33,7 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1.result._id}`, {
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.result?._id}`, {
         headers: {
           Authorization: accessToken
         }
@@ -41,12 +41,12 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
       )
       .then((e) => {
         setData(e.data);
-        refresh(e.data.result.customerId.name);
+        refresh(e.data?.result?.customerId?.name);
       })
       .catch((e) => {
       });
   };
-  const contacted: any = data.result.customerId;
+  const contacted: any = data?.result?.customerId;
   const contacts = contacted?.contacts ? contacted?.contacts : [];
   return (
     <>

@@ -518,7 +518,7 @@ const Events = ({
                 success: "Event Added Successfully!",
               })
             );
-          });
+          }).catch((e: any) => { });
       })
       .catch((e) => {
         dispatch(
