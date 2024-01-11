@@ -160,10 +160,10 @@ const CompanyProfile = ({ data1, refresh }: any) => {
                 />
               </a>
             )}
-            {data?.companyId?.company_socialMedia2 && (
+            {data?.result?.companyId?.company_socialMedia2 && (
               <a href={data?.companyId?.company_socialMedia2Url}>
                 <Image
-                  src={getBasicIcon(data?.companyId?.company_socialMedia2)}
+                  src={getBasicIcon(data?.result?.companyId?.company_socialMedia2)}
                   className={`w-[20px] svg-grey mr-2`}
                   alt=""
                   width={20}
