@@ -3,7 +3,7 @@ import { useAppDispatch } from "@/store/store";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropzone from "react-dropzone";
 import { useDispatch } from "react-redux";
 
@@ -68,7 +68,7 @@ const Uploads = ({ cancel, id, refresh }) => {
   };
 
   const dispatch = useAppDispatch();
-  const [accessToken, setAccessToken] = useState < string > ("");
+  const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
     if (window !== undefined) {
