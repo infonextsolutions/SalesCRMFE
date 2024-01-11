@@ -67,6 +67,30 @@ const Activity = () => {
         ]
     ]);
 
+    const [totalItem, setTotalItems] = useState<number>(0);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [currPage, setCurrPage] = useState<number>(0);
+    const [limit, setLimit] = useState<number>(10);
+
+    const getData = (page = currPage) => {
+        try {
+
+        } catch (error) {
+
+        }
+    };
+
+    const handlePageChange = (payload: any) => {
+        if (currPage !== payload?.selected) {
+            setCurrPage(payload?.selected || 0);
+            getData(payload?.selected);
+        }
+    };
+
+    const handleItemsPerPageChange = (val: any) => {
+        setLimit(val);
+    };
+
     return (
         <div className='w-[100%]'>
             <div className="flex w-[100%] justify-between py-4">
@@ -97,7 +121,7 @@ const Activity = () => {
             </div>
             <div>
                 <Table columns={columns} rows={rows} />
-                <Pagination />
+                <Pagination itemsPerPage={limit} totalItems={totalItem} totalPages={totalPages} currPage={currPage} updatePage={handlePageChange} updateItemsPerPage={handleItemsPerPageChange} />
             </div>
         </div>
     )

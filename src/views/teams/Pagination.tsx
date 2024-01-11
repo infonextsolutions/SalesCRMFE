@@ -4,32 +4,34 @@ import React from 'react'
 import ReactPaginate from "react-paginate";
 
 const Pagination = ({
+    currPage = 0,
     itemsPerPage = 10,
     totalItems = 0,
     totalPages = 1,
     updateItemsPerPage,
-    currPage = 0,
+    updatePage,
 }: {
     itemsPerPage?: number,
     totalItems?: number,
     totalPages?: number,
     updateItemsPerPage?: any,
-    currPage?: number
+    currPage?: number,
+    updatePage?: any
 }) => {
-    const handlePageChange = () => {
-
+    const handlePageChange = (payload: any) => {
+        updatePage(payload);
     };
 
-    const handleItemsPerPageChange = () => {
-        updateItemsPerPage();
+    const handleItemsPerPageChange = (e: any) => {
+        updateItemsPerPage(e.target.value);
     };
 
     const setFirstPage = () => {
-        handlePageChange();
+        handlePageChange({ selected: 0 });
     };
 
     const setLastPage = () => {
-        handlePageChange();
+        handlePageChange({ selected: totalPages - 1 });
     };
 
     return (

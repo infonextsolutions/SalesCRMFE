@@ -229,6 +229,11 @@ const AllocatedCalls = () => {
         }
     });
 
+    const [totalItem, setTotalItems] = useState<number>(0);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [currPage, setCurrPage] = useState<number>(0);
+    const [limit, setLimit] = useState<number>(10);
+
     const ref: any = useRef();
     const [accessToken, setAccessToken] = useState<any>("");
 
@@ -300,14 +305,16 @@ const AllocatedCalls = () => {
         setShowManageCol(!showManageCol);
     };
 
-    useEffect(() => {
+    const getData = (page = currPage) => {
         try {
-            
             if (window !== undefined) {
                 const userId = localStorage.getItem("user-id");
-                axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}`, { headers: { Authorization: accessToken } })
+                axios.get(`https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}&page=${page}&limit=${limit}`, { headers: { Authorization: accessToken } })
                     .then((res: any) => {
                         const data = res?.data?.result;
+                        setTotalItems(res?.data?.totalRecords);
+                        const pages = Math.ceil(res?.data?.totalRecords / limit);
+                        setTotalPages(pages);
                         setRows(data?.map((item: any, index: number) => {
                             let row = [
                                 { text: item?.callId || "-" },
@@ -339,8 +346,12 @@ const AllocatedCalls = () => {
                     });
             }
         } catch (error) {
-            
+
         }
+    };
+
+    useEffect(() => {
+        getData();
     }, [accessToken]);
 
     useEffect(() => {
@@ -358,6 +369,17 @@ const AllocatedCalls = () => {
             router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
         };
     }, []);
+
+    const handlePageChange = (payload: any) => {
+        if (currPage !== payload?.selected) {
+            setCurrPage(payload?.selected || 0);
+            getData(payload?.selected);
+        }
+    };
+
+    const handleItemsPerPageChange = (val: any) => {
+        setLimit(val);
+    };
 
     return (
         <>
@@ -400,7 +422,7 @@ const AllocatedCalls = () => {
                 </div>
                 <Filters filters={filters} />
                 <Table rows={rows} columns={columns} />
-                <Pagination />
+                <Pagination itemsPerPage={limit} totalItems={totalItem} totalPages={totalPages} currPage={currPage} updatePage={handlePageChange} updateItemsPerPage={handleItemsPerPageChange} />
             </div>
             {showManageCol && (
                 <Backdrop>

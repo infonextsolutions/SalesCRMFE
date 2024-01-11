@@ -56,7 +56,7 @@ const DashboardPage = () => {
         date, { headers: { Authorization: accessToken } }
       )
         .then((res: any) => {
-          setData2(res.data);
+          setData3(res.data);
         }).catch((e: any) => { });
     } catch (error) {
 

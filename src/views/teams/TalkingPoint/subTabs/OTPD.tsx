@@ -176,18 +176,67 @@ const OTPD = () => {
         console.log('======= UPDATE FILTER : filterData, newValue =======', filterData, newValue);
     };
 
+    const [totalItems1, setTotalItems1] = useState<number>(0);
+    const [totalPages1, setTotalPages1] = useState<number>(0);
+    const [currPage1, setCurrPage1] = useState<number>(0);
+    const [limit1, setLimit1] = useState<number>(10);
+
+    const [totalItems2, setTotalItems2] = useState<number>(0);
+    const [totalPages2, setTotalPages2] = useState<number>(0);
+    const [currPage2, setCurrPage2] = useState<number>(0);
+    const [limit2, setLimit2] = useState<number>(10);
+
+    const getData1 = (page = currPage1) => {
+        try {
+
+        } catch (error) {
+
+        }
+    };
+
+
+    const getData2 = (page = currPage1) => {
+        try {
+
+        } catch (error) {
+
+        }
+    };
+
+    const handlePageChange1 = (payload: any) => {
+        if (currPage1 !== payload?.selected) {
+            setCurrPage1(payload?.selected || 0);
+            getData1(payload?.selected);
+        }
+    };
+
+    const handleItemsPerPageChange1 = (val: any) => {
+        setLimit1(val);
+    };
+
+    const handlePageChange2 = (payload: any) => {
+        if (currPage2 !== payload?.selected) {
+            setCurrPage2(payload?.selected || 0);
+            getData2(payload?.selected);
+        }
+    };
+
+    const handleItemsPerPageChange2 = (val: any) => {
+        setLimit2(val);
+    };
+
     return (
         <div>
             <Filters filters={filters} onUpdate={handleFilterUpdate} />
             <div className='w-[100%] flex'>
                 <div className=''>
                     <Table rows={rows} columns={columns} />
-                    <Pagination />
+                    <Pagination itemsPerPage={limit1} totalItems={totalItems1} totalPages={totalPages1} currPage={currPage1} updatePage={handlePageChange1} updateItemsPerPage={handleItemsPerPageChange1} />
                 </div>
                 <div className=''>
                     <h1 className='text-black text-[22px]'>List of Calls</h1>
                     <Table columns={columns2} rows={rows2} />
-                    <Pagination />
+                    <Pagination itemsPerPage={limit2} totalItems={totalItems2} totalPages={totalPages2} currPage={currPage2} updatePage={handlePageChange2} updateItemsPerPage={handleItemsPerPageChange2} />
                 </div>
             </div>
         </div>
