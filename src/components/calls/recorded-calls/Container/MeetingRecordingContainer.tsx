@@ -116,7 +116,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   ]);
 
   const exportXLSX = () => {
-    const worksheet = XLSX.utils.json_to_sheet(data.result);
+    const worksheet = XLSX.utils.json_to_sheet(data?.result);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, "DataSheet.xlsx");
@@ -129,7 +129,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
           style: "header",
         },
         {
-          text: JSON.stringify(data.result, null, 4),
+          text: JSON.stringify(data?.result, null, 4),
           style: "contentStyle",
         },
       ],
@@ -179,7 +179,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                       title: "CSV",
                       Icon: "CSV",
                       wrapper: (
-                        <CSVLink data={data.result} className="" ref={ref}>
+                        <CSVLink data={data?.result} className="" ref={ref}>
                           CSV
                         </CSVLink>
                       ),

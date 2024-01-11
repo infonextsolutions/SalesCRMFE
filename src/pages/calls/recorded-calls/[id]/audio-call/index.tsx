@@ -62,7 +62,7 @@ const CallProfile = () => {
 
   useEffect(() => {
     refreshData();
-  }, [accessToken]);
+  }, [accessToken, id]);
 
   const getAllQAM = () => {
     axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_manager`, { headers: { Authorization: accessToken } })

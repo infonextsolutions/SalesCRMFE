@@ -545,6 +545,10 @@ const Audio = ({ data, data1, data2 }: any) => {
     }
   }, []);
 
+  useEffect(() => {
+    setCallData(data2)
+  }, [data2]);
+
   const callit = () => {
     const url = "https://sales365.trainright.fit/api/calling/call-status";
     if (data.leadId?._id) {
