@@ -349,9 +349,9 @@ const Dashboard = ({ data }: any) => {
                   wrapper: (
                     <CSVLink
                       data={[
-                        data.first.result,
-                        data.second.result,
-                        data.third.result,
+                        data?.first?.result,
+                        data?.second?.result,
+                        data?.third?.result,
                       ]}
                       className=""
                       ref={ref}
