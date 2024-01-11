@@ -36,7 +36,7 @@ export default function Open() {
     }
     ).then((res: any) => {
       setData(res.data);
-    });
+    }).catch((e: any) => { });
   }, [accessToken]);
 
   React.useEffect(() => {

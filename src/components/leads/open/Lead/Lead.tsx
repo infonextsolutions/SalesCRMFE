@@ -666,7 +666,7 @@ const LeadContainer = ({
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData._id}`, {
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData?._id}`, {
         headers: {
           Authorization: accessToken
         }
@@ -815,7 +815,7 @@ const LeadContainer = ({
             weight={500}
             textLeft={0}
             color={"#000"}
-            text={LeadData1.leadId}
+            text={LeadData1?.leadId}
             click={true}
             route={`${pathname}/${id}/lead-profile`}
           />
@@ -823,7 +823,7 @@ const LeadContainer = ({
             width={120}
             left={0}
             color={"#000"}
-            text={LeadData1.lead_title}
+            text={LeadData1?.lead_title}
             click={true}
             route={`${pathname}/${id}/lead-profile`}
           />

@@ -39,7 +39,7 @@ const LeadProfileContainer = ({
         actionHistory?.[i]?.type?.toLowerCase() === "call" ||
         actionHistory?.[i]?.callType?.toLowerCase() === "call"
       ) {
-        return actionHistory[i];
+        return actionHistory?.[i];
       }
     }
     return null;
@@ -66,9 +66,8 @@ const LeadProfileContainer = ({
 
   return (
     <div
-      className={`w-[${
-        width ? width : "100%"
-      }] bg-[#F7F7F7] rounded-xl p-[25px] px-[35px] pt-[30px] `}
+      className={`w-[${width ? width : "100%"
+        }] bg-[#F7F7F7] rounded-xl p-[25px] px-[35px] pt-[30px] `}
     >
       <Navigator
         width={false}
@@ -93,7 +92,7 @@ const LeadProfileContainer = ({
                 />
               </div> */}
               <h2 className="text-4xl font-semibold">
-                Lead-{data.lead_title}
+                Lead-{data?.lead_title}
                 {""} Info
               </h2>
               <div className="pr-20">
@@ -119,9 +118,8 @@ const LeadProfileContainer = ({
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">
                     {lastCallData
-                      ? `${
-                          lastCallData?.call_type || lastCallData?.type
-                        } on ${formatDateTime(lastCallData?.createdAt)}`
+                      ? `${lastCallData?.call_type || lastCallData?.type
+                      } on ${formatDateTime(lastCallData?.createdAt)}`
                       : "-"}
                   </p>
                 </div>

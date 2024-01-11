@@ -34,7 +34,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1.result._id}`, {
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.result?._id}`, {
           headers: {
             Authorization: accessToken
           }
@@ -42,7 +42,7 @@ const CompanyProfile = ({ data1, refresh }: any) => {
         )
         .then((e) => {
           setData(e.data);
-          refresh(e.data.result.companyId.company_name);
+          refresh(e.data?.result?.companyId?.company_name);
         })
         .catch((e) => {
         });

@@ -288,7 +288,7 @@ const CallsPage = () => {
         }
         ).then((res: any) => {
             setData(res?.data);
-        });
+        }).catch((e: any) => { });
     }, [accessToken]);
 
     const [filters, setFilters] = useState({
@@ -523,37 +523,42 @@ const CallsPage = () => {
     };
 
     const handleAssignTo = (checked: boolean, qaId: any) => {
-        if (selectedRows.length === 0) {
-            dispatch(setError({
-                show: true,
-                error: "No Selection.",
-            }));
-        } else if (checked) {
-            dispatch(setSuccess({
-                show: true,
-                success: "Assigning...",
-            }));
-            const assigningPromise = selectedRows.map((selectedRow: any) => {
-                const payload = {
-                    qaId: qaId,
-                    qamId: window !== undefined ? localStorage.getItem('user-id') : "",
-                    callId: selectedRow
-                };
-                return axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload, {headers: {Authorization: accessToken}});
-            });
-            Promise.all(assigningPromise)
-                .then((res: any) => {
-                    dispatch(setSuccess({
-                        show: true,
-                        success: "Successfully Assigned!",
-                    }));
-                })
-                .catch((err: any) => {
-                    dispatch(setError({
-                        show: true,
-                        error: "Error Occured!",
-                    }));
+        try {
+            
+            if (selectedRows.length === 0) {
+                dispatch(setError({
+                    show: true,
+                    error: "No Selection.",
+                }));
+            } else if (checked) {
+                dispatch(setSuccess({
+                    show: true,
+                    success: "Assigning...",
+                }));
+                const assigningPromise = selectedRows.map((selectedRow: any) => {
+                    const payload = {
+                        qaId: qaId,
+                        qamId: window !== undefined ? localStorage.getItem('user-id') : "",
+                        callId: selectedRow
+                    };
+                    return axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload, { headers: { Authorization: accessToken } });
                 });
+                Promise.all(assigningPromise)
+                    .then((res: any) => {
+                        dispatch(setSuccess({
+                            show: true,
+                            success: "Successfully Assigned!",
+                        }));
+                    })
+                    .catch((err: any) => {
+                        dispatch(setError({
+                            show: true,
+                            error: "Error Occured!",
+                        }));
+                    });
+            }
+        } catch (error) {
+            
         }
     };
 

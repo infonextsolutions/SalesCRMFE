@@ -7,7 +7,7 @@ import { Card } from "@mui/material";
 
 const Activityhistory = ({ data }: { data: any }) => {
   const history = data.activityId?.history ? data.activityId?.history : [];
-  const notes = history.filter((item: any) => item.type == "note");
+  const notes = history.filter((item: any) => item?.type == "note");
 
   function formatDateAndTime(dateString: any) {
     // Create a Date object from the given date string (UTC time)
@@ -61,7 +61,7 @@ const Activityhistory = ({ data }: { data: any }) => {
         <h2 className="text-[#3F434A] text-2xl font-medium">
           Activity History
         </h2>
-        {history.length > 0 && (
+        {history?.length > 0 && (
           <div className="mt-[2px] mx-[20px] ml-[3px] flex flex-col gap-y-2.5 w-[100%]">
             <div className="flex text-[14px] mt-[30px] w-[100%] text-[#8A9099] leading-[21px] items-center justify-between">
               <p className="text-[#8A9099] font-medium w-[19%]">
@@ -79,28 +79,28 @@ const Activityhistory = ({ data }: { data: any }) => {
 
             <div className="w-[100%] flex flex-col-reverse">
               {history.map((item: any, i: any) => {
-                const date = formatDateAndTime(item.createdAt);
+                const date = formatDateAndTime(item?.createdAt);
                 return (
                   <>
                     <div className="text-[14px] pl-[20px] mb-[10px] py-[7px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffe3e170] rounded-xl justify-between">
                       <div className="w-[19%]">
                         <p className="text-[#3F434A] font-medium">
-                          {date.date}
+                          {date?.date}
                         </p>
                         <p className="text-[#3F434A] font-medium">
-                          {date.time}
+                          {date?.time}
                         </p>
                       </div>
                       <div className="w-[17.5%]">
                         <Image
                           src={
-                            item.type === "email"
+                            item?.type === "email"
                               ? getBasicIcon("Mail")
-                              : item.type === "note"
-                              ? getBasicIcon("Tasks")
-                              : item.call_title
-                              ? getBasicIcon("Phone")
-                              : getBasicIcon("activity-1")
+                              : item?.type === "note"
+                                ? getBasicIcon("Tasks")
+                                : item?.call_title
+                                  ? getBasicIcon("Phone")
+                                  : getBasicIcon("activity-1")
                           }
                           className={`
                     `}
@@ -120,24 +120,24 @@ const Activityhistory = ({ data }: { data: any }) => {
                         <p>-</p>
                       </div>
                       <div className=" w-[17.5%] ">
-                        {item.type === "email" ? (
+                        {item?.type === "email" ? (
                           <>
                             <p
-                              dangerouslySetInnerHTML={{ __html: item.title }}
+                              dangerouslySetInnerHTML={{ __html: item?.title }}
                               className="text-gray-500  font-semibold text-xs"
                             ></p>
                             <p
-                              dangerouslySetInnerHTML={{ __html: item.content }}
+                              dangerouslySetInnerHTML={{ __html: item?.content }}
                               className="text-[#8A9099] font-small text-xs"
                             ></p>
                           </>
                         ) : (
                           <>
                             <p className="text-gray-500  font-bold text-lg">
-                              {item.title}
+                              {item?.title}
                             </p>
                             <p className="text-[#8A9099] font-small text-sm">
-                              {item.content}
+                              {item?.content}
                             </p>
                           </>
                         )}
@@ -162,20 +162,20 @@ const Activityhistory = ({ data }: { data: any }) => {
           </div>
         )}
       </Card>
-      {notes.length > 0 && (
+      {notes?.length > 0 && (
         <Card className="mt-4 flex flex-col gap-4 p-6">
-          {notes.length > 0 && <h2 className="text-2xl font-bold">Notes</h2>}
-          {notes.map((item: any) => (
+          {notes?.length > 0 && <h2 className="text-2xl font-bold">Notes</h2>}
+          {notes?.map((item: any) => (
             <>
               <div className="w-[100%] h-[20vh] rounded-md border-black border border-solid p-5">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold">{item.title}</h2>
+                  <h2 className="text-xl font-semibold">{item?.title}</h2>
                   <div className="flex gap-4">
-                    <h2>{item.createdAt.split("T")[0]}</h2>
-                    <h2>{item.createdAt.split("T")[1].substring(0, 5)}</h2>
+                    <h2>{item?.createdAt.split("T")[0]}</h2>
+                    <h2>{item?.createdAt.split("T")[1].substring(0, 5)}</h2>
                   </div>
                 </div>
-                <h2 className="text-sm mt-2">{item.content}</h2>
+                <h2 className="text-sm mt-2">{item?.content}</h2>
               </div>
             </>
           ))}

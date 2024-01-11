@@ -214,7 +214,7 @@ const Attachements = ({ data }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`, {
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`, {
           headers: {
             Authorization: accessToken
           }
@@ -231,7 +231,7 @@ const Attachements = ({ data }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data._id}`, {
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`, {
           headers: { Authorization: accessToken }
         }
         )

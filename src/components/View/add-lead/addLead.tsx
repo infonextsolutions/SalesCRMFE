@@ -84,7 +84,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
       setLoading(false);
       router.reload();
       cancel();
-    });
+    }).catch((e: any) => { });
   };
 
   return (

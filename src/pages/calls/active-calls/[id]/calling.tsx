@@ -68,7 +68,7 @@ const AudioProfile = () => {
         ).then((res2: any) => {
           setScripts(res2.data);
         });
-      });
+      }).catch((e: any) => { });
     } catch (error) {
 
     }

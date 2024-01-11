@@ -121,7 +121,7 @@ const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; d
 
       }, { headers: { Authorization: accessToken } })
       .then((e: any) => {
-      });
+      }).catch((e: any) => { });
   };
 
   return (

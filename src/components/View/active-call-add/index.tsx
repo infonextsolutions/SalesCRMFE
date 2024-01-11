@@ -493,7 +493,7 @@ const ActiveCall = ({
   };
 
   const list = lead
-    ? lead.owners.map((i: any) => {
+    ? lead?.owners?.map((i: any) => {
       return {
         title: i.name,
         value: i._id,
@@ -641,7 +641,6 @@ const ActiveCall = ({
           // ...list,
         ]}
         change={(e: any) => {
-          console.log('++++++++ set participants ++++++++++', e)
           setData({ ...data, participants: e });
         }}
       />

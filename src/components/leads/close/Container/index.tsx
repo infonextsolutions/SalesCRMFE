@@ -67,26 +67,30 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   };
 
   const getData = async () => {
-    const payload = {
-      status,
-      stage,
-      product,
-      leadSource,
-      search,
-      date: {
-        from: startDate,
-        to: endDate,
-      },
-    };
-
-    const response = await axios.get(
-      "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close", {
-      headers: {
-        Authorization: accessToken
+    try {
+      const payload = {
+        status,
+        stage,
+        product,
+        leadSource,
+        search,
+        date: {
+          from: startDate,
+          to: endDate,
+        },
+      };
+  
+      const response = await axios.get(
+        "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close", {
+        headers: {
+          Authorization: accessToken
+        }
       }
+      );
+      records = { ...response.data };
+    } catch (error) {
+      
     }
-    );
-    records = { ...response.data };
   };
 
   useEffect(() => {

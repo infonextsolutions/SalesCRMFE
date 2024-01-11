@@ -38,7 +38,7 @@ export default function Open() {
     }
     ).then((res: any) => {
       setData(res.data);
-    });
+    }).catch((e: any) => { });
     axios.get(
       "https://sales365.trainright.fit/api/master-users/find-all", {
       headers: {
@@ -47,7 +47,7 @@ export default function Open() {
     }
     ).then((res: any) => {
       setMastersData(res.data);
-    });
+    }).catch((e: any) => { });
   }, [accessToken]);
 
   React.useEffect(() => {

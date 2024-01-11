@@ -142,7 +142,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
   }, []);
 
   const exportXLSX = () => {
-    const worksheet = XLSX.utils.json_to_sheet(data.result);
+    const worksheet = XLSX.utils.json_to_sheet(data?.result);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
@@ -151,13 +151,18 @@ const SalesOpen = ({ data, mastersData }: props) => {
   };
 
   const makecall = async () => {
-    const res = await axios.post(
-      "https://sales365.trainright.fit/api/calling/make-call",
-      {
-        callTo: "7669481778",
-      },
-      { headers: { Authorization: accessToken } }
-    );
+    try {
+      
+      const res = await axios.post(
+        "https://sales365.trainright.fit/api/calling/make-call",
+        {
+          callTo: "7669481778",
+        },
+        { headers: { Authorization: accessToken } }
+      );
+    } catch (error) {
+      
+    }
   };
 
   const addExport = (e: any, e1: any) => {
@@ -250,7 +255,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
                 title: "CSV",
                 Icon: "CSV",
                 wrapper: (
-                  <CSVLink data={data.result} className="" ref={ref}>
+                  <CSVLink data={data?.result} className="" ref={ref}>
                     CSV
                   </CSVLink>
                 ),
@@ -259,7 +264,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
           },
         ]}
       />
-      <LeadsContainer view={view} records={data.totalRecords} list={Dummy} />
+      <LeadsContainer view={view} records={data?.totalRecords} list={Dummy} />
     </div>
   );
 };

@@ -28,7 +28,7 @@ const CompanyProfile = () => {
       .then((res: any) => {
         setData(res.data);
         setTitle(res?.data?.result?.companyId?.company_name)
-      });
+      }).catch((e: any) => { });
   }, [accessToken]);
 
   return (

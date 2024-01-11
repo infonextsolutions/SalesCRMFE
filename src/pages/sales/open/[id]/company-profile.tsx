@@ -31,7 +31,7 @@ const CompanyProfile = () => {
     }
     ).then((res: any) => {
       setData(res.data);
-    });
+    }).catch((e: any) => { });
   }, [accessToken]);
 
   return (

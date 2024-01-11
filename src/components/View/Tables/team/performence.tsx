@@ -28,43 +28,53 @@ const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
   }, []);
 
   useEffect(() => {
-    const count = Math.ceil(Number(totalRecords) / limit);
-    setpageCount(count);
-    if (pageNumber >= count && pageCount != 0) setpageNumber(0);
-    const getItems = async () => {
-      // const res = await fetch(
-      //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${pageNumber}`
-      // );
-      const res = await axios.get(
-        `https://sales365.trainright.fit/api/lead-report/find-all?limit=${limit}&page=${pageNumber}`, {
-        headers: {
-          Authorization: accessToken
+    try {
+
+      const count = Math.ceil(Number(totalRecords) / limit);
+      setpageCount(count);
+      if (pageNumber >= count && pageCount != 0) setpageNumber(0);
+      const getItems = async () => {
+        // const res = await fetch(
+        //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${pageNumber}`
+        // );
+        const res = await axios.get(
+          `https://sales365.trainright.fit/api/lead-report/find-all?limit=${limit}&page=${pageNumber}`, {
+          headers: {
+            Authorization: accessToken
+          }
         }
-      }
-      );
-      // const data = await res.json();
+        );
+        // const data = await res.json();
 
-      setItems(res.data.result);
+        setItems(res.data.result);
 
-      // if(pageCount==0) setpageCount(7);
-    };
+        // if(pageCount==0) setpageCount(7);
+      };
 
-    getItems();
+      getItems();
+    } catch (error) {
+
+    }
   }, [limit, pageNumber, pageCount, totalRecords, accessToken]);
 
   const fetchItems = async (current: any) => {
     // const res = await fetch(
     //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}`
     // );
-    const res = await axios.get(
-      `https://sales365.trainright.fit/api/lead-report/find-all?limit=${limit}&page=${current}`, {
-      headers: {
-        Authorization: accessToken
+    try {
+
+      const res = await axios.get(
+        `https://sales365.trainright.fit/api/lead-report/find-all?limit=${limit}&page=${current}`, {
+        headers: {
+          Authorization: accessToken
+        }
       }
+      );
+      // const data = await res.json();
+      return res.data.result;
+    } catch (error) {
+
     }
-    );
-    // const data = await res.json();
-    return res.data.result;
   };
 
   const handleChange = (e: any) => {

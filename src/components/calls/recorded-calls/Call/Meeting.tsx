@@ -497,7 +497,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     if (CallData.leadId.length > 0) {
       axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData.leadId}`, {
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData?.leadId}`, {
           headers: {
             Authorization: accessToken
           }

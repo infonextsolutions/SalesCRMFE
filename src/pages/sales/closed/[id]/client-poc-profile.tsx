@@ -29,7 +29,7 @@ const ClientProfile = () => {
     )
       .then((res: any) => {
         setData(res.data);
-      });
+      }).catch((e: any) => { });
   }, [accessToken]);
 
   function CallBack(childData: any) {
