@@ -82,7 +82,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
     // return;
     axios.post(`${API_DOMAIN}/api/leads/create`, payload, { headers: { Authorization: accessToken } }).then((e) => {
       setLoading(false);
-      router.reload();
+      // router.reload();
       cancel();
     }).catch((e: any) => { });
   };
