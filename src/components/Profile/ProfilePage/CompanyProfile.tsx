@@ -30,6 +30,10 @@ const CompanyProfile = ({ data1, refresh }: any) => {
     }
   }, []);
 
+  useEffect(() => {
+    setData(data1);
+  }, [data1]);
+
   const UpdateData = async () => {
     setTimeout(async () => {
       const response = await axios

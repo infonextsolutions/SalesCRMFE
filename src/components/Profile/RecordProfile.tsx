@@ -37,6 +37,10 @@ const RecordProfile = ({
     }
   }, []);
 
+  useEffect(() => {
+    setActiveCall(data1);
+  }, [data1]);
+
   const UpdateCall = async () => {
     const response = await axios
       .get(

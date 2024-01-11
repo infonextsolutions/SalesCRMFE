@@ -37,15 +37,14 @@ const Profile = () => {
       }
     }
     ).then((res: any) => {
-      console.log('=================== FIND BY ID ==================', res.data);
       setData1(res.data);
+      setData(res.data);
     }).catch((e: any) => { });
     axios.get(
       "https://sales365.trainright.fit/api/master-users/find-all", {
       headers: { Authorization: accessToken }
     }
     ).then((res: any) => {
-      console.log('=================== MASTERS DATA ==================', res.data);
       setMastersData(res.data);
     }).catch((e: any) => { });
   }, [accessToken]);
@@ -202,7 +201,7 @@ const Profile = () => {
               }}
               cancel={cancelEmails}
               data={data1?.result}
-              leadIdResult={data1?.result._id}
+              leadIdResult={data1?.result?._id}
             />
           </Backdrop>
         )}
@@ -234,7 +233,7 @@ const Profile = () => {
           <div className="w-[340px] min-h-[70vh] bg-[#ffe3e170] rounded-xl shrink-0 p-[20px]">
             <ProfilePage
               updated={UpdateData}
-              data1={data?.result}
+              data1={data1?.result}
               mastersData={mastersData}
             />
           </div>

@@ -191,7 +191,7 @@ const Profile = () => {
           </Backdrop>
         )}
         <Navigation
-          title={`${data1.result.lead_title} - Info`}
+          title={`${data1?.result?.lead_title} - Info`}
           buttons={[
             {
               text: "Take Action",
@@ -213,10 +213,10 @@ const Profile = () => {
         />
         <div className="w-[100%] flex gap-[25px] mb-[100px] ">
           <div className="w-[340px] min-h-[70vh] bg-white rounded-xl shrink-0 p-[20px]">
-            <ProfilePage updated={UpdateData} data1={data.result} />
+            <ProfilePage updated={UpdateData} data1={data?.result} />
           </div>
           <LeadProfileContainer
-            data={data1.result}
+            data={data1?.result}
             titles={titles}
             current={0}
             info={dummy.leadInfo}

@@ -212,7 +212,7 @@ const Deals = ({ data, type }: any) => {
         setInterest(data?.intrest);
       })
       .catch((error) => console.error("Error fetching data: ", error));
-  }, [accessToken]);
+  }, [accessToken, data]);
 
   return (
     <div className="">

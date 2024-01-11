@@ -44,6 +44,10 @@ const MeetingProfile = () => {
     }, []);
 
     useEffect(() => {
+        setData(data);
+    }, [data]);
+
+    useEffect(() => {
         try {
             axios.get(
                 `https://sales365.trainright.fit/api/meeting/find-by-id?id=${id}`, {
@@ -55,7 +59,7 @@ const MeetingProfile = () => {
         } catch (error) {
 
         }
-    }, [accessToken]);
+    }, [accessToken, id]);
 
     const takeAction = (e: any, e1: any) => {
         if (e1 === 0) {
@@ -127,7 +131,7 @@ const MeetingProfile = () => {
         // );
         // formData.append("callId", data.result?.callId);
         formData.append("leadId", data1.result?.leadId?._id);
-        formData.append("activeCallId", data1.result?._id);
+        formData.append("activeCallId", data1?.result?._id);
         formData.append("file", audioFile);
         axios
             .post("https://sales365.trainright.fit/api/recording/add-rc", formData, { headers: { Authorization: accessToken } })
@@ -309,7 +313,7 @@ const MeetingProfile = () => {
             <div className="w-[100%] min-h-[90vh] pl-[10px] pr-[10px] pt-4">
                 {make && (
                     <Backdrop bool={bool}>
-                        <MakeCall cancel={cancelCall} data={data.result} />
+                        <MakeCall cancel={cancelCall} data={data?.result} />
                     </Backdrop>
                 )}
                 {/* <MakeCall cancel={cancelCall} data={data.result} /> */}
@@ -390,8 +394,8 @@ const MeetingProfile = () => {
                                 UpdateData();
                             }}
                             cancel={cancelEmails}
-                            data={data.result}
-                            leadIdResult={data.result._id}
+                            data={data?.result}
+                            leadIdResult={data?.result?._id}
                         />
                     </Backdrop>
                 )}

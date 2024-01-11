@@ -106,7 +106,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     } catch (error) {
 
     }
-  }, [limit, pageNumber, search, accessToken]);
+  }, [limit, pageNumber, search]);
 
   const fetchItems = async (current: any) => {
     try {

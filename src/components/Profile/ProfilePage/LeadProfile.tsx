@@ -12,7 +12,6 @@ import axios from "axios";
 import Lead from "@/types/Leads";
 
 const ProfilePage = ({ data1, updated, mastersData }: any) => {
-  console.log('============================ ProfilePage =========================', data1, mastersData);
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
 
@@ -45,6 +44,10 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
       setAccessToken(localStorage.getItem("access-token"));
     }
   }, []);
+
+  useEffect(() => {
+    setData(data1);
+  }, [data1]);
 
   // const domain = extractDomain(data.companyId?.company_website_url);
 
@@ -120,7 +123,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
       }
       setCheck(true);
     }
-  });
+  }, []);
 
   function formatDateFromISOString(isoString: any) {
     const dateObject = new Date(isoString);
@@ -394,13 +397,13 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
           />
           <div className="ml-3">
             <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-wide text-[#000] -900 font-normal">
-              {data?.customerId?.customer_name}
+              {data?.customerId?.customer_name || data?.customerId?.name}
             </h2>
             <a
               href="#0"
               className="block text-xs text-[14px] text-[#000] -500 tracking-wide hover:text-indigo-500"
             >
-              {data?.customerId?.customer_designation}
+              {data?.customerId?.customer_designation || data?.customerId?.designation}
             </a>
           </div>
         </div>
@@ -408,19 +411,19 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[-22px] leading-[21px]">
           <p className="text-sm font-medium">Gender</p>
           <p className="text-sm font-semibold text-black">
-            {data?.customerId?.customer_gender}
+            {data?.customerId?.customer_gender || data?.customerId?.gender}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Phone</p>
           <p className="text-sm font-semibold text-black">
-            {data?.customerId?.customer_contact}
+            {data?.customerId?.customer_contact || data?.customerId?.contact}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Email</p>
           <p className="text-sm font-semibold text-black">
-            {data?.customerId?.customer_email}
+            {data?.customerId?.customer_email || data?.customerId?.email}
           </p>
         </div>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
