@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import { PaymentOutlined } from "@mui/icons-material";
 
 const LeadsTable = React.lazy(
-  () => import("@/components/View/Tables/allocated/LeadsSearch")
+  () => import("@/components/View/Tables/allocate/LeadsSearch")
 );
 const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
@@ -81,7 +81,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`, {
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open&${getQueryStr()}`, {
         headers: {
           Authorization: accessToken
         }

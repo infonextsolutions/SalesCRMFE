@@ -19,7 +19,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
-  const [items, setItems]: any = useState([]);
+  const [items, setItems]: any = useState<any>([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
   const [accessToken, setAccessToken] = useState<any>("");
 
@@ -100,7 +100,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         settotalLeads(filtered.length);
         const count = Math.ceil(Number(filtered.length) / limit);
         setpageCount(count);
-        setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
+        setItems(filtered?.slice(pageNumber * limit, pageNumber * limit + limit));
       };
 
       getItems();
@@ -120,15 +120,15 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         }
       }
       );
-      const data = res.data.result;
-      const filtered = data.filter(
+      const data = res?.data?.result;
+      const filtered = data?.filter(
         (e: Lead) =>
           e?.leadId?.includes(search) ||
           e.lead_title?.includes(search) ||
           e.companyId.company_name?.includes(search) ||
           e.customer_name?.includes(search)
       );
-      settotalLeads(filtered.length);
+      settotalLeads(filtered?.length);
       return filtered;
     } catch (error) {
       return {}
@@ -156,13 +156,12 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
   };
   const handlePageClick = async (data: any) => {
     setLoading(true);
-    let current = data.selected;
+    let current = data?.selected;
     setpageNumber(current);
     const allItems = await fetchItems(current);
     setItems(allItems);
     setLoading(false);
   };
-  const Leads = items;
   const [selectAll, setSelectAll] = useState(false);
 
   function sortArray(arr: any) {
@@ -256,40 +255,38 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           }}
           win={() => {
             const wins = [];
-            for (let i = 0; i < Leads.length; i++) {
-              const str = Leads[i].win_probability;
+            for (let i = 0; i < items?.length; i++) {
+              const str = items?.[i]?.win_probability;
               let strr = "";
               for (let j = 0; j < str.length - 1; j++) {
                 strr += str[j];
               }
               wins.push(Number(strr));
             }
-            setItems(sortwins(Leads));
+            setItems(sortwins(items));
           }}
           deal={() => {
             const deals = [];
-            for (let i = 0; i < Leads.length; i++) {
-              const str = Leads[i].potential_deal_size;
+            for (let i = 0; i < items?.length; i++) {
+              const str = items?.[i]?.potential_deal_size;
               deals.push(Number(str));
             }
-            setItems(sortdeals(Leads));
+            setItems(sortdeals(items));
           }}
           budget={() => {
             const budget = [];
-            for (let i = 0; i < Leads.length; i++) {
-              const str = Leads[i].existing_budget;
+            for (let i = 0; i < items?.length; i++) {
+              const str = items?.[i]?.existing_budget;
               budget.push(Number(str));
             }
-            setItems(sortbudget(Leads));
+            setItems(sortbudget(items));
           }}
         />
         {loading ? (
           <Spinner />
         ) : (
-          // ) : (
-
-          Leads != null &&
-          Leads?.map((item: Lead, ind: any) => {
+          items != null &&
+          items?.map((item: Lead, ind: any) => {
             return (
               <LeadContainer
                 selectAll={selectAll}
@@ -303,7 +300,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
                 custom={item.customer_name}
                 LeadData={item}
                 owners={item.owners}
-                last={Leads.length - 1 === ind}
+                last={items?.length - 1 === ind}
               />
             );
           })
