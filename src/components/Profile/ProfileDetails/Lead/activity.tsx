@@ -6,7 +6,7 @@ import { LeadId } from "@/types/leadId";
 import { Card } from "@mui/material";
 
 const Activityhistory = ({ data }: { data: any }) => {
-  const history = data.activityId?.history ? data.activityId?.history : [];
+  const history = data?.activityId?.history ? data.activityId?.history : [];
   const notes = history.filter((item: any) => item?.type == "note");
 
   function formatDateAndTime(dateString: any) {

@@ -201,7 +201,7 @@ const Attachements = ({ data }: any) => {
     return `${day} ${month} ${year}, ${timeStr}`;
   }
 
-  const [attachments, setAttachments] = useState(data.attachments);
+  const [attachments, setAttachments] = useState(data?.attachments);
   const [accessToken, setAccessToken] = useState<any>("");
 
   useEffect(() => {
@@ -258,7 +258,7 @@ const Attachements = ({ data }: any) => {
                 setBool(true);
               }, 500);
             }}
-            id={data._id}
+            id={data?._id}
           />
         </Backdrop>
       )}
@@ -286,7 +286,7 @@ const Attachements = ({ data }: any) => {
             {/* <input name="input" type="file"></input> */}
           </button>
         </div>
-        {attachments.map((item: any, i: any) => {
+        {attachments?.map((item: any, i: any) => {
           return (
             <ScriptDoc
               key={i}
