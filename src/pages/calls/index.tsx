@@ -263,6 +263,10 @@ const CallsPage = () => {
     const [qaList, setQaList] = useState([]);
     const [searchAssignTo, setSearchAssignTo] = useState('');
     const [selectedRows, setSelectedRows] = useState<any>([]);
+    const [totalItem, setTotalItems] = useState<number>(0);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [currPage, setCurrPage] = useState<number>(0);
+    const [limit, setLimit] = useState<number>(10);
 
     const [currTab, setCurrTab] = useState(0);
     const [subType, setSubType] = useState("allocated_call_reviews");
@@ -377,23 +381,23 @@ const CallsPage = () => {
         }
     };
 
-    const getData = () => {
+    const getData = (page = currPage) => {
         let endpoint = '';
         if (subType === "feedback_requested_call_reviews") {
-            endpoint = `https://sales365.trainright.fit/api/qa/findRequestFeedBack`;
+            endpoint = `https://sales365.trainright.fit/api/qa/findRequestFeedBack?page=${page}&limit=${limit}`;
         } else {
             switch (currTab) {
                 case 0:
-                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
+                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}`;
                     break;
                 case 1:
-                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated`;
+                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated&page=${page}&limit=${limit}`;
                     break;
                 case 2:
-                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed`;
+                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed&page=${page}&limit=${limit}`;
                     break;
                 default:
-                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active`;
+                    endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}`;
                     break;
             }
         }
@@ -401,6 +405,9 @@ const CallsPage = () => {
             .then((res: any) => {
                 const data = res?.data?.result;
                 generateRows(data);
+                setTotalItems(res?.data?.totalRecords);
+                const pages = Math.ceil(res?.data?.totalRecords / limit);
+                setTotalPages(pages);
             })
             .catch((err: any) => {
             });
@@ -524,7 +531,7 @@ const CallsPage = () => {
 
     const handleAssignTo = (checked: boolean, qaId: any) => {
         try {
-            
+
             if (selectedRows.length === 0) {
                 dispatch(setError({
                     show: true,
@@ -558,8 +565,19 @@ const CallsPage = () => {
                     });
             }
         } catch (error) {
-            
+
         }
+    };
+
+    const handlePageChange = (payload: any) => {
+        if (currPage !== payload?.selected) {
+            setCurrPage(payload?.selected || 0);
+            getData(payload?.selected);
+        }
+    };
+
+    const handleItemsPerPageChange = (val: any) => {
+        setLimit(val);
     };
 
     const renderAssignToDD = () => {
@@ -705,7 +723,7 @@ const CallsPage = () => {
             ) : (
                 renderFRCR()
             )}
-            <Pagination />
+            <Pagination itemsPerPage={limit} totalItems={totalItem} totalPages={totalPages} currPage={currPage} updatePage={handlePageChange} updateItemsPerPage={handleItemsPerPageChange} />
         </>
     )
 }
