@@ -81,7 +81,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open&${getQueryStr()}`, {
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open&id=${qaid}${getQueryStr()}`, {
         headers: {
           Authorization: accessToken
         }
