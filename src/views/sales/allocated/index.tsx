@@ -13,6 +13,7 @@ import EditLead from "@/components/View/EditLead";
 import Notes1 from "@/components/View/NotesSalesView";
 import PromptEdit from "@/components/View/PromptEdit";
 import { useRouter } from "next/router";
+import DropDown3 from "@/utils/Button/DropDown3";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -152,7 +153,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
 
   const makecall = async () => {
     try {
-      
+
       const res = await axios.post(
         "https://sales365.trainright.fit/api/calling/make-call",
         {
@@ -161,7 +162,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
         { headers: { Authorization: accessToken } }
       );
     } catch (error) {
-      
+
     }
   };
 
@@ -169,6 +170,23 @@ const SalesOpen = ({ data, mastersData }: props) => {
     if (e1 === 0) {
       exportXLSX();
     }
+  };
+
+  const renderDropdownList = () => {
+    return (
+      <div className="">
+        <div className={`relative`}>
+          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer`}>Reallocate To</button>
+
+        </div>
+        <div className={`relative`}>
+          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer`}>Change Lead Status</button>
+        </div>
+        <div className={`relative`}>
+          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer`}>Change Lead Stage</button>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -186,6 +204,11 @@ const SalesOpen = ({ data, mastersData }: props) => {
       )}
       <Navigation
         title={""}
+        leftChildren={
+          <DropDown3 text="Actions" id={0} dropdown={true} dark={true}>
+            {renderDropdownList()}
+          </DropDown3>
+        }
         buttons={[
           // {
           //   text: "Actions",

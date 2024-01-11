@@ -2,7 +2,7 @@ import Button, { ButtonProps } from "@/utils/Button/Button";
 import { Logout } from "@mui/icons-material";
 import React from "react";
 
-const Navigation = ({ buttons, title, leftBtns }: NavigationProps) => {
+const Navigation = ({ buttons, title, leftBtns, leftChildren }: NavigationProps) => {
   console.log(buttons);
   const arr = [];
   return (
@@ -27,6 +27,7 @@ const Navigation = ({ buttons, title, leftBtns }: NavigationProps) => {
               />
             );
           })}
+          {leftChildren}
         </div>
       </div>
       {buttons?.length > 0 && (
@@ -61,4 +62,5 @@ interface NavigationProps {
   children?: JSX.Element[] | JSX.Element;
   title: String;
   leftBtns?: any;
+  leftChildren?: any
 }
