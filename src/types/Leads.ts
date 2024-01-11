@@ -81,6 +81,7 @@ export interface CustomerId {
   _id: string
   name: string
   contact: string
+  gender?: string
   email: string
   designation: string
   companyId: string

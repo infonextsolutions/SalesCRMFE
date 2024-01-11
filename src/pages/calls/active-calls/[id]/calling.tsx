@@ -50,6 +50,11 @@ const AudioProfile = () => {
   }, []);
 
   useEffect(() => {
+    setNoToCall(data?.result?.participants?.customer_contact);
+    setData(data);
+  }, [data]);
+
+  useEffect(() => {
     try {
       axios.get(
         `https://sales365.trainright.fit/api/active-call/find-by-id?id=${id}`, {
@@ -72,7 +77,7 @@ const AudioProfile = () => {
     } catch (error) {
 
     }
-  }, [accessToken]);
+  }, [accessToken, id]);
 
   const takeAction = (e: any, e1: any) => {
     if (e1 === 0) {
@@ -96,53 +101,6 @@ const AudioProfile = () => {
       return;
     }
     const formData = new FormData();
-
-    // const payload = {
-    //   call_title: data.result?.call_title,
-    //   leadId: data.result?.leadId?._id,
-    //   companyId: data.result?.companyId?._id,
-    //   customerId: data.result?.customerId?._id,
-    //   call_start_time: data.result?.call_start_time,
-    //   call_discription: data.result?.call_discription,
-    //   call_type: data.result?.call_type,
-    //   call_date: data.result?.call_date,
-    //   owner: data.result?.owner?._id,
-    //   participants: data.result?.customerId?._id,
-    //   call_new_participant_number: data.result?.call_new_participant_number,
-    //   call_new_participant_title: data.result?.call_new_participant_title,
-    //   call_new_participant_name: data.result?.call_new_participant_name,
-    //   call_new_participant_designation:
-    //     data.result?.call_new_participant_designation,
-    //   callId: data.result?.callId,
-    //   file: audioFile,
-    // };
-    // formData.append("call_title", data.result?.call_title);
-
-    // formData.append("companyId", data.result?.companyId?._id);
-    // formData.append("customerId", data.result?.customerId?._id);
-    // formData.append("call_start_time", data.result?.call_start_time);
-    // formData.append("call_discription", data.result?.call_discription);
-    // formData.append("call_type", data.result?.call_type);
-    // formData.append("call_date", data.result?.call_date);
-    // formData.append("owner", data.result?.owner?._id);
-    // formData.append("participants", data.result?.customerId?._id);
-    // formData.append(
-    //   "call_new_participant_number",
-    //   data.result?.call_new_participant_number
-    // );
-    // formData.append(
-    //   "call_new_participant_title",
-    //   data.result?.call_new_participant_title
-    // );
-    // formData.append(
-    //   "call_new_participant_name",
-    //   data.result?.call_new_participant_name
-    // );
-    // formData.append(
-    //   "call_new_participant_designation",
-    //   data.result?.call_new_participant_designation
-    // );
-    // formData.append("callId", data.result?.callId);
     formData.append("leadId", data1.result?.leadId?._id);
     formData.append("activeCallId", data1.result?._id);
     formData.append("file", audioFile);
@@ -420,7 +378,7 @@ const AudioProfile = () => {
               }}
               cancel={cancelEmails}
               data={data.result}
-              leadIdResult={data.result._id}
+              leadIdResult={data.result?._id}
             />
           </Backdrop>
         )}
@@ -429,7 +387,7 @@ const AudioProfile = () => {
             <Notes
               cancel={cancelNotes}
               update={UpdateData}
-              leadid={data.result._id}
+              leadid={data.result?._id}
             />
           </Backdrop>
         )}

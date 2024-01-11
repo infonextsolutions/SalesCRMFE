@@ -30,6 +30,10 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
     }
   }, []);
 
+  useEffect(() => {
+    setData(data1);
+  }, [data1]);
+
   const UpdateData = async () => {
     const response = await axios
       .get(

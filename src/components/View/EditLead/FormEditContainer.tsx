@@ -64,7 +64,7 @@ const FormEditContainer = ({
                     lead_manager: data?.manager?._id,
                     product_category: data?.product_category,
                     lead_owner:
-                      data.owners.length > 0 ? data?.owners?.[0]?._id : "",
+                      data?.owners?.length > 0 ? data?.owners?.[0]?._id : "",
                     Stage: data?.leadStage,
                     Status: data?.leadStatus,
                     Source: data?.leadSource,
@@ -286,8 +286,8 @@ const FormEditContainer = ({
                               <option value="" selected>
                                 -- Select Lead Stage --
                               </option>
-                              {data.leadStatus === "open" ||
-                                data.leadStatus === "Open" ? (
+                              {data?.leadStatus === "open" ||
+                                data?.leadStatus === "Open" ? (
                                 <>
                                   <option value="Enquiry">Enquiry</option>
                                   <option value="Interaction">
@@ -295,8 +295,8 @@ const FormEditContainer = ({
                                   </option>
                                   <option value="Proposal">Proposal</option>
                                 </>
-                              ) : data.leadStatus === "close" ||
-                                data.leadStatus === "Close" ? (
+                              ) : data?.leadStatus === "close" ||
+                                data?.leadStatus === "Close" ? (
                                 <>
                                   <option value="Win">Win</option>
                                   <option value="Lost">Lost</option>
