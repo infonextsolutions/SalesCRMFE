@@ -96,6 +96,17 @@ const SalesOpen = ({ data, mastersData }: props) => {
 
   const [showSubDD, setShowSubDD] = useState<number>(-1);
 
+  const [openStages, setOpenStages] = useState<any>([
+    { id: "Enquiry", label: "Enquiry" },
+    { id: "Proposal", label: "Proposal" },
+    { id: "Interaction", label: "Interaction" },
+  ]);
+  const [closeStages, setCloseStages] = useState<any>([
+    { id: "Won", label: "Won" },
+    { id: "Lost", label: "Lost" },
+    { id: "Dead", label: "Dead" },
+  ]);
+
   const showForm = () => {
     setForm(true);
   };
@@ -221,70 +232,80 @@ const SalesOpen = ({ data, mastersData }: props) => {
     // }
   };
 
-  const renderDdOptionDetail = (type: string) => {
-    return (
-      <div className="absolute left-[100%] w-[auto] max-h-[300px] w-[100px] bg-white">
-        {type === 'ALLOCATE' ? (
-          <div className="w-[100%]">
-            <div className='flex items-center p-[6px] border-solid border-1 border-black rounded'>
-              <input type="text" className='bg-white outline-none text-black' placeholder='Search...' value={searchAssignTo} onInput={(e: any) => handleSearchAllocateTo(e.target.value)} />
-              <button className='flex items-center justify-center w-[20px] h-[20px]'>
-                <img src={getBasicIcon("Search")} alt='Search' width={"20px"} height={"20px"} />
-              </button>
-            </div>
-            <ul className=''>
-              {
-                searchAssignTo ? (
-                  qaList?.filter((qaItem: any, index: number) => {
-                    return qaItem?.name?.toLowerCase().includes(searchAssignTo.toLowerCase());
-                  }).map((qaItem: any, index: number) => (
-                    <li key={index}>
-                      <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
-                        <span>{qaItem?.name}</span>
-                        <input type="checkbox" id={qaItem?._id} onChange={(e) => handleAllocateTo(e.target.checked, qaItem?._id)} />
-                      </label>
-                    </li>
-                  ))
-                ) : (
-                  qaList?.map((qaItem: any, index: number) => (
-                    <li key={index}>
-                      <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
-                        <span>{qaItem?.name}</span>
-                        <input type="checkbox" id={qaItem?._id} onChange={(e) => handleAllocateTo(e.target.checked, qaItem?._id)} />
-                      </label>
-                    </li>
-                  ))
-                )
-              }
-            </ul>
-          </div>
-        ) : type === 'STATUS' ? (
-          <div className="">
-
-          </div>
-        ) : (
-          <div className="">
-
-          </div>
-        )}
-      </div>
-    );
-  };
-
   const renderDropdownList = () => {
     return (
       <div className="">
-        <div className={``}>
-          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer`} onClick={() => setShowSubDD(0)}>Allocate To</button>
-          {/* {showSubDD === 0 && renderDdOptionDetail("ALLOCATE")} */}
+        <div className={`rounded-[8px] overflow-hidden`}>
+          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 0 && "bg-[#eee]"}`} onClick={() => setShowSubDD(0)}>Allocate To</button>
+          {showSubDD === 0 && (
+            <div className="w-[100%] bg-[#eee]">
+              <div className='flex items-center p-[6px] border-solid border-1 border-black bg-white'>
+                <input type="text" className='w-[160px] bg-white outline-none text-black' placeholder='Search...' value={searchAssignTo} onInput={(e: any) => handleSearchAllocateTo(e.target.value)} />
+                <button className='flex items-center justify-center w-[20px] h-[20px]'>
+                  <img src={getBasicIcon("Search")} alt='Search' width={"20px"} height={"20px"} />
+                </button>
+              </div>
+              <ul className=''>
+                {
+                  searchAssignTo ? (
+                    qaList?.filter((qaItem: any, index: number) => {
+                      return qaItem?.name?.toLowerCase().includes(searchAssignTo.toLowerCase());
+                    }).map((qaItem: any, index: number) => (
+                      <li key={index}>
+                        <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                          <span>{qaItem?.name}</span>
+                          <input type="checkbox" id={qaItem?._id} onChange={(e) => handleAllocateTo(e.target.checked, qaItem?._id)} />
+                        </label>
+                      </li>
+                    ))
+                  ) : (
+                    qaList?.map((qaItem: any, index: number) => (
+                      <li key={index}>
+                        <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                          <span>{qaItem?.name}</span>
+                          <input type="checkbox" id={qaItem?._id} onChange={(e) => handleAllocateTo(e.target.checked, qaItem?._id)} />
+                        </label>
+                      </li>
+                    ))
+                  )
+                }
+              </ul>
+            </div>
+          )}
         </div>
-        <div className={``}>
-          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer`} onClick={() => setShowSubDD(1)}>Change Lead Status</button>
-          {/* {showSubDD === 1 && renderDdOptionDetail("STATUS")} */}
+        <div className={`rounded-[8px] overflow-hidden`}>
+          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 1 && "bg-[#eee]"}`} onClick={() => setShowSubDD(1)}>Change Lead Status</button>
+          {showSubDD === 1 && (
+            <ul className="bg-[#eee] flex flex-col gap-[4px]">
+              <li className="">
+                <label htmlFor={"Open"} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                  <span>Open</span>
+                  <input type="radio" id={"Open"} name="status" onChange={(e) => { }} />
+                </label>
+              </li>
+              <li className="">
+                <label htmlFor={"Close"} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                  <span>Close</span>
+                  <input type="radio" id={"Close"} name="status" onChange={(e) => { }} />
+                </label>
+              </li>
+            </ul>
+          )}
         </div>
-        <div className={``}>
-          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer`} onClick={() => setShowSubDD(2)}>Change Lead Stage</button>
-          {/* {showSubDD === 2 && renderDdOptionDetail("STAGE")} */}
+        <div className={`rounded-[8px] overflow-hidden`}>
+          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 2 && "bg-[#eee]"}`} onClick={() => setShowSubDD(2)}>Change Lead Stage</button>
+          {showSubDD === 2 && (
+            <ul className="bg-[#eee] flex flex-col gap-[4px]">
+              {closeStages?.map((stageItem: any, index: number) => (
+                <li className="" key={index}>
+                  <label htmlFor={stageItem?.id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                    <span>{stageItem?.label}</span>
+                    <input type="radio" id={stageItem?.id} name="stage" onChange={(e) => { }} />
+                  </label>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     );
