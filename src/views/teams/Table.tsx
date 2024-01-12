@@ -1,5 +1,6 @@
 import { getBasicIcon } from '@/utils/AssetsHelper';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useRef, useState } from 'react'
 
 const RenderCheckBox = ({ width, bool, onUpdate, row }: any) => {
@@ -110,9 +111,11 @@ const RenderRowItem = ({
     type, // PRICE, DATETIME, DATE, TIME
     currency,
     show,
+    link,
 }: {
     text?: string,
     subText?: string,
+    link?: string,
     width?: any,
     left?: any,
     type?: string,
@@ -125,8 +128,19 @@ const RenderRowItem = ({
                 className={`flex-col min-h-[20px] shrink-0`}
                 style={{ width: width, marginLeft: left }}
             >
-                <span className='text-black'>{text}</span>
-                <span className='text-[#666]'>{subText}</span>
+                {
+                    link ? (
+                        <Link href={link}>
+                            <span className='text-black'>{text}</span>
+                            <span className='text-[#666]'>{subText}</span>
+                        </Link>
+                    ) : (
+                        <>
+                            <span className='text-black'>{text}</span>
+                            <span className='text-[#666]'>{subText}</span>
+                        </>
+                    )
+                }
             </div>
         );
     } else {
@@ -159,6 +173,7 @@ const RenderRow = ({
                         key={itemIndex}
                         text={rowItem?.text}
                         subText={rowItem?.subText}
+                        link={rowItem?.link}
                         width={columns?.[itemIndex]?.width}
                         left={columns?.[itemIndex]?.left}
                         show={columns?.[itemIndex]?.checked}

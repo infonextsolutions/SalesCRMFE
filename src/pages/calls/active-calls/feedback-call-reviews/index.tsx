@@ -19,7 +19,7 @@ const FeedbackCallReviewsAC = () => {
     const router = useRouter();
     const [columns, setColumns] = useState([
         {
-            width: 200,
+            width: 240,
             left: 40,
             text: "Call ID",
             key: "call_id",
@@ -407,6 +407,112 @@ const FeedbackCallReviewsAC = () => {
         setLimit(val);
     };
 
+    const formatDateToCustomFormat = (isoDate: any) => {
+        const dateObject = new Date(isoDate);
+        const hours = String(dateObject.getHours()).padStart(2, "0");
+        const minutes = String(dateObject.getMinutes()).padStart(2, "0");
+        const day = dateObject.getDate();
+        const monthNames = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ];
+        const month = monthNames[dateObject.getMonth()];
+        const year = dateObject.getFullYear();
+
+        return `${day} ${month} ${year}`;
+
+        // const months = [
+        //     "Jan",
+        //     "Feb",
+        //     "Mar",
+        //     "Apr",
+        //     "May",
+        //     "Jun",
+        //     "Jul",
+        //     "Aug",
+        //     "Sep",
+        //     "Oct",
+        //     "Nov",
+        //     "Dec",
+        // ];
+
+        // const dateObj = new Date(isoDate);
+        // const day = dateObj.getUTCDate();
+        // const month = months[dateObj.getUTCMonth()];
+        // const year = dateObj.getUTCFullYear();
+
+        // return `${day} ${month} ${year}`;
+
+        // // Create a Date object from the given date string (UTC time)
+        // const dateObj = new Date(dateString);
+
+        // // Convert the UTC time to IST (Indian Standard Time)
+        // const utcToIstOffset = 5.5 * 60 * 60 * 1000; // 5 hours 30 minutes in milliseconds
+        // dateObj.setTime(dateObj.getTime() + utcToIstOffset);
+
+        // // Months array to get the month name
+        // const months = [
+        //   "January",
+        //   "February",
+        //   "March",
+        //   "April",
+        //   "May",
+        //   "June",
+        //   "July",
+        //   "August",
+        //   "September",
+        //   "October",
+        //   "November",
+        //   "December",
+        // ];
+
+        // // Get the day and month
+        // const day = dateObj.getUTCDate();
+        // const month = months[dateObj.getUTCMonth()];
+
+        // // Get the hours and minutes in IST
+        // let hours = dateObj.getUTCHours();
+        // let minutes: string = dateObj.getUTCMinutes().toString();
+
+        // // Convert the hours to 12-hour format and determine AM/PM
+        // const amPm = hours >= 12 ? "PM" : "AM";
+        // hours = hours % 12 || 12; // Convert 0 to 12
+
+        // // Pad single-digit minutes with a leading zero
+        // minutes = minutes.toString().padStart(2, "0");
+
+        // // Create the formatted date and time string
+        // const formattedDate = `${day} ${month}`;
+        // const formattedTime = `${hours}:${minutes} ${amPm}`;
+
+        // return { date: formattedDate, time: formattedTime };
+    };
+
+    function diff_minutes(start: any, end: any) {
+        var firstDate = new Date(start),
+            secondDate = new Date(end),
+            firstDateInSeconds = firstDate.getTime() / 1000,
+            secondDateInSeconds = secondDate.getTime() / 1000,
+            difference = Math.abs(firstDateInSeconds - secondDateInSeconds);
+        if (difference < 60) {
+            return difference + ' sec';
+        } else if (difference < 3600) {
+            return Math.floor(difference / 60) + ' min';
+        } else {
+            return Math.floor(difference / 3600) + ' hr';
+        }
+    }
+
     const getData = (page = currPage) => {
         try {
             if (window !== undefined) {
@@ -419,27 +525,27 @@ const FeedbackCallReviewsAC = () => {
                         setTotalPages(pages);
                         setRows(data?.map((item: any, index: number) => {
                             let row = [
-                                { text: item?.callId || "-" },
-                                { text: item?.callTitle || "-" },
-                                { text: item?.leadId?.[0]?.leadId || "-" },
-                                { text: item?.leadId?.[0]?.lead_title || "-" },
+                                { text: item?._id || "-", link: `/calls/recorded-calls/${item?._id}/audio-call` },
+                                { text: item?.callTitle || "-", link: `/calls/recorded-calls/${item?._id}/audio-call` },
+                                { text: item?.leadId?.[0]?.leadId || "-", link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile` },
+                                { text: item?.leadId?.[0]?.lead_title || "-", link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile` },
                                 { text: item?.callId || "-" },  // participants
                                 { text: item?.owner?.name || "-" },  // call owner
                                 { text: item?.teamManager || "-" },  // team manager
                                 { text: item?.callId || "-" },  // client poc
                                 { text: item?.company?.[0]?.company_name || "-" },
-                                { text: item?.StartTime || "-" },  // call date & time
+                                { text: formatDateToCustomFormat(item?.StartTime) || "-" },  // call date & time
                                 { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
-                                { text: item?.callId || "-" },  // call duration
+                                { text: diff_minutes(item?.StartTime, item?.EndTime) || "-" },  // call duration
                                 { text: item?.callDisposiiton || "-" },  // call disposition
                                 { text: item?.callType || "-" },  // call type
                                 { text: item?.score || "-" },  // call score
                                 { text: item?.qaId?.name || "-" },  // call review type
                                 { text: item?.callId || "-" },  // call review status
                                 { text: item?.callId || "-" },  // close date
-                                { text: item?.qaAllocatedAt || "-" },  // allocated on
+                                { text: formatDateToCustomFormat(item?.qaAllocatedAt) || "-" },  // allocated on
                                 { text: item?.callId || "-" },  // review due date
-                                { text: item?.callId || "-" },  // last updated on
+                                { text: formatDateToCustomFormat(item?.updatedAt) || "-" },  // last updated on
                                 { text: item?.callId || "-" },  // feedback requested on
                                 { text: item?.callId || "-" },  // feedback requested by
                             ];
