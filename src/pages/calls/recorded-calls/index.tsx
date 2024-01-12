@@ -22,10 +22,11 @@ const Calls = () => {
     }
   }, []);
 
-  useEffect(() => {
+  const getData = () => {
+    const apiEndpoint = recodedCalls ? "https://sales365.trainright.fit/api/recording/find-all" : "https://sales365.trainright.fit/api/event/findAllRecordedMeetings";
     try {
       axios.get(
-        "https://sales365.trainright.fit/api/recording/find-all", {
+        apiEndpoint, {
         headers: { Authorization: accessToken }
       }
       ).then((res: any) => {
@@ -34,6 +35,10 @@ const Calls = () => {
     } catch (error) {
 
     }
+  };
+
+  useEffect(() => {
+    getData();
   }, [accessToken]);
 
   useEffect(() => {

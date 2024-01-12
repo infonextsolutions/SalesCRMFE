@@ -33,7 +33,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 
   useEffect(function () {
     axios.get(
-      `https://sales365.trainright.fit/api/meeting/find-all?limit=${limit}&page=${pageNumber}${queryStr}`, {
+      `https://sales365.trainright.fit/api/event/findAllRecordedMeetings?limit=${limit}&page=${pageNumber}${queryStr}`, {
       headers: {
         Authorization: accessToken
       }
@@ -50,7 +50,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     try {
 
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/meeting/find-all?limit=${limit}&page=${current}${queryStr}"`, {
+        `https://sales365.trainright.fit/api/event/findAllRecordedMeetings?limit=${limit}&page=${current}${queryStr}"`, {
         headers: {
           Authorization: accessToken
         }
@@ -84,7 +84,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         if (pageNumber >= count && pageCount != 0) setpageNumber(0);
         const getItems = async () => {
           const res = await axios.get(
-            `https://sales365.trainright.fit/api/meeting/find-all?${queryStr}`, {
+            `https://sales365.trainright.fit/api/event/findAllRecordedMeetings?${queryStr}`, {
             headers: {
               Authorization: accessToken
             }
@@ -134,7 +134,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
     try {
 
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/meeting/find-all?limit=${limit}&page=${current}`, {
+        `https://sales365.trainright.fit/api/event/findAllRecordedMeetings?limit=${limit}&page=${current}`, {
         headers: {
           Authorization: accessToken
         }
