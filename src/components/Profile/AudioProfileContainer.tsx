@@ -54,7 +54,7 @@ const AudioProfileContainer = ({
               width={25}
               height={25}
             />
-            {info[0].data?.companyName}
+            {data1?.companyId?.company_name}
           </div>
           <div className="flex gap-2 text-[black]">
             <Image

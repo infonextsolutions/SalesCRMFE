@@ -55,7 +55,7 @@ export default function Open() {
       // const res = axios.post(
       //   `https://${ExotelKey}:${ExotelToken}@api.exotel.com/v3/accounts/westoryboard1/calls`,
       //   {
-      //     from: {
+      //     from: {  
       //       contact_uri: "+9199XXXXXXX",
       //       state_management: "true",
       //     },

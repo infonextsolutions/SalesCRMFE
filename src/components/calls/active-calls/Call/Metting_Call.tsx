@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import BackdropRight from "@/components/View/Backdrop/Right";
 
-const CallBox = ({ width, bool }: any) => {
+const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
     if (check) {
@@ -26,7 +26,7 @@ const CallBox = ({ width, bool }: any) => {
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" ref={ref} className="checkbox" />
+      <input type="checkbox" ref={ref} className="checkbox" onChange={(e: any) => handleCheck(e.target.checked)} />
     </div>
   );
 };
@@ -114,9 +114,8 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -354,6 +353,7 @@ const ExpandableRow = ({
   leadData,
   handleClose,
 }: any) => {
+  console.log('=================== lead data =================', leadData);
   return (
     <div
       className="custom-scroll-black w-[100%] h-[auto] py-[30px] px-[50px] overflow-y-auto"
@@ -380,7 +380,7 @@ const ExpandableRow = ({
           Lead Source
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {leadData?.leadSource}
+          {leadData?.leadId?.leadSource || "-"}
         </p>
       </div>
       <div className="w-[100%] flex items-center mb-[20px]">
@@ -388,7 +388,7 @@ const ExpandableRow = ({
           Last Call Disposition
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {leadData?.activityId?.lastCallDisposition ?? "-"}
+          {leadData?.leadId?.activityId?.lastCallDisposition ?? "-"}
         </p>
       </div>
       <div className="w-[100%] mb-[20px]">
@@ -396,7 +396,7 @@ const ExpandableRow = ({
           Lead Description
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {leadDesc}
+          {leadData?.leadId?.lead_description || "-"}
         </p>
       </div>
       <div className="w-[100%] mb-[20px]">
@@ -404,22 +404,22 @@ const ExpandableRow = ({
           Company Description
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {companyDesc ?? "-"}
+          {leadData?.leadId?.companyId?.company_description ?? "-"}
         </p>
       </div>
-      {leadData?.notes?.length !== 0 && (
+      {leadData?.leadId?.notes?.length !== 0 && (
         <div className="w-[100%] mb-[20px]">
           <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">
             Note
           </p>
           <div className="">
-            {/* <h3 className="font-medium text-[#000]">
-              {leadData?.notes[leadData?.notes?.length - 1]?.title ?? "-"}
-            </h3> */}
+            <h3 className="font-medium text-[#000]">
+              {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]?.title ?? "-"}
+            </h3>
           </div>
-          {/* <p className="text-[#53565a] font-medium mt-[5px] text-[16px] tracking-wide">
-            {leadData?.notes[leadData?.notes?.length - 1]?.content || "-"}
-          </p> */}
+          <p className="text-[#53565a] f  ont-medium mt-[5px] text-[16px] tracking-wide">
+            {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]?.content || "-"}
+          </p>
         </div>
       )}
       <div className="flex flex-col mb-[20px]">
@@ -428,8 +428,8 @@ const ExpandableRow = ({
             Company Website
           </p>
           <p className="text-[#000] font-medium mt-[0px] text-[16px] tracking-wide">
-            <a href={`https://${companyWebsite}`} target="_blank">
-              {companyWebsite}
+            <a href={`https://${leadData?.leadId?.companyId?.company_website_url}`} target="_blank">
+              {leadData?.leadId?.companyId?.company_website_url}
             </a>
           </p>
         </div>
@@ -438,10 +438,10 @@ const ExpandableRow = ({
             Social Media
           </p>
           <div className="flex mt-[2px]">
-            {leadData?.companyId?.company_socialMedia1 && (
-              <a href={leadData?.companyId?.company_socialMedia1Url}>
+            {leadData?.leadId?.companyId?.company_socialMedia1 && (
+              <a href={leadData?.leadId?.companyId?.company_socialMedia1Url}>
                 <Image
-                  src={getBasicIcon(leadData?.companyId?.company_socialMedia1)}
+                  src={getBasicIcon(leadData?.leadId?.companyId?.company_socialMedia1)}
                   className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
                   height={20}
                   width={20}
@@ -449,10 +449,10 @@ const ExpandableRow = ({
                 />
               </a>
             )}
-            {leadData?.companyId?.company_socialMedia2 && (
-              <a href={leadData?.companyId?.company_socialMedia2Url}>
+            {leadData?.leadId?.companyId?.company_socialMedia2 && (
+              <a href={leadData?.leadId?.companyId?.company_socialMedia2Url}>
                 <Image
-                  src={getBasicIcon(leadData?.companyId?.company_socialMedia2)}
+                  src={getBasicIcon(leadData?.leadId?.companyId?.company_socialMedia2)}
                   className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
                   height={20}
                   width={20}
@@ -467,13 +467,13 @@ const ExpandableRow = ({
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Lead Owner
         </p>
-        {LeadOwners?.map((item: Owner, i: any) => {
+        {leadData?.leadId?.owners?.map((item: Owner, i: any) => {
           return (
             <p
               key={i}
               className="text-[#000] font-medium mt-[2px] text-[16px] tracking-wide"
             >
-              {item.name}
+              {item?.name}
             </p>
           );
         })}
@@ -489,7 +489,7 @@ const ExpandableRow = ({
           </span>
           , {leadData?.customerId?.customer_designation}
         </p>
-        {otherContacts?.map((item: any, i: any) => {
+        {leadData?.leadId?.customerId?.contacts?.map((item: any, i: any) => {
           if (item && Object.keys(item).length !== 0) {
             return (
               <p
@@ -500,7 +500,7 @@ const ExpandableRow = ({
                   {" "}
                   {item?.customer_name}
                 </span>
-                , {item?.designation}
+                , {item?.customer_designation}
               </p>
             );
           } else {
@@ -513,7 +513,7 @@ const ExpandableRow = ({
           Lead Created On
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {convertDatetime(leadData?.createdAt)}
+          {convertDatetime(leadData?.leadId?.createdAt)}
         </p>
       </div>
     </div>
@@ -563,6 +563,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const [hover, setHover] = useState(false);
   const [bounding, setBounding] = useState({ top: 0, left: 0 });
   const ref: any = useRef();
+  const [selected, setSelected] = useState<boolean>(false);
 
   function formatDateToCustomFormat(isoDate: any) {
     const months = [
@@ -638,10 +639,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     <>
       <div className="flex">
         <div
-          className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
+          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${(selectAll || selected || detailShow) && "bg-white"}`}
           ref={wRef}
         >
-          <CallBox width={30} bool={selectAll} />
+          <CallBox width={30} bool={selectAll || selected} handleCheck={(checked: any) => { setSelected(checked); console.log('CHECKED', checked) }} />
           <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
@@ -713,9 +714,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             }}
           >
             <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${
-                true ? "text-[#3F434A]" : "text-[#8A9099]"
-              }`}
+              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
+                }`}
             >
               <span>{CallData ? getParticipants(CallData) : "-"}</span>{" "}
               <span className="text-bg-red ">
@@ -751,11 +751,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={`${
-              isISOString(CallData.call_start_time)
-                ? formatDateToCustomFormat(CallData.call_start_time)
-                : "-"
-            }`}
+            upperText={`${isISOString(CallData.call_start_time)
+              ? formatDateToCustomFormat(CallData.call_start_time)
+              : "-"
+              }`}
             bottomText={
               isISOString(CallData.call_start_time)
                 ? convertISOToTime(CallData.call_start_time)

@@ -1,11 +1,13 @@
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
+import { CompanyId, CustomerId } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
 
 const CallInfo = ({ check, info, data, data1 }: Props) => {
+  console.log('--------------------- data1 --------------------', data1, data)
   const activeTitle = 0;
   // const [edit, setEdit] = useState(false);
   // const [bool, setBool] = useState(true);
@@ -55,18 +57,18 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
 
       <div className="pl-[30px]">
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id - {info?.[activeTitle]?.data?.callId}
+          Call Id - {data?._id?.slice(0,6)}
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">LEAD ID</p>
           <p className="text-sm font-semibold text-black">
-            {info?.[activeTitle]?.data?.leadID}
+            {data1?.leadId || "-"}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Lead Title</p>
           <p className="text-sm font-semibold text-black">
-            {info?.[activeTitle]?.data?.leadInfo}
+            {data1?.lead_title || "-"}
           </p>
         </div>
         <p className="border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[22px] text-[20px] font-medium">
@@ -75,13 +77,13 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium"> Company Name</p>
           <p className="text-sm font-semibold text-black">
-            {info?.[activeTitle]?.data?.companyName ?? "-"}
+            {data1?.companyId?.company_name ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Client POC</p>
           <p className="text-sm font-semibold text-black">
-            {info?.[activeTitle]?.data?.clientPOC ?? "-"}
+            {data1?.customerId?.customer_name ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
@@ -96,7 +98,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Call Type</p>
-          <p className="text-sm font-semibold text-black">{data1?.call_type}</p>
+          <p className="text-sm font-semibold text-black">{data1?.call_type ?? "-"}</p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Call Description</p>
@@ -119,17 +121,15 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
           <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
             <p className="text-sm font-medium">Call Owner</p>
             <p className="text-sm font-semibold text-black">
-              {info?.[activeTitle]?.data?.callOwner ?? "-"}
+              {data1?.owners?.[0]?.name ?? "-"}
             </p>
           </div>
           <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
             <p className="text-sm font-medium">Call Participant</p>
-            <p className="text-sm font-semibold text-black">
-              {info?.[activeTitle]?.data?.clientPOC ?? "-"}
-            </p>
-            <p className="text-sm font-semibold text-grey">
-              {info?.[activeTitle]?.data?.pocJob ?? "-"}
-            </p>
+            <div className="flex flex-col items-end">
+              <p className="text-sm font-semibold text-black">{data1?.customerId?.customer_name ?? "-"}</p>
+              <p className="text-sm font-semibold text-grey">{data1?.customerId?.customer_designation ?? "-"}</p>
+            </div>
           </div>
         </div>
         {/* <p className="text-[#8A9099] text-[12px] leading-[18px]">
@@ -147,38 +147,38 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
               <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
                 <p className="text-sm font-medium">Talk/Listen Ratio</p>
                 <p className="text-sm font-semibold text-black">
-                  {info?.[activeTitle]?.data?.talkRatio}
+                  {data?.talkRatio || "-"}
                 </p>
               </div>
             </div>
             <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
               <p className="text-sm font-medium">Longest Monologue</p>
               <p className="text-sm font-semibold text-black">
-                {info?.[activeTitle]?.data?.longestMonologue}
+                {data?.longestMonologue || "-"}
               </p>
             </div>
             <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
               <p className="text-sm font-medium">Filler words per minute</p>
               <p className="text-sm font-semibold text-black">
-                {info?.[activeTitle]?.data?.fillerWords}
+                {data?.fillerWords || "-"}
               </p>
             </div>
             <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
               <p className="text-sm font-medium">Interactivity</p>
               <p className="text-sm font-semibold text-black">
-                {info?.[activeTitle]?.data?.interactivity}
+                {data?.interactivity || "-"}
               </p>
             </div>
             <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
               <p className="text-sm font-medium"> Next Steps</p>
               <p className="text-sm font-semibold text-black">
-                {info?.[activeTitle]?.data?.nextSteps}
+                {data?.nextSteps || "-"}
               </p>
             </div>
             <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
               <p className="text-sm font-medium">Engaging questions</p>
               <p className="text-sm font-semibold text-black">
-                {info?.[activeTitle]?.data?.engagingQuestions}
+                {data?.engagingQuestions || "-"}
               </p>
             </div>
           </div>
@@ -225,32 +225,6 @@ export interface Root {
     name: string;
     designation: string;
   };
-}
-
-export interface CompanyId {
-  _id: string;
-  company_name: string;
-  company_website_url: string;
-  company_icon: string;
-  company_location: string;
-  company_product_category: string;
-  company_description: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-export interface CustomerId {
-  _id: string;
-  name: string;
-  contact: string;
-  email: string;
-  parentId: string;
-  designation: string;
-  companyId: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
 }
 
 export interface Note {

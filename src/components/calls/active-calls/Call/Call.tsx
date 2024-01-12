@@ -8,7 +8,7 @@ import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
 import { Owner } from "@/types/Leads";
 
-const CallBox = ({ width, bool }: any) => {
+const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
     if (check) {
@@ -26,7 +26,7 @@ const CallBox = ({ width, bool }: any) => {
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" ref={ref} className="checkbox" />
+      <input type="checkbox" ref={ref} className="checkbox" onChange={(e: any) => handleCheck(e.target.checked)} />
     </div>
   );
 };
@@ -114,9 +114,8 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -551,7 +550,7 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
 const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
-
+  const [selected, setSelected] = useState<boolean>(false);
   const [w, setW] = useState(0);
   const wRef: any = useRef();
   React.useEffect(() => {
@@ -644,18 +643,17 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const twelveHourFormat = parsedHours % 12 || 12; // Convert 0 to 12 for midnight
 
   // Construct the formatted time string
-  const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${
-    minutes != undefined ? minutes : ""
-  } ${period}`;
+  const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${minutes != undefined ? minutes : ""
+    } ${period}`;
 
   return (
     <>
       <div className="flex">
         <div
-          className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
+          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${(selectAll || selected || detailShow) && "bg-white"}`}
           ref={wRef}
         >
-          <CallBox width={30} bool={selectAll} />
+          <CallBox width={30} bool={selectAll || selected} handleCheck={(checked: any) => { setSelected(checked); console.log('CHECKED', checked) }} />
           <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
