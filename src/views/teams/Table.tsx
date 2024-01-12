@@ -198,8 +198,8 @@ const Table = ({
 }) => {
     return (
         <div className='w-[100%] mt-[20px]'>
-            <RenderHeader selectAll={false} columns={columns} handleSelection={handleSelection} />
-            <RenderRow rows={rows} columns={columns} handleSelection={handleSelection} selectedRows={selectedRows} />
+            <RenderHeader selectAll={false} columns={columns} handleSelection={handleSelection || (() => { })} />
+            <RenderRow rows={rows} columns={columns} handleSelection={handleSelection || (() => { })} selectedRows={selectedRows} />
         </div>
     )
 }

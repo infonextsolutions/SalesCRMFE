@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -12,6 +12,7 @@ import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 import Backdrop from "@/components/View/Backdrop";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import BigSpinner from "@/components/loader/BigSpinner";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -527,7 +528,9 @@ const AllocatedCalls = () => {
                     </div>
                 </div>
                 <Filters filters={filters} />
-                <Table rows={rows} columns={columns} />
+                <Suspense fallback={<BigSpinner />}>
+                    <Table rows={rows} columns={columns} />
+                </Suspense>
                 <Pagination itemsPerPage={limit} totalItems={totalItem} totalPages={totalPages} currPage={currPage} updatePage={handlePageChange} updateItemsPerPage={handleItemsPerPageChange} />
             </div>
             {showManageCol && (
