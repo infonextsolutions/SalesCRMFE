@@ -54,7 +54,7 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const SalesOpen = ({ data, mastersData, teamManagersData }: props) => {
+const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
 
@@ -91,7 +91,6 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: props) => {
   const [imports, setImports] = useState(false);
   const [bool, setBool] = useState(true);
 
-  const [qaList, setQaList] = useState([{ _id: 1, name: "Tanish" }, { _id: 2, name: "NFKLdskj" }]);
   const [searchAssignTo, setSearchAssignTo] = useState('');
 
   const [showSubDD, setShowSubDD] = useState<number>(-1);
@@ -236,19 +235,19 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: props) => {
     return (
       <div className="">
         <div className={`rounded-[8px] overflow-hidden`}>
-          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 0 && "bg-[#eee]"}`} onClick={() => setShowSubDD(0)}>Reallocate To</button>
+          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 0 && "bg-[#eee]"}`} onClick={() => setShowSubDD(showSubDD !== 0 ? 0 : -1)}>Reallocate To</button>
           {showSubDD === 0 && (
             <div className="w-[100%] bg-[#eee]">
               <div className='flex items-center p-[6px] border-solid border-1 border-black bg-white'>
                 <input type="text" className='w-[160px] bg-white outline-none text-black' placeholder='Search...' value={searchAssignTo} onInput={(e: any) => handleSearchAllocateTo(e.target.value)} />
                 <button className='flex items-center justify-center w-[20px] h-[20px]'>
-                  <img src={getBasicIcon("Search")} alt='Search' width={"20px"} height={"20px"} />
+                  <img src={getBasicIcon("Search")} alt='Search' width={"16px"} height={"16px"} />
                 </button>
               </div>
               <ul className=''>
                 {
                   searchAssignTo ? (
-                    qaList?.filter((qaItem: any, index: number) => {
+                    sdrBdmData?.result?.filter((qaItem: any, index: number) => {
                       return qaItem?.name?.toLowerCase().includes(searchAssignTo.toLowerCase());
                     }).map((qaItem: any, index: number) => (
                       <li key={index}>
@@ -259,7 +258,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: props) => {
                       </li>
                     ))
                   ) : (
-                    qaList?.map((qaItem: any, index: number) => (
+                    sdrBdmData?.result?.map((qaItem: any, index: number) => (
                       <li key={index}>
                         <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
                           <span>{qaItem?.name}</span>
@@ -420,4 +419,5 @@ interface props {
   data: any;
   mastersData: any;
   teamManagersData: any;
+  sdrBdmData: any;
 }
