@@ -20,7 +20,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const CallsPage = () => {
     const columnsACR = [
         {
-            width: 200,
+            width: 240,
             left: 40,
             text: "Call ID",
             checked: true,
@@ -137,7 +137,7 @@ const CallsPage = () => {
 
     const columnsFRCR = [
         {
-            width: 200,
+            width: 240,
             left: 40,
             text: "Call ID",
             checked: true,
@@ -327,26 +327,117 @@ const CallsPage = () => {
         },
     });
 
+    const formatDateToCustomFormat = (isoDate: any) => {
+        const dateObject = new Date(isoDate);
+        const hours = String(dateObject.getHours()).padStart(2, "0");
+        const minutes = String(dateObject.getMinutes()).padStart(2, "0");
+        const day = dateObject.getDate();
+        const monthNames = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ];
+        const month = monthNames[dateObject.getMonth()];
+        const year = dateObject.getFullYear();
+
+        return `${day} ${month} ${year}`;
+
+        // const months = [
+        //     "Jan",
+        //     "Feb",
+        //     "Mar",
+        //     "Apr",
+        //     "May",
+        //     "Jun",
+        //     "Jul",
+        //     "Aug",
+        //     "Sep",
+        //     "Oct",
+        //     "Nov",
+        //     "Dec",
+        // ];
+
+        // const dateObj = new Date(isoDate);
+        // const day = dateObj.getUTCDate();
+        // const month = months[dateObj.getUTCMonth()];
+        // const year = dateObj.getUTCFullYear();
+
+        // return `${day} ${month} ${year}`;
+
+        // // Create a Date object from the given date string (UTC time)
+        // const dateObj = new Date(dateString);
+
+        // // Convert the UTC time to IST (Indian Standard Time)
+        // const utcToIstOffset = 5.5 * 60 * 60 * 1000; // 5 hours 30 minutes in milliseconds
+        // dateObj.setTime(dateObj.getTime() + utcToIstOffset);
+
+        // // Months array to get the month name
+        // const months = [
+        //   "January",
+        //   "February",
+        //   "March",
+        //   "April",
+        //   "May",
+        //   "June",
+        //   "July",
+        //   "August",
+        //   "September",
+        //   "October",
+        //   "November",
+        //   "December",
+        // ];
+
+        // // Get the day and month
+        // const day = dateObj.getUTCDate();
+        // const month = months[dateObj.getUTCMonth()];
+
+        // // Get the hours and minutes in IST
+        // let hours = dateObj.getUTCHours();
+        // let minutes: string = dateObj.getUTCMinutes().toString();
+
+        // // Convert the hours to 12-hour format and determine AM/PM
+        // const amPm = hours >= 12 ? "PM" : "AM";
+        // hours = hours % 12 || 12; // Convert 0 to 12
+
+        // // Pad single-digit minutes with a leading zero
+        // minutes = minutes.toString().padStart(2, "0");
+
+        // // Create the formatted date and time string
+        // const formattedDate = `${day} ${month}`;
+        // const formattedTime = `${hours}:${minutes} ${amPm}`;
+
+        // return { date: formattedDate, time: formattedTime };
+    };
+
     const generateRows = (data: any) => {
         if (subType === "allocated_call_reviews") {
             setRowsACR(data?.map((item: any, index: number) => {
                 let row = [
-                    { text: item?.callId || "-", id: item?._id },
-                    { text: item?.callTitle || "-", id: item?._id },
+                    { text: item?._id || "-", id: item?._id, link: `/calls/recorded-calls/${item?._id}/audio-call` },
+                    { text: item?.callTitle || "-", id: item?._id, link: `/calls/recorded-calls/${item?._id}/audio-call` },
                     { text: item?.leadId?.[0]?.leadId || "-", id: item?._id },
                     { text: item?.leadId?.[0]?.lead_title || "-", id: item?._id },
                     { text: item?.company?.[0]?.company_name || "-", id: item?._id },
                     { text: item?.owner?.[0]?.name || "-", id: item?._id },  // call owner
                     { text: item?.teamManager?.name || "-", id: item?._id },  // team manager
                     { text: item?.callId || "-", id: item?._id },  // client poc
-                    { text: item?.StartTime || "-", id: item?._id },  // call date & time
+                    { text: formatDateToCustomFormat(item?.StartTime) || "-", id: item?._id },  // call date & time
                     { text: item?.company?.[0]?.company_product_category || "-", id: item?._id },  // product/service
                     { text: item?.callDisposiiton || "-", id: item?._id },  // call disposition
                     { text: item?.callType || "-", id: item?._id },  // call type
                     { text: item?.callId || "-", id: item?._id },  // call review type
-                    { text: item?.score || "-", id: item?._id },  // call score
+                    { text: item?.score || "Not Scored", id: item?._id },  // call score
                     { text: item?.callId || "-", id: item?._id },  // allocation type
-                    { text: item?.qaAllocatedAt || "-", id: item?._id },  // allocated on
+                    { text: item?.qaAllocatedAt ? formatDateToCustomFormat(item?.qaAllocatedAt) : "-", id: item?._id },  // allocated on
                     { text: item?.qaId?.name || "-", id: item?._id },  // allocated to
                     { text: item?.callId || "-", id: item?._id },  // review due date
                     { text: item?.callId || "-", id: item?._id },  // call review status
@@ -356,25 +447,25 @@ const CallsPage = () => {
         } else {
             setRowsFRCR(data?.map((item: any, index: number) => {
                 let row = [
-                    { text: item?.callId || "-" },
-                    { text: item?.callTitle || "-" },
-                    { text: item?.leadId?.[0]?.leadId || "-" },
-                    { text: item?.leadId?.[0]?.lead_title || "-" },
-                    { text: item?.owner?.name || "-" },  // call owner
-                    { text: item?.teamManager || "-" },  // team manager
-                    { text: item?.callId || "-" },  // client poc
-                    { text: item?.company?.[0]?.company_name || "-" },
-                    { text: item?.StartTime || "-" },  // call date & time
-                    { text: item?.company?.[0]?.company_product_category || "-" },  // product/service
-                    { text: item?.callId || "-" },  // call review type
-                    { text: item?.callDisposiiton || "-" },  // call disposition
-                    { text: item?.callType || "-" },  // call type
-                    { text: item?.score || "-" },  // call score
-                    { text: item?.qaId?.name || "-" },  // feedback requestd by
-                    { text: item?.callId || "-" },  // on time review
-                    { text: item?.callId || "-" },  // delay time
-                    { text: item?.callId || "-" },  // time to complete review
-                    { text: item?.callId || "-" },  // call review status
+                    { text: item?._id || "-", id: item?._id, link: `/calls/recorded-calls/${item?._id}/audio-call` },
+                    { text: item?.callTitle || "-", id: item?._id, link: `/calls/recorded-calls/${item?._id}/audio-call` },
+                    { text: item?.leadId?.[0]?.leadId || "-", id: item?._id, },
+                    { text: item?.leadId?.[0]?.lead_title || "-", id: item?._id, },
+                    { text: item?.owner?.name || "-", id: item?._id, },  // call owner
+                    { text: item?.teamManager || "-", id: item?._id, },  // team manager
+                    { text: item?.callId || "-", id: item?._id, },  // client poc
+                    { text: item?.company?.[0]?.company_name || "-", id: item?._id, },
+                    { text: item?.StartTime || "-", id: item?._id, },  // call date & time
+                    { text: item?.company?.[0]?.company_product_category || "-", id: item?._id, },  // product/service
+                    { text: item?.callId || "-", id: item?._id, },  // call review type
+                    { text: item?.callDisposiiton || "-", id: item?._id, },  // call disposition
+                    { text: item?.callType || "-", id: item?._id, },  // call type
+                    { text: item?.score || "-", id: item?._id, },  // call score
+                    { text: item?.qaId?.name || "-", id: item?._id, },  // feedback requestd by
+                    { text: item?.callId || "-", id: item?._id, },  // on time review
+                    { text: item?.callId || "-", id: item?._id, },  // delay time
+                    { text: item?.callId || "-", id: item?._id, },  // time to complete review
+                    { text: item?.callId || "-", id: item?._id, },  // call review status
                 ];
                 return row;
             }));
