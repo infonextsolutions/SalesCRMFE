@@ -15,6 +15,8 @@ import PromptEdit from "@/components/View/PromptEdit";
 import { useRouter } from "next/router";
 import DropDown3 from "@/utils/Button/DropDown3";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import { useAppDispatch } from "@/store/store";
+import { setError, setSuccess } from "@/store/ai";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -86,6 +88,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
     };
   }, [router]);
 
+  const [selectedRows, setSelectedRows] = useState<any>([]);
   const [form, setForm] = useState(false);
   const [promptVal, setPromptVal] = useState(false);
   const [imports, setImports] = useState(false);
@@ -152,6 +155,8 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
   const ref: any = useRef();
   const [accessToken, setAccessToken] = useState<string>("");
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (window !== undefined) {
       setAccessToken(localStorage.getItem("access-token") || "");
@@ -192,43 +197,65 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
     setSearchAssignTo(val);
   };
 
-  const handleAllocateTo = (checked: boolean, qaId: any) => {
-    // try {
-    //     if (selectedRows.length === 0) {
-    //         dispatch(setError({
-    //             show: true,
-    //             error: "No Selection.",
-    //         }));
-    //     } else if (checked) {
-    //         dispatch(setSuccess({
-    //             show: true,
-    //             success: "Assigning...",
-    //         }));
-    //         const assigningPromise = selectedRows.map((selectedRow: any) => {
-    //             const payload = {
-    //                 qaId: qaId,
-    //                 qamId: window !== undefined ? localStorage.getItem('user-id') : "",
-    //                 callId: selectedRow
-    //             };
-    //             return axios.post(`https://sales365.trainright.fit/api/qam/allocateCallToQA`, payload, { headers: { Authorization: accessToken } });
-    //         });
-    //         Promise.all(assigningPromise)
-    //             .then((res: any) => {
-    //                 dispatch(setSuccess({
-    //                     show: true,
-    //                     success: "Successfully Assigned!",
-    //                 }));
-    //             })
-    //             .catch((err: any) => {
-    //                 dispatch(setError({
-    //                     show: true,
-    //                     error: "Error Occured!",
-    //                 }));
-    //             });
-    //     }
-    // } catch (error) {
+  const handleAllocateTo = (checked: boolean, newOwnerId: any) => {
+    try {
+      if (selectedRows.length === 0) {
+        dispatch(setError({
+          show: true,
+          error: "No Selection.",
+        }));
+      } else if (checked) {
+        dispatch(setSuccess({
+          show: true,
+          success: "Reallocating...",
+        }));
+        const assigningPromise = selectedRows.map((selectedRow: any) => {
+          const payload = {
+            id: selectedRow, // lead id
+            manager: window !== undefined ? localStorage.getItem('user-id') : "",
+            owner: newOwnerId
+          };
+          return axios.post(`https://sales365.trainright.fit/api/leads/allocateLeadToOwner`, payload, { headers: { Authorization: accessToken } });
+        });
+        Promise.all(assigningPromise)
+          .then((res: any) => {
+            dispatch(setSuccess({
+              show: true,
+              success: "Lead Reallocated Successfully!",
+            }));
+          })
+          .catch((err: any) => {
+            dispatch(setError({
+              show: true,
+              error: "Error Occured!",
+            }));
+          });
+      }
+    } catch (error) {
 
-    // }
+    }
+  };
+
+  const updateLead = (checked: any, key: any, value: any) => {
+    console.log('------- updateLead : allocated -------', checked, key, value);
+    if (checked) {
+      if (selectedRows.length === 0) {
+        dispatch(setError({
+          show: true,
+          error: "No Selection.",
+        }));
+      } else {
+        const payload = {
+          [key]: value
+        };
+        axios.put(``, payload, { headers: { Authorization: accessToken } })
+          .then((res: any) => {
+
+          }).catch((err: any) => {
+
+          });
+      }
+    }
   };
 
   const renderDropdownList = () => {
@@ -279,13 +306,13 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
               <li className="">
                 <label htmlFor={"Open"} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
                   <span>Open</span>
-                  <input type="radio" id={"Open"} name="status" onChange={(e) => { }} />
+                  <input type="radio" id={"Open"} name="status" onChange={(e) => updateLead(e.target.checked, "lead_status", "Open")} />
                 </label>
               </li>
               <li className="">
                 <label htmlFor={"Close"} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
                   <span>Close</span>
-                  <input type="radio" id={"Close"} name="status" onChange={(e) => { }} />
+                  <input type="radio" id={"Close"} name="status" onChange={(e) => updateLead(e.target.checked, "lead_status", "Close")} />
                 </label>
               </li>
             </ul>
@@ -295,11 +322,11 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
           <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 2 && "bg-[#eee]"}`} onClick={() => setShowSubDD(2)}>Change Lead Stage</button>
           {showSubDD === 2 && (
             <ul className="bg-[#eee] flex flex-col gap-[4px]">
-              {closeStages?.map((stageItem: any, index: number) => (
+              {openStages?.map((stageItem: any, index: number) => (
                 <li className="" key={index}>
                   <label htmlFor={stageItem?.id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
                     <span>{stageItem?.label}</span>
-                    <input type="radio" id={stageItem?.id} name="stage" onChange={(e) => { }} />
+                    <input type="radio" id={stageItem?.id} name="stage" onChange={(e) => updateLead(e.target.checked, "lead_stage", stageItem?.id)} />
                   </label>
                 </li>
               ))}
