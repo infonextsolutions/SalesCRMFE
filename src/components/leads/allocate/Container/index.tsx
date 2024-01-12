@@ -117,9 +117,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
                 className="text-red-500"
                 id="countries"
               >
-                <option selected={status === "open"} value="open">
-                  Open
-                </option>
+                <option selected={status === "open"} value="open">Open</option>
                 <option selected={status === "close"} value="close">Close</option>
               </select>
             </div>

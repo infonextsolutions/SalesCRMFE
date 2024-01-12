@@ -91,7 +91,7 @@ const example = {
   updatedAt: "2023-04-03T00:00:00.000Z",
 };
 
-const CallBox = ({ width, bool }: any) => {
+const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
     if (check) {
@@ -109,7 +109,7 @@ const CallBox = ({ width, bool }: any) => {
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" ref={ref} className="checkbox" />
+      <input type="checkbox" ref={ref} className="checkbox" onChange={(e: any) => handleCheck(e.target.checked)} />
     </div>
   );
 };
@@ -486,6 +486,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const [checked, setChecked] = useState(true);
   const [LeadData, setLeadData] = useState<any>(example);
   const [accessToken, setAccessToken] = useState<any>("");
+  const [selected, setSelected] = useState<boolean>(false);
 
   useEffect(() => {
     if (window !== undefined) {
@@ -568,10 +569,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
     <>
       <div className="flex">
         <div
-          className=" pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] "
+          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] over:bg-white ${(selectAll || selected || detailShow) && "bg-white"}`}
           ref={wRef}
         >
-          <CallBox width={30} bool={selectAll} />
+          <CallBox width={30} bool={selectAll || selected} handleCheck={(checked: any) => { setSelected(checked); console.log('CHECKED', checked) }} />
           <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
