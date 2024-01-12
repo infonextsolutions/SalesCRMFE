@@ -52,7 +52,7 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const SalesOpen = ({ data, mastersData }: props) => {
+const SalesOpen = ({ data, mastersData, teamManagersData }: props) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
 
@@ -152,7 +152,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
 
   const makecall = async () => {
     try {
-      
+
       const res = await axios.post(
         "https://sales365.trainright.fit/api/calling/make-call",
         {
@@ -161,7 +161,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
         { headers: { Authorization: accessToken } }
       );
     } catch (error) {
-      
+
     }
   };
 
@@ -181,7 +181,7 @@ const SalesOpen = ({ data, mastersData }: props) => {
       )}
       {form && (
         <Backdrop bool={bool}>
-          <AddLeadForm cancel={cancelForms} mastersData={mastersData} />
+          <AddLeadForm cancel={cancelForms} mastersData={mastersData} teamManagersData={teamManagersData} />
         </Backdrop>
       )}
       <Navigation
@@ -274,4 +274,5 @@ export default SalesOpen;
 interface props {
   data: any;
   mastersData: any;
+  teamManagersData: any;
 }

@@ -13,6 +13,7 @@ const SalesOpen = React.lazy(() => import("@/views/sales/open"));
 export default function Open() {
   const [data, setData] = useState<any>({});
   const [mastersData, setMastersData] = useState<any>({});
+  const [tmData, setTmData] = useState<any>({});
   const [accessToken, setAccessToken] = useState<any>("");
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
@@ -47,6 +48,15 @@ export default function Open() {
     }
     ).then((res: any) => {
       setMastersData(res.data);
+    }).catch((e: any) => { });
+    axios.get(
+      "https://sales365.trainright.fit/api/master-users/getTeamManagerList", {
+      headers: {
+        Authorization: accessToken
+      }
+    }
+    ).then((res: any) => {
+      setTmData(res.data);
     }).catch((e: any) => { });
   }, [accessToken]);
 
@@ -103,7 +113,7 @@ export default function Open() {
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
-            <SalesOpen data={data} mastersData={mastersData} />
+            <SalesOpen data={data} mastersData={mastersData} teamManagersData={tmData} />
           </Suspense>
         )}
       </Suspense>
