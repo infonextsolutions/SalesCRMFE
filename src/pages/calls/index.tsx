@@ -424,9 +424,9 @@ const CallsPage = () => {
                 let row = [
                     { text: item?._id || "-", id: item?._id, link: `/calls/recorded-calls/${item?._id}/audio-call` },
                     { text: item?.callTitle || "-", id: item?._id, link: `/calls/recorded-calls/${item?._id}/audio-call` },
-                    { text: item?.leadId?.[0]?.leadId || "-", id: item?._id },
-                    { text: item?.leadId?.[0]?.lead_title || "-", id: item?._id },
-                    { text: item?.company?.[0]?.company_name || "-", id: item?._id },
+                    { text: item?.leadId?.[0]?.leadId || "-", id: item?._id, link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile` },
+                    { text: item?.leadId?.[0]?.lead_title || "-", id: item?._id, link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile` },
+                    { text: item?.company?.[0]?.company_name || "-", id: item?._id, link: `/sales/open/${item?.leadId?.[0]?._id}/company-profile` },
                     { text: item?.owner?.[0]?.name || "-", id: item?._id },  // call owner
                     { text: item?.teamManager?.name || "-", id: item?._id },  // team manager
                     { text: item?.callId || "-", id: item?._id },  // client poc

@@ -496,7 +496,7 @@ const Events = ({
     };
 
     axios
-      .post("https://sales365.trainright.fit/api/event/create", finalPayload, { headers: { Authorization: accessToken } })
+      .post("https://sales365.trainright.fit/api/meeting/create", finalPayload, { headers: { Authorization: accessToken } })
       .then((e: any) => {
         const { result } = e?.data;
         const payload = {
