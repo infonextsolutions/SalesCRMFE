@@ -14,6 +14,7 @@ export default function Open() {
   const [data, setData] = useState<any>({});
   const [mastersData, setMastersData] = useState<any>({});
   const [tmData, setTmData] = useState<any>({});
+  const [sdrBdmData, setSdrBdmData] = useState<any>({});
   const [accessToken, setAccessToken] = useState<any>("");
   const state = useSelector((state: any) => state.auth);
   const router = useRouter();
@@ -57,6 +58,15 @@ export default function Open() {
     }
     ).then((res: any) => {
       setTmData(res.data);
+    }).catch((e: any) => { });
+    axios.get(
+      "https://sales365.trainright.fit/api/master-users/getTeamSDRAndBDMList", {
+      headers: {
+        Authorization: accessToken
+      }
+    }
+    ).then((res: any) => {
+      setSdrBdmData(res.data);
     }).catch((e: any) => { });
   }, [accessToken]);
 
@@ -113,7 +123,7 @@ export default function Open() {
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
-            <SalesOpen data={data} mastersData={mastersData} teamManagersData={tmData} />
+            <SalesOpen data={data} mastersData={mastersData} teamManagersData={tmData} sdrBdmData={sdrBdmData} />
           </Suspense>
         )}
       </Suspense>
