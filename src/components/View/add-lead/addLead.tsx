@@ -29,7 +29,7 @@ const AddText = ({ key, top, title, width, change, required }: any) => {
   );
 };
 
-const AddLead = ({ cancel, mastersData }: any) => {
+const AddLead = ({ cancel, mastersData, teamManagersData }: any) => {
   const [leadData, setLeadData] = React.useState<any>({});
   const [companyData, setCompanyData] = React.useState<any>({});
   const [contactData, setContactData] = React.useState<any>({});
@@ -197,7 +197,7 @@ const AddLead = ({ cancel, mastersData }: any) => {
                 -- Select Lead Manager --
               </option>
               {
-                mastersData?.result?.map((item: any, index: number) => (
+                teamManagersData?.result?.map((item: any, index: number) => (
                   <option value={item?._id} key={item?._id || index}>{item?.name}</option>
                 ))
               }

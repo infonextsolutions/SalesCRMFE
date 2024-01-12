@@ -83,7 +83,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`, {
+        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`, {
         headers: {
           Authorization: accessToken
         }
