@@ -471,7 +471,7 @@ const AllocatedCallsCC = ({ data }: any) => {
                         setTotalPages(pages);
                         setRows(data?.map((item: any, index: number) => {
                             let row = [
-                                { text: item?.callId || "-", link: `/calls/recorded-calls/${item?._id}/audio-call` },
+                                { text: item?._id || "-", link: `/calls/recorded-calls/${item?._id}/audio-call` },
                                 { text: item?.callTitle || "-", link: `/calls/recorded-calls/${item?._id}/audio-call` },
                                 { text: item?.leadId?.[0]?.leadId || "-", link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile` },
                                 { text: item?.leadId?.[0]?.lead_title || "-", link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile` },
