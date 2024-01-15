@@ -7,7 +7,6 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 const CallInfo = ({ check, data, data1 }: any) => {
-  console.log('--------------------- data1 & data --------------------', data1, data)
   const activeTitle = 0;
   // const [edit, setEdit] = useState(false);
   // const [bool, setBool] = useState(true);
