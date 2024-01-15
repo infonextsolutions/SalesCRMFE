@@ -16,21 +16,21 @@ import { useRouter } from "next/router";
 //Manya will make this page
 
 const CallProfile = () => {
-  const [dataNew, setDataNew] = useState<any>({});
-  const [dataNew1, setDataNew1] = useState<any>({});
-  const [dataNew2, setDataNew2] = useState<any>({});
+  const [dataNew, setDataNew] = useState({});
+  const [dataNew1, setDataNew1] = useState({});
+  const [dataNew2, setDataNew2] = useState({});
   const titles = ["CALL INFO", "COMMENTS & NOTES", "COACHING"];
   const [fullCall, setFullCall] = useState(false);
   const [snippet, setSnippet] = useState(false);
   const [bool, setBool] = useState(true);
 
-  const [userId, setUserId] = useState<any>("");
+  const [userId, setUserId] = useState("");
   const [userRole, setUserRole] = useState("");
-  const [qams, setQams] = useState<any>([]);
+  const [qams, setQams] = useState([]);
 
   const router = useRouter();
   const { id } = router.query;
-  const [accessToken, setAccessToken] = useState<any>("");
+  const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
     if (window !== undefined) {
