@@ -3,7 +3,12 @@ import { BarChart } from "@mui/x-charts";
 import React from "react";
 import { axisClasses } from "@mui/x-charts";
 
-const BarChartVertical = ({ title = "", data, template, options = null }: any) => {
+const BarChartVertical = ({
+  title = "",
+  data,
+  template,
+  options = null,
+}: any) => {
   const xLabels = template?.labels?.map(
     (label: string, index: number) => template?.mappings?.[label]
   );
@@ -21,13 +26,19 @@ const BarChartVertical = ({ title = "", data, template, options = null }: any) =
           {title}
         </h1>
         {options && (
-          <select className="text-black" name="option" id="option">
-            {
-              options?.map((option: any, index: number) => (
-                <option key={index} value={option?.key}>{option?.label}</option>
-              ))
-            }
-          </select>
+          <div className="bg-[#909193] pr-2 rounded-lg">
+            <select
+              className="text-white p-2 focus:outline-none outline-none cursor-pointer rounded-lg bg-[#909193]"
+              name="option"
+              id="option"
+            >
+              {options?.map((option: any, index: number) => (
+                <option key={index} value={option?.key}>
+                  {option?.label}
+                </option>
+              ))}
+            </select>
+          </div>
         )}
       </div>
       <div className="chart-container">
