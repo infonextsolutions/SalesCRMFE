@@ -54,7 +54,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
       UpdateData();
       setCheck(true);
     }
-  });
+  }, []);
 
   const called: any = data1;
   const owner = called?.owner;

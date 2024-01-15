@@ -7,13 +7,13 @@ const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
 const xLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const daysMapper = {
-  Monday: 0,
-  Tuesday: 1,
-  Wednesday: 2,
-  Thursday: 3,
-  Friday: 4,
-  Saturday: 5,
-  Sunday: 6,
+  Monday: "Mon",
+  Tuesday: "Tue",
+  Wednesday: "Wed",
+  Thursday: "Thu",
+  Friday: "Fri",
+  Saturday: "Sat",
+  Sunday: "Sun",
 }
 
 const DealAnalysis = ({ dealAnalytics }) => {
@@ -22,9 +22,10 @@ const DealAnalysis = ({ dealAnalytics }) => {
 
   React.useEffect(() => {
     let formattedW = [0, 0, 0, 0, 0, 0, 0], formattedL = [0, 0, 0, 0, 0, 0, 0];
-    dealAnalytics?.result?.forEach((item) => {
-      formattedW[daysMapper?.[item?.day]] = item?.wonDeals;
-      formattedL[daysMapper?.[item?.day]] = item?.lostDeals;
+    dealAnalytics?.result?.forEach((item, index) => {
+      formattedW[index] = item?.wonDeals;
+      formattedL[index] = item?.lostDeals;
+      xLabels[index] = daysMapper?.[item?.day];
     });
     setDealsWonList(formattedW);
     setDealsLostList(formattedL);

@@ -635,7 +635,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             text={CallData?.company?.[0]?.company_product_category ?? "-"}
           />
           <CallItem width={200} left={20} text={CallData?.callData?.[0]?.call_new_participant_name} />
-          <CallItem width={100} left={20} text={CallData?.leadId?.[0]?.owners?.[0]?.name || CallData?.owner?.name || "-"} />
+          <CallItem width={100} left={20} text={CallData?.leadId?.[0]?.owners?.[0]?.name || CallData?.owner?.[0]?.name || "-"} />
           <CallItem width={130} left={20} text={CallData?.callData?.[0]?.call_type} />
           <CallItemMultiple
             width={120}
