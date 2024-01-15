@@ -212,7 +212,6 @@ const CallProfile = () => {
             check={true}
             current={0}
             data1={dataNew1.result}
-            info={dummy.audioCallDetails}
             refresh={refreshData}
           />
           <div className="w-[58%] min-h-[50vh] ">

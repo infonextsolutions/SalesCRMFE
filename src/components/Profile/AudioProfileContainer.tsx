@@ -14,13 +14,12 @@ import CommentsAndNotes from "./AudioProfileDetails/Comment";
 const AudioProfileContainer = ({
   titles,
   current,
-  info,
   check,
   data,
   width,
   data1,
   refresh,
-}: AudioProfileContainerProps) => {
+}: any) => {
   const activeTitle = useSelector((state: any) => state.ui.current);
   const dispatch = useDispatch();
   function CallBack(childData: any) {
@@ -29,13 +28,17 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  const timestamp = data1?.createdAt;
-  const date = new Date(timestamp);
+  const getTime = (ts: any) => {
+    const date = new Date(ts);
 
-  const hours = date.getUTCHours();
-  const minutes = date.getUTCMinutes();
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
 
-  const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+    const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+
+    return formattedTime;
+  };
+
 
   return (
     <div
@@ -78,7 +81,7 @@ const AudioProfileContainer = ({
               width={25}
               height={25}
             />
-            {formattedTime}
+            {getTime(data1?.createdAt)}
           </div>
         </div>
       )}
@@ -92,12 +95,14 @@ const AudioProfileContainer = ({
       <div className="flex justify-between w-[100%] relative overflow-hidden">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && (
-            <CallInfo data1={data1} data={data} check={check} info={info} />
+            <CallInfo data1={data1} data={data} check={check} />
           )}
           {activeTitle === 1 && (
             <CommentsAndNotes data={data} notesData={data} />
           )}
-          {activeTitle === 2 && <Coaching data={data} refresh={refresh} />}
+          {activeTitle === 2 && (
+            <Coaching data={data} refresh={refresh} />
+          )}
         </div>
       </div>
     </div>

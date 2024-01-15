@@ -379,7 +379,7 @@ const ExpandableRow = ({
           Lead Source
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {leadData?.leadSource}
+          {leadData?.leadId?.leadSource}
         </p>
       </div>
       <div className="w-[100%] flex items-center mb-[20px]">
@@ -387,7 +387,7 @@ const ExpandableRow = ({
           Last Call Disposition
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {leadData?.activityId?.lastCallDisposition ?? "-"}
+          {leadData?.leadId?.activityId?.lastCallDisposition ?? "-"}
         </p>
       </div>
       <div className="w-[100%] mb-[20px]">
@@ -395,7 +395,7 @@ const ExpandableRow = ({
           Lead Description
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {leadDesc}
+          {leadData?.leadId?.lead_description}
         </p>
       </div>
       <div className="w-[100%] mb-[20px]">
@@ -406,18 +406,18 @@ const ExpandableRow = ({
           {companyDesc ?? "-"}
         </p>
       </div>
-      {leadData?.notes?.length !== 0 && (
+      {leadData?.leadId?.notes?.length !== 0 && (
         <div className="w-[100%] mb-[20px]">
           <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">
             Note
           </p>
           <div className="">
             <h3 className="font-medium text-[#000]">
-              {leadData?.notes[leadData?.notes?.length - 1]?.title || "-"}
+              {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]?.title || "-"}
             </h3>
           </div>
           <p className="text-[#53565a] font-medium mt-[5px] text-[16px] tracking-wide">
-            {leadData?.notes[leadData?.notes?.length - 1]?.content || "-"}
+            {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]?.content || "-"}
           </p>
         </div>
       )}

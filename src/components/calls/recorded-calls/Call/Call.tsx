@@ -11,87 +11,6 @@ import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
 
-const example = {
-  _id: "6457d6b590467877fd40291c",
-  companyId: {
-    _id: "6457d6b590467877fd402915",
-    company_name: "Zen Corp.",
-    company_website_url: "www.faxquote.com",
-    company_icon: "",
-    company_location: "New Delhi",
-    company_product_category: "Product C",
-    company_description:
-      "XYZ Corp is a marketing and advertising agency providing creative solutions to help businesses increase brand awareness, generate leads, and drive sales.",
-    createdAt: "2023-05-07T16:49:57.100Z",
-    updatedAt: "2023-05-07T16:49:57.100Z",
-    __v: 0,
-  },
-  customerId: {
-    _id: "6457d6b590467877fd402918",
-    name: "Ishita Patel",
-    contact: "(208) 555-0112",
-    email: "ishitapatel@example.com",
-    parentId: "6411718c074708bce819b8c1",
-    designation: "Sales Manager",
-    companyId: "6457d6b590467877fd402915",
-    createdAt: "2023-05-07T16:49:57.183Z",
-    updatedAt: "2023-05-07T16:49:57.183Z",
-    __v: 0,
-  },
-  potential_deal_size: "50001",
-  win_probability: "80%",
-  created_by: "Sales",
-  customer_name: "Ishita Patel",
-  inquiry: "Trial Enquiry",
-  existing_budget: "30001",
-  leadStatus: "Close",
-  leadStage: "Lost",
-  lead_title: "Product discussion with Zen Corp.",
-  lead_description: "Interested to know about Product A.",
-  notes: [
-    {
-      title: "Product feature A",
-      content: "Interested to know about Product A.",
-      _id: "6457d6b590467877fd40291d",
-      createdAt: "2023-05-10T11:06:35.095Z",
-      updatedAt: "2023-05-10T11:06:35.095Z",
-    },
-  ],
-  source: "Phone",
-  leadId: "14023",
-  owners: [
-    {
-      _id: "645662800c64d03119111371",
-      name: "Anika Sharma",
-      email: "anika.sharma@gmail.com",
-      password: "$2a$08$keNizUi5NrepC16mgviYKuyGU9R022MfaOFoCUJlkGOziAl1ecx2K",
-      phone: "1234567892",
-      roles: ["63fdcc5251dadb27a426df6c"],
-      token: "",
-      createdAt: "2023-05-06T14:21:52.401Z",
-      updatedAt: "2023-05-06T14:21:52.477Z",
-      __v: 1,
-      designation: "Sales Executive",
-    },
-    {
-      _id: "6457d28ac7275bff6e607e88",
-      name: "Sanya Reddy",
-      email: "sanya.reddy@gmail.com",
-      password: "$2a$08$jIydspUt73TuVJlHzr3fe.rLCWGQrV2cHT3xDSW6PLBMhuIdZ3xmO",
-      phone: "9876543213",
-      roles: ["63fdcc5251dadb27a426df6c"],
-      token: "",
-      createdAt: "2023-05-07T16:32:10.246Z",
-      updatedAt: "2023-05-07T16:32:10.345Z",
-      __v: 1,
-      designation: "Sales Rep",
-    },
-  ],
-  __v: 0,
-  createdAt: "2023-04-03T00:00:00.000Z",
-  updatedAt: "2023-04-03T00:00:00.000Z",
-};
-
 const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
@@ -491,11 +410,7 @@ const ParticipantsHover = ({
   last,
   bounding,
   data,
-}: {
-  last: any;
-  bounding: any;
-  data: Lead;
-}) => {
+}: any) => {
   return (
     <div
       className="bg-[#E8E9EB] max-w-[240px] flex flex-col items-center pb-[40px] rounded-[15px] fixed py-[13px] px-[15px]  right-[10px] drop-shadow-sm"
@@ -511,7 +426,7 @@ const ParticipantsHover = ({
       <p className="text-[#000] w-[100%] text-[15px] font-medium">
         Call Participants
       </p>
-      {data.owners.map((item, i) => {
+      {data.owners.map((item: any, i: number) => {
         return (
           <p
             key={i}
@@ -528,7 +443,7 @@ const ParticipantsHover = ({
   );
 };
 
-const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
+const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -547,7 +462,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
   const dispatch = useDispatch();
 
   const [checked, setChecked] = useState(true);
-  const [LeadData, setLeadData] = useState<any>(example);
   const [accessToken, setAccessToken] = useState<any>("");
   const [selected, setSelected] = useState<boolean>(false);
 
@@ -569,7 +483,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
         )
         .then((e: any) => {
           setChecked(false);
-          setLeadData(e.data.result);
         })
         .catch((e) => {
         });
@@ -646,7 +559,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             width={200}
             left={20}
             // text={"345345354335"}
-            text={convertDatetimeToCustomFormat(CallData.updatedAt)}
+            text={CallData?.callData?.[0]?.callId || "-"}
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/audio-call`}
@@ -657,9 +570,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             color={"#000"}
             // text={"Discussion on PX features"}
             text={
-              call_title?.active_calls?.length > 0
-                ? call_title?.active_calls[0].call_title
-                : ""
+              CallData?.callData?.[0]?.call_title || "-"
             }
             click={true}
           // route={`${pathname}/${id}/audio-call`}
@@ -667,27 +578,27 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={200}
             left={10}
-            text={CallData.leadId.length > 0 ? CallData.leadId[0].leadId : "-"}
+            text={CallData?.leadId?.length > 0 ? CallData?.leadId?.[0]?.leadId : "-"}
             click={true}
-            route={`/sales/open/${CallData.leadId.length > 0 && CallData.leadId[0]._id
+            route={`/sales/open/${CallData?.leadId?.length > 0 && CallData?.leadId?.[0]?._id
               }/lead-profile`}
             color={"#000"}
           />
           <CallItem
             width={240}
             left={-65}
-            text={LeadData?.lead_title}
+            text={CallData?.leadId?.[0]?.lead_title}
             click={true}
-            route={`/sales/open/${LeadData?._id}/lead-profile`}
+            route={`/sales/open/${CallData?.leadId?.[0]?._id}/lead-profile`}
             color={"#000"}
           />
           <CallItem
             width={220}
             left={40}
-            text={LeadData?.companyId?.company_name}
-            secondaryText={LeadData?.companyId?.company_address || LeadData?.companyId?.company_location}
+            text={CallData?.company?.[0]?.company_name}
+            secondaryText={CallData?.company?.[0]?.company_address || CallData?.company?.[0]?.company_location}
             click={true}
-            route={`/sales/open/${LeadData?._id}/company-profile`}
+            route={`/sales/open/${CallData?.leadId?.[0]?._id}/company-profile`}
             color={"#000"}
           />
           {/* <div
@@ -721,24 +632,24 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
           <CallItem
             width={200}
             left={20}
-            text={LeadData?.companyId?.company_product_category ?? "-"}
+            text={CallData?.company?.[0]?.company_product_category ?? "-"}
           />
-          <CallItem width={200} left={20} text={"-"} />
-          <CallItem width={100} left={20} text={LeadData.owners?.[0]?.name} />
-          <CallItem width={130} left={20} text={"-"} />
+          <CallItem width={200} left={20} text={CallData?.callData?.[0]?.call_new_participant_name} />
+          <CallItem width={100} left={20} text={CallData?.leadId?.[0]?.owners?.[0]?.name || CallData?.owner?.name || "-"} />
+          <CallItem width={130} left={20} text={CallData?.callData?.[0]?.call_type} />
           <CallItemMultiple
             width={120}
             left={10}
-            upperText={convertTimestampToDate(CallData.DateCreated)}
-            bottomText={"on " + convertTimestampToTime(CallData.DateCreated)}
+            upperText={convertTimestampToDate(CallData?.DateCreated)}
+            bottomText={"on " + convertTimestampToTime(CallData?.DateCreated)}
           />
           <CallItem
             width={120}
             left={10}
-            text={calculateTimeDifference(CallData.StartTime, CallData.EndTime)}
+            text={calculateTimeDifference(CallData?.StartTime, CallData?.EndTime)}
           />
-          <CallItem width={160} left={20} text={"-"} />
-          <CallItem width={120} left={10} text={"-"} />
+          <CallItem width={160} left={20} text={CallData?.callDisposition || CallData?.callData?.[0]?.call_disposition || "-"} />
+          <CallItem width={120} left={10} text={CallData?.score || "-"} />
           {/* <CallItem
             width={110}
             left={20}
@@ -756,9 +667,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       {detailShow && (
         <BackdropRight bool={detailShow}>
           <ExpandableRow
-            CallDesc={
-              "ABC Corp. is a IT company serving industry such as Finance and Edtech. Company has 10+ existing clients and also works with individual people."
-            }
+            CallDesc={CallData?.callData?.[0]?.call_discription}
             callMatrics={[
               {
                 title: "Talk/Listen Ratio ",
@@ -783,7 +692,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
       )}
 
       {hover && (
-        <ParticipantsHover bounding={bounding} data={LeadData} last={last} />
+        <ParticipantsHover bounding={bounding} last={last} />
       )}
     </>
   );
