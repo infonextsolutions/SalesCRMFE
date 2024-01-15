@@ -902,7 +902,7 @@ const CallsPage = () => {
             className={`w-[130px] ${
               subType == "allocated_call_reviews"
                 ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-                : ""
+                : "text-sm"
             } `}
             onClick={() => handleSubType("allocated_call_reviews")}
           >
@@ -912,7 +912,7 @@ const CallsPage = () => {
             className={`w-[190px] ${
               subType == "feedback_requested_call_reviews"
                 ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-                : ""
+                : "text-sm"
             } `}
             onClick={() => handleSubType("feedback_requested_call_reviews")}
           >
@@ -941,6 +941,14 @@ const CallsPage = () => {
         width={true}
       />
       {renderToggleSwitch()}
+      <div className="pl-9 pt-6 pb-3">
+        <h2 className="font-semibold text-xl">
+          {tabs?.[currTab]?.title} {" > "}
+          {subType === "allocated_call_reviews"
+            ? "Calls To Be Allocated"
+            : "Calls To Be Feedback Requested"}
+        </h2>
+      </div>
       <div className="bg-[#ffe3e170] mt-6 rounded-lg mx-6 px-6 overflow-x-auto">
         {renderFilters()}
         {subType === "allocated_call_reviews" ? renderACR() : renderFRCR()}
