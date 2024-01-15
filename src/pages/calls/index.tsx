@@ -896,33 +896,30 @@ const CallsPage = () => {
 
   const renderToggleSwitch = () => {
     return (
-      <div className="flex text-black mt-6 px-8 pr-20 items-center gap-[20px]">
-        <div className="w-[340px] px-2 bg-gray-200 rounded-3xl">
-          <button
-            className={`w-[130px] ${
-              subType == "allocated_call_reviews"
-                ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-                : ""
-            } `}
-            onClick={() => handleSubType("allocated_call_reviews")}
-          >
-            Allocated Call Reviews
-          </button>
-          <button
-            className={`w-[190px] ${
-              subType == "feedback_requested_call_reviews"
-                ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-                : ""
-            } `}
-            onClick={() => handleSubType("feedback_requested_call_reviews")}
-          >
-            Feedback Requested Call Reviews
-          </button>
-        </div>
+      <div className="flex text-black justify-between px-8 pr-20 items-center gap-[20px]">
+        <button
+          className={`${
+            subType == "allocated_call_reviews"
+              ? "focus:outline-none  bg-[#fe5043ad] hover:bg-[#fe5043ad] font-medium rounded-lg text-sm px-6 py-2 mt-2 mb-2"
+              : ""
+          } `}
+          onClick={() => handleSubType("allocated_call_reviews")}
+        >
+          Allocated Call Reviews
+        </button>
+        <button
+          className={`${
+            subType == "feedback_requested_call_reviews"
+              ? "focus:outline-none bg-[#fe5043ad] hover:bg-[#fe5043ad] font-medium rounded-lg text-sm px-6 py-2 mt-2 mb-2"
+              : ""
+          } `}
+          onClick={() => handleSubType("feedback_requested_call_reviews")}
+        >
+          Feedback Requested Call Reviews
+        </button>
       </div>
     );
   };
-
   return (
     <>
       <Navbar
