@@ -951,6 +951,14 @@ const CallsPage = () => {
         width={true}
       />
       {renderToggleSwitch()}
+      <div className="pl-9 pt-6 pb-3">
+        <h2 className="font-semibold text-xl">
+          {tabs?.[currTab]?.title} {" > "}
+          {subType === "allocated_call_reviews"
+            ? "Calls To Be Allocated"
+            : "Calls To Be Feedback Requested"}
+        </h2>
+      </div>
       <div className="bg-[#ffe3e170] mt-6 rounded-lg mx-6 px-6 overflow-x-auto">
         {renderFilters()}
         {subType === "allocated_call_reviews" ? renderACR() : renderFRCR()}
