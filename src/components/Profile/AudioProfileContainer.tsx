@@ -28,16 +28,17 @@ const AudioProfileContainer = ({
   }
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));
 
-  const getTime = (ts: any) => {
+  function getTime(ts: any) {
     const date = new Date(ts);
-
-    const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-
-    const formattedTime = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
-
-    return formattedTime;
-  };
+    let hours = date.getHours();
+    let minutes: string | number = date.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
 
 
   return (
