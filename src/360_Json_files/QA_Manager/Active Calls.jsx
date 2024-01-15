@@ -1,4 +1,15 @@
-import { AUTO_FETCH_API_USER, CONTAINER, CONTAINER_365, DASHBOARD_LISTING, HEADING, LOGIN_REFRESH, PAGE_HEADER, POST, SELECT, SIDE_MENU_365 } from "../../components/utils/Const";
+import {
+  AUTO_FETCH_API_USER,
+  CONTAINER,
+  CONTAINER_365,
+  DASHBOARD_LISTING,
+  HEADING,
+  LOGIN_REFRESH,
+  PAGE_HEADER,
+  POST,
+  SELECT,
+  SIDE_MENU_365,
+} from "../../components/utils/Const";
 
 const HEADER = {
   type: CONTAINER_365,
@@ -78,7 +89,6 @@ export const Open_Reviews_Allocated_call_Reviews = {
       text: "Menu",
     },
 
-
     {
       type: "PAGES_365",
       Pageslist: [
@@ -99,7 +109,7 @@ export const Open_Reviews_Allocated_call_Reviews = {
               api: "API_ENDPOINTS[GET_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS_DATA]",
               data: {
                 sortType: "desc",
-                sortColumn: "updatedAt"
+                sortColumn: "updatedAt",
               },
               method: POST,
               className: "header",
@@ -137,14 +147,14 @@ export const Open_Reviews_Allocated_call_Reviews = {
                 dataKey: "Call Date Start",
                 label: "From Call Date Start",
                 name: "Call Date Start",
-                type: "DATE_PICKER"
+                type: "DATE_PICKER",
               },
               toDate: {
                 dataKey: "Call End Date",
                 label: "Call End Date",
                 name: "Call end Date",
-                type: "DATE_PICKER"
-              }
+                type: "DATE_PICKER",
+              },
             },
             {
               type: SELECT,
@@ -164,7 +174,7 @@ export const Open_Reviews_Allocated_call_Reviews = {
               defaultValue: {
                 label: "Call Desposition",
                 value: "callDisposition",
-              }
+              },
             },
             {
               type: SELECT,
@@ -210,7 +220,6 @@ export const Open_Reviews_Allocated_call_Reviews = {
                         " Allocated To": " Allocated To",
                         " Review Due Date": " Review Due Date",
                         " Call Review Status": " Call Review status",
-
                       },
                       mobileHeaders: {
                         "Call ID": "Call Id",
@@ -236,23 +245,24 @@ export const Open_Reviews_Allocated_call_Reviews = {
 
                       fieldConst: "newPropertyConst",
                       editApi: "ALTER_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS_DATA",
-                      deleteApi: "DELETE_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS_DATA",
-                      getDataApi: "GET_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS_DATA",
-                      approveApi: "APPROVE_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS_DATA",
-                      endpoint: 'API_ENDPOINTS[GET_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS]',
+                      deleteApi:
+                        "DELETE_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS_DATA",
+                      getDataApi:
+                        "GET_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS_DATA",
+                      approveApi:
+                        "APPROVE_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS_DATA",
+                      endpoint:
+                        "API_ENDPOINTS[GET_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS]",
                       dataPoint: "GET_OPEN_REVIEWS_ALLOCATED_CALL_REVIEWS",
                       onRefreshApiType: POST,
                       disableRowModal: true,
-                      showPreviewButton: true
+                      showPreviewButton: true,
                     },
                   ],
                 },
               ],
             },
-
-
-          ]
-
+          ],
         },
 
         //for  Closed Calls - Feedback Requested Call Reviews
@@ -273,7 +283,7 @@ export const Open_Reviews_Allocated_call_Reviews = {
               api: "API_ENDPOINTS[GET_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS]",
               data: {
                 sortType: "desc",
-                sortColumn: "updatedAt"
+                sortColumn: "updatedAt",
               },
               method: POST,
               className: "header",
@@ -312,28 +322,28 @@ export const Open_Reviews_Allocated_call_Reviews = {
                 dataKey: "Call Date Start",
                 label: "From Call Date Start",
                 name: "Call Date Start",
-                type: "DATE_PICKER"
+                type: "DATE_PICKER",
               },
               toDate: {
                 dataKey: "Call End Date",
                 label: "Call End Date",
                 name: "Call end Date",
-                type: "DATE_PICKER"
-              }
+                type: "DATE_PICKER",
+              },
             },
             {
               fromDate: {
                 dataKey: "Feedback Request Start",
                 label: "Feedback Request Start",
                 name: "CFeedback Request Start",
-                type: "DATE_PICKER"
+                type: "DATE_PICKER",
               },
               toDate: {
                 dataKey: "Feedback Request End Date",
                 label: "Feedback Request End Date",
                 name: "Feedback Request End Date",
-                type: "DATE_PICKER"
-              }
+                type: "DATE_PICKER",
+              },
             },
             {
               type: SELECT,
@@ -353,7 +363,7 @@ export const Open_Reviews_Allocated_call_Reviews = {
               defaultValue: {
                 label: "Call Desposition",
                 value: "callDisposition",
-              }
+              },
             },
             {
               type: SELECT,
@@ -400,8 +410,6 @@ export const Open_Reviews_Allocated_call_Reviews = {
                         "Delay Time": " Delay Time",
                         "Time to Complete Review": "Time to Complete Review",
                         "Call Review Status": "Call Review Status",
-
-
                       },
                       mobileHeaders: {
                         "Call ID": "Call Id",
@@ -424,34 +432,32 @@ export const Open_Reviews_Allocated_call_Reviews = {
                         "Delay Time": " Delay Time",
                         "Time to Complete Review": "Time to Complete Review",
                         "Call Review Status": "Call Review Status",
-
-
                       },
 
                       fieldConst: "newPropertyConst",
-                      editApi: "ALTER_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS_DATA",
-                      deleteApi: "DELETE_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS_DATA",
-                      getDataApi: "GET_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS",
-                      approveApi: "APPROVE_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS_DATA",
-                      endpoint: 'API_ENDPOINTS[GET_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS]',
-                      dataPoint: "GET_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS",
+                      editApi:
+                        "ALTER_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS_DATA",
+                      deleteApi:
+                        "DELETE_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS_DATA",
+                      getDataApi:
+                        "GET_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS",
+                      approveApi:
+                        "APPROVE_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS_DATA",
+                      endpoint:
+                        "API_ENDPOINTS[GET_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS]",
+                      dataPoint:
+                        "GET_CALL_FOR_REVIEW_FEEDBACK_REQUESTED_CALL_REVIEWS",
                       onRefreshApiType: POST,
                       disableRowModal: true,
-                      showPreviewButton: true
+                      showPreviewButton: true,
                     },
                   ],
                 },
-
               ],
             },
-
-
-
           ],
         },
       ],
-
     },
-
   ],
-}
+};
