@@ -32,7 +32,11 @@ const Dashboard = ({ data }: any) => {
   const [tabs, setTabs] = useState<any>([]);
   const [currTab, setCurrTab] = useState(0);
   const [role, setRole] = useState<any>("SDR");
-  const [userId, setUserId] = useState(window !== undefined ? (localStorage.getItem("user-id") || auth?._id) : "6456622b0c64d0311911136c");
+  const [userId, setUserId] = useState(
+    window !== undefined
+      ? localStorage.getItem("user-id") || auth?._id
+      : "6456622b0c64d0311911136c"
+  );
   const [daysSpan, setDaysSpan] = useState(7);
 
   const [dealAnalyticsData, setDealAnalyticsData] = useState({});
@@ -40,29 +44,34 @@ const Dashboard = ({ data }: any) => {
   const [noOfQuesAskedData, setNoOfQuesAsked] = useState({});
 
   const getDealAnalyticsData = () => {
-    axios.get(
-      `https://sales365.trainright.fit/api/dashboard/dealAnalytics?userId=${userId}`, {
-      headers: {
-        Authorization: `${accessToken}`
-      }
-    }
-    )
+    axios
+      .get(
+        `https://sales365.trainright.fit/api/dashboard/dealAnalytics?userId=${userId}`,
+        {
+          headers: {
+            Authorization: `${accessToken}`,
+          },
+        }
+      )
       .then((res: any) => {
-        setDealAnalyticsData({ average: res.data.average, result: res.data.result });
+        setDealAnalyticsData({
+          average: res.data.average,
+          result: res.data.result,
+        });
       })
-      .catch((err: any) => {
-
-      });
+      .catch((err: any) => {});
   };
 
   const getAvgCallScores = () => {
-    axios.get(
-      `https://sales365.trainright.fit/api/dashboard/averageCallScores?userId=${userId}`, {
-      headers: {
-        Authorization: `${accessToken}`
-      }
-    }
-    )
+    axios
+      .get(
+        `https://sales365.trainright.fit/api/dashboard/averageCallScores?userId=${userId}`,
+        {
+          headers: {
+            Authorization: `${accessToken}`,
+          },
+        }
+      )
       .then((res: any) => {
         let formattedData: any = {};
         res?.data?.result?.forEach((item: any) => {
@@ -70,19 +79,19 @@ const Dashboard = ({ data }: any) => {
         });
         setAvgCallScoresData(formattedData);
       })
-      .catch((err: any) => {
-
-      });
+      .catch((err: any) => {});
   };
 
   const getNoOfQuesAsked = () => {
-    axios.get(
-      `https://sales365.trainright.fit/api/dashboard/numberOfQuestionsAsked?userId=${userId}`, {
-      headers: {
-        Authorization: `${accessToken}`
-      }
-    }
-    )
+    axios
+      .get(
+        `https://sales365.trainright.fit/api/dashboard/numberOfQuestionsAsked?userId=${userId}`,
+        {
+          headers: {
+            Authorization: `${accessToken}`,
+          },
+        }
+      )
       .then((res: any) => {
         let formattedData: any = {};
         res?.data?.result?.forEach((item: any) => {
@@ -90,9 +99,7 @@ const Dashboard = ({ data }: any) => {
         });
         setNoOfQuesAsked(formattedData);
       })
-      .catch((err: any) => {
-
-      });
+      .catch((err: any) => {});
   };
 
   useEffect(() => {
@@ -158,7 +165,8 @@ const Dashboard = ({ data }: any) => {
     axios
       .post(
         "https://sales365.trainright.fit/api/pitch-analysis/find-one",
-        finalPayload, { headers: { Authorization: accessToken } }
+        finalPayload,
+        { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         setPitchData(res.data.result);
@@ -178,7 +186,8 @@ const Dashboard = ({ data }: any) => {
     axios
       .post(
         "https://sales365.trainright.fit/api/selling-analysis/find-one",
-        finalPayload, { headers: { Authorization: accessToken } }
+        finalPayload,
+        { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         setSellingData(res.data.result);
@@ -198,7 +207,8 @@ const Dashboard = ({ data }: any) => {
     axios
       .post(
         "https://sales365.trainright.fit/api/script-analysis/find-one",
-        finalPayload, { headers: { Authorization: accessToken } }
+        finalPayload,
+        { headers: { Authorization: accessToken } }
       )
       .then((res) => {
         setScriptBuilderData(res.data.result);
@@ -285,23 +295,34 @@ const Dashboard = ({ data }: any) => {
 
   const renderTab0 = () => {
     if (role === "QA Analyst") {
-      return <CallReviews tabData={tabs[currTab]} sellingData={sellingData} getSellingData={getSellingData} noOfQuesAsked={noOfQuesAskedData} />;
+      return (
+        <CallReviews
+          tabData={tabs[currTab]}
+          sellingData={sellingData}
+          getSellingData={getSellingData}
+          noOfQuesAsked={noOfQuesAskedData}
+        />
+      );
     } else if (role === "QA manager") {
-      return <DashboardQAM
-        tabData={tabs[currTab]}
-        sellingData={sellingData}
-        getSellingData={getSellingData}
-        noOfQuesAsked={noOfQuesAskedData}
-      />
+      return (
+        <DashboardQAM
+          tabData={tabs[currTab]}
+          sellingData={sellingData}
+          getSellingData={getSellingData}
+          noOfQuesAsked={noOfQuesAskedData}
+        />
+      );
     } else {
-      return <SalesPerformance
-        tabData={tabs[currTab]}
-        sellingData={sellingData}
-        getSellingData={getSellingData}
-        avgCallScores={avgCallScoresData}
-        noOfQuesAsked={noOfQuesAskedData}
-        dealAnalytics={dealAnalyticsData}
-      />;
+      return (
+        <SalesPerformance
+          tabData={tabs[currTab]}
+          sellingData={sellingData}
+          getSellingData={getSellingData}
+          avgCallScores={avgCallScoresData}
+          noOfQuesAsked={noOfQuesAskedData}
+          dealAnalytics={dealAnalyticsData}
+        />
+      );
     }
   };
 
@@ -330,7 +351,7 @@ const Dashboard = ({ data }: any) => {
                 { title: "Last 15 days", Icon: "" },
                 { title: "Last 30 days", Icon: "" },
               ],
-              click: handleDaysSpan
+              click: handleDaysSpan,
             },
             {
               text: "",
@@ -371,18 +392,16 @@ const Dashboard = ({ data }: any) => {
         list={tabs}
         width={true}
       />
-      {currTab === 0 && (
-        renderTab0()
-      )}
+      {currTab === 0 && renderTab0()}
       {currTab === 1 && (
-        <CommunicationInteraction tabData={tabs[currTab]} pitchData={pitchData} getPitchData={getPitchData} />
+        <CommunicationInteraction
+          tabData={tabs[currTab]}
+          pitchData={pitchData}
+          getPitchData={getPitchData}
+        />
       )}
-      {(currTab === 2) && (
-        renderTab2()
-      )}
-      {currTab === 3 && (
-        <Scoring tabData={tabs[currTab]} />
-      )}
+      {currTab === 2 && renderTab2()}
+      {currTab === 3 && <Scoring tabData={tabs[currTab]} />}
     </div>
   );
 };
