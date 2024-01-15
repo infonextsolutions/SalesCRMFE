@@ -897,9 +897,9 @@ const CallsPage = () => {
   const renderToggleSwitch = () => {
     return (
       <div className="flex text-black mt-6 px-8 pr-20 items-center gap-[20px]">
-        <div className="w-[340px] px-2 bg-gray-200 rounded-3xl">
+        <div className="w-[350px] px-2 bg-gray-200 rounded-3xl">
           <button
-            className={`w-[130px] ${
+            className={`w-[140px] ${
               subType == "allocated_call_reviews"
                 ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
                 : ""
