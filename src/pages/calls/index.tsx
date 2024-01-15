@@ -14,6 +14,8 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import DropDown2 from "@/utils/Button/DropDown2";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
+import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
+import ButtonDropDown from "@/utils/Button/Button";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -805,9 +807,18 @@ const CallsPage = () => {
       <div className="flex items-center gap-[20px]">
         {currTab === 0 ? (
           <>
-            <DropDown2 text="Assign To" id={0} dropdown={true}>
+            <DropDown2 text="Assign To" id={0} dark={true} dropdown={true}>
               {renderAssignToDD()}
             </DropDown2>
+            <ButtonDropDown
+              dropdown={true}
+              list={[]}
+              click={() => {}}
+              text="Auto - Allocate"
+              id={0}
+              light={false}
+              dark={false}
+            />
             {/* <button className='text-black'>Auto Allocate</button> */}
           </>
         ) : currTab === 1 ? (
@@ -836,7 +847,7 @@ const CallsPage = () => {
             </div>
             {renderControls()}
           </div>
-          <div className="flex items-center gap-[20px]">
+          <div className="flex justify-end gap-[20px]">
             <NavigationWithoutTitle
               buttons={[
                 {
@@ -897,12 +908,12 @@ const CallsPage = () => {
   const renderToggleSwitch = () => {
     return (
       <div className="flex text-black mt-6 px-8 pr-20 items-center gap-[20px]">
-        <div className="w-[340px] px-2 bg-gray-200 rounded-3xl">
+        <div className="w-[350px] px-2 bg-gray-200 rounded-3xl">
           <button
-            className={`w-[130px] ${
+            className={`w-[140px] ${
               subType == "allocated_call_reviews"
                 ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-                : ""
+                : "font-medium text-sm"
             } `}
             onClick={() => handleSubType("allocated_call_reviews")}
           >
@@ -912,7 +923,7 @@ const CallsPage = () => {
             className={`w-[190px] ${
               subType == "feedback_requested_call_reviews"
                 ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-                : ""
+                : "font-medium text-sm"
             } `}
             onClick={() => handleSubType("feedback_requested_call_reviews")}
           >
