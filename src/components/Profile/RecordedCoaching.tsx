@@ -350,11 +350,11 @@ const Coaching = ({ data, refresh }: any) => {
               <div className="w-[100%]">
                 <div className="w-[100%] flex justify-between">
                   <span className="text-[gray]">Call Disposition</span>
-                  <span>{data?.CallDisposition || "-"}</span>
+                  <span>{data?.activeCall?.call_disposition || "-"}</span>
                 </div>
                 <div className="w-[100%] flex justify-between">
                   <span className="text-[gray]">Call Type</span>
-                  <span>{data?.CallType || "-"}</span>
+                  <span>{data?.activeCall?.call_type || "-"}</span>
                 </div>
               </div>
               {tab === 1 && (

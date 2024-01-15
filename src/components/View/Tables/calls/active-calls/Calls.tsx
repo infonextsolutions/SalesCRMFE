@@ -331,9 +331,9 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
               <option value="10" selected>
                 10
               </option>
-              <option value="11">11</option>
+              {/* <option value="11">11</option>
               <option value="12">12</option>
-              <option value="13">13</option>
+              <option value="13">13</option> */}
             </select>
             <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
               {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${(pageNumber + 1) * limit > totalLeads

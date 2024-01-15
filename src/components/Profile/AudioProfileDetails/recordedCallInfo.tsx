@@ -6,8 +6,8 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const CallInfo = ({ check, info, data, data1 }: Props) => {
-  console.log('--------------------- data1 --------------------', data1, data)
+const CallInfo = ({ check, data, data1 }: any) => {
+  console.log('--------------------- data1 & data --------------------', data1, data)
   const activeTitle = 0;
   // const [edit, setEdit] = useState(false);
   // const [bool, setBool] = useState(true);
@@ -57,7 +57,7 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
 
       <div className="pl-[30px]">
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id - {data?._id?.slice(0,6)}
+          Call Id - {data?.activeCall?.callId}
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">LEAD ID</p>
@@ -98,18 +98,18 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Call Type</p>
-          <p className="text-sm font-semibold text-black">{data1?.call_type ?? "-"}</p>
+          <p className="text-sm font-semibold text-black">{data?.activeCall?.call_type ?? "-"}</p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Call Description</p>
           <p className="text-sm font-semibold text-black">
-            {data1?.call_description ?? "-"}
+            {data?.activeCall?.call_discription ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Call Disposition</p>
           <p className="text-sm font-semibold text-black">
-            {data1?.call_disposition ?? "-"}
+            {data?.activeCall?.call_disposition ?? "-"}
           </p>
         </div>
       </div>

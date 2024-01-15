@@ -496,6 +496,7 @@ const EmailPage = ({
           ...newEmailList,
         ]}
       />
+      <AddText title="Subject" place="" />
       {/* <DropItems
         title={"Send Email To"}
         top={20}
