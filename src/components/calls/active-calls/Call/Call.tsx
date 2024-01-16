@@ -353,6 +353,7 @@ const ExpandableRow = ({
   leadData,
   handleClose,
 }: any) => {
+  console.log('----------------------- LEAD DATA --------------------', leadData)
   return (
     <div
       className="custom-scroll-black w-[100%] h-[100%] py-[30px] px-[50px] overflow-y-auto"
@@ -374,39 +375,39 @@ const ExpandableRow = ({
           />
         </button>
       </div>
-      <div className="w-[100%] flex items-center">
+      {/* <div className="w-[100%] flex items-center">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Lead Source
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {leadData?.leadId?.leadSource}
         </p>
-      </div>
-      <div className="w-[100%] flex items-center mb-[20px]">
+      </div> */}
+      {/* <div className="w-[100%] flex items-center mb-[20px]">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Last Call Disposition
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {leadData?.leadId?.activityId?.lastCallDisposition ?? "-"}
         </p>
-      </div>
+      </div> */}
       <div className="w-[100%] mb-[20px]">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
-          Lead Description
+          Call Description
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
-          {leadData?.leadId?.lead_description}
+          {leadData?.call_discription}
         </p>
       </div>
-      <div className="w-[100%] mb-[20px]">
+      {/* <div className="w-[100%] mb-[20px]">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Company Description
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {companyDesc ?? "-"}
         </p>
-      </div>
-      {leadData?.leadId?.notes?.length !== 0 && (
+      </div> */}
+      {/* {leadData?.leadId?.notes?.length !== 0 && (
         <div className="w-[100%] mb-[20px]">
           <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">
             Note
@@ -420,8 +421,8 @@ const ExpandableRow = ({
             {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]?.content || "-"}
           </p>
         </div>
-      )}
-      <div className="flex flex-col mb-[20px]">
+      )} */}
+      {/* <div className="flex flex-col mb-[20px]">
         <div className="w-[100%] flex items-center mb-[20px]">
           <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
             Company Website
@@ -461,8 +462,8 @@ const ExpandableRow = ({
             )}
           </div>
         </div>
-      </div>
-      <div className="w-[100%] mb-[20px] flex items-center">
+      </div> */}
+      {/* <div className="w-[100%] mb-[20px] flex items-center">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Lead Owner
         </p>
@@ -476,8 +477,8 @@ const ExpandableRow = ({
             </p>
           );
         })}
-      </div>
-      <div className="w-[100%] mb-[20px]">
+      </div> */}
+      {/* <div className="w-[100%] mb-[20px]">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Other Contacts
         </p>
@@ -506,15 +507,15 @@ const ExpandableRow = ({
             return null;
           }
         })}
-      </div>
-      <div className="w-[100%] mb-[20px] flex items-center">
+      </div> */}
+      {/* <div className="w-[100%] mb-[20px] flex items-center">
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Lead Created On
         </p>
         <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {convertDatetime(leadData?.createdAt)}
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };

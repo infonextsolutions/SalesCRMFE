@@ -365,7 +365,7 @@ const ExpandableRow = ({
       }}
     >
       <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
-        <h2 className="text-[18px] font-medium">Call Metrics</h2>
+        <h2 className="text-[18px] font-medium">Call Details</h2>
         <button
           className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
           onClick={handleClose}
@@ -378,7 +378,7 @@ const ExpandableRow = ({
           />
         </button>
       </div>
-      <div className="w-[100%] flex flex-col justify-between">
+      {/* <div className="w-[100%] flex flex-col justify-between">
         {callMatrics.map((item: any, i: any) => {
           return (
             <div className="flex justify-between items-center mt-[3px]" key={i}>
@@ -394,11 +394,13 @@ const ExpandableRow = ({
             </div>
           );
         })}
-      </div>
+      </div> */}
 
-      <div className="w-[100%] pt-6 mb-[20px]">
-        <h2 className="text-[18px] font-medium"> Call Description</h2>
-        <p className="text-gray-600 font-medium mt-[5px] text-[14px] tracking-wide">
+      <div className="w-[100%] mb-[20px]">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          Call Description
+        </p>
+        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
           {CallDesc}
         </p>
       </div>
