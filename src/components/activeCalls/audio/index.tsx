@@ -636,7 +636,7 @@ const Audio = ({ data, data1, data2 }: any) => {
           <div className="bg-white rounded-xl pb-3">
             <div className="w-full mt-[30px] mb-[30px] py-6 px-[38px] bg-white rounded-xl">
               <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
-                call datas
+                call data
               </h1>
               <div className="w-full flex items-center">
                 <Image
