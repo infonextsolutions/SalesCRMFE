@@ -90,6 +90,18 @@ const RecordProfile = ({
     }
   });
 
+  function getTime(ts: any) {
+    const date = new Date(ts);
+    let hours = date.getHours();
+    let minutes: string | number = date.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+
   return (
     <div
       className={`w-[${width ? width : "100%"
@@ -102,9 +114,9 @@ const RecordProfile = ({
           </p>
         </div>
       )}
-      {data2?.companyId?.company_name && (
+            {data1?.companyId?.company_name && (
         <div className="w-[90%] flex justify-around">
-          <div className="flex gap-2">
+          <div className="flex gap-2 text-[black]">
             <Image
               src={getBasicIcon("buildingIcon")}
               style={{
@@ -114,9 +126,9 @@ const RecordProfile = ({
               width={25}
               height={25}
             />
-            {info[0].data?.companyName}
+            {data1?.companyId?.company_name}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 text-[black]">
             <Image
               src={getBasicIcon("Calendar")}
               style={{
@@ -128,7 +140,7 @@ const RecordProfile = ({
             />
             {new Date(data1.createdAt).toDateString()}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 text-[black]">
             <Image
               src={getBasicIcon("Time")}
               style={{
@@ -138,7 +150,7 @@ const RecordProfile = ({
               width={25}
               height={25}
             />
-            {formattedTime}
+            {getTime(data1?.createdAt)}
           </div>
         </div>
       )}
