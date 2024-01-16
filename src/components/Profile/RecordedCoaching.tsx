@@ -40,7 +40,7 @@ const ChartContainer = ({ children }: any) => {
 
 const ScriptBuilding = ({ script }: { script: ScriptBuilding }) => {
   return (
-    <div className="w-[100%] h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
+    <div className="w-[100%] p-6 h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Script Building Blocks
@@ -77,7 +77,7 @@ const ScriptBuilding = ({ script }: { script: ScriptBuilding }) => {
 
 const Selling = ({ selling }: { selling: SellingSkills }) => {
   return (
-    <div className="w-[100%] h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
+    <div className="w-[100%] p-6 h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Selling Skills
@@ -114,7 +114,7 @@ const Selling = ({ selling }: { selling: SellingSkills }) => {
 
 const Emotion = ({ data }: { data: Emotion }) => {
   return (
-    <div className="w-[100%] h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
+    <div className="w-[100%] h-[350px] p-6 bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Emotion Analysis
@@ -161,8 +161,12 @@ const Loader = () => {
 };
 
 const Coaching = ({ data, refresh }: any) => {
-  const [userId, setUserId] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
-  const [userRole, setUserRole] = useState(window !== undefined ? localStorage.getItem("user-role") : "");
+  const [userId, setUserId] = useState(
+    window !== undefined ? localStorage.getItem("user-id") : ""
+  );
+  const [userRole, setUserRole] = useState(
+    window !== undefined ? localStorage.getItem("user-role") : ""
+  );
   const [loading, setLoading] = React.useState(true);
   const [checked, setChecked] = React.useState(true);
   const [data1, setData] = useState({
@@ -207,48 +211,126 @@ const Coaching = ({ data, refresh }: any) => {
       key: "client_introduction",
       value: "",
       options: [
-        { key: "0", value: 0, label: "No introduction or insufficient information about the client." },
-        { key: "1", value: 10, label: "Basic information provided, but lacks personalization or relevant details." },
-        { key: "2", value: 20, label: "Adequate introduction with some personalization and relevant details about the client." },
-        { key: "3", value: 25, label: "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry." },
+        {
+          key: "0",
+          value: 0,
+          label:
+            "No introduction or insufficient information about the client.",
+        },
+        {
+          key: "1",
+          value: 10,
+          label:
+            "Basic information provided, but lacks personalization or relevant details.",
+        },
+        {
+          key: "2",
+          value: 20,
+          label:
+            "Adequate introduction with some personalization and relevant details about the client.",
+        },
+        {
+          key: "3",
+          value: 25,
+          label:
+            "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry.",
+        },
         { key: "4", value: "NA", label: "Not applicable." },
-      ]
+      ],
     },
     {
       label: "Service Offerings",
       key: "service_offerings",
       value: "",
       options: [
-        { key: "0", value: 0, label: "No mention or unclear explanation of the service offerings." },
-        { key: "1", value: 10, label: "Basic description of the service offerings, but lacks clarity or fails to highlight key benefits." },
-        { key: "2", value: 20, label: "Clear explanation of the service offerings with an emphasis on key benefits and value proposition." },
-        { key: "3", value: 25, label: "Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits." },
+        {
+          key: "0",
+          value: 0,
+          label: "No mention or unclear explanation of the service offerings.",
+        },
+        {
+          key: "1",
+          value: 10,
+          label:
+            "Basic description of the service offerings, but lacks clarity or fails to highlight key benefits.",
+        },
+        {
+          key: "2",
+          value: 20,
+          label:
+            "Clear explanation of the service offerings with an emphasis on key benefits and value proposition.",
+        },
+        {
+          key: "3",
+          value: 25,
+          label:
+            "Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits.",
+        },
         { key: "4", value: "NA", label: "Not applicable." },
-      ]
+      ],
     },
     {
       label: "Purpose of Call",
       key: "purpose_of_call",
       value: "",
       options: [
-        { key: "0", value: 0, label: "No introduction or insufficient information about the client." },
-        { key: "1", value: 10, label: "Basic information provided, but lacks personalization or relevant details." },
-        { key: "2", value: 20, label: "Adequate introduction with some personalization and relevant details about the client." },
-        { key: "3", value: 25, label: "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry." },
+        {
+          key: "0",
+          value: 0,
+          label:
+            "No introduction or insufficient information about the client.",
+        },
+        {
+          key: "1",
+          value: 10,
+          label:
+            "Basic information provided, but lacks personalization or relevant details.",
+        },
+        {
+          key: "2",
+          value: 20,
+          label:
+            "Adequate introduction with some personalization and relevant details about the client.",
+        },
+        {
+          key: "3",
+          value: 25,
+          label:
+            "Execellent introduction that demonstrates a strong understanding of the client&apos;s background, industry.",
+        },
         { key: "4", value: "NA", label: "Not applicable." },
-      ]
+      ],
     },
     {
       label: "Service Offerings",
       key: "service_offerings_2",
       value: "",
       options: [
-        { key: "0", value: 0, label: "No mention or unclear explanation of the service offerings." },
-        { key: "1", value: 10, label: "Basic description of the service offerings, but lacks clarity or fails to highlight key benefits." },
-        { key: "2", value: 20, label: "Clear explanation of the service offerings with an emphasis on key benefits and value proposition." },
-        { key: "3", value: 25, label: "Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits." },
+        {
+          key: "0",
+          value: 0,
+          label: "No mention or unclear explanation of the service offerings.",
+        },
+        {
+          key: "1",
+          value: 10,
+          label:
+            "Basic description of the service offerings, but lacks clarity or fails to highlight key benefits.",
+        },
+        {
+          key: "2",
+          value: 20,
+          label:
+            "Clear explanation of the service offerings with an emphasis on key benefits and value proposition.",
+        },
+        {
+          key: "3",
+          value: 25,
+          label:
+            "Detailed and persuasive presentation of the service offerings, highlighting specific features, benefits.",
+        },
         { key: "4", value: "NA", label: "Not applicable." },
-      ]
+      ],
     },
   ]);
 
@@ -267,7 +349,7 @@ const Coaching = ({ data, refresh }: any) => {
           return {
             ...scoreQuesItem,
             value: val,
-          }
+          };
         } else {
           return scoreQuesItem;
         }
@@ -280,22 +362,21 @@ const Coaching = ({ data, refresh }: any) => {
       if (checked) {
         axios
           .get(
-            `https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=${userId}`, {
-            headers: {
-              Authorization: accessToken
+            `https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=${userId}`,
+            {
+              headers: {
+                Authorization: accessToken,
+              },
             }
-          }
           )
           .then((e) => {
             setData(e.data);
             setLoading(false);
           })
-          .catch((e) => { });
+          .catch((e) => {});
         setChecked(false);
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }, [accessToken]);
 
   const handleCallback = (payload: any) => {
@@ -310,29 +391,35 @@ const Coaching = ({ data, refresh }: any) => {
         return acc + 0;
       }
     }, 0);
-    axios.post(
-      `https://sales365.trainright.fit/api/qa/updateCallScore`,
-      {
-        score: finalScore,
-        callId: data?._id,
-      }, {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    )
+    axios
+      .post(
+        `https://sales365.trainright.fit/api/qa/updateCallScore`,
+        {
+          score: finalScore,
+          callId: data?._id,
+        },
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
       .then((res: any) => {
-        appDispatch(setSuccess({
-          show: true,
-          success: "Call Scored Successfully."
-        }));
+        appDispatch(
+          setSuccess({
+            show: true,
+            success: "Call Scored Successfully.",
+          })
+        );
         refresh();
       })
       .catch((err: any) => {
-        appDispatch(setError({
-          show: true,
-          error: "Score Submission failed."
-        }))
+        appDispatch(
+          setError({
+            show: true,
+            error: "Score Submission failed.",
+          })
+        );
       });
   };
 
@@ -374,48 +461,59 @@ const Coaching = ({ data, refresh }: any) => {
             list={tabs}
           />
           {tab === 0 && (
-            <>
+            <div className="flex flex-col gap-6 py-4">
               <ScriptBuilding script={data1?.scriptBuilding} />
               <Selling selling={data1?.sellingSkills} />
               <Emotion data={data1?.emotion} />
-            </>
+            </div>
           )}
-          {(tab === 1 && userRole === "QA Analyst") && (
+          {tab === 1 && userRole === "QA Analyst" && (
             <div>
-              {
-                scoreQuestions?.map((quesItem: any, index: number) => (
-                  <div className="fieldset mt-[24px]" key={index}>
-                    <span className="text-[16px] font-bold mb-[16px]">
-                      {quesItem?.label}
-                    </span>
-                    <div>
-                      {
-                        quesItem?.options?.map((optionItem: any, opIdx: number) => (
-                          <div key={opIdx}>
-                            <label htmlFor={quesItem?.key + optionItem?.key}>
-                              <input
-                                type="radio"
-                                id={quesItem?.key + optionItem?.key}
-                                name={quesItem?.key}
-                                onChange={(e) => updateScoreItem(e.target.checked, index, optionItem?.value)}
-                              />
-                              <span>
-                                {optionItem?.value !== "NA" && (
-                                  <span className="font-medium">{optionItem?.value} marks:</span>
-                                )}
-                                {optionItem?.label}
-                              </span>
-                            </label>
-                          </div>
-                        ))
-                      }
-                    </div>
+              {scoreQuestions?.map((quesItem: any, index: number) => (
+                <div className="fieldset mt-[24px]" key={index}>
+                  <span className="text-[16px] font-bold mb-[16px]">
+                    {quesItem?.label}
+                  </span>
+                  <div>
+                    {quesItem?.options?.map(
+                      (optionItem: any, opIdx: number) => (
+                        <div key={opIdx}>
+                          <label htmlFor={quesItem?.key + optionItem?.key}>
+                            <input
+                              type="radio"
+                              id={quesItem?.key + optionItem?.key}
+                              name={quesItem?.key}
+                              onChange={(e) =>
+                                updateScoreItem(
+                                  e.target.checked,
+                                  index,
+                                  optionItem?.value
+                                )
+                              }
+                            />
+                            <span>
+                              {optionItem?.value !== "NA" && (
+                                <span className="font-medium">
+                                  {optionItem?.value} marks:
+                                </span>
+                              )}
+                              {optionItem?.label}
+                            </span>
+                          </label>
+                        </div>
+                      )
+                    )}
                   </div>
-                ))
-              }
+                </div>
+              ))}
 
               <div className="form_btns w-[100%] flex justify-end">
-                <button className="p-[10px] text-[16px]" onClick={handleScoreSubmit}>Submit</button>
+                <button
+                  className="p-[10px] text-[16px]"
+                  onClick={handleScoreSubmit}
+                >
+                  Submit
+                </button>
               </div>
             </div>
           )}

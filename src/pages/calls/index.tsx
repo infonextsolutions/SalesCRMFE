@@ -917,7 +917,7 @@ const CallsPage = () => {
             } `}
             onClick={() => handleSubType("allocated_call_reviews")}
           >
-            Allocated Call Reviewssss
+            Allocated Call Reviews
           </button>
           <button
             className={`w-[190px] ${
