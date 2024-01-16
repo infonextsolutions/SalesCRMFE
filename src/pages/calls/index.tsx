@@ -810,7 +810,7 @@ const CallsPage = () => {
             <DropDown2 text="Assign To" id={0} dark={true} dropdown={true}>
               {renderAssignToDD()}
             </DropDown2>
-            <ButtonDropDown
+            {/* <ButtonDropDown
               dropdown={true}
               list={[]}
               click={() => {}}
@@ -818,7 +818,7 @@ const CallsPage = () => {
               id={0}
               light={false}
               dark={false}
-            />
+            /> */}
             {/* <button className='text-black'>Auto Allocate</button> */}
           </>
         ) : currTab === 1 ? (

@@ -470,9 +470,9 @@ const AllocatedCalls = () => {
               })
             );
           })
-          .catch((err) => { });
+          .catch((err) => {});
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -509,7 +509,7 @@ const AllocatedCalls = () => {
   return (
     <div className="overflow-x-hidden">
       <Navbar
-        mainTitle={"Open Reviews"}
+        mainTitle={"Active Calls"}
         title={"Allocated Calls"}
         src="ActiveCalls"
       />
