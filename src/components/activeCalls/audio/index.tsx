@@ -437,7 +437,7 @@ const CallHolder = ({ click }: any) => {
 const CallPlayer = () => {
   const [playing, setPlaying] = React.useState(false);
   const ref: any = useRef();
-  React.useEffect(() => { });
+  React.useEffect(() => {});
 
   return (
     <div className="w-[100%] h-[100px] mb-[100px] mt-[20px] px-[40px]">
@@ -447,7 +447,7 @@ const CallPlayer = () => {
       <audio src="/poor-audio.ogg" ref={ref}></audio>
       <div className="w-[100%]  h-[4px] mt-[10px] flex bg-[#fff] relative rounded-[3px]">
         <div className="h-[100%] w-[40%] bg-bg-red rounded-l-[3px] relative">
-          <CallHolder click={() => { }} />
+          <CallHolder click={() => {}} />
         </div>
         <div className="absolute text-[#8A9099] top-[10px] right-[3px] text-[11px] tracking-wide font-medium ">
           15:53/30:00
@@ -553,15 +553,20 @@ const Audio = ({ data, data1, data2 }: any) => {
     const url = "https://sales365.trainright.fit/api/calling/call-status";
     if (data.leadId?._id) {
       axios
-        .post(url, {
-          sid: data.Sid,
-          leadId: data.leadId._id,
-        }, { headers: { Authorization: accessToken } })
+        .post(
+          url,
+          {
+            sid: data.Sid,
+            leadId: data.leadId._id,
+          },
+          { headers: { Authorization: accessToken } }
+        )
         .then((e) => {
           setCallData(e.data.result);
           // console.log('--------------- setCallData --------------', e.data.result);
           setCheck(false);
-        }).catch((e: any) => { });
+        })
+        .catch((e: any) => {});
     }
   };
 
@@ -628,34 +633,36 @@ const Audio = ({ data, data1, data2 }: any) => {
       {data?.Status === "in-progress" && (
         <>
           <AudioPlayer src={data?.RecordingUrl} />
-          <div className="w-full mt-[30px] mb-[30px] px-[38px] bg-white rounded-xl">
-            <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
-              call data
-            </h1>
-            <div className="w-full flex items-center">
-              <Image
-                src="/Images/dots/Dot.svg"
-                className="h-[18px] svg-ellipse-5 mr-[25px]"
-                alt=""
-                width={10}
-                height={10}
-              />
-              <p className="text-[#304FFD] text-[14px]">Participant 1: A</p>
+          <div className="bg-white rounded-xl pb-3">
+            <div className="w-full mt-[30px] mb-[30px] py-6 px-[38px] bg-white rounded-xl">
+              <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
+                call datas
+              </h1>
+              <div className="w-full flex items-center">
+                <Image
+                  src="/Images/dots/Dot.svg"
+                  className="h-[18px] svg-ellipse-5 mr-[25px]"
+                  alt=""
+                  width={10}
+                  height={10}
+                />
+                <p className="text-[#304FFD] text-[14px]">Participant 1: A</p>
+              </div>
+              <div className="w-full flex items-center mt-[6px]">
+                <Image
+                  src="/Images/dots/Dot.svg"
+                  className="h-[18px] svg-ellipse-6 mr-[25px]"
+                  alt=""
+                  width={10}
+                  height={10}
+                />
+                <p className="text-[#FF965D] text-[14px]">Participant 2: B</p>
+              </div>
             </div>
-            <div className="w-full flex items-center mt-[6px]">
-              <Image
-                src="/Images/dots/Dot.svg"
-                className="h-[18px] svg-ellipse-6 mr-[25px]"
-                alt=""
-                width={10}
-                height={10}
-              />
-              <p className="text-[#FF965D] text-[14px]">Participant 2: B</p>
-            </div>
+            <Tracker title={"A"} list={list} color={"#304FFD"} />
+            <Tracker title={"B"} list={list} color={"#FF965D"} />
+            {/* <Tracker title={"Topics"} list={list} color={"#0090FF"} /> */}
           </div>
-          <Tracker title={"A"} list={list} color={"#304FFD"} />
-          <Tracker title={"B"} list={list} color={"#FF965D"} />
-          {/* <Tracker title={"Topics"} list={list} color={"#0090FF"} /> */}
           <Transcript
             src={data?.RecordingUrl}
             data={data}
