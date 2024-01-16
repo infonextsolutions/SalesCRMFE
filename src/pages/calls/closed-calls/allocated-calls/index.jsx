@@ -509,9 +509,9 @@ const AllocatedCallsCC = ({ data }) => {
               })
             );
           })
-          .catch((err) => { });
+          .catch((err) => {});
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -548,9 +548,9 @@ const AllocatedCallsCC = ({ data }) => {
   return (
     <div className="overflow-x-hidden">
       <Navbar
-        mainTitle={"Open Reviews"}
-        title={"Allocated Calls"}
-        src="ActiveCalls"
+        mainTitle={"Closed Calls"}
+        title={"Alocated Calls"}
+        src="ClosedCalls"
       />
       <div className="bg-[#ffe3e170] mx-6 pt-8 rounded-xl w-[100%] min-h-[90vh] pl-[40px] pr-[40px] mt-[20px]">
         <div className="flex items-center justify-between">
