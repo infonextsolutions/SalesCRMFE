@@ -479,6 +479,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             lead={Item}
             companyId={Item.companyId._id}
             customerId={Item.customerId._id}
+            companyName={Item.companyId.company_name}
           />
         </Backdrop>
       )}
