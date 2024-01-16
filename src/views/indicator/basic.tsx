@@ -107,6 +107,7 @@ const Indicator = () => {
   const [indicatorTypes, setIndicatorTypes] = useState<any>([]);
   const [itClone, setItClone] = useState<any>([]);
 
+  const [disableITSave, setDisableITSave] = useState<boolean>(false);
   const [currIndicatorType, setCurrIndicatorType] = useState(0);
   const [currIndicatorCategory, setCurrIndicatorCategory] = useState(0);
   const [currIndicatorValue, setCurrIndicatorValue] = useState<any>(0);
@@ -439,6 +440,18 @@ const Indicator = () => {
     );
   };
 
+  const handleScoreChange = () => {
+    let score = 0;
+    indicatorTypes?.forEach((typeItem: any, index: number) => {
+      score += typeItem?.scoreWeightage;
+    });
+    if (score !== 100) {
+      setDisableITSave(true);
+    } else {
+      setDisableITSave(false);
+    }
+  };
+
   const setNewIndicatorTypeData = (idx: number, key: string, value: string) => {
     setIndicatorTypes((currIndicatorTypes: any) => {
       return currIndicatorTypes?.map((currIndicator: any, index: number) => {
@@ -461,6 +474,10 @@ const Indicator = () => {
       });
     });
   };
+
+  useEffect(() => {
+    handleScoreChange();
+  }, [indicatorTypes]);
 
   const saveEditedValue = () => {
     updateIndicator(
@@ -988,6 +1005,7 @@ const Indicator = () => {
           <div className="w-[100%] pb-4 mt-10 pr-5 flex justify-end">
             <SimpleButton
               theme={1}
+              disabled={disableITSave}
               click={handleNewIndicatorType}
               text={"Save"}
               left={20}

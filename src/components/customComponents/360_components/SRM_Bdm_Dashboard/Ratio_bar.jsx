@@ -2,11 +2,18 @@ import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { Card } from "@mui/material";
 
-const uData = [40, 30, 98, 27, 18, 23, 34];
-const pData = [24, 13, 20, 39, 48, 38, 43];
+const uData = [0, 0, 0, 0, 0, 0, 0];
+const pData = [0, 0, 0, 0, 0, 0, 0];
 const xLabels = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
 
-const TalkRatio = () => {
+const TalkRatio = ({ talkRatioData }) => {
+  React.useEffect(() => {
+    talkRatioData?.forEach((item, index) => {
+      xLabels[index] = item.day;
+      uData[index] = item.speakerA;
+      pData[index] = item.speakerB;
+    });
+  }, [talkRatioData]);
   return (
     <Card className=" h-[370px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">

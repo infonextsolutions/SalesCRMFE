@@ -103,7 +103,7 @@ const Deals = ({ data, type }: any) => {
   const [bool, setBool] = React.useState(true);
   const [call, setCall] = React.useState(false);
   // const [detailShow, setDetailShow] = useState(false);
-
+  console.log('------------------ deals data -----------------', data);
   const showNotes = () => {
     setNotes(true);
   };
@@ -246,36 +246,34 @@ const Deals = ({ data, type }: any) => {
                 <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
                   <div className="w-[140px]">
                     <p className="text-[#3F434A]">
-                      {deal?.leadData?.leadId || "00000"}
+                      {deal?.leadId || "-"}
                     </p>
                   </div>
                   <div className="w-[180px]">
                     <p>
-                      {deal?.leadData?.Product
-                        ? deal?.leadData?.Product
-                        : "product A"}{" "}
+                      {deal?.product_category}
                     </p>
                   </div>
                   <div className="w-[160px]">
                     <p>
-                      {deal?.leadData?.leadStage
-                        ? deal?.leadData?.leadStage
-                        : "Won"}
+                      {deal?.leadStage
+                        ? deal?.leadStage
+                        : "-"}
                     </p>
                   </div>
                   <div className="w-[200px]">
                     <p>
                       {deal?.lastActivity?.subject
                         ? deal?.leadData?.subject
-                        : "Email Sent"}
+                        : "-"}
                     </p>
                     <p>
                       {deal?.lastActivity?.createdAt
                         ? deal?.leadData?.createdAt
-                        : "23 Jan 2023"}
+                        : "-"}
                     </p>
                   </div>
-                  <div className="w-[200px] flex items-start gap-[5px] w-[220px] text-[#3F434A]">
+                  <div className="w-[200px] flex items-start gap-[5px] text-[#3F434A]">
                     <QuickActions
                       width={200}
                       notes={() => {
@@ -388,33 +386,33 @@ const Deals = ({ data, type }: any) => {
                 <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
                   <div className="w-[140px]">
                     <p className="text-[#3F434A]">
-                      {deal?.leadData?.leadId || "00000"}
+                      {deal?.leadId || "-"}
                     </p>
                   </div>
                   <div className="w-[180px]">
                     <p>
-                      {deal?.leadData?.Product
-                        ? deal?.leadData?.Product
-                        : "product A"}{" "}
+                      {deal?.product_category
+                        ? deal?.product_category
+                        : "-"}{" "}
                     </p>
                   </div>
                   <div className="w-[160px]">
                     <p>
-                      {deal?.leadData?.leadStage
-                        ? deal?.leadData?.leadStage
-                        : "close"}
+                      {deal?.leadStage
+                        ? deal?.leadStage
+                        : "-"}
                     </p>
                   </div>
                   <div className="w-[200px]">
                     <p>
                       {deal?.lastActivity?.subject
                         ? deal?.leadData?.subject
-                        : "Email Sent"}
+                        : "-"}
                     </p>
                     <p>
                       {deal?.lastActivity?.createdAt
                         ? deal?.leadData?.createdAt
-                        : "23 Jan 2023"}
+                        : "-"}
                     </p>
                   </div>
                   <div className="flex items-start gap-[5px] w-[200px] text-[#3F434A]">
@@ -526,16 +524,15 @@ const Deals = ({ data, type }: any) => {
                 <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center  rounded-xl">
                   <div className="w-[180px]">
                     <p className="ml-2">
-                      {deal?.companyData?.company_product_category ||
-                        "Product D"}
+                      {deal?.companyData?.[0]?.company_product_category || "-"}
                     </p>
                   </div>
                   <div className="w-[140px]">
-                    <p>{deal?.leadData?.leadId || "00000"}</p>
+                    <p>{deal?.leadData?.leadId || "-"}</p>
                   </div>
                   <div className="w-[200px]">
-                    <p>Email Sent</p>
-                    <p>23 Jan 2023</p>
+                    <p>{deal?.lastActivity?.call_id !== "" ? "Call" : "-"}</p>
+                    <p>{deal?.lastActivity?.call_date || "-"}</p>
                   </div>
                   {/* <div className="w-[45%] flex justify-end">
               <Image
