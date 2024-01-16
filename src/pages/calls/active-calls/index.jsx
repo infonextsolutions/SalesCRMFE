@@ -93,16 +93,16 @@ const Calls = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      "https://sales365.trainright.fit/api/active-call/find-all", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setData(res?.data);
-    }).catch((err) => {
-    });
+    axios
+      .get("https://sales365.trainright.fit/api/active-call/find-all", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setData(res?.data);
+      })
+      .catch((err) => {});
   }, [accessToken]);
 
   const exportXLSX = () => {
@@ -183,7 +183,7 @@ const Calls = () => {
                   : "text-black font-medium text-md hover:bg-[#fe5043ad] hover:rounded-lg  hover:py-1.5 hover:px-16 hover:mt-2 hover:mb-2"
               }
             >
-              Schedule Metting
+              Schedule Meeting
             </button>
           </div>
         </div>

@@ -116,7 +116,7 @@ const SelectFilter = ({
 
 const Filters = ({ filters, onUpdate }: { filters?: any; onUpdate?: any }) => {
   return (
-    <div className="w[100%] flex items-end gap-[12px] h-[auto] flex-wrap shrink-1 mt-[20px]">
+    <div className="w[100%] flex items-end gap-[12px] h-[auto] flex-wrap shrink-1">
       {Object.keys(filters)?.map((filterKey: any, index: number) => {
         switch (filters[filterKey]?.type) {
           case "DATE":

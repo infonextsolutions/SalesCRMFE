@@ -530,13 +530,13 @@ const FeedbackCallReviewsCC = () => {
   };
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Navbar
         mainTitle={"Closed Calls"}
         title={"Feedback Call Reviews"}
         src="ClosedCalls"
       />
-      <div className="w-[100%] min-h-[90vh] pl-[40px] pr-[40px] mt-[20px]">
+      <div className="bg-[#ffe3e170] mx-6 pt-8 rounded-xl w-[96%] min-h-[90vh] pl-[40px] pr-[40px] mt-[30px]">
         <div className="flex items-center justify-between">
           <div className="w-[60%] bg-white h-[40px] relative border-[#ccc] border-[1px] rounded-[12px] p-2  flex items-center">
             <input
@@ -646,7 +646,7 @@ const FeedbackCallReviewsCC = () => {
           </div>
         </Backdrop>
       )}
-    </>
+    </div>
   );
 };
 

@@ -71,7 +71,7 @@ const Transcript = ({
         start: uttrItem.start,
         end: uttrItem.end,
       };
-    })
+    });
     setArr(py);
     setSuperArr(py);
   };
@@ -81,7 +81,7 @@ const Transcript = ({
   }, [src, data, text, utterances]);
 
   useEffect(() => {
-    Arrr
+    Arrr;
     // console.log('=========== Arrr ============', Arrr)
   }, [Arrr]);
 
@@ -115,15 +115,14 @@ const Transcript = ({
   }
 
   return (
-    <div className="pt-[1px] ">
+    <div className="pt-[1px] bg-white rounded-xl mt-8 ">
       <Search
         change={(e: any) => {
           setInput(e.target.value);
           const str = e.target.value;
           const newArr = superArr
-            .filter(
-              (item: any) =>
-                (item.message.toLowerCase().includes(str.toLowerCase()))
+            .filter((item: any) =>
+              item.message.toLowerCase().includes(str.toLowerCase())
             )
             .map((item: any) => {
               let newTitle = item.title.replace(
@@ -161,12 +160,12 @@ const Transcript = ({
                     style={{
                       color: item.title === "A" ? "#fe5143" : "#909193",
                     }}
-                  // dangerouslySetInnerHTML={{
-                  //   // __html: `00:05 ${item.title}:`,
-                  //   __html: `${convertMilliseconds(item.start)} ${
-                  //     item.title
-                  //   }:`,
-                  // }}
+                    // dangerouslySetInnerHTML={{
+                    //   // __html: `00:05 ${item.title}:`,
+                    //   __html: `${convertMilliseconds(item.start)} ${
+                    //     item.title
+                    //   }:`,
+                    // }}
                   >
                     {convertMilliseconds(item.start)}
                   </p>
@@ -175,12 +174,12 @@ const Transcript = ({
                     style={{
                       color: item.title === "A" ? "#fe5143" : "#909193",
                     }}
-                  // dangerouslySetInnerHTML={{
-                  //   // __html: `00:05 ${item.title}:`,
-                  //   __html: `${convertMilliseconds(item.start)} ${
-                  //     item.title
-                  //   }:`,
-                  // }} 
+                    // dangerouslySetInnerHTML={{
+                    //   // __html: `00:05 ${item.title}:`,
+                    //   __html: `${convertMilliseconds(item.start)} ${
+                    //     item.title
+                    //   }:`,
+                    // }}
                   >
                     {item.title} :
                   </p>

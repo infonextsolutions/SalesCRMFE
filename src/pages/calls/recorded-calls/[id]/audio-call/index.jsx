@@ -39,25 +39,33 @@ const CallProfile = () => {
   }, []);
 
   const refreshData = () => {
-    axios.get(`https://sales365.trainright.fit/api/calling/find-by-id?id=${id}`, { headers: { Authorization: accessToken } })
+    axios
+      .get(`https://sales365.trainright.fit/api/calling/find-by-id?id=${id}`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setDataNew(res.data);
-        axios.get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`, { headers: { Authorization: accessToken } })
+        axios
+          .get(
+            `https://sales365.trainright.fit/api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`,
+            { headers: { Authorization: accessToken } }
+          )
           .then((res2) => {
             setDataNew1(res2.data);
-          }).catch((e) => { });
-        axios.post(
-          `https://sales365.trainright.fit/api/calling/call-status`,
-          { sid: res.data.result.Sid, leadId: res.data.result.leadId._id },
-          { headers: { Authorization: accessToken } }
-        )
+          })
+          .catch((e) => {});
+        axios
+          .post(
+            `https://sales365.trainright.fit/api/calling/call-status`,
+            { sid: res.data.result.Sid, leadId: res.data.result.leadId._id },
+            { headers: { Authorization: accessToken } }
+          )
           .then((res3) => {
             setDataNew2(res3.data);
-          }).catch((e) => { });
+          })
+          .catch((e) => {});
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -65,21 +73,25 @@ const CallProfile = () => {
   }, [accessToken, id]);
 
   const getAllQAM = () => {
-    axios.get(`https://sales365.trainright.fit/api/master-users/findAllQA_manager`, { headers: { Authorization: accessToken } })
+    axios
+      .get(
+        `https://sales365.trainright.fit/api/master-users/findAllQA_manager`,
+        { headers: { Authorization: accessToken } }
+      )
       .then((res) => {
-        setQams(res?.data?.result?.map((qamItem, index) => {
-          return {
-            title: qamItem.name,
-            _id: qamItem?._id,
-            name: qamItem.name,
-            email: qamItem?.email,
-            roles: qamItem?.roles,
-          };
-        }));
+        setQams(
+          res?.data?.result?.map((qamItem, index) => {
+            return {
+              title: qamItem.name,
+              _id: qamItem?._id,
+              name: qamItem.name,
+              email: qamItem?.email,
+              roles: qamItem?.roles,
+            };
+          })
+        );
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -123,72 +135,81 @@ const CallProfile = () => {
   };
 
   const handleRequestFeedback = (prev, next) => {
-    axios.post(
-      `https://sales365.trainright.fit/api/qa/requestFeedBack`,
-      {
-        qaId: userId,
-        qamId: qams?.[next]?._id,
-        callId: dataNew?.result?._id,
-      },
-      { headers: { Authorization: accessToken } }
-    )
+    axios
+      .post(
+        `https://sales365.trainright.fit/api/qa/requestFeedBack`,
+        {
+          qaId: userId,
+          qamId: qams?.[next]?._id,
+          callId: dataNew?.result?._id,
+        },
+        { headers: { Authorization: accessToken } }
+      )
       .then((res) => {
-        appDispatch(setSuccess({
-          show: true,
-          success: "Feedback requested successfully.",
-        }));
+        appDispatch(
+          setSuccess({
+            show: true,
+            success: "Feedback requested successfully.",
+          })
+        );
         refreshData();
       })
       .catch((err) => {
-        appDispatch(setError({
-          show: true,
-          error: "Feedback request failed."
-        }))
+        appDispatch(
+          setError({
+            show: true,
+            error: "Feedback request failed.",
+          })
+        );
       });
   };
 
   return (
     <>
       <NavbarWithButton
-        buttons={dataNew?.result?.qaFeedbackReq === "requested" ? [
-          {
-            text: "Share",
-            dropdown: true,
-            id: 1,
-            icon: "Share",
-            light: false,
-            dark: true,
-            click: addCall,
-            list: [
-              { title: "Full Call", Icon: "Phone" },
-              { title: "Call Snippet", Icon: "Mail" },
-            ],
-          },
-        ] : [
-          {
-            text: "Request Feedback",
-            dropdown: true,
-            id: 2,
-            light: false,
-            dark: false,
-            // icon: "",
-            list: qams,
-            click: handleRequestFeedback,
-          },
-          {
-            text: "Share",
-            dropdown: true,
-            id: 1,
-            icon: "Share",
-            light: false,
-            dark: true,
-            click: addCall,
-            list: [
-              { title: "Full Call", Icon: "Phone" },
-              { title: "Call Snippet", Icon: "Mail" },
-            ],
-          },
-        ]}
+        buttons={
+          dataNew?.result?.qaFeedbackReq === "requested"
+            ? [
+                {
+                  text: "Share",
+                  dropdown: true,
+                  id: 1,
+                  icon: "Share",
+                  light: false,
+                  dark: true,
+                  click: addCall,
+                  list: [
+                    { title: "Full Call", Icon: "Phone" },
+                    { title: "Call Snippet", Icon: "Mail" },
+                  ],
+                },
+              ]
+            : [
+                {
+                  text: "Request Feedback",
+                  dropdown: true,
+                  id: 2,
+                  light: false,
+                  dark: false,
+                  // icon: "",
+                  list: qams,
+                  click: handleRequestFeedback,
+                },
+                {
+                  text: "Share",
+                  dropdown: true,
+                  id: 1,
+                  icon: "Share",
+                  light: false,
+                  dark: true,
+                  click: addCall,
+                  list: [
+                    { title: "Full Call", Icon: "Phone" },
+                    { title: "Call Snippet", Icon: "Mail" },
+                  ],
+                },
+              ]
+        }
         mainTitle="Calls"
         title="Recorded Calls"
         src="Phone"
@@ -215,7 +236,12 @@ const CallProfile = () => {
             refresh={refreshData}
           />
           <div className="w-[58%] min-h-[50vh] ">
-            <Audio data={dataNew.result} data1={dataNew1.result} data2={dataNew2.result} refresh={refreshData} />
+            <Audio
+              data={dataNew.result}
+              data1={dataNew1.result}
+              data2={dataNew2.result}
+              refresh={refreshData}
+            />
           </div>
         </div>
         {/* write your code here for profile page manya! */}
