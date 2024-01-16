@@ -42,6 +42,7 @@ const Dashboard = ({ data }: any) => {
   const [dealAnalyticsData, setDealAnalyticsData] = useState({});
   const [avgCallScoresData, setAvgCallScoresData] = useState({});
   const [noOfQuesAskedData, setNoOfQuesAsked] = useState({});
+  const [talkRatioData, setTalkRatioData] = useState({});
 
   const getDealAnalyticsData = () => {
     axios
@@ -102,6 +103,26 @@ const Dashboard = ({ data }: any) => {
       .catch((err: any) => {});
   };
 
+  const getTalkRatioData = () => {
+    axios.get(
+      `https://sales365.trainright.fit/api/dashboard/getTalkRatioData?userId=${userId}`, {
+      headers: {
+        Authorization: `${accessToken}`
+      }
+    }
+    )
+      .then((res: any) => {
+        // let formattedData: any = {};
+        // res?.data?.result?.forEach((item: any) => {
+        //   formattedData[item?.label?.replaceAll(" ", "_")] = item?.value;
+        // });
+        setTalkRatioData(res.data.result);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
   useEffect(() => {
     if (window !== undefined) {
       setAccessToken(localStorage.getItem("access-token"));
@@ -113,6 +134,7 @@ const Dashboard = ({ data }: any) => {
       getDealAnalyticsData();
       getAvgCallScores();
       getNoOfQuesAsked();
+      getTalkRatioData();
     }
   }, [accessToken]);
 
@@ -398,6 +420,7 @@ const Dashboard = ({ data }: any) => {
           tabData={tabs[currTab]}
           pitchData={pitchData}
           getPitchData={getPitchData}
+          talkRatioData={talkRatioData}
         />
       )}
       {currTab === 2 && renderTab2()}

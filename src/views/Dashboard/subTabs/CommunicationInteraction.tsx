@@ -27,10 +27,12 @@ const CommunicationInteraction = ({
   tabData,
   pitchData,
   getPitchData,
+  talkRatioData,
 }: {
   tabData?: any;
   pitchData?: any;
   getPitchData?: any;
+  talkRatioData?: any;
 }) => {
   // QA Analyst; QA manager; Manager, SRD/BDM
   if (tabData?.key === "Manager") {
@@ -52,7 +54,7 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <TalkRatio />
+            <TalkRatio talkRatioData={talkRatioData} />
             <BarChartVertical
               title="Number of Topics"
               template={NoOfTopics}
@@ -231,7 +233,7 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <TalkRatio />
+            <TalkRatio talkRatioData={talkRatioData} />
             <BarChartVertical
               title="Number of Topics"
               template={NoOfTopics}
@@ -260,7 +262,7 @@ const CommunicationInteraction = ({
               template={LongestMonologue}
               data={avgCallScore}
             />
-            <TalkRatio />
+            <TalkRatio talkRatioData={talkRatioData} />
             <BarChartVertical
               title="Number of Topics"
               template={NoOfTopics}
