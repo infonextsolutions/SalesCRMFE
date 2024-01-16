@@ -18,7 +18,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
     }
   }, []);
 
-  //   const getallItems = async (current: any) => {
+  //   const getallItems = atotalRecordssync (current: any) => {
   //     const res = await axios.get(
   //       `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
   //     );
