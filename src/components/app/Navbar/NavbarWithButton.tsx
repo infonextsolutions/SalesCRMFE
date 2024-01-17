@@ -149,9 +149,7 @@ const NavbarWithButton = ({
             src={getBasicIcon("Bell")}
             className="ml-[20px] cursor-pointer"
             alt=""
-            onClick={() => {
-              dispatch(triggerMenu());
-            }}
+            onClick={() => {}}
             // fill={true}
             style={{
               objectFit: "contain",
@@ -171,12 +169,12 @@ const NavbarWithButton = ({
             }}
             width={30}
             height={40}
-          // onClick={() => {
-          //   dispatch(logout());
-          //   dispatch(setLoggedInStatus(false));
-          //   router.replace("/login");
-          //   localStorage.clear();
-          // }}
+            // onClick={() => {
+            //   dispatch(logout());
+            //   dispatch(setLoggedInStatus(false));
+            //   router.replace("/login");
+            //   localStorage.clear();
+            // }}
           />
         </div>
         <div>

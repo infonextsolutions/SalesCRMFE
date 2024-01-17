@@ -10,7 +10,7 @@ const TreeMap = ({ data1, getPitchData }: any) => {
     getPitchData([startDate, endDate]);
   }, [startDate, endDate]);
   return (
-    <div className="w-[100%] overflow-hidden border border-gray-200 bg-[#fff] rounded-xl shadow shrink-0 px-[2px] pb-[19px] mb-[50px]">
+    <div className="w-[100%] mt-7 overflow-hidden border border-gray-200 bg-[#fff] rounded-xl shadow shrink-0 px-[2px] pb-[19px] mb-[50px]">
       <div className="w-[100%] pl-6 pt-8 flex items-center justify-between overflow-hidden">
         <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">
           Sales Pitch Analysis
