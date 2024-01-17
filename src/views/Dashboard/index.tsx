@@ -16,6 +16,7 @@ import CallReviews from "./subTabs/CallReviews";
 import DashboardQAM from "./subTabs/DashboardQAM";
 import Scoring from "./subTabs/Scoring";
 import { useSelector } from "react-redux";
+import CallReviewsQAE from "./subTabs/CallReviewsQAE";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -104,13 +105,15 @@ const Dashboard = ({ data }: any) => {
   };
 
   const getTalkRatioData = () => {
-    axios.get(
-      `https://sales365.trainright.fit/api/dashboard/getTalkRatioData?userId=${userId}`, {
-      headers: {
-        Authorization: `${accessToken}`
-      }
-    }
-    )
+    axios
+      .get(
+        `https://sales365.trainright.fit/api/dashboard/getTalkRatioData?userId=${userId}`,
+        {
+          headers: {
+            Authorization: `${accessToken}`,
+          },
+        }
+      )
       .then((res: any) => {
         // let formattedData: any = {};
         // res?.data?.result?.forEach((item: any) => {
@@ -118,9 +121,7 @@ const Dashboard = ({ data }: any) => {
         // });
         setTalkRatioData(res.data.result);
       })
-      .catch((err: any) => {
-
-      });
+      .catch((err: any) => {});
   };
 
   useEffect(() => {
@@ -424,7 +425,7 @@ const Dashboard = ({ data }: any) => {
         />
       )}
       {currTab === 2 && renderTab2()}
-      {currTab === 3 && <Scoring tabData={tabs[currTab]} />}
+      {currTab === 3 && <CallReviewsQAE tabData={tabs[currTab]} />}
     </div>
   );
 };

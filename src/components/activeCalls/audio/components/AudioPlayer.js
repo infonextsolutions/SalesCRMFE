@@ -65,7 +65,9 @@ const AudioPlayer = ({ src }) => {
                   step={0.5}
                   value={speed}
                   style={{
-                    background: `linear-gradient(to right, #909193  ${0 * 100}%, #ccc ${0 * 100}%)`,
+                    background: `linear-gradient(to right, #909193  ${
+                      0 * 100
+                    }%, #ccc ${0 * 100}%)`,
                   }}
                   onChange={(e) => setSpeed(e.target.value)}
                 />

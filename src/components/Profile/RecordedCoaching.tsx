@@ -508,8 +508,18 @@ const Coaching = ({ data, refresh }: any) => {
               ))}
 
               <div className="form_btns w-[100%] flex justify-end">
+                {/* <SimpleButton
+                  theme={1}
+                  text={loading ? "Saving..." : "Save"}
+                  left={0}
+                  right={0}
+                  disabled={loading}
+                  click={() => {
+                    submit();
+                  }}
+                /> */}
                 <button
-                  className="p-[10px] text-[16px]"
+                  className="p-[10px] px-7 rounded-lg text-white text-[16px] bg-bg-red hover:bg-[#ff7d6d]"
                   onClick={handleScoreSubmit}
                 >
                   Submit

@@ -19,6 +19,7 @@ import {
 import NoiseAndVolumeChart from "@/components/analysis/Call/Charts/NoiseAndVolumeChart";
 import CallSentiment from "@/components/customComponents/360_components/CallSentiment";
 import TopScoringCall from "@/components/customComponents/360_components/table_topScoring";
+import NavigationWithSwitchIcon from "@/components/app/NavigationWithSwitchIcon";
 
 const CallReviews = ({
   tabData,
@@ -35,6 +36,26 @@ const CallReviews = ({
   if (tabData?.key === "QA Analyst") {
     return (
       <div className="w-[100%] mt-4">
+        <div className="flex w-[100%] justify-end gap-[10px]">
+          <NavigationWithSwitchIcon
+            title=""
+            buttons={[
+              {
+                text: `Call Reviews Type`,
+                dropdown: true,
+                id: 1,
+                dark: true,
+                light: false,
+                list: [
+                  { title: "All", Icon: "" },
+                  { title: "Allocated", Icon: "" },
+                  { title: "Feedback Requested", Icon: "" },
+                ],
+                // click: handleDaysSpan,
+              },
+            ]}
+          />
+        </div>
         <div className="flex w-[100%] justify-between flex-wrap gap-4 py-4">
           <DealsCard
             label="Total Calls For Review"
