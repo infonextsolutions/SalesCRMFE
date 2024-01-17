@@ -45,7 +45,7 @@ const HeaderItem = ({
   );
 };
 
-const Scoring = ({ tabData }: { tabData?: any }) => {
+const CallReviewsQAE = ({ tabData }: { tabData?: any }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [manager, setManager] = useState("");
@@ -58,7 +58,7 @@ const Scoring = ({ tabData }: { tabData?: any }) => {
       <div className="my-5">
         <div className="flex items-center gap-5">
           <div className="flex flex-col gap-2">
-            <h4 className="text-sm">Allocation Start and End Date</h4>
+            <h4 className="text-sm">Start and End Date</h4>
             <DatePicker
               startDate={startDate}
               setStartDate={setStartDate}
@@ -139,40 +139,50 @@ const Scoring = ({ tabData }: { tabData?: any }) => {
         </div>
       </div>
 
-      <div className="bg-[#ffe3e170] rounded-xl overflow-x-scroll overflow-y-hidden">
+      <div className="bg-[#ffe3e170] rounded-xl overflow-x-hidden overflow-y-hidden">
         <h1 className="text-[20px] font-medium p-5 text-[#3F434A] tracking-wide">
-          Call Scores
+          Call Review - Allocated Calls
         </h1>
         <div className="flex justify-between pb-8">
           <HeaderItem width={150} left={20} text={"Name (QA Executive)"} />
-          <HeaderItem width={180} left={0} text={"Average Overall Score"} />
-          <HeaderItem width={100} left={0} text={"Highest Score"} />
-          <HeaderItem width={100} left={0} text={"Lowest Score"} />
-          <HeaderItem width={50} left={0} text={"Parameter1"} />
-          <HeaderItem width={50} left={0} text={"Parameter2"} />
-          <HeaderItem width={50} left={0} text={"Parameter3"} />
-          <HeaderItem width={50} left={0} text={"Parameter4"} />
-          <HeaderItem width={50} left={0} text={"Parameter5"} />
+          <HeaderItem width={180} left={0} text={"Total Calls Allocated"} />
+          <HeaderItem
+            width={220}
+            left={0}
+            text={"Allocated Calls in Progress"}
+          />
+          <HeaderItem width={200} left={0} text={"Allocated Calls Complete"} />
+          <HeaderItem width={200} left={0} text={"On Time Call Reviews"} />
+          <HeaderItem
+            width={250}
+            left={0}
+            text={"Call Reviews Exceeding Time Limit"}
+          />
         </div>
       </div>
-      <div className="bg-[#ffe3e170] mt-4 rounded-xl overflow-x-scroll overflow-y-hidden">
+      <div className="bg-[#ffe3e170] mt-4 rounded-xl overflow-x-hidden overflow-y-hidden">
         <h1 className="text-[20px] font-medium p-5 text-[#3F434A] tracking-wide">
           QA Executive Call Info
         </h1>
         <div className="flex justify-between pb-8">
           <HeaderItem width={150} left={20} text={"Name (QA Executive)"} />
-          <HeaderItem width={180} left={0} text={"Average Overall Score"} />
-          <HeaderItem width={100} left={0} text={"Highest Score"} />
-          <HeaderItem width={100} left={0} text={"Lowest Score"} />
-          <HeaderItem width={50} left={0} text={"Parameter1"} />
-          <HeaderItem width={50} left={0} text={"Parameter2"} />
-          <HeaderItem width={50} left={0} text={"Parameter3"} />
-          <HeaderItem width={50} left={0} text={"Parameter4"} />
-          <HeaderItem width={50} left={0} text={"Parameter5"} />
+          <HeaderItem width={180} left={0} text={"Total Calls Allocated"} />
+          <HeaderItem
+            width={220}
+            left={0}
+            text={"Allocated Calls in Progress"}
+          />
+          <HeaderItem width={200} left={0} text={"Allocated Calls Complete"} />
+          <HeaderItem width={200} left={0} text={"On Time Call Reviews"} />
+          <HeaderItem
+            width={250}
+            left={0}
+            text={"Call Reviews Exceeding Time Limit"}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default Scoring;
+export default CallReviewsQAE;

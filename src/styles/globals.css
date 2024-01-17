@@ -332,6 +332,11 @@ input[type="range"]::-webkit-slider-thumb {
   left: 0;
 }
 
+
+
+select{
+  outline: none;
+}
 /* dragging thumb - chrome and safari */
 input[type="range"]:active::-webkit-slider-thumb {
   transform: scale(1.2);
