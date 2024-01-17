@@ -51,9 +51,9 @@ const DropItemsNew = ({ title, list, top, change, customerId }: any) => {
   return (
     <div
       className="w-[100%] flex items-center gap-1"
-    // style={{
-    //   marginTop: top,
-    // }}
+      // style={{
+      //   marginTop: top,
+      // }}
     >
       <p className="block text-sm font-medium text-[#8a9099] tracking-wide">
         {title}
@@ -311,7 +311,7 @@ const DatePage = ({ date, setDate }: any) => {
             setDate(e.target.value);
           }}
         />
-        <Image
+        {/* <Image
           src={getBasicIcon("Arrow-Down 2")}
           className="absolute right-[8px] pointer-events-none cursor-pointer w-[15px] top-[15px]"
           alt=""
@@ -320,7 +320,7 @@ const DatePage = ({ date, setDate }: any) => {
           }}
           width={15}
           height={15}
-        />
+        /> */}
       </div>
     </div>
   );
@@ -450,12 +450,13 @@ const ActiveCall = ({
 
   const callNow = () => {
     try {
-
     } catch (error) {
-      dispatch(setError({
-        show: true,
-        error: "Error occurred."
-      }));
+      dispatch(
+        setError({
+          show: true,
+          error: "Error occurred.",
+        })
+      );
     }
   };
 
@@ -505,13 +506,13 @@ const ActiveCall = ({
 
   const list = lead
     ? lead?.owners?.map((i: any) => {
-      return {
-        title: i.name,
-        value: i._id,
-        selected: false,
-        _id: i._id,
-      };
-    })
+        return {
+          title: i.name,
+          value: i._id,
+          selected: false,
+          _id: i._id,
+        };
+      })
     : [];
   const state = useSelector((state: any) => state.auth);
   const loggedInUser = localStorage.getItem("user-name");
@@ -713,7 +714,7 @@ const ActiveCall = ({
       <div className="w-[100%] flex justify-end mt-[20px]">
         {/* <SimpleButton theme={2} text={"Call Now"} left={20} right={0} click={callNow} /> */}
         <SimpleButton
-          theme={1} 
+          theme={1}
           click={submit}
           text={"Schedule Call"}
           left={20}

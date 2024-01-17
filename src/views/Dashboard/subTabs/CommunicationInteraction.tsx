@@ -40,7 +40,7 @@ const CommunicationInteraction = ({
       <div className="">
         <TreeMap getPitchData={getPitchData} data1={pitchData} />
         <div className="w-[100%] flex justify-between flex-wrap gap-2">
-          <div className="w-[48%] flex flex-col gap-6">
+          <div className="w-[100%] lg:w-[48%] md:w-[48%] flex flex-col gap-6">
             <EmotionalAnalysisComp />
             <BarChartVertical
               title="Longest Monologue"
@@ -68,7 +68,7 @@ const CommunicationInteraction = ({
               ]}
             />
           </div>
-          <div className="w-[48%] flex flex-col gap-6">
+          <div className="w-[100%] lg:w-[48%] md:w-[48%] flex flex-col gap-6">
             <BarChartVertical
               title="Sales Rep's Patience/Silence"
               template={SalesRepPatienceSilence}
@@ -146,7 +146,7 @@ const CommunicationInteraction = ({
         </div>
         <TreeMap getPitchData={getPitchData} data1={pitchData} />
         <div className="w-[100%] flex justify-between flex-wrap gap-2">
-          <div className="w-[48%] flex flex-col gap-6">
+          <div className="w-[100%] lg:w-[48%] md:w-[48%] flex flex-col gap-6">
             <BarChartVertical
               title="Sales Rep's Patience/Silence"
               template={SalesRepPatienceSilence}
@@ -208,7 +208,7 @@ const CommunicationInteraction = ({
               ]}
             />
           </div>
-          <div className="w-[48%] flex flex-col gap-6">
+          <div className="w-[100%] lg:w-[48%] md:w-[48%] flex flex-col gap-6">
             <BarChartVertical
               title="Satisfaction Score"
               template={SatisfactionScore}
@@ -255,7 +255,7 @@ const CommunicationInteraction = ({
       <div className="">
         <TreeMap getPitchData={getPitchData} data1={pitchData} />
         <div className="w-[100%] flex justify-between flex-wrap gap-2">
-          <div className="w-[48%] flex flex-col gap-6">
+          <div className="w-[100%] lg:w-[48%] md:w-[48%] flex flex-col gap-6">
             <EmotionalAnalysisComp />
             <BarChartVertical
               title="Longest Monologue"
@@ -269,7 +269,7 @@ const CommunicationInteraction = ({
               data={noOfTopics}
             />
           </div>
-          <div className="w-[48%] flex flex-col gap-6">
+          <div className="w-[100%] lg:w-[48%] md:w-[48%] flex flex-col gap-6">
             <BarChartVertical
               title="Sales Rep's Patience/Silence"
               template={SalesRepPatienceSilence}

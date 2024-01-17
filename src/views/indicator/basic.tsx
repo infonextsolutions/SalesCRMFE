@@ -13,7 +13,6 @@ import EditCategory from "@/components/Indicator/basic/editCategory";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import NavigationWithEditAndDeleteButtons from "@/components/app/NavigationWithEditAndDelete";
 
-
 const AddText = ({ title, place, change, value }: any) => {
   return (
     <div className="w-[100%]  mb-[15px]">
@@ -33,7 +32,6 @@ const AddText = ({ title, place, change, value }: any) => {
   );
 };
 
-
 const AddScore = ({
   typeValue,
   scoreValue,
@@ -44,7 +42,11 @@ const AddScore = ({
   handleDeleteIndicatorType,
 }: any) => {
   return (
-    <div className="flex items-center px-8 mt-4 gap-20">
+    <div
+      className={`flex justify-between items-center px-8 mt-4 ${
+        !disabled && "pr-20"
+      }`}
+    >
       <div className="flex items-center gap-6">
         <div className="">
           <input
@@ -52,7 +54,9 @@ const AddScore = ({
             disabled={disabled}
             onInput={handleChangeType}
             type="text"
-            className={`${!disabled ? "border-2 rounded-xl py-1 pl-3" : ""}`}
+            className={`${
+              !disabled ? "border-2 w-64 rounded-xl py-1 pl-3" : ""
+            }`}
           />
         </div>{" "}
         {disabled && (
@@ -77,7 +81,11 @@ const AddScore = ({
             disabled={disabled}
             onInput={handleChangeScore}
             type="text"
-            className={`outline-none ${!disabled ? "border-2 w-[100px] rounded-xl px-8 py-1" : "w-[100px]"}`}
+            className={`outline-none ${
+              !disabled
+                ? "border-2 w-[100px] rounded-xl px-8 py-1"
+                : "w-[100px]"
+            }`}
           />
         </div>
         {disabled && (
@@ -98,7 +106,6 @@ const AddScore = ({
     </div>
   );
 };
-
 
 const Indicator = () => {
   const [apiData, setApiData] = useState([]);
@@ -203,13 +210,15 @@ const Indicator = () => {
               key: item?.category,
               label: item?.category,
               scoreWeightage: 1,
-              values: [{
-                oid: item._id,
-                key: item.value,
-                label: item.value,
-                alternatives: item.alternative,
-                scoreWeightage: parseInt(item?.score || "0"),
-              }]
+              values: [
+                {
+                  oid: item._id,
+                  key: item.value,
+                  label: item.value,
+                  alternatives: item.alternative,
+                  scoreWeightage: parseInt(item?.score || "0"),
+                },
+              ],
             },
           ],
         });
@@ -223,39 +232,43 @@ const Indicator = () => {
     // if sdr/bdm user then find-all otherwise getTypesById
     axios
       .get(
-        "https://sales365.trainright.fit/api/indicator/find-all?page=0&limit=10", {
-        headers: { Authorization: accessToken }
-      }
+        "https://sales365.trainright.fit/api/indicator/find-all?page=0&limit=10",
+        {
+          headers: { Authorization: accessToken },
+        }
       )
       .then((res: any) => {
         formatData(res.data);
       })
-      .catch((err: any) => {
-      });
+      .catch((err: any) => {});
   };
 
   const getTypesById = (id: any) => {
     axios
-      .get(`https://sales365.trainright.fit/api/indicator/find-by-id?id=${id}`, {
-        headers: { Authorization: accessToken }
-      })
+      .get(
+        `https://sales365.trainright.fit/api/indicator/find-by-id?id=${id}`,
+        {
+          headers: { Authorization: accessToken },
+        }
+      )
       .then((res: any) => {
         console.log("============ indicator : data ============", res);
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   };
 
   const getValues = () => {
     axios
       .get(
-        "https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=65782fb3cae5f857818476dd", {
-        headers: { Authorization: accessToken }
-      }
+        "https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=65782fb3cae5f857818476dd",
+        {
+          headers: { Authorization: accessToken },
+        }
       )
       .then((res: any) => {
         console.log("============ indicator : data ============", res);
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   };
 
   const deleteIndicatorById = (
@@ -264,9 +277,10 @@ const Indicator = () => {
   ) => {
     axios
       .delete(
-        `https://sales365.trainright.fit/api/indicator/delete-by-id?id=${id}`, {
-        headers: { Authorization: accessToken }
-      }
+        `https://sales365.trainright.fit/api/indicator/delete-by-id?id=${id}`,
+        {
+          headers: { Authorization: accessToken },
+        }
       )
       .then((res: any) => {
         if (type === "INDICATOR") {
@@ -304,7 +318,9 @@ const Indicator = () => {
     type: "INDICATOR" | "CATEGORY" | "VALUE"
   ) => {
     axios
-      .put("https://sales365.trainright.fit/api/indicator/update", payload, { headers: { Authorization: accessToken } })
+      .put("https://sales365.trainright.fit/api/indicator/update", payload, {
+        headers: { Authorization: accessToken },
+      })
       .then((res: any) => {
         if (type === "INDICATOR") {
           // setIndicatorSetting(false);
@@ -339,7 +355,9 @@ const Indicator = () => {
     type: "INDICATOR" | "CATEGORY" | "VALUE" = "INDICATOR"
   ) => {
     axios
-      .post("https://sales365.trainright.fit/api/indicator/create", payload, { headers: { Authorization: accessToken } })
+      .post("https://sales365.trainright.fit/api/indicator/create", payload, {
+        headers: { Authorization: accessToken },
+      })
       .then((res: any) => {
         if (type === "INDICATOR") {
           setIndicatorSetting(false);
@@ -643,13 +661,15 @@ const Indicator = () => {
       });
       if (isEdit) {
         setIndicatorTypes((currIndicatorTypes: any) => {
-          return currIndicatorTypes?.map((item: any) => {
-            if (item?.oid === undefined) {
-              return null;
-            } else {
-              return { ...item, edit: false };
-            }
-          }).filter((item: any) => item !== null);
+          return currIndicatorTypes
+            ?.map((item: any) => {
+              if (item?.oid === undefined) {
+                return null;
+              } else {
+                return { ...item, edit: false };
+              }
+            })
+            .filter((item: any) => item !== null);
         });
       } else {
         setBool(false);
@@ -1134,7 +1154,7 @@ const Indicator = () => {
                           value: e.target.value,
                         })
                       }
-                      handleChangeScore={(e: any) => { }}
+                      handleChangeScore={(e: any) => {}}
                       handleEditIndicatorType={() =>
                         handleEditIndicatorCategoryData({ key: index })
                       }
@@ -1206,7 +1226,7 @@ const Indicator = () => {
                         value: e.target.value,
                       })
                     }
-                    handleChangeScore={(e: any) => { }}
+                    handleChangeScore={(e: any) => {}}
                     handleEditIndicatorType={() =>
                       handleEditIndicatorValue({ key: index })
                     }
@@ -1515,8 +1535,9 @@ const Indicator = () => {
                 key={index}
                 onClick={() => setCurrIndicatorType(index)}
                 value={item?.key}
-                className={`${currIndicatorType == index ? "text-bg-red" : ""
-                  } font-medium cursor-pointer`}
+                className={`${
+                  currIndicatorType == index ? "text-bg-red" : ""
+                } font-medium cursor-pointer`}
               >
                 {item?.label}
               </li>
@@ -1558,17 +1579,16 @@ const Indicator = () => {
                 click: handleAddScore,
                 light: false,
                 dark: true,
-                list: itClone?.[currIndicatorType]?.categories?.length !== 0 &&
+                list:
+                  itClone?.[currIndicatorType]?.categories?.length !== 0 &&
                   itClone?.[currIndicatorType]?.categories?.[
                     currIndicatorCategory
                   ]?.label !== ""
-                  ? [
-                    { id: 0, title: "Indicator Category Score" },
-                    { id: 1, title: "Indicator Value Score" },
-                  ]
-                  : [
-                    { id: 0, title: "Indicator Category Score" },
-                  ],
+                    ? [
+                        { id: 0, title: "Indicator Category Score" },
+                        { id: 1, title: "Indicator Value Score" },
+                      ]
+                    : [{ id: 0, title: "Indicator Category Score" }],
                 value: 0,
               },
               {
@@ -1581,57 +1601,57 @@ const Indicator = () => {
                 dark: false,
                 list:
                   itClone?.[currIndicatorType]?.categories?.length !== 0 &&
-                    itClone?.[currIndicatorType]?.categories?.[
-                      currIndicatorCategory
-                    ]?.label !== ""
+                  itClone?.[currIndicatorType]?.categories?.[
+                    currIndicatorCategory
+                  ]?.label !== ""
                     ? [
-                      { id: 0, title: "Indicator Category" },
-                      { id: 1, title: "Indicator Value" },
-                    ]
+                        { id: 0, title: "Indicator Category" },
+                        { id: 1, title: "Indicator Value" },
+                      ]
                     : [{ id: 0, title: "Indicator Category" }],
               },
             ]}
             leftBtns={
               itClone?.[currIndicatorType]?.categories?.length !== 0 &&
-                itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]
-                  ?.label !== ""
+              itClone?.[currIndicatorType]?.categories?.[currIndicatorCategory]
+                ?.label !== ""
                 ? [
-                  {
-                    icon: "Edit",
-                    dropdown: false,
-                    id: 1,
-                    dark: false,
-                    light: true,
-                    list: [],
-                    onClick1: () => {
-                      handleEditIndicatorCategoryData({
-                        key: currIndicatorCategory,
-                      });
-                      setBool(true);
-                      setEditIndicatorCategory({
-                        open: true,
-                        payload: {
-                          value:
-                            itClone?.[currIndicatorType]?.categories?.[
-                              currIndicatorCategory
-                            ]?.label,
-                        },
-                      });
+                    {
+                      icon: "Edit",
+                      dropdown: false,
+                      id: 1,
+                      dark: false,
+                      light: true,
+                      list: [],
+                      onClick1: () => {
+                        handleEditIndicatorCategoryData({
+                          key: currIndicatorCategory,
+                        });
+                        setBool(true);
+                        setEditIndicatorCategory({
+                          open: true,
+                          payload: {
+                            value:
+                              itClone?.[currIndicatorType]?.categories?.[
+                                currIndicatorCategory
+                              ]?.label,
+                          },
+                        });
+                      },
                     },
-                  },
-                  {
-                    icon: "Delete",
-                    dropdown: false,
-                    id: 2,
-                    dark: false,
-                    light: true,
-                    list: [],
-                    onClick1: () =>
-                      handleDeleteIndicatorCategory({
-                        key: currIndicatorCategory,
-                      }),
-                  },
-                ]
+                    {
+                      icon: "Delete",
+                      dropdown: false,
+                      id: 2,
+                      dark: false,
+                      light: true,
+                      list: [],
+                      onClick1: () =>
+                        handleDeleteIndicatorCategory({
+                          key: currIndicatorCategory,
+                        }),
+                    },
+                  ]
                 : []
             }
           />
