@@ -7,7 +7,7 @@ import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import KanbanItem from "./KanbanItems";
 
-const KanbanTable = ({ totalRecords, search }: TableProps) => {
+const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
   const [accessToken, setAccessToken] = useState<any>("");
@@ -32,7 +32,7 @@ const KanbanTable = ({ totalRecords, search }: TableProps) => {
       setLoading(true);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open`, {
+          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open&leadStatus=Open&${queryStr}`, {
           headers: {
             Authorization: accessToken
           }

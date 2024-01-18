@@ -44,7 +44,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
       setLoading(true);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close`, {
+          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`, {
           headers: {
             Authorization: accessToken
           }
