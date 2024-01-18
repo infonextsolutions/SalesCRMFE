@@ -119,8 +119,9 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -666,17 +667,17 @@ const LeadContainer = ({
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData?._id}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData?._id}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       )
       .then((e) => {
         setLeadData(e.data.result);
       })
-      .catch((e) => {
-      });
+      .catch((e) => {});
   };
 
   const activities: any = LeadData1;
@@ -766,7 +767,6 @@ const LeadContainer = ({
       const newArr = filterItemsWithSimilarParameters(e);
 
       if (newArr.length > 0) {
-
         return { date: newArr[0].date, time: newArr[0].time };
       } else {
         return null;
@@ -839,7 +839,7 @@ const LeadContainer = ({
           <LeadItemMultiple
             width={130}
             left={70}
-            upperText={LeadData1?.companyId.company_name}
+            upperText={LeadData1?.companyId?.company_name}
             bottomText={
               LeadData1?.companyId?.company_location ||
               LeadData1?.companyId?.company_address
