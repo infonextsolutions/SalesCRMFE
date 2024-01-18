@@ -48,14 +48,17 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     // if (search !== "") {
     //   queryStr += `&search=${search}`;
     // }
+    if (status !== "") {
+      queryStr += `&lead_status=${status}`;
+    }
     if (stage !== "") {
-      queryStr += `&leadStage=${stage}`;
+      queryStr += `&lead_stage=${stage}`;
     }
     if (product !== "") {
-      queryStr += `&productCategory=${product}`;
+      queryStr += `&product_service=${product}`;
     }
     if (leadSource !== "") {
-      queryStr += `&leadSource=${leadSource}`;
+      queryStr += `&lead_source=${leadSource}`;
     }
     if (startDate !== "") {
       queryStr += `&startDate=${startDate}`;
@@ -117,6 +120,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
                 className="text-red-500"
                 id="countries"
               >
+                <option selected={status === ""} value=""></option>
                 <option selected={status === "open"} value="open">Open</option>
                 <option selected={status === "close"} value="close">Close</option>
               </select>

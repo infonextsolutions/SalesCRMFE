@@ -46,6 +46,7 @@ const Dashboard = ({ data }: any) => {
   const [talkRatioData, setTalkRatioData] = useState({});
   const [noOfInterruptions, setNoOfInterruptions] = useState({});
   const [noOfSwitches, setNoOfSwitches] = useState({});
+  const [callSentimentData, setCallSentimentData] = useState({});
 
   const getDealAnalyticsData = () => {
     axios
@@ -123,7 +124,7 @@ const Dashboard = ({ data }: any) => {
         // });
         setTalkRatioData(res.data.result);
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   };
 
   const getNoOfInterruptions = () => {
@@ -166,6 +167,26 @@ const Dashboard = ({ data }: any) => {
       });
   };
 
+  const getCallSentiment = () => {
+    axios.get(
+      `https://sales365.trainright.fit/api/dashboard/sentimentAnalysis?userId=${userId}`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
+    )
+      .then((res: any) => {
+        // let formattedData: any = {};
+        // res?.data?.result?.forEach((item: any) => {
+        //   formattedData[item?.day?.replaceAll(" ", "_")] = item?.switches;
+        // });
+        setCallSentimentData(res?.data?.result);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
   useEffect(() => {
     if (window !== undefined) {
       setAccessToken(localStorage.getItem("access-token"));
@@ -180,6 +201,7 @@ const Dashboard = ({ data }: any) => {
       getTalkRatioData();
       getNoOfInterruptions();
       getNoOfSwitches();
+      getCallSentiment();
     }
   }, [accessToken]);
 
@@ -368,6 +390,7 @@ const Dashboard = ({ data }: any) => {
           sellingData={sellingData}
           getSellingData={getSellingData}
           noOfQuesAsked={noOfQuesAskedData}
+          callSentimentData={callSentimentData}
         />
       );
     } else if (role === "QA manager") {
@@ -377,6 +400,7 @@ const Dashboard = ({ data }: any) => {
           sellingData={sellingData}
           getSellingData={getSellingData}
           noOfQuesAsked={noOfQuesAskedData}
+          callSentimentData={callSentimentData}
         />
       );
     } else {
@@ -397,7 +421,7 @@ const Dashboard = ({ data }: any) => {
     if (role === "QA manager") {
       return <Scoring tabData={tabs[currTab]} />;
     } else {
-      return <EngagementReports tabData={tabs[currTab]} />;
+      return <EngagementReports tabData={tabs[currTab]} callSentimentData={callSentimentData} />;
     }
   };
 

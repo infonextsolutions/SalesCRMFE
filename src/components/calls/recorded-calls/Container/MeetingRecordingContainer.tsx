@@ -16,6 +16,41 @@ import { CSVLink } from "react-csv";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
+  const [callTypeOps, setCallTypeOps] = useState([
+    {
+      title: "Choose Type",
+      val: "Choose Type",
+    },
+    {
+      title: "Discovery",
+      val: "Discovery",
+    },
+    {
+      title: "Product Demo",
+      val: "Product Demo",
+    },
+    {
+      title: "Solution Design",
+      val: "Solution Design",
+    },
+    {
+      title: "Consultation",
+      val: "Consultation",
+    },
+    {
+      title: "Pricing Discussion",
+      val: "Pricing Discussion",
+    },
+    {
+      title: "Negotiation",
+      val: "Negotiation",
+    },
+    {
+      title: "Follow-Up",
+      val: "Follow-Up",
+    },
+  ]);
+  const [ownerOps, setOwnerOps] = useState([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
@@ -34,6 +69,23 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    try {
+      if (window !== undefined) {
+        axios
+          .get("https://sales365.trainright.fit/api/master-users/find-all", {
+            headers: {
+              Authorization: accessToken,
+            },
+          })
+          .then((res) => {
+            setOwnerOps(res?.data?.result);
+          })
+          .catch((e) => {});
+      }
+    } catch (error) {}
+  }, [accessToken]);
+
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
@@ -45,16 +97,16 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     //   queryStr += `&search=${search}`;
     // }
     if (companyName !== "") {
-      queryStr += `&companyName=${companyName}`;
+      queryStr += `&company_name=${companyName}`;
     }
     if (product !== "") {
-      queryStr += `&productCategory=${product}`;
+      queryStr += `&product_service=${product}`;
     }
     if (callOwner !== "") {
-      queryStr += `&callOwner=${callOwner}`;
+      queryStr += `&meeting_owner=${callOwner}`;
     }
     if (callType !== "") {
-      queryStr += `&callType=${callType}`;
+      queryStr += `&meeting_type=${callType}`;
     }
     if (location !== "") {
       queryStr += `&location=${location}`;
@@ -247,6 +299,31 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 <option selected={product === "Product D"} value="Product D">
                   Product D
                 </option>
+                <option selected={product === "Technology"} value="Technology">
+                  Technology
+                </option>
+                <option selected={product === "Healthcare"} value="Healthcare">
+                  Healthcare
+                </option>
+                <option selected={product === "Finance"} value="Finance">
+                  Finance
+                </option>
+                <option selected={product === "Education"} value="Education">
+                  Education
+                </option>
+                <option
+                  selected={product === "Hospitality"}
+                  value="Hospitality"
+                >
+                  Hospitality
+                </option>
+                <option
+                  selected={product === "Real Estate"}
+                  value=" Real Estate"
+                >
+                  {" "}
+                  Real Estate
+                </option>
               </select>
             </div>
             <div className="flex items-center w-48 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -257,9 +334,15 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="meetingOwner"
               >
                 <option selected={callOwner === ""} value=""></option>
-                <option selected={callOwner === "John"} value="John">
-                  John
-                </option>
+                {ownerOps?.map((opItem: any, idx: number) => (
+                  <option
+                    selected={callType === opItem?._id}
+                    value={opItem?._id}
+                    key={opItem?._id}
+                  >
+                    {opItem?.name}
+                  </option>
+                ))}
               </select>
             </div>
 

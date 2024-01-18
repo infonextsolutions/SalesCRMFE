@@ -26,11 +26,13 @@ const CallReviews = ({
   sellingData,
   getSellingData,
   noOfQuesAsked,
+  callSentimentData,
 }: {
   tabData?: any;
   sellingData?: any;
   getSellingData?: any;
   noOfQuesAsked?: any;
+  callSentimentData?: any;
 }) => {
   // SDR/BDM; Manager
   if (tabData?.key === "QA Analyst") {
@@ -143,7 +145,7 @@ const CallReviews = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <CallSentiment />
+            <CallSentiment callSentimentData={callSentimentData} />
             <BarChartVertical
               title="Call Disposition"
               template={CallsDisposition}
