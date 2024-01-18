@@ -1,7 +1,6 @@
 import Backdrop from "@/components/View/Backdrop/Center";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import Notes from "@/components/View/Notes";
-import Lead, { CompanyId, CustomerId, Owner } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -483,7 +482,7 @@ const ExpandableRow = ({
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Lead Owner
         </p>
-        {LeadOwners.map((item: Owner, i: any) => {
+        {LeadOwners.map((item: any, i: any) => {
           return (
             <p
               key={i}
@@ -557,7 +556,7 @@ const LeadContainer = ({
   selectAll,
   owners,
   last,
-}: LeadProps) => {
+}: any) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
   const [notes, setNotes] = React.useState(false);
@@ -1171,17 +1170,3 @@ const LeadContainer = ({
 };
 
 export default LeadContainer;
-
-interface LeadProps {
-  company: any;
-  customer: any;
-  id: String;
-  leadStage: String;
-  leadStatus: String;
-  custom: String;
-  LeadData: Lead;
-  index: Number;
-  selectAll: any;
-  last: any;
-  owners: any;
-}

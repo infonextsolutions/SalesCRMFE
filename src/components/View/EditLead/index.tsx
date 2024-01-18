@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
-import { LeadId } from "@/types/leadId";
 import Navigation from "@/components/app/Navigation";
 // import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
 import FormEditContainer from "./FormEditContainer";

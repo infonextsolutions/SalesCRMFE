@@ -1,6 +1,5 @@
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
-import { CompanyId, CustomerId } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Image from "next/image";
@@ -188,62 +187,3 @@ const CallInfo = ({ check, data, data1, refresh }: any) => {
 };
 
 export default CallInfo;
-
-interface Props {
-  check: any;
-  info: any;
-  data: any;
-  data1: Root;
-}
-
-export interface Root {
-  _id: string;
-  companyId: CompanyId;
-  customerId: CustomerId;
-  potential_deal_size: string;
-  win_probability: string;
-  created_by: string;
-  customer_name: string;
-  inquiry: string;
-  existing_budget: string;
-  leadStatus: string;
-  leadStage: string;
-  lead_title: string;
-  lead_description: string;
-  notes: Note[];
-  source: string;
-  leadId: string;
-  owners: Owner[];
-  __v: number;
-  createdAt: string;
-  updatedAt: string;
-  call_type: string;
-  call_disposition: string;
-  call_description: string;
-  participants: {
-    name: string;
-    designation: string;
-  };
-}
-
-export interface Note {
-  title: string;
-  content: string;
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Owner {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  roles: string[];
-  token: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  designation: string;
-}

@@ -1,4 +1,3 @@
-import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState, Suspense } from "react";
@@ -14,9 +13,8 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-import ActiveCall from "@/types/recorded-call";
 import CallContainer from "@/components/calls/recorded-calls/Call/Call";
-const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
+const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -105,7 +103,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
             setItems(allItems);
           }
 
-          const filtered = data.filter((e: ActiveCall) => {
+          const filtered = data.filter((e: any) => {
             const idss: any = String(
               convertDatetimeToCustomFormat(e.updatedAt)
             );
@@ -148,7 +146,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
         }
       );
       const data = res.data.result;
-      const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
+      const filtered = data.filter((e: any) => e._id.includes(search));
       settotalLeads(filtered.length);
       return filtered;
     } catch (error) {
@@ -310,7 +308,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           <Spinner />
         ) : (
           Leads != null &&
-          Leads?.map((item: ActiveCall, i: any) => {
+          Leads?.map((item: any, i: any) => {
             return (
               <CallContainer
                 key={item._id}
@@ -504,10 +502,3 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 };
 
 export default LeadsTable;
-
-interface TableProps {
-  totalRecords: Number;
-  [key: string]: any;
-  icon?: String;
-  search: String | any;
-}

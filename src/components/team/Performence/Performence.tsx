@@ -1,13 +1,11 @@
 import Backdrop from "@/components/View/Backdrop/Center";
 import Notes from "@/components/View/Notes";
-import { CompanyId, CustomerId } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Events from "@/components/View/Event/Events";
-import Lead from "@/types/teams";
 
 
 const LeadBox = ({ width, bool }: any) => {
@@ -204,7 +202,7 @@ const LeadContainer = ({
   LeadData,
   selectAll,
   last,
-}: LeadProps) => {
+}: any) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
 
@@ -325,11 +323,3 @@ const LeadContainer = ({
 };
 
 export default LeadContainer;
-
-interface LeadProps {
-  id: String;
-  LeadData: Lead;
-  index: Number;
-  selectAll: any;
-  last: any;
-}

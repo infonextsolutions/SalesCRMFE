@@ -37,7 +37,7 @@ const DropDown2 = ({
     width,
     dropDirection,
     children,
-}: ButtonProps) => {
+}: any) => {
     const [clicked, setclicked] = React.useState(false);
     const [mouseOver, setMouseOver] = React.useState(false);
     const [curr, setCurr] = React.useState<Number | undefined>(value);
@@ -157,23 +157,3 @@ const DropDown2 = ({
 };
 
 export default DropDown2;
-
-export interface ButtonProps {
-    icon?: String;
-    dropdown?: Boolean;
-    width?: Number;
-    text: String;
-    id: Number;
-    light?: Boolean;
-    dark?: Boolean;
-    height?: Number;
-    border?: Boolean;
-    onClick1?: any;
-    pl?: Number;
-    tight?: Boolean;
-    list?: [] | any;
-    dropDirection?: Boolean;
-    click?: (prev: Number, current: Number) => void | undefined;
-    value?: Number;
-    children?: any;
-}

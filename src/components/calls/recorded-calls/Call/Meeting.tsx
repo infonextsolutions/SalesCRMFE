@@ -1,12 +1,9 @@
 import { setCurrent } from "@/store/UI";
-import Call, { CompanyId, CustomerId } from "@/types/Calls";
-import ActiveCall from "@/types/recorded-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import Lead from "@/types/Leads";
 import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 
@@ -431,7 +428,7 @@ const ParticipantsHover = ({
 }: {
   last: any;
   bounding: any;
-  data: Lead;
+  data: any;
 }) => {
   return (
     <div
@@ -448,7 +445,7 @@ const ParticipantsHover = ({
       <p className="text-[#000] w-[100%] text-[15px] font-medium">
         Call Participants
       </p>
-      {data.owners.map((item, i) => {
+      {data.owners.map((item: any, i: number) => {
         return (
           <p
             key={i}
@@ -465,7 +462,7 @@ const ParticipantsHover = ({
   );
 };
 
-const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
+const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -725,10 +722,3 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
 };
 
 export default CallContainer;
-
-interface CallProps {
-  id: String;
-  CallData: ActiveCall;
-  last: any;
-  selectAll: any;
-}

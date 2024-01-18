@@ -62,7 +62,7 @@ const SalesOpen = ({
   mastersData,
   teamManagersData,
   sdrBdmData,
-}: props) => {
+}: any) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
   const [selectedRows, setSelectedRows] = useState<any>([]);
@@ -548,16 +548,9 @@ const SalesOpen = ({
           },
         ]}
       />
-      <LeadsContainer view={view} records={data.totalRecords} list={Dummy} />
+      <LeadsContainer view={view} records={data.totalRecords} list={Dummy} setSelectedRows={setSelectedRows} />
     </div>
   );
 };
 
 export default SalesOpen;
-
-interface props {
-  data: any;
-  mastersData: any;
-  teamManagersData: any;
-  sdrBdmData: any;
-}

@@ -17,7 +17,7 @@ const CallsTable = React.lazy(
   () => import("@/components/View/Tables/calls/active-calls/Metting_Lead")
 );
 
-const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
+const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
   const [callTypeOps, setCallTypeOps] = useState([
     {
       title: "Choose Type",
@@ -400,9 +400,3 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
 };
 
 export default ScheduleMeetingContainer;
-
-interface LeadContainerProps {
-  dummy1: any;
-  dummy2: any;
-  data: any;
-}

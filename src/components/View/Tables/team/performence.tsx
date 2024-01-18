@@ -1,4 +1,3 @@
-import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState } from "react";
@@ -13,8 +12,7 @@ import {
   RightArrow,
 } from "@/utils/AssetsHelper";
 import axios from "axios";
-import Root from "@/types/teams";
-const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
+const PerformenceTable = ({ totalRecords, filter }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -107,7 +105,7 @@ const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
         <Header />
         {Leads != null &&
-          Leads.map((item: Root, ind: Number) => {
+          Leads.map((item: any, ind: Number) => {
             return (
               <LeadContainer
                 selectAll={false}
@@ -281,11 +279,3 @@ const PerformenceTable = ({ totalRecords, filter }: TableProps) => {
 };
 
 export default PerformenceTable;
-
-interface TableProps {
-  totalRecords: Number;
-  [key: string]: any;
-  icon?: String;
-  search?: String;
-  filter: any;
-}

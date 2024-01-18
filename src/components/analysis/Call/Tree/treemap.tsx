@@ -29,7 +29,7 @@ const SoleChart = ({ i, title, w, data }: any) => {
   );
 };
 
-const Charts = ({ data1 }: { data1: Root }) => {
+const Charts = ({ data1 }: any) => {
 
   const data = [
     [
@@ -194,37 +194,3 @@ const Charts = ({ data1 }: { data1: Root }) => {
 };
 
 export default Charts;
-
-interface Root {
-  _id: string;
-  call_purpose: number;
-  company_intro: number;
-  self_credentialing: number;
-  voice_mail: number;
-  real_time_cues: number;
-  post_call_analytics: number;
-  integration: number;
-  open_ended: number;
-  sales_coaching: number;
-  sales_visibility: number;
-  dialer: number;
-  CRM: number;
-  decision_maker: number;
-  revenue_potential: number;
-  web_conferencing: number;
-  better_sales_visibility: number;
-  improved_customer_experience: number;
-  actionable_insights: number;
-  conversion_rate: number;
-  ramp_time: number;
-  data_driven_coaching: number;
-  trail: number;
-  email: number;
-  meeting: number;
-  closure: number;
-  call: number;
-  next_steps: number;
-  zoom_demo: number;
-  createdAt: string;
-  updatedAt: string;
-}

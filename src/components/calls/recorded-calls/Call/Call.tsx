@@ -1,12 +1,9 @@
 import { setCurrent } from "@/store/UI";
-import Call, { CompanyId, CustomerId } from "@/types/Calls";
-import ActiveCall from "@/types/recorded-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import Lead, { Owner } from "@/types/Leads";
 import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
@@ -772,10 +769,3 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
 };
 
 export default CallContainer;
-
-interface CallProps {
-  id: String;
-  CallData: ActiveCall;
-  last: any;
-  selectAll: any;
-}

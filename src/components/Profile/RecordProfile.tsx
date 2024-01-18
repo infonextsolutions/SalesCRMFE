@@ -19,7 +19,7 @@ const RecordProfile = ({
   live,
   data1,
   width,
-}: AudioProfileContainerProps) => {
+}: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
 
   function CallBack(childData: any) {
@@ -178,11 +178,3 @@ const RecordProfile = ({
 };
 
 export default RecordProfile;
-
-interface AudioProfileContainerProps {
-  titles: any[] | any;
-  current: Number;
-  [key: string]: any;
-  check: Boolean;
-  live?: any;
-}

@@ -5,11 +5,9 @@ import {
   parseDateString,
 } from "@/utils/AssetsHelper";
 import Image from "next/image";
-import { LeadId } from "@/types/leadId";
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
 import axios from "axios";
-import Lead from "@/types/Leads";
 
 const ProfilePage = ({ data1, updated, mastersData }: any) => {
   const [edit, setEdit] = useState(false);
@@ -36,7 +34,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
     return ""; // Return an empty string if no match is found
   }
 
-  const [data, setData] = useState<Lead>(data1);
+  const [data, setData] = useState<any>(data1);
   const [accessToken, setAccessToken] = useState<any>("");
 
   useEffect(() => {
@@ -512,7 +510,3 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
 };
 
 export default ProfilePage;
-
-interface props {
-  data: LeadId;
-}

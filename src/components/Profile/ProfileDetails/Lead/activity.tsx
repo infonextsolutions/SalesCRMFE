@@ -2,7 +2,6 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import React from "react";
 import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
-import { LeadId } from "@/types/leadId";
 import { Card } from "@mui/material";
 
 const Activityhistory = ({ data }: { data: any }) => {

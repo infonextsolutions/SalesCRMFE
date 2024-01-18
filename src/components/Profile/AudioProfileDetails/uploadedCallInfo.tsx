@@ -5,7 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const CallInfo = ({ check, info, data }: Props) => {
+const CallInfo = ({ check, info, data }: any) => {
   const activeTitle = 0;
 
   function convertDatetimeToCustomFormat(dateStr: any) {
@@ -111,82 +111,3 @@ const CallInfo = ({ check, info, data }: Props) => {
 };
 
 export default CallInfo;
-
-interface Props {
-  check: any;
-  info: any;
-  data: Root;
-}
-
-export interface Root {
-  auto_highlights_result: AutoHighlightsResult;
-  callTitle: string;
-  _id: string;
-  audio_url: string;
-  transId: string;
-  language_model: string;
-  acoustic_model: string;
-  language_code: string;
-  status: string;
-  text: string;
-  words: Word[];
-  confidence: string;
-  audio_duration: string;
-  utterances: Utterance[];
-  chapters: any;
-  sentiment_analysis_results: SentimentAnalysisResult[];
-  entities: any;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface AutoHighlightsResult {
-  status: string;
-  results: Result[];
-}
-
-export interface Result {
-  count: number;
-  rank: number;
-  text: string;
-  timestamps: Timestamp[];
-}
-
-export interface Timestamp {
-  start: number;
-  end: number;
-}
-
-export interface Word {
-  text: string;
-  start: number;
-  end: number;
-  confidence: number;
-  speaker: string;
-}
-
-export interface Utterance {
-  confidence: number;
-  end: number;
-  speaker: string;
-  start: number;
-  text: string;
-  words: Word2[];
-}
-
-export interface Word2 {
-  text: string;
-  start: number;
-  end: number;
-  confidence: number;
-  speaker: string;
-}
-
-export interface SentimentAnalysisResult {
-  text: string;
-  start: number;
-  end: number;
-  sentiment: string;
-  confidence: number;
-  speaker: string;
-}

@@ -6,7 +6,6 @@ const Asset = () => {
 
 export default Asset;
 
-// import Lead from "@/types/Leads";
 // import ButtonDropDown from "@/utils/Button/Button";
 // import SmallButton from "@/utils/Button/SmallButton";
 // import React, { useEffect, useState, Suspense } from "react";
@@ -22,7 +21,6 @@ export default Asset;
 // } from "@/utils/AssetsHelper";
 // import axios from "axios";
 // import Spinner from "@/components/loader/spinner";
-// import { ActiveCall } from "@/types/active-call";
 // import CallContainer from "@/components/calls/recorded-calls/Call/Call";
 // const LeadsTable = ({ totalRecords, search }: TableProps) => {
 //   const [pageCount, setpageCount]: any = useState(0);
@@ -432,10 +430,3 @@ export default Asset;
 // };
 
 // export default LeadsTable;
-
-// interface TableProps {
-//   totalRecords: Number;
-//   [key: string]: any;
-//   icon?: String;
-//   search: String | any;
-// }

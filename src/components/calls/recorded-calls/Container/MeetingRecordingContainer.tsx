@@ -15,7 +15,7 @@ import { CSVLink } from "react-csv";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
+const MeetingRecordingContainer = ({ dummy1, data }: any) => {
   const [callTypeOps, setCallTypeOps] = useState([
     {
       title: "Choose Type",
@@ -407,9 +407,3 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 };
 
 export default MeetingRecordingContainer;
-
-interface LeadContainerProps {
-  dummy1: any;
-  dummy2?: any;
-  data?: any;
-}

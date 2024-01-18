@@ -1,4 +1,4 @@
-import Button, { ButtonProps } from "@/utils/Button/Button";
+import Button from "@/utils/Button/Button";
 import { Logout } from "@mui/icons-material";
 import React from "react";
 
@@ -7,7 +7,7 @@ const Navigation = ({
   title,
   leftBtns,
   leftChildren,
-}: NavigationProps) => {
+}: any) => {
   console.log(buttons);
   const arr = [];
   return (
@@ -38,7 +38,7 @@ const Navigation = ({
         <div className="w-[50%] flex justify-end ">
           {leftChildren}
 
-          {buttons.map((item, i) => {
+          {buttons.map((item: any, i: any) => {
             return (
               <Button
                 dropdown={item.dropdown}
@@ -62,11 +62,3 @@ const Navigation = ({
 };
 
 export default Navigation;
-
-interface NavigationProps {
-  buttons: ButtonProps[];
-  children?: JSX.Element[] | JSX.Element;
-  title: String;
-  leftBtns?: any;
-  leftChildren?: any;
-}

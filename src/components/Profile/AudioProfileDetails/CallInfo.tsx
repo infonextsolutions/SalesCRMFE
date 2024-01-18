@@ -5,7 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
-const CallInfo = ({ check, info, data, data1 }: Props) => {
+const CallInfo = ({ check, info, data, data1 }: any) => {
   const activeTitle = 0;
   const [edit, setEdit] = useState(false);
   const [bool, setBool] = useState(true);
@@ -238,91 +238,3 @@ const CallInfo = ({ check, info, data, data1 }: Props) => {
 };
 
 export default CallInfo;
-
-interface Props {
-  check: any;
-  info: any;
-  data: any;
-  data1: Root;
-}
-
-interface Root {
-  _id: string;
-  callId: string;
-  call_title: string;
-  call_type: string;
-  leadId: LeadId;
-  companyId: CompanyId;
-  customerId: CustomerId;
-  call_start_time: string;
-  call_discription: string;
-  call_new_participant_name: string;
-  participants: {
-    name: string;
-    designation: string;
-  };
-  call_new_participant_designation: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  scriptId: string;
-}
-
-interface LeadId {
-  _id: string;
-  companyId: string;
-  customerId: string;
-  potential_deal_size: string;
-  win_probability: string;
-  created_by: string;
-  customer_name: string;
-  inquiry: string;
-  existing_budget: string;
-  leadStatus: string;
-  leadStage: string;
-  lead_title: string;
-  lead_description: string;
-  notes: Note[];
-  source: string;
-  leadId: string;
-  owners: string[];
-  __v: number;
-  updatedAt: string;
-  createdAt: string;
-  scriptId: string;
-  callId: string;
-}
-
-interface Note {
-  title: string;
-  content: string;
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface CompanyId {
-  _id: string;
-  company_name: string;
-  company_website_url: string;
-  company_icon: string;
-  company_location: string;
-  company_product_category: string;
-  company_description: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-interface CustomerId {
-  _id: string;
-  name: string;
-  contact: string;
-  email: string;
-  parentId: string;
-  designation: string;
-  companyId: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}

@@ -1,4 +1,3 @@
-import { ActiveCall } from "@/types/active-call";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -44,7 +43,7 @@ const AddText = ({ top, title, width, value, click }: any) => {
   );
 };
 
-const Notes = ({ cancel, data }: { cancel: () => void; data: ActiveCall }) => {
+const Notes = ({ cancel, data }: { cancel: () => void; data: any }) => {
   const [accessToken, setAccessToken] = useState<string>("");
 
   useEffect(() => {

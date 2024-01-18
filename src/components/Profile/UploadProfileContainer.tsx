@@ -7,7 +7,6 @@ import Notes from "./AudioProfileDetails/notesUpload";
 import CallInfo from "./AudioProfileDetails/uploadedCallInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/store/UI";
-import Recorded from "@/types/recorded-call";
 import Coaching from "./RecordedCoaching";
 
 const AudioProfileContainer = ({
@@ -17,7 +16,7 @@ const AudioProfileContainer = ({
   check,
   data,
   width,
-}: AudioProfileContainerProps) => {
+}: any) => {
   const activeTitle = useSelector((state: any) => state.ui.current);
   const dispatch = useDispatch();
   function CallBack(childData: any) {
@@ -54,84 +53,3 @@ const AudioProfileContainer = ({
 };
 
 export default AudioProfileContainer;
-
-interface AudioProfileContainerProps {
-  titles: any[] | any;
-  current: Number;
-  [key: string]: any;
-  check: Boolean;
-  data: Root;
-}
-
-export interface Root {
-  auto_highlights_result: AutoHighlightsResult;
-  callTitle: string;
-  _id: string;
-  audio_url: string;
-  transId: string;
-  language_model: string;
-  acoustic_model: string;
-  language_code: string;
-  status: string;
-  text: string;
-  words: Word[];
-  confidence: string;
-  audio_duration: string;
-  utterances: Utterance[];
-  chapters: any;
-  sentiment_analysis_results: SentimentAnalysisResult[];
-  entities: any;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface AutoHighlightsResult {
-  status: string;
-  results: Result[];
-}
-
-export interface Result {
-  count: number;
-  rank: number;
-  text: string;
-  timestamps: Timestamp[];
-}
-
-export interface Timestamp {
-  start: number;
-  end: number;
-}
-
-export interface Word {
-  text: string;
-  start: number;
-  end: number;
-  confidence: number;
-  speaker: string;
-}
-
-export interface Utterance {
-  confidence: number;
-  end: number;
-  speaker: string;
-  start: number;
-  text: string;
-  words: Word2[];
-}
-
-export interface Word2 {
-  text: string;
-  start: number;
-  end: number;
-  confidence: number;
-  speaker: string;
-}
-
-export interface SentimentAnalysisResult {
-  text: string;
-  start: number;
-  end: number;
-  sentiment: string;
-  confidence: number;
-  speaker: string;
-}

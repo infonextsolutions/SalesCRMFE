@@ -1,7 +1,4 @@
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
-import Call, { CompanyId, CustomerId } from "@/types/Calls";
-import { Owner } from "@/types/Leads";
-import { ActiveCall } from "@/types/active-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -467,7 +464,7 @@ const ExpandableRow = ({
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Lead Owner
         </p>
-        {leadData?.leadId?.owners?.map((item: Owner, i: any) => {
+        {leadData?.leadId?.owners?.map((item: any, i: any) => {
           return (
             <p
               key={i}
@@ -548,7 +545,7 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
   );
 };
 
-const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
+const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -823,10 +820,3 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
 };
 
 export default React.memo(CallContainer);
-
-interface CallProps {
-  id: String;
-  CallData: ActiveCall;
-  last: any;
-  selectAll: any;
-}

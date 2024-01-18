@@ -19,7 +19,7 @@ const SmallButton = ({
   RightDblIcon,
   RightIcon,
   click,
-}: ButtonProps) => {
+}: any) => {
   const Theme =
     theme === 1
       ? "bg-bg-red"
@@ -60,20 +60,3 @@ const SmallButton = ({
 };
 
 export default SmallButton;
-
-interface ButtonProps {
-  icon?: String;
-  width?: Number;
-  text?: String;
-  id?: Number;
-  theme: Number;
-  height?: Number;
-  left?: Number;
-  right?: Number;
-  border?: Boolean;
-  leftIcon?: Boolean;
-  leftDblIcon?: Boolean;
-  RightIcon?: Boolean;
-  RightDblIcon?: Boolean;
-  click?: () => {};
-}
