@@ -21,17 +21,19 @@ const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
   const [qaid, setQaid] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
   const [visibleRecords, setVisibleRecords] = useState(records);
+  const [mastersList, setMastersList] = useState([]);
   const router = useRouter();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState(
-    window.location.pathname.split("/").pop() === "open" ? "open" : "close"
-  );
+  const [status, setStatus] = useState("");
   const [stage, setStage] = useState("");
   const [product, setProduct] = useState("");
   const [leadSource, setLeadSource] = useState("");
   const [queryStr, setQueryStr] = useState("");
+  const [leadAllocatedBy, setLeadAllocatedBy] = useState("");
+  const [leadAllocatedTo, setLeadAllocatedTo] = useState("");
+
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
@@ -45,19 +47,36 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (window !== undefined) {
+      axios.get(
+        "https://sales365.trainright.fit/api/master-users/find-all", {
+        headers: {
+          Authorization: accessToken
+        }
+      }
+      ).then((res) => {
+        setMastersList(res?.data?.result);
+      }).catch((e) => { });
+    }
+  }, [accessToken]);
+
   const getQueryStr = () => {
     let queryStr = "";
     // if (search !== "") {
     //   queryStr += `&search=${search}`;
     // }
+    if (status !== "") {
+      queryStr += `&lead_status=${status}`;
+    }
     if (stage !== "") {
-      queryStr += `&leadStage=${stage}`;
+      queryStr += `&lead_stage=${stage}`;
     }
     if (product !== "") {
-      queryStr += `&productCategory=${product}`;
+      queryStr += `&product_service=${product}`;
     }
     if (leadSource !== "") {
-      queryStr += `&leadSource=${leadSource}`;
+      queryStr += `&lead_source=${leadSource}`;
     }
     if (startDate !== "") {
       queryStr += `&startDate=${startDate}`;
@@ -112,17 +131,15 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
               <select
                 onChange={(e) => {
                   setStatus(e.target.value);
-                  router.push(
-                    `/sales/${e.target.value === "open" ? "open" : "closed"}`
-                  );
                 }}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="open">
+                <option selected={status === ""} value=""></option>
+                <option selected={status === "open"} value="open">
                   Open
                 </option>
-                <option value="close">Close</option>
+                <option selected={status === "close"} value="close">Close</option>
               </select>
             </div>
             <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -247,9 +264,17 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
                 id="countries"
               >
                 <option selected={stage === ""} value=""></option>
-                <option selected={stage === "John C."} value="John C.">
-                  John C.
-                </option>
+                {
+                  mastersList?.map((opItem: any, idx: number) => (
+                    <option
+                      selected={leadAllocatedTo === opItem?._id}
+                      value={opItem?._id}
+                      key={opItem?._id}
+                    >
+                      {opItem?.name}
+                    </option>
+                  ))
+                }
               </select>
             </div>
             <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -260,9 +285,17 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
                 id="countries"
               >
                 <option selected={stage === ""} value=""></option>
-                <option selected={stage === "Mike"} value="Mike">
-                  Mike
-                </option>
+                {
+                  mastersList?.map((opItem: any, idx: number) => (
+                    <option
+                      selected={leadAllocatedBy === opItem?._id}
+                      value={opItem?._id}
+                      key={opItem?._id}
+                    >
+                      {opItem?.name}
+                    </option>
+                  ))
+                }
               </select>
             </div>
           </div>

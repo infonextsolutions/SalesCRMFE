@@ -7,7 +7,9 @@ const pData = [2400, 1398, 9800, 3908, 4800, 3800];
 const cData = [3400, 2398, 4800, 2908, 1800, 5800];
 const xLabels = ["12 Nov", "26 Nov", "10 Dec", "24 Dec", "7 Jan", "21 Jan"];
 
-const CallSentiment = () => {
+const CallSentiment = ({ callSentimentData }) => {
+  console.log('====== callSentimentData ======', callSentimentData);
+
   return (
     <Card className="w-[auto] h-[320px] bg-[#fff] rounded-xl shrink-0 px-[19px] py-[19px]">
       <h1 className="text-[20px] font-medium text-[#3F434A] tracking-wide">

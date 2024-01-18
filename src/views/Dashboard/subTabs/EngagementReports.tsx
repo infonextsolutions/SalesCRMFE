@@ -20,7 +20,7 @@ import {
   talkingSpeed,
 } from "@/constants/dummyData";
 
-const EngagementReports = ({ tabData }: { tabData?: any }) => {
+const EngagementReports = ({ tabData, callSentimentData }: { tabData?: any, callSentimentData?: any }) => {
   // SDR/BDM; Manager
   if (tabData?.key === "Manager") {
     return (
@@ -50,7 +50,7 @@ const EngagementReports = ({ tabData }: { tabData?: any }) => {
               { key: "", label: "Jacob Wilson" },
             ]}
           />
-          <CallSentiment />
+          <CallSentiment callSentimentData={callSentimentData} />
           <BarChartVertical
             title="Call Disposition"
             template={CallsDisposition}
@@ -119,7 +119,7 @@ const EngagementReports = ({ tabData }: { tabData?: any }) => {
             template={SalesRepSentimentScore}
             data={salesRepSentimentScore}
           />
-          <CallSentiment />
+          <CallSentiment callSentimentData={callSentimentData} />
         </div>
         <div className="w-[100%] lg:w-[46%] md:w-[46%] flex flex-wrap flex-col gap-6">
           <BarChartVertical

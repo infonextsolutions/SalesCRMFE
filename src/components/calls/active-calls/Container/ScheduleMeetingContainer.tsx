@@ -369,10 +369,10 @@ const ScheduleMeetingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="location"
               >
                 <option selected={location === ""} value=""></option>
-                <option selected={location === "zoom"} value="zoom">
+                <option selected={location === "Zoom"} value="Zoom">
                   Zoom
                 </option>
-                <option selected={location === "meet"} value="meet">
+                <option selected={location === "Google Meet"} value="Google Meet">
                   Google Meet
                 </option>
               </select>
