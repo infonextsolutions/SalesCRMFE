@@ -674,7 +674,6 @@ const CallsPage = () => {
   const handleSearchAssignTo = (val: any) => {
     setSearchAssignTo(val);
   };
-
   const handleAssignTo = (checked: boolean, qaId: any) => {
     try {
       if (selectedRows.length === 0) {
@@ -711,6 +710,7 @@ const CallsPage = () => {
                 success: "Successfully Assigned!",
               })
             );
+            window.location.reload();
           })
           .catch((err: any) => {
             dispatch(
@@ -885,12 +885,14 @@ const CallsPage = () => {
 
   const renderACR = () => {
     return (
-      <Table
-        rows={rowsACR}
-        columns={columnsACR}
-        handleSelection={handleSelection}
-        selectedRows={selectedRows}
-      />
+      <>
+        <Table
+          rows={rowsACR}
+          columns={columnsACR}
+          handleSelection={handleSelection}
+          selectedRows={selectedRows}
+        />
+      </>
     );
   };
 
