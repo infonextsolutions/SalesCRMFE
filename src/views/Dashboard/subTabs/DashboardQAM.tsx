@@ -21,11 +21,13 @@ const DashboardQAM = ({
   sellingData,
   getSellingData,
   noOfQuesAsked,
+  callSentimentData,
 }: {
   tabData?: any;
   sellingData?: any;
   getSellingData?: any;
   noOfQuesAsked?: any;
+  callSentimentData?: any;
 }) => {
   // SDR/BDM; Manager
   return (
@@ -129,7 +131,7 @@ const DashboardQAM = ({
               { key: "", label: "Jacob Wilson" },
             ]}
           />
-          <CallSentiment />
+          <CallSentiment callSentimentData={callSentimentData} />
           <NoiseAndVolumeChart />
         </div>
       </div>
