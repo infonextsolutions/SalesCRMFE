@@ -1,12 +1,9 @@
-import Call, { CompanyId, CustomerId } from "@/types/Calls";
-import { ActiveCall } from "@/types/active-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
-import { Owner } from "@/types/Leads";
 
 const CallBox = ({
   width,
@@ -561,7 +558,7 @@ const ParticipantsHover = ({ last, bounding, owner, participants }: any) => {
   );
 };
 
-const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
+const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
   const [selected, setSelected] = useState<boolean>(false);
@@ -848,10 +845,3 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
 };
 
 export default React.memo(CallContainer);
-
-interface CallProps {
-  id: String;
-  CallData: ActiveCall;
-  last: any;
-  selectAll: any;
-}

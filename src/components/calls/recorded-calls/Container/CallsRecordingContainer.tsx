@@ -10,7 +10,7 @@ import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 
-const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
+const CallsRecordingContainer = ({ dummy1, data }: any) => {
   const [callTypeOps, setCallTypeOps] = useState([
     {
       title: "Choose Type",
@@ -375,9 +375,3 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 };
 
 export default CallsRecordingContainer;
-
-interface LeadContainerProps {
-  dummy1: any;
-  dummy2?: any;
-  data?: any;
-}

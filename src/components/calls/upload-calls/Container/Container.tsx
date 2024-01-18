@@ -4,7 +4,7 @@ import Search from "../Search/Search";
 import Spinner from "@/components/loader/spinner";
 import DatePicker from "@/utils/Button/DatePicker";
 
-const CallsContainer = ({ dummy1, data }: LeadContainerProps) => {
+const CallsContainer = ({ dummy1, data }: any) => {
   const [search, setSearch] = useState("");
   const onChange = (e: any) => {
     const val = e.target.value;
@@ -78,9 +78,3 @@ const CallsContainer = ({ dummy1, data }: LeadContainerProps) => {
 };
 
 export default CallsContainer;
-
-interface LeadContainerProps {
-  dummy1: any;
-  dummy2?: any;
-  data?: any;
-}

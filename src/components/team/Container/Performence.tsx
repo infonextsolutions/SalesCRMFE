@@ -1,5 +1,4 @@
 // import LeadsTable from "@/components/View/Tables/LeadsSearch";
-import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import React, { useState, Suspense } from "react";
 import Search from "../Search/Search";

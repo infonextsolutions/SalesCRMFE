@@ -1,4 +1,3 @@
-import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState } from "react";
@@ -13,7 +12,7 @@ import {
   RightArrow,
 } from "@/utils/AssetsHelper";
 import axios from "axios";
-const LeadsTable = ({ totalRecords }: TableProps) => {
+const LeadsTable = ({ totalRecords }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -104,7 +103,7 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
       <div className="mt-[0px] w-[100%] h-[540px]  overflow-x-auto  hide-scrollbar">
         <Header />
         {Leads != null &&
-          Leads.map((item: Lead, ind: Number) => {
+          Leads.map((item: any, ind: Number) => {
             return (
               <LeadContainer
                 selectAll={false}
@@ -284,10 +283,3 @@ const LeadsTable = ({ totalRecords }: TableProps) => {
 };
 
 export default LeadsTable;
-
-interface TableProps {
-  totalRecords: Number;
-  [key: string]: any;
-  icon?: String;
-  search?: String;
-}

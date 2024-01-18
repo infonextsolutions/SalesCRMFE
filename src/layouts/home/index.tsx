@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useSelector } from "react-redux";
 
-const HomeLayout = ({ children }: HomeLayoutProps) => {
+const HomeLayout = ({ children }: any) => {
   const [width, setWidth] = React.useState(0);
 
   React.useEffect(() => {
@@ -35,7 +35,3 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
 };
 
 export default HomeLayout;
-
-interface HomeLayoutProps {
-  children: JSX.Element[] | JSX.Element;
-}

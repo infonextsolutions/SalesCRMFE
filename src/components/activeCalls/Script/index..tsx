@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import { getBasicIcon } from "@/utils/AssetsHelper";
-import { ActiveCall } from "@/types/active-call";
 import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Uploads from "@/components/View/uploads/index.jsx";
@@ -219,7 +218,7 @@ const ScriptList = ({
   setSelected: any;
   selected: any;
   data: any;
-  moredata: ActiveCall;
+  moredata: any;
   refresh: () => void;
   onSelectFile: (additionalData: any) => void;
 }) => {
@@ -391,7 +390,7 @@ const ScriptView = ({ data }: { data: any }) => {
   );
 };
 
-const Script = ({ data, scripts }: { data: ActiveCall; scripts: any }) => {
+const Script = ({ data, scripts }: { data: any; scripts: any }) => {
 
   const [activeTitle, setActiveTitle] = React.useState(0);
 

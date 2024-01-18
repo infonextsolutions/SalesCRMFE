@@ -61,7 +61,7 @@ const SalesOpen = ({
   mastersData,
   teamManagersData,
   sdrBdmData,
-}: props) => {
+}: any) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
 
@@ -542,10 +542,3 @@ const SalesOpen = ({
 };
 
 export default SalesOpen;
-
-interface props {
-  data: any;
-  mastersData: any;
-  teamManagersData: any;
-  sdrBdmData: any;
-}

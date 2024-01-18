@@ -1,13 +1,13 @@
-import Button, { ButtonProps } from "@/utils/Button/Button";
+import Button from "@/utils/Button/Button";
 import { Logout } from "@mui/icons-material";
 import React from "react";
 
-const NavigationWithoutTitle = ({ buttons }: NavigationProps) => {
+const NavigationWithoutTitle = ({ buttons }: any) => {
   return (
     <div className=" w-[18%] min-h-[40px] flex justify-end">
       {buttons?.length > 0 && (
         <div className="flex justify-end ">
-          {buttons.map((item, i) => {
+          {buttons.map((item: any, i: number) => {
             return (
               <Button
                 dropdown={item.dropdown}
@@ -31,8 +31,3 @@ const NavigationWithoutTitle = ({ buttons }: NavigationProps) => {
 };
 
 export default NavigationWithoutTitle;
-
-interface NavigationProps {
-  buttons: ButtonProps[];
-  children?: JSX.Element[] | JSX.Element;
-}

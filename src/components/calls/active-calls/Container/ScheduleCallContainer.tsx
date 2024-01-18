@@ -17,7 +17,7 @@ const CallsTable = React.lazy(
   () => import("@/components/View/Tables/calls/active-calls/Calls")
 );
 
-const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
+const ScheduleCallsContainer = ({ dummy1, data }: any) => {
   const [search, setSearch] = useState("");
   const onChange = (e: any) => {
     const val = e.target.value;
@@ -369,9 +369,3 @@ const ScheduleCallsContainer = ({ dummy1, data }: LeadContainerProps) => {
 };
 
 export default ScheduleCallsContainer;
-
-interface LeadContainerProps {
-  dummy1: any;
-  dummy2: any;
-  data: any;
-}

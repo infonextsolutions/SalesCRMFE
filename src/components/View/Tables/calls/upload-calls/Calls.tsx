@@ -1,4 +1,3 @@
-import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState, Suspense } from "react";
@@ -14,9 +13,8 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-import ActiveCall from "@/types/recorded-call";
 import CallContainer from "@/components/calls/upload-calls/Call/Call";
-const LeadsTable = ({ totalRecords, search }: TableProps) => {
+const LeadsTable = ({ totalRecords, search }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -460,10 +458,3 @@ const LeadsTable = ({ totalRecords, search }: TableProps) => {
 };
 
 export default LeadsTable;
-
-interface TableProps {
-  totalRecords: Number;
-  [key: string]: any;
-  icon?: String;
-  search: String | any;
-}

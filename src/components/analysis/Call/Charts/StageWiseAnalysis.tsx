@@ -62,18 +62,4 @@ const StageWiseAnalysis = ({
   );
 };
 
-export interface Result {
-  _id?: string;
-  consultative_selling?: number;
-  empathy?: number;
-  listening_skills?: number;
-  confidence?: number;
-  urgency_creation?: number;
-  positive_energy?: number;
-  report_building?: number;
-  politeness?: number;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
 export default StageWiseAnalysis;

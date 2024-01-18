@@ -38,10 +38,7 @@ const ChartContainer = ({ children }: any) => {
 const ScriptBuilding = ({
   script,
   getScriptData,
-}: {
-  script: Root;
-  getScriptData: any;
-}) => {
+}: any) => {
   const [startDate, setStartDate] = useState("2023-07-19");
   const [endDate, setEndDate] = useState("2023-07-26");
   useEffect(() => {
@@ -98,16 +95,3 @@ const ScriptBuilding = ({
 };
 
 export default ScriptBuilding;
-
-export interface Root {
-  _id: string;
-  opening: number;
-  lead_qualification: number;
-  need_discovery: number;
-  key_value_proposition: number;
-  product_knowledge: number;
-  price_discussion: number;
-  closing: number;
-  createdAt: string;
-  updatedAt: string;
-}
