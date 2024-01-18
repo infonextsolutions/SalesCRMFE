@@ -11,6 +11,41 @@ import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 
 const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
+  const [callTypeOps, setCallTypeOps] = useState([
+    {
+      title: "Choose Type",
+      val: "Choose Type",
+    },
+    {
+      title: "Discovery",
+      val: "Discovery",
+    },
+    {
+      title: "Product Demo",
+      val: "Product Demo",
+    },
+    {
+      title: "Solution Design",
+      val: "Solution Design",
+    },
+    {
+      title: "Consultation",
+      val: "Consultation",
+    },
+    {
+      title: "Pricing Discussion",
+      val: "Pricing Discussion",
+    },
+    {
+      title: "Negotiation",
+      val: "Negotiation",
+    },
+    {
+      title: "Follow-Up",
+      val: "Follow-Up",
+    },
+  ]);
+  const [ownerOps, setOwnerOps] = useState([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
@@ -27,6 +62,26 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
       setAccessToken(localStorage.getItem("access-token") || "");
     }
   }, []);
+
+
+  useEffect(() => {
+    try {
+      if (window !== undefined) {
+        axios.get(
+          "https://sales365.trainright.fit/api/master-users/find-all", {
+          headers: {
+            Authorization: accessToken
+          }
+        }
+        ).then((res) => {
+          setOwnerOps(res?.data?.result);
+        }).catch((e) => { });
+      }
+    } catch (error) {
+
+    }
+  }, [accessToken]);
+
   const onChange = (e: any) => {
     const val = e.target.value;
     setSearch(val);
@@ -38,16 +93,16 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
     //   queryStr += `&search=${search}`;
     // }
     if (companyName !== "") {
-      queryStr += `&companyName=${companyName}`;
+      queryStr += `&company_name=${companyName}`;
     }
     if (product !== "") {
-      queryStr += `&productCategory=${product}`;
+      queryStr += `&product_service=${product}`;
     }
     if (callOwner !== "") {
-      queryStr += `&callOwner=${callOwner}`;
+      queryStr += `&call_owner=${callOwner}`;
     }
     if (callType !== "") {
-      queryStr += `&callType=${callType}`;
+      queryStr += `&call_type=${callType}`;
     }
     if (callDisposition !== "") {
       queryStr += `&callDisposition=${callDisposition}`;
@@ -64,7 +119,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 
   const getData = async () => {
     try {
-      
+
       const payload = {
         companyName,
         product,
@@ -77,7 +132,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
           to: endDate,
         },
       };
-  
+
       const response = await axios.post(
         "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
         payload,
@@ -85,7 +140,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
       );
       dummy1 = { ...response.data };
     } catch (error) {
-      
+
     }
   };
 
@@ -215,6 +270,12 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 <option selected={product === "Product D"} value="Product D">
                   Product D
                 </option>
+                <option selected={product === "Technology"} value="Technology">Technology</option>
+                <option selected={product === "Healthcare"} value="Healthcare">Healthcare</option>
+                <option selected={product === "Finance"} value="Finance">Finance</option>
+                <option selected={product === "Education"} value="Education">Education</option>
+                <option selected={product === "Hospitality"} value="Hospitality">Hospitality</option>
+                <option selected={product === "Real Estate"} value=" Real Estate"> Real Estate</option>
               </select>
             </div>
             <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -225,9 +286,17 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="callOwner"
               >
                 <option selected={callOwner === ""} value=""></option>
-                <option selected={callOwner === "John"} value="John">
-                  John
-                </option>
+                {
+                  ownerOps?.map((opItem: any, idx: number) => (
+                    <option
+                      selected={callType === opItem?._id}
+                      value={opItem?._id}
+                      key={opItem?._id}
+                    >
+                      {opItem?.name}
+                    </option>
+                  ))
+                }
               </select>
             </div>
             <DatePicker
@@ -246,12 +315,17 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="callType"
               >
                 <option selected={callType === ""} value=""></option>
-                <option
-                  selected={callType === "Product Demo"}
-                  value="Product Demo"
-                >
-                  Product Demo
-                </option>
+                {
+                  callTypeOps?.map((opItem: any, idx: number) => (
+                    <option
+                      selected={callType === opItem?.val}
+                      value={opItem?.val}
+                      key={idx}
+                    >
+                      {opItem?.title}
+                    </option>
+                  ))
+                }
               </select>
             </div>
             <div className="flex gap-4 items-center w-80 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
