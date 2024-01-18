@@ -62,7 +62,7 @@ const Notes = ({ data, refresh }: any) => {
           title: title,
           content: content,
           callId: data._id,
-        },{headers: {Authorization: accessToken}})
+        }, { headers: { Authorization: accessToken } })
         .then((e) => {
           if (containerRef.current) {
             containerRef.current.scrollTop = 0; // Set scrollTop to 0 to scroll to the top
