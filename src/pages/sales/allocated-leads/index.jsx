@@ -32,43 +32,53 @@ export default function Open() {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/find-all", {
-      headers: { Authorization: accessToken }
-    }
-    )
+    axios
+      .get("https://sales365.trainright.fit/api/master-users/find-all", {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setMastersData(res.data);
-      }).catch((e) => { });
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/getTeamManagerList", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setTmData(res.data);
-    }).catch((e) => { });
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/getTeamSDRAndBDMList", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setSdrBdmData(res.data);
-    }).catch((e) => { });
+      })
+      .catch((e) => {});
+    axios
+      .get(
+        "https://sales365.trainright.fit/api/master-users/getTeamManagerList",
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
+      .then((res) => {
+        setTmData(res.data);
+      })
+      .catch((e) => {});
+    axios
+      .get(
+        "https://sales365.trainright.fit/api/master-users/getTeamSDRAndBDMList",
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
+      .then((res) => {
+        setSdrBdmData(res.data);
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   React.useEffect(() => {
-    const userId = window !== undefined ? localStorage.getItem("user-id") : ""
-    axios.get(`https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${userId}`, { headers: { Authorization: accessToken } })
+    const userId = window !== undefined ? localStorage.getItem("user-id") : "";
+    axios
+      .get(
+        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${userId}`,
+        { headers: { Authorization: accessToken } }
+      )
       .then((res) => {
         setData(res?.data);
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
   }, [accessToken]);
 
   React.useEffect(() => {
@@ -101,7 +111,7 @@ export default function Open() {
     }
   }, [state.isLoggedIn, logged]);
 
-  // 
+  //
 
   return (
     <>
@@ -111,7 +121,12 @@ export default function Open() {
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
-            <SalesOpen data={data} mastersData={mastersData} teamManagersData={tmData} sdrBdmData={sdrBdmData} />
+            <SalesOpen
+              data={data}
+              mastersData={mastersData}
+              teamManagersData={tmData}
+              sdrBdmData={sdrBdmData}
+            />
           </Suspense>
         )}
       </Suspense>

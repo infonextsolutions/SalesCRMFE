@@ -11,7 +11,11 @@ import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
 
-const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
+const CallBox = ({
+  width,
+  bool,
+  handleCheck = (checked: boolean) => {},
+}: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
     if (check) {
@@ -29,7 +33,12 @@ const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) 
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" ref={ref} className="checkbox" onChange={(e: any) => handleCheck(e.target.checked)} />
+      <input
+        type="checkbox"
+        ref={ref}
+        className="checkbox"
+        onChange={(e: any) => handleCheck(e.target.checked)}
+      />
     </div>
   );
 };
@@ -152,8 +161,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -359,24 +369,46 @@ const ExpandableRow = ({
 }: any) => {
   return (
     <div
-      className="custom-scroll-black w-[100%] h-[100vh] py-[30px] px-[50px] overflow-y-auto"
+      className="custom-scroll-black w-[100%] h-[100vh] py-[30px] px-[20px] overflow-y-auto pl-10"
       style={{
         zIndex: 100000000000000,
       }}
     >
-      <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
-        <h2 className="text-[18px] font-medium">Call Details</h2>
-        <button
-          className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
-          onClick={handleClose}
-        >
-          <img
-            alt="close"
-            loading="lazy"
-            className="w-[15px] h-[15px]"
-            src="/Images/Icons/Basic/Cross.svg"
-          />
-        </button>
+      <div className="w-[100%] text-black mb-[20px]">
+        <div className="flex items-center justify-end pr-6">
+          <button
+            className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center bg-[#eeeeee]"
+            onClick={handleClose}
+          >
+            <img
+              alt="close"
+              loading="lazy"
+              className="w-[15px] h-[15px]"
+              src="/Images/Icons/Basic/Cross.svg"
+            />
+          </button>
+        </div>
+        <div>
+          <h2 className="text-[18px] font-medium pt-4">Call Metrics</h2>
+          <ul className="w-full">
+            {callMatrics.map((item: any) => (
+              <li
+                key={item.title}
+                className="flex justify-between items-center"
+              >
+                <h3 className="text-[#909193] text-[14px] font-[500]">
+                  {item.title}
+                </h3>
+                <p
+                  className="text-[#434343] text-[14px] font-[500] w-[120px]
+                "
+                >
+                  {item.data}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       {/* <div className="w-[100%] flex flex-col justify-between">
         {callMatrics.map((item: any, i: any) => {
@@ -397,22 +429,23 @@ const ExpandableRow = ({
       </div> */}
 
       <div className="w-[100%] mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+        <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
           Call Description
-        </p>
-        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+        </h3>
+        <p className="text-[#585858] font-medium mt-[5px] text-[16px] tracking-wide">
           {CallDesc}
         </p>
+      </div>
+      <div>
+        <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
+          Call Player
+        </h3>
       </div>
     </div>
   );
 };
 
-const ParticipantsHover = ({
-  last,
-  bounding,
-  data,
-}: any) => {
+const ParticipantsHover = ({ last, bounding, data }: any) => {
   return (
     <div
       className="bg-[#E8E9EB] max-w-[240px] flex flex-col items-center pb-[40px] rounded-[15px] fixed py-[13px] px-[15px]  right-[10px] drop-shadow-sm"
@@ -432,8 +465,9 @@ const ParticipantsHover = ({
         return (
           <p
             key={i}
-            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
-              } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${
+              i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
+            } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -477,20 +511,19 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     if (CallData?.leadId?.length > 0) {
       axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData.leadId[0]._id}`, {
-          headers: {
-            Authorization: accessToken
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData.leadId[0]._id}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
         )
         .then((e: any) => {
           setChecked(false);
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
     }
   };
-
 
   React.useEffect(() => {
     if (checked) {
@@ -547,10 +580,19 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     <>
       <div className="flex">
         <div
-          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${(selectAll || selected || detailShow) && "bg-white"}`}
+          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${
+            (selectAll || selected || detailShow) && "bg-white"
+          }`}
           ref={wRef}
         >
-          <CallBox width={30} bool={selectAll || selected} handleCheck={(checked: any) => { setSelected(checked); console.log('CHECKED', checked) }} />
+          <CallBox
+            width={30}
+            bool={selectAll || selected}
+            handleCheck={(checked: any) => {
+              setSelected(checked);
+              console.log("CHECKED", checked);
+            }}
+          />
           <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
@@ -571,19 +613,20 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             left={20}
             color={"#000"}
             // text={"Discussion on PX features"}
-            text={
-              CallData?.callData?.[0]?.call_title || "-"
-            }
+            text={CallData?.callData?.[0]?.call_title || "-"}
             click={true}
-          // route={`${pathname}/${id}/audio-call`}
+            // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
             left={10}
-            text={CallData?.leadId?.length > 0 ? CallData?.leadId?.[0]?.leadId : "-"}
+            text={
+              CallData?.leadId?.length > 0 ? CallData?.leadId?.[0]?.leadId : "-"
+            }
             click={true}
-            route={`/sales/open/${CallData?.leadId?.length > 0 && CallData?.leadId?.[0]?._id
-              }/lead-profile`}
+            route={`/sales/open/${
+              CallData?.leadId?.length > 0 && CallData?.leadId?.[0]?._id
+            }/lead-profile`}
             color={"#000"}
           />
           <CallItem
@@ -598,7 +641,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             width={220}
             left={40}
             text={CallData?.company?.[0]?.company_name}
-            secondaryText={CallData?.company?.[0]?.company_address || CallData?.company?.[0]?.company_location}
+            secondaryText={
+              CallData?.company?.[0]?.company_address ||
+              CallData?.company?.[0]?.company_location
+            }
             click={true}
             route={`/sales/open/${CallData?.leadId?.[0]?._id}/company-profile`}
             color={"#000"}
@@ -636,9 +682,25 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             left={20}
             text={CallData?.company?.[0]?.company_product_category ?? "-"}
           />
-          <CallItem width={200} left={20} text={CallData?.callData?.[0]?.call_new_participant_name} />
-          <CallItem width={100} left={20} text={CallData?.leadId?.[0]?.owners?.[0]?.name || CallData?.owner?.[0]?.name || "-"} />
-          <CallItem width={130} left={20} text={CallData?.callData?.[0]?.call_type} />
+          <CallItem
+            width={200}
+            left={20}
+            text={CallData?.callData?.[0]?.call_new_participant_name}
+          />
+          <CallItem
+            width={100}
+            left={20}
+            text={
+              CallData?.leadId?.[0]?.owners?.[0]?.name ||
+              CallData?.owner?.[0]?.name ||
+              "-"
+            }
+          />
+          <CallItem
+            width={130}
+            left={20}
+            text={CallData?.callData?.[0]?.call_type}
+          />
           <CallItemMultiple
             width={120}
             left={10}
@@ -648,9 +710,20 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={120}
             left={10}
-            text={calculateTimeDifference(CallData?.StartTime, CallData?.EndTime)}
+            text={calculateTimeDifference(
+              CallData?.StartTime,
+              CallData?.EndTime
+            )}
           />
-          <CallItem width={160} left={20} text={CallData?.callDisposition || CallData?.callData?.[0]?.call_disposition || "-"} />
+          <CallItem
+            width={160}
+            left={20}
+            text={
+              CallData?.callDisposition ||
+              CallData?.callData?.[0]?.call_disposition ||
+              "-"
+            }
+          />
           <CallItem width={120} left={10} text={CallData?.score || "-"} />
           {/* <CallItem
             width={110}
@@ -693,9 +766,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
         </BackdropRight>
       )}
 
-      {hover && (
-        <ParticipantsHover bounding={bounding} last={last} />
-      )}
+      {hover && <ParticipantsHover bounding={bounding} last={last} />}
     </>
   );
 };

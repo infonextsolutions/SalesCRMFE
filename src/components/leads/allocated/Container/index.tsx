@@ -19,7 +19,9 @@ const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
 
 const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
-  const [qaid, setQaid] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
+  const [qaid, setQaid] = useState(
+    window !== undefined ? localStorage.getItem("user-id") : ""
+  );
   const [visibleRecords, setVisibleRecords] = useState(records);
   const [mastersList, setMastersList] = useState([]);
   const router = useRouter();
@@ -102,15 +104,15 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       );
       setVisibleRecords({ ...response.data });
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -120,12 +122,12 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
 
   return (
     <div className="w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] h-[120px] flex items-center  px-[8px] ">
+      <div className="w-[100%] h-[200px] flex items-center  px-[8px] mb-4">
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex gap-5">
             <Search change={onChange} view={view} />
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 flex-wrap">
             <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Status</h2>
               <select
@@ -142,7 +144,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
                 <option selected={status === "close"} value="close">Close</option>
               </select>
             </div>
-            <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex gap-5 items-center justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Stage</h2>
               <select
                 onChange={(e) => setStage(e.target.value)}
@@ -248,7 +250,9 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
               </select>
             </div>
             <div className="">
-              <span className="text-gray-500">Allocated Start and End Date</span>
+              <span className="text-gray-500">
+                Allocated Start and End Date
+              </span>
               <DatePicker
                 startDate={startDate}
                 setStartDate={setStartDate}
@@ -256,7 +260,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
                 setEndDate={setEndDate}
               />
             </div>
-            <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center gap-5 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Lead Allocated To</h2>
               <select
                 onChange={(e) => setStage(e.target.value)}
@@ -277,7 +281,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
                 }
               </select>
             </div>
-            <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center gap-5 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Lead Allocated By</h2>
               <select
                 onChange={(e) => setStage(e.target.value)}
@@ -332,24 +336,26 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
           />
         )} */}
       </div>
-      {!view ? (
-        <Suspense fallback={<Spinner />}>
-          <LeadsTable
-            totalRecords={visibleRecords}
-            search={search}
-            queryStr={queryStr}
-          />
-        </Suspense>
-      ) : (
-        <Suspense fallback={<Spinner />}>
-          {/* <KanbanContainer list={list} /> */}
-          <KanbanTable
-            totalRecords={visibleRecords}
-            search={search}
-            queryStr={queryStr}
-          />
-        </Suspense>
-      )}
+      <div className="">
+        {!view ? (
+          <Suspense fallback={<Spinner />}>
+            <LeadsTable
+              totalRecords={visibleRecords}
+              search={search}
+              queryStr={queryStr}
+            />
+          </Suspense>
+        ) : (
+          <Suspense fallback={<Spinner />}>
+            {/* <KanbanContainer list={list} /> */}
+            <KanbanTable
+              totalRecords={visibleRecords}
+              search={search}
+              queryStr={queryStr}
+            />
+          </Suspense>
+        )}
+      </div>
     </div>
   );
 };

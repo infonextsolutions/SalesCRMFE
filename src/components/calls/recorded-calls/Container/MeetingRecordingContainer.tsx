@@ -72,19 +72,18 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   useEffect(() => {
     try {
       if (window !== undefined) {
-        axios.get(
-          "https://sales365.trainright.fit/api/master-users/find-all", {
-          headers: {
-            Authorization: accessToken
-          }
-        }
-        ).then((res) => {
-          setOwnerOps(res?.data?.result);
-        }).catch((e) => { });
+        axios
+          .get("https://sales365.trainright.fit/api/master-users/find-all", {
+            headers: {
+              Authorization: accessToken,
+            },
+          })
+          .then((res) => {
+            setOwnerOps(res?.data?.result);
+          })
+          .catch((e) => {});
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }, [accessToken]);
 
   const onChange = (e: any) => {
@@ -127,7 +126,6 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 
   const getData = async () => {
     try {
-
       const payload = {
         companyName,
         product,
@@ -148,9 +146,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
         { headers: { Authorization: accessToken } }
       );
       dummy1 = { ...response.data };
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
   const ref: any = useRef();
 
@@ -242,7 +238,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               ]}
             />
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center gap-5">
             <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Company Name</h2>
               <select
@@ -303,12 +299,31 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 <option selected={product === "Product D"} value="Product D">
                   Product D
                 </option>
-                <option selected={product === "Technology"} value="Technology">Technology</option>
-                <option selected={product === "Healthcare"} value="Healthcare">Healthcare</option>
-                <option selected={product === "Finance"} value="Finance">Finance</option>
-                <option selected={product === "Education"} value="Education">Education</option>
-                <option selected={product === "Hospitality"} value="Hospitality">Hospitality</option>
-                <option selected={product === "Real Estate"} value=" Real Estate"> Real Estate</option>
+                <option selected={product === "Technology"} value="Technology">
+                  Technology
+                </option>
+                <option selected={product === "Healthcare"} value="Healthcare">
+                  Healthcare
+                </option>
+                <option selected={product === "Finance"} value="Finance">
+                  Finance
+                </option>
+                <option selected={product === "Education"} value="Education">
+                  Education
+                </option>
+                <option
+                  selected={product === "Hospitality"}
+                  value="Hospitality"
+                >
+                  Hospitality
+                </option>
+                <option
+                  selected={product === "Real Estate"}
+                  value=" Real Estate"
+                >
+                  {" "}
+                  Real Estate
+                </option>
               </select>
             </div>
             <div className="flex items-center w-48 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -319,82 +334,57 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 id="meetingOwner"
               >
                 <option selected={callOwner === ""} value=""></option>
-                {
-                  ownerOps?.map((opItem: any, idx: number) => (
-                    <option
-                      selected={callType === opItem?._id}
-                      value={opItem?._id}
-                      key={opItem?._id}
-                    >
-                      {opItem?.name}
-                    </option>
-                  ))
-                }
+                {ownerOps?.map((opItem: any, idx: number) => (
+                  <option
+                    selected={callType === opItem?._id}
+                    value={opItem?._id}
+                    key={opItem?._id}
+                  >
+                    {opItem?.name}
+                  </option>
+                ))}
               </select>
             </div>
+
+            <div className="flex items-center w-40 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <h2 className="font-medium">Location</h2>
+              <select
+                onChange={(e) => setLocation(e.target.value)}
+                className="text-red-500"
+                id="location"
+              >
+                <option selected={location === ""} value=""></option>
+                <option selected={location === "zoom"} value="zoom">
+                  Zoom
+                </option>
+                <option selected={location === "meet"} value="meet">
+                  Meet
+                </option>
+              </select>
+            </div>
+            <div className="flex gap-4 items-center w-72 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <h2 className="font-medium">Call Dispostion</h2>
+              <select
+                onChange={(e) => setCallDisposition(e.target.value)}
+                className="text-red-500"
+                id="callDispostion"
+              >
+                <option selected={callDisposition === ""} value=""></option>
+                <option
+                  selected={callDisposition === "Follow-up Required"}
+                  value="Follow-up Required"
+                >
+                  Follow-up Required
+                </option>
+              </select>
+            </div>
+
             <DatePicker
               startDate={startDate}
               setStartDate={setStartDate}
               endDate={endDate}
               setEndDate={setEndDate}
             />
-          </div>
-          <div className="flex gap-4">
-            <div className="flex items-center w-60 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <h2 className="font-medium">Meeting Type</h2>
-              <select
-                onChange={(e) => setCallType(e.target.value)}
-                className="text-red-500"
-                id="meetingType"
-              >
-                <option selected={callType === ""} value=""></option>
-                {
-                  callTypeOps?.map((opItem: any, idx: number) => (
-                    <option
-                      selected={callType === opItem?.val}
-                      value={opItem?.val}
-                      key={idx}
-                    >
-                      {opItem?.title}
-                    </option>
-                  ))
-                }
-              </select>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center w-40 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h2 className="font-medium">Location</h2>
-                <select
-                  onChange={(e) => setLocation(e.target.value)}
-                  className="text-red-500"
-                  id="location"
-                >
-                  <option selected={location === ""} value=""></option>
-                  <option selected={location === "zoom"} value="zoom">
-                    Zoom
-                  </option>
-                  <option selected={location === "meet"} value="meet">
-                    Meet
-                  </option>
-                </select>
-              </div>
-              <div className="flex gap-4 items-center w-72 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h2 className="font-medium">Call Dispostion</h2>
-                <select
-                  onChange={(e) => setCallDisposition(e.target.value)}
-                  className="text-red-500"
-                  id="callDispostion"
-                >
-                  <option selected={callDisposition === ""} value=""></option>
-                  <option
-                    selected={callDisposition === "Follow-up Required"}
-                    value="Follow-up Required"
-                  >
-                    Follow-up Required
-                  </option>
-                </select>
-              </div>
-            </div>
           </div>
         </div>
         {/* <ButtonDropDown
