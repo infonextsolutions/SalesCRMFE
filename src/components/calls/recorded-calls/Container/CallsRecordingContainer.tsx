@@ -64,7 +64,6 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 
   const getData = async () => {
     try {
-      
       const payload = {
         companyName,
         product,
@@ -77,16 +76,14 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
           to: endDate,
         },
       };
-  
+
       const response = await axios.post(
         "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
         payload,
         { headers: { Authorization: accessToken } }
       );
       dummy1 = { ...response.data };
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   const ref: any = useRef();
@@ -154,8 +151,8 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               ]}
             />
           </div>
-          <div className="flex items-center gap-5">
-            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <div className="flex items-center gap-5 flex-wrap ">
+            <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -186,7 +183,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
-            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
@@ -217,7 +214,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
-            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
@@ -230,15 +227,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
-            <DatePicker
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-            />
-          </div>
-          <div className="flex gap-4">
-            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
@@ -254,7 +243,7 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
-            <div className="flex gap-4 items-center w-80 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex gap-4 items-center w-72 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Dispostion</h2>
               <select
                 onChange={(e) => setCallDisposition(e.target.value)}
@@ -270,6 +259,12 @@ const CallsRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
+            <DatePicker
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+            />
           </div>
         </div>
         {/* <ButtonDropDown

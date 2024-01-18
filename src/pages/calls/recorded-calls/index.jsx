@@ -8,7 +8,6 @@ import Navbar from "@/components/app/Navbar/Navbar";
 import CallsRecordingContainer from "@/components/calls/recorded-calls/Container/CallsRecordingContainer";
 import MeetingRecordingContainer from "@/components/calls/recorded-calls/Container/MeetingRecordingContainer";
 
-
 const Calls = () => {
   const [recodedCalls, setRecordedCalls] = useState(true);
   const [recodedMeeting, setRecodedMeeting] = useState(false);
@@ -23,18 +22,18 @@ const Calls = () => {
   }, []);
 
   const getData = () => {
-    const apiEndpoint = recodedCalls ? "https://sales365.trainright.fit/api/recording/find-all" : "https://sales365.trainright.fit/api/event/findAllRecordedMeetings";
+    const apiEndpoint = recodedCalls
+      ? "https://sales365.trainright.fit/api/recording/find-all"
+      : "https://sales365.trainright.fit/api/event/findAllRecordedMeetings";
     try {
-      axios.get(
-        apiEndpoint, {
-        headers: { Authorization: accessToken }
-      }
-      ).then((res) => {
-        setData(res.data);
-      });
-    } catch (error) {
-
-    }
+      axios
+        .get(apiEndpoint, {
+          headers: { Authorization: accessToken },
+        })
+        .then((res) => {
+          setData(res.data);
+        });
+    } catch (error) {}
   };
 
   useEffect(() => {

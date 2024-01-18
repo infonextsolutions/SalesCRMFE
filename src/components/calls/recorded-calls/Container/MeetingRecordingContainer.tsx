@@ -74,7 +74,6 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 
   const getData = async () => {
     try {
-
       const payload = {
         companyName,
         product,
@@ -95,9 +94,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
         { headers: { Authorization: accessToken } }
       );
       dummy1 = { ...response.data };
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
   const ref: any = useRef();
 
@@ -189,7 +186,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
               ]}
             />
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center gap-5">
             <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Company Name</h2>
               <select
@@ -265,64 +262,46 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
                 </option>
               </select>
             </div>
+
+            <div className="flex items-center w-40 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <h2 className="font-medium">Location</h2>
+              <select
+                onChange={(e) => setLocation(e.target.value)}
+                className="text-red-500"
+                id="location"
+              >
+                <option selected={location === ""} value=""></option>
+                <option selected={location === "zoom"} value="zoom">
+                  Zoom
+                </option>
+                <option selected={location === "meet"} value="meet">
+                  Meet
+                </option>
+              </select>
+            </div>
+            <div className="flex gap-4 items-center w-72 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <h2 className="font-medium">Call Dispostion</h2>
+              <select
+                onChange={(e) => setCallDisposition(e.target.value)}
+                className="text-red-500"
+                id="callDispostion"
+              >
+                <option selected={callDisposition === ""} value=""></option>
+                <option
+                  selected={callDisposition === "Follow-up Required"}
+                  value="Follow-up Required"
+                >
+                  Follow-up Required
+                </option>
+              </select>
+            </div>
+
             <DatePicker
               startDate={startDate}
               setStartDate={setStartDate}
               endDate={endDate}
               setEndDate={setEndDate}
             />
-          </div>
-          <div className="flex gap-4">
-            <div className="flex items-center w-60 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <h2 className="font-medium">Meeting Type</h2>
-              <select
-                onChange={(e) => setCallType(e.target.value)}
-                className="text-red-500"
-                id="meetingType"
-              >
-                <option selected={callType === ""} value=""></option>
-                <option
-                  selected={callType === "Product Demo"}
-                  value="Product Demo"
-                >
-                  Product Demo
-                </option>
-              </select>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center w-40 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h2 className="font-medium">Location</h2>
-                <select
-                  onChange={(e) => setLocation(e.target.value)}
-                  className="text-red-500"
-                  id="location"
-                >
-                  <option selected={location === ""} value=""></option>
-                  <option selected={location === "zoom"} value="zoom">
-                    Zoom
-                  </option>
-                  <option selected={location === "meet"} value="meet">
-                    Meet
-                  </option>
-                </select>
-              </div>
-              <div className="flex gap-4 items-center w-72 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h2 className="font-medium">Call Dispostion</h2>
-                <select
-                  onChange={(e) => setCallDisposition(e.target.value)}
-                  className="text-red-500"
-                  id="callDispostion"
-                >
-                  <option selected={callDisposition === ""} value=""></option>
-                  <option
-                    selected={callDisposition === "Follow-up Required"}
-                    value="Follow-up Required"
-                  >
-                    Follow-up Required
-                  </option>
-                </select>
-              </div>
-            </div>
           </div>
         </div>
         {/* <ButtonDropDown
