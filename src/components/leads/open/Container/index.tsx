@@ -64,6 +64,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
     if (endDate !== "") {
       queryStr += `&endDate=${endDate}`;
     }
+    console.log('----------- get query str : filter change ------------', queryStr);
     setQueryStr(queryStr);
     return queryStr;
   };
