@@ -390,6 +390,7 @@ const Dashboard = ({ data }: any) => {
           sellingData={sellingData}
           getSellingData={getSellingData}
           noOfQuesAsked={noOfQuesAskedData}
+          callSentimentData={callSentimentData}
         />
       );
     } else if (role === "QA manager") {
@@ -399,6 +400,7 @@ const Dashboard = ({ data }: any) => {
           sellingData={sellingData}
           getSellingData={getSellingData}
           noOfQuesAsked={noOfQuesAskedData}
+          callSentimentData={callSentimentData}
         />
       );
     } else {
