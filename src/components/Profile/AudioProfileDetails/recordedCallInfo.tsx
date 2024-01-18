@@ -6,7 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const CallInfo = ({ check, data, data1 }: any) => {
+const CallInfo = ({ check, data, data1, refresh }: any) => {
   const activeTitle = 0;
   // const [edit, setEdit] = useState(false);
   // const [bool, setBool] = useState(true);

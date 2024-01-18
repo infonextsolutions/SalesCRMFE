@@ -22,17 +22,22 @@ import {
 } from "@/constants/dummyData";
 import GroupBarChartVertical from "@/components/analysis/Call/Charts/GroupBarChartVertical";
 import NavigationWithSwitchIcon from "@/components/app/NavigationWithSwitchIcon";
+import NoOfInterruptionsChart from "@/components/analysis/Call/Charts/NoOfInterruptions";
 
 const CommunicationInteraction = ({
   tabData,
   pitchData,
   getPitchData,
   talkRatioData,
+  noOfInterruptions,
+  noOfSwitches,
 }: {
   tabData?: any;
   pitchData?: any;
   getPitchData?: any;
   talkRatioData?: any;
+  noOfInterruptions?: any;
+  noOfSwitches?: any;
 }) => {
   // QA Analyst; QA manager; Manager, SRD/BDM
   if (tabData?.key === "Manager") {
@@ -93,10 +98,10 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <GroupBarChartVertical
+            <NoOfInterruptionsChart
               title="Number of Interruptions"
               template={NoOfInterruptions}
-              data={noOfParticipants}
+              data={noOfInterruptions}
               options={[
                 { key: "", label: "Select Team Members" },
                 { key: "", label: "John C." },
@@ -108,7 +113,7 @@ const CommunicationInteraction = ({
             <BarChartVertical
               title="Number of Switches"
               template={NoOfSwitches}
-              data={avgCallScore}
+              data={noOfSwitches}
               options={[
                 { key: "", label: "Select Team Members" },
                 { key: "", label: "John C." },
@@ -171,10 +176,10 @@ const CommunicationInteraction = ({
                 { key: "", label: "Jacob Wilson" },
               ]}
             />
-            <GroupBarChartVertical
+            <NoOfInterruptionsChart
               title="Number of Interruptions"
               template={NoOfInterruptions}
-              data={noOfParticipants}
+              data={noOfInterruptions}
               options={[
                 { key: "", label: "Select Team Members" },
                 { key: "", label: "John C." },
@@ -186,7 +191,7 @@ const CommunicationInteraction = ({
             <BarChartVertical
               title="Number of Switches"
               template={NoOfSwitches}
-              data={avgCallScore}
+              data={noOfSwitches}
               options={[
                 { key: "", label: "Select Team Members" },
                 { key: "", label: "John C." },
@@ -280,15 +285,15 @@ const CommunicationInteraction = ({
               template={LongestCustomerStory}
               data={avgCallScore}
             />
-            <GroupBarChartVertical
+            <NoOfInterruptionsChart
               title="Number of Interruptions"
               template={NoOfInterruptions}
-              data={noOfParticipants}
+              data={noOfInterruptions}
             />
             <BarChartVertical
               title="Number of Switches"
               template={NoOfSwitches}
-              data={avgCallScore}
+              data={noOfSwitches}
             />
           </div>
         </div>

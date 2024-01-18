@@ -99,7 +99,7 @@ const AudioProfileContainer = ({
             <CallInfo data1={data1} data={data} check={check} />
           )}
           {activeTitle === 1 && (
-            <CommentsAndNotes data={data} notesData={data} />
+            <CommentsAndNotes data={data} notesData={data} refresh={refresh} />
           )}
           {activeTitle === 2 && (
             <Coaching data={data} refresh={refresh} />

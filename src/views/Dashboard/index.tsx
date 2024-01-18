@@ -44,6 +44,8 @@ const Dashboard = ({ data }: any) => {
   const [avgCallScoresData, setAvgCallScoresData] = useState({});
   const [noOfQuesAskedData, setNoOfQuesAsked] = useState({});
   const [talkRatioData, setTalkRatioData] = useState({});
+  const [noOfInterruptions, setNoOfInterruptions] = useState({});
+  const [noOfSwitches, setNoOfSwitches] = useState({});
 
   const getDealAnalyticsData = () => {
     axios
@@ -61,7 +63,7 @@ const Dashboard = ({ data }: any) => {
           result: res.data.result,
         });
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   };
 
   const getAvgCallScores = () => {
@@ -81,7 +83,7 @@ const Dashboard = ({ data }: any) => {
         });
         setAvgCallScoresData(formattedData);
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   };
 
   const getNoOfQuesAsked = () => {
@@ -101,7 +103,7 @@ const Dashboard = ({ data }: any) => {
         });
         setNoOfQuesAsked(formattedData);
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   };
 
   const getTalkRatioData = () => {
@@ -124,6 +126,46 @@ const Dashboard = ({ data }: any) => {
       .catch((err: any) => {});
   };
 
+  const getNoOfInterruptions = () => {
+    axios.get(
+      `https://sales365.trainright.fit/api/dashboard/countInterruptions`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
+    )
+      .then((res: any) => {
+        // let formattedData: any = {};
+        // res?.data?.result?.forEach((item: any) => {
+        //   formattedData[item?.label?.replaceAll(" ", "_")] = item?.value;
+        // });
+        setNoOfInterruptions(res.data.result);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
+  const getNoOfSwitches = () => {
+    axios.get(
+      `https://sales365.trainright.fit/api/dashboard/numberOfSwiteches`, {
+      headers: {
+        Authorization: accessToken
+      }
+    }
+    )
+      .then((res: any) => {
+        let formattedData: any = {};
+        res?.data?.result?.forEach((item: any) => {
+          formattedData[item?.day?.replaceAll(" ", "_")] = item?.switches;
+        });
+        setNoOfSwitches(formattedData);
+      })
+      .catch((err: any) => {
+
+      });
+  };
+
   useEffect(() => {
     if (window !== undefined) {
       setAccessToken(localStorage.getItem("access-token"));
@@ -136,6 +178,8 @@ const Dashboard = ({ data }: any) => {
       getAvgCallScores();
       getNoOfQuesAsked();
       getTalkRatioData();
+      getNoOfInterruptions();
+      getNoOfSwitches();
     }
   }, [accessToken]);
 
@@ -422,6 +466,8 @@ const Dashboard = ({ data }: any) => {
           pitchData={pitchData}
           getPitchData={getPitchData}
           talkRatioData={talkRatioData}
+          noOfInterruptions={noOfInterruptions}
+          noOfSwitches={noOfSwitches}
         />
       )}
       {currTab === 2 && renderTab2()}
