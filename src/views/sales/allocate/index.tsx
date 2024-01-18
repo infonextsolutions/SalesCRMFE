@@ -57,7 +57,12 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) => {
+const SalesOpen = ({
+  data,
+  mastersData,
+  teamManagersData,
+  sdrBdmData,
+}: props) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
   const [selectedRows, setSelectedRows] = useState<any>([]);
@@ -94,7 +99,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
   const [promptVal, setPromptVal] = useState(false);
   const [imports, setImports] = useState(false);
   const [bool, setBool] = useState(true);
-  const [searchAssignTo, setSearchAssignTo] = useState('');
+  const [searchAssignTo, setSearchAssignTo] = useState("");
 
   const [showSubDD, setShowSubDD] = useState<number>(-1);
 
@@ -165,10 +170,15 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
 
   useEffect(() => {
     if (window !== undefined) {
-      axios.get(`https://sales365.trainright.fit/api/master-users/getTeamSDRAndBDMList`, { headers: { Authorization: accessToken } })
+      axios
+        .get(
+          `https://sales365.trainright.fit/api/master-users/getTeamSDRAndBDMList`,
+          { headers: { Authorization: accessToken } }
+        )
         .then((res: any) => {
-          console.log('=============== res sdr/bdm ==============', res.data);
-        }).catch((err: any) => { });
+          console.log("=============== res sdr/bdm ==============", res.data);
+        })
+        .catch((err: any) => {});
     }
   }, [accessToken]);
 
@@ -183,7 +193,6 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
 
   const makecall = async () => {
     try {
-
       const res = await axios.post(
         "https://sales365.trainright.fit/api/calling/make-call",
         {
@@ -191,9 +200,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
         },
         { headers: { Authorization: accessToken } }
       );
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const addExport = (e: any, e1: any) => {
@@ -209,133 +216,226 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
   const handleAllocateTo = (checked: boolean, newOwnerId: any) => {
     try {
       if (selectedRows.length === 0) {
-        dispatch(setError({
-          show: true,
-          error: "No Selection.",
-        }));
+        dispatch(
+          setError({
+            show: true,
+            error: "No Selection.",
+          })
+        );
       } else if (checked) {
-        dispatch(setSuccess({
-          show: true,
-          success: "Allocating...",
-        }));
+        dispatch(
+          setSuccess({
+            show: true,
+            success: "Allocating...",
+          })
+        );
         const assigningPromise = selectedRows?.map((selectedRow: any) => {
           const payload = {
             id: selectedRow,
-            manager: window !== undefined ? localStorage.getItem('user-id') : "",
-            owner: newOwnerId
+            manager:
+              window !== undefined ? localStorage.getItem("user-id") : "",
+            owner: newOwnerId,
           };
-          return axios.post(`https://sales365.trainright.fit/api/leads/allocateLeadToOwner`, payload, { headers: { Authorization: accessToken } });
+          return axios.post(
+            `https://sales365.trainright.fit/api/leads/allocateLeadToOwner`,
+            payload,
+            { headers: { Authorization: accessToken } }
+          );
         });
         Promise.all(assigningPromise)
           .then((res: any) => {
-            dispatch(setSuccess({
-              show: true,
-              success: "Lead Allocated Successfully!",
-            }));
+            dispatch(
+              setSuccess({
+                show: true,
+                success: "Lead Allocated Successfully!",
+              })
+            );
           })
           .catch((err: any) => {
-            dispatch(setError({
-              show: true,
-              error: "Error Occured!",
-            }));
+            dispatch(
+              setError({
+                show: true,
+                error: "Error Occured!",
+              })
+            );
           });
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const updateLead = (checked: any, key: any, value: any) => {
-    console.log('------- updateLead : allocate -------', checked, key, value);
+    console.log("------- updateLead : allocate -------", checked, key, value);
     if (checked) {
       if (selectedRows.length === 0) {
-        dispatch(setError({
-          show: true,
-          error: "No Selection.",
-        }));
+        dispatch(
+          setError({
+            show: true,
+            error: "No Selection.",
+          })
+        );
       } else {
         const payload = {
-          [key]: value
+          [key]: value,
         };
-        axios.put(``, payload, { headers: { Authorization: accessToken } })
-          .then((res: any) => {
-
-          }).catch((err: any) => {
-
-          });
+        axios
+          .put(``, payload, { headers: { Authorization: accessToken } })
+          .then((res: any) => {})
+          .catch((err: any) => {});
       }
     }
   };
 
   const renderDropdownList = () => {
     return (
-      <div className="">
-        <div className={`rounded-[8px] overflow-hidden`}>
-          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 0 && "bg-[#eee]"}`} onClick={() => setShowSubDD(showSubDD !== 0 ? 0 : -1)}>Allocate To</button>
+      <div className="flex gap-7 ">
+        <div className={`rounded-[8px] overflow-hidden w-[150px]`}>
+          <button
+            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
+              showSubDD === 0 && "bg-[#eee]"
+            }`}
+            onClick={() => setShowSubDD(showSubDD !== 0 ? 0 : -1)}
+          >
+            Allocate To
+          </button>
+          <button
+            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
+              showSubDD === 1 && "bg-[#eee]"
+            }`}
+            onClick={() => setShowSubDD(1)}
+          >
+            Change Lead Status
+          </button>
+          <button
+            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
+              showSubDD === 2 && "bg-[#eee]"
+            }`}
+            onClick={() => setShowSubDD(2)}
+          >
+            Change Lead Stage
+          </button>
+        </div>
+        <div>
           {showSubDD === 0 && (
             <div className="w-[100%] bg-[#eee]">
-              <div className='flex items-center p-[6px] border-solid border-1 border-black bg-white'>
-                <input type="text" className='w-[160px] bg-white outline-none text-black' placeholder='Search...' value={searchAssignTo} onInput={(e: any) => handleSearchAllocateTo(e.target.value)} />
-                <button className='flex items-center justify-center w-[20px] h-[20px]'>
-                  <img src={getBasicIcon("Search")} alt='Search' width={"16px"} height={"16px"} />
+              <div className="flex items-center p-[6px] border-solid border-1 border-black bg-white">
+                <input
+                  type="text"
+                  className="w-[160px] bg-white outline-none text-black"
+                  placeholder="Search..."
+                  value={searchAssignTo}
+                  onInput={(e: any) => handleSearchAllocateTo(e.target.value)}
+                />
+                <button className="flex items-center justify-center w-[20px] h-[20px]">
+                  <img
+                    src={getBasicIcon("Search")}
+                    alt="Search"
+                    width={"16px"}
+                    height={"16px"}
+                  />
                 </button>
               </div>
-              <ul className=''>
-                {
-                  searchAssignTo ? (
-                    sdrBdmData?.result?.filter((qaItem: any, index: number) => {
-                      return qaItem?.name?.toLowerCase().includes(searchAssignTo.toLowerCase());
-                    }).map((qaItem: any, index: number) => (
+              <ul className="">
+                {searchAssignTo
+                  ? sdrBdmData?.result
+                      ?.filter((qaItem: any, index: number) => {
+                        return qaItem?.name
+                          ?.toLowerCase()
+                          .includes(searchAssignTo.toLowerCase());
+                      })
+                      .map((qaItem: any, index: number) => (
+                        <li key={index}>
+                          <label
+                            htmlFor={qaItem?._id}
+                            className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                          >
+                            <span>{qaItem?.name}</span>
+                            <input
+                              type="checkbox"
+                              id={qaItem?._id}
+                              onChange={(e) =>
+                                handleAllocateTo(e.target.checked, qaItem?._id)
+                              }
+                            />
+                          </label>
+                        </li>
+                      ))
+                  : sdrBdmData?.result?.map((qaItem: any, index: number) => (
                       <li key={index}>
-                        <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                        <label
+                          htmlFor={qaItem?._id}
+                          className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                        >
                           <span>{qaItem?.name}</span>
-                          <input type="checkbox" id={qaItem?._id} onChange={(e) => handleAllocateTo(e.target.checked, qaItem?._id)} />
+                          <input
+                            type="checkbox"
+                            id={qaItem?._id}
+                            onChange={(e) =>
+                              handleAllocateTo(e.target.checked, qaItem?._id)
+                            }
+                          />
                         </label>
                       </li>
-                    ))
-                  ) : (
-                    sdrBdmData?.result?.map((qaItem: any, index: number) => (
-                      <li key={index}>
-                        <label htmlFor={qaItem?._id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
-                          <span>{qaItem?.name}</span>
-                          <input type="checkbox" id={qaItem?._id} onChange={(e) => handleAllocateTo(e.target.checked, qaItem?._id)} />
-                        </label>
-                      </li>
-                    ))
-                  )
-                }
+                    ))}
               </ul>
             </div>
           )}
-        </div>
-        <div className={`rounded-[8px] overflow-hidden`}>
-          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 1 && "bg-[#eee]"}`} onClick={() => setShowSubDD(1)}>Change Lead Status</button>
           {showSubDD === 1 && (
             <ul className="bg-[#eee] flex flex-col gap-[4px]">
               <li className="">
-                <label htmlFor={"Open"} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                <label
+                  htmlFor={"Open"}
+                  className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                >
                   <span>Open</span>
-                  <input type="radio" id={"Open"} name="status" onChange={(e) => updateLead(e.target.checked, "lead_status", "Open")} />
+                  <input
+                    type="radio"
+                    id={"Open"}
+                    name="status"
+                    onChange={(e) =>
+                      updateLead(e.target.checked, "lead_status", "Open")
+                    }
+                  />
                 </label>
               </li>
               <li className="">
-                <label htmlFor={"Close"} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                <label
+                  htmlFor={"Close"}
+                  className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                >
                   <span>Close</span>
-                  <input type="radio" id={"Close"} name="status" onChange={(e) => updateLead(e.target.checked, "lead_status", "Close")} />
+                  <input
+                    type="radio"
+                    id={"Close"}
+                    name="status"
+                    onChange={(e) =>
+                      updateLead(e.target.checked, "lead_status", "Close")
+                    }
+                  />
                 </label>
               </li>
             </ul>
           )}
-        </div>
-        <div className={`rounded-[8px] overflow-hidden`}>
-          <button className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 2 && "bg-[#eee]"}`} onClick={() => setShowSubDD(2)}>Change Lead Stage</button>
           {showSubDD === 2 && (
             <ul className="bg-[#eee] flex flex-col gap-[4px]">
               {openStages?.map((stageItem: any, index: number) => (
                 <li className="" key={index}>
-                  <label htmlFor={stageItem?.id} className='w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer'>
+                  <label
+                    htmlFor={stageItem?.id}
+                    className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                  >
                     <span>{stageItem?.label}</span>
-                    <input type="radio" id={stageItem?.id} name="stage" onChange={(e) => updateLead(e.target.checked, "lead_stage", stageItem?.id)} />
+                    <input
+                      type="radio"
+                      id={stageItem?.id}
+                      name="stage"
+                      onChange={(e) =>
+                        updateLead(
+                          e.target.checked,
+                          "lead_stage",
+                          stageItem?.id
+                        )
+                      }
+                    />
                   </label>
                 </li>
               ))}
@@ -356,7 +456,11 @@ const SalesOpen = ({ data, mastersData, teamManagersData, sdrBdmData }: props) =
       )}
       {form && (
         <Backdrop bool={bool}>
-          <AddLeadForm cancel={cancelForms} mastersData={mastersData} teamManagersData={teamManagersData} />
+          <AddLeadForm
+            cancel={cancelForms}
+            mastersData={mastersData}
+            teamManagersData={teamManagersData}
+          />
         </Backdrop>
       )}
       <Navigation
