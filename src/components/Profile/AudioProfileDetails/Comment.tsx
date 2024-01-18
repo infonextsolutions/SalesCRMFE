@@ -163,7 +163,7 @@ const Comment = ({ user, content, time, reply, last, replied }: any) => {
   );
 };
 
-const CommentsAndNotes = ({ data, notesData }: any) => {
+const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
   const [text, setText] = React.useState("");
   const [list, setList] = React.useState<any>(data?.comments);
   const [emoji, setEmoji] = useState(false);
@@ -174,6 +174,10 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
       setAccessToken(localStorage.getItem("access-token"));
     }
   }, []);
+
+  useEffect(() => {
+    setList(data?.comments);
+  }, [data]);
 
   function getCurrentTimeInHoursAndMinutes() {
     let now = new Date();
@@ -294,7 +298,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
           onClick={() => {
             if (text.length !== 0) {
               const letsSee = {
-                user: "-",
+                user: window !== undefined && localStorage.getItem("user-id"),
                 content: text,
                 time: getCurrentTimeInHoursAndMinutes().time,
                 last: timeToHoursAgo(
@@ -321,6 +325,10 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
                 )
                 .then((e) => {
                   UpdateCalls();
+                  if (refresh) {
+                    console.log('-------------- comment added successfully ------------');
+                    refresh();
+                  }
                   dispatch(
                     setSuccess({
                       show: true,
@@ -356,6 +364,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
                 last={item?.last}
                 time={item?.time}
                 reply={item?.reply}
+                refresh={refresh}
                 replied={(e: any) => {
                   const finalList = list;
                   finalList[i].reply.push(e);
@@ -376,6 +385,10 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
                           success: "Reply added Successfully!",
                         })
                       );
+                      if (refresh) {
+                        console.log('-------------- reply added successfully ------------');
+                        refresh();
+                      }
                     })
                     .catch(() => {
                       dispatch(
@@ -392,7 +405,7 @@ const CommentsAndNotes = ({ data, notesData }: any) => {
         </div>
       </div>
       <hr className="border-t-4 border-gray-300" />
-      <Notes data={notesData} />
+      <Notes data={notesData} refresh={refresh} />
     </>
   );
 };

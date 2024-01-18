@@ -53,7 +53,7 @@ const CallProfile = () => {
           .then((res2) => {
             setDataNew1(res2.data);
           })
-          .catch((e) => {});
+          .catch((e) => { });
         axios
           .post(
             `https://sales365.trainright.fit/api/calling/call-status`,
@@ -63,9 +63,9 @@ const CallProfile = () => {
           .then((res3) => {
             setDataNew2(res3.data);
           })
-          .catch((e) => {});
+          .catch((e) => { });
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const CallProfile = () => {
           })
         );
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   useEffect(() => {
@@ -170,45 +170,45 @@ const CallProfile = () => {
         buttons={
           dataNew?.result?.qaFeedbackReq === "requested"
             ? [
-                {
-                  text: "Share",
-                  dropdown: true,
-                  id: 1,
-                  icon: "Share",
-                  light: false,
-                  dark: true,
-                  click: addCall,
-                  list: [
-                    { title: "Full Call", Icon: "Phone" },
-                    { title: "Call Snippet", Icon: "Mail" },
-                  ],
-                },
-              ]
+              {
+                text: "Share",
+                dropdown: true,
+                id: 1,
+                icon: "Share",
+                light: false,
+                dark: true,
+                click: addCall,
+                list: [
+                  { title: "Full Call", Icon: "Phone" },
+                  { title: "Call Snippet", Icon: "Mail" },
+                ],
+              },
+            ]
             : [
-                {
-                  text: "Request Feedback",
-                  dropdown: true,
-                  id: 2,
-                  light: false,
-                  dark: false,
-                  // icon: "",
-                  list: qams,
-                  click: handleRequestFeedback,
-                },
-                {
-                  text: "Share",
-                  dropdown: true,
-                  id: 1,
-                  icon: "Share",
-                  light: false,
-                  dark: true,
-                  click: addCall,
-                  list: [
-                    { title: "Full Call", Icon: "Phone" },
-                    { title: "Call Snippet", Icon: "Mail" },
-                  ],
-                },
-              ]
+              {
+                text: "Request Feedback",
+                dropdown: true,
+                id: 2,
+                light: false,
+                dark: false,
+                // icon: "",
+                list: qams,
+                click: handleRequestFeedback,
+              },
+              {
+                text: "Share",
+                dropdown: true,
+                id: 1,
+                icon: "Share",
+                light: false,
+                dark: true,
+                click: addCall,
+                list: [
+                  { title: "Full Call", Icon: "Phone" },
+                  { title: "Call Snippet", Icon: "Mail" },
+                ],
+              },
+            ]
         }
         mainTitle="Calls"
         title="Recorded Calls"
