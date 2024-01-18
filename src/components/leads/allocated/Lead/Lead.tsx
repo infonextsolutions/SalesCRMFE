@@ -817,7 +817,7 @@ const LeadContainer = ({
             color={"#000"}
             text={LeadData1.leadId}
             click={true}
-            route={`${pathname}/${id}/lead-profile`}
+            route={`/sales/open/${id}/lead-profile`}
           />
           <LeadItem
             width={120}
@@ -825,7 +825,7 @@ const LeadContainer = ({
             color={"#000"}
             text={LeadData1.lead_title}
             click={true}
-            route={`${pathname}/${id}/lead-profile`}
+            route={`/sales/open/${id}/lead-profile`}
           />
           <NotesEventQuickActions
             width={90}
@@ -846,14 +846,14 @@ const LeadContainer = ({
             }
             bold={true}
             click={true}
-            route={`${pathname}/${id}/company-profile`}
+            route={`/sales/open/${id}/company-profile`}
           />
           <LeadItem
             width={160}
             left={40}
             text={LeadData1?.customerId?.customer_name}
             click={true}
-            route={`${pathname}/${id}/client-poc-profile`}
+            route={`/sales/open/${id}/client-poc-profile`}
           />
           {/* <LeadItem
             width={200}

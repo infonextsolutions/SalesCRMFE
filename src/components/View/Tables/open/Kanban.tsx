@@ -58,7 +58,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
     } catch (error) {
 
     }
-  }, [search, accessToken]);
+  }, [search, accessToken, queryStr]);
 
   const Leads = items;
   const [selectAll, setSelectAll] = useState(false);
