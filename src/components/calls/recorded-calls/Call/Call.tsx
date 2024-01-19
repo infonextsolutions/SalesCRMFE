@@ -364,6 +364,7 @@ const ExpandableRow = ({
   engagingQuestions,
   height,
   handleClose,
+  audioPlayerData,
 }: any) => {
   return (
     <div
@@ -438,7 +439,7 @@ const ExpandableRow = ({
         <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
           Call Player
         </h3>
-        <SideBarAudioPlayer src={""} />
+        <SideBarAudioPlayer src={audioPlayerData} />
       </div>
     </div>
   );
@@ -742,6 +743,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
         <BackdropRight bool={detailShow}>
           <ExpandableRow
             CallDesc={CallData?.callData?.[0]?.call_discription}
+            audioPlayerData={CallData?.RecordingUrl}
             callMatrics={[
               {
                 title: "Talk/Listen Ratio ",

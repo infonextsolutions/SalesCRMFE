@@ -3,8 +3,11 @@ import { tracks } from "./tracks";
 
 // import components
 import DisplayTrack from "./DisplayTrack";
-import Controls from "./Controls";
+import SideBarControls from "./SideBarControls";
 import ProgressBar from "./ProgressBar";
+import TopBar from "./TopBar";
+import { getBasicIcon } from "@/utils/AssetsHelper";
+import Image from "next/image";
 
 const SideBarAudioPlayer = ({ src }) => {
   // states
@@ -12,6 +15,10 @@ const SideBarAudioPlayer = ({ src }) => {
   const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(60);
+  const [muteVolume, setMuteVolume] = useState(false);
+  const [speed, setSpeed] = useState(1);
 
   // reference
   const audioRef = useRef();
@@ -29,15 +36,46 @@ const SideBarAudioPlayer = ({ src }) => {
 
   return (
     <>
-      <div className="audio-player relative bg-white mt-4 flex flex-col justify-center">
+      <div className="mt-4 flex flex-col justify-center">
         <div className="">
-          <div className="flex justify-between">
-            <div className="flex items-center gap-6"></div>
+          <div className="flex items-center gap-6 mb-4">
+            <h4 className="text-gray-600 text-sm font-semibold">
+              Speed {speed}X :{" "}
+            </h4>
+            <div className="volume ">
+              {/* <button onClick={() => setMuteVolume((prev) => !prev)}>
+                  <Image
+                    src={getBasicIcon("volume_gray")}
+                    style={{
+                      zIndex: 10,
+                    }}
+                    alt=""
+                    width={13}
+                    height={13}
+                    className="mr-[9px] cursor-pointer"
+                  />
+                </button> */}
+              <input
+                type="range"
+                className="diff"
+                min={0.5}
+                max={2}
+                step={0.5}
+                value={speed}
+                style={{
+                  background: `linear-gradient(to right, #909193  ${
+                    0 * 100
+                  }%, #ccc ${0 * 100}%)`,
+                }}
+                onChange={(e) => setSpeed(e.target.value)}
+              />
+            </div>
           </div>
+
           <ProgressBar
             {...{ progressBarRef, audioRef, timeProgress, duration }}
           />
-          <Controls
+          <SideBarControls
             {...{
               audioRef,
               progressBarRef,
@@ -59,6 +97,7 @@ const SideBarAudioPlayer = ({ src }) => {
               setDuration,
               progressBarRef,
               handleNext,
+              speed,
             }}
           />
         </div>
