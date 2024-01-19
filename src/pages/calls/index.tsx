@@ -287,7 +287,7 @@ const CallsPage = () => {
       checked: true,
     },
     {
-      width: 120,
+      width: 160,
       left: 20,
       text: "Call Review Status",
       checked: true,
@@ -595,7 +595,7 @@ const CallsPage = () => {
 
   const handleTabNavigation = (payload: any) => {
     setCurrTab(payload);
-    setSubType("allocated_call_reviews");
+    // setSubType(subType);
   };
 
   const handleSubType = (payload: string) => {
