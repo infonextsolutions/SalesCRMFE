@@ -59,6 +59,7 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
     },
   ]);
   const [ownerOps, setOwnerOps] = useState([]);
+  const [companyOps, setCompanyOps] = useState([]);
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -86,6 +87,15 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
         }
         ).then((res) => {
           setOwnerOps(res?.data?.result);
+        }).catch((e) => { });
+        axios.get(
+          "https://sales365.trainright.fit/api/user-company-master/findAllCompanies", {
+          headers: {
+            Authorization: accessToken
+          }
+        }
+        ).then((res) => {
+          setCompanyOps(res?.data?.result);
         }).catch((e) => { });
       }
     } catch (error) {
@@ -238,27 +248,17 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
                 id="company"
               >
                 <option selected={companyName === ""} value=""></option>
-                <option selected={companyName === "ABC Corp"} value="ABC Corp">
-                  ABC Corp
-                </option>
-                <option
-                  selected={companyName === "Bridge Corp."}
-                  value="Bridge Corp."
-                >
-                  Bridge Corp.
-                </option>
-                <option
-                  selected={companyName === "Zen Corp."}
-                  value="Zen Corp."
-                >
-                  Zen Corp.
-                </option>
-                <option
-                  selected={companyName === "XYZ Corp."}
-                  value="XYZ Corp."
-                >
-                  XYZ Corp.
-                </option>
+                {
+                  companyOps?.map((opItem: any, idx: number) => (
+                    <option
+                      selected={callType === opItem?.company_name}
+                      value={opItem?.company_name}
+                      key={opItem?.company_name}
+                    >
+                      {opItem?.company_name}
+                    </option>
+                  ))
+                }
               </select>
             </div>
             <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Card } from "@mui/material";
 
 const Activityhistory = ({ data }: { data: any }) => {
-  const history = data.activityId?.history ? data.activityId?.history : [];
+  const history = data?.leadId?.activityId?.history ? data?.leadId?.activityId?.history : [];
   const notes = history.filter((item: any) => item.type == "note");
 
   function formatDateAndTime(dateString: any) {
@@ -96,10 +96,10 @@ const Activityhistory = ({ data }: { data: any }) => {
                             item.type === "email"
                               ? getBasicIcon("Mail")
                               : item.type === "note"
-                              ? getBasicIcon("Tasks")
-                              : item.call_title
-                              ? getBasicIcon("Phone")
-                              : getBasicIcon("activity-1")
+                                ? getBasicIcon("Tasks")
+                                : item.call_title
+                                  ? getBasicIcon("Phone")
+                                  : getBasicIcon("activity-1")
                           }
                           className={`
                     `}

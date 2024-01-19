@@ -50,17 +50,14 @@ const LeadsContainer = ({ view, records, list }: any) => {
       queryStr += `&leadStage=${stage}`;
     }
     if (product !== "") {
-      queryStr += `&product=${product}`;
+      queryStr += `&productCategory=${product}`;
     }
     if (leadSource !== "") {
       queryStr += `&leadSource=${leadSource}`;
     }
-    // if (startDate !== "") {
-    //   queryStr += `&search=${startDate}`;
-    // }
-    // if (endDate !== "") {
-    //   queryStr += `&search=${endDate}`;
-    // }
+    if (startDate !== "" || endDate !== "") {
+      queryStr += `&date_range=${JSON.stringify([startDate, endDate])}`;
+    }
     setQueryStr(queryStr);
     return queryStr;
   };
@@ -78,7 +75,7 @@ const LeadsContainer = ({ view, records, list }: any) => {
           to: endDate,
         },
       };
-  
+
       const response = await axios.get(
         "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close", {
         headers: {
@@ -88,7 +85,7 @@ const LeadsContainer = ({ view, records, list }: any) => {
       );
       records = { ...response.data };
     } catch (error) {
-      
+
     }
   };
 
