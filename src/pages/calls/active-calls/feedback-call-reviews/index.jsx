@@ -471,7 +471,7 @@ const FeedbackCallReviewsAC = () => {
                   { text: formatDateToCustomFormat(item?.StartTime) || "-" }, // call date & time
                   { text: item?.company?.[0]?.company_product_category || "-" }, // product/service
                   { text: diff_minutes(item?.StartTime, item?.EndTime) || "-" }, // call duration
-                  { text: item?.callDisposiiton || "-" }, // call disposition
+                  { text: item?.callDisposiiton || "NA" }, // call disposition
                   { text: item?.callData[0]?.call_type || "-" }, // call type
                   { text: item?.score || "Not Scored" }, // call score
                   // { text: item?.qaId?.name || "-" }, // call review type
