@@ -133,10 +133,10 @@ const Activityhistory = ({ data }: { data: any }) => {
                         ) : (
                           <>
                             <p className="text-gray-500  font-bold text-lg">
-                              {item.title}
+                              {item.title || item?.call_title}
                             </p>
-                            <p className="text-[#8A9099] font-small text-sm">
-                              {item.content}
+                            <p className="text-[#8A9099] font-small text-sm line-clamp-2 h-[80px]">
+                              {item.content || item?.call_discription}
                             </p>
                           </>
                         )}
