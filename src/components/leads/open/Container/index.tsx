@@ -58,11 +58,8 @@ const LeadsContainer = ({ view, records, list }: any) => {
     if (leadSource !== "") {
       queryStr += `&leadSource=${leadSource}`;
     }
-    if (startDate !== "") {
-      queryStr += `&startDate=${startDate}`;
-    }
-    if (endDate !== "") {
-      queryStr += `&endDate=${endDate}`;
+    if (startDate !== "" || endDate !== "") {
+      queryStr += `&date_range=${JSON.stringify([startDate, endDate])}`;
     }
     setQueryStr(queryStr);
     return queryStr;
