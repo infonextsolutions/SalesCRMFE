@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 
-const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows }: any) => {
+const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }: any) => {
   const [qaid, setQaid] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
@@ -44,7 +44,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows }: any) =>
           setpageCount(count);
         }).catch((e: any) => { });
     },
-    [queryStr, accessToken]
+    [queryStr, accessToken, reload]
   );
 
   const getallItems = async (current: any) => {
@@ -243,11 +243,33 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows }: any) =>
     }
   };
 
+  const handleSelection = (leadId: any, add: boolean = true, all: boolean = false) => {
+    if (all && add) {
+      if (add) {
+        const leadIds = Leads?.map((leadItem: any, idx: number) => leadItem?._id);
+        setSelectedRows(leadIds);
+      } else {
+        setSelectedRows([]);
+      }
+    } else {
+      if (add) { // add lead id
+        setSelectedRows((currSelectedRows: any) => {
+          return [...currSelectedRows, leadId];
+        })
+      } else {  // remove lead id
+        setSelectedRows((currSelectedRows: any) => {
+          return currSelectedRows?.filter((rowItem: any, idx: number) => rowItem !== leadId);
+        });
+      }
+    }
+  };
+
   return (
     <>
       <div className=" mt-[0px] w-[100%] min-h-[340px] overflow-y-hidden overflow-x-auto custom-scroll pb-[0px]">
         <Header
           selectAll={() => {
+            handleSelection(null, !selectAll, true);
             setSelectAll(!selectAll);
           }}
           win={() => {
@@ -300,6 +322,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows }: any) =>
                 LeadData={item}
                 owners={item.owners}
                 last={Leads.length - 1 === ind}
+                onSelection={handleSelection}
               />
             );
           })

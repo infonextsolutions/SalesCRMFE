@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 
-const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
+const LeadsTable = ({ totalRecords, search, queryStr, reload }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -45,7 +45,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
           setpageCount(count);
         }).catch((e: any) => { });
     },
-    [queryStr, accessToken]
+    [queryStr, accessToken, reload]
   );
 
   const getallItems = async (current: any) => {
