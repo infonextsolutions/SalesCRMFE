@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
+import DescBoxAudioPlayer from "@/components/activeCalls/audio/components/DescBoxAudioPlayer";
 
 const CallBox = ({
   width,
@@ -360,6 +361,7 @@ const CallPlayer = () => {
 const ExpandableRow = ({
   CallDesc,
   callMatrics,
+  audioPlayerData,
   engagingQuestions,
   height,
   handleClose,
@@ -387,6 +389,24 @@ const ExpandableRow = ({
         </div>
         <div>
           <h2 className="text-[18px] font-medium pt-4">Call Details</h2>
+          <ul className="w-full">
+            {callMatrics.map((item: any) => (
+              <li
+                key={item.title}
+                className="flex justify-between items-center"
+              >
+                <h3 className="text-[#909193] text-[14px] font-[500]">
+                  {item.title}
+                </h3>
+                <p
+                  className="text-[#434343] text-[14px] font-[500] w-[120px]
+                "
+                >
+                  {item.data}
+                </p>
+              </li>
+            ))}
+          </ul>
           {/* <ul className="w-full">
             {callMatrics.map((item: any) => (
               <li
@@ -432,6 +452,12 @@ const ExpandableRow = ({
         <p className="text-[#585858] font-medium mt-[5px] text-[16px] tracking-wide">
           {CallDesc}
         </p>
+      </div>
+      <div>
+        <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
+          Call Player
+        </h3>
+        <DescBoxAudioPlayer src={audioPlayerData} />
       </div>
       {/* <div>
         <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
@@ -740,6 +766,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
         <BackdropRight bool={detailShow}>
           <ExpandableRow
             CallDesc={CallData?.callData?.[0]?.call_discription}
+            audioPlayerData={CallData?.RecordingUrl}
             callMatrics={[
               {
                 title: "Talk/Listen Ratio ",
