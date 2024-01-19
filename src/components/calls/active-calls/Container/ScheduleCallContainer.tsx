@@ -79,28 +79,31 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
   useEffect(() => {
     try {
       if (window !== undefined) {
-        axios.get(
-          "https://sales365.trainright.fit/api/master-users/find-all", {
-          headers: {
-            Authorization: accessToken
-          }
-        }
-        ).then((res) => {
-          setOwnerOps(res?.data?.result);
-        }).catch((e) => { });
-        axios.get(
-          "https://sales365.trainright.fit/api/user-company-master/findAllCompanies", {
-          headers: {
-            Authorization: accessToken
-          }
-        }
-        ).then((res) => {
-          setCompanyOps(res?.data?.result);
-        }).catch((e) => { });
+        axios
+          .get("https://sales365.trainright.fit/api/master-users/find-all", {
+            headers: {
+              Authorization: accessToken,
+            },
+          })
+          .then((res) => {
+            setOwnerOps(res?.data?.result);
+          })
+          .catch((e) => {});
+        axios
+          .get(
+            "https://sales365.trainright.fit/api/user-company-master/findAllCompanies",
+            {
+              headers: {
+                Authorization: accessToken,
+              },
+            }
+          )
+          .then((res) => {
+            setCompanyOps(res?.data?.result);
+          })
+          .catch((e) => {});
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }, [accessToken]);
 
   const getQueryStr = () => {
@@ -132,7 +135,6 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
 
   const getData = async () => {
     try {
-
       const payload = {
         companyName,
         product,
@@ -151,9 +153,7 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
         { headers: { Authorization: accessToken } }
       );
       dummy1 = { ...response.data };
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const exportXLSX = () => {
@@ -208,8 +208,8 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
 
   return (
     <div className="pr-[10px] w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] overflow-hidden mb-[40px]">
-      <div className="w-[100%] h-[120px] flex items-center  px-[8px]">
-        <div className="w-[100%] flex flex-col gap-4">
+      <div className="w-[100%] flex items-center  px-[8px]">
+        <div className="w-[100%] flex flex-col gap-4 my-4">
           <div className="flex justify-between  gap-6">
             <Search change={onChange} />
             <NavigationWithoutTitle
@@ -239,8 +239,8 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
               ]}
             />
           </div>
-          <div className="flex items-center gap-5">
-            <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <div className="flex items-center gap-5 flex-wrap">
+            <div className="flex items-center w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -248,17 +248,15 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
                 id="company"
               >
                 <option selected={companyName === ""} value=""></option>
-                {
-                  companyOps?.map((opItem: any, idx: number) => (
-                    <option
-                      selected={callType === opItem?.company_name}
-                      value={opItem?.company_name}
-                      key={opItem?.company_name}
-                    >
-                      {opItem?.company_name}
-                    </option>
-                  ))
-                }
+                {companyOps?.map((opItem: any, idx: number) => (
+                  <option
+                    selected={callType === opItem?.company_name}
+                    value={opItem?.company_name}
+                    key={opItem?.company_name}
+                  >
+                    {opItem?.company_name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -290,12 +288,31 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
                 <option selected={product === "Product D"} value="Product D">
                   Product D
                 </option>
-                <option selected={product === "Technology"} value="Technology">Technology</option>
-                <option selected={product === "Healthcare"} value="Healthcare">Healthcare</option>
-                <option selected={product === "Finance"} value="Finance">Finance</option>
-                <option selected={product === "Education"} value="Education">Education</option>
-                <option selected={product === "Hospitality"} value="Hospitality">Hospitality</option>
-                <option selected={product === "Real Estate"} value=" Real Estate"> Real Estate</option>
+                <option selected={product === "Technology"} value="Technology">
+                  Technology
+                </option>
+                <option selected={product === "Healthcare"} value="Healthcare">
+                  Healthcare
+                </option>
+                <option selected={product === "Finance"} value="Finance">
+                  Finance
+                </option>
+                <option selected={product === "Education"} value="Education">
+                  Education
+                </option>
+                <option
+                  selected={product === "Hospitality"}
+                  value="Hospitality"
+                >
+                  Hospitality
+                </option>
+                <option
+                  selected={product === "Real Estate"}
+                  value=" Real Estate"
+                >
+                  {" "}
+                  Real Estate
+                </option>
               </select>
             </div>
             <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -306,17 +323,15 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
                 id="callOwner"
               >
                 <option selected={callOwner === ""} value=""></option>
-                {
-                  ownerOps?.map((opItem: any, idx: number) => (
-                    <option
-                      selected={callType === opItem?._id}
-                      value={opItem?._id}
-                      key={opItem?._id}
-                    >
-                      {opItem?.name}
-                    </option>
-                  ))
-                }
+                {ownerOps?.map((opItem: any, idx: number) => (
+                  <option
+                    selected={callType === opItem?._id}
+                    value={opItem?._id}
+                    key={opItem?._id}
+                  >
+                    {opItem?.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -327,17 +342,15 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
                 id="callType"
               >
                 <option selected={callType === ""} value=""></option>
-                {
-                  callTypeOps?.map((opItem: any, idx: number) => (
-                    <option
-                      selected={callType === opItem?.val}
-                      value={opItem?.val}
-                      key={idx}
-                    >
-                      {opItem?.title}
-                    </option>
-                  ))
-                }
+                {callTypeOps?.map((opItem: any, idx: number) => (
+                  <option
+                    selected={callType === opItem?.val}
+                    value={opItem?.val}
+                    key={idx}
+                  >
+                    {opItem?.title}
+                  </option>
+                ))}
               </select>
             </div>
             <DatePicker
