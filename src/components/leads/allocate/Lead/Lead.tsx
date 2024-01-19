@@ -16,7 +16,7 @@ import ButtonDropDown from "@/utils/Button/Button";
 import axios from "axios";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
 
-const LeadBox = ({ width, bool }: any) => {
+const LeadBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
     if (check) {
@@ -34,7 +34,9 @@ const LeadBox = ({ width, bool }: any) => {
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" ref={ref} className="checkbox" />
+      <input type="checkbox" ref={ref} className="checkbox"
+        onChange={(e: any) => handleCheck(e.target.checked)}
+      />
     </div>
   );
 };
@@ -546,6 +548,7 @@ const LeadContainer = ({
   selectAll,
   owners,
   last,
+  onSelection,
 }: any) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
@@ -780,6 +783,7 @@ const LeadContainer = ({
   const contacts = contacted.contacts;
 
   const [showDescModal, setShowDescModal] = useState(false);
+  const [selected, setSelected] = useState<boolean>(false);
 
   const handleDoubleClick = () => {
     setDetailShow(true);
@@ -799,10 +803,16 @@ const LeadContainer = ({
       >
         <div
           // onDoubleClick={handleDoubleClick}
-          className="-z-50 pl-[10px] h-[auto] flex items-center grow border-[#ccc] border-b-[1px] "
+          className={`-z-50 pl-[10px] h-[auto] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${(selectAll || selected || detailShow) && "bg-white"
+            }`}
           ref={wRef}
         >
-          <LeadBox width={30} bool={selectAll} />
+          <LeadBox width={30} bool={selectAll || selected}
+            handleCheck={(checked: any) => {
+              setSelected(checked);
+              onSelection(LeadData1?._id, checked);
+            }}
+          />
           <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);

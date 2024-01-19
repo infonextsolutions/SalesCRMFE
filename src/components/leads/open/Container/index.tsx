@@ -20,6 +20,7 @@ const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 const LeadsContainer = ({ view, records, list }: any) => {
   const [visibleRecords, setVisibleRecords] = useState(records);
   const router = useRouter();
+  const [reload, setReload] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
@@ -63,7 +64,6 @@ const LeadsContainer = ({ view, records, list }: any) => {
     if (endDate !== "") {
       queryStr += `&endDate=${endDate}`;
     }
-    console.log('----------- get query str : filter change ------------', queryStr);
     setQueryStr(queryStr);
     return queryStr;
   };
@@ -275,6 +275,7 @@ const LeadsContainer = ({ view, records, list }: any) => {
             totalRecords={visibleRecords}
             search={search}
             queryStr={queryStr}
+            reload={reload}
           />
         </Suspense>
       ) : (
@@ -284,6 +285,7 @@ const LeadsContainer = ({ view, records, list }: any) => {
             totalRecords={visibleRecords}
             search={search}
             queryStr={queryStr}
+            reload={reload}
           />
         </Suspense>
       )}

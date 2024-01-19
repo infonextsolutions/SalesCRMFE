@@ -161,6 +161,7 @@ const SalesOpen = ({
   const [accessToken, setAccessToken] = useState<string>("");
 
   const dispatch = useAppDispatch();
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     if (window !== undefined) {
@@ -186,7 +187,7 @@ const SalesOpen = ({
         },
         { headers: { Authorization: accessToken } }
       );
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const addExport = (e: any, e1: any) => {
@@ -215,41 +216,41 @@ const SalesOpen = ({
             success: "Reallocating...",
           })
         );
-        const assigningPromise = selectedRows.map((selectedRow: any) => {
+        selectedRows.forEach((selectedRow: any) => {
           const payload = {
             id: selectedRow, // lead id
             manager:
               window !== undefined ? localStorage.getItem("user-id") : "",
             owner: newOwnerId,
           };
-          return axios.post(
+          axios.post(
             `https://sales365.trainright.fit/api/leads/allocateLeadToOwner`,
             payload,
             { headers: { Authorization: accessToken } }
-          );
+          )
+            .then((res: any) => {
+              dispatch(
+                setSuccess({
+                  show: true,
+                  success: "Lead Reallocated Successfully!",
+                })
+              );
+              setReload(!reload);
+              // setTimeout(() => {
+              //   window.location.reload();
+              // }, 2000);
+            })
+            .catch((err: any) => {
+              dispatch(
+                setError({
+                  show: true,
+                  error: "Error Occured!",
+                })
+              );
+            });
         });
-        Promise.all(assigningPromise)
-          .then((res: any) => {
-            dispatch(
-              setSuccess({
-                show: true,
-                success: "Lead Reallocated Successfully!",
-              })
-            );
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
-          })
-          .catch((err: any) => {
-            dispatch(
-              setError({
-                show: true,
-                error: "Error Occured!",
-              })
-            );
-          });
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const updateLead = (checked: any, key: any, value: any) => {
@@ -268,8 +269,8 @@ const SalesOpen = ({
         };
         axios
           .put(``, payload, { headers: { Authorization: accessToken } })
-          .then((res: any) => {})
-          .catch((err: any) => {});
+          .then((res: any) => { })
+          .catch((err: any) => { });
       }
     }
   };
@@ -279,25 +280,22 @@ const SalesOpen = ({
       <div className="flex gap-7">
         <div className={`rounded-[8px] overflow-hidden w-[150px]`}>
           <button
-            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
-              showSubDD === 0 && "bg-[#eee]"
-            }`}
+            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 0 && "bg-[#eee]"
+              }`}
             onClick={() => setShowSubDD(showSubDD !== 0 ? 0 : -1)}
           >
             Reallocate To
           </button>
           <button
-            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
-              showSubDD === 1 && "bg-[#eee]"
-            }`}
+            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 1 && "bg-[#eee]"
+              }`}
             onClick={() => setShowSubDD(1)}
           >
             Change Lead Status
           </button>
           <button
-            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
-              showSubDD === 2 && "bg-[#eee]"
-            }`}
+            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${showSubDD === 2 && "bg-[#eee]"
+              }`}
             onClick={() => setShowSubDD(2)}
           >
             Change Lead Stage
@@ -326,29 +324,12 @@ const SalesOpen = ({
               <ul className="">
                 {searchAssignTo
                   ? sdrBdmData?.result
-                      ?.filter((qaItem: any, index: number) => {
-                        return qaItem?.name
-                          ?.toLowerCase()
-                          .includes(searchAssignTo.toLowerCase());
-                      })
-                      .map((qaItem: any, index: number) => (
-                        <li key={index}>
-                          <label
-                            htmlFor={qaItem?._id}
-                            className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
-                          >
-                            <span>{qaItem?.name}</span>
-                            <input
-                              type="checkbox"
-                              id={qaItem?._id}
-                              onChange={(e) =>
-                                handleAllocateTo(e.target.checked, qaItem?._id)
-                              }
-                            />
-                          </label>
-                        </li>
-                      ))
-                  : sdrBdmData?.result?.map((qaItem: any, index: number) => (
+                    ?.filter((qaItem: any, index: number) => {
+                      return qaItem?.name
+                        ?.toLowerCase()
+                        .includes(searchAssignTo.toLowerCase());
+                    })
+                    .map((qaItem: any, index: number) => (
                       <li key={index}>
                         <label
                           htmlFor={qaItem?._id}
@@ -364,7 +345,24 @@ const SalesOpen = ({
                           />
                         </label>
                       </li>
-                    ))}
+                    ))
+                  : sdrBdmData?.result?.map((qaItem: any, index: number) => (
+                    <li key={index}>
+                      <label
+                        htmlFor={qaItem?._id}
+                        className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                      >
+                        <span>{qaItem?.name}</span>
+                        <input
+                          type="checkbox"
+                          id={qaItem?._id}
+                          onChange={(e) =>
+                            handleAllocateTo(e.target.checked, qaItem?._id)
+                          }
+                        />
+                      </label>
+                    </li>
+                  ))}
               </ul>
             </div>
           )}
@@ -537,7 +535,13 @@ const SalesOpen = ({
           },
         ]}
       />
-      <LeadsContainer view={view} records={data?.totalRecords} list={Dummy} />
+      <LeadsContainer
+        view={view}
+        records={data?.totalRecords}
+        list={Dummy}
+        setSelectedRows={setSelectedRows}
+        reload={reload}
+      />
     </div>
   );
 };
