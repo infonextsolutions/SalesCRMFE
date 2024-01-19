@@ -17,7 +17,13 @@ const LeadsTable = React.lazy(
 const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
 
-const LeadsContainer = ({ view, records, list, setSelectedRows, reload }: any) => {
+const LeadsContainer = ({
+  view,
+  records,
+  list,
+  setSelectedRows,
+  reload,
+}: any) => {
   const [qaid, setQaid] = useState(
     window !== undefined ? localStorage.getItem("user-id") : ""
   );
@@ -50,15 +56,16 @@ const LeadsContainer = ({ view, records, list, setSelectedRows, reload }: any) =
 
   useEffect(() => {
     if (window !== undefined) {
-      axios.get(
-        "https://sales365.trainright.fit/api/master-users/find-all", {
-        headers: {
-          Authorization: accessToken
-        }
-      }
-      ).then((res) => {
-        setMastersList(res?.data?.result);
-      }).catch((e) => { });
+      axios
+        .get("https://sales365.trainright.fit/api/master-users/find-all", {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((res) => {
+          setMastersList(res?.data?.result);
+        })
+        .catch((e) => {});
     }
   }, [accessToken]);
 
@@ -111,7 +118,7 @@ const LeadsContainer = ({ view, records, list, setSelectedRows, reload }: any) =
         }
       );
       setVisibleRecords({ ...response.data });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -121,8 +128,8 @@ const LeadsContainer = ({ view, records, list, setSelectedRows, reload }: any) =
 
   return (
     <div className="w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] h-[200px] flex items-center  px-[8px] mb-4">
-        <div className="w-[100%] flex flex-col gap-4">
+      <div className="w-[100%] flex items-center  px-[8px] mb-4">
+        <div className="w-[100%] flex flex-col gap-4 my-4">
           <div className="flex gap-5">
             <Search change={onChange} view={view} />
           </div>
@@ -144,7 +151,9 @@ const LeadsContainer = ({ view, records, list, setSelectedRows, reload }: any) =
                 <option selected={status === "open"} value="open">
                   Open
                 </option>
-                <option selected={status === "close"} value="close">Close</option>
+                <option selected={status === "close"} value="close">
+                  Close
+                </option>
               </select>
             </div>
             <div className="flex gap-5 items-center justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -271,17 +280,15 @@ const LeadsContainer = ({ view, records, list, setSelectedRows, reload }: any) =
                 id="countries"
               >
                 <option selected={stage === ""} value=""></option>
-                {
-                  mastersList?.map((opItem: any, idx: number) => (
-                    <option
-                      selected={leadAllocatedTo === opItem?._id}
-                      value={opItem?._id}
-                      key={opItem?._id}
-                    >
-                      {opItem?.name}
-                    </option>
-                  ))
-                }
+                {mastersList?.map((opItem: any, idx: number) => (
+                  <option
+                    selected={leadAllocatedTo === opItem?._id}
+                    value={opItem?._id}
+                    key={opItem?._id}
+                  >
+                    {opItem?.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="flex items-center gap-5 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -292,17 +299,15 @@ const LeadsContainer = ({ view, records, list, setSelectedRows, reload }: any) =
                 id="countries"
               >
                 <option selected={stage === ""} value=""></option>
-                {
-                  mastersList?.map((opItem: any, idx: number) => (
-                    <option
-                      selected={leadAllocatedBy === opItem?._id}
-                      value={opItem?._id}
-                      key={opItem?._id}
-                    >
-                      {opItem?.name}
-                    </option>
-                  ))
-                }
+                {mastersList?.map((opItem: any, idx: number) => (
+                  <option
+                    selected={leadAllocatedBy === opItem?._id}
+                    value={opItem?._id}
+                    key={opItem?._id}
+                  >
+                    {opItem?.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
