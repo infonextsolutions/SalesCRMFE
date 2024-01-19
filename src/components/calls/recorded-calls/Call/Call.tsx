@@ -388,8 +388,8 @@ const ExpandableRow = ({
           </button>
         </div>
         <div>
-          <h2 className="text-[18px] font-medium pt-4">Call Metrics</h2>
-          <ul className="w-full">
+          <h2 className="text-[18px] font-medium pt-4">Call Details</h2>
+          {/* <ul className="w-full">
             {callMatrics.map((item: any) => (
               <li
                 key={item.title}
@@ -406,7 +406,7 @@ const ExpandableRow = ({
                 </p>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
       {/* <div className="w-[100%] flex flex-col justify-between">
@@ -435,7 +435,7 @@ const ExpandableRow = ({
           {CallDesc}
         </p>
       </div>
-      <div>
+      {/* <div>
         <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
           Call Player
         </h3>
