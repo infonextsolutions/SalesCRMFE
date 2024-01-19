@@ -201,7 +201,7 @@ const SalesOpen = ({
 
   const handleAllocateTo = (checked: boolean, newOwnerId: any) => {
     try {
-      if (!newOwnerId) {
+      if (selectedRows.length === 0) {
         dispatch(
           setError({
             show: true,
