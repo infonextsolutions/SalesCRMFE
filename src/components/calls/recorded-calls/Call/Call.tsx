@@ -10,6 +10,7 @@ import Lead, { Owner } from "@/types/Leads";
 import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
+import SideBarAudioPlayer from "@/components/activeCalls/audio/components/SideBarAudioPlayer";
 
 const CallBox = ({
   width,
@@ -440,6 +441,7 @@ const ExpandableRow = ({
         <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
           Call Player
         </h3>
+        <SideBarAudioPlayer src={""} />
       </div>
     </div>
   );
