@@ -260,9 +260,9 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                 {
                   companyOps?.map((opItem: any, idx: number) => (
                     <option
-                      selected={callType === opItem?._id}
-                      value={opItem?._id}
-                      key={opItem?._id}
+                      selected={callType === opItem?.company_name}
+                      value={opItem?.company_name}
+                      key={opItem?.company_name}
                     >
                       {opItem?.company_name}
                     </option>
