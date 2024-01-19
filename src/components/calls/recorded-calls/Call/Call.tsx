@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
-import SideBarAudioPlayer from "@/components/activeCalls/audio/components/SideBarAudioPlayer";
+import SideBarAudioPlayer from "@/components/activeCalls/audio/components/SidebarAudioPlayer.js";
 
 const CallBox = ({
   width,
