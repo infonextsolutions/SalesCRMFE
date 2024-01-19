@@ -28,16 +28,19 @@ export default function Open() {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    )
+    axios
+      .get(
+        "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
       .then((res) => {
         setData(res.data);
-      }).catch((e) => { });
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   React.useEffect(() => {

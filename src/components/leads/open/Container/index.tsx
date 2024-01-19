@@ -82,15 +82,15 @@ const LeadsContainer = ({ view, records, list }: any) => {
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open${getQueryStr()}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open${getQueryStr()}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       );
       setVisibleRecords({ ...response.data });
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -100,12 +100,12 @@ const LeadsContainer = ({ view, records, list }: any) => {
 
   return (
     <div className="w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] h-[120px] flex items-center  px-[8px] ">
-        <div className="w-[100%] flex flex-col gap-4">
+      <div className="w-[100%] flex items-center px-[8px] ">
+        <div className="w-[100%] flex flex-col gap-4 my-4">
           <div className="flex gap-5">
             <Search change={onChange} view={view} />
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 flex-wrap">
             <div className="flex items-center w-36 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Status</h2>
               <select

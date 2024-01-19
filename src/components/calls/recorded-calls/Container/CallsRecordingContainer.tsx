@@ -173,7 +173,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
 
   return (
     <div className="w-[100%] bg-[#ffe3e170] pt-3 min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] h-[190px] flex items-center  px-[8px]">
+      <div className="w-[100%] flex items-center px-[8px] py-4">
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex justify-between">
             <Search change={onChange} />

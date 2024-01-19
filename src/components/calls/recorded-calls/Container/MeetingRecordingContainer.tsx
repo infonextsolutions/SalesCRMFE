@@ -206,7 +206,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
   };
   return (
     <div className="w-[100%] bg-[#ffe3e170] pt-3 min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] h-[190px] flex items-center  px-[8px]">
+      <div className="w-[100%] flex items-center py-4 px-[8px]">
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex justify-between">
             <Search change={onChange} />
@@ -325,7 +325,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                 </option>
               </select>
             </div>
-            <div className="flex items-center w-48 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Meeting Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
