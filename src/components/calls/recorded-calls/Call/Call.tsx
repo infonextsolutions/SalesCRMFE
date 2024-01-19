@@ -744,7 +744,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             text={
               CallData?.callDisposition ||
               CallData?.callData?.[0]?.call_disposition ||
-              "-"
+              "NA"
             }
           />
           <CallItem width={120} left={10} text={CallData?.score || "-"} />
