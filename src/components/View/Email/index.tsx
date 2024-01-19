@@ -59,7 +59,7 @@ const DisabledAddText = ({ title, place }: any) => {
     </div>
   );
 };
-const AddText = ({ title, place }: any) => {
+const AddText = ({ title, place, handleChange }: any) => {
   return (
     <div className="w-[100%] mb-[15px]">
       <p className="w-[100%] text-[#8A9099] font-medium tracking-wide mb-[8px]">
@@ -71,6 +71,7 @@ const AddText = ({ title, place }: any) => {
         name=""
         placeholder={place}
         id=""
+        onInput={(e: any) => handleChange(e.target.value)}
       />
     </div>
   );
@@ -243,7 +244,7 @@ const TextBox = ({ content, title, isBold, isItalic, isUnderline }: any) => {
     </>
   );
 };
-const EmailLayout = ({ content }: any) => {
+const EmailLayout = ({ content, subject }: any) => {
   const theme = "snow";
   const modules = {
     toolbar: [
@@ -315,7 +316,7 @@ const SendEmail = ({ receiver, change, title, content, clicked }: any) => {
         <TextBox title={title} content={content} isBold={isBold} isItalic={isItalic} isUnderline={isUnderline} /> */}
 
         <div className="w-full h-[210px] overflow-auto rounded-lg">
-          <EmailLayout content={content} />
+          <EmailLayout content={content} subject={title} />
         </div>
       </div>
       <div className="w-[100%] flex my-[15px] items-center">
@@ -357,25 +358,9 @@ const EmailPage = ({
   const [receiver, setReceiver] = useState<any>("");
   const [title, setTitle] = useState<any>("");
   const [content, setContent] = useState<any>("");
+  const [subject, setSubject] = useState<any>("");
   const [sendTo, setSendTo] = useState<any>("");
-  const emailList = [
-    {
-      title: "Client 1",
-      val: "client1@email.com",
-      selected: false,
-    },
-    {
-      title: "Client 2",
-      val: "client2@email.com",
-      selected: false,
-    },
-    {
-      title: "Client 3",
-      val: "client3@email.com",
-      selected: false,
-    },
-  ];
-  const [newEmailList, setNewEmailList] = useState<any>([emailList]);
+  const [newEmailList, setNewEmailList] = useState<any>([]);
   const dispatch = useAppDispatch();
   const [accessToken, setAccessToken] = useState<string>("");
 
@@ -495,7 +480,7 @@ const EmailPage = ({
           ...newEmailList,
         ]}
       />
-      <AddText title="Subject" place="" />
+      <AddText title="Subject" place="" handleChange={(val: any) => setTitle(val)} />
       {/* <DropItems
         title={"Send Email To"}
         top={20}

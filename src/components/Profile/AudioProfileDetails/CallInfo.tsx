@@ -116,7 +116,7 @@ const CallInfo = ({ check, info, data, data1 }: any) => {
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Client POC</p>
           <p className="text-sm font-semibold text-black">
-            {data1?.customerId?.name}
+            {data1?.customerId?.customer_name || data1?.customerId?.name || "-"}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
@@ -153,14 +153,17 @@ const CallInfo = ({ check, info, data, data1 }: any) => {
             <p className="text-sm font-semibold text-black">
               {owner ? owner.name : "-"}
             </p>
+            <p className="text-sm font-semibold text-grey">
+              {owner?.roles?.[0]?.name || "-"}
+            </p>
           </div>
           <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
             <p className="text-sm font-medium">Call Participant</p>
             <p className="text-sm font-semibold text-black">
-              {data1?.participants?.name}
+              {data1?.participants?.customer_name}
             </p>
             <p className="text-sm font-semibold text-grey">
-              {data1?.participants?.designation}
+              {data1?.participants?.customer_designation}
             </p>
           </div>
           <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
