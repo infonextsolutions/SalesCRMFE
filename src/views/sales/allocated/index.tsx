@@ -201,7 +201,7 @@ const SalesOpen = ({
 
   const handleAllocateTo = (checked: boolean, newOwnerId: any) => {
     try {
-      if (selectedRows.length === 0) {
+      if (!newOwnerId) {
         dispatch(
           setError({
             show: true,
@@ -236,6 +236,9 @@ const SalesOpen = ({
                 success: "Lead Reallocated Successfully!",
               })
             );
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           })
           .catch((err: any) => {
             dispatch(
@@ -252,7 +255,7 @@ const SalesOpen = ({
   const updateLead = (checked: any, key: any, value: any) => {
     console.log("------- updateLead : allocated -------", checked, key, value);
     if (checked) {
-      if (selectedRows.length === 0) {
+      if (!value) {
         dispatch(
           setError({
             show: true,
@@ -273,8 +276,8 @@ const SalesOpen = ({
 
   const renderDropdownList = () => {
     return (
-      <div className="">
-        <div className={`rounded-[8px] overflow-hidden`}>
+      <div className="flex gap-7">
+        <div className={`rounded-[8px] overflow-hidden w-[150px]`}>
           <button
             className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
               showSubDD === 0 && "bg-[#eee]"
@@ -283,6 +286,24 @@ const SalesOpen = ({
           >
             Reallocate To
           </button>
+          <button
+            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
+              showSubDD === 1 && "bg-[#eee]"
+            }`}
+            onClick={() => setShowSubDD(1)}
+          >
+            Change Lead Status
+          </button>
+          <button
+            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
+              showSubDD === 2 && "bg-[#eee]"
+            }`}
+            onClick={() => setShowSubDD(2)}
+          >
+            Change Lead Stage
+          </button>
+        </div>
+        <div>
           {showSubDD === 0 && (
             <div className="w-[100%] bg-[#eee]">
               <div className="flex items-center p-[6px] border-solid border-1 border-black bg-white">
@@ -347,16 +368,6 @@ const SalesOpen = ({
               </ul>
             </div>
           )}
-        </div>
-        <div className={`rounded-[8px] overflow-hidden`}>
-          <button
-            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
-              showSubDD === 1 && "bg-[#eee]"
-            }`}
-            onClick={() => setShowSubDD(1)}
-          >
-            Change Lead Status
-          </button>
           {showSubDD === 1 && (
             <ul className="bg-[#eee] flex flex-col gap-[4px]">
               <li className="">
@@ -393,16 +404,6 @@ const SalesOpen = ({
               </li>
             </ul>
           )}
-        </div>
-        <div className={`rounded-[8px] overflow-hidden`}>
-          <button
-            className={`w-[100%] text-left text-black p-[4px] cursor-pointer ${
-              showSubDD === 2 && "bg-[#eee]"
-            }`}
-            onClick={() => setShowSubDD(2)}
-          >
-            Change Lead Stage
-          </button>
           {showSubDD === 2 && (
             <ul className="bg-[#eee] flex flex-col gap-[4px]">
               {openStages?.map((stageItem: any, index: number) => (
