@@ -253,7 +253,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
             />
           </div>
           <div className="flex flex-wrap items-center gap-5">
-            <div className="flex items-center w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center gap-2 w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -266,6 +266,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                     selected={callType === opItem?.company_name}
                     value={opItem?.company_name}
                     key={opItem?.company_name}
+                    className="text-center"
                   >
                     {opItem?.company_name}
                   </option>
@@ -328,7 +329,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                 </option>
               </select>
             </div>
-            <div className="flex items-center w-48 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Meeting Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
