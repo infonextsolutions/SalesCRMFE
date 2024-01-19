@@ -821,10 +821,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
       {detailShow && (
         <BackdropRight bool={detailShow}>
           <ExpandableRow
-            leadDesc={CallData.call_description}
-            companyDesc={CallData.companyId.company_description}
-            companyWebsite={CallData.companyId.company_website_url}
-            LeadOwners={CallData.leadId.owners}
+            leadDesc={CallData?.call_description}
+            companyDesc={CallData?.companyId?.company_description}
+            companyWebsite={CallData?.companyId?.company_website_url}
+            LeadOwners={CallData?.leadId?.owners}
             otherContacts={CallData?.customerId?.contacts}
             leadData={CallData}
             handleClose={() => setDetailShow(!detailShow)}

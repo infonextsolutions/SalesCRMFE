@@ -17,7 +17,7 @@ const LeadsTable = React.lazy(
 const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
 
-const LeadsContainer = ({ view, records, list }: any) => {
+const LeadsContainer = ({ view, records, list, setSelectedRows, reload }: any) => {
   const [qaid, setQaid] = useState(
     window !== undefined ? localStorage.getItem("user-id") : ""
   );
@@ -346,6 +346,8 @@ const LeadsContainer = ({ view, records, list }: any) => {
               totalRecords={visibleRecords}
               search={search}
               queryStr={queryStr}
+              setSelectedRows={setSelectedRows}
+              reload={reload}
             />
           </Suspense>
         ) : (
