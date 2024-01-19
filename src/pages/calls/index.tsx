@@ -707,8 +707,12 @@ const CallsPage = () => {
   const handleSearchAssignTo = (val: any) => {
     setSearchAssignTo(val);
   };
+  const [relaod, setReload] = useState(false);
   const handleAssignTo = (checked: boolean, qaId: any) => {
     try {
+      setTimeout(() => {
+        setReload(true);
+      }, 2000);
       if (selectedRows.length === 0) {
         dispatch(
           setError({
@@ -743,7 +747,9 @@ const CallsPage = () => {
                 success: "Successfully Assigned!",
               })
             );
-            window.location.reload();
+            setTimeout(() => {
+              setReload(false);
+            }, 2100);
           })
           .catch((err: any) => {
             dispatch(
@@ -994,10 +1000,14 @@ const CallsPage = () => {
             : "Calls To Be Feedback Requested"}
         </h2>
       </div>
-      <div className="bg-[#ffe3e170] mt-6 rounded-lg mx-6 px-6 overflow-x-auto">
-        {renderFilters()}
-        {subType === "allocated_call_reviews" ? renderACR() : renderFRCR()}
-      </div>
+      {relaod ? (
+        <></>
+      ) : (
+        <div className="bg-[#ffe3e170] mt-6 rounded-lg mx-6 px-6 overflow-x-auto">
+          {renderFilters()}
+          {subType === "allocated_call_reviews" ? renderACR() : renderFRCR()}
+        </div>
+      )}
       <Pagination
         itemsPerPage={limit}
         totalItems={totalItem}
