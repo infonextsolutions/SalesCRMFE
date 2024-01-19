@@ -14,7 +14,7 @@ import { IoMdVolumeHigh, IoMdVolumeOff, IoMdVolumeLow } from "react-icons/io";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 
-const SideBarControls = ({
+const DescBoxAudioPlayerControls = ({
   audioRef,
   progressBarRef,
   duration,
@@ -143,4 +143,4 @@ const SideBarControls = ({
   );
 };
 
-export default SideBarControls;
+export default DescBoxAudioPlayerControls;

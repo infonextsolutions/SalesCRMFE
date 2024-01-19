@@ -3,13 +3,13 @@ import { tracks } from "./tracks";
 
 // import components
 import DisplayTrack from "./DisplayTrack";
-import SideBarControls from "./SideBarControls";
+import SideBarControls from "./DescBoxAudioPlayerControls";
 import ProgressBar from "./ProgressBar";
 import TopBar from "./TopBar";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 
-const SideBarAudioPlayer = ({ src }) => {
+const DescBoxAudioPlayer = ({ src }) => {
   // states
   const [trackIndex, setTrackIndex] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
@@ -105,4 +105,4 @@ const SideBarAudioPlayer = ({ src }) => {
     </>
   );
 };
-export default SideBarAudioPlayer;
+export default DescBoxAudioPlayer;

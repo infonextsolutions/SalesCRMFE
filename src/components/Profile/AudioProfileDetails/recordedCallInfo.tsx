@@ -6,6 +6,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 const CallInfo = ({ check, data, data1, refresh }: any) => {
+  console.log('-------------- call info -------------', data1, data)
   const activeTitle = 0;
   // const [edit, setEdit] = useState(false);
   // const [bool, setBool] = useState(true);
@@ -50,7 +51,7 @@ const CallInfo = ({ check, data, data1, refresh }: any) => {
   return (
     <div>
       <h4 className="text-2xl font-semibold capitalize pl-7">
-        {data1?.lead_title}
+        {data?.activeCall?.call_title}
       </h4>
 
       <div className="pl-[30px]">
