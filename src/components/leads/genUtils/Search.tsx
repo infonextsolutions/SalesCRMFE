@@ -18,7 +18,7 @@ const Search = ({ change, view }: any) => {
           <input
             type="text"
             onChange={change}
-            className="w-[100%] h-[32px]  outline-0 text-black "
+            className="w-[100%] h-[32px] bg-inherit outline-0 text-black "
             placeholder="Search Lead..."
           />
         </div>

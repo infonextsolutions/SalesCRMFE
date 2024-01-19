@@ -83,18 +83,22 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
           .then((res) => {
             setOwnerOps(res?.data?.result);
           })
-          .catch((e) => { });
-        axios.get(
-          "https://sales365.trainright.fit/api/user-company-master/findAllCompanies", {
-          headers: {
-            Authorization: accessToken
-          }
-        }
-        ).then((res) => {
-          setCompanyOps(res?.data?.result);
-        }).catch((e) => { });
+          .catch((e) => {});
+        axios
+          .get(
+            "https://sales365.trainright.fit/api/user-company-master/findAllCompanies",
+            {
+              headers: {
+                Authorization: accessToken,
+              },
+            }
+          )
+          .then((res) => {
+            setCompanyOps(res?.data?.result);
+          })
+          .catch((e) => {});
       }
-    } catch (error) { }
+    } catch (error) {}
   }, [accessToken]);
 
   const onChange = (e: any) => {
@@ -157,7 +161,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
         { headers: { Authorization: accessToken } }
       );
       dummy1 = { ...response.data };
-    } catch (error) { }
+    } catch (error) {}
   };
   const ref: any = useRef();
 
@@ -217,8 +221,8 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
   };
   return (
     <div className="w-[100%] bg-[#ffe3e170] pt-3 min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] h-[190px] flex items-center  px-[8px]">
-        <div className="w-[100%] flex flex-col gap-4">
+      <div className="w-[100%] flex items-center  px-[8px]">
+        <div className="w-[100%] flex flex-col gap-4 my-4">
           <div className="flex justify-between">
             <Search change={onChange} />
             <NavigationWithoutTitle
@@ -249,7 +253,7 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
             />
           </div>
           <div className="flex flex-wrap items-center gap-5">
-            <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -257,17 +261,15 @@ const MeetingRecordingContainer = ({ dummy1, data }: any) => {
                 id="company"
               >
                 <option selected={companyName === ""} value=""></option>
-                {
-                  companyOps?.map((opItem: any, idx: number) => (
-                    <option
-                      selected={callType === opItem?.company_name}
-                      value={opItem?.company_name}
-                      key={opItem?.company_name}
-                    >
-                      {opItem?.company_name}
-                    </option>
-                  ))
-                }
+                {companyOps?.map((opItem: any, idx: number) => (
+                  <option
+                    selected={callType === opItem?.company_name}
+                    value={opItem?.company_name}
+                    key={opItem?.company_name}
+                  >
+                    {opItem?.company_name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
