@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
-import SideBarAudioPlayer from "@/components/activeCalls/audio/components/SideBarAudioPlayer";
+import DescBoxAudioPlayer from "@/components/activeCalls/audio/components/DescBoxAudioPlayer";
 
 const CallBox = ({
   width,
@@ -407,8 +407,43 @@ const ExpandableRow = ({
               </li>
             ))}
           </ul>
+          {/* <ul className="w-full">
+            {callMatrics.map((item: any) => (
+              <li
+                key={item.title}
+                className="flex justify-between items-center"
+              >
+                <h3 className="text-[#909193] text-[14px] font-[500]">
+                  {item.title}
+                </h3>
+                <p
+                  className="text-[#434343] text-[14px] font-[500] w-[120px]
+                "
+                >
+                  {item.data}
+                </p>
+              </li>
+            ))}
+          </ul> */}
         </div>
       </div>
+      {/* <div className="w-[100%] flex flex-col justify-between">
+        {callMatrics.map((item: any, i: any) => {
+          return (
+            <div className="flex justify-between items-center mt-[3px]" key={i}>
+              <p className="text-[#8A9099] font-medium mt-[2px] text-[14px] tracking-wide">
+                {item.title}
+              </p>
+              <p
+                key={i}
+                className="text-[#000] font-medium mt-[2px] text-[14px] tracking-wide"
+              >
+                {item.data}
+              </p>
+            </div>
+          );
+        })}
+      </div> */}
 
       <div className="w-[100%] mb-[20px]">
         <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
@@ -422,8 +457,13 @@ const ExpandableRow = ({
         <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
           Call Player
         </h3>
-        <SideBarAudioPlayer src={audioPlayerData} />
+        <DescBoxAudioPlayer src={audioPlayerData} />
       </div>
+      {/* <div>
+        <h3 className="w-[200px] text-[16px] text-[#3F434A] font-medium">
+          Call Player
+        </h3>
+      </div> */}
     </div>
   );
 };
