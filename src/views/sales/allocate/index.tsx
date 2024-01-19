@@ -213,9 +213,12 @@ const SalesOpen = ({
     setSearchAssignTo(val);
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handleAllocateTo = (checked: boolean, newOwnerId: any) => {
     try {
-      if (selectedRows.length === 0) {
+      setLoading(true);
+      if (!newOwnerId) {
         dispatch(
           setError({
             show: true,
@@ -250,6 +253,9 @@ const SalesOpen = ({
                 success: "Lead Allocated Successfully!",
               })
             );
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           })
           .catch((err: any) => {
             dispatch(
@@ -260,13 +266,14 @@ const SalesOpen = ({
             );
           });
       }
+      setLoading(false);
     } catch (error) {}
   };
 
   const updateLead = (checked: any, key: any, value: any) => {
     console.log("------- updateLead : allocate -------", checked, key, value);
     if (checked) {
-      if (selectedRows.length === 0) {
+      if (!key) {
         dispatch(
           setError({
             show: true,
@@ -463,92 +470,103 @@ const SalesOpen = ({
           />
         </Backdrop>
       )}
-      <Navigation
-        title={""}
-        leftChildren={
-          <DropDown3 text="Actions" id={0} dropdown={true} dark={true}>
-            {renderDropdownList()}
-          </DropDown3>
-        }
-        buttons={[
-          // {
-          //   text: "Actions",
-          //   dropdown: true,
-          //   id: 0,
-          //   click: viewButtinClick,
-          //   light: false,
-          //   dark: true,
-          //   list: [
-          //     {
-          //       title: "Table View",
-          //       Icon: "List 2",
-          //     },
-          //     {
-          //       title: "Kanban View",
-          //       Icon: "Grid",
-          //     },
-          //   ],
-          //   value: 0,
-          // },
-          {
-            text: "View",
-            dropdown: true,
-            id: 0,
-            click: viewButtinClick,
-            light: false,
-            dark: true,
-            list: [
+      {!loading ? (
+        <>
+          <Navigation
+            title={""}
+            leftChildren={
+              <DropDown3 text="Actions" id={0} dropdown={true} dark={true}>
+                {renderDropdownList()}
+              </DropDown3>
+            }
+            buttons={[
+              // {
+              //   text: "Actions",
+              //   dropdown: true,
+              //   id: 0,
+              //   click: viewButtinClick,
+              //   light: false,
+              //   dark: true,
+              //   list: [
+              //     {
+              //       title: "Table View",
+              //       Icon: "List 2",
+              //     },
+              //     {
+              //       title: "Kanban View",
+              //       Icon: "Grid",
+              //     },
+              //   ],
+              //   value: 0,
+              // },
               {
-                title: "Table View",
-                Icon: "List 2",
+                text: "View",
+                dropdown: true,
+                id: 0,
+                click: viewButtinClick,
+                light: false,
+                dark: true,
+                list: [
+                  {
+                    title: "Table View",
+                    Icon: "List 2",
+                  },
+                  {
+                    title: "Kanban View",
+                    Icon: "Grid",
+                  },
+                ],
+                value: 0,
               },
               {
-                title: "Kanban View",
-                Icon: "Grid",
+                text: "Add Lead",
+                dropdown: true,
+                id: 1,
+                icon: "Plus",
+                click: AddLead,
+                light: false,
+                dark: false,
+                list: [
+                  { title: "Using Form", Icon: "Text" },
+                  { title: "Import Leads", Icon: "Download" },
+                  // { title: "Using Prompt", Icon: "Text" },
+                ],
               },
-            ],
-            value: 0,
-          },
-          {
-            text: "Add Lead",
-            dropdown: true,
-            id: 1,
-            icon: "Plus",
-            click: AddLead,
-            light: false,
-            dark: false,
-            list: [
-              { title: "Using Form", Icon: "Text" },
-              { title: "Import Leads", Icon: "Download" },
-              // { title: "Using Prompt", Icon: "Text" },
-            ],
-          },
-          {
-            text: "",
-            dropdown: true,
-            id: 1,
-            icon: "Download",
-            light: true,
-            dark: false,
-            click: addExport,
-            list: [
-              // { title: "Print", Icon: "Printer" },
-              { title: "Excel", Icon: "Excel" },
-              // { title: "PDF", Icon: "PDF" },
               {
-                title: "CSV",
-                Icon: "CSV",
-                wrapper: (
-                  <CSVLink data={data.result} className="" ref={ref}>
-                    CSV
-                  </CSVLink>
-                ),
+                text: "",
+                dropdown: true,
+                id: 1,
+                icon: "Download",
+                light: true,
+                dark: false,
+                click: addExport,
+                list: [
+                  // { title: "Print", Icon: "Printer" },
+                  { title: "Excel", Icon: "Excel" },
+                  // { title: "PDF", Icon: "PDF" },
+                  {
+                    title: "CSV",
+                    Icon: "CSV",
+                    wrapper: (
+                      <CSVLink data={data.result} className="" ref={ref}>
+                        CSV
+                      </CSVLink>
+                    ),
+                  },
+                ],
               },
-            ],
-          },
-        ]}
-      />
-      <LeadsContainer view={view} records={data.totalRecords} list={Dummy} setSelectedRows={setSelectedRows} />
+            ]}
+          />
+          <LeadsContainer
+            view={view}
+            records={data.totalRecords}
+            list={Dummy}
+            setSelectedRows={setSelectedRows}
+          />
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
