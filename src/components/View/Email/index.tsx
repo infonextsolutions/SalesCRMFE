@@ -5,7 +5,6 @@ import "quill/dist/quill.snow.css";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
-import { Root } from "../EditLead/FormEditContainer";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 

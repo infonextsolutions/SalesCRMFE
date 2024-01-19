@@ -1,12 +1,9 @@
 import { setCurrent } from "@/store/UI";
-import Call, { CompanyId, CustomerId } from "@/types/Calls";
-import ActiveCall from "@/types/recorded-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import Lead from "@/types/Leads";
 import axios from "axios";
 import AudioPlayer from "@/components/upload-calls/audio/components/AudioPlayer";
 
@@ -219,9 +216,8 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -399,7 +395,7 @@ const ParticipantsHover = ({
 }: {
   last: any;
   bounding: any;
-  data: Lead;
+  data: any;
 }) => {
   return (
     <div
@@ -416,13 +412,12 @@ const ParticipantsHover = ({
       <p className="text-[#000] w-[100%] text-[15px] font-medium">
         Call Participants
       </p>
-      {data.owners.map((item, i) => {
+      {data.owners.map((item: any, i: number) => {
         return (
           <p
             key={i}
-            className={`${
-              i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
-            } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
+              } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -434,7 +429,7 @@ const ParticipantsHover = ({
   );
 };
 
-const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
+const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const { pathname, push } = useRouter();
   const [detailShow, setDetailShow] = useState(false);
 
@@ -509,7 +504,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
             // text={"Discussion on PX features"}
             text={CallData.callTitle}
             click={true}
-            // route={`${pathname}/${id}/audio-call`}
+          // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
@@ -574,83 +569,3 @@ const CallContainer = ({ id, CallData, last, selectAll }: CallProps) => {
 };
 
 export default CallContainer;
-
-interface CallProps {
-  id: String;
-  CallData: Root;
-  last: any;
-  selectAll: any;
-}
-
-export interface Root {
-  auto_highlights_result: AutoHighlightsResult;
-  callTitle: string;
-  _id: string;
-  audio_url: string;
-  transId: string;
-  language_model: string;
-  acoustic_model: string;
-  language_code: string;
-  status: string;
-  text: string;
-  words: Word[];
-  confidence: string;
-  audio_duration: string;
-  utterances: Utterance[];
-  chapters: any;
-  sentiment_analysis_results: SentimentAnalysisResult[];
-  entities: any;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface AutoHighlightsResult {
-  status: string;
-  results: Result[];
-}
-
-export interface Result {
-  count: number;
-  rank: number;
-  text: string;
-  timestamps: Timestamp[];
-}
-
-export interface Timestamp {
-  start: number;
-  end: number;
-}
-
-export interface Word {
-  text: string;
-  start: number;
-  end: number;
-  confidence: number;
-  speaker: string;
-}
-
-export interface Utterance {
-  confidence: number;
-  end: number;
-  speaker: string;
-  start: number;
-  text: string;
-  words: Word2[];
-}
-
-export interface Word2 {
-  text: string;
-  start: number;
-  end: number;
-  confidence: number;
-  speaker: string;
-}
-
-export interface SentimentAnalysisResult {
-  text: string;
-  start: number;
-  end: number;
-  sentiment: string;
-  confidence: number;
-  speaker: string;
-}

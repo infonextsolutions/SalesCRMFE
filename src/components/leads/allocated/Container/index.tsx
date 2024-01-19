@@ -1,5 +1,4 @@
 // import LeadsTable from "@/components/View/Tables/LeadsSearch";
-import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import React, { useState, Suspense, useEffect } from "react";
 import Search from "../../genUtils/Search";
@@ -18,7 +17,7 @@ const LeadsTable = React.lazy(
 const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
 
-const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
+const LeadsContainer = ({ view, records, list }: any) => {
   const [qaid, setQaid] = useState(
     window !== undefined ? localStorage.getItem("user-id") : ""
   );
@@ -112,7 +111,7 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
         }
       );
       setVisibleRecords({ ...response.data });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -132,7 +131,11 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
               <h2 className="font-medium">Status</h2>
               <select
                 onChange={(e) => {
-                  setStatus(e.target.value);
+                  if (e.target.value == "close") {
+                    router.push(`/sales/closed`);
+                  } else {
+                    setStatus(e.target.value);
+                  }
                 }}
                 className="text-red-500"
                 id="countries"
@@ -361,9 +364,3 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
 };
 
 export default LeadsContainer;
-
-interface LeadContainerProps {
-  view?: Boolean;
-  records: Lead[] | any;
-  list: any[];
-}

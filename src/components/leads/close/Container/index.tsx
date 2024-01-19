@@ -1,5 +1,4 @@
 // import LeadsTable from "@/components/View/Tables/LeadsSearch";
-import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import React, { useState, Suspense, useEffect } from "react";
 import Search from "../../genUtils/Search";
@@ -17,7 +16,7 @@ const LeadsTable = React.lazy(
 const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
 
-const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
+const LeadsContainer = ({ view, records, list }: any) => {
   const [search, setSearch] = useState("");
   const onChange = (e: any) => {
     const val = e.target.value;
@@ -294,9 +293,3 @@ const LeadsContainer = ({ view, records, list }: LeadContainerProps) => {
 };
 
 export default LeadsContainer;
-
-interface LeadContainerProps {
-  view?: Boolean;
-  records: Lead[] | any;
-  list: any[];
-}

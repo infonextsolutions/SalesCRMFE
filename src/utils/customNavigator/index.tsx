@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Navigator = ({ list, current, callback, width }: NavigatorProps) => {
+const Navigator = ({ list, current, callback, width }: any) => {
   const [activeTitle, setActiveTitle] = useState(current);
   const handleOnClick = (id: any) => {
     setActiveTitle(id);
@@ -43,10 +43,3 @@ const Navigator = ({ list, current, callback, width }: NavigatorProps) => {
 };
 
 export default Navigator;
-
-interface NavigatorProps {
-  list: any[] | any;
-  current: Number;
-  callback: Function;
-  width: boolean | null;
-}

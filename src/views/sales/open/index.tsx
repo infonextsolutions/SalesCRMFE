@@ -52,7 +52,7 @@ const Dummy = [
   { id: 18, type: "Dead", data: dummyItem },
 ];
 
-const SalesOpen = ({ data, mastersData, teamManagersData }: props) => {
+const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
 
@@ -270,9 +270,3 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: props) => {
 };
 
 export default SalesOpen;
-
-interface props {
-  data: any;
-  mastersData: any;
-  teamManagersData: any;
-}

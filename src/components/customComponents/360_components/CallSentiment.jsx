@@ -2,7 +2,20 @@ import * as React from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Card } from "@mui/material";
 
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "July",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 const CallSentiment = ({ callSentimentData }) => {
   const [ready, setReady] = React.useState(false);
@@ -11,20 +24,27 @@ const CallSentiment = ({ callSentimentData }) => {
   const [neutralData, setNeutralData] = React.useState([]);
   const [labels, setLabels] = React.useState([]);
   React.useEffect(() => {
-    const posData = [], negData = [], neuData = [], lbl = [];
-    callSentimentData?.map((dataItem, idx) => {
-      posData[idx] = dataItem?.POSITIVE;
-      negData[idx] = dataItem?.NEGATIVE;
-      neuData[idx] = dataItem?.NEUTRAL;
-      const date = new Date(dataItem?.date);
-      const labelItem = `${date?.getDate()} ${months[date?.getMonth()]}`
-      lbl[idx] = labelItem;
-    });
-    setPositiveData(posData);
-    setNegativeData(negData);
-    setNeutralData(neuData);
-    setLabels(lbl);
-    setReady(true);
+    const posData = [],
+      negData = [],
+      neuData = [],
+      lbl = [];
+    if (callSentimentData.length) {
+      callSentimentData?.map((dataItem, idx) => {
+        posData[idx] = dataItem?.POSITIVE;
+        negData[idx] = dataItem?.NEGATIVE;
+        neuData[idx] = dataItem?.NEUTRAL;
+        const date = new Date(dataItem?.date);
+        const labelItem = `${date?.getDate()} ${months[date?.getMonth()]}`;
+        lbl[idx] = labelItem;
+      });
+      setPositiveData(posData);
+      setNegativeData(negData);
+      setNeutralData(neuData);
+      setLabels(lbl);
+      setReady(true);
+    } else {
+      return;
+    }
   }, [callSentimentData]);
 
   return (

@@ -3,7 +3,7 @@ import { getBasicIcon, getRoundedAvatar } from "@/utils/AssetsHelper";
 import { useAppDispatch } from "@/store/store";
 import { triggerMenu } from "@/store/UI";
 import Image from "next/image";
-import ButtonDropDown, { ButtonProps } from "@/utils/Button/Button";
+import ButtonDropDown from "@/utils/Button/Button";
 import { logout, setLoggedInStatus } from "@/store/auth";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -51,7 +51,7 @@ const NavbarWithButton = ({
   title,
   buttons,
   src,
-}: UpdatedNavigationProps) => {
+}: any) => {
   const { menuOpen } = useUI();
   const [view, setView] = React.useState(false);
   const dispatch = useAppDispatch();
@@ -101,7 +101,7 @@ const NavbarWithButton = ({
         <div className="mr-3">
           {buttons?.length > 0 && (
             <div className="flex justify-end ">
-              {buttons.map((item, i) => {
+              {buttons.map((item: any, i: number) => {
                 return (
                   <Button
                     dropdown={item.dropdown}
@@ -199,11 +199,3 @@ const NavbarWithButton = ({
 };
 
 export default NavbarWithButton;
-
-interface UpdatedNavigationProps {
-  buttons: ButtonProps[];
-  children?: JSX.Element[] | JSX.Element;
-  title: String;
-  mainTitle: String;
-  src: String;
-}

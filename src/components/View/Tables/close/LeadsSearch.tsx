@@ -1,4 +1,3 @@
-import Lead from "@/types/Leads";
 import ButtonDropDown from "@/utils/Button/Button";
 import SmallButton from "@/utils/Button/SmallButton";
 import React, { useEffect, useState, Suspense } from "react";
@@ -14,7 +13,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
+const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -83,7 +82,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           setItems(allItems);
         }
         const filtered = data.filter(
-          (e: Lead) =>
+          (e: any) =>
             e?.leadId?.includes(search) ||
             e.lead_title?.includes(search) ||
             e.companyId.company_name?.includes(search) ||
@@ -116,7 +115,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
       );
       const data = res.data.result;
       const filtered = data.filter(
-        (e: Lead) =>
+        (e: any) =>
           e?.leadId?.includes(search) ||
           e.lead_title?.includes(search) ||
           e.companyId.company_name?.includes(search) ||
@@ -283,7 +282,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           // ) : (
 
           Leads != null &&
-          Leads.map((item: Lead, ind: any) => {
+          Leads.map((item: any, ind: any) => {
             return (
               <LeadContainer
                 selectAll={selectAll}
@@ -473,10 +472,3 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 };
 
 export default LeadsTable;
-
-interface TableProps {
-  totalRecords: Number;
-  [key: string]: any;
-  icon?: String;
-  search: String | any;
-}

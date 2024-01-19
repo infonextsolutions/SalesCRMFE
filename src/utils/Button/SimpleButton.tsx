@@ -10,7 +10,7 @@ const SimpleButton = ({
   click,
   type,
   disabled,
-}: ButtonProps) => {
+}: any) => {
   const Theme =
     theme === 1
       ? "bg-bg-red hover:bg-[#ff7d6d]"
@@ -48,17 +48,3 @@ const SimpleButton = ({
 };
 
 export default SimpleButton;
-
-interface ButtonProps {
-  width?: any;
-  text?: String;
-  id?: Number;
-  theme: Number;
-  height?: any;
-  left?: Number;
-  right?: Number;
-  border?: Boolean;
-  type?: string;
-  disabled?: boolean;
-  click?: () => void;
-}

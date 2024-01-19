@@ -20,7 +20,7 @@ const ButtonDropDown = ({
   value,
   width,
   dropDirection,
-}: ButtonProps) => {
+}: any) => {
   const [clicked, setclicked] = React.useState(false);
   const [mouseOver, setMouseOver] = React.useState(false);
   const [curr, setCurr] = React.useState<Number | undefined>(value);
@@ -180,22 +180,3 @@ const ButtonDropDown = ({
 };
 
 export default ButtonDropDown;
-
-export interface ButtonProps {
-  icon?: String;
-  dropdown?: Boolean | {};
-  width?: Number;
-  text: String;
-  id: Number;
-  light?: Boolean;
-  dark?: Boolean;
-  height?: Number;
-  border?: Boolean;
-  onClick1?: any;
-  pl?: Number;
-  tight?: Boolean;
-  list?: [] | any;
-  dropDirection?: Boolean;
-  click?: (prev: Number, current: Number) => void | undefined;
-  value?: Number;
-}

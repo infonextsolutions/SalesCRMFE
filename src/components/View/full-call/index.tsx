@@ -1,4 +1,3 @@
-import Recorded from "@/types/recorded-call";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import DualRange from "@/utils/dualRange";
 import Image from "next/image";
@@ -126,7 +125,7 @@ const Text = ({ top, title, width, src }: any) => {
   );
 };
 
-const FullCall = ({ cancel, data }: props) => {
+const FullCall = ({ cancel, data }: any) => {
   return (
     <div className="hide-scrollbar w-[100%]  px-[40px] py-[30px] h-[100%] overflow-y-auto relative ">
       <div
@@ -181,8 +180,3 @@ const FullCall = ({ cancel, data }: props) => {
 };
 
 export default FullCall;
-
-interface props {
-  data: Recorded;
-  cancel: () => void;
-}

@@ -1,7 +1,6 @@
 import Backdrop from "@/components/View/Backdrop/Center";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import Notes from "@/components/View/Notes";
-import Lead, { CompanyId, CustomerId, Owner } from "@/types/Leads";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -473,7 +472,7 @@ const ExpandableRow = ({
         <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
           Lead Owner
         </p>
-        {LeadOwners.map((item: Owner, i: any) => {
+        {LeadOwners.map((item: any, i: any) => {
           return (
             <p
               key={i}
@@ -547,7 +546,7 @@ const LeadContainer = ({
   selectAll,
   owners,
   last,
-}: LeadProps) => {
+}: any) => {
   const { pathname } = useRouter();
   const state = useSelector((state: any) => state.auth);
   const [notes, setNotes] = React.useState(false);
@@ -818,7 +817,7 @@ const LeadContainer = ({
             color={"#000"}
             text={LeadData1.leadId}
             click={true}
-            route={`${pathname}/${id}/lead-profile`}
+            route={`/sales/open/${id}/lead-profile`}
           />
           <LeadItem
             width={120}
@@ -826,7 +825,7 @@ const LeadContainer = ({
             color={"#000"}
             text={LeadData1.lead_title}
             click={true}
-            route={`${pathname}/${id}/lead-profile`}
+            route={`/sales/open/${id}/lead-profile`}
           />
           <NotesEventQuickActions
             width={90}
@@ -847,14 +846,14 @@ const LeadContainer = ({
             }
             bold={true}
             click={true}
-            route={`${pathname}/${id}/company-profile`}
+            route={`/sales/open/${id}/company-profile`}
           />
           <LeadItem
             width={160}
             left={40}
             text={LeadData1?.customerId?.customer_name}
             click={true}
-            route={`${pathname}/${id}/client-poc-profile`}
+            route={`/sales/open/${id}/client-poc-profile`}
           />
           {/* <LeadItem
             width={200}
@@ -1153,17 +1152,3 @@ const LeadContainer = ({
 };
 
 export default LeadContainer;
-
-interface LeadProps {
-  company: any;
-  customer: any;
-  id: String;
-  leadStage: String;
-  leadStatus: String;
-  custom: String;
-  LeadData: Lead;
-  index: Number;
-  selectAll: any;
-  last: any;
-  owners: any;
-}

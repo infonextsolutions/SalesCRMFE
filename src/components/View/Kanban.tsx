@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getBasicIcon } from "../../utils/AssetsHelper";
-import Button, { ButtonProps } from "@/utils/Button/Button";
+import Button from "@/utils/Button/Button";
 import Image from "next/image";
 import axios from "axios";
 
-const Kanban = ({ list }: KanbasProps) => {
+const Kanban = ({ list }: any) => {
   const [accessToken, setAccessToken] = useState<any>("");
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Kanban = ({ list }: KanbasProps) => {
   return (
     <div className="px-[20px] mt-[10px] text-[#ffffff] flex gap-[20px] h-[1200px] overflow-x-auto custom-scroll">
       {leads.map((col, i) => {
-        var res = list.filter((obj) => {
+        var res = list.filter((obj: any) => {
           return obj.type === col;
         });
         if (res.length)
@@ -71,7 +71,7 @@ const Kanban = ({ list }: KanbasProps) => {
                     }
                   </div>
                 </div>
-                {res.map((item, i) => {
+                {res.map((item: any, i: any) => {
                   return (
                     <div
                       className="border border-slate-600 p-[15px] rounded-xl mb-[20px] w-[270px] shadow-lg shadow-slate-400"
@@ -248,7 +248,3 @@ const Kanban = ({ list }: KanbasProps) => {
 };
 
 export default Kanban;
-
-interface KanbasProps {
-  list: any[];
-}

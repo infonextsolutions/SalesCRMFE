@@ -76,13 +76,6 @@ const AddTextBox = ({ index, change }: any) => {
   );
 };
 
-interface Question {
-  id: number;
-  questionText: string;
-  answerType: string;
-  option: Array<Object>;
-}
-
 const NewQuestions: React.FC = () => {
   return <div></div>;
 };
@@ -117,17 +110,11 @@ const Dropdown = ({ index, question, option }: any) => {
   );
 };
 
-interface DropdownOption {
-  value: number | null;
-  selected: boolean;
-  title: string;
-}
-
 const DropDownEditable = ({ ind, setOption, option }: any) => {
   // const [list, setList] = useState<DropdownOption[]>([
   //   { value: 1, selected: true, title: "" },
   // ]);
-  const [list, setList] = useState<DropdownOption[]>(option);
+  const [list, setList] = useState<any[]>(option);
 
   const addDropdownOption = () => {
     const lastOption = list[list.length - 1];
@@ -329,13 +316,9 @@ const McqEditable = ({ ind, setOption, option }: any) => {
     </>
   );
 };
-interface Option {
-  title: string;
-  selected: boolean;
-}
 
 const CheckboxEdit = ({ ind, setOption, option }: any) => {
-  const [options, setOptions] = useState<Option[]>(option);
+  const [options, setOptions] = useState<any[]>(option);
   // const [options, setOptions] = useState<Option[]>([
   //   { title: "", selected: false }
   // ]);
@@ -415,7 +398,7 @@ const CheckboxEdit = ({ ind, setOption, option }: any) => {
   );
 };
 const Checkbox = ({ index, question, option }: any) => {
-  const [options, setOptions] = useState<Option[]>(option);
+  const [options, setOptions] = useState<any[]>(option);
 
   const toggleOption = (index: number) => {
     setOptions((prevOptions) => {

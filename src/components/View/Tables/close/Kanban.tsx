@@ -1,4 +1,3 @@
-import Lead from "@/types/Leads";
 import React, { useEffect, useState, Suspense } from "react";
 import Header from "@/components/leads/open/Header/Header";
 import Image from "next/image";
@@ -7,7 +6,7 @@ import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import KanbanItem from "./KanbanItems";
 
-const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
+const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
   const [items, setItems]: any = useState([]);
   const [totalLeads, settotalLeads]: any = useState(totalRecords);
   const [accessToken, setAccessToken] = useState<any>("");
@@ -52,7 +51,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
         );
         const data = res?.data?.result;
         const filtered = data.filter(
-          (e: Lead) =>
+          (e: any) =>
             e.companyId?.company_name?.includes(search) ||
             e.customerId?.name?.includes(search) ||
             e.potential_deal_size?.includes(search) ||
@@ -71,7 +70,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
     } catch (error) {
 
     }
-  }, [search]);
+  }, [search, accessToken, queryStr]);
 
   const Leads = items;
   const [selectAll, setSelectAll] = useState(false);
@@ -203,10 +202,3 @@ const KanbanTable = ({ totalRecords, search, queryStr }: TableProps) => {
 };
 
 export default KanbanTable;
-
-interface TableProps {
-  totalRecords: Number;
-  [key: string]: any;
-  icon?: String;
-  search: String | any;
-}

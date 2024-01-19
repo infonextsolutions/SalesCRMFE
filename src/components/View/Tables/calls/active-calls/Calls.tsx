@@ -10,11 +10,10 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-import { ActiveCall } from "@/types/active-call";
 import CallContainer from "@/components/calls/active-calls/Call/Call";
 import { data } from "@/components/analysis/Call/Tree/data";
 
-const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
+const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -99,7 +98,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
             const allItems = await getallItems(pageNumber);
             setItems(allItems);
           }
-          const filtered = data.filter((e: ActiveCall) => {
+          const filtered = data.filter((e: any) => {
             const idss: any = String(convertDatetimeToCustomFormat(e.updatedAt));
             const leadid = e.leadId?.leadId;
             return (
@@ -138,7 +137,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
       );
       const data = res.data.result;
       const filtered = data.filter(
-        (e: ActiveCall) =>
+        (e: any) =>
           e._id.includes(search) ||
           e.call_title?.includes(search) ||
           e.customerId.name?.includes(search)
@@ -306,7 +305,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
           <Spinner />
         ) : (
           Leads != null &&
-          Leads.map((item: ActiveCall, i: any) => {
+          Leads.map((item: any, i: any) => {
             return (
               <CallContainer
                 key={item._id}
@@ -489,10 +488,3 @@ const LeadsTable = ({ totalRecords, search, queryStr }: TableProps) => {
 };
 
 export default LeadsTable;
-
-interface TableProps {
-  totalRecords: Number;
-  [key: string]: any;
-  icon?: String;
-  search: String | any;
-}

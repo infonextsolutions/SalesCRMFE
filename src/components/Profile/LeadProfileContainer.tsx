@@ -4,8 +4,6 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ActivityHistory from "./ProfileDetails/Lead/activity";
 import Attachements from "./ProfileDetails/Lead/attachements";
-import { LeadId } from "@/types/leadId";
-import Lead from "@/types/Leads";
 
 const LeadProfileContainer = ({
   titles,
@@ -13,7 +11,7 @@ const LeadProfileContainer = ({
   info,
   data,
   width,
-}: LeadProfileContainerProps) => {
+}: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
   function CallBack(childData: any) {
     setActiveTitle(childData);
@@ -157,10 +155,3 @@ const LeadProfileContainer = ({
 };
 
 export default LeadProfileContainer;
-
-interface LeadProfileContainerProps {
-  titles: any[] | any;
-  current: Number;
-  [key: string]: any;
-  data: Lead;
-}

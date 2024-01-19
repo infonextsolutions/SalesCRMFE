@@ -67,7 +67,7 @@ const TeamsPerformence = ({ data }: any) => {
             id: 1,
             light: true,
             dark: false,
-            click: (e1, e2) => {
+            click: (e1: any, e2: any) => {
               if (e2 === 0) {
                 setFilter(0);
               } else if (e2 === 1) {

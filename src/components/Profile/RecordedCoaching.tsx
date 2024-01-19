@@ -38,7 +38,7 @@ const ChartContainer = ({ children }: any) => {
   );
 };
 
-const ScriptBuilding = ({ script }: { script: ScriptBuilding }) => {
+const ScriptBuilding = ({ script }:any) => {
   return (
     <div className="w-[100%] p-6 h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
@@ -75,7 +75,7 @@ const ScriptBuilding = ({ script }: { script: ScriptBuilding }) => {
   );
 };
 
-const Selling = ({ selling }: { selling: SellingSkills }) => {
+const Selling = ({ selling }: any) => {
   return (
     <div className="w-[100%] p-6 h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
@@ -112,7 +112,7 @@ const Selling = ({ selling }: { selling: SellingSkills }) => {
   );
 };
 
-const Emotion = ({ data }: { data: Emotion }) => {
+const Emotion = ({ data }: any) => {
   return (
     <div className="w-[100%] h-[350px] p-6 bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
@@ -534,38 +534,3 @@ const Coaching = ({ data, refresh }: any) => {
 };
 
 export default Coaching;
-export interface Root {
-  scriptBuilding: ScriptBuilding;
-  emotion: Emotion;
-  sellingSkills: SellingSkills;
-}
-
-export interface ScriptBuilding {
-  Opening: number;
-  "Lead Qualification": number;
-  "Need Discovery": number;
-  "Product Knowledge": number;
-  "Price Discussion": number;
-  Closing: number;
-  "Key Value Proposition": number;
-}
-
-export interface Emotion {
-  Joy: number;
-  Trust: number;
-  Politeness: number;
-  Satisfaction: number;
-  Curiosity: number;
-  Assertiveness: number;
-}
-
-export interface SellingSkills {
-  "Consultative Selling": number;
-  Empathy: number;
-  "Listening Skills": number;
-  Confidence: number;
-  "Urgency Creation": number;
-  "Positive Energy": number;
-  "Rapport Building": number;
-  Politeness: number;
-}

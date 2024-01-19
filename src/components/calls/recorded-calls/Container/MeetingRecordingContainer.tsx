@@ -15,7 +15,7 @@ import { CSVLink } from "react-csv";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
+const MeetingRecordingContainer = ({ dummy1, data }: any) => {
   const [callTypeOps, setCallTypeOps] = useState([
     {
       title: "Choose Type",
@@ -206,11 +206,10 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
   };
   return (
     <div className="w-[100%] bg-[#ffe3e170] pt-3 min-h-[70vh] rounded-[18px] relative mb-[40px]">
-      <div className="w-[100%] h-[170px] flex items-center  px-[8px]">
+      <div className="w-[100%] h-[190px] flex items-center  px-[8px]">
         <div className="w-[100%] flex flex-col gap-4">
           <div className="flex justify-between">
             <Search change={onChange} />
-
             <NavigationWithoutTitle
               buttons={[
                 {
@@ -408,9 +407,3 @@ const MeetingRecordingContainer = ({ dummy1, data }: LeadContainerProps) => {
 };
 
 export default MeetingRecordingContainer;
-
-interface LeadContainerProps {
-  dummy1: any;
-  dummy2?: any;
-  data?: any;
-}

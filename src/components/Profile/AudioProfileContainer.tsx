@@ -7,7 +7,6 @@ import Notes from "./AudioProfileDetails/notesRecordt";
 import CallInfo from "./AudioProfileDetails/recordedCallInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/store/UI";
-import Recorded from "@/types/recorded-call";
 import Coaching from "./RecordedCoaching";
 import CommentsAndNotes from "./AudioProfileDetails/Comment";
 
@@ -111,12 +110,3 @@ const AudioProfileContainer = ({
 };
 
 export default AudioProfileContainer;
-
-interface AudioProfileContainerProps {
-  titles: any[] | any;
-  current: Number;
-  [key: string]: any;
-  check: Boolean;
-  data: Recorded;
-  refresh?: any;
-}

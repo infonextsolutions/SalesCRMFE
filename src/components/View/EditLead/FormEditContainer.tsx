@@ -3,12 +3,10 @@ import SimpleButton from "@/utils/Button/SimpleButton";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
-import { LeadId } from "@/types/leadId";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
-import { CompanyId, CustomerId } from "@/types/Leads";
 
 const FormEditContainer = ({
   titles,
@@ -20,7 +18,7 @@ const FormEditContainer = ({
   width,
   cancel,
   title,
-}: FormEditContainerProps) => {
+}: any) => {
   const [activeTitle, setActiveTitle] = useState(
     window.location.pathname.split("/").pop()
   );
@@ -950,63 +948,3 @@ const FormEditContainer = ({
 };
 
 export default FormEditContainer;
-
-interface FormEditContainerProps {
-  titles: any[] | any;
-  current: Number;
-  [key: string]: any;
-  update: () => void;
-  data: Root;
-  cancel: any;
-  title?: any;
-}
-
-export interface Root {
-  _id: string;
-  companyId: CompanyId;
-  customerId: CustomerId;
-  potential_deal_size: string;
-  product_category: string;
-  win_probability: string;
-  created_by: string;
-  customer_name: string;
-  inquiry: string;
-  existing_budget: string;
-  leadStatus: string;
-  leadStage: string;
-  lead_title: string;
-  lead_description: string;
-  notes: Note[];
-  leadSource: string;
-  source?: string;
-  leadId: string;
-  owners: Owner[];
-  manager?: string | any;
-  __v: number;
-  updatedAt: string;
-  createdAt: string;
-  scriptId: string;
-  callId: string;
-}
-
-export interface Note {
-  title: string;
-  content: string;
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Owner {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  roles: string[];
-  token: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  designation: string;
-}

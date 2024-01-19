@@ -1,4 +1,3 @@
-import Recorded from "@/types/reco-1";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Image from "next/image";
@@ -47,7 +46,7 @@ const Transcript = ({
   utterances,
 }: {
   src: any;
-  data: Recorded;
+  data: any;
   text: any;
   utterances: any;
 }) => {

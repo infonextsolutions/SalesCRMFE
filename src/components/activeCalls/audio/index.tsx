@@ -5,7 +5,6 @@ import Transcript from "../Transcript/Transcript";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import useSound from "use-sound";
 import AudioPlayer from "./components/AudioPlayer";
-import Recorded from "@/types/reco-1";
 import axios from "axios";
 
 const example = {
@@ -536,7 +535,7 @@ const list = [
 const Audio = ({ data, data1, data2 }: any) => {
   const [check, setCheck] = useState(true);
 
-  const [callData, setCallData] = useState<AudioData>(data2);
+  const [callData, setCallData] = useState<any>(data2);
   const [accessToken, setAccessToken] = useState<string>("");
 
   useEffect(() => {
@@ -708,142 +707,3 @@ const Audio = ({ data, data1, data2 }: any) => {
 
 export default Audio;
 
-interface props {
-  data: Recorded;
-  data1: Root;
-}
-
-export interface AudioData {
-  _id: string;
-  Sid: string;
-  ParentCallSid: string;
-  DateCreated: string;
-  DateUpdated: string;
-  AccountSid: string;
-  To: string;
-  From: string;
-  PhoneNumberSid: string;
-  Status: string;
-  StartTime: string;
-  EndTime: string;
-  Duration: string;
-  Price: string;
-  Direction: string;
-  AnsweredBy: string;
-  ForwardedFrom: string;
-  CallerName: string;
-  Uri: string;
-  RecordingUrl: string;
-  leadId: string;
-  questionnaire: any[];
-  comments: any[];
-  notes: any[];
-  createdAt: string;
-  updatedAt: string;
-  transcriptId: TranscriptId;
-}
-
-export interface TranscriptId {
-  auto_highlights_result: AutoHighlightsResult;
-  utterances: any[];
-  chapters: any[];
-  sentiment_analysis_results: any[];
-  entities: any[];
-  _id: string;
-  audio_url: string;
-  transId: string;
-  language_model: string;
-  acoustic_model: string;
-  language_code: string;
-  status: string;
-  text: string;
-  words: Word[];
-  confidence: string;
-  audio_duration: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-export interface AutoHighlightsResult {
-  results: any[];
-}
-
-export interface Word {
-  text: string;
-  start: number;
-  end: number;
-  confidence: number;
-  speaker: any;
-}
-
-export interface Root {
-  _id: string;
-  companyId: CompanyId;
-  customerId: CustomerId;
-  potential_deal_size: string;
-  win_probability: string;
-  created_by: string;
-  customer_name: string;
-  inquiry: string;
-  existing_budget: string;
-  leadStatus: string;
-  leadStage: string;
-  lead_title: string;
-  lead_description: string;
-  notes: Note[];
-  source: string;
-  leadId: string;
-  owners: Owner[];
-  __v: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CompanyId {
-  _id: string;
-  company_name: string;
-  company_website_url: string;
-  company_icon: string;
-  company_location: string;
-  company_product_category: string;
-  company_description: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-export interface CustomerId {
-  _id: string;
-  name: string;
-  contact: string;
-  email: string;
-  parentId: string;
-  designation: string;
-  companyId: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
-export interface Note {
-  title: string;
-  content: string;
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Owner {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  roles: string[];
-  token: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  designation: string;
-}
