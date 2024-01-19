@@ -682,7 +682,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={200}
             left={20}
-            text={CallData?.callData?.[0]?.call_new_participant_name}
+            text={CallData?.participants?.[0]?.customer_name}
           />
           <CallItem
             width={100}
