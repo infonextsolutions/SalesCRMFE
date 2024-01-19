@@ -123,13 +123,13 @@ const FeedbackCallReviewsAC = () => {
       key: "call_score",
       checked: true,
     },
-    {
-      width: 200,
-      left: 40,
-      text: "Call Review Type",
-      key: "call_review_type",
-      checked: true,
-    },
+    // {
+    //   width: 200,
+    //   left: 40,
+    //   text: "Call Review Type",
+    //   key: "call_review_type",
+    //   checked: true,
+    // },
     {
       width: 120,
       left: 20,
@@ -137,13 +137,13 @@ const FeedbackCallReviewsAC = () => {
       key: "call_review_status",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "Close Date",
-      key: "close_date",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Close Date",
+    //   key: "close_date",
+    //   checked: true,
+    // },
     {
       width: 200,
       left: 40,
@@ -452,38 +452,38 @@ const FeedbackCallReviewsAC = () => {
                     link: `/calls/recorded-calls/${item?._id}/audio-call`,
                   },
                   {
-                    text: item?.callTitle || "-",
+                    text: item?.callData[0]?.call_title || "-",
                     link: `/calls/recorded-calls/${item?._id}/audio-call`,
                   },
                   {
                     text: item?.leadId?.[0]?.leadId || "-",
-                    link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
+                    // link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
                   },
                   {
                     text: item?.leadId?.[0]?.lead_title || "-",
                     link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
                   },
                   { text: item?.callId || "-" }, // participants
-                  { text: item?.owner?.name || "-" }, // call owner
-                  { text: item?.teamManager || "-" }, // team manager
-                  { text: item?.callId || "-" }, // client poc
+                  { text: item?.owner?.[0]?.name || "-" }, // call owner
+                  { text: item?.manager[0]?.name || "-" }, // team manager
+                  { text: item?.customer[0]?.customer_name || "-" }, // client poc
                   { text: item?.company?.[0]?.company_name || "-" },
                   { text: formatDateToCustomFormat(item?.StartTime) || "-" }, // call date & time
                   { text: item?.company?.[0]?.company_product_category || "-" }, // product/service
                   { text: diff_minutes(item?.StartTime, item?.EndTime) || "-" }, // call duration
                   { text: item?.callDisposiiton || "-" }, // call disposition
-                  { text: item?.callType || "-" }, // call type
-                  { text: item?.score || "-" }, // call score
-                  { text: item?.qaId?.name || "-" }, // call review type
-                  { text: item?.callId || "-" }, // call review status
-                  { text: item?.callId || "-" }, // close date
+                  { text: item?.callData[0]?.call_type || "-" }, // call type
+                  { text: item?.score || "Not Scored" }, // call score
+                  // { text: item?.qaId?.name || "-" }, // call review type
+                  { text: "Feedback" || "-" }, // call review status
+                  // { text: item?.callId || "-" }, // close date
                   {
                     text: formatDateToCustomFormat(item?.qaAllocatedAt) || "-",
                   }, // allocated on
-                  { text: item?.callId || "-" }, // review due date
+                  { text: "NA" }, // review due date
                   { text: formatDateToCustomFormat(item?.updatedAt) || "-" }, // last updated on
-                  { text: item?.callId || "-" }, // feedback requested on
-                  { text: item?.callId || "-" }, // feedback requested by
+                  { text: item?.allocatedTo[0]?.name || "-" }, // feedback requested on
+                  { text: item?.allocatedBy[0]?.name || "-" }, // feedback requested by
                 ];
                 return row;
               })

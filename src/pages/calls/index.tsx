@@ -450,17 +450,18 @@ const CallsPage = () => {
             { text: item?.manager[0]?.name || "-", id: item?._id }, // team manager
             { text: item?.customer[0]?.customer_name || "-", id: item?._id }, // client poc
             {
-              text: formatDateToCustomFormat(item?.StartTime) || "-",
+              text:
+                formatDateToCustomFormat(item?.callData[0]?.call_date) || "-",
               id: item?._id,
             }, // call date & time
             {
               text: item?.company?.[0]?.company_product_category || "-",
               id: item?._id,
             }, // product/service
-            { text: item?.callDisposiiton || "-", id: item?._id }, // call disposition
+            { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
             { text: item?.callData[0]?.call_type || "-", id: item?._id }, // call type
             {
-              text: "Calls To Be Allocated",
+              text: "Allocated Call",
               id: item?._id,
             }, // call review type
             { text: item?.score || "Not Scored", id: item?._id }, // call score
@@ -509,13 +510,17 @@ const CallsPage = () => {
             { text: item?.manager[0]?.name || "-", id: item?._id }, // team manager
             { text: item?.customer[0]?.customer_name || "-", id: item?._id }, // client poc
             { text: item?.company?.[0]?.company_name || "-", id: item?._id },
-            { text: item?.StartTime || "-", id: item?._id }, // call date & time
+            {
+              text:
+                formatDateToCustomFormat(item?.callData[0]?.call_date) || "-",
+              id: item?._id,
+            }, // call date & time
             {
               text: item?.company?.[0]?.company_product_category || "-",
               id: item?._id,
             }, // product/service
-            { text: "Calls To Be Feedback Requested", id: item?._id }, // call review type
-            { text: item?.callDisposiiton || "-", id: item?._id }, // call disposition
+            { text: "Feedback Requested", id: item?._id }, // call review type
+            { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
             { text: item?.callData[0]?.call_type || "-", id: item?._id }, // call type
             { text: item?.score || "Not Scored", id: item?._id }, // call score
             currTab != 0 && {
