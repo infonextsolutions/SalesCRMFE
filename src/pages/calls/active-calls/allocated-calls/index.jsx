@@ -126,27 +126,27 @@ const AllocatedCalls = () => {
       key: "call_score",
       checked: true,
     },
+    // {
+    //   width: 200,
+    //   left: 40,
+    //   text: "Call Review Type",
+    //   key: "call_review_type",
+    //   checked: true,
+    // },
     {
-      width: 200,
-      left: 40,
-      text: "Call Review Type",
-      key: "call_review_type",
-      checked: true,
-    },
-    {
-      width: 120,
+      width: 170,
       left: 20,
       text: "Call Review Status",
       key: "calL_review_status",
       checked: true,
     },
-    {
-      width: 120,
-      left: 20,
-      text: "Close Date",
-      key: "close_date",
-      checked: true,
-    },
+    // {
+    //   width: 120,
+    //   left: 20,
+    //   text: "Close Date",
+    //   key: "close_date",
+    //   checked: true,
+    // },
     {
       width: 200,
       left: 40,
@@ -428,8 +428,8 @@ const AllocatedCalls = () => {
                     link: `/calls/recorded-calls/${item?._id}/audio-call`,
                   },
                   {
-                    text: item?.callTitle || "-",
-                    link: `/calls/recorded-calls/${item?._id}/audio-call`,
+                    text: item?.callData[0]?.call_title || "-",
+                    // link: `/calls/recorded-calls/${item?._id}/audio-call`,
                   },
                   {
                     text: item?.leadId?.[0]?.leadId || "-",
@@ -440,30 +440,34 @@ const AllocatedCalls = () => {
                     link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
                   },
                   { text: item?.callId || "-" }, // participants
-                  { text: item?.owner?.name || "-" }, // call owner
-                  { text: item?.teamManager || "-" }, // team manager
-                  { text: item?.callId || "-" }, // client poc
+                  { text: item?.owner?.[0]?.name || "-" }, // call owner
+                  { text: item?.manager[0]?.name || "-" }, // team manager
+                  { text: item?.customer[0]?.customer_name || "-" }, // client poc
                   {
                     text: item?.company?.[0]?.company_name || "-",
                     link: `/sales/open/${item?.leadId?.[0]?._id}/company-profile`,
                   },
-                  { text: formatDateToCustomFormat(item?.StartTime) || "-" }, // call date & time
+                  {
+                    text:
+                      formatDateToCustomFormat(item?.callData[0]?.call_date) ||
+                      "-",
+                  }, // call date & time
                   { text: item?.company?.[0]?.company_product_category || "-" }, // product/service
                   { text: diff_minutes(item?.StartTime, item?.EndTime) || "-" }, // call duration
                   { text: item?.callDisposiiton || "-" }, // call disposition
-                  { text: item?.callType || "-" }, // call type
-                  { text: item?.score || "-" }, // call score
-                  { text: item?.qaId?.name || "-" }, // call review type
-                  { text: item?.callId || "-" }, // call review status
+                  { text: item?.callData[0]?.call_type || "-" }, // call type
+                  { text: item?.score || "Not Scored" }, // call score
+                  // { text: item?.qaId?.name || "-" }, // call review type
+                  { text: "Allocated call" }, // call review status
+                  // {
+                  //   text: item?.qaClosedAt
+                  //     ? formatDateToCustomFormat(item?.qaClosedAt)
+                  //     : "-",
+                  // }, // close date
                   {
-                    text: item?.qaClosedAt
-                      ? formatDateToCustomFormat(item?.qaClosedAt)
-                      : "-",
-                  }, // close date
-                  {
-                    text: formatDateToCustomFormat(item?.qaAllocatedAt) || "-",
+                    text: formatDateToCustomFormat(item?.qaAllocatedAt) || "",
                   }, // allocated on
-                  { text: item?.callId || "-" }, // review due date
+                  { text: item?.callId || "NA" }, // review due date
                   { text: formatDateToCustomFormat(item?.DateUpdated) || "-" }, // last updated on
                 ];
                 return row;
