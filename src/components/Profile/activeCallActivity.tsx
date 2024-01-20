@@ -1,12 +1,14 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import { Card } from "@mui/material";
+import axios from "axios";
 
-const Activityhistory = ({ data }: { data: any }) => {
+const Activityhistory = ({ data, accessToken }: any) => {
   const history = data?.leadId?.activityId?.history ? data?.leadId?.activityId?.history : [];
   const notes = history.filter((item: any) => item.type == "note");
+  const [callParticipantData, setCallParticipantData] = useState<any>({});
 
   function formatDateAndTime(dateString: any) {
     // Create a Date object from the given date string (UTC time)
@@ -53,6 +55,41 @@ const Activityhistory = ({ data }: { data: any }) => {
 
     return { date: formattedDate, time: formattedTime };
   }
+
+  const getParticipantsData = () => {
+    if (history.length > 0) {
+      history.forEach((historyItem: any, index: number) => {
+        if (historyItem.callId) {
+          axios.get(
+            `https://sales365.trainright.fit/api/customer/find-by-id?id=${historyItem?.participants}`,
+            { headers: { Authorization: accessToken } }
+          ).then((res: any) => {
+            console.log('============== res participants =============', res.data.result);
+            setCallParticipantData((curr: any) => {
+              return { ...curr, [`participant${index}`]: res?.data?.result };
+            });
+          }).catch((err: any) => {
+
+          });
+        }
+      });
+    }
+  };
+
+  const getOutcome = (item: any, idx: number) => {
+    console.log(`-------- activity item ${idx}  --------`, item);
+    if (item?.type?.toLowerCase() == 'email') {
+      return "Email sent";
+    } else if (item?.type?.toLowerCase() == "sms") {
+      return "SMS sent";
+    } else {
+      return 'NA';
+    }
+  };
+
+  useEffect(() => {
+    getParticipantsData();
+  }, [accessToken, history]);
 
   return (
     <div>
@@ -113,10 +150,10 @@ const Activityhistory = ({ data }: { data: any }) => {
                         />
                       </div>
                       <div className="w-[21%]">
-                        <p>-</p>
+                        <p>{callParticipantData?.[`participant${i}` as keyof typeof callParticipantData]?.customer_name || "NA"}</p>
                       </div>
                       <div className="w-[19%]">
-                        <p>-</p>
+                        <p>{getOutcome(item, i)}</p>
                       </div>
                       <div className=" w-[17.5%] ">
                         {item.type === "email" ? (
@@ -135,7 +172,7 @@ const Activityhistory = ({ data }: { data: any }) => {
                             <p className="text-gray-500  font-bold text-lg">
                               {item.title || item?.call_title}
                             </p>
-                            <p className="text-[#8A9099] font-small text-sm line-clamp-2 h-[80px]">
+                            <p className="text-[#8A9099] font-small text-sm line-clamp-2">
                               {item.content || item?.call_discription}
                             </p>
                           </>

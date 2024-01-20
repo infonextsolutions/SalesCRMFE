@@ -725,7 +725,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={120}
             left={20}
-            text={CallData?.companyId?.company_product_category}
+            text={CallData?.leadId?.product_category}
             click={true}
             color={"#000"}
           />
