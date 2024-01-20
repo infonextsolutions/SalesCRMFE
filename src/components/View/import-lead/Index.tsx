@@ -214,7 +214,7 @@ const Step1 = ({ next, cancel }: any) => {
           dispatch(
             setSuccess({
               show: true,
-              success: "Leads added Successfully!",
+              success: `${e?.data?.message || "Leads added Successfully!"}`,
             })
           );
           cancel();
