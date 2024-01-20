@@ -308,6 +308,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
           <Spinner />
         ) : (
           Leads != null &&
+          Leads?.length > 0 &&
           Leads?.map((item: any, i: any) => {
             return (
               <CallContainer

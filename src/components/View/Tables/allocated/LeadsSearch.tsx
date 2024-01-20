@@ -14,8 +14,16 @@ import {
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 
-const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }: any) => {
-  const [qaid, setQaid] = useState(window !== undefined ? localStorage.getItem("user-id") : "");
+const LeadsTable = ({
+  totalRecords,
+  search,
+  queryStr,
+  setSelectedRows,
+  reload,
+}: any) => {
+  const [qaid, setQaid] = useState(
+    window !== undefined ? localStorage.getItem("user-id") : ""
+  );
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
   const [limit, setLimit]: any = useState(10);
@@ -33,18 +41,20 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }:
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${pageNumber}${queryStr}`, {
-          headers: {
-            Authorization: accessToken
+          `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${pageNumber}${queryStr}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
         )
         .then((res) => {
           setItems(res?.data?.result);
           settotalLeads(res?.data?.totalRecords);
           const count = Math.ceil(Number(res?.data?.totalRecords) / limit);
           setpageCount(count);
-        }).catch((err: any) => { });
+        })
+        .catch((err: any) => {});
     },
     [queryStr, accessToken, reload]
   );
@@ -52,11 +62,12 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }:
   const getallItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}${queryStr}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}${queryStr}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       );
       const data = res.data.result;
       return data;
@@ -73,11 +84,12 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }:
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}${queryStr}`, {
-          headers: {
-            Authorization: accessToken
+          `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}${queryStr}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
         );
         const data = res.data.result;
 
@@ -98,24 +110,25 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }:
         settotalLeads(filtered.length);
         const count = Math.ceil(Number(filtered.length) / limit);
         setpageCount(count);
-        setItems(filtered.slice(pageNumber * limit, pageNumber * limit + limit));
+        setItems(
+          filtered.slice(pageNumber * limit, pageNumber * limit + limit)
+        );
       };
 
       getItems();
       setLoading(false);
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }, [limit, pageNumber, search, accessToken]);
 
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}&limit=${limit}&page=${current}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       );
       const data = res.data.result;
       const filtered = data.filter(
@@ -244,22 +257,32 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }:
     }
   };
 
-  const handleSelection = (leadId: any, add: boolean = true, all: boolean = false) => {
+  const handleSelection = (
+    leadId: any,
+    add: boolean = true,
+    all: boolean = false
+  ) => {
     if (all && add) {
       if (add) {
-        const leadIds = Leads?.map((leadItem: any, idx: number) => leadItem?._id);
+        const leadIds = Leads?.map(
+          (leadItem: any, idx: number) => leadItem?._id
+        );
         setSelectedRows(leadIds);
       } else {
         setSelectedRows([]);
       }
     } else {
-      if (add) { // add lead id
+      if (add) {
+        // add lead id
         setSelectedRows((currSelectedRows: any) => {
           return [...currSelectedRows, leadId];
-        })
-      } else {  // remove lead id
+        });
+      } else {
+        // remove lead id
         setSelectedRows((currSelectedRows: any) => {
-          return currSelectedRows?.filter((rowItem: any, idx: number) => rowItem !== leadId);
+          return currSelectedRows?.filter(
+            (rowItem: any, idx: number) => rowItem !== leadId
+          );
         });
       }
     }
@@ -308,6 +331,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }:
           // ) : (
 
           Leads != null &&
+          Leads.length &&
           Leads.map((item: any, ind: any) => {
             return (
               <LeadContainer
@@ -346,30 +370,34 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }:
               <option value="13">13</option> */}
             </select>
             <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${(pageNumber + 1) * limit > totalLeads
-                ? totalLeads
-                : (pageNumber + 1) * limit
-                } of ${totalLeads}`}
+              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${
+                (pageNumber + 1) * limit > totalLeads
+                  ? totalLeads
+                  : (pageNumber + 1) * limit
+              } of ${totalLeads}`}
             </p>
           </div>
           <div className="flex justify-center my-[45px] ">
             <div
-              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === 0 ? "" : "bg-[#ffccbb] cursor-pointer"
-                }`}
+              className={`flex justify-center mr-[8px] h-[40px] w-[40px] rounded-[10px] ${
+                pageNumber === 0 ? "" : "bg-[#ffccbb] cursor-pointer"
+              }`}
               onClick={setFirstPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != 0 ? "svg-red" : ""
-                  } rotate-180 translate-x-[6px]`}
+                className={`${
+                  pageNumber != 0 ? "svg-red" : ""
+                } rotate-180 translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != 0 ? "svg-red" : ""
-                  } rotate-180 translate-x-[-6px]`}
+                className={`${
+                  pageNumber != 0 ? "svg-red" : ""
+                } rotate-180 translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}
@@ -408,38 +436,45 @@ const LeadsTable = ({ totalRecords, search, queryStr, setSelectedRows, reload }:
               containerClassName={"text-black flex justify-center gap-[8px]"}
               pageClassName={`px-[15px] py-[8px] text-[15px] text-[#3F434A]`}
               pageLinkClassName={``}
-              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === 0 ? "" : "bg-[#ffad9f]"
-                }`}
-              previousLinkClassName={`flex justify-center ${pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
-                }`}
-              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${pageNumber === pageCount - 1 ? "" : "bg-[#ffad9f]"
-                }`}
-              nextLinkClassName={`flex justify-center ${pageNumber === pageCount - 1 ? "cursor-auto" : ""
-                }`}
+              previousClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
+                pageNumber === 0 ? "" : "bg-[#ffad9f]"
+              }`}
+              previousLinkClassName={`flex justify-center ${
+                pageNumber != 0 ? "text-[#304FFD]" : "cursor-auto"
+              }`}
+              nextClassName={`flex justify-center  px-[10px] py-[7px] rounded-[10px] ${
+                pageNumber === pageCount - 1 ? "" : "bg-[#ffad9f]"
+              }`}
+              nextLinkClassName={`flex justify-center ${
+                pageNumber === pageCount - 1 ? "cursor-auto" : ""
+              }`}
               breakClassName={""}
               breakLinkClassName={""}
               forcePage={pageNumber}
               activeClassName={`bg-bg-red text-[#fff] rounded-[10px]`}
             />
             <div
-              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${pageNumber === pageCount - 1
-                ? ""
-                : "bg-[#ffccbb] cursor-pointer"
-                }`}
+              className={`flex justify-center ml-[8px] h-[40px] w-[40px] rounded-[10px] ${
+                pageNumber === pageCount - 1
+                  ? ""
+                  : "bg-[#ffccbb] cursor-pointer"
+              }`}
               onClick={setLastPage}
             >
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != pageCount - 1 ? "svg-red" : ""
-                  } translate-x-[6px]`}
+                className={`${
+                  pageNumber != pageCount - 1 ? "svg-red" : ""
+                } translate-x-[6px]`}
                 alt=""
                 width={18}
                 height={18}
               />
               <Image
                 src={getBasicIcon("Arrow-Right 2")}
-                className={`${pageNumber != pageCount - 1 ? "svg-red" : ""
-                  } translate-x-[-6px]`}
+                className={`${
+                  pageNumber != pageCount - 1 ? "svg-red" : ""
+                } translate-x-[-6px]`}
                 alt=""
                 width={18}
                 height={18}

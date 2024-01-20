@@ -38,7 +38,7 @@ const ChartContainer = ({ children }: any) => {
   );
 };
 
-const ScriptBuilding = ({ script }:any) => {
+const ScriptBuilding = ({ script }: any) => {
   return (
     <div className="w-[100%] p-6 h-[350px] bg-[#fff] rounded-xl shrink-0  py-[19px]">
       <div className="w-[100%] flex items-center justify-between">
@@ -437,7 +437,7 @@ const Coaching = ({ data, refresh }: any) => {
               <div className="w-[100%]">
                 <div className="w-[100%] flex justify-between">
                   <span className="text-[gray]">Call Disposition</span>
-                  <span>{data?.activeCall?.call_disposition || "-"}</span>
+                  <span>{data?.activeCall?.call_disposition || "NA"}</span>
                 </div>
                 <div className="w-[100%] flex justify-between">
                   <span className="text-[gray]">Call Type</span>

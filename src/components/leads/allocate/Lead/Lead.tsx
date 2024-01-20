@@ -701,7 +701,7 @@ const LeadContainer = ({
       day: "numeric",
     });
 
-    return "on " + formattedDate;
+    return formattedDate;
   }
 
   function isISODateString(str: any) {
@@ -966,7 +966,7 @@ const LeadContainer = ({
           />
           <LeadItem
             width={150}
-            left={0}
+            left={20}
             textLeft={10}
             text={"Allocated Leads"}
           />

@@ -10,7 +10,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
-import CallContainer from "@/components/calls/active-calls/Call/Call.tsx"
+import CallContainer from "@/components/calls/active-calls/Call/Call.tsx";
 
 const LeadsTable = ({ totalRecords, search }) => {
   const [pageCount, setpageCount] = useState(0);
@@ -32,11 +32,12 @@ const LeadsTable = ({ totalRecords, search }) => {
   const getallItems = async (current) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       );
       const data = res.data.result;
       return data;
@@ -61,11 +62,12 @@ const LeadsTable = ({ totalRecords, search }) => {
         if (pageNumber >= count && pageCount !== 0) setpageNumber(0);
         const getItems = async () => {
           const res = await axios.get(
-            `https://sales365.trainright.fit/api/active-call/find-all`, {
-            headers: {
-              Authorization: accessToken
+            `https://sales365.trainright.fit/api/active-call/find-all`,
+            {
+              headers: {
+                Authorization: accessToken,
+              },
             }
-          }
           );
           const data = res.data.result;
 
@@ -94,9 +96,7 @@ const LeadsTable = ({ totalRecords, search }) => {
         getItems();
         setLoading(false);
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }, [limit, pageNumber, search]);
 
   return (
@@ -122,7 +122,7 @@ const LeadsTable = ({ totalRecords, search }) => {
           })
         )}
       </div>
-      {pageCount && (
+      {pageCount > 0 && (
         <div className="mx-[80px] flex justify-between">
           {/* Pagination section */}
         </div>
