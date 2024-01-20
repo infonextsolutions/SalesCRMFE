@@ -166,7 +166,7 @@ const RecordProfile = ({
           {activeTitle === 0 && (
             <CallInfo check={check} data={data} data1={data1} info={info} />
           )}
-          {activeTitle === 1 && <Activityhistory data={data1} />}
+          {activeTitle === 1 && <Activityhistory data={data1} accessToken={accessToken} />}
           {activeTitle === 2 && (
             <Notes data={activeCall} refresh={UpdateCall} />
           )}

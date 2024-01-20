@@ -703,7 +703,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={200}
             left={20}
-            text={CallData?.company?.[0]?.company_product_category ?? "-"}
+            text={CallData?.leadId?.[0]?.product_category ?? "-"}
           />
           <CallItem
             width={200}

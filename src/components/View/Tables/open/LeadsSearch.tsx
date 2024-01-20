@@ -113,7 +113,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, reload }: any) => {
     try {
 
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}`, {
+        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open`, {
         headers: {
           Authorization: accessToken
         }
@@ -322,7 +322,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, reload }: any) => {
               <option value="13">13</option> */}
             </select>
             <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
-              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${(pageNumber + 1) * limit > totalLeads
+              {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${(pageNumber * limit + 1) * limit > totalLeads
                 ? totalLeads
                 : (pageNumber + 1) * limit
                 } of ${totalLeads}`}

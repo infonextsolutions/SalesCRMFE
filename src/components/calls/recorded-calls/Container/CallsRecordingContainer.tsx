@@ -269,7 +269,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                 <option selected={product === "Product D"} value="Product D">
                   Product D
                 </option>
-                <option selected={product === "Technology"} value="Technology">
+                {/* <option selected={product === "Technology"} value="Technology">
                   Technology
                 </option>
                 <option selected={product === "Healthcare"} value="Healthcare">
@@ -293,7 +293,7 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
                 >
                   {" "}
                   Real Estate
-                </option>
+                </option> */}
               </select>
             </div>
             <div className="flex items-center gap-5 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
