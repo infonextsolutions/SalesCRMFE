@@ -85,9 +85,9 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
         <HeaderItem width={120} left={10} text={"lead status"} />
         <HeaderItem width={120} left={10} text={"lead stage"} />
         <HeaderItem width={150} left={10} text={"product/service"} />
-        <HeaderItem width={130} left={20} text={"Lead Allocated To"} />
-        <HeaderItem width={130} left={20} text={"Lead Allocated On"} />
-        <HeaderItem width={130} left={20} text={"Lead Allocated By"} />
+        {/* <HeaderItem width={130} left={20} text={"Lead Allocated To"} /> */}
+        {/* <HeaderItem width={130} left={20} text={"Lead Allocated On"} /> */}
+        {/* <HeaderItem width={130} left={20} text={"Lead Allocated By"} /> */}
         <HeaderItem width={130} left={20} text={"Lead Allocation Status"} />
         <HeaderItem width={130} left={20} text={"Lead Created On"} />
       </div>
