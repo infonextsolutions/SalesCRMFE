@@ -54,7 +54,7 @@ const AudioProfile = () => {
     setData(data);
   }, [data]);
 
-  useEffect(() => {
+  const getData = () => {
     try {
       axios.get(
         `https://sales365.trainright.fit/api/active-call/find-by-id?id=${id}`, {
@@ -77,6 +77,10 @@ const AudioProfile = () => {
     } catch (error) {
 
     }
+  };
+
+  useEffect(() => {
+    getData();
   }, [accessToken, id]);
 
   const takeAction = (e, e1) => {
@@ -379,6 +383,7 @@ const AudioProfile = () => {
               cancel={cancelEmails}
               data={data.result}
               leadIdResult={data.result?._id}
+              reload={getData}
             />
           </Backdrop>
         )}
@@ -393,7 +398,7 @@ const AudioProfile = () => {
         )}
         {messages && (
           <Backdrop bool={bool} pad={"50px 0"}>
-            <Messages cancel={cancelMessages} />
+            <Messages cancel={cancelMessages} reload={getData} />
           </Backdrop>
         )}
         <div className="w-[100%] flex gap-[8px] mb-[100px] ">

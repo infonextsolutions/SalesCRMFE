@@ -55,6 +55,7 @@ const Dummy = [
 const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
   const state = useSelector((state: any) => state.auth);
   const [view, setView] = React.useState(false);
+  const [reload, setReload] = useState(false);
 
   const viewButtinClick = (prev: Number, current: Number) => {
     if (current === 1) {
@@ -106,6 +107,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
       setImports(false);
       setBool(true);
       // ========================= RELOAD ===========================
+      setReload(!reload);
     }, 500);
   };
   const cancelForms = () => {
@@ -265,7 +267,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
           },
         ]}
       />
-      <LeadsContainer view={view} records={data?.totalRecords} list={Dummy} />
+      <LeadsContainer view={view} records={data?.totalRecords} list={Dummy} reload={reload} />
     </div>
   );
 };

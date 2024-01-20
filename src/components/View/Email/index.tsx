@@ -348,12 +348,8 @@ const EmailPage = ({
   data,
   refresh,
   leadIdResult,
-}: {
-  cancel?: any;
-  data?: any;
-  refresh?: any;
-  leadIdResult?: any;
-}) => {
+  reload,
+}: any) => {
   // const [receiver, setReceiver] = useState<any>("");
   const [receiver, setReceiver] = useState<any>("");
   const [title, setTitle] = useState<any>("");
@@ -395,6 +391,7 @@ const EmailPage = ({
         dispatch(
           setSuccess({ show: true, success: "Email Sent Successfully!" })
         );
+        reload();
       })
       .catch((e) => {
         dispatch(setError({ show: true, error: "Error Occured" }));

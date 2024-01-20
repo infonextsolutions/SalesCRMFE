@@ -17,10 +17,9 @@ const LeadsTable = React.lazy(
 const KanbanContainer = React.lazy(() => import("@/components/View/Kanban"));
 // const About = lazy(() => import("./pages/About"));
 
-const LeadsContainer = ({ view, records, list }: any) => {
+const LeadsContainer = ({ view, records, list, reload }: any) => {
   const [visibleRecords, setVisibleRecords] = useState(records);
   const router = useRouter();
-  const [reload, setReload] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
