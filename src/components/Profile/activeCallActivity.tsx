@@ -80,6 +80,8 @@ const Activityhistory = ({ data, accessToken }: any) => {
       return "Email sent";
     } else if (item?.type?.toLowerCase() == "sms") {
       return "SMS sent";
+    }  else if (item?.type?.toLowerCase() == "note") {
+      return "Note sent";
     } else {
       return 'NA';
     }
