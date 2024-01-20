@@ -29,11 +29,12 @@ const LeadsContainer = ({
   );
   const [visibleRecords, setVisibleRecords] = useState(records);
   const [mastersList, setMastersList] = useState([]);
+  const [TMList, setTMList] = useState([]);
   const router = useRouter();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("open");
   const [stage, setStage] = useState("");
   const [product, setProduct] = useState("");
   const [leadSource, setLeadSource] = useState("");
@@ -65,7 +66,17 @@ const LeadsContainer = ({
         .then((res) => {
           setMastersList(res?.data?.result);
         })
-        .catch((e) => {});
+        .catch((e) => { });
+        axios
+        .get("https://sales365.trainright.fit/api/master-users/getTeamManagerList", {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((res) => {
+          setTMList(res?.data?.result);
+        })
+        .catch((e) => { });
     }
   }, [accessToken]);
 
@@ -86,11 +97,14 @@ const LeadsContainer = ({
     if (leadSource !== "") {
       queryStr += `&lead_source=${leadSource}`;
     }
-    if (startDate !== "") {
-      queryStr += `&startDate=${startDate}`;
+    if (leadAllocatedTo !== "") {
+      queryStr += `&lead_allocated_to=${leadAllocatedTo}`;
     }
-    if (endDate !== "") {
-      queryStr += `&endDate=${endDate}`;
+    if (leadAllocatedBy !== "") {
+      queryStr += `&lead_allocated_by=${leadAllocatedBy}`;
+    }
+    if (startDate !== "") {
+      queryStr += `&allocated_start_and_end_date=${JSON.stringify([startDate, endDate])}`;
     }
     setQueryStr(queryStr);
     return queryStr;
@@ -118,13 +132,13 @@ const LeadsContainer = ({
         }
       );
       setVisibleRecords({ ...response.data });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
     // getData();
     getQueryStr();
-  }, [status, stage, product, leadSource, startDate, endDate]);
+  }, [status, stage, product, leadSource, startDate, endDate, leadAllocatedTo, leadAllocatedBy]);
 
   return (
     <div className="w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">
@@ -275,7 +289,7 @@ const LeadsContainer = ({
             <div className="flex items-center gap-5 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Lead Allocated To</h2>
               <select
-                onChange={(e) => setStage(e.target.value)}
+                onChange={(e) => setLeadAllocatedTo(e.target.value)}
                 className="text-red-500"
                 id="countries"
               >
@@ -294,12 +308,12 @@ const LeadsContainer = ({
             <div className="flex items-center gap-5 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Lead Allocated By</h2>
               <select
-                onChange={(e) => setStage(e.target.value)}
+                onChange={(e) => setLeadAllocatedBy(e.target.value)}
                 className="text-red-500"
                 id="countries"
               >
                 <option selected={stage === ""} value=""></option>
-                {mastersList?.map((opItem: any, idx: number) => (
+                {TMList?.map((opItem: any, idx: number) => (
                   <option
                     selected={leadAllocatedBy === opItem?._id}
                     value={opItem?._id}
