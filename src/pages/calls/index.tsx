@@ -581,10 +581,11 @@ const CallsPage = () => {
       })
       .catch((err: any) => {});
   };
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     getData();
-  }, [currTab, subType]);
+  }, [currTab, subType, reload]);
 
   useEffect(() => {
     axios
@@ -707,7 +708,6 @@ const CallsPage = () => {
   const handleSearchAssignTo = (val: any) => {
     setSearchAssignTo(val);
   };
-  const [relaod, setReload] = useState(false);
   const handleAssignTo = (checked: boolean, qaId: any) => {
     try {
       setTimeout(() => {
@@ -1000,7 +1000,7 @@ const CallsPage = () => {
             : "Calls To Be Feedback Requested"}
         </h2>
       </div>
-      {relaod ? (
+      {reload ? (
         <></>
       ) : (
         <div className="bg-[#ffe3e170] mt-6 rounded-lg mx-6 px-6 overflow-x-auto">
