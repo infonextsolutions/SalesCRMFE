@@ -105,6 +105,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
     setTimeout(() => {
       setImports(false);
       setBool(true);
+      // ========================= RELOAD ===========================
     }, 500);
   };
   const cancelForms = () => {

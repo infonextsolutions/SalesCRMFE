@@ -67,11 +67,8 @@ const LeadsContainer = ({
     if (leadSource !== "") {
       queryStr += `&lead_source=${leadSource}`;
     }
-    if (startDate !== "") {
-      queryStr += `&startDate=${startDate}`;
-    }
-    if (endDate !== "") {
-      queryStr += `&endDate=${endDate}`;
+    if (startDate !== "" || endDate !== "") {
+      queryStr += `&date_range=${JSON.stringify([startDate, endDate])}`;
     }
     setQueryStr(queryStr);
     return queryStr;
@@ -99,7 +96,7 @@ const LeadsContainer = ({
         }
       );
       setVisibleRecords({ ...response.data });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

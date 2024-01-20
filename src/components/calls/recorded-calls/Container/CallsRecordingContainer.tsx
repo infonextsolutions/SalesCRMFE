@@ -120,11 +120,8 @@ const CallsRecordingContainer = ({ dummy1, data }: any) => {
     if (callDisposition !== "") {
       queryStr += `&callDisposition=${callDisposition}`;
     }
-    if (startDate !== "") {
-      queryStr += `&startDate=${startDate}`;
-    }
-    if (endDate !== "") {
-      queryStr += `&endDate=${endDate}`;
+    if (startDate !== "" || endDate !== "") {
+      queryStr += `&date_range=${JSON.stringify([startDate, endDate])}`;
     }
     setQueryStr(queryStr);
     return queryStr;
