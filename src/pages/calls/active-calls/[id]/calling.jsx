@@ -227,18 +227,19 @@ const AudioProfile = () => {
   };
   const [data1, setData] = useState(data);
 
-  const UpdateData = async () => {
-    const response = await axios
-      .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`, {
-        headers: { Authorization: accessToken }
-      }
-      )
-      .then((e) => {
-        setData(e.data);
-      })
-      .catch(() => { });
-  };
+  // const UpdateData = async () => {
+  //   const response = await axios
+  //     .get(
+  //       `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`, {
+  //       headers: { Authorization: accessToken }
+  //     }
+  //     )
+  //     .then((e) => {
+  //       setData(e.data.result);
+  //     })
+  //     .catch(() => { });
+  // };
+
   return (
     <>
       <NavbarWithButton
@@ -378,7 +379,8 @@ const AudioProfile = () => {
           <Backdrop bool={bool} pad={"50px 0"}>
             <EmailPage
               refresh={(e) => {
-                UpdateData();
+                // UpdateData();
+                getData();
               }}
               cancel={cancelEmails}
               data={data.result}
@@ -391,8 +393,9 @@ const AudioProfile = () => {
           <Backdrop bool={bool}>
             <Notes
               cancel={cancelNotes}
-              update={UpdateData}
-              leadid={data.result?._id}
+              update={getData}
+              leadid={data.result?.leadId?._id}
+              reload={getData}
             />
           </Backdrop>
         )}
