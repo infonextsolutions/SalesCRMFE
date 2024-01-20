@@ -72,6 +72,7 @@ const SliderFilter = ({
           min={filterData?.min?.value}
           max={filterData?.max?.value}
           step={filterData?.step || 1}
+          onChange={(e: any) => onUpdate(filterData, e.target.value)}
         />
         <div className="w[100%] flex items-center justify-between mt-[4px]">
           <span className="">{filterData?.min?.label}</span>
