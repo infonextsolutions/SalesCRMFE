@@ -975,7 +975,7 @@ const LeadContainer = ({
             width={150}
             left={50}
             textLeft={10}
-            text={convertToFormattedDate(LeadData1?.owners[0]?.createdAt)}
+            text={convertToFormattedDate(LeadData1?.leadAllocatedAt)}
           />
           <LeadItem
             width={150}
