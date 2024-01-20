@@ -195,6 +195,9 @@ const FeedbackCallReviewsAC = () => {
     productService: {
       label: "Product/Service",
       options: [
+        { key: "P1", label: "P1" },
+        { key: "P2", label: "P2" },
+        { key: "P3", label: "P3" },
         { key: "Product A", label: "Product A" },
         { key: "Product B", label: "Product B" },
         { key: "Product C", label: "Product C" },
@@ -209,7 +212,36 @@ const FeedbackCallReviewsAC = () => {
     },
     callType: {
       label: "Call Type",
-      options: [{ key: "Product Demo", label: "Product Demo" }],
+      options: [
+        {
+          label: "Discovery",
+          key: "Discovery",
+        },
+        {
+          label: "Product Demo",
+          key: "Product Demo",
+        },
+        {
+          label: "Solution Design",
+          key: "Solution Design",
+        },
+        {
+          label: "Consultation",
+          key: "Consultation",
+        },
+        {
+          label: "Pricing Discussion",
+          key: "Pricing Discussion",
+        },
+        {
+          label: "Negotiation",
+          key: "Negotiation",
+        },
+        {
+          label: "Follow-Up",
+          key: "Follow-Up",
+        },
+      ],
       value: "",
     },
     callDuration: {
@@ -430,13 +462,43 @@ const FeedbackCallReviewsAC = () => {
     }
   }
 
+  const getQuery = () => {
+    let query = "";
+    if (search) {
+      query += `search=${search}&`;
+    }
+    if (filters?.callReviewStatus?.value && filters?.callReviewStatus?.value !== "") {
+      query += `call_review_status=${filters?.callReviewStatus?.value}&`;
+    }
+    if (filters?.productService?.value && filters?.productService?.value !== "") {
+      query += `product_service=${filters?.productService?.value}&`;
+    }
+    if (filters?.feedbackRequestedOn?.value && (filters?.feedbackRequestedOn?.value[0] !== "" || filters?.feedbackRequestedOn?.value[1] !== "")) {
+      query += `feedback_requested_on=${JSON.stringify(filters?.feedbackRequestedOn?.value)}&`;
+    }
+    if (filters?.reviewDueDate?.value && (filters?.reviewDueDate?.value[0] !== "" || filters?.reviewDueDate?.value[1] !== "")) {
+      query += `review_due_date=${JSON.stringify(filters?.reviewDueDate?.value)}&`;
+    }
+    if (filters?.callType?.value && filters?.callType?.value !== "") {
+      query += `call_type=${filters?.callType?.value}&`;
+    }
+    if (filters?.callDisposition?.value && filters?.callDisposition?.value !== "") {
+      query += `call_disposition=${filters?.callDisposition?.value}&`;
+    }
+    if (filters?.callDuration?.value && filters?.callDuration?.value !== "") {
+      query += `call_duration=${filters?.callDuration?.value}&`;
+    }
+    return query;
+  };
+
   const getData = (page = currPage) => {
     try {
+      const newQuery = getQuery();
       if (window !== undefined) {
         const userId = localStorage.getItem("user-id");
         axios
           .get(
-            `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}&page=${page}&limit=${limit}`,
+            `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}&page=${page}&limit=${limit}&${newQuery}`,
             { headers: { Authorization: accessToken } }
           )
           .then((res) => {
@@ -474,7 +536,7 @@ const FeedbackCallReviewsAC = () => {
                   { text: item?.customer[0]?.customer_name || "-" }, // client poc
                   { text: item?.company?.[0]?.company_name || "-" },
                   { text: formatDateToCustomFormat(item?.StartTime) || "-" }, // call date & time
-                  { text: item?.company?.[0]?.company_product_category || "-" }, // product/service
+                  { text: item?.leadId?.[0]?.product_category || "-" }, // product/service
                   { text: diff_minutes(item?.StartTime, item?.EndTime) || "-" }, // call duration
                   { text: item?.callDisposiiton || "NA" }, // call disposition
                   { text: item?.callData[0]?.call_type || "-" }, // call type
@@ -494,14 +556,14 @@ const FeedbackCallReviewsAC = () => {
               })
             );
           })
-          .catch((err) => {});
+          .catch((err) => { });
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
     getData();
-  }, [accessToken]);
+  }, [accessToken, filters]);
 
   useEffect(() => {
     const handleBeforeHistoryChange = () => {
@@ -518,6 +580,24 @@ const FeedbackCallReviewsAC = () => {
       router.events.off("beforeHistoryChange", handleBeforeHistoryChange);
     };
   }, []);
+
+  const handleUpdateFilter = (filter, val, idx = -1) => {
+    for (const filterKey of Object.keys(filters)) {
+      if (filters[filterKey].label === filter.label) {
+        const newFilter = {
+          ...filters[filterKey],
+          value: idx === -1 ? val : idx === 0 ? [val, filters[filterKey].value[1]] : [filters[filterKey].value[0], val],
+        };
+        setFilters((currFIlters) => {
+          return {
+            ...currFIlters,
+            [filterKey]: newFilter
+          };
+        });
+      }
+
+    }
+  };
 
   return (
     <div className="overflow-x-hidden">
@@ -573,7 +653,7 @@ const FeedbackCallReviewsAC = () => {
             />
           </div>
         </div>
-        <Filters filters={filters} />
+        <Filters filters={filters} onUpdate={handleUpdateFilter} />
         <Table rows={rows} columns={columns} />
         <Pagination
           itemsPerPage={limit}
