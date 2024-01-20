@@ -440,7 +440,10 @@ const AllocatedCalls = () => {
                     link: `/sales/open/${item?.leadId?.[0]?._id}/lead-profile`,
                   },
                   {
-                    text: item?.customer[0]?.name || "-",
+                    text:
+                      item?.customer[0]?.name ||
+                      item?.customer[0]?.customer_name ||
+                      "-",
                   }, // participants
                   { text: item?.owner?.[0]?.name || "-" }, // call owner
                   { text: item?.manager[0]?.name || "-" }, // team manager
