@@ -966,26 +966,26 @@ const LeadContainer = ({
             text={LeadData1?.product_category}
           />
           <LeadItem
-            width={150}
+            width={100}
             left={20}
+            textLeft={10}
+            text={LeadData1?.owners[0]?.name}
+          />
+          <LeadItem
+            width={150}
+            left={50}
+            textLeft={10}
+            text={convertToFormattedDate(LeadData1?.owners[0]?.createdAt)}
+          />
+          <LeadItem
+            width={150}
+            left={10}
             textLeft={10}
             text={LeadData1?.manager?.name}
           />
           <LeadItem
             width={150}
             left={0}
-            textLeft={10}
-            text={convertToFormattedDate(LeadData1?.owners[0]?.createdAt)}
-          />
-          <LeadItem
-            width={100}
-            left={0}
-            textLeft={10}
-            text={LeadData1?.owners[0]?.name}
-          />
-          <LeadItem
-            width={150}
-            left={40}
             textLeft={10}
             text={"Allocated Leads"}
           />
