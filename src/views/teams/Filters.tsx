@@ -33,6 +33,7 @@ const DateRangeFilter = ({
           id="fromDate"
           name="fromDate"
           value={filterData?.value[0]}
+          onChange={(e) => onUpdate(filterData, e.target.value, 0)}
         />
         <Image
           src={getBasicIcon("InputSeperator")}
@@ -47,7 +48,8 @@ const DateRangeFilter = ({
           type="date"
           id="toDate"
           name="toDate"
-          value={filterData?.value[0]}
+          value={filterData?.value[1]}
+          onChange={(e) => onUpdate(filterData, e.target.value, 1)}
         />
       </div>
     </div>

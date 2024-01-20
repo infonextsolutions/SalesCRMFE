@@ -55,10 +55,10 @@ const CallsPage = () => {
       .then((res: any) => {
         setData(res?.data);
       })
-      .catch((e: any) => {});
+      .catch((e: any) => { });
   }, [accessToken]);
 
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<any>({
     callStartAndEndDate: {
       label: "Call Start and End Date",
       type: "DATERANGE",
@@ -67,6 +67,9 @@ const CallsPage = () => {
     productService: {
       label: "Product/Service",
       options: [
+        { key: "P1", label: "P1" },
+        { key: "P2", label: "P2" },
+        { key: "P3", label: "P3" },
         { key: "Product A", label: "Product A" },
         { key: "Product B", label: "Product B" },
         { key: "Product C", label: "Product C" },
@@ -76,7 +79,36 @@ const CallsPage = () => {
     },
     callType: {
       label: "Call Type",
-      options: [{ key: "Product Demo", label: "Product Demo" }],
+      options: [
+        {
+          label: "Discovery",
+          key: "Discovery",
+        },
+        {
+          label: "Product Demo",
+          key: "Product Demo",
+        },
+        {
+          label: "Solution Design",
+          key: "Solution Design",
+        },
+        {
+          label: "Consultation",
+          key: "Consultation",
+        },
+        {
+          label: "Pricing Discussion",
+          key: "Pricing Discussion",
+        },
+        {
+          label: "Negotiation",
+          key: "Negotiation",
+        },
+        {
+          label: "Follow-Up",
+          key: "Follow-Up",
+        },
+      ],
       value: "",
     },
     callDisposition: {
@@ -455,7 +487,7 @@ const CallsPage = () => {
               id: item?._id,
             }, // call date & time
             {
-              text: item?.company?.[0]?.company_product_category || "-",
+              text: item?.leadId?.[0]?.product_category || "-",
               id: item?._id,
             }, // product/service
             { text: item?.callDisposiiton || "NA", id: item?._id }, // call disposition
@@ -482,8 +514,8 @@ const CallsPage = () => {
                 currTab == 0
                   ? "Pending"
                   : currTab == 1
-                  ? "In-progess"
-                  : "Completed",
+                    ? "In-progess"
+                    : "Completed",
               id: item?._id,
             }, // call review status
           ];
@@ -516,7 +548,7 @@ const CallsPage = () => {
               id: item?._id,
             }, // call date & time
             {
-              text: item?.company?.[0]?.company_product_category || "-",
+              text: item?.leadId?.[0]?.product_category || "-",
               id: item?._id,
             }, // product/service
             { text: "Feedback Requested", id: item?._id }, // call review type
@@ -539,8 +571,8 @@ const CallsPage = () => {
                 currTab == 0
                   ? "Pending"
                   : currTab == 1
-                  ? "In-progess"
-                  : "Completed",
+                    ? "In-progess"
+                    : "Completed",
               id: item?._id,
             },
           ];
@@ -552,21 +584,22 @@ const CallsPage = () => {
 
   const getData = (page = currPage) => {
     let endpoint = "";
+    const newQuery = getQuery();
     if (subType === "feedback_requested_call_reviews") {
-      endpoint = `https://sales365.trainright.fit/api/qa/findRequestFeedBack?page=${page}&limit=${limit}`;
+      endpoint = `https://sales365.trainright.fit/api/qa/findRequestFeedBack?page=${page}&limit=${limit}&${newQuery}`;
     } else {
       switch (currTab) {
         case 0:
-          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}`;
+          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}&${newQuery}`;
           break;
         case 1:
-          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated&page=${page}&limit=${limit}`;
+          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated&page=${page}&limit=${limit}&${newQuery}`;
           break;
         case 2:
-          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed&page=${page}&limit=${limit}`;
+          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed&page=${page}&limit=${limit}&${newQuery}`;
           break;
         default:
-          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}`;
+          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}&${newQuery}`;
           break;
       }
     }
@@ -579,8 +612,9 @@ const CallsPage = () => {
         const pages = Math.ceil(res?.data?.totalRecords / limit);
         setTotalPages(pages);
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   };
+
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
@@ -596,7 +630,7 @@ const CallsPage = () => {
       .then((res: any) => {
         setQaList(res?.data?.result);
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   }, []);
 
   const handleTabNavigation = (payload: any) => {
@@ -611,17 +645,44 @@ const CallsPage = () => {
   const getQuery = () => {
     let query = "";
     if (search) {
-      query += `search=${search}`;
+      query += `search=${search}&`;
     }
-    Object.keys(filters).forEach((filterKey: any, index: number) => {
-      if (filters?.[filterKey as keyof typeof filters]?.value !== "") {
-        query +=
-          (query !== "" ? "&" : "") +
-          `${filterKey}=${filters?.[filterKey as keyof typeof filters]?.value}`;
-      }
-    });
+    if (filters?.productService?.value && filters?.productService?.value !== "") {
+      query += `product_service=${filters?.productService?.value}&`;
+    }
+    if (filters?.callStartAndEndDate?.value && (filters?.callStartAndEndDate?.value[0] !== "" || filters?.callStartAndEndDate?.value[1] !== "")) {
+      query += `call_start_and_end_date=${JSON.stringify(filters?.callStartAndEndDate?.value)}&`;
+    }
+    if (filters?.callType?.value && filters?.callType?.value !== "") {
+      query += `call_type=${filters?.callType?.value}&`;
+    }
+    if (filters?.callDisposition?.value && filters?.callDisposition?.value !== "") {
+      query += `call_disposition=${filters?.callDisposition?.value}&`;
+    }
     return query;
   };
+
+  const handleUpdateFilter = (filter: any, val: any, idx: number = -1) => {
+    for (const filterKey of Object.keys(filters)) {
+      if (filters[filterKey].label === filter.label) {
+        const newFilter = {
+          ...filters[filterKey],
+          value: idx === -1 ? val : idx === 0 ? [val, filters[filterKey].value[1]] : [filters[filterKey].value[0], val],
+        };
+        setFilters((currFIlters: any) => {
+          return {
+            ...currFIlters,
+            [filterKey]: newFilter
+          };
+        });
+      }
+
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [filters]);
 
   const ref: any = useRef();
   const dispatch = useAppDispatch();
@@ -708,6 +769,7 @@ const CallsPage = () => {
   const handleSearchAssignTo = (val: any) => {
     setSearchAssignTo(val);
   };
+
   const handleAssignTo = (checked: boolean, qaId: any) => {
     try {
       setTimeout(() => {
@@ -760,7 +822,7 @@ const CallsPage = () => {
             );
           });
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handlePageChange = (payload: any) => {
@@ -797,29 +859,12 @@ const CallsPage = () => {
         <ul className="">
           {searchAssignTo
             ? qaList
-                ?.filter((qaItem: any, index: number) => {
-                  return qaItem?.name
-                    ?.toLowerCase()
-                    .includes(searchAssignTo.toLowerCase());
-                })
-                .map((qaItem: any, index: number) => (
-                  <li key={index}>
-                    <label
-                      htmlFor={qaItem?._id}
-                      className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
-                    >
-                      <span>{qaItem?.name}</span>
-                      <input
-                        type="checkbox"
-                        id={qaItem?._id}
-                        onChange={(e) =>
-                          handleAssignTo(e.target.checked, qaItem?._id)
-                        }
-                      />
-                    </label>
-                  </li>
-                ))
-            : qaList?.map((qaItem: any, index: number) => (
+              ?.filter((qaItem: any, index: number) => {
+                return qaItem?.name
+                  ?.toLowerCase()
+                  .includes(searchAssignTo.toLowerCase());
+              })
+              .map((qaItem: any, index: number) => (
                 <li key={index}>
                   <label
                     htmlFor={qaItem?._id}
@@ -835,7 +880,24 @@ const CallsPage = () => {
                     />
                   </label>
                 </li>
-              ))}
+              ))
+            : qaList?.map((qaItem: any, index: number) => (
+              <li key={index}>
+                <label
+                  htmlFor={qaItem?._id}
+                  className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                >
+                  <span>{qaItem?.name}</span>
+                  <input
+                    type="checkbox"
+                    id={qaItem?._id}
+                    onChange={(e) =>
+                      handleAssignTo(e.target.checked, qaItem?._id)
+                    }
+                  />
+                </label>
+              </li>
+            ))}
         </ul>
       </div>
     );
@@ -916,7 +978,7 @@ const CallsPage = () => {
           </div>
         </div>
         <div className="">
-          <Filters filters={filters} />
+          <Filters filters={filters} onUpdate={handleUpdateFilter} />
         </div>
       </div>
     );
@@ -951,21 +1013,19 @@ const CallsPage = () => {
       <div className="flex text-black mt-6 px-8 pr-20 items-center gap-[20px]">
         <div className="w-[350px] px-2 bg-gray-200 rounded-3xl">
           <button
-            className={`w-[140px] ${
-              subType == "allocated_call_reviews"
-                ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-                : "font-medium text-sm"
-            } `}
+            className={`w-[140px] ${subType == "allocated_call_reviews"
+              ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
+              : "font-medium text-sm"
+              } `}
             onClick={() => handleSubType("allocated_call_reviews")}
           >
             Allocated Call Reviews
           </button>
           <button
-            className={`w-[190px] ${
-              subType == "feedback_requested_call_reviews"
-                ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-                : "font-medium text-sm"
-            } `}
+            className={`w-[190px] ${subType == "feedback_requested_call_reviews"
+              ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
+              : "font-medium text-sm"
+              } `}
             onClick={() => handleSubType("feedback_requested_call_reviews")}
           >
             Feedback Requested Call Reviews
