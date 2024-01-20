@@ -699,7 +699,7 @@ const LeadContainer = ({
       day: "numeric",
     });
 
-    return "on " + formattedDate;
+    return formattedDate;
   }
 
   function isISODateString(str: any) {
@@ -961,6 +961,36 @@ const LeadContainer = ({
             left={20}
             textLeft={10}
             text={LeadData1?.product_category}
+          />
+          <LeadItem
+            width={100}
+            left={20}
+            textLeft={10}
+            text={LeadData1?.owners[0]?.name}
+          />
+          <LeadItem
+            width={150}
+            left={50}
+            textLeft={10}
+            text={convertToFormattedDate(LeadData1?.owners[0]?.createdAt)}
+          />
+          <LeadItem
+            width={150}
+            left={10}
+            textLeft={10}
+            text={LeadData1?.manager?.name}
+          />
+          <LeadItem
+            width={170}
+            left={0}
+            textLeft={10}
+            text={"Allocated Leads"}
+          />
+          <LeadItem
+            width={150}
+            left={20}
+            textLeft={10}
+            text={convertToFormattedDate(LeadData1?.createdAt)}
           />
           {/* <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} /> */}
 

@@ -93,6 +93,11 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
         <HeaderItem width={200} left={10} text={"lead manager"} />
         <HeaderItem width={150} left={10} text={"lead Enquiry"} /> */}
         <HeaderItem width={150} left={10} text={"product/service"} />
+        <HeaderItem width={150} left={10} text={"Lead Allocated To"} />
+        <HeaderItem width={150} left={10} text={"Lead Allocated On"} />
+        <HeaderItem width={150} left={10} text={"Lead Allocated By"} />
+        <HeaderItem width={170} left={10} text={"Lead Allocation Status"} />
+        <HeaderItem width={150} left={10} text={"Lead Created On"} />
         {/* <HeaderItem
           width={180}
           left={0}
