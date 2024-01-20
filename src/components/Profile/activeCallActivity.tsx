@@ -64,7 +64,6 @@ const Activityhistory = ({ data, accessToken }: any) => {
             `https://sales365.trainright.fit/api/customer/find-by-id?id=${historyItem?.participants}`,
             { headers: { Authorization: accessToken } }
           ).then((res: any) => {
-            console.log('============== res participants =============', res.data.result);
             setCallParticipantData((curr: any) => {
               return { ...curr, [`participant${index}`]: res?.data?.result };
             });
@@ -77,7 +76,6 @@ const Activityhistory = ({ data, accessToken }: any) => {
   };
 
   const getOutcome = (item: any, idx: number) => {
-    console.log(`-------- activity item ${idx}  --------`, item);
     if (item?.type?.toLowerCase() == 'email') {
       return "Email sent";
     } else if (item?.type?.toLowerCase() == "sms") {
