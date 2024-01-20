@@ -16,7 +16,11 @@ import ButtonDropDown from "@/utils/Button/Button";
 import axios from "axios";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
 
-const LeadBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
+const LeadBox = ({
+  width,
+  bool,
+  handleCheck = (checked: boolean) => {},
+}: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
     if (check) {
@@ -34,7 +38,10 @@ const LeadBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) 
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" ref={ref} className="checkbox"
+      <input
+        type="checkbox"
+        ref={ref}
+        className="checkbox"
         onChange={(e: any) => handleCheck(e.target.checked)}
       />
     </div>
@@ -120,8 +127,9 @@ const LeadItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -669,17 +677,17 @@ const LeadContainer = ({
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData?._id}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData?._id}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       )
       .then((e) => {
         setLeadData(e.data.result);
       })
-      .catch((e) => {
-      });
+      .catch((e) => {});
   };
 
   const activities: any = LeadData1;
@@ -769,7 +777,6 @@ const LeadContainer = ({
       const newArr = filterItemsWithSimilarParameters(e);
 
       if (newArr.length > 0) {
-
         return { date: newArr[0].date, time: newArr[0].time };
       } else {
         return null;
@@ -803,11 +810,14 @@ const LeadContainer = ({
       >
         <div
           // onDoubleClick={handleDoubleClick}
-          className={`-z-50 pl-[10px] h-[auto] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${(selectAll || selected || detailShow) && "bg-white"
-            }`}
+          className={`-z-50 pl-[10px] h-[auto] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${
+            (selectAll || selected || detailShow) && "bg-white"
+          }`}
           ref={wRef}
         >
-          <LeadBox width={30} bool={selectAll || selected}
+          <LeadBox
+            width={30}
+            bool={selectAll || selected}
             handleCheck={(checked: any) => {
               setSelected(checked);
               onSelection(LeadData1?._id, checked);
@@ -953,6 +963,18 @@ const LeadContainer = ({
             left={20}
             textLeft={10}
             text={LeadData1?.product_category}
+          />
+          <LeadItem
+            width={150}
+            left={0}
+            textLeft={10}
+            text={"Allocated Leads"}
+          />
+          <LeadItem
+            width={150}
+            left={0}
+            textLeft={10}
+            text={convertToFormattedDate(LeadData1?.createdAt)}
           />
           {/* <LeadItem width={150} left={10} textLeft={10} text={company.company_product_category} /> */}
 
