@@ -586,16 +586,35 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     return `${day} ${month} ${year}`;
   }
 
-  function convertDatetimeToCustomFormat(dateStr: any) {
-    // Convert the string to a Date object
-    const dt: any = new Date(dateStr);
-
-    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
-    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
-    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
-
-    return secondsDifference;
+  function calculateTimeDifference(startTime: any, endTime: any) {
+    if (startTime && endTime) {
+      const [h1, m1] = startTime.split(':');
+      const [h2, m2] = endTime.split(':');
+      let diff = (h2 - h1) * 60 + (m2 - m1);
+      if (diff < 0) diff += 24 * 60;
+      const hours = Math.floor(diff / 60);
+      const minutes = diff - hours * 60;
+      const hh = hours.toString().padStart(2, '0');
+      const mm = minutes.toString().padStart(2, '0');
+      return `${hh !== "00" ? `${hh}hr` : ""}${mm ? ` ${mm}min` : ""}`;
+    } else {
+      return "-";
+    }
   }
+
+  const getFormattedDate = () => {
+    const initialDate = new Date(CallData?.callData[0]?.call_date);
+
+    // Get day, month, and year components from the Date object
+    const day = initialDate.getDate();
+    const month = initialDate.toLocaleString("default", { month: "long" });
+    const year = initialDate.getFullYear();
+
+    // Construct the desired date format
+    const convertedDateStr = `${day} ${month} ${year}`;
+
+    return convertedDateStr;
+  };
 
   const called: any = CallData;
   const owners = called?.owner;
@@ -647,9 +666,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             showProp={detailShow}
           />
           <CallItem
-            width={150}
+            width={240}
             left={20}
-            text={CallData?.Metting_ID ? CallData?.Metting_ID : "12XXX"}
+            text={CallData?._id ? CallData?._id : "-"}
             // text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
             click={true}
@@ -660,7 +679,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             left={0}
             color={"#000"}
             text={
-              CallData?.call_description ? CallData?.call_description : "Zoom"
+              CallData?.title ? CallData?.title : "-"
             }
             click={true}
             route={`${pathname}/${id}/meeting`}
@@ -691,13 +710,18 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             width={150}
             left={10}
             text={
-              CallData?.leadId?.companyId?.company_product_category
+              CallData?.leadId?.product_category
                 ? CallData?.leadId?.product_category
                 : "P1"
             }
             color={"#000"}
           />
-          <div
+          <CallItemMultiple
+            width={200} left={20}
+            upperText={CallData?.participants?.customer_name}
+            bottomText={CallData?.participants?.customer_designation}
+          />
+          {/* <div
             className={`flex justify-between flex-col h-[34px] shrink-150 cursor-pointer`}
             style={{ width: 200, marginLeft: 40 }}
             ref={ref}
@@ -719,7 +743,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
                 {CallData?.allocatedOwner ? CallData?.allocatedOwner : "-"}
               </span>
             </p>
-          </div>
+          </div> */}
           <CallItem width={150} left={20} text={owners ? owners.name : "-"} />
           <CallItem
             width={150}
@@ -738,12 +762,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={150}
             left={20}
-            text={CallData?.duration ? `${CallData?.duration} Minutes` : "-"}
+            text={CallData?.duration ? `${CallData?.duration} Min` : "-"}
           />
           <CallItem
             width={150}
             left={20}
-            text={CallData?.location ? CallData?.location : "Zoom"}
+            text={CallData?.location ? CallData?.location : "-"}
           />
           <CallItemMultiple
             width={130}
