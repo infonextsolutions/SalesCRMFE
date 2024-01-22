@@ -12,7 +12,7 @@ import DescBoxAudioPlayer from "@/components/activeCalls/audio/components/DescBo
 const CallBox = ({
   width,
   bool,
-  handleCheck = (checked: boolean) => {},
+  handleCheck = (checked: boolean) => { },
 }: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
@@ -159,9 +159,8 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${
-          bold ? "text-[#3F434A]" : "text-[#8A9099]"
-        }`}
+        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
+          }`}
         style={{
           textAlign: align && "center",
         }}
@@ -390,7 +389,7 @@ const ExpandableRow = ({
         <div>
           <h2 className="text-[18px] font-medium pt-4">Call Details</h2>
           <ul className="w-full">
-            {callMatrics.map((item: any) => (
+            {callMatrics?.map((item: any) => (
               <li
                 key={item.title}
                 className="flex justify-between items-center"
@@ -477,20 +476,19 @@ const ParticipantsHover = ({ last, bounding, data }: any) => {
         // top: !last ? "30px" : "",
         // right: "10px",
         // bottom: last ? "30px" : "",
-        top: last ? bounding.top - 50 : bounding.top + 30,
-        left: bounding.left + 120,
+        top: last ? bounding?.top - 50 : bounding?.top + 30,
+        left: bounding?.left + 120,
       }}
     >
       <p className="text-[#000] w-[100%] text-[15px] font-medium">
         Call Participants
       </p>
-      {data.owners.map((item: any, i: number) => {
+      {data?.owners?.map((item: any, i: number) => {
         return (
           <p
             key={i}
-            className={`${
-              i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
-            } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
+              } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -511,7 +509,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
 
   React.useEffect(() => {
     if (wRef.current) {
-      setW(wRef.current.offsetWidth);
+      setW(wRef.current?.offsetWidth);
     }
   });
 
@@ -544,7 +542,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
         .then((e: any) => {
           setChecked(false);
         })
-        .catch((e) => {});
+        .catch((e) => { });
     }
   };
 
@@ -555,22 +553,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     }
   }, [accessToken]);
 
-  function convertTimestampToTime(timestamp: string) {
-    const dateTime = new Date(timestamp);
-    const hours = dateTime.getUTCHours().toString().padStart(2, "0");
-    const minutes = dateTime.getUTCMinutes().toString().padStart(2, "0");
-    const seconds = dateTime.getUTCSeconds().toString().padStart(2, "0");
-    const timeStr = hours + ":" + minutes + ":" + seconds;
-    return timeStr;
-  }
-
-  function convertTimestampToDate(timestamp: string) {
-    const dateTime = new Date(timestamp);
-    const options: any = { year: "numeric", month: "long", day: "numeric" };
-    const dateStr = dateTime.toLocaleDateString("en-US", options);
-    return dateStr;
-  }
-
   function calculateTimeDifference(startTime: any, endTime: any) {
     if (startTime && endTime) {
       const startDateTime: any = new Date(startTime);
@@ -580,32 +562,65 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
       const minutes = Math.floor(timeDifference / (1000 * 60));
       const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-      return `${minutes}:${seconds}`;
+      return `${minutes ? `${minutes}min` : ''}${seconds ? ` ${seconds}sec` : ''}`;
     } else {
       return "-";
     }
   }
 
-  function convertDatetimeToCustomFormat(dateStr: any) {
-    // Convert the string to a Date object
-    const dt: any = new Date(dateStr);
+  const getFormattedDate = () => {
+    const initialDate = new Date(CallData?.callData[0]?.call_date);
 
-    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
-    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
-    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+    // Get day, month, and year components from the Date object
+    const day = initialDate.getDate();
+    const month = initialDate.toLocaleString("default", { month: "long" });
+    const year = initialDate.getFullYear();
 
-    return secondsDifference;
-  }
+    // Construct the desired date format
+    const convertedDateStr = `${day} ${month} ${year}`;
 
-  const call_title: any = CallData;
+    return convertedDateStr;
+  };
+
+  const getFormattedTime = () => {
+    const initialDate = new Date(CallData?.callData[0]?.call_date);
+
+    // Get day, month, and year components from the Date object
+    const day = initialDate.getDate();
+    const month = initialDate.toLocaleString("default", { month: "long" });
+    const year = initialDate.getFullYear();
+
+    // Construct the desired date format
+    const convertedDateStr = `${day} ${month} ${year}`;
+
+    const initialTime = CallData?.callData[0]?.call_start_time;
+
+    // Splitting the time string into hours and minutes
+    const [hours, minutes] = initialTime.split(":");
+
+    // Convert hours to a number
+    const parsedHours = parseInt(hours, 10);
+
+    // Determine if it's AM or PM based on the hours
+    const period = parsedHours >= 12 ? "pm" : "am";
+
+    // Convert hours to 12-hour format
+    const twelveHourFormat = parsedHours % 12 || 12; // Convert 0 to 12 for midnight
+
+    // Construct the formatted time string
+    const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${minutes != undefined ? minutes : ""
+      } ${period}`;
+
+    return formattedTime;
+  };
+
 
   return (
     <>
       <div className="flex">
         <div
-          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${
-            (selectAll || selected || detailShow) && "bg-white"
-          }`}
+          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${(selectAll || selected || detailShow) && "bg-white"
+            }`}
           ref={wRef}
         >
           <CallBox
@@ -638,7 +653,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             // text={"Discussion on PX features"}
             text={CallData?.callData?.[0]?.call_title || "-"}
             click={true}
-            // route={`${pathname}/${id}/audio-call`}
+          // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
@@ -647,9 +662,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
               CallData?.leadId?.length > 0 ? CallData?.leadId?.[0]?.leadId : "-"
             }
             click={true}
-            route={`/sales/open/${
-              CallData?.leadId?.length > 0 && CallData?.leadId?.[0]?._id
-            }/lead-profile`}
+            route={`/sales/open/${CallData?.leadId?.length > 0 && CallData?.leadId?.[0]?._id
+              }/lead-profile`}
             color={"#000"}
           />
           <CallItem
@@ -727,8 +741,12 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItemMultiple
             width={120}
             left={10}
-            upperText={convertTimestampToDate(CallData?.DateCreated)}
-            bottomText={"on " + convertTimestampToTime(CallData?.DateCreated)}
+            upperText={CallData?.callData[0]?.call_date ? getFormattedDate() : "-"}
+            bottomText={
+              CallData?.callData[0]?.call_date && CallData?.callData[0]?.call_start_time
+                ? getFormattedTime()
+                : "-"
+            }
           />
           <CallItem
             width={120}

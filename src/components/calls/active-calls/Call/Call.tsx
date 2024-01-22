@@ -613,22 +613,6 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const owners = called?.owner;
   const participants = called?.participants;
 
-  function convertISOToTime(isoString: any) {
-    const date = new Date(isoString);
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return "at " + hours + ":" + minutes;
-  }
-
-  function isISOString(inputString: any) {
-    // Define the regular expression pattern for ISO date and time representation
-    const isoPattern =
-      /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d{1,3})?)Z?$/;
-
-    // Test the input string against the ISO pattern
-    return isoPattern.test(inputString);
-  }
-
   const initialDate = new Date(CallData.call_date);
 
   // Get day, month, and year components from the Date object
