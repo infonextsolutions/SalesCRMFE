@@ -329,6 +329,7 @@ const Dashboard = ({ data }: any) => {
   };
 
   const exportPDF = () => {
+    // var worker = html2pdf().from(element).save();
     const documentDefinition = {
       content: [
         {

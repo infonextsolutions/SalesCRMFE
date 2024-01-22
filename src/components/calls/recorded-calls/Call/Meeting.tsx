@@ -536,29 +536,65 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
 
   function calculateTimeDifference(startTime: any, endTime: any) {
     if (startTime && endTime) {
-      const startDateTime: any = new Date(startTime);
-      const endDateTime: any = new Date(endTime);
-
-      const timeDifference = Math.abs(endDateTime - startDateTime);
-      const minutes = Math.floor(timeDifference / (1000 * 60));
-      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-      return `${minutes}:${seconds}`;
+      const [h1, m1] = startTime.split(':');
+      const [h2, m2] = endTime.split(':');
+      let diff = (h2 - h1) * 60 + (m2 - m1);
+      if (diff < 0) diff += 24 * 60;
+      const hours = Math.floor(diff / 60);
+      const minutes = diff - hours * 60;
+      const hh = hours.toString().padStart(2, '0');
+      const mm = minutes.toString().padStart(2, '0');
+      return `${hh !== "00" ? `${hh}hr` : ""}${mm ? ` ${mm}min` : ""}`;
     } else {
       return "-";
     }
   }
 
-  function convertDatetimeToCustomFormat(dateStr: any) {
-    // Convert the string to a Date object
-    const dt: any = new Date(dateStr);
+  const getFormattedDate = () => {
+    const initialDate = new Date(CallData?.callData[0]?.call_date);
 
-    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
-    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
-    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+    // Get day, month, and year components from the Date object
+    const day = initialDate.getDate();
+    const month = initialDate.toLocaleString("default", { month: "long" });
+    const year = initialDate.getFullYear();
 
-    return secondsDifference;
-  }
+    // Construct the desired date format
+    const convertedDateStr = `${day} ${month} ${year}`;
+
+    return convertedDateStr;
+  };
+
+  const getFormattedTime = () => {
+    const initialDate = new Date(CallData?.callData[0]?.call_date);
+
+    // Get day, month, and year components from the Date object
+    const day = initialDate.getDate();
+    const month = initialDate.toLocaleString("default", { month: "long" });
+    const year = initialDate.getFullYear();
+
+    // Construct the desired date format
+    const convertedDateStr = `${day} ${month} ${year}`;
+
+    const initialTime = CallData?.callData[0]?.call_start_time;
+
+    // Splitting the time string into hours and minutes
+    const [hours, minutes] = initialTime.split(":");
+
+    // Convert hours to a number
+    const parsedHours = parseInt(hours, 10);
+
+    // Determine if it's AM or PM based on the hours
+    const period = parsedHours >= 12 ? "pm" : "am";
+
+    // Convert hours to 12-hour format
+    const twelveHourFormat = parsedHours % 12 || 12; // Convert 0 to 12 for midnight
+
+    // Construct the formatted time string
+    const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${minutes != undefined ? minutes : ""
+      } ${period}`;
+
+    return formattedTime;
+  };
 
   const call_title: any = CallData;
 
@@ -580,7 +616,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             width={200}
             left={20}
             // text={"345345354335"}
-            text={convertDatetimeToCustomFormat(CallData.updatedAt)}
+            text={CallData._id}
             color={"#000"}
             click={true}
             route={`${pathname}/${id}/audio-call`}
@@ -590,87 +626,60 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             left={20}
             color={"#000"}
             // text={"Discussion on PX features"}
-            text={
-              call_title?.active_calls?.length > 0
-                ? call_title?.active_calls[0].call_title
-                : ""
-            }
+            text={CallData.title || "-"}
             click={true}
-          // route={`${pathname}/${id}/audio-call`}
+            route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
             left={10}
-            text={CallData.leadId.length > 0 ? CallData.leadId[0].leadId : "-"}
+            text={CallData?.leadId?.leadId || "-"}
             click={true}
-            route={`/sales/open/${CallData.leadId.length > 0 && CallData.leadId[0]._id
+            route={`/sales/open/${CallData?.leadId?._id
               }/lead-profile`}
             color={"#000"}
           />
           <CallItem
             width={240}
             left={-65}
-            text={LeadData?.lead_title}
+            text={CallData?.leadId?.lead_title}
             click={true}
-            route={`/sales/open/${LeadData?._id}/lead-profile`}
+            route={`/sales/open/${CallData?.leadId?._id}/lead-profile`}
             color={"#000"}
           />
-          <CallItem
+          <CallItemMultiple
             width={220}
             left={40}
-            text={LeadData?.companyId?.company_name}
+            upperText={CallData?.companyId?.company_name}
+            bottomText={CallData?.companyId?.company_address}
             click={true}
             route={`/sales/open/${LeadData?._id}/company-profile`}
             color={"#000"}
           />
-          {/* <div
-            className={`flex justify-between flex-col h-[34px] shrink-0 cursor-pointer`}
-            style={{ width: 200, marginLeft: 20 }}
-            ref={ref}
-            onMouseOver={() => {
-              const box = ref.current.getBoundingClientRect();
-              setBounding({ left: box.x, top: box.y });
-              setHover(true);
-            }}
-            onMouseLeave={() => {
-              setHover(false);
-            }}
-          >
-            <p
-              className={`text-[13px] mt-[8px] tracking-wide font-medium ${true ? "text-[#3F434A]" : "text-[#8A9099]"
-                }`}
-            // >
-            >
-              -
-              {LeadData.owners?.map((item:any, i:any) => {
-                return (
-                  <span className={i !== 0 ? "text-bg-red" : ""} key={i}>
-                    {i < 2 && item.name} ,
-                  </span>
-                );
-              })}
-            </p>
-          </div> */}
           <CallItem
             width={200}
             left={20}
-            text={LeadData?.companyId?.company_product_category ?? "-"}
+            text={CallData?.leadId?.product_category ?? "-"}
           />
-          <CallItem width={200} left={20} text={"-"} />
-          <CallItem width={140} left={20} text={LeadData.owners?.[0]?.name} />
-          <CallItem width={130} left={20} text={"-"} />
+          <CallItemMultiple
+            width={200} left={20}
+            upperText={CallData?.participants?.customer_name}
+            bottomText={CallData?.participants?.customer_designation}
+          />
+          <CallItem width={140} left={20} text={CallData.owner?.name} />
+          <CallItem width={130} left={20} text={CallData?.type} />
           <CallItemMultiple
             width={120}
             left={10}
-            upperText={convertTimestampToDate(CallData.DateCreated)}
-            bottomText={"on " + convertTimestampToTime(CallData.DateCreated)}
+            upperText={convertTimestampToDate(CallData.datetime?.fromDate)}
+            bottomText={"on " + CallData?.datetime?.fromTime}
           />
           <CallItem
             width={120}
             left={10}
-            text={calculateTimeDifference(CallData.StartTime, CallData.EndTime)}
+            text={calculateTimeDifference(CallData?.datetime?.fromTime, CallData?.datetime?.toTime)}
           />
-          <CallItem width={160} left={20} text={"-"} />
+          <CallItem width={160} left={20} text={CallData?.location} />
           <CallItem width={120} left={10} text={"-"} />
           {/* <CallItem
             width={110}
