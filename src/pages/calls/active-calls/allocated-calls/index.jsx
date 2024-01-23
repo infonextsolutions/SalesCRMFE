@@ -438,6 +438,20 @@ const AllocatedCalls = () => {
     }
   }
 
+  const clearFilter = () => {
+    for (const filterKey of Object.keys(filters)) {
+      const newFilter = {
+        ...filters[filterKey],
+        value: typeof filters[filterKey].value === 'object' ? ["", ""] : "",
+      };
+      setFilters((currFIlters) => {
+        return {
+          ...currFIlters,
+          [filterKey]: newFilter
+        };
+      });
+    }
+  };
 
   const getQuery = () => {
     let query = "";
@@ -578,7 +592,6 @@ const AllocatedCalls = () => {
           };
         });
       }
-
     }
   };
 
