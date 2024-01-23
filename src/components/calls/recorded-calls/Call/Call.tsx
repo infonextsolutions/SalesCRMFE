@@ -569,7 +569,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   }
 
   const getFormattedDate = () => {
-    const initialDate = new Date(CallData?.callData[0]?.call_date);
+    const initialDate = new Date(CallData?.createdAt);
 
     // Get day, month, and year components from the Date object
     const day = initialDate.getDate();
@@ -583,7 +583,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   };
 
   const getFormattedTime = () => {
-    const initialDate = new Date(CallData?.callData[0]?.call_date);
+    const initialDate = new Date(CallData?.createdAt);
 
     // Get day, month, and year components from the Date object
     const day = initialDate.getDate();
@@ -593,7 +593,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     // Construct the desired date format
     const convertedDateStr = `${day} ${month} ${year}`;
 
-    const initialTime = CallData?.callData[0]?.call_start_time;
+    const initialTime = CallData?.createdAt;
 
     // Splitting the time string into hours and minutes
     const [hours, minutes] = initialTime.split(":");
@@ -741,7 +741,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItemMultiple
             width={120}
             left={10}
-            upperText={CallData?.callData[0]?.call_date ? getFormattedDate() : "-"}
+            upperText={CallData?.createdAt ? getFormattedDate() : "-"}
             bottomText={
               CallData?.callData[0]?.call_date && CallData?.callData[0]?.call_start_time
                 ? getFormattedTime()
