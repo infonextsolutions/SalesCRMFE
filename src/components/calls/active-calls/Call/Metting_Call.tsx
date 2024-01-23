@@ -672,7 +672,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             // text={convertDatetimeToCustomFormat(CallData.updatedAt)}
             color={"#000"}
             click={true}
-            route={`${pathname}/${id}/meeting`}
+            route={`${pathname}/${CallData?._id}/meeting`}
           />
           <CallItem
             width={150}
@@ -682,7 +682,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
               CallData?.title ? CallData?.title : "-"
             }
             click={true}
-            route={`${pathname}/${id}/meeting`}
+            route={`${pathname}/${CallData?._id}/meeting`}
           />
           <CallItem
             width={150}

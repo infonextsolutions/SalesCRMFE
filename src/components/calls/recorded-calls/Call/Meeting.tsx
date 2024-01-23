@@ -619,7 +619,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             text={CallData._id}
             color={"#000"}
             click={true}
-            route={`${pathname}/${id}/audio-call`}
+            route={`${pathname}/${id}/meeting`}
           />
           <CallItem
             width={130}
@@ -628,7 +628,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             // text={"Discussion on PX features"}
             text={CallData.title || "-"}
             click={true}
-            route={`${pathname}/${id}/audio-call`}
+            route={`${pathname}/${id}/meeting`}
           />
           <CallItem
             width={200}
