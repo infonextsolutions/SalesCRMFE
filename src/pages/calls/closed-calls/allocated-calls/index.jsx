@@ -580,7 +580,7 @@ const AllocatedCallsCC = ({ data }) => {
                     text: formatDateToCustomFormat(item?.qaAllocatedAt) || "-",
                   }, // allocated on
                   { text: item?.callId || "NA" }, // review due date
-                  { text: formatDateToCustomFormat(item?.DateUpdated) || "-" }, // last updated on
+                  { text: formatDateToCustomFormat(item?.leadId?.[0]?.updatedAt) || "-" }, // last updated on
                   { text: "NA" },
                   { text: "NA" },
                   { text: "NA" },
