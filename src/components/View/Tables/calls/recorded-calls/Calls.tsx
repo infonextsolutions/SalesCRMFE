@@ -33,7 +33,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${pageNumber}${queryStr}`,
+          `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${0}${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -133,12 +133,12 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
         setLoading(false);
       }
     } catch (error) {}
-  }, [limit, pageNumber, search, accessToken]);
+  }, [limit, search, accessToken]);
 
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${current}`,
+        `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${current}${queryStr}`,
         {
           headers: {
             Authorization: accessToken,

@@ -31,7 +31,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${pageNumber}&leadStatus=Close&${queryStr}`,
+          `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${0}&leadStatus=Close&${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -74,7 +74,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close${queryStr}`,
+          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -108,12 +108,12 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
       getItems();
       setLoading(false);
     } catch (error) {}
-  }, [limit, pageNumber, search]);
+  }, [limit, search]);
 
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}?leadStatus=Close`,
+        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}?leadStatus=Close&${queryStr}`,
         {
           headers: {
             Authorization: accessToken,

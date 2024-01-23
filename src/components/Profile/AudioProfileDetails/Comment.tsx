@@ -296,7 +296,7 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
         </div>
         <button
           onClick={() => {
-            if (text.length !== 0) {
+            if (text?.length !== 0) {
               const letsSee = {
                 user: window !== undefined && localStorage.getItem("user-id"),
                 content: text,
@@ -326,7 +326,6 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
                 .then((e) => {
                   UpdateCalls();
                   if (refresh) {
-                    console.log('-------------- comment added successfully ------------');
                     refresh();
                   }
                   dispatch(

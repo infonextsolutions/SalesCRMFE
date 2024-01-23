@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "@/components/app/Navigation";
-import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
 import dummy from "@/shared/dummy";
 import Audio from "@/components/activeCalls/audio";
 import axios from "axios";
@@ -13,6 +12,7 @@ import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 import { useRouter } from "next/router";
+import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
 //Manya will make this page
 
 const CallProfile = () => {
@@ -40,7 +40,7 @@ const CallProfile = () => {
 
   const refreshData = () => {
     axios
-      .get(`https://sales365.trainright.fit/api/calling/find-by-id?id=${id}`, {
+      .get(`https://sales365.trainright.fit/api/meeting/find-by-id?id=${id}`, {
         headers: { Authorization: accessToken },
       })
       .then((res) => {

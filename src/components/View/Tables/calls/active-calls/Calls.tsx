@@ -34,7 +34,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
         if (window !== undefined) {
           axios
             .get(
-              `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${pageNumber}${queryStr}`,
+              `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${0}${queryStr}`,
               {
                 headers: {
                   Authorization: accessToken,
@@ -125,21 +125,18 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
             filtered.slice(pageNumber * limit, pageNumber * limit + limit)
           );
         } catch (error) {
-          console.log(
-            "======================= error ; 1 ====================",
-            error
-          );
+
         }
       };
       getItems();
       setLoading(false);
     }
-  }, [limit, pageNumber, search, accessToken]);
+  }, [limit, search, accessToken]);
 
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}`,
+        `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}${queryStr}`,
         {
           headers: {
             Authorization: accessToken,

@@ -24,7 +24,7 @@ const Note = ({ title, content, date }: any) => {
 };
 
 const Notes = ({ data, refresh }: any) => {
-  const [list, setList] = useState<any>([...data.notes]);
+  const [list, setList] = useState<any>([...data?.notes]);
 
   const [notes, setNotes] = React.useState(false);
   const [bool, setBool] = React.useState(true);
@@ -61,7 +61,7 @@ const Notes = ({ data, refresh }: any) => {
         .post(url, {
           title: title,
           content: content,
-          callId: data._id,
+          callId: data?._id,
         }, { headers: { Authorization: accessToken } })
         .then((e) => {
           if (containerRef.current) {
@@ -171,7 +171,7 @@ const Notes = ({ data, refresh }: any) => {
           className=" overflow-y-auto flex flex-col custom-scroll-black h-[70vh]"
         >
           <div className="flex flex-col-reverse ">
-            {list.map((item: any, i: any) => {
+            {list?.map((item: any, i: any) => {
               return (
                 <Note
                   title={item.title}
