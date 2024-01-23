@@ -18,6 +18,7 @@ const AudioProfileContainer = ({
   width,
   data1,
   refresh,
+  type = "CALL"
 }: any) => {
   const activeTitle = useSelector((state: any) => state.ui.current);
   const dispatch = useDispatch();
@@ -96,13 +97,13 @@ const AudioProfileContainer = ({
       <div className="flex justify-between w-[100%] relative overflow-hidden">
         <div className="text-black w-[100%] text-[14px] leading-[21px] mt-[25px] tracking-wide ">
           {activeTitle === 0 && (
-            <CallInfo data1={data1} data={data} check={check} />
+            <CallInfo data1={data1} data={data} check={check} type={type} />
           )}
           {activeTitle === 1 && (
-            <CommentsAndNotes data={data} notesData={data} refresh={refresh} />
+            <CommentsAndNotes data={data} notesData={data} refresh={refresh} type={type} />
           )}
           {activeTitle === 2 && (
-            <Coaching data={data} refresh={refresh} />
+            <Coaching data={data} refresh={refresh} type={type} />
           )}
         </div>
       </div>

@@ -45,6 +45,7 @@ const CallProfile = () => {
         headers: { Authorization: accessToken },
       })
       .then((res) => {
+        console.log('++++++++++ api/event/find-by-id +++++++++++', res.data);
         setDataNew(res.data);
         axios
           .get(
@@ -235,6 +236,7 @@ const CallProfile = () => {
             current={0}
             data1={dataNew1.result}
             refresh={refreshData}
+            type={"MEETING"}
           />
           <div className="w-[58%] min-h-[50vh] ">
             <Audio
