@@ -5,8 +5,8 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const CallInfo = ({ check, data, data1, refresh }: any) => {
-  console.log('-------------- call info -------------', data1, data)
+const CallInfo = ({ check, data, data1, refresh, type }: any) => {
+  console.log('-------------- call info -------------', data, data1)
   const activeTitle = 0;
   // const [edit, setEdit] = useState(false);
   // const [bool, setBool] = useState(true);
@@ -50,13 +50,16 @@ const CallInfo = ({ check, data, data1, refresh }: any) => {
 
   return (
     <div>
+      <div className="flex justify-between">
       <h4 className="text-2xl font-semibold capitalize pl-7">
-        {data?.activeCall?.call_title}
+        {type === "MEETING" ? data?.title : data?.activeCall?.call_title}
       </h4>
+      {type === "MEETING" && <h5 className="text-xl font-semibold capitalize pl-7">{data?.location}</h5>}
+      </div>
 
       <div className="pl-[30px]">
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id - {data?.activeCall?.callId}
+          Call Id - {type === "MEETING" ? data?._id :data?.activeCall?.callId}
         </p>
         <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">LEAD ID</p>
@@ -97,12 +100,12 @@ const CallInfo = ({ check, data, data1, refresh }: any) => {
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Call Type</p>
-          <p className="text-sm font-semibold text-black">{data?.activeCall?.call_type ?? "-"}</p>
+          <p className="text-sm font-semibold text-black">{type === "MEETING" ? data?.type :data?.activeCall?.call_type ?? "-"}</p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
           <p className="text-sm font-medium">Call Description</p>
           <p className="text-sm font-semibold text-black">
-            {data?.activeCall?.call_discription ?? "-"}
+            {type === "MEETING" ? data?.description : data?.activeCall?.call_discription ?? "-"}
           </p>
         </div>
         <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
