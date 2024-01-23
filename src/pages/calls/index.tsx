@@ -53,7 +53,7 @@ const CallsPage = () => {
         headers: { Authorization: accessToken },
       })
       .then((res: any) => {
-        setData(res?.data);
+        setData(res?.data?.result);
       })
       .catch((e: any) => { });
   }, [accessToken]);
@@ -607,6 +607,7 @@ const CallsPage = () => {
       .get(endpoint, { headers: { Authorization: accessToken } })
       .then((res: any) => {
         const data = res?.data?.result;
+        setData(data);
         generateRows(data);
         setTotalItems(res?.data?.totalRecords);
         const pages = Math.ceil(res?.data?.totalRecords / limit);
@@ -618,6 +619,7 @@ const CallsPage = () => {
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
+    clearFilter();
     getData();
   }, [currTab, subType, reload]);
 
@@ -662,6 +664,21 @@ const CallsPage = () => {
     return query;
   };
 
+  const clearFilter = () => {
+    for (const filterKey of Object.keys(filters)) {
+      const newFilter = {
+        ...filters[filterKey],
+        value: typeof filters[filterKey].value === 'object' ? ["", ""] : "",
+      };
+      setFilters((currFIlters: any) => {
+        return {
+          ...currFIlters,
+          [filterKey]: newFilter
+        };
+      });
+    }
+  };
+
   const handleUpdateFilter = (filter: any, val: any, idx: number = -1) => {
     for (const filterKey of Object.keys(filters)) {
       if (filters[filterKey].label === filter.label) {
@@ -676,7 +693,6 @@ const CallsPage = () => {
           };
         });
       }
-
     }
   };
 
@@ -688,13 +704,14 @@ const CallsPage = () => {
   const dispatch = useAppDispatch();
 
   const exportXLSX = () => {
-    const worksheet = XLSX.utils.json_to_sheet(data?.result);
+    const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, "DataSheet.xlsx");
   };
 
   const exportPDF = () => {
+    console.log('------ export pdf ------', data);
     const documentDefinition = {
       content: [
         {
@@ -702,7 +719,7 @@ const CallsPage = () => {
           style: "header",
         },
         {
-          text: JSON.stringify(data.result, null, 4),
+          text: JSON.stringify(data, null, 4),
           style: "contentStyle",
         },
       ],
@@ -966,7 +983,7 @@ const CallsPage = () => {
                       title: "CSV",
                       Icon: "CSV",
                       wrapper: (
-                        <CSVLink data={data?.result} className="" ref={ref}>
+                        <CSVLink data={data} className="" ref={ref}>
                           CSV
                         </CSVLink>
                       ),
