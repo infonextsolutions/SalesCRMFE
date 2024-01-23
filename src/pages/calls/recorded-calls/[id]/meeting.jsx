@@ -39,8 +39,9 @@ const CallProfile = () => {
   }, []);
 
   const refreshData = () => {
+    console.log('============= refreshData ================', accessToken);
     axios
-      .get(`https://sales365.trainright.fit/api/meeting/find-by-id?id=${id}`, {
+      .get(`https://sales365.trainright.fit/api/event/find-by-id?id=${id}`, {
         headers: { Authorization: accessToken },
       })
       .then((res) => {

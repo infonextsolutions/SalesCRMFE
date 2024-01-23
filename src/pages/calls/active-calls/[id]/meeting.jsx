@@ -50,7 +50,7 @@ const MeetingProfile = () => {
     useEffect(() => {
         try {
             axios.get(
-                `https://sales365.trainright.fit/api/meeting/find-by-id?id=${id}`, {
+                `https://sales365.trainright.fit/api/event/find-by-id?id=${id}`, {
                 headers: { Authorization: accessToken }
             }
             ).then((res1) => {
