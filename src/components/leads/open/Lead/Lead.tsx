@@ -962,7 +962,7 @@ const LeadContainer = ({
             textLeft={10}
             text={LeadData1?.product_category}
           />
-          <LeadItem
+          {/* <LeadItem
             width={100}
             left={20}
             textLeft={10}
@@ -985,7 +985,7 @@ const LeadContainer = ({
             left={0}
             textLeft={10}
             text={"Allocated Leads"}
-          />
+          /> */}
           <LeadItem
             width={150}
             left={20}
