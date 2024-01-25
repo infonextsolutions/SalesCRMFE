@@ -12,7 +12,7 @@ import DescBoxAudioPlayer from "@/components/activeCalls/audio/components/DescBo
 const CallBox = ({
   width,
   bool,
-  handleCheck = (checked: boolean) => { },
+  handleCheck = (checked: boolean) => {},
 }: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
@@ -159,8 +159,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -487,8 +488,9 @@ const ParticipantsHover = ({ last, bounding, data }: any) => {
         return (
           <p
             key={i}
-            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
-              } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${
+              i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
+            } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -542,7 +544,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
         .then((e: any) => {
           setChecked(false);
         })
-        .catch((e) => { });
+        .catch((e) => {});
     }
   };
 
@@ -562,7 +564,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
       const minutes = Math.floor(timeDifference / (1000 * 60));
       const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-      return `${minutes ? `${minutes}min` : ''}${seconds ? ` ${seconds}sec` : ''}`;
+      return `${minutes ? `${minutes}min` : ""}${
+        seconds ? ` ${seconds}sec` : ""
+      }`;
     } else {
       return "-";
     }
@@ -608,19 +612,20 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     const twelveHourFormat = parsedHours % 12 || 12; // Convert 0 to 12 for midnight
 
     // Construct the formatted time string
-    const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${minutes != undefined ? minutes : ""
-      } ${period}`;
+    const formattedTime = `${twelveHourFormat}${
+      minutes != undefined ? ":" : ""
+    }${minutes != undefined ? minutes : ""} ${period}`;
 
     return formattedTime;
   };
-
 
   return (
     <>
       <div className="flex">
         <div
-          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${(selectAll || selected || detailShow) && "bg-white"
-            }`}
+          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${
+            (selectAll || selected || detailShow) && "bg-white"
+          }`}
           ref={wRef}
         >
           <CallBox
@@ -653,7 +658,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             // text={"Discussion on PX features"}
             text={CallData?.callData?.[0]?.call_title || "-"}
             click={true}
-          // route={`${pathname}/${id}/audio-call`}
+            // route={`${pathname}/${id}/audio-call`}
           />
           <CallItem
             width={200}
@@ -662,8 +667,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
               CallData?.leadId?.length > 0 ? CallData?.leadId?.[0]?.leadId : "-"
             }
             click={true}
-            route={`/sales/open/${CallData?.leadId?.length > 0 && CallData?.leadId?.[0]?._id
-              }/lead-profile`}
+            route={`/sales/open/${
+              CallData?.leadId?.length > 0 && CallData?.leadId?.[0]?._id
+            }/lead-profile`}
             color={"#000"}
           />
           <CallItem
@@ -743,7 +749,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             left={10}
             upperText={CallData?.createdAt ? getFormattedDate() : "-"}
             bottomText={
-              CallData?.callData[0]?.call_date && CallData?.callData[0]?.call_start_time
+              CallData?.callData[0]?.call_date &&
+              CallData?.callData[0]?.call_start_time
                 ? getFormattedTime()
                 : "-"
             }

@@ -5,13 +5,7 @@ import React, { useState } from "react";
 import ActivityHistory from "./ProfileDetails/Lead/activity";
 import Attachements from "./ProfileDetails/Lead/attachements";
 
-const LeadProfileContainer = ({
-  titles,
-  current,
-  info,
-  data,
-  width,
-}: any) => {
+const LeadProfileContainer = ({ titles, current, info, data, width }: any) => {
   const [activeTitle, setActiveTitle] = useState(0);
   function CallBack(childData: any) {
     setActiveTitle(childData);
@@ -64,8 +58,9 @@ const LeadProfileContainer = ({
 
   return (
     <div
-      className={`w-[${width ? width : "100%"
-        }] bg-[#F7F7F7] rounded-xl p-[25px] px-[35px] pt-[30px] `}
+      className={`w-[${
+        width ? width : "100%"
+      }] bg-[#F7F7F7] rounded-xl p-[25px] px-[35px] pt-[30px] `}
     >
       <Navigator
         width={false}
@@ -89,46 +84,51 @@ const LeadProfileContainer = ({
                   }}
                 />
               </div> */}
-              <h2 className="text-4xl font-semibold">
+              <h2 className="text-3xl font-semibold">
                 Lead-{data?.lead_title}
                 {""} Info
               </h2>
               <div className="pr-20">
-                <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-sm">Last Activity</p>
+                <div className="flex items-center mt-4">
+                  <p className="text-[#3F434A] text-sm mr-4 w-[300px]">
+                    Last Activity
+                  </p>
                   <p className=" text-[#595F69] text-sm font-medium">
                     {data?.activityId?.lastActivity?.call_type ||
                       data?.activityId?.lastActivity?.type ||
                       "-"}
                   </p>
                 </div>
-                <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-sm">
+                <div className="flex items-center mt-4">
+                  <p className="text-[#3F434A] text-sm mr-4 w-[300px]">
                     Product/ Service Type
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">
                     {data?.product_category}
                   </p>
                 </div>
-                <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-sm">
+                <div className="flex items-center mt-4">
+                  <p className="text-[#3F434A] text-sm mr-4 w-[300px]">
                     Last Call Disposition
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">
                     {lastCallData
-                      ? `${lastCallData?.call_type || lastCallData?.type
-                      } on ${formatDateTime(lastCallData?.createdAt)}`
+                      ? `${
+                          lastCallData?.call_type || lastCallData?.type
+                        } on ${formatDateTime(lastCallData?.createdAt)}`
                       : "-"}
                   </p>
                 </div>
-                <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-sm">Next Action</p>
+                <div className="flex items-center mt-4">
+                  <p className="text-[#3F434A] text-sm mr-4 w-[300px]">
+                    Next Action
+                  </p>
                   <p className="text-[#595F69] text-sm font-medium">
                     {data?.activityId?.lastActivity?.nextAction || "-"}
                   </p>
                 </div>
-                <div className="flex items-center mt-4 justify-between">
-                  <p className="text-[#3F434A] text-sm">
+                <div className="flex items-center mt-4">
+                  <p className="text-[#3F434A] text-sm mr-4 w-[300px]">
                     Interested Product/Service Type
                   </p>
                   <p className="text-[#595F69] text-sm font-medium">

@@ -5,7 +5,11 @@ import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import BackdropRight from "@/components/View/Backdrop/Right";
 
-const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
+const CallBox = ({
+  width,
+  bool,
+  handleCheck = (checked: boolean) => {},
+}: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
     if (check) {
@@ -23,7 +27,12 @@ const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) 
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" ref={ref} className="checkbox" onChange={(e: any) => handleCheck(e.target.checked)} />
+      <input
+        type="checkbox"
+        ref={ref}
+        className="checkbox"
+        onChange={(e: any) => handleCheck(e.target.checked)}
+      />
     </div>
   );
 };
@@ -69,11 +78,11 @@ const CallItem = ({
         </a>
       ) : (
         <p
-          className="text-[#8A9099] overflow-hidden text-[13px] tracking-wide cursor-pointer"
+          className="text-[#8A9099] overflow-hidden text-[13px] text-bold tracking-wide cursor-pointer"
           style={{
             textAlign: align && "center",
             marginLeft: textLeft && `${textLeft}px`,
-            fontWeight: bold ? bold : 500,
+            fontWeight: bold ? bold : 700,
             color: color ? color : "#8A9099",
           }}
           onClick={() => {
@@ -111,8 +120,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -350,7 +360,7 @@ const ExpandableRow = ({
   leadData,
   handleClose,
 }: any) => {
-  console.log('=================== lead data =================', leadData);
+  console.log("=================== lead data =================", leadData);
   return (
     <div
       className="custom-scroll-black w-[100%] h-[auto] py-[30px] px-[50px] overflow-y-auto"
@@ -411,11 +421,13 @@ const ExpandableRow = ({
           </p>
           <div className="">
             <h3 className="font-medium text-[#000]">
-              {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]?.title ?? "-"}
+              {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]
+                ?.title ?? "-"}
             </h3>
           </div>
           <p className="text-[#53565a] f  ont-medium mt-[5px] text-[16px] tracking-wide">
-            {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]?.content || "-"}
+            {leadData?.leadId?.notes[leadData?.leadId?.notes?.length - 1]
+              ?.content || "-"}
           </p>
         </div>
       )}
@@ -425,7 +437,10 @@ const ExpandableRow = ({
             Company Website
           </p>
           <p className="text-[#000] font-medium mt-[0px] text-[16px] tracking-wide">
-            <a href={`https://${leadData?.leadId?.companyId?.company_website_url}`} target="_blank">
+            <a
+              href={`https://${leadData?.leadId?.companyId?.company_website_url}`}
+              target="_blank"
+            >
               {leadData?.leadId?.companyId?.company_website_url}
             </a>
           </p>
@@ -438,7 +453,9 @@ const ExpandableRow = ({
             {leadData?.leadId?.companyId?.company_socialMedia1 && (
               <a href={leadData?.leadId?.companyId?.company_socialMedia1Url}>
                 <Image
-                  src={getBasicIcon(leadData?.leadId?.companyId?.company_socialMedia1)}
+                  src={getBasicIcon(
+                    leadData?.leadId?.companyId?.company_socialMedia1
+                  )}
                   className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
                   height={20}
                   width={20}
@@ -449,7 +466,9 @@ const ExpandableRow = ({
             {leadData?.leadId?.companyId?.company_socialMedia2 && (
               <a href={leadData?.leadId?.companyId?.company_socialMedia2Url}>
                 <Image
-                  src={getBasicIcon(leadData?.leadId?.companyId?.company_socialMedia2)}
+                  src={getBasicIcon(
+                    leadData?.leadId?.companyId?.company_socialMedia2
+                  )}
                   className="mr-[8px] cursor-pointer w-[20px] h-[20px]"
                   height={20}
                   width={20}
@@ -588,14 +607,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
 
   function calculateTimeDifference(startTime: any, endTime: any) {
     if (startTime && endTime) {
-      const [h1, m1] = startTime.split(':');
-      const [h2, m2] = endTime.split(':');
+      const [h1, m1] = startTime.split(":");
+      const [h2, m2] = endTime.split(":");
       let diff = (h2 - h1) * 60 + (m2 - m1);
       if (diff < 0) diff += 24 * 60;
       const hours = Math.floor(diff / 60);
       const minutes = diff - hours * 60;
-      const hh = hours.toString().padStart(2, '0');
-      const mm = minutes.toString().padStart(2, '0');
+      const hh = hours.toString().padStart(2, "0");
+      const mm = minutes.toString().padStart(2, "0");
       return `${hh !== "00" ? `${hh}hr` : ""}${mm ? ` ${mm}min` : ""}`;
     } else {
       return "-";
@@ -655,10 +674,19 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     <>
       <div className="flex">
         <div
-          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${(selectAll || selected || detailShow) && "bg-white"}`}
+          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] hover:bg-white ${
+            (selectAll || selected || detailShow) && "bg-white"
+          }`}
           ref={wRef}
         >
-          <CallBox width={30} bool={selectAll || selected} handleCheck={(checked: any) => { setSelected(checked); console.log('CHECKED', checked) }} />
+          <CallBox
+            width={30}
+            bool={selectAll || selected}
+            handleCheck={(checked: any) => {
+              setSelected(checked);
+              console.log("CHECKED", checked);
+            }}
+          />
           <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
@@ -678,9 +706,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             width={150}
             left={0}
             color={"#000"}
-            text={
-              CallData?.title ? CallData?.title : "-"
-            }
+            text={CallData?.title ? CallData?.title : "-"}
             click={true}
             route={`${pathname}/${CallData?._id}/meeting`}
           />
@@ -717,7 +743,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             color={"#000"}
           />
           <CallItemMultiple
-            width={200} left={20}
+            width={200}
+            left={20}
             upperText={CallData?.participants?.customer_name}
             bottomText={CallData?.participants?.customer_designation}
           />
@@ -772,10 +799,11 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItemMultiple
             width={130}
             left={20}
-            upperText={`${isISOString(CallData.call_start_time)
-              ? formatDateToCustomFormat(CallData.call_start_time)
-              : "-"
-              }`}
+            upperText={`${
+              isISOString(CallData.call_start_time)
+                ? formatDateToCustomFormat(CallData.call_start_time)
+                : "-"
+            }`}
             bottomText={
               isISOString(CallData.call_start_time)
                 ? convertISOToTime(CallData.call_start_time)

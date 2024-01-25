@@ -13,6 +13,7 @@ import EditLead from "@/components/View/EditLead";
 import Notes1 from "@/components/View/NotesSalesView";
 import PromptEdit from "@/components/View/PromptEdit";
 import { useRouter } from "next/router";
+import { BsKanban } from "react-icons/bs";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -155,7 +156,6 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
 
   const makecall = async () => {
     try {
-
       const res = await axios.post(
         "https://sales365.trainright.fit/api/calling/make-call",
         {
@@ -163,9 +163,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
         },
         { headers: { Authorization: accessToken } }
       );
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const addExport = (e: any, e1: any) => {
@@ -175,7 +173,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
   };
 
   return (
-    <div className="relative w-[100%] min-h-[90vh] px-[10px] ">
+    <div className="relative w-[100%] min-h-[90vh] px-[10px]">
       {/* <Navigation  /> */}
       {imports && (
         <Backdrop bool={bool}>
@@ -184,7 +182,11 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
       )}
       {form && (
         <Backdrop bool={bool}>
-          <AddLeadForm cancel={cancelForms} mastersData={mastersData} teamManagersData={teamManagersData} />
+          <AddLeadForm
+            cancel={cancelForms}
+            mastersData={mastersData}
+            teamManagersData={teamManagersData}
+          />
         </Backdrop>
       )}
       <Navigation
@@ -228,20 +230,21 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
             ],
             value: 0,
           },
-          {
-            text: "Add Lead",
-            dropdown: true,
-            id: 1,
-            icon: "Plus",
-            click: AddLead,
-            light: false,
-            dark: false,
-            list: [
-              { title: "Using Form", Icon: "Text" },
-              { title: "Import Leads", Icon: "Download" },
-              // { title: "Using Prompt", Icon: "Text" },
-            ],
-          },
+          //sougata
+          // {
+          //   text: "Add Lead",
+          //   dropdown: true,
+          //   id: 1,
+          //   icon: "Plus",
+          //   click: AddLead,
+          //   light: false,
+          //   dark: false,
+          //   list: [
+          //     { title: "Using Form", Icon: "Text" },
+          //     { title: "Import Leads", Icon: "Download" },
+          //     // { title: "Using Prompt", Icon: "Text" },
+          //   ],
+          // },
           {
             text: "",
             dropdown: true,
@@ -267,7 +270,12 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
           },
         ]}
       />
-      <LeadsContainer view={view} records={data?.totalRecords} list={Dummy} reload={reload} />
+      <LeadsContainer
+        view={view}
+        records={data?.totalRecords}
+        list={Dummy}
+        reload={reload}
+      />
     </div>
   );
 };

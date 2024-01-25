@@ -103,7 +103,7 @@ const Deals = ({ data, type }: any) => {
   const [bool, setBool] = React.useState(true);
   const [call, setCall] = React.useState(false);
   // const [detailShow, setDetailShow] = useState(false);
-  console.log('------------------ deals data -----------------', data);
+  console.log("------------------ deals data -----------------", data);
   const showNotes = () => {
     setNotes(true);
   };
@@ -199,11 +199,16 @@ const Deals = ({ data, type }: any) => {
   useEffect(() => {
     axios
       .get(
-        `https://sales365.trainright.fit/api/leads/getDeals?id=${type === "company" ? data?.result?.companyId?._id : data?.result?.customerId?._id}&type=${type}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/getDeals?id=${
+          type === "company"
+            ? data?.result?.companyId?._id
+            : data?.result?.customerId?._id
+        }&type=${type}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       )
       .then((response) => {
         const data = response?.data;
@@ -218,18 +223,18 @@ const Deals = ({ data, type }: any) => {
     <div className="">
       <Navigator
         width={false}
-        callback={() => { }}
+        callback={() => {}}
         current={0}
         list={[{ id: 0, title: "Deals" }]}
       />
 
       <div className="w-[700px]">
         <div className=" my-[40px] overflow-hidden">
-          <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
+          <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-bold">
             Open Deals
           </h5>
           {/* <p className="text-center text-[#000]">-</p> */}
-          <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
+          <div className="mt-[20px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
             <p className="w-[140px]">Lead Id</p>
             <p className="w-[180px]">Product/Service</p>
             <p className="w-[160px]">Lead Stage</p>
@@ -245,21 +250,13 @@ const Deals = ({ data, type }: any) => {
               >
                 <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
                   <div className="w-[140px]">
-                    <p className="text-[#3F434A]">
-                      {deal?.leadId || "-"}
-                    </p>
+                    <p className="text-[#3F434A]">{deal?.leadId || "-"}</p>
                   </div>
                   <div className="w-[180px]">
-                    <p>
-                      {deal?.product_category}
-                    </p>
+                    <p>{deal?.product_category}</p>
                   </div>
                   <div className="w-[160px]">
-                    <p>
-                      {deal?.leadStage
-                        ? deal?.leadStage
-                        : "-"}
-                    </p>
+                    <p>{deal?.leadStage ? deal?.leadStage : "-"}</p>
                   </div>
                   <div className="w-[200px]">
                     <p>
@@ -311,7 +308,7 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool}>
                     <Notes
                       cancel={cancelNotes}
-                    //  leadid={id}
+                      //  leadid={id}
                     />
                   </Backdrop>
                 )}
@@ -319,7 +316,7 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool} pad={"50px 0"}>
                     <Events
                       cancel={cancelEvents}
-                    // leadid={id}
+                      // leadid={id}
                     />
                   </Backdrop>
                 )}
@@ -350,11 +347,11 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool} pad={"50px 0"}>
                     <ActiveCall
                       cancel={cancelCall}
-                    // id={LeadData._id}
-                    // lead={LeadData}
-                    // companyId={LeadData.companyId._id}
-                    // companyName={LeadData.companyId.company_name}
-                    // customerId={LeadData.customerId._id}
+                      // id={LeadData._id}
+                      // lead={LeadData}
+                      // companyId={LeadData.companyId._id}
+                      // companyName={LeadData.companyId.company_name}
+                      // customerId={LeadData.customerId._id}
                     />
                   </Backdrop>
                 )}
@@ -365,11 +362,11 @@ const Deals = ({ data, type }: any) => {
         {/* ?close deals */}
 
         <div className=" my-[40px] overflow-hidden">
-          <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
-            Close Deals
+          <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-bold">
+            Closed Deals
           </h5>
           {/* <p className="text-center text-[#000]">-</p> */}
-          <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
+          <div className="mt-[20px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
             <p className="w-[140px]">Lead Id</p>
             <p className="w-[180px]">Product/Service</p>
             <p className="w-[160px]">Lead Stage</p>
@@ -385,23 +382,15 @@ const Deals = ({ data, type }: any) => {
               >
                 <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
                   <div className="w-[140px]">
-                    <p className="text-[#3F434A]">
-                      {deal?.leadId || "-"}
-                    </p>
+                    <p className="text-[#3F434A]">{deal?.leadId || "-"}</p>
                   </div>
                   <div className="w-[180px]">
                     <p>
-                      {deal?.product_category
-                        ? deal?.product_category
-                        : "-"}{" "}
+                      {deal?.product_category ? deal?.product_category : "-"}{" "}
                     </p>
                   </div>
                   <div className="w-[160px]">
-                    <p>
-                      {deal?.leadStage
-                        ? deal?.leadStage
-                        : "-"}
-                    </p>
+                    <p>{deal?.leadStage ? deal?.leadStage : "-"}</p>
                   </div>
                   <div className="w-[200px]">
                     <p>
@@ -453,7 +442,7 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool}>
                     <Notes
                       cancel={cancelNotes}
-                    //  leadid={id}
+                      //  leadid={id}
                     />
                   </Backdrop>
                 )}
@@ -461,7 +450,7 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool} pad={"50px 0"}>
                     <Events
                       cancel={cancelEvents}
-                    // leadid={id}
+                      // leadid={id}
                     />
                   </Backdrop>
                 )}
@@ -492,11 +481,11 @@ const Deals = ({ data, type }: any) => {
                   <Backdrop bool={bool} pad={"50px 0"}>
                     <ActiveCall
                       cancel={cancelCall}
-                    // id={LeadData._id}
-                    // lead={LeadData}
-                    // companyId={LeadData.companyId._id}
-                    // companyName={LeadData.companyId.company_name}
-                    // customerId={LeadData.customerId._id}
+                      // id={LeadData._id}
+                      // lead={LeadData}
+                      // companyId={LeadData.companyId._id}
+                      // companyName={LeadData.companyId.company_name}
+                      // customerId={LeadData.customerId._id}
                     />
                   </Backdrop>
                 )}
@@ -505,11 +494,11 @@ const Deals = ({ data, type }: any) => {
         </div>
 
         <div className="my-[50px] mt-[80px]">
-          <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-medium">
+          <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-bold">
             Interest History
           </h5>
           {/* <p className="text-center text-[#000]">-</p> */}
-          <div className="mt-[40px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
+          <div className="mt-[20px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
             <p className="w-[180px]">Product/Service</p>
             <p className="w-[140px]">Lead Id</p>
             <p className="w-[200px]">Last Activity</p>
@@ -521,7 +510,7 @@ const Deals = ({ data, type }: any) => {
                 key={index}
                 className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
               >
-                <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center  rounded-xl">
+                <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
                   <div className="w-[180px]">
                     <p className="ml-2">
                       {deal?.companyData?.[0]?.company_product_category || "-"}

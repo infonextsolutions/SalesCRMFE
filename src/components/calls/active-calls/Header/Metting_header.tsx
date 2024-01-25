@@ -27,7 +27,7 @@ const HeaderItem = ({ width, text, left, align, bold, color }: any) => {
         className="text-[#8A9099] uppercase text-[12px] font-medium tracking-wider w-[100%]"
         style={{
           textAlign: align && "center",
-          fontWeight: bold ? bold : 500,
+          fontWeight: bold ? bold : 700,
           color: color ? color : "#8A9099",
         }}
       >
@@ -48,18 +48,18 @@ const Header = ({ selectAll, win, deal, budget }: any) => {
           }}
         />
 
-        <HeaderItem width={240} left={70} text={"Metting ID"} />
-        <HeaderItem width={150} left={10} text={"Metting title"} />
+        <HeaderItem width={240} left={70} text={"Meeting ID"} />
+        <HeaderItem width={150} left={10} text={"Meeting title"} />
         <HeaderItem width={150} left={10} text={"lead id"} />
         <HeaderItem width={150} left={10} text={"lead title"} />
         <HeaderItem width={150} left={10} text={"Company Name"} />
         <HeaderItem width={200} left={10} text={"Product/Services"} />
 
         <HeaderItem width={200} left={20} text={"participants"} />
-        <HeaderItem width={150} left={20} text={"Metting owner"} />
-        <HeaderItem width={150} left={20} text={"Metting type"} />
+        <HeaderItem width={150} left={20} text={"Meeting owner"} />
+        <HeaderItem width={150} left={20} text={"Meeting type"} />
 
-        <HeaderItem width={150} left={20} text={"Metting date-time"} />
+        <HeaderItem width={150} left={20} text={"Meeting date-time"} />
         <HeaderItem width={150} left={20} text={"Duration"} />
         <HeaderItem width={150} left={20} text={"location"} />
         <HeaderItem width={150} left={20} text={"join info"} />

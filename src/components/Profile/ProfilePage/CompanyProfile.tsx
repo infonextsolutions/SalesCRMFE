@@ -38,18 +38,18 @@ const CompanyProfile = ({ data1, refresh }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.result?._id}`, {
-          headers: {
-            Authorization: accessToken
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.result?._id}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
         )
         .then((e) => {
           setData(e.data);
           refresh(e.data?.result?.companyId?.company_name);
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
     }, 1000);
   };
   return (
@@ -107,20 +107,20 @@ const CompanyProfile = ({ data1, refresh }: any) => {
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Company Info
         </p>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Company Name</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium mr-4 w-[200px]">Company Name</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_name}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Company Address</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium mr-4 w-[200px]">Company Address</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_address}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium"> Website Link</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium mr-4 w-[200px]"> Website Link</p>
           <p
             onClick={() => {
               if (data?.result?.companyId?.company_website_url) {
@@ -135,14 +135,14 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             {data?.result?.companyId?.company_website_url}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Industry Type</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium mr-4 w-[200px]">Industry Type</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_product_category}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium"> Social Media</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium mr-4 w-[200px]"> Social Media</p>
           <p className="text-sm font-semibold text-black flex">
             {data?.result?.companyId?.company_socialMedia1 && (
               <a href={data?.result?.companyId?.company_socialMedia1Url}>
@@ -163,7 +163,9 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             {data?.result?.companyId?.company_socialMedia2 && (
               <a href={data?.companyId?.company_socialMedia2Url}>
                 <Image
-                  src={getBasicIcon(data?.result?.companyId?.company_socialMedia2)}
+                  src={getBasicIcon(
+                    data?.result?.companyId?.company_socialMedia2
+                  )}
                   className={`w-[20px] svg-grey mr-2`}
                   alt=""
                   width={20}

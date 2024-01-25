@@ -253,7 +253,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
             />
           </div>
           <div className="flex items-center gap-5 flex-wrap">
-            <div className="flex items-center gap-2 w-fit justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center gap-2 w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
@@ -273,7 +273,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-56 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
@@ -329,7 +329,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 </option>
               </select>
             </div>
-            <div className="flex items-center w-56 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-56 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Meeting Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
@@ -348,15 +348,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <DatePicker
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-            />
-          </div>
-          <div className="flex gap-5">
-            <div className="flex items-center w-64 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-64 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Meeting Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
@@ -375,7 +367,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 ))}
               </select>
             </div>
-            <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <div className="flex items-center w-52 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Location</h2>
               <select
                 onChange={(e) => setLocation(e.target.value)}
@@ -394,6 +386,12 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                 </option>
               </select>
             </div>
+            <DatePicker
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+            />
           </div>
         </div>
         {/* <ButtonDropDown

@@ -206,15 +206,14 @@ const KanbanItem = ({ item, i, Item }: any) => {
             email: emails,
           });
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
     });
   };
 
   return (
     <>
       <div
-        className="p-[15px] rounded-xl mb-[20px] w-[240px] flex flex-col justify-between mh-[270px] shadow-lg shadow-slate-400"
+        className="bg-white p-[15px] rounded-xl mb-[20px] w-[250px] flex flex-col justify-between mh-[270px] shadow-lg shadow-slate-400"
         key={i}
       >
         <div className="block-heading text-black text-[13px] leading-4 mb-[23px]">
@@ -222,11 +221,11 @@ const KanbanItem = ({ item, i, Item }: any) => {
             onClick={() => {
               leadId();
             }}
-            className="cursor-pointer text-[16px] text-rose-600"
+            className="cursor-pointer text-[16px] text-[#FE5143] font-semibold"
           >
             Lead Id-{Item?.leadId}
           </p>
-          <p className="text-bold text-[16px] text-rose-600 mt-[6px]">
+          <p className="text-bold text-[16px] text-[#FE5143] my-[6px] font-semibold">
             {Item?.lead_title}
           </p>
           <p
@@ -281,7 +280,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
           </div>
         </div>
 
-        <div className="quick-actions text-[12px] px-[9px] mt-auto py-[6px]  bg-slate-200 rounded-[12px] flex items-center justify-between">
+        <div className="quick-actions text-[12px] mt-auto py-[6px]  bg-gray-200 flex items-center justify-between rounded-full px-2">
           <p className="text-black/[.75] leading-[14px]">Quick Actions</p>
           <div className="icons flex gap-[6px]">
             <Image
@@ -351,7 +350,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             />
           </div>
         </div>
-        <div className="px-[10px] py-[5px] text-[12px] text-black rounded-[14px] border border-black flex mt-[10px] opacity-80 gap-[4px] w-[100%] flex justify-between">
+        <div className="px-[10px] py-[5px] text-[12px] text-black rounded-[14px] border border-black flex mt-[10px] opacity-80 gap-[4px] w-[100%] justify-between">
           <Image
             src={getBasicIcon("Phone")}
             className={`w-[18px]`}

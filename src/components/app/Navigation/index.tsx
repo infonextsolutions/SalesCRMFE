@@ -2,12 +2,7 @@ import Button from "@/utils/Button/Button";
 import { Logout } from "@mui/icons-material";
 import React from "react";
 
-const Navigation = ({
-  buttons,
-  title,
-  leftBtns,
-  leftChildren,
-}: any) => {
+const Navigation = ({ buttons, title, leftBtns, leftChildren }: any) => {
   console.log(buttons);
   const arr = [];
   return (

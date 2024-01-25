@@ -24,10 +24,10 @@ const HeaderItem = ({ width, text, left, align, bold, color }: any) => {
       style={{ width: width, marginLeft: left }}
     >
       <p
-        className="text-[#8A9099] uppercase text-[12px] font-medium tracking-wider w-[100%]"
+        className="text-[#8A9099] uppercase text-[12px] tracking-wider w-[100%]"
         style={{
           textAlign: align && "center",
-          fontWeight: bold ? bold : 500,
+          fontWeight: bold ? bold : 700,
           color: color ? color : "#8A9099",
         }}
       >
