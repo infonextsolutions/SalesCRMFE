@@ -30,36 +30,39 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      `https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setData1(res.data);
-      setData(res.data);
-    }).catch((e) => { });
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/find-all", {
-      headers: { Authorization: accessToken }
-    }
-    ).then((res) => {
-      setMastersData(res.data);
-    }).catch((e) => { });
+    axios
+      .get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setData1(res.data);
+        setData(res.data);
+      })
+      .catch((e) => {});
+    axios
+      .get("https://sales365.trainright.fit/api/master-users/find-all", {
+        headers: { Authorization: accessToken },
+      })
+      .then((res) => {
+        setMastersData(res.data);
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`, {
-        headers: { Authorization: accessToken }
-      }
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`,
+        {
+          headers: { Authorization: accessToken },
+        }
       )
       .then((e) => {
         setData(e.data);
       })
-      .catch(() => { });
+      .catch(() => {});
   };
   const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS"];
 

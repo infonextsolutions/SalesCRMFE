@@ -57,11 +57,12 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
     setTimeout(async () => {
       const response = await axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?._id}`, {
-          headers: {
-            Authorization: accessToken
+          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?._id}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
         )
         .then((e) => {
           setData(e.data.result);
@@ -69,8 +70,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             updated();
           }
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
       updated();
     }, 1000);
   };
@@ -197,14 +197,14 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Company Info
         </p>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Company Name</p>
+        <div className="text-[#8A9099] flex items-center  gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Company Name</p>
           <p className="text-sm font-semibold text-black">
             {data?.companyId?.company_name}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium"> Website Link</p>
+        <div className="text-[#8A9099] flex items-center gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]"> Website Link</p>
           <p
             onClick={() => {
               if (data?.companyId?.company_website_url) {
@@ -216,14 +216,14 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             {data?.companyId?.company_website_url}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Industry Type</p>
+        <div className="text-[#8A9099] flex items-center gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Industry Type</p>
           <p className="text-sm font-semibold text-black">
             {data?.companyId?.company_product_category}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium"> Social Media</p>
+        <div className="text-[#8A9099] flex justify-between gap-4 w-9/12  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]"> Social Media</p>
           <p className="text-sm font-semibold text-black flex">
             {data?.companyId?.company_socialMedia1 && (
               <a href={data?.companyId?.company_socialMedia1Url}>
@@ -259,22 +259,24 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Lead Info
         </p>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Status</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px] gap-4">
+          <p className="text-sm font-medium w-[120px]">Status</p>
           <p className="text-sm font-semibold text-black">{data?.leadStatus}</p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Stage</p>
-          <p className="text-sm font-semibold text-black">{data?.leadStage}</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Stage</p>
+          <p className="text-sm font-semibold text-black w-[120px]">
+            {data?.leadStage}
+          </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Source</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Source</p>
           <p className="text-sm font-semibold text-black">
             {data?.leadSource ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Lead owner</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Lead owner</p>
           {data?.owners?.map((owner: any, index: number) => {
             if (owner && Object.keys(owner).length !== 0) {
               return (
@@ -287,29 +289,29 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             }
           })}
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Lead Manager</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Lead Manager</p>
           <p className="text-sm font-semibold text-black">
             {data?.manager?.name ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Lead Created by</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Lead Created by</p>
           <p className="text-sm font-semibold text-black">
             {data?.created_by ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Lead Updated on</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Lead Updated on</p>
           <p className="text-sm font-semibold text-black">
             {formatDateFromISOString(data?.updatedAt) ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-12/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Activity History</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Activity History</p>
           <div className=" text-sm font-semibold text-black">
             <div className="flex gap-3 items-center">
-              <div className="flex gap-2 mr-[8px]">
+              <div className="flex mr-[8px]">
                 <Image
                   src={getBasicIcon("Phone")}
                   alt=""
@@ -322,7 +324,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                 />
                 <p className="text-black">{Activities.call}</p>
               </div>
-              <div className="flex gap-2 mr-[8px]">
+              <div className="flex mr-[8px]">
                 <Image
                   src={getBasicIcon("Chat")}
                   alt=""
@@ -335,7 +337,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                 />
                 <p className="text-black">0</p>
               </div>
-              <div className="flex gap-2 mr-[8px]">
+              <div className="flex mr-[8px]">
                 <Image
                   src={getBasicIcon("Mail")}
                   alt=""
@@ -350,7 +352,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
               </div>
             </div>
             <div className="flex mt-2 gap-3 items-center">
-              <div className="flex gap-2 mr-[8px]">
+              <div className="flex mr-[8px]">
                 <Image
                   src={getBasicIcon("Calendar")}
                   alt=""
@@ -363,7 +365,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
                 />
                 <p className="text-black">0</p>
               </div>
-              <div className="flex gap-2 mr-[8px]">
+              <div className="flex mr-[8px]">
                 <Image
                   src={getBasicIcon("Tasks")}
                   alt=""
@@ -394,38 +396,39 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             }}
           />
           <div className="ml-3">
-            <h2 className="text-base text-[14px] whitespace-nowrap leading-7 tracking-wide text-[#000] -900 font-normal">
+            <h2 className="text-base text-[14px] whitespace-nowrap tracking-wide text-[#000] -900 font-normal">
               {data?.customerId?.customer_name || data?.customerId?.name}
             </h2>
             <a
               href="#0"
               className="block text-xs text-[14px] text-[#000] -500 tracking-wide hover:text-indigo-500"
             >
-              {data?.customerId?.customer_designation || data?.customerId?.designation}
+              {data?.customerId?.customer_designation ||
+                data?.customerId?.designation}
             </a>
           </div>
         </div>
 
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[-22px] leading-[21px]">
-          <p className="text-sm font-medium">Gender</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[-22px]">
+          <p className="text-sm font-medium w-[120px]">Gender</p>
           <p className="text-sm font-semibold text-black">
             {data?.customerId?.customer_gender || data?.customerId?.gender}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Phone</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Phone</p>
           <p className="text-sm font-semibold text-black">
             {data?.customerId?.customer_contact || data?.customerId?.contact}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Email</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Email</p>
           <p className="text-sm font-semibold text-black">
             {data?.customerId?.customer_email || data?.customerId?.email}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Social Media</p>
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[120px]">Social Media</p>
           <div className="flex">
             {data?.customerId?.customer_socialMedia1 && (
               <a href={data?.customerId?.customer_socialMedia1Url}>
@@ -460,7 +463,7 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Other Contact
         </p>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
+        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
           {data?.customerId?.contacts &&
             data?.customerId?.contacts?.map((item: any, i: any) => {
               function random_number_between_1_and_7() {

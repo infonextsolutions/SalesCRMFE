@@ -124,9 +124,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
           setItems(
             filtered.slice(pageNumber * limit, pageNumber * limit + limit)
           );
-        } catch (error) {
-
-        }
+        } catch (error) {}
       };
       getItems();
       setLoading(false);
