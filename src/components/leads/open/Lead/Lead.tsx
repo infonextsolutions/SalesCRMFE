@@ -376,7 +376,7 @@ const ExpandableRow = ({
         zIndex: 100000000000000,
       }}
     >
-      <div className="w-[100%] flex items-center justify-between text-black mb-[20px]">
+      <div className="w-[100%] flex items-center justify-between text-black mb-[20px] font-bold">
         <h2 className="text-[24px]">Lead Details</h2>
         <button
           className="w-[30px] h-[30px] cursor-pointer rounded-xl flex items-center justify-center"
@@ -391,65 +391,65 @@ const ExpandableRow = ({
         </button>
       </div>
       <div className="w-[100%] flex items-center">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
           Lead Source
         </p>
-        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+        <p className="text-[#000] mt-[5px] text-[16px] tracking-wide">
           {leadData?.leadSource}
         </p>
       </div>
       <div className="w-[100%] flex items-center mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
           Last Call Disposition
         </p>
-        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+        <p className="text-[#000] mt-[5px] text-[16px] tracking-wide">
           {leadData?.activityId?.lastCallDisposition ?? "-"}
         </p>
       </div>
       <div className="w-[100%] mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
           Lead Description
         </p>
-        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+        <p className="text-[#000] mt-[5px] text-[16px] tracking-wide">
           {leadDesc}
         </p>
       </div>
       <div className="w-[100%] mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
           Company Description
         </p>
-        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+        <p className="text-[#000] mt-[5px] text-[16px] tracking-wide">
           {companyDesc ?? "-"}
         </p>
       </div>
       {leadData?.notes?.length !== 0 && (
         <div className="w-[100%] mb-[20px]">
-          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium mb-[5px]">
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-bold mb-[5px]">
             Note
           </p>
           <div className="">
-            <h3 className="font-medium text-[#000]">
+            <h3 className="text-[#000]">
               {leadData?.notes[leadData?.notes?.length - 1]?.title || "-"}
             </h3>
           </div>
-          <p className="text-[#53565a] font-medium mt-[5px] text-[16px] tracking-wide">
+          <p className="text-[#53565a] mt-[5px] text-[16px] tracking-wide">
             {leadData?.notes[leadData?.notes?.length - 1]?.content || "-"}
           </p>
         </div>
       )}
       <div className="flex flex-col mb-[20px]">
         <div className="w-[100%] flex items-center mb-[20px]">
-          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
             Company Website
           </p>
-          <p className="text-[#000] font-medium mt-[0px] text-[16px] tracking-wide">
+          <p className="text-[#000] mt-[0px] text-[16px] tracking-wide">
             <a href={`https://${companyWebsite}`} target="_blank">
               {companyWebsite}
             </a>
           </p>
         </div>
         <div className="w-[100%] mt-[10px] flex items-center">
-          <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+          <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
             Social Media
           </p>
           <div className="flex mt-[2px]">
@@ -479,14 +479,14 @@ const ExpandableRow = ({
         </div>
       </div>
       <div className="w-[100%] mb-[20px] flex items-center">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
           Lead Owner
         </p>
         {LeadOwners.map((item: any, i: any) => {
           return (
             <p
               key={i}
-              className="text-[#000] font-medium mt-[2px] text-[16px] tracking-wide"
+              className="text-[#000] mt-[2px] text-[16px] tracking-wide"
             >
               {item.name}
             </p>
@@ -494,10 +494,10 @@ const ExpandableRow = ({
         })}
       </div>
       <div className="w-[100%] mb-[20px]">
-        <p className="w-[200px] text-[16px] text-[#8A9099] font-medium">
+        <p className="w-[200px] text-[16px] text-[#8A9099] font-bold">
           Other Contacts
         </p>
-        <p className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider">
+        <p className="text-[#8A9099] mt-[5px] text-[14px] tracking-wider">
           <span className="text-[#000] text-[15px]">
             {" "}
             {leadData?.customerId?.customer_name}
@@ -509,7 +509,7 @@ const ExpandableRow = ({
             return (
               <p
                 key={i}
-                className="text-[#8A9099] font-medium mt-[5px] text-[14px] tracking-wider"
+                className="text-[#8A9099] mt-[5px] text-[14px] tracking-wider"
               >
                 <span className="text-[#000] text-[15px]">
                   {" "}
@@ -524,10 +524,8 @@ const ExpandableRow = ({
         })}
       </div>
       <div className="w-[100%] mb-[20px] flex flex-col">
-        <p className=" text-[16px] text-[#8A9099] font-medium">
-          Lead Created On
-        </p>
-        <p className="text-[#000] font-medium mt-[5px] text-[16px] tracking-wide">
+        <p className=" text-[16px] text-[#8A9099] font-bold">Lead Created On</p>
+        <p className="text-[#000] mt-[5px] text-[16px] tracking-wide">
           {convertDatetime(leadData?.createdAt)}
         </p>
       </div>

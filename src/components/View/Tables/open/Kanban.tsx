@@ -27,15 +27,15 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
   const [loading, setLoading] = React.useState(false);
   useEffect(() => {
     try {
-
       setLoading(true);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open&${queryStr}`, {
-          headers: {
-            Authorization: accessToken
+          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open&${queryStr}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
         );
         const data = res.data.result;
         const filtered = data.filter(
@@ -54,9 +54,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
 
       getItems();
       setLoading(false);
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }, [search, accessToken, queryStr]);
 
   const Leads = items;
@@ -65,12 +63,11 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
   const stages = ["Enquiry", "Interaction", "Proposal", "Won", "Lost"];
   const titles = ["ENQUIRY", "INTERACTION", "PROPOSAL", "WON", "LOST"];
   useEffect(() => {
-    items.map((e: any, i: any) => {
-    });
+    items.map((e: any, i: any) => {});
   }, [items]);
   return (
     <>
-      <div className="px-[10px] mt-[10px] text-[#ffffff] flex gap-[10px] h-[1200px] overflow-x-auto custom-scroll">
+      <div className="px-[10px] mt-[10px] text-[#ffffff] flex gap-[30px] h-[1200px] overflow-x-auto custom-scroll">
         {/* {loading ? (
           <Spinner />
         ) : (
@@ -102,12 +99,12 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
           if (res.length || col === "Dead") {
             return (
               <div className="flex gap-[20px]" key={i}>
-                <div className="w-[240px] shrink-0 ">
+                <div className="w-[250px] shrink-0 ">
                   <div className="leadName flex mb-[10px]">
                     <div className="w-[100%] bg-slate-700 h-[45px] rounded-xl pl-[15px] pr-[15px] flex items-center justify-between">
-                      <div className="enq-header font-medium flex items-center ml-[10px] text-[13px] flex gap-[8px] items-center">
+                      <div className="enq-header font-medium flex items-center ml-[10px] text-[13px] gap-[8px]">
                         <p className="">{titles[i]}</p>
-                        <div className="text-[10px] h-[19px] justify-center w-[20px] font-medium text-[#fff] flex items-center bg-slate-400 px-[4px] h-[13px] rounded-[4px]">
+                        <div className="text-[10px] h-[19px] justify-center w-[20px] font-medium text-[#fff] flex items-center bg-slate-400 px-[4px] rounded-[4px]">
                           {res.length}
                         </div>
                       </div>

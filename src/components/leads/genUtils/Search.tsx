@@ -19,7 +19,7 @@ const Search = ({ change, view }: any) => {
             type="text"
             onChange={change}
             className="w-[100%] h-[32px] bg-inherit outline-0 text-black "
-            placeholder="Search Lead..."
+            placeholder="Search Leads..."
           />
         </div>
         <div className="h-[100%] w-[40px] px-[12px] flex items-center justify-center cursor-pointer ">
