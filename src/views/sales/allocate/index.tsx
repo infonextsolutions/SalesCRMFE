@@ -499,25 +499,25 @@ const SalesOpen = ({
           //   ],
           //   value: 0,
           // },
-          {
-            text: "View",
-            dropdown: true,
-            id: 0,
-            click: viewButtinClick,
-            light: false,
-            dark: true,
-            list: [
-              {
-                title: "Table View",
-                Icon: "List 2",
-              },
-              {
-                title: "Kanban View",
-                Icon: "Grid",
-              },
-            ],
-            value: 0,
-          },
+          // {
+          //   text: "View",
+          //   dropdown: true,
+          //   id: 0,
+          //   click: viewButtinClick,
+          //   light: false,
+          //   dark: true,
+          //   list: [
+          //     {
+          //       title: "Table View",
+          //       Icon: "List 2",
+          //     },
+          //     {
+          //       title: "Kanban View",
+          //       Icon: "Grid",
+          //     },
+          //   ],
+          //   value: 0,
+          // },
           {
             text: "Add Lead",
             dropdown: true,

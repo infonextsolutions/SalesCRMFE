@@ -1122,6 +1122,7 @@ const Indicator = () => {
               callback={handleICTabNavigation}
               current={currICTab}
               list={ICTabs}
+              justifyAround={true}
             />
             {currICTab === 0 ? scoreSettingTab() : timeSettingTab()}
           </div>

@@ -96,7 +96,7 @@ const LeadsContainer = ({
         }
       );
       setVisibleRecords({ ...response.data });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {

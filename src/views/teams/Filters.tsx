@@ -25,8 +25,8 @@ const DateRangeFilter = ({
   onUpdate?: any;
 }) => {
   return (
-    <div className="">
-      <h2 className="font-medium text-black">{filterData?.label}</h2>
+    <div className="mt-1">
+      <h2 className="font-semibold text-black">{filterData?.label}</h2>
       <div className="flex items-center gap-[10px] w-[auto] justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <input
           type="date"
