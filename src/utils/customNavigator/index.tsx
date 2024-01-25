@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-const Navigator = ({ list, current, callback, width }: any) => {
+const Navigator = ({
+  list,
+  current,
+  callback,
+  width,
+  justifyAround,
+  borderBottom,
+}: any) => {
   const [activeTitle, setActiveTitle] = useState(current);
   const handleOnClick = (id: any) => {
     setActiveTitle(id);
@@ -9,11 +16,11 @@ const Navigator = ({ list, current, callback, width }: any) => {
 
   return (
     <>
-      <div className="border-b-2">
+      <div className={`${borderBottom == false ? "" : "border-b-2"}`}>
         <div
-          className={`${
-            width ? "w-[80%]" : "w-[100%]"
-          }  flex justify-between items-center text-black  px-[30px] pt-[20px]`}
+          className={`${width ? "w-[80%]" : "w-[100%]"}  flex ${
+            justifyAround ? "justify-around" : "justify-between"
+          } items-center text-black  px-[30px] pt-[20px]`}
         >
           {list?.map((item: any, i: any) => {
             return (
@@ -28,7 +35,7 @@ const Navigator = ({ list, current, callback, width }: any) => {
               >
                 <p
                   className={`text-[13px] tracking-wide ${
-                    item?.id === activeTitle ? "text-[#000]" : "text-[#000]"
+                    item?.id === activeTitle ? "text-[#fff]" : "text-[#000]"
                   }`}
                 >
                   {item?.title}

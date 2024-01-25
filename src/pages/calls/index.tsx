@@ -55,7 +55,7 @@ const CallsPage = () => {
       .then((res: any) => {
         setData(res?.data?.result);
       })
-      .catch((e: any) => { });
+      .catch((e: any) => {});
   }, [accessToken]);
 
   const [filters, setFilters] = useState<any>({
@@ -514,8 +514,8 @@ const CallsPage = () => {
                 currTab == 0
                   ? "Pending"
                   : currTab == 1
-                    ? "In-progess"
-                    : "Completed",
+                  ? "In-progess"
+                  : "Completed",
               id: item?._id,
             }, // call review status
           ];
@@ -571,8 +571,8 @@ const CallsPage = () => {
                 currTab == 0
                   ? "Pending"
                   : currTab == 1
-                    ? "In-progess"
-                    : "Completed",
+                  ? "In-progess"
+                  : "Completed",
               id: item?._id,
             },
           ];
@@ -613,7 +613,7 @@ const CallsPage = () => {
         const pages = Math.ceil(res?.data?.totalRecords / limit);
         setTotalPages(pages);
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   };
 
   const [reload, setReload] = useState(false);
@@ -632,7 +632,7 @@ const CallsPage = () => {
       .then((res: any) => {
         setQaList(res?.data?.result);
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   }, []);
 
   const handleTabNavigation = (payload: any) => {
@@ -649,16 +649,28 @@ const CallsPage = () => {
     if (search) {
       query += `search=${search}&`;
     }
-    if (filters?.productService?.value && filters?.productService?.value !== "") {
+    if (
+      filters?.productService?.value &&
+      filters?.productService?.value !== ""
+    ) {
       query += `product_service=${filters?.productService?.value}&`;
     }
-    if (filters?.callStartAndEndDate?.value && (filters?.callStartAndEndDate?.value[0] !== "" || filters?.callStartAndEndDate?.value[1] !== "")) {
-      query += `call_start_and_end_date=${JSON.stringify(filters?.callStartAndEndDate?.value)}&`;
+    if (
+      filters?.callStartAndEndDate?.value &&
+      (filters?.callStartAndEndDate?.value[0] !== "" ||
+        filters?.callStartAndEndDate?.value[1] !== "")
+    ) {
+      query += `call_start_and_end_date=${JSON.stringify(
+        filters?.callStartAndEndDate?.value
+      )}&`;
     }
     if (filters?.callType?.value && filters?.callType?.value !== "") {
       query += `call_type=${filters?.callType?.value}&`;
     }
-    if (filters?.callDisposition?.value && filters?.callDisposition?.value !== "") {
+    if (
+      filters?.callDisposition?.value &&
+      filters?.callDisposition?.value !== ""
+    ) {
       query += `call_disposition=${filters?.callDisposition?.value}&`;
     }
     return query;
@@ -668,12 +680,12 @@ const CallsPage = () => {
     for (const filterKey of Object.keys(filters)) {
       const newFilter = {
         ...filters[filterKey],
-        value: typeof filters[filterKey].value === 'object' ? ["", ""] : "",
+        value: typeof filters[filterKey].value === "object" ? ["", ""] : "",
       };
       setFilters((currFIlters: any) => {
         return {
           ...currFIlters,
-          [filterKey]: newFilter
+          [filterKey]: newFilter,
         };
       });
     }
@@ -684,12 +696,17 @@ const CallsPage = () => {
       if (filters[filterKey].label === filter.label) {
         const newFilter = {
           ...filters[filterKey],
-          value: idx === -1 ? val : idx === 0 ? [val, filters[filterKey].value[1]] : [filters[filterKey].value[0], val],
+          value:
+            idx === -1
+              ? val
+              : idx === 0
+              ? [val, filters[filterKey].value[1]]
+              : [filters[filterKey].value[0], val],
         };
         setFilters((currFIlters: any) => {
           return {
             ...currFIlters,
-            [filterKey]: newFilter
+            [filterKey]: newFilter,
           };
         });
       }
@@ -711,7 +728,7 @@ const CallsPage = () => {
   };
 
   const exportPDF = () => {
-    console.log('------ export pdf ------', data);
+    console.log("------ export pdf ------", data);
     const documentDefinition = {
       content: [
         {
@@ -839,7 +856,7 @@ const CallsPage = () => {
             );
           });
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const handlePageChange = (payload: any) => {
@@ -876,12 +893,29 @@ const CallsPage = () => {
         <ul className="">
           {searchAssignTo
             ? qaList
-              ?.filter((qaItem: any, index: number) => {
-                return qaItem?.name
-                  ?.toLowerCase()
-                  .includes(searchAssignTo.toLowerCase());
-              })
-              .map((qaItem: any, index: number) => (
+                ?.filter((qaItem: any, index: number) => {
+                  return qaItem?.name
+                    ?.toLowerCase()
+                    .includes(searchAssignTo.toLowerCase());
+                })
+                .map((qaItem: any, index: number) => (
+                  <li key={index}>
+                    <label
+                      htmlFor={qaItem?._id}
+                      className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
+                    >
+                      <span>{qaItem?.name}</span>
+                      <input
+                        type="checkbox"
+                        id={qaItem?._id}
+                        onChange={(e) =>
+                          handleAssignTo(e.target.checked, qaItem?._id)
+                        }
+                      />
+                    </label>
+                  </li>
+                ))
+            : qaList?.map((qaItem: any, index: number) => (
                 <li key={index}>
                   <label
                     htmlFor={qaItem?._id}
@@ -897,24 +931,7 @@ const CallsPage = () => {
                     />
                   </label>
                 </li>
-              ))
-            : qaList?.map((qaItem: any, index: number) => (
-              <li key={index}>
-                <label
-                  htmlFor={qaItem?._id}
-                  className="w-[100%] flex items-center justify-between text-black p-[4px] cursor-pointer"
-                >
-                  <span>{qaItem?.name}</span>
-                  <input
-                    type="checkbox"
-                    id={qaItem?._id}
-                    onChange={(e) =>
-                      handleAssignTo(e.target.checked, qaItem?._id)
-                    }
-                  />
-                </label>
-              </li>
-            ))}
+              ))}
         </ul>
       </div>
     );
@@ -1030,19 +1047,21 @@ const CallsPage = () => {
       <div className="flex text-black mt-6 px-8 pr-20 items-center gap-[20px]">
         <div className="w-[350px] px-2 bg-gray-200 rounded-3xl">
           <button
-            className={`w-[140px] ${subType == "allocated_call_reviews"
-              ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-              : "font-medium text-sm"
-              } `}
+            className={`w-[140px] text-sm font-medium ${
+              subType == "allocated_call_reviews"
+                ? "focus:outline-none bg-[#fff] rounded-3xl px-6 py-2 mt-2 mb-2"
+                : "text-gray-400"
+            } `}
             onClick={() => handleSubType("allocated_call_reviews")}
           >
             Allocated Call Reviews
           </button>
           <button
-            className={`w-[190px] ${subType == "feedback_requested_call_reviews"
-              ? "focus:outline-none bg-[#fff] font-medium rounded-3xl text-sm px-6 py-2 mt-2 mb-2"
-              : "font-medium text-sm"
-              } `}
+            className={`w-[190px] text-sm font-medium ${
+              subType == "feedback_requested_call_reviews"
+                ? "focus:outline-none bg-[#fff] rounded-3xl px-6 py-2 mt-2 mb-2"
+                : " text-gray-400"
+            } `}
             onClick={() => handleSubType("feedback_requested_call_reviews")}
           >
             Feedback Requested Call Reviews
@@ -1051,6 +1070,7 @@ const CallsPage = () => {
       </div>
     );
   };
+
   return (
     <>
       <Navbar
@@ -1074,7 +1094,7 @@ const CallsPage = () => {
           {tabs?.[currTab]?.title} {" > "}
           {subType === "allocated_call_reviews"
             ? "Calls To Be Allocated"
-            : "Calls To Be Feedback Requested"}
+            : "Feedback Requested Calls For Review"}
         </h2>
       </div>
       {reload ? (
