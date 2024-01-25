@@ -37,18 +37,18 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.result?._id}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.result?._id}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       )
       .then((e) => {
         setData(e.data);
         refresh(e.data?.result?.customerId?.name);
       })
-      .catch((e) => {
-      });
+      .catch((e) => {});
   };
   const contacted: any = data?.result?.customerId;
   const contacts = contacted?.contacts ? contacted?.contacts : [];
@@ -108,8 +108,8 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
         <p className="border-b-2 border-red-400 w-3/4 pb-2 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Info
         </p>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Gender</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">Gender</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.customerId?.customer_gender}
           </p>
