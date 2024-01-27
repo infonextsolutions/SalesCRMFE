@@ -228,39 +228,40 @@ const Deals = ({ data, type }: any) => {
         list={[{ id: 0, title: "Deals" }]}
       />
 
-      <div className="w-[700px] ">
+      <div className="w-full ">
         <div className=" my-[40px] overflow-hidden">
           <h5 className="text-[#3F434A] px-[30px] text-[20px] leading-[30px] font-bold">
             Open Deals
           </h5>
           {/* <p className="text-center text-[#000]">-</p> */}
-          <div className="mt-[20px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center">
-            <p className="w-[140px]">Lead Id</p>
-            <p className="w-[180px]">Product/Service</p>
-            <p className="w-[160px]">Lead Stage</p>
-            <p className="w-[200px]">Last Activity</p>
-            <p className="w-[200px]">Activity History</p>
+          <div className="mt-[20px] pl-[35px] pr-[43px] flex text-[#8A9099] text-[14px] leading-[21px] items-center justify-between mx-2">
+            <p className="">Lead Id</p>
+            <p className="">Product/Service</p>
+            <p className="">Lead Stage</p>
+            <p className="">Last Activity</p>
+            <p className="">Activity History</p>
           </div>
           <div
-            className={openDeals?.length >= 4 ? "h-52 overflow-y-scroll" : ""}
+            className={
+              openDeals?.length >= 4
+                ? "h-52 overflow-y-scroll pl-4 w-full"
+                : "pl-20"
+            }
           >
             {openDeals &&
               openDeals.map((deal: any, index: number) => (
-                <div
-                  key={index}
-                  className="mt-[10px] mx-[13px] flex flex-col gap-y-2.5"
-                >
-                  <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex items-center bg-[#ffffff] rounded-xl">
-                    <div className="w-[140px]">
+                <div key={index} className="mt-[10px] mx-[13px] ">
+                  <div className="text-[14px] pl-[20px] py-[5px] text-[#8A9099] leading-[21px] flex justify-between items-center bg-[#ffffff] rounded-xl">
+                    <div className="">
                       <p className="text-[#3F434A]">{deal?.leadId || "-"}</p>
                     </div>
-                    <div className="w-[180px]">
+                    <div className="">
                       <p>{deal?.product_category}</p>
                     </div>
-                    <div className="w-[160px]">
+                    <div className="">
                       <p>{deal?.leadStage ? deal?.leadStage : "-"}</p>
                     </div>
-                    <div className="w-[200px]">
+                    <div className="">
                       <p>
                         {deal?.lastActivity?.subject
                           ? deal?.leadData?.subject
@@ -272,9 +273,9 @@ const Deals = ({ data, type }: any) => {
                           : "-"}
                       </p>
                     </div>
-                    <div className="w-[200px] flex items-start gap-[5px] text-[#3F434A]">
+                    <div className=" flex items-start gap-[5px] text-[#3F434A]">
                       <QuickActions
-                        width={200}
+                        width={""}
                         notes={() => {
                           AddLead(1, 0);
                         }}
