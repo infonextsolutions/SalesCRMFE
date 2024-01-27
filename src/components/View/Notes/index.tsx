@@ -5,6 +5,8 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
+import { MdOutlineCancel } from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
 const AddText = ({ top, title, width, textarea, change }: any) => {
   return (
     <div
@@ -132,8 +134,8 @@ const Notes = ({ cancel, leadid, update }: any) => {
         {/* <div className="absolute w-[24%] border-[#ccc] flex mt-5  border-[1px] rounded-2xl h-34px] ">
           <DatePage/>
         </div> */}
-        <div className="absolute right-[160px] bottom-[20px] mt-[130px] ">
-          <SimpleButton
+        <div className="absolute top-5 right-10">
+          {/* <SimpleButton
             theme={2}
             text={"Cancel"}
             left={20}
@@ -141,7 +143,17 @@ const Notes = ({ cancel, leadid, update }: any) => {
             click={() => {
               cancel();
             }}
-          />
+          /> */}
+          <button
+            onClick={() => {
+              cancel();
+            }}
+          >
+            <RxCross2
+              color="#ef4444"
+              className="w-8 h-8 hover:w-9 hover:h-9 delay-75"
+            />
+          </button>
         </div>
         <div className="absolute right-[40px] bottom-[20px] mt-[130px] ">
           <SimpleButton

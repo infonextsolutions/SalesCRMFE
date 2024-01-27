@@ -295,12 +295,12 @@ const ProfilePage = ({ data1, updated, mastersData }: any) => {
             {data?.manager?.name ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
+        {/* <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[120px]">Lead Created by</p>
           <p className="text-sm font-semibold text-black">
             {data?.created_by ?? "-"}
           </p>
-        </div>
+        </div> */}
         <div className="text-[#8A9099] flex gap-4 mt-[7px] leading-[21px]">
           <p className="text-sm font-medium w-[120px]">Lead Updated on</p>
           <p className="text-sm font-semibold text-black">

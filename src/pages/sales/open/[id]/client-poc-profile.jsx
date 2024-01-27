@@ -19,15 +19,16 @@ const ClientProfile = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      `https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setData(res.data);
-    }).catch((e) => { });
+    axios
+      .get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   function CallBack(childData) {
@@ -68,7 +69,7 @@ const ClientProfile = () => {
           }
         /> */}
         <div className="w-[100%] pl-4 flex gap-[25px] mb-[100px] mt-6">
-          <div className="w-[32%] min-h-[70vh] bg-[#ffe3e170] rounded-xl p-[20px]">
+          <div className="w-[30%] min-h-[70vh] bg-[#ffe3e170] rounded-xl p-[20px]">
             <ProfilePage
               refresh={(e) => {
                 setTitle(e);
