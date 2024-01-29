@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
+import { baseUrl } from "@/utils/baseUrl";
 
 const example = {
   _id: "6457d6b590467877fd40291c",
@@ -88,7 +89,11 @@ const example = {
   updatedAt: "2023-04-03T00:00:00.000Z",
 };
 
-const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) => {
+const CallBox = ({
+  width,
+  bool,
+  handleCheck = (checked: boolean) => {},
+}: any) => {
   const [check, setCheck] = useState(false);
   React.useEffect(() => {
     if (check) {
@@ -106,7 +111,12 @@ const CallBox = ({ width, bool, handleCheck = (checked: boolean) => { } }: any) 
       className={`flex items-center justify-center h-[20px] shrink-0 `}
       style={{ width: width, flexShrink: "unset" }}
     >
-      <input type="checkbox" ref={ref} className="checkbox" onChange={(e: any) => handleCheck(e.target.checked)} />
+      <input
+        type="checkbox"
+        ref={ref}
+        className="checkbox"
+        onChange={(e: any) => handleCheck(e.target.checked)}
+      />
     </div>
   );
 };
@@ -216,8 +226,9 @@ const CallItemMultiple = ({
       }}
     >
       <p
-        className={`text-[12px] tracking-wide font-medium ${bold ? "text-[#3F434A]" : "text-[#8A9099]"
-          }`}
+        className={`text-[12px] tracking-wide font-medium ${
+          bold ? "text-[#3F434A]" : "text-[#8A9099]"
+        }`}
         style={{
           textAlign: align && "center",
         }}
@@ -449,8 +460,9 @@ const ParticipantsHover = ({
         return (
           <p
             key={i}
-            className={`${i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
-              } text-[13px] ml-[2px]  w-[100%] font-medium`}
+            className={`${
+              i === 0 ? "text-[#000] mt-[19px]" : "text-bg-red"
+            } text-[13px] ml-[2px]  w-[100%] font-medium`}
           >
             {item.name} {"("}
             {item.designation}
@@ -494,22 +506,18 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const GetLeadData = () => {
     if (CallData.leadId.length > 0) {
       axios
-        .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData?.leadId}`, {
+        .get(`${baseUrl}api/leads/find-by-id?id=${CallData?.leadId}`, {
           headers: {
-            Authorization: accessToken
-          }
-        }
-        )
+            Authorization: accessToken,
+          },
+        })
         .then((e: any) => {
           setChecked(false);
           setLeadData(e.data.result);
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
     }
   };
-
 
   React.useEffect(() => {
     if (checked) {
@@ -536,14 +544,14 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
 
   function calculateTimeDifference(startTime: any, endTime: any) {
     if (startTime && endTime) {
-      const [h1, m1] = startTime.split(':');
-      const [h2, m2] = endTime.split(':');
+      const [h1, m1] = startTime.split(":");
+      const [h2, m2] = endTime.split(":");
       let diff = (h2 - h1) * 60 + (m2 - m1);
       if (diff < 0) diff += 24 * 60;
       const hours = Math.floor(diff / 60);
       const minutes = diff - hours * 60;
-      const hh = hours.toString().padStart(2, '0');
-      const mm = minutes.toString().padStart(2, '0');
+      const hh = hours.toString().padStart(2, "0");
+      const mm = minutes.toString().padStart(2, "0");
       return `${hh !== "00" ? `${hh}hr` : ""}${mm ? ` ${mm}min` : ""}`;
     } else {
       return "-";
@@ -590,8 +598,9 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     const twelveHourFormat = parsedHours % 12 || 12; // Convert 0 to 12 for midnight
 
     // Construct the formatted time string
-    const formattedTime = `${twelveHourFormat}${minutes != undefined ? ":" : ""}${minutes != undefined ? minutes : ""
-      } ${period}`;
+    const formattedTime = `${twelveHourFormat}${
+      minutes != undefined ? ":" : ""
+    }${minutes != undefined ? minutes : ""} ${period}`;
 
     return formattedTime;
   };
@@ -602,10 +611,19 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
     <>
       <div className="flex">
         <div
-          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] over:bg-white ${(selectAll || selected || detailShow) && "bg-white"}`}
+          className={`pl-[10px] h-[50px] flex items-center grow border-[#ccc] border-b-[1px] over:bg-white ${
+            (selectAll || selected || detailShow) && "bg-white"
+          }`}
           ref={wRef}
         >
-          <CallBox width={30} bool={selectAll || selected} handleCheck={(checked: any) => { setSelected(checked); console.log('CHECKED', checked) }} />
+          <CallBox
+            width={30}
+            bool={selectAll || selected}
+            handleCheck={(checked: any) => {
+              setSelected(checked);
+              console.log("CHECKED", checked);
+            }}
+          />
           <ExpandingIcon
             change={(e: any) => {
               setDetailShow(e);
@@ -635,8 +653,7 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             left={10}
             text={CallData?.leadId?.leadId || "-"}
             click={true}
-            route={`/sales/open/${CallData?.leadId?._id
-              }/lead-profile`}
+            route={`/sales/open/${CallData?.leadId?._id}/lead-profile`}
             color={"#000"}
           />
           <CallItem
@@ -662,7 +679,8 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
             text={CallData?.leadId?.product_category ?? "-"}
           />
           <CallItemMultiple
-            width={200} left={20}
+            width={200}
+            left={20}
             upperText={CallData?.participants?.customer_name}
             bottomText={CallData?.participants?.customer_designation}
           />
@@ -677,7 +695,10 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
           <CallItem
             width={120}
             left={10}
-            text={calculateTimeDifference(CallData?.datetime?.fromTime, CallData?.datetime?.toTime)}
+            text={calculateTimeDifference(
+              CallData?.datetime?.fromTime,
+              CallData?.datetime?.toTime
+            )}
           />
           <CallItem width={160} left={20} text={CallData?.location} />
           <CallItem width={120} left={10} text={"-"} />

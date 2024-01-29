@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
+import { baseUrl } from "@/utils/baseUrl";
 
-const Performence = React.lazy(() => import("@/views/team/Team-performence/deals"));
+const Performence = React.lazy(() =>
+  import("@/views/team/Team-performence/deals")
+);
 
 export default function Open() {
   const [data, setData] = useState({});
@@ -29,15 +32,16 @@ export default function Open() {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      "https://sales365.trainright.fit/api/leads/find-all", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setData(res.data);
-    }).catch((e) => { });
+    axios
+      .get(`${baseUrl}api/leads/find-all`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   React.useEffect(() => {

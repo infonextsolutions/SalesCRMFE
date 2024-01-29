@@ -1,4 +1,5 @@
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -50,7 +51,7 @@ const Transcript = ({
   text: any;
   utterances: any;
 }) => {
-  //   url = https://sales365.trainright.fit/api/audio-transcript/create/by-audio-url
+  // url = `${baseUrl}api/audio-transcript/create/by-audio-url`
   // method = post
   // body = {
   //     "audio_url":"",
@@ -88,7 +89,7 @@ const Transcript = ({
 
   // const transcriptUpdate = async () => {
   //   const res = await axios.post(
-  //     "https://sales365.trainright.fit/api/audio-transcript/create/by-audio-url",
+  //     `${baseUrl}api/audio-transcript/create/by-audio-url`,
   //     {
   //       audio_url: src,
   //       leadId: data.leadId._id,

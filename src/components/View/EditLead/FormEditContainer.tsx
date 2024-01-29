@@ -7,6 +7,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import Image from "next/image";
 import { setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
+import { baseUrl } from "@/utils/baseUrl";
 
 const FormEditContainer = ({
   titles,
@@ -39,8 +40,9 @@ const FormEditContainer = ({
 
   return (
     <div
-      className={`w-[${width ? width : "100%"
-        }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
+      className={`w-[${
+        width ? width : "100%"
+      }] bg-white rounded-xl overflow-auto p-[10px] px-[30px] pt-[8px] `}
     >
       {/* <Navigator callback={CallBack} current={current} list={list} /> */}
       <h1 className="w-[100%] text-[#3F434A] text-center pt-[10px] font-medium text-3xl">
@@ -87,8 +89,9 @@ const FormEditContainer = ({
                       };
                       update();
                       const response = await axios.put(
-                        "https://sales365.trainright.fit/api/leads/update",
-                        val, { headers: { Authorization: accessToken } }
+                        `${baseUrl}api/leads/update`,
+                        val,
+                        { headers: { Authorization: accessToken } }
                       );
                       dispatch(
                         setSuccess({
@@ -285,7 +288,7 @@ const FormEditContainer = ({
                                 -- Select Lead Stage --
                               </option>
                               {data?.leadStatus === "open" ||
-                                data?.leadStatus === "Open" ? (
+                              data?.leadStatus === "Open" ? (
                                 <>
                                   <option value="Enquiry">Enquiry</option>
                                   <option value="Interaction">
@@ -381,8 +384,9 @@ const FormEditContainer = ({
                         },
                       };
                       const response = await axios.put(
-                        "https://sales365.trainright.fit/api/leads/update",
-                        val, { headers: { Authorization: accessToken } }
+                        `${baseUrl}api/leads/update`,
+                        val,
+                        { headers: { Authorization: accessToken } }
                       );
                       dispatch(
                         setSuccess({
@@ -720,8 +724,9 @@ const FormEditContainer = ({
                         };
                       }
                       const response = await axios.put(
-                        "https://sales365.trainright.fit/api/leads/update",
-                        val, { headers: { Authorization: accessToken } }
+                        `${baseUrl}api/leads/update`,
+                        val,
+                        { headers: { Authorization: accessToken } }
                       );
                       dispatch(
                         setSuccess({

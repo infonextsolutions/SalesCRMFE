@@ -13,6 +13,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
+import { baseUrl } from "@/utils/baseUrl";
 const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
@@ -31,7 +32,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${0}&leadStatus=Close&${queryStr}`,
+          `${baseUrl}api/leads/find-all?limit=${limit}&page=${0}&leadStatus=Close&${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -52,7 +53,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const getallItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Close${queryStr}`,
+        `${baseUrl}api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Close${queryStr}`,
         {
           headers: {
             Authorization: accessToken,
@@ -74,7 +75,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`,
+          `${baseUrl}api/leads/find-all?leadStatus=Close&${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -113,7 +114,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}?leadStatus=Close&${queryStr}`,
+        `${baseUrl}api/leads/find-all?limit=${limit}&page=${current}?leadStatus=Close&${queryStr}`,
         {
           headers: {
             Authorization: accessToken,

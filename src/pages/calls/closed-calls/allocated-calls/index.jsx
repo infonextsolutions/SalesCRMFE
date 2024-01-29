@@ -12,6 +12,7 @@ import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx";
 import Backdrop from "@/components/View/Backdrop";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import { baseUrl } from "@/utils/baseUrl";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -284,7 +285,10 @@ const AllocatedCallsCC = ({ data }) => {
     },
     onTimeReview: {
       label: "On Time Review",
-      options: [{ key: "No", label: "No" }, { key: "Yes", label: "Yes" }],
+      options: [
+        { key: "No", label: "No" },
+        { key: "Yes", label: "Yes" },
+      ],
       value: "",
     },
     delayTime: {
@@ -486,19 +490,37 @@ const AllocatedCallsCC = ({ data }) => {
     if (search) {
       query += `search=${search}&`;
     }
-    if (filters?.productService?.value && filters?.productService?.value !== "") {
+    if (
+      filters?.productService?.value &&
+      filters?.productService?.value !== ""
+    ) {
       query += `product_service=${filters?.productService?.value}&`;
     }
-    if (filters?.feedbackRequestedOn?.value && (filters?.feedbackRequestedOn?.value[0] !== "" || filters?.feedbackRequestedOn?.value[1] !== "")) {
-      query += `feedback_requested_on=${JSON.stringify(filters?.feedbackRequestedOn?.value)}&`;
+    if (
+      filters?.feedbackRequestedOn?.value &&
+      (filters?.feedbackRequestedOn?.value[0] !== "" ||
+        filters?.feedbackRequestedOn?.value[1] !== "")
+    ) {
+      query += `feedback_requested_on=${JSON.stringify(
+        filters?.feedbackRequestedOn?.value
+      )}&`;
     }
-    if (filters?.reviewDueDate?.value && (filters?.reviewDueDate?.value[0] !== "" || filters?.reviewDueDate?.value[1] !== "")) {
-      query += `review_due_date=${JSON.stringify(filters?.reviewDueDate?.value)}&`;
+    if (
+      filters?.reviewDueDate?.value &&
+      (filters?.reviewDueDate?.value[0] !== "" ||
+        filters?.reviewDueDate?.value[1] !== "")
+    ) {
+      query += `review_due_date=${JSON.stringify(
+        filters?.reviewDueDate?.value
+      )}&`;
     }
     if (filters?.callType?.value && filters?.callType?.value !== "") {
       query += `call_type=${filters?.callType?.value}&`;
     }
-    if (filters?.callDisposition?.value && filters?.callDisposition?.value !== "") {
+    if (
+      filters?.callDisposition?.value &&
+      filters?.callDisposition?.value !== ""
+    ) {
       query += `call_disposition=${filters?.callDisposition?.value}&`;
     }
     if (filters?.callDuration?.value && filters?.callDuration?.value !== "") {
@@ -523,7 +545,7 @@ const AllocatedCallsCC = ({ data }) => {
         const userId = localStorage.getItem("user-id");
         axios
           .get(
-            `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=closed&qaId=${userId}&page=${page}&limit=${limit}&${newQuery}`,
+            `${baseUrl}api/qa/callForReview?qaStatus=closed&qaId=${userId}&page=${page}&limit=${limit}&${newQuery}`,
             { headers: { Authorization: accessToken } }
           )
           .then((res) => {
@@ -580,7 +602,11 @@ const AllocatedCallsCC = ({ data }) => {
                     text: formatDateToCustomFormat(item?.qaAllocatedAt) || "-",
                   }, // allocated on
                   { text: item?.callId || "NA" }, // review due date
-                  { text: formatDateToCustomFormat(item?.leadId?.[0]?.updatedAt) || "-" }, // last updated on
+                  {
+                    text:
+                      formatDateToCustomFormat(item?.leadId?.[0]?.updatedAt) ||
+                      "-",
+                  }, // last updated on
                   { text: "NA" },
                   { text: "NA" },
                   { text: "NA" },
@@ -589,9 +615,9 @@ const AllocatedCallsCC = ({ data }) => {
               })
             );
           })
-          .catch((err) => { });
+          .catch((err) => {});
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -619,16 +645,20 @@ const AllocatedCallsCC = ({ data }) => {
       if (filters[filterKey].label === filter.label) {
         const newFilter = {
           ...filters[filterKey],
-          value: idx === -1 ? val : idx === 0 ? [val, filters[filterKey].value[1]] : [filters[filterKey].value[0], val],
+          value:
+            idx === -1
+              ? val
+              : idx === 0
+              ? [val, filters[filterKey].value[1]]
+              : [filters[filterKey].value[0], val],
         };
         setFilters((currFIlters) => {
           return {
             ...currFIlters,
-            [filterKey]: newFilter
+            [filterKey]: newFilter,
           };
         });
       }
-
     }
   };
 

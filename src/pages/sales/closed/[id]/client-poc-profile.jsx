@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "@/components/app/Navbar/Navbar";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 
 const ClientProfile = () => {
   const [activeTitle, setActiveTitle] = useState(0);
@@ -22,14 +23,14 @@ const ClientProfile = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      `https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
-      headers: { Authorization: accessToken }
-    }
-    )
+    axios
+      .get(`${baseUrl}api/leads/find-by-id?id=${id}`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setData(res.data);
-      }).catch((e) => { });
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   function CallBack(childData) {

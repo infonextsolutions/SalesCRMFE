@@ -14,6 +14,7 @@ import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Profile = () => {
   const [data, setData1] = useState({});
@@ -31,7 +32,7 @@ const Profile = () => {
 
   useEffect(() => {
     axios
-      .get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
+      .get(`${baseUrl}api/leads/find-by-id?id=${id}`, {
         headers: {
           Authorization: accessToken,
         },
@@ -42,7 +43,7 @@ const Profile = () => {
       })
       .catch((e) => {});
     axios
-      .get("https://sales365.trainright.fit/api/master-users/find-all", {
+      .get(`${baseUrl}api/master-users/find-all`, {
         headers: { Authorization: accessToken },
       })
       .then((res) => {
@@ -53,12 +54,9 @@ const Profile = () => {
 
   const UpdateData = async () => {
     const response = await axios
-      .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data.result._id}`,
-        {
-          headers: { Authorization: accessToken },
-        }
-      )
+      .get(`${baseUrl}api/leads/find-by-id?id=${data.result._id}`, {
+        headers: { Authorization: accessToken },
+      })
       .then((e) => {
         setData(e.data);
       })

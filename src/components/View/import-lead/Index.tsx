@@ -2,6 +2,7 @@ import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -205,11 +206,9 @@ const Step1 = ({ next, cancel }: any) => {
       const formdata = new FormData();
       formdata.append("file", e[0]);
       axios
-        .post(
-          "https://sales365.trainright.fit/api/leads/upload/afakfabk",
-          formdata,
-          { headers: { Authorization: accessToken } }
-        )
+        .post(`${baseUrl}api/leads/upload/afakfabk`, formdata, {
+          headers: { Authorization: accessToken },
+        })
         .then((e) => {
           dispatch(
             setSuccess({

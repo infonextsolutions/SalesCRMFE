@@ -1,5 +1,6 @@
 import { setError, setSuccess } from "@/store/ai";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -447,13 +448,13 @@ const Questionnaire = ({ data, data1 }: any) => {
     data?.questionnaire
       ? data?.questionnaire
       : [
-        {
-          question: "",
-          answerType: "",
-          answer: "",
-          option: [{ title: "", selected: false }],
-        },
-      ]
+          {
+            question: "",
+            answerType: "",
+            answer: "",
+            option: [{ title: "", selected: false }],
+          },
+        ]
   );
 
   const [title, setTitle] = useState("");
@@ -540,28 +541,27 @@ const Questionnaire = ({ data, data1 }: any) => {
     if (!flag) {
       axios
         .post(
-          "https://sales365.trainright.fit/api/v2/active-call/questionnaire",
+          `${baseUrl}api/v2/active-call/questionnaire`,
           {
             id: data._id,
             questionnaire: questionList,
             title: title,
-          }, {
-          headers: {
-            Authorization: accessToken
+          },
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
         )
         .then((e) => {
           setFinalQuestionList([...e.data.questionnaire.questionnaire]);
           setTimeout(() => {
             axios
-              .get(
-                `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data._id}`, {
+              .get(`${baseUrl}api/active-call/find-by-id?id=${data._id}`, {
                 headers: {
-                  Authorization: accessToken
-                }
-              }
-              )
+                  Authorization: accessToken,
+                },
+              })
               .then((ev: any) => {
                 setFinalQuestionList([...ev?.data?.result?.questionnaire]);
                 dispatch(

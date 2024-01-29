@@ -14,6 +14,7 @@ import Notes1 from "@/components/View/NotesSalesView";
 import PromptEdit from "@/components/View/PromptEdit";
 import { useRouter } from "next/router";
 import { BsKanban } from "react-icons/bs";
+import { baseUrl } from "@/utils/baseUrl";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -157,7 +158,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
   const makecall = async () => {
     try {
       const res = await axios.post(
-        "https://sales365.trainright.fit/api/calling/make-call",
+        `${baseUrl}api/calling/make-call`,
         {
           callTo: "7669481778",
         },

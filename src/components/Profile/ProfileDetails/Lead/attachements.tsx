@@ -7,6 +7,7 @@ import Uploads from "./uploads";
 import axios from "axios";
 import { useAppDispatch } from "@/store/store";
 import { setSuccess } from "@/store/ai";
+import { baseUrl } from "@/utils/baseUrl";
 
 const ScriptDoc = ({
   title,
@@ -69,7 +70,7 @@ const ScriptDoc = ({
               alt=""
               onClick={(e) => {
                 // axios
-                //   .delete(`https://sales365.trainright.fit/api/call-script/delete-by-id?id=${id}`)
+                // .delete(`${baseUrl}api/call-script/delete-by-id?id=${id}`)
                 //   .then((e) => {
                 //     refresh();
                 //   })
@@ -194,8 +195,9 @@ const Attachements = ({ data }: any) => {
     const minutes = istTime.getUTCMinutes();
 
     // Format the time part (hours and minutes) in 12-hour clock format with AM/PM indicator
-    let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"
-      }`;
+    let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${
+      hours >= 12 ? "PM" : "AM"
+    }`;
 
     // Format the date and time as desired
     return `${day} ${month} ${year}, ${timeStr}`;
@@ -213,33 +215,27 @@ const Attachements = ({ data }: any) => {
   const UpdateData = async () => {
     setTimeout(async () => {
       const response = await axios
-        .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`, {
+        .get(`${baseUrl}api/leads/find-by-id?id=${data?._id}`, {
           headers: {
-            Authorization: accessToken
-          }
-        }
-        )
+            Authorization: accessToken,
+          },
+        })
         .then((e) => {
           setAttachments(e.data.result.attachments);
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
     }, 1000);
   };
   const UpdateData2 = async () => {
     setTimeout(async () => {
       const response = await axios
-        .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`, {
-          headers: { Authorization: accessToken }
-        }
-        )
+        .get(`${baseUrl}api/leads/find-by-id?id=${data?._id}`, {
+          headers: { Authorization: accessToken },
+        })
         .then((e) => {
           setAttachments(e.data.result.attachments);
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
     }, 2000);
   };
   const dispatch = useAppDispatch();
@@ -305,7 +301,9 @@ const Attachements = ({ data }: any) => {
                   _id: data._id,
                 };
                 axios
-                  .put("https://sales365.trainright.fit/api/leads/update", val, { headers: { Authorization: accessToken } })
+                  .put(`${baseUrl}api/leads/update`, val, {
+                    headers: { Authorization: accessToken },
+                  })
                   .then((e) => {
                     UpdateData2();
                     dispatch(
@@ -315,7 +313,7 @@ const Attachements = ({ data }: any) => {
                       })
                     );
                   })
-                  .catch((e) => { });
+                  .catch((e) => {});
               }}
               refresh={() => {
                 UpdateData();

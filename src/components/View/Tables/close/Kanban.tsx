@@ -5,6 +5,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import KanbanItem from "./KanbanItems";
+import { baseUrl } from "@/utils/baseUrl";
 
 const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
   const [items, setItems]: any = useState([]);
@@ -17,22 +18,26 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
     }
   }, []);
 
-  useEffect(function () {
-    axios.get(
-      `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`, {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then(res => {
-      setItems(res?.data?.result);
-      // settotalLeads(res?.data?.totalRecords)
-    }).catch((e: any) => { });
-  }, [queryStr, accessToken]);
+  useEffect(
+    function () {
+      axios
+        .get(`${baseUrl}api/leads/find-all?leadStatus=Close&${queryStr}`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((res) => {
+          setItems(res?.data?.result);
+          // settotalLeads(res?.data?.totalRecords)
+        })
+        .catch((e: any) => {});
+    },
+    [queryStr, accessToken]
+  );
 
   //   const getallItems = async (current: any) => {
   //     const res = await axios.get(
-  //       `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+  //       `${baseUrl}api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
   //     );
   //     const data = res.data.result;
   //     return data;
@@ -43,11 +48,12 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
       setLoading(true);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close&${queryStr}`, {
-          headers: {
-            Authorization: accessToken
+          `${baseUrl}api/leads/find-all?leadStatus=Close&${queryStr}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
         );
         const data = res?.data?.result;
         const filtered = data.filter(
@@ -66,10 +72,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
 
       getItems();
       setLoading(false);
-
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }, [search, accessToken, queryStr]);
 
   const Leads = items;
@@ -78,8 +81,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
   const stages = ["Won", "Lost", "Dead"];
   const titles = ["WON", "LOST", "DEAD"];
   useEffect(() => {
-    items.map((e: any, i: any) => {
-    });
+    items.map((e: any, i: any) => {});
   }, [items]);
   return (
     <>

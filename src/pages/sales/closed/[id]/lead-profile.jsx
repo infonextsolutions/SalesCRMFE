@@ -13,6 +13,7 @@ import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 import Navbar from "@/components/app/Navbar/Navbar";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Profile = () => {
   const [data, setData1] = useState({});
@@ -28,28 +29,26 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      `https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
-      headers: { Authorization: accessToken }
-    }
-    )
+    axios
+      .get(`${baseUrl}api/leads/find-by-id?id=${id}`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setData1(res.data);
         setData(res.data);
-      }).catch((e) => { });
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   const UpdateData = async () => {
     const response = await axios
-      .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?.result?._id}`, {
-        headers: { Authorization: accessToken }
-      }
-      )
+      .get(`${baseUrl}api/leads/find-by-id?id=${data?.result?._id}`, {
+        headers: { Authorization: accessToken },
+      })
       .then((e) => {
         setData(e.data);
       })
-      .catch(() => { });
+      .catch(() => {});
   };
   const titles = ["DEAL INFO", "ACTIVITY HISTORY", "ATTACHMENTS"];
 
@@ -172,7 +171,10 @@ const Profile = () => {
         )}
         {messages && (
           <Backdrop bool={bool} pad={"50px 0"}>
-            <Messages cancel={cancelMessages} companyName={data1?.result?.companyId?.company_name} />
+            <Messages
+              cancel={cancelMessages}
+              companyName={data1?.result?.companyId?.company_name}
+            />
           </Backdrop>
         )}
         {call && (

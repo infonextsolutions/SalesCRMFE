@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Performence = React.lazy(() => import("@/views/team/Team-performence"));
 
@@ -28,15 +29,16 @@ export default function Open() {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      "https://sales365.trainright.fit/api/lead-report/find-all?page=0&limit=10", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setData(res.data);
-    }).catch((e) => { });
+    axios
+      .get(`${baseUrl}api/lead-report/find-all?page=0&limit=10`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   React.useEffect(() => {

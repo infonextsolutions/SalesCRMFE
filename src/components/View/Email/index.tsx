@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useQuill } from "react-quilljs";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
+import { baseUrl } from "@/utils/baseUrl";
 
 const DropItems = ({ title, list, top, setEventType }: any) => {
   return (
@@ -177,22 +178,25 @@ const Toolbar = ({
       </div>
       <div className="border-x-[1px] border-x-[#E8E9EB] flex gap-1 ">
         <button
-          className={`${isBold ? "bg-slate-300" : "bg-transparent"
-            } p-1 rounded-lg w-[38px]  flex`}
+          className={`${
+            isBold ? "bg-slate-300" : "bg-transparent"
+          } p-1 rounded-lg w-[38px]  flex`}
           onClick={() => setIsBold((prev: any) => !prev)}
         >
           <Icon src="/Images/Logo/Bold.svg" />
         </button>
         <button
-          className={`${isItalic ? "bg-slate-300" : "bg-transparent"
-            } p-1 rounded-lg w-[38px]  flex`}
+          className={`${
+            isItalic ? "bg-slate-300" : "bg-transparent"
+          } p-1 rounded-lg w-[38px]  flex`}
           onClick={() => setIsItalic((prev: any) => !prev)}
         >
           <Icon src="/Images/Logo/Italic.svg" />
         </button>
         <button
-          className={`${isUnderline ? "bg-slate-300" : "bg-transparent"
-            } p-1 rounded-lg w-[38px]  flex`}
+          className={`${
+            isUnderline ? "bg-slate-300" : "bg-transparent"
+          } p-1 rounded-lg w-[38px]  flex`}
           onClick={() => setIsUnderline((prev: any) => !prev)}
         >
           {" "}
@@ -236,8 +240,9 @@ const TextBox = ({ content, title, isBold, isItalic, isUnderline }: any) => {
         onChange={(e: any) => {
           content(e.target.value);
         }}
-        className={` ${isBold ? "font-bold" : "font-normal"} ${isItalic ? "italic" : "not-italic"
-          } ${isUnderline ? "underline underline-offset-1" : "underline-offset-0"}
+        className={` ${isBold ? "font-bold" : "font-normal"} ${
+          isItalic ? "italic" : "not-italic"
+        } ${isUnderline ? "underline underline-offset-1" : "underline-offset-0"}
         w-[100%] outline-none text-[14px] text-text-norm h-[110px] py-[10px] px-[18px] bg-[#fff]`}
         placeholder="Type Something"
       ></textarea>
@@ -343,13 +348,7 @@ const SendEmail = ({ receiver, change, title, content, clicked }: any) => {
 
 //condition to check refresh is present or not
 
-const EmailPage = ({
-  cancel,
-  data,
-  refresh,
-  leadIdResult,
-  reload,
-}: any) => {
+const EmailPage = ({ cancel, data, refresh, leadIdResult, reload }: any) => {
   // const [receiver, setReceiver] = useState<any>("");
   const [receiver, setReceiver] = useState<any>("");
   const [title, setTitle] = useState<any>("");
@@ -376,7 +375,7 @@ const EmailPage = ({
       subject: e2,
       content: e3,
     };
-    const url = "https://sales365.trainright.fit/api/send-email";
+    const url = `${baseUrl}api/send-email`;
     const body = {
       email: e1,
       subject: e2,
@@ -428,17 +427,13 @@ const EmailPage = ({
     }
 
     axios
-      .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data?._id}`, {
+      .get(`${baseUrl}api/leads/find-by-id?id=${data?._id}`, {
         headers: {
-          Authorization: accessToken
-        }
-      }
-      )
-      .then((res) => {
+          Authorization: accessToken,
+        },
       })
-      .catch((err) => {
-      });
+      .then((res) => {})
+      .catch((err) => {});
   }, [data, accessToken]);
 
   return (
@@ -477,7 +472,11 @@ const EmailPage = ({
           ...newEmailList,
         ]}
       />
-      <AddText title="Subject" place="" handleChange={(val: any) => setTitle(val)} />
+      <AddText
+        title="Subject"
+        place=""
+        handleChange={(val: any) => setTitle(val)}
+      />
       {/* <DropItems
         title={"Send Email To"}
         top={20}

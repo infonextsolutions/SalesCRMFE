@@ -4,6 +4,7 @@ import ButtonDropDown from "@/utils/Button/Button";
 import Navigator from "@/utils/customNavigator";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Chart = ({ title, percent }: any) => {
   return (
@@ -361,14 +362,11 @@ const Coaching = ({ data, refresh }: any) => {
     try {
       if (checked) {
         axios
-          .get(
-            `https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=${userId}`,
-            {
-              headers: {
-                Authorization: accessToken,
-              },
-            }
-          )
+          .get(`${baseUrl}api/indicator/getIndicatorValues?userId=${userId}`, {
+            headers: {
+              Authorization: accessToken,
+            },
+          })
           .then((e) => {
             setData(e.data);
             setLoading(false);
@@ -393,7 +391,7 @@ const Coaching = ({ data, refresh }: any) => {
     }, 0);
     axios
       .post(
-        `https://sales365.trainright.fit/api/qa/updateCallScore`,
+        `${baseUrl}api/qa/updateCallScore`,
         {
           score: finalScore,
           callId: data?._id,

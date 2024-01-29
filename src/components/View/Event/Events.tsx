@@ -6,6 +6,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
+import { baseUrl } from "@/utils/baseUrl";
 
 const DropItems = ({ title, list, top, setEventType }: any) => {
   return (
@@ -366,8 +367,8 @@ const DateContainer = ({
           setEventFromDate={setEventFromDate}
           setEventToDate={setEventToDate}
           setEventToTime={setEventToTime}
-        // timeFunc={setEventFromTime}
-        // dateFunc={setEventFromDate}
+          // timeFunc={setEventFromTime}
+          // dateFunc={setEventFromDate}
         />
         <div className="w-[30px] h-[1px] bg-[#ccc]" />
         <DateTime
@@ -376,8 +377,8 @@ const DateContainer = ({
           setEventFromDate={setEventFromDate}
           setEventToDate={setEventToDate}
           setEventToTime={setEventToTime}
-        // timeFunc={setEventToTime}
-        // dateFunc={setEventToTime}
+          // timeFunc={setEventToTime}
+          // dateFunc={setEventToTime}
         />
       </div>
     </div>
@@ -496,7 +497,9 @@ const Events = ({
     };
 
     axios
-      .post("https://sales365.trainright.fit/api/event/create", finalPayload, { headers: { Authorization: accessToken } })
+      .post(`${baseUrl}api/event/create`, finalPayload, {
+        headers: { Authorization: accessToken },
+      })
       .then((e: any) => {
         const { result } = e?.data;
         const payload = {
@@ -518,7 +521,8 @@ const Events = ({
                 success: "Event Added Successfully!",
               })
             );
-          }).catch((e: any) => { });
+          })
+          .catch((e: any) => {});
       })
       .catch((e) => {
         dispatch(

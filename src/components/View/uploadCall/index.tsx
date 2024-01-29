@@ -7,6 +7,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import UploadAudio from "../uploadContainer/index";
 import { useDispatch } from "react-redux";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Loader = () => {
   return (
@@ -329,12 +330,9 @@ const ActiveCall = ({ cancel }: any) => {
       }
     }
     axios
-      .post(
-        // "https://sales365.trainright.fit/api/recording/createManualRecording",
-        "https://sales365.trainright.fit/api/recording/createManualRecording",
-        formdate,
-        { headers: { Authorization: accessToken } }
-      )
+      .post(`${baseUrl}api/recording/createManualRecording`, formdate, {
+        headers: { Authorization: accessToken },
+      })
       .then(() => {
         dispatch(
           setSuccess({

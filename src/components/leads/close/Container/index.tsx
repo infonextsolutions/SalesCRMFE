@@ -9,6 +9,7 @@ import KanbanTable from "@/components/View/Tables/close/Kanban";
 import DatePicker from "@/utils/Button/DatePicker";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 
 const LeadsTable = React.lazy(
   () => import("@/components/View/Tables/close/LeadsSearch")
@@ -77,7 +78,7 @@ const LeadsContainer = ({ view, records, list }: any) => {
       };
 
       const response = await axios.get(
-        "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
+        `${baseUrl}api/leads/find-all?leadStatus=Close`,
         {
           headers: {
             Authorization: accessToken,

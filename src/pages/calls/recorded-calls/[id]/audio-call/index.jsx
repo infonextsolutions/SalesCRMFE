@@ -13,6 +13,7 @@ import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 //Manya will make this page
 
 const CallProfile = () => {
@@ -40,14 +41,14 @@ const CallProfile = () => {
 
   const refreshData = () => {
     axios
-      .get(`https://sales365.trainright.fit/api/calling/find-by-id?id=${id}`, {
+      .get(`${baseUrl}api/calling/find-by-id?id=${id}`, {
         headers: { Authorization: accessToken },
       })
       .then((res) => {
         setDataNew(res.data);
         axios
           .get(
-            `https://sales365.trainright.fit/api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`,
+            `${baseUrl}api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`,
             { headers: { Authorization: accessToken } }
           )
           .then((res2) => {
@@ -56,7 +57,7 @@ const CallProfile = () => {
           .catch((e) => {});
         axios
           .post(
-            `https://sales365.trainright.fit/api/calling/call-status`,
+            `${baseUrl}api/calling/call-status`,
             { sid: res.data.result.Sid, leadId: res.data.result.leadId._id },
             { headers: { Authorization: accessToken } }
           )
@@ -74,10 +75,9 @@ const CallProfile = () => {
 
   const getAllQAM = () => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/master-users/findAllQA_manager`,
-        { headers: { Authorization: accessToken } }
-      )
+      .get(`${baseUrl}api/master-users/findAllQA_manager`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setQams(
           res?.data?.result?.map((qamItem, index) => {
@@ -137,7 +137,7 @@ const CallProfile = () => {
   const handleRequestFeedback = (prev, next) => {
     axios
       .post(
-        `https://sales365.trainright.fit/api/qa/requestFeedBack`,
+        `${baseUrl}api/qa/requestFeedBack`,
         {
           qaId: userId,
           qamId: qams?.[next]?._id,

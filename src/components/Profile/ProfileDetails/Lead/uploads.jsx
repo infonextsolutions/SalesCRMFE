@@ -1,6 +1,7 @@
 import { setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -86,11 +87,9 @@ const Uploads = ({ cancel, id, refresh }) => {
       formData.append("id", id);
 
       const res = await axios
-        .post(
-          `https://sales365.trainright.fit/api/leads/addLeadAttachments`,
-          formData,
-          { headers: { Authorization: accessToken } }
-        )
+        .post(`${baseUrl}api/leads/addLeadAttachments`, formData, {
+          headers: { Authorization: accessToken },
+        })
         .then((e) => {
           refresh();
           dispatch(
@@ -101,7 +100,7 @@ const Uploads = ({ cancel, id, refresh }) => {
           );
           cancel();
         })
-        .catch((e) => { });
+        .catch((e) => {});
     }
   };
 

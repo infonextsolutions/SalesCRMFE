@@ -10,6 +10,7 @@ import * as XLSX from "xlsx";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import NavigationWithoutTitle from "@/components/app/NavigationWithoutTitle";
+import { baseUrl } from "@/utils/baseUrl";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -80,7 +81,7 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
     try {
       if (window !== undefined) {
         axios
-          .get("https://sales365.trainright.fit/api/master-users/find-all", {
+          .get(`${baseUrl}api/master-users/find-all`, {
             headers: {
               Authorization: accessToken,
             },
@@ -90,14 +91,11 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
           })
           .catch((e) => {});
         axios
-          .get(
-            "https://sales365.trainright.fit/api/user-company-master/findAllCompanies",
-            {
-              headers: {
-                Authorization: accessToken,
-              },
-            }
-          )
+          .get(`${baseUrl}api/user-company-master/findAllCompanies`, {
+            headers: {
+              Authorization: accessToken,
+            },
+          })
           .then((res) => {
             setCompanyOps(res?.data?.result);
           })
@@ -148,7 +146,7 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
       };
 
       const response = await axios.post(
-        "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Close",
+        `${baseUrl}api/leads/find-all?leadStatus=Close`,
         payload,
         { headers: { Authorization: accessToken } }
       );

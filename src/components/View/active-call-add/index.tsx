@@ -2,6 +2,7 @@ import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -477,11 +478,9 @@ const ActiveCall = ({
       // call_start_time: timee ? timee : getCurrentTimeInHours(),
     };
     axios
-      .post(
-        "https://sales365.trainright.fit/api/active-call/create",
-        finalPayload,
-        { headers: { Authorization: accessToken } }
-      )
+      .post(`${baseUrl}api/active-call/create`, finalPayload, {
+        headers: { Authorization: accessToken },
+      })
       .then((e: any) => {
         cancel();
         dispatch(
