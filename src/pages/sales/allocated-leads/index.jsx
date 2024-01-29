@@ -7,6 +7,7 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
 import { ExotelKey, ExotelToken } from "@/utils/urlHelper";
 import Navbar from "@/components/app/Navbar/Navbar";
+import { baseUrl } from "@/utils/baseUrl";
 
 const SalesOpen = React.lazy(() => import("@/views/sales/allocated"));
 
@@ -33,7 +34,7 @@ export default function Open() {
 
   useEffect(() => {
     axios
-      .get("https://sales365.trainright.fit/api/master-users/find-all", {
+      .get(`${baseUrl}api/master-users/find-all`, {
         headers: { Authorization: accessToken },
       })
       .then((res) => {
@@ -41,27 +42,21 @@ export default function Open() {
       })
       .catch((e) => {});
     axios
-      .get(
-        "https://sales365.trainright.fit/api/master-users/getTeamManagerList",
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      )
+      .get(`${baseUrl}api/master-users/getTeamManagerList`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((res) => {
         setTmData(res.data);
       })
       .catch((e) => {});
     axios
-      .get(
-        "https://sales365.trainright.fit/api/master-users/getTeamSDRAndBDMList",
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      )
+      .get(`${baseUrl}api/master-users/getTeamSDRAndBDMList`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((res) => {
         setSdrBdmData(res.data);
       })
@@ -72,7 +67,7 @@ export default function Open() {
     const userId = window !== undefined ? localStorage.getItem("user-id") : "";
     axios
       .get(
-        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${userId}`,
+        `${baseUrl}api/leads/allocatedLeads?qaStatus=allocated&qaId=${userId}`,
         { headers: { Authorization: accessToken } }
       )
       .then((res) => {

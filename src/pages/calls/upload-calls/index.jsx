@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/store/store";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import Navbar from "@/components/app/Navbar/Navbar";
+import { baseUrl } from "@/utils/baseUrl";
 const dummyItem = {
   companyName: "ABC Corp",
   companyAddress: "Noida, UP",
@@ -65,18 +66,17 @@ const Calls = () => {
 
   useEffect(() => {
     try {
-      axios.get(
-        "https://sales365.trainright.fit/api/recording/getManualRecordingList", {
-        headers: {
-          Authorization: accessToken
-        }
-      }
-      ).then((res) => {
-        setData(res.data);
-      }).catch((e) => { });
-    } catch (error) {
-
-    }
+      axios
+        .get(`${baseUrl}api/recording/getManualRecordingList`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
+        .then((res) => {
+          setData(res.data);
+        })
+        .catch((e) => {});
+    } catch (error) {}
   }, [accessToken]);
 
   useEffect(() => {
@@ -111,7 +111,7 @@ const Calls = () => {
     }
   };
 
-  const AddLead = () => { };
+  const AddLead = () => {};
 
   const [upload, setUpload] = useState(false);
   const [bool, setBool] = useState(true);

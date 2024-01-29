@@ -549,7 +549,7 @@ const Audio = ({ data, data1, data2 }: any) => {
   }, [data2]);
 
   const callit = () => {
-    const url = "https://sales365.trainright.fit/api/calling/call-status";
+    const url = `https://sales365.trainright.fit/api/calling/call-status`;
     if (data.leadId?._id) {
       axios
         .post(

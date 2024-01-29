@@ -6,6 +6,7 @@ import axios from "axios";
 import Backdrop from "@/components/View/Backdrop/Center";
 import Uploads from "@/components/View/uploads/index.jsx";
 import { Card } from "@mui/material";
+import { baseUrl } from "../../../utils/baseUrl";
 
 const ScriptDoc = ({
   title,
@@ -104,14 +105,13 @@ const ScriptDoc = ({
             alt=""
             onClick={(e) => {
               axios
-                .delete(
-                  `https://sales365.trainright.fit/api/call-script/delete-by-id?id=${id}`, { headers: { Authorization: accessToken } }
-                )
+                .delete(`${baseUrl}api/call-script/delete-by-id?id=${id}`, {
+                  headers: { Authorization: accessToken },
+                })
                 .then((e) => {
                   refresh();
                 })
-                .catch((e) => {
-                });
+                .catch((e) => {});
             }}
             // fill={true}
             style={
@@ -200,8 +200,9 @@ export function convertDatetime(inputStr: any) {
   const minutes = istTime.getUTCMinutes();
 
   // Format the time part (hours and minutes) in 12-hour clock format with AM/PM indicator
-  let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"
-    }`;
+  let timeStr = `${hours % 12 || 12}:${minutes.toString().padStart(2, "0")} ${
+    hours >= 12 ? "PM" : "AM"
+  }`;
 
   // Format the date and time as desired
   return `${day} ${month} ${year}, ${timeStr}`;
@@ -391,7 +392,6 @@ const ScriptView = ({ data }: { data: any }) => {
 };
 
 const Script = ({ data, scripts }: { data: any; scripts: any }) => {
-
   const [activeTitle, setActiveTitle] = React.useState(0);
 
   function CallBack(childData: any) {
@@ -410,18 +410,14 @@ const Script = ({ data, scripts }: { data: any; scripts: any }) => {
 
   const refresh = () => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/call-script/active-call?activeCallId=${data?._id}`, {
+      .get(`${baseUrl}api/call-script/active-call?activeCallId=${data?._id}`, {
         headers: {
-          Authorization: accessToken
-        }
-      }
-      )
-      .then((e) => {
+          Authorization: accessToken,
+        },
       })
-      .catch((e) => { });
+      .then((e) => {})
+      .catch((e) => {});
   };
-
 
   const titles = ["SCRIPT"];
   const list = titles.map((title: any, i: any) => ({ id: i, title: title }));

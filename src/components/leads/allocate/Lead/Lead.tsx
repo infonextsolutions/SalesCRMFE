@@ -15,6 +15,7 @@ import ActiveCall from "@/components/View/active-call-add";
 import ButtonDropDown from "@/utils/Button/Button";
 import axios from "axios";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
+import { baseUrl } from "@/utils/baseUrl";
 
 const LeadBox = ({
   width,
@@ -676,14 +677,11 @@ const LeadContainer = ({
 
   const UpdateData = async () => {
     const response = await axios
-      .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${LeadData?._id}`,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      )
+      .get(`${baseUrl}api/leads/find-by-id?id=${LeadData?._id}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((e) => {
         setLeadData(e.data.result);
       })

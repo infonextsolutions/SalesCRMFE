@@ -3,6 +3,7 @@ import { getBasicIcon } from "../../utils/AssetsHelper";
 import Button from "@/utils/Button/Button";
 import Image from "next/image";
 import axios from "axios";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Kanban = ({ list }: any) => {
   const [accessToken, setAccessToken] = useState<any>("");
@@ -15,16 +16,12 @@ const Kanban = ({ list }: any) => {
 
   const fetchItems = async () => {
     try {
-      const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all`, {
+      const res = await axios.get(`${baseUrl}api/leads/find-all`, {
         headers: {
-          Authorization: accessToken
-        }
-      }
-      );
-    } catch (error) {
-
-    }
+          Authorization: accessToken,
+        },
+      });
+    } catch (error) {}
   };
 
   fetchItems();

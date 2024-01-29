@@ -2,6 +2,7 @@ import Navbar from "@/components/app/Navbar/Navbar";
 import BigSpinner from "@/components/loader/BigSpinner";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { Suspense, useEffect, useState } from "react";
@@ -38,31 +39,25 @@ const DashboardPage = () => {
   useEffect(() => {
     try {
       axios
-        .post(
-          "https://sales365.trainright.fit/api/pitch-analysis/find-one",
-          date,
-          { headers: { Authorization: accessToken } }
-        )
+        .post(`${baseUrl}api/pitch-analysis/find-one`, date, {
+          headers: { Authorization: accessToken },
+        })
         .then((res) => {
           setData1(res.data);
         })
         .catch((e) => {});
       axios
-        .post(
-          "https://sales365.trainright.fit/api/script-analysis/find-one",
-          date,
-          { headers: { Authorization: accessToken } }
-        )
+        .post(`${baseUrl}api/script-analysis/find-one`, date, {
+          headers: { Authorization: accessToken },
+        })
         .then((res) => {
           setData2(res.data);
         })
         .catch((e) => {});
       axios
-        .post(
-          "https://sales365.trainright.fit/api/selling-analysis/find-one",
-          date,
-          { headers: { Authorization: accessToken } }
-        )
+        .post(`${baseUrl}api/selling-analysis/find-one`, date, {
+          headers: { Authorization: accessToken },
+        })
         .then((res) => {
           setData3(res.data);
         })

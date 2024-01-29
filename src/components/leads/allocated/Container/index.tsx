@@ -10,6 +10,7 @@ import DatePicker from "@/utils/Button/DatePicker";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { PaymentOutlined } from "@mui/icons-material";
+import { baseUrl } from "@/utils/baseUrl";
 
 const LeadsTable = React.lazy(
   () => import("@/components/View/Tables/allocated/LeadsSearch")
@@ -58,7 +59,7 @@ const LeadsContainer = ({
   useEffect(() => {
     if (window !== undefined) {
       axios
-        .get("https://sales365.trainright.fit/api/master-users/find-all", {
+        .get(`${baseUrl}api/master-users/find-all`, {
           headers: {
             Authorization: accessToken,
           },
@@ -66,9 +67,9 @@ const LeadsContainer = ({
         .then((res) => {
           setMastersList(res?.data?.result);
         })
-        .catch((e) => { });
-        axios
-        .get("https://sales365.trainright.fit/api/master-users/getTeamManagerList", {
+        .catch((e) => {});
+      axios
+        .get(`${baseUrl}api/master-users/getTeamManagerList`, {
           headers: {
             Authorization: accessToken,
           },
@@ -76,7 +77,7 @@ const LeadsContainer = ({
         .then((res) => {
           setTMList(res?.data?.result);
         })
-        .catch((e) => { });
+        .catch((e) => {});
     }
   }, [accessToken]);
 
@@ -104,7 +105,10 @@ const LeadsContainer = ({
       queryStr += `&lead_allocated_by=${leadAllocatedBy}`;
     }
     if (startDate !== "") {
-      queryStr += `&allocated_start_and_end_date=${JSON.stringify([startDate, endDate])}`;
+      queryStr += `&allocated_start_and_end_date=${JSON.stringify([
+        startDate,
+        endDate,
+      ])}`;
     }
     setQueryStr(queryStr);
     return queryStr;
@@ -124,7 +128,7 @@ const LeadsContainer = ({
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`,
+        `${baseUrl}api/leads/allocatedLeads?qaStatus=allocated&qaId=${qaid}${getQueryStr()}`,
         {
           headers: {
             Authorization: accessToken,
@@ -132,13 +136,22 @@ const LeadsContainer = ({
         }
       );
       setVisibleRecords({ ...response.data });
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
     // getData();
     getQueryStr();
-  }, [status, stage, product, leadSource, startDate, endDate, leadAllocatedTo, leadAllocatedBy]);
+  }, [
+    status,
+    stage,
+    product,
+    leadSource,
+    startDate,
+    endDate,
+    leadAllocatedTo,
+    leadAllocatedBy,
+  ]);
 
   return (
     <div className="w-[100%] bg-[#ffe3e170] min-h-[70vh] rounded-[18px] relative mb-[40px]">

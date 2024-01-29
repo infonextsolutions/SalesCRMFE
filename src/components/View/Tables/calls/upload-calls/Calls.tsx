@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import CallContainer from "@/components/calls/upload-calls/Call/Call";
+import { baseUrl } from "@/utils/baseUrl";
 const LeadsTable = ({ totalRecords, search }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
@@ -32,7 +33,7 @@ const LeadsTable = ({ totalRecords, search }: any) => {
   const getallItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/recording/getManualRecordingList?limit=${limit}&page=${current}"`,
+        `${baseUrl}api/recording/getManualRecordingList?limit=${limit}&page=${current}"`,
         {
           headers: {
             Authorization: accessToken,
@@ -66,7 +67,7 @@ const LeadsTable = ({ totalRecords, search }: any) => {
         if (pageNumber >= count && pageCount != 0) setpageNumber(0);
         const getItems = async () => {
           const res = await axios.get(
-            `https://sales365.trainright.fit/api/recording/getManualRecordingList`,
+            `${baseUrl}api/recording/getManualRecordingList`,
             {
               headers: {
                 Authorization: accessToken,
@@ -103,7 +104,7 @@ const LeadsTable = ({ totalRecords, search }: any) => {
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/recording/getManualRecordingList?limit=${limit}&page=${current}`,
+        `${baseUrl}api/recording/getManualRecordingList?limit=${limit}&page=${current}`,
         {
           headers: {
             Authorization: accessToken,

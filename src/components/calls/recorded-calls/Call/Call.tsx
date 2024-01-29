@@ -8,6 +8,7 @@ import axios from "axios";
 import BackdropRight from "@/components/View/Backdrop/Right";
 import { convertDatetime } from "@/components/activeCalls/Script/index.";
 import DescBoxAudioPlayer from "@/components/activeCalls/audio/components/DescBoxAudioPlayer";
+import { baseUrl } from "@/utils/baseUrl";
 
 const CallBox = ({
   width,
@@ -533,14 +534,11 @@ const CallContainer = ({ id, CallData, last, selectAll }: any) => {
   const GetLeadData = () => {
     if (CallData?.leadId?.length > 0) {
       axios
-        .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${CallData.leadId[0]._id}`,
-          {
-            headers: {
-              Authorization: accessToken,
-            },
-          }
-        )
+        .get(`${baseUrl}api/leads/find-by-id?id=${CallData.leadId[0]._id}`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
         .then((e: any) => {
           setChecked(false);
         })

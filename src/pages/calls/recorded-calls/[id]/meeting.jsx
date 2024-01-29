@@ -13,6 +13,7 @@ import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 import { useRouter } from "next/router";
 import AudioProfileContainer from "@/components/Profile/AudioProfileContainer";
+import { baseUrl } from "../../../../utils/baseUrl";
 //Manya will make this page
 
 const CallProfile = () => {
@@ -39,35 +40,35 @@ const CallProfile = () => {
   }, []);
 
   const refreshData = () => {
-    console.log('============= refreshData ================', accessToken);
+    console.log("============= refreshData ================", accessToken);
     axios
-      .get(`https://sales365.trainright.fit/api/event/find-by-id?id=${id}`, {
+      .get(`${baseUrl}api/event/find-by-id?id=${id}`, {
         headers: { Authorization: accessToken },
       })
       .then((res) => {
-        console.log('++++++++++ api/event/find-by-id +++++++++++', res.data);
+        console.log("++++++++++ api/event/find-by-id +++++++++++", res.data);
         setDataNew(res.data);
         axios
           .get(
-            `https://sales365.trainright.fit/api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`,
+            `${baseUrl}api/leads/find-by-id?id=${res?.data?.result?.leadId?._id}`,
             { headers: { Authorization: accessToken } }
           )
           .then((res2) => {
             setDataNew1(res2.data);
           })
-          .catch((e) => { });
+          .catch((e) => {});
         axios
           .post(
-            `https://sales365.trainright.fit/api/calling/call-status`,
+            `${baseUrl}api/calling/call-status`,
             { sid: res.data.result.Sid, leadId: res.data.result.leadId._id },
             { headers: { Authorization: accessToken } }
           )
           .then((res3) => {
             setDataNew2(res3.data);
           })
-          .catch((e) => { });
+          .catch((e) => {});
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -76,10 +77,9 @@ const CallProfile = () => {
 
   const getAllQAM = () => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/master-users/findAllQA_manager`,
-        { headers: { Authorization: accessToken } }
-      )
+      .get(`${baseUrl}api/master-users/findAllQA_manager`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setQams(
           res?.data?.result?.map((qamItem, index) => {
@@ -93,7 +93,7 @@ const CallProfile = () => {
           })
         );
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -139,7 +139,7 @@ const CallProfile = () => {
   const handleRequestFeedback = (prev, next) => {
     axios
       .post(
-        `https://sales365.trainright.fit/api/qa/requestFeedBack`,
+        `${baseUrl}api/qa/requestFeedBack`,
         {
           qaId: userId,
           qamId: qams?.[next]?._id,
@@ -172,45 +172,45 @@ const CallProfile = () => {
         buttons={
           dataNew?.result?.qaFeedbackReq === "requested"
             ? [
-              {
-                text: "Share",
-                dropdown: true,
-                id: 1,
-                icon: "Share",
-                light: false,
-                dark: true,
-                click: addCall,
-                list: [
-                  { title: "Full Call", Icon: "Phone" },
-                  { title: "Call Snippet", Icon: "Mail" },
-                ],
-              },
-            ]
+                {
+                  text: "Share",
+                  dropdown: true,
+                  id: 1,
+                  icon: "Share",
+                  light: false,
+                  dark: true,
+                  click: addCall,
+                  list: [
+                    { title: "Full Call", Icon: "Phone" },
+                    { title: "Call Snippet", Icon: "Mail" },
+                  ],
+                },
+              ]
             : [
-              {
-                text: "Request Feedback",
-                dropdown: true,
-                id: 2,
-                light: false,
-                dark: false,
-                // icon: "",
-                list: qams,
-                click: handleRequestFeedback,
-              },
-              {
-                text: "Share",
-                dropdown: true,
-                id: 1,
-                icon: "Share",
-                light: false,
-                dark: true,
-                click: addCall,
-                list: [
-                  { title: "Full Call", Icon: "Phone" },
-                  { title: "Call Snippet", Icon: "Mail" },
-                ],
-              },
-            ]
+                {
+                  text: "Request Feedback",
+                  dropdown: true,
+                  id: 2,
+                  light: false,
+                  dark: false,
+                  // icon: "",
+                  list: qams,
+                  click: handleRequestFeedback,
+                },
+                {
+                  text: "Share",
+                  dropdown: true,
+                  id: 1,
+                  icon: "Share",
+                  light: false,
+                  dark: true,
+                  click: addCall,
+                  list: [
+                    { title: "Full Call", Icon: "Phone" },
+                    { title: "Call Snippet", Icon: "Mail" },
+                  ],
+                },
+              ]
         }
         mainTitle="Calls"
         title="Recorded Calls"

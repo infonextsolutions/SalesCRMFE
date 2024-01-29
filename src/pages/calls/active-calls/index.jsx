@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import Navbar from "@/components/app/Navbar/Navbar";
 import ScheduleCallsContainer from "@/components/calls/active-calls/Container/ScheduleCallContainer";
 import ScheduleMeetingContainer from "@/components/calls/active-calls/Container/ScheduleMeetingContainer";
+import { baseUrl } from "@/utils/baseUrl";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -94,7 +95,7 @@ const Calls = () => {
 
   useEffect(() => {
     axios
-      .get("https://sales365.trainright.fit/api/active-call/find-all", {
+      .get(`${baseUrl}api/active-call/find-all`, {
         headers: {
           Authorization: accessToken,
         },

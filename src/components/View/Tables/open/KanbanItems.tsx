@@ -10,6 +10,7 @@ import Notes1 from "../../NotesSalesView";
 import Messages from "../../messages";
 import axios from "axios";
 import ActiveCall from "@/components/View/active-call-add";
+import { baseUrl } from "@/utils/baseUrl";
 
 const KanbanItem = ({ item, i, Item }: any) => {
   const { pathname, replace, push } = useRouter();
@@ -181,9 +182,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
   const update = async () => {
     setTimeout(async () => {
       const response = await axios
-        .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${Item?._id}`
-        )
+        .get(`${baseUrl}api/leads/find-by-id?id=${Item?._id}`)
         .then((e) => {
           const history = e.data.result.activityId.history;
           let calls = 0;

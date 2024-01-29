@@ -10,6 +10,7 @@ import DatePicker from "@/utils/Button/DatePicker";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { PaymentOutlined } from "@mui/icons-material";
+import { baseUrl } from "@/utils/baseUrl";
 // import ViewDownloadButton from "@/views/sales/open/index";
 
 const LeadsTable = React.lazy(
@@ -79,7 +80,7 @@ const LeadsContainer = ({ view, records, list, reload }: any) => {
     };
     try {
       const response = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open${getQueryStr()}`,
+        `${baseUrl}api/leads/find-all?leadStatus=Open${getQueryStr()}`,
         {
           headers: {
             Authorization: accessToken,

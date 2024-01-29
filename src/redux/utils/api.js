@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { baseUrl } from "../../utils/baseUrl";
 
 const API_DOMAIN = "https://bfservices.onrender.com/api/";
 const CHAT_API_DOMAIN = "https://itsolutionshub.com/chat";
@@ -16,8 +17,8 @@ export const getApiName = (api) => {
 };
 
 export const API_ENDPOINTS = {
-  GET_SDR_DASHBOARD:"https://sales365.trainright.fit/api/lead-report/dashboard",
- 
+  GET_SDR_DASHBOARD: `${baseUrl}api/lead-report/dashboard`,
+
   rejectProperty: API_DOMAIN + "properties/rejectProperty",
   getPropertiesCountsByUserId:
     API_DOMAIN + "properties/getPropertiesCountsByUserId",
@@ -54,12 +55,15 @@ export const API_ENDPOINTS = {
   addPropertySearched: API_DOMAIN + "properties/createUserHistory/searches",
   addPropertyViewed: API_DOMAIN + "properties/createUserHistory/visited",
   addPropertyContacted: API_DOMAIN + "properties/createUserHistory/contacted",
-  addPropertyRecommended: API_DOMAIN + "properties/createUserHistory/recommendation",
+  addPropertyRecommended:
+    API_DOMAIN + "properties/createUserHistory/recommendation",
   getPropertySearched: API_DOMAIN + "properties/getUserHistory/searches",
   getPropertyViewed: API_DOMAIN + "properties/getUserHistory/visited",
   getPropertyContacted: API_DOMAIN + "properties/getUserHistory/contacted",
-  getPropertyRecommended: API_DOMAIN + "properties/getUserHistory/recommendation",
-  getCustomerContacted: API_DOMAIN + "properties/getCpUserHistory/recommendation",
+  getPropertyRecommended:
+    API_DOMAIN + "properties/getUserHistory/recommendation",
+  getCustomerContacted:
+    API_DOMAIN + "properties/getCpUserHistory/recommendation",
   getUnapprovedAgentsData: API_DOMAIN + "users/getCpApporovalUsersList",
   approveAgent: API_DOMAIN + "users/approveCp",
 };

@@ -7,6 +7,7 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
 import { ExotelKey, ExotelToken } from "@/utils/urlHelper";
 import Navbar from "@/components/app/Navbar/Navbar";
+import { baseUrl } from "@/utils/baseUrl";
 
 const SalesOpen = React.lazy(() => import("@/views/sales/allocate"));
 
@@ -32,42 +33,46 @@ export default function Open() {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      "https://sales365.trainright.fit/api/leads/leadsForAllocation", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setData(res.data);
-    }).catch((e) => { });
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/find-all", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setMastersData(res.data);
-    }).catch((e) => { });
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/getTeamManagerList", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setTmData(res.data);
-    }).catch((e) => { });
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/getTeamSDRAndBDMList", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setSdrBdmData(res.data);
-    }).catch((e) => { });
+    axios
+      .get(`${baseUrl}api/leads/leadsForAllocation`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((e) => {});
+    axios
+      .get(`${baseUrl}api/master-users/find-all`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setMastersData(res.data);
+      })
+      .catch((e) => {});
+    axios
+      .get(`${baseUrl}api/master-users/getTeamManagerList`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setTmData(res.data);
+      })
+      .catch((e) => {});
+    axios
+      .get(`${baseUrl}api/master-users/getTeamSDRAndBDMList`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setSdrBdmData(res.data);
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   React.useEffect(() => {
@@ -123,7 +128,12 @@ export default function Open() {
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
-            <SalesOpen data={data} mastersData={mastersData} teamManagersData={tmData} sdrBdmData={sdrBdmData} />
+            <SalesOpen
+              data={data}
+              mastersData={mastersData}
+              teamManagersData={tmData}
+              sdrBdmData={sdrBdmData}
+            />
           </Suspense>
         )}
       </Suspense>

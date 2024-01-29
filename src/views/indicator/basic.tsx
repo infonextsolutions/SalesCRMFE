@@ -12,6 +12,7 @@ import DeleteCategory from "@/components/Indicator/basic/deleteCategory";
 import EditCategory from "@/components/Indicator/basic/editCategory";
 import SimpleButton from "@/utils/Button/SimpleButton";
 import NavigationWithEditAndDeleteButtons from "@/components/app/NavigationWithEditAndDelete";
+import { baseUrl } from "@/utils/baseUrl";
 
 const AddText = ({ title, place, change, value }: any) => {
   return (
@@ -231,12 +232,9 @@ const Indicator = () => {
   const getTypes = () => {
     // if sdr/bdm user then find-all otherwise getTypesById
     axios
-      .get(
-        "https://sales365.trainright.fit/api/indicator/find-all?page=0&limit=10",
-        {
-          headers: { Authorization: accessToken },
-        }
-      )
+      .get(`${baseUrl}api/indicator/find-all?page=0&limit=10`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res: any) => {
         formatData(res.data);
       })
@@ -245,12 +243,9 @@ const Indicator = () => {
 
   const getTypesById = (id: any) => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/indicator/find-by-id?id=${id}`,
-        {
-          headers: { Authorization: accessToken },
-        }
-      )
+      .get(`${baseUrl}api/indicator/find-by-id?id=${id}`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res: any) => {
         console.log("============ indicator : data ============", res);
       })
@@ -260,7 +255,7 @@ const Indicator = () => {
   const getValues = () => {
     axios
       .get(
-        "https://sales365.trainright.fit/api/indicator/getIndicatorValues?userId=65782fb3cae5f857818476dd",
+        `${baseUrl}api/indicator/getIndicatorValues?userId=65782fb3cae5f857818476dd`,
         {
           headers: { Authorization: accessToken },
         }
@@ -276,12 +271,9 @@ const Indicator = () => {
     type: "INDICATOR" | "CATEGORY" | "VALUE" | any
   ) => {
     axios
-      .delete(
-        `https://sales365.trainright.fit/api/indicator/delete-by-id?id=${id}`,
-        {
-          headers: { Authorization: accessToken },
-        }
-      )
+      .delete(`${baseUrl}api/indicator/delete-by-id?id=${id}`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res: any) => {
         if (type === "INDICATOR") {
           setIndicatorSetting(false);
@@ -318,7 +310,7 @@ const Indicator = () => {
     type: "INDICATOR" | "CATEGORY" | "VALUE"
   ) => {
     axios
-      .put("https://sales365.trainright.fit/api/indicator/update", payload, {
+      .put(`${baseUrl}api/indicator/update`, payload, {
         headers: { Authorization: accessToken },
       })
       .then((res: any) => {
@@ -355,7 +347,7 @@ const Indicator = () => {
     type: "INDICATOR" | "CATEGORY" | "VALUE" = "INDICATOR"
   ) => {
     axios
-      .post("https://sales365.trainright.fit/api/indicator/create", payload, {
+      .post(`${baseUrl}api/indicator/create`, payload, {
         headers: { Authorization: accessToken },
       })
       .then((res: any) => {

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Comment = ({ user, content, time, reply, last, replied }: any) => {
   const [repVis, setRepVis] = useState(false);
@@ -209,14 +210,17 @@ const Comments = ({ data }: any) => {
 
   const UpdateCalls = () => {
     setTimeout(() => {
-      const urri = `https://sales365.trainright.fit/api/recording/getManualRecording`;
+      const urri = `${baseUrl}api/recording/getManualRecording`;
       axios
-        .post(urri, {
-          transId: data._id,
-        }, { headers: { Authorization: accessToken } })
-        .then((e) => {
-        })
-        .catch((e) => { });
+        .post(
+          urri,
+          {
+            transId: data._id,
+          },
+          { headers: { Authorization: accessToken } }
+        )
+        .then((e) => {})
+        .catch((e) => {});
     }, 1000);
   };
 
@@ -314,7 +318,7 @@ const Comments = ({ data }: any) => {
 
               axios
                 .post(
-                  "https://sales365.trainright.fit/api/recording/comments/addManual",
+                  `${baseUrl}api/recording/comments/addManual`,
                   {
                     recordingId: data._id,
                     comments: [...list, letsSee],
@@ -362,7 +366,7 @@ const Comments = ({ data }: any) => {
                   finalList[i].reply.push(e);
                   axios
                     .post(
-                      "https://sales365.trainright.fit/api/recording/comments/addManual",
+                      `${baseUrl}api/recording/comments/addManual`,
                       {
                         recordingId: data._id,
                         comments: finalList,

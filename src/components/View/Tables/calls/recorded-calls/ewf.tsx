@@ -31,7 +31,7 @@ export default Asset;
 
 //   const getallItems = async (current: any) => {
 //     const res = await axios.get(
-//       `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${current}"`
+//       `${baseUrl}api/recording/find-all?limit=${limit}&page=${current}"`
 //     );
 //     const data = res.data.result;
 //     return data;
@@ -44,7 +44,7 @@ export default Asset;
 //     if (pageNumber >= count && pageCount != 0) setpageNumber(0);
 //     const getItems = async () => {
 //       const res = await axios.get(
-//         `https://sales365.trainright.fit/api/recording/find-all`
+//         `${baseUrl}api/recording/find-all`
 //       );
 //       const data = res.data.result;
 
@@ -71,10 +71,9 @@ export default Asset;
 //     setLoading(false);
 //   }, [limit, pageNumber, search]);
 
-
 //   const fetchItems = async (current: any) => {
 //     const res = await axios.get(
-//       `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${current}`
+//       `${baseUrl}api/recording/find-all?limit=${limit}&page=${current}`
 //     );
 //     const data = res.data.result;
 //     const filtered = data.filter((e: ActiveCall) => e._id.includes(search));
@@ -193,7 +192,6 @@ export default Asset;
 //       }
 //     }
 //   };
-
 
 //   return (
 //     <>

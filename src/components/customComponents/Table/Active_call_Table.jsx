@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import CallContainer from "@/components/calls/active-calls/Call/Call.tsx";
+import { baseUrl } from "../../../utils/baseUrl";
 
 const LeadsTable = ({ totalRecords, search }) => {
   const [pageCount, setpageCount] = useState(0);
@@ -32,7 +33,7 @@ const LeadsTable = ({ totalRecords, search }) => {
   const getallItems = async (current) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/active-call/find-all?limit=${limit}&page=${current}`,
+        `${baseUrl}api/active-call/find-all?limit=${limit}&page=${current}`,
         {
           headers: {
             Authorization: accessToken,
@@ -61,14 +62,11 @@ const LeadsTable = ({ totalRecords, search }) => {
         setpageCount(count);
         if (pageNumber >= count && pageCount !== 0) setpageNumber(0);
         const getItems = async () => {
-          const res = await axios.get(
-            `https://sales365.trainright.fit/api/active-call/find-all`,
-            {
-              headers: {
-                Authorization: accessToken,
-              },
-            }
-          );
+          const res = await axios.get(`${baseUrl}api/active-call/find-all`, {
+            headers: {
+              Authorization: accessToken,
+            },
+          });
           const data = res.data.result;
 
           if (search.length) {

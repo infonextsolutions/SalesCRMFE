@@ -17,6 +17,7 @@ import DashboardQAM from "./subTabs/DashboardQAM";
 import Scoring from "./subTabs/Scoring";
 import { useSelector } from "react-redux";
 import CallReviewsQAE from "./subTabs/CallReviewsQAE";
+import { baseUrl } from "@/utils/baseUrl";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -50,14 +51,11 @@ const Dashboard = ({ data }: any) => {
 
   const getDealAnalyticsData = () => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/dashboard/dealAnalytics?userId=${userId}`,
-        {
-          headers: {
-            Authorization: `${accessToken}`,
-          },
-        }
-      )
+      .get(`${baseUrl}api/dashboard/dealAnalytics?userId=${userId}`, {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      })
       .then((res: any) => {
         setDealAnalyticsData({
           average: res.data.average,
@@ -69,14 +67,11 @@ const Dashboard = ({ data }: any) => {
 
   const getAvgCallScores = () => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/dashboard/averageCallScores?userId=${userId}`,
-        {
-          headers: {
-            Authorization: `${accessToken}`,
-          },
-        }
-      )
+      .get(`${baseUrl}api/dashboard/averageCallScores?userId=${userId}`, {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      })
       .then((res: any) => {
         let formattedData: any = {};
         res?.data?.result?.forEach((item: any) => {
@@ -89,14 +84,11 @@ const Dashboard = ({ data }: any) => {
 
   const getNoOfQuesAsked = () => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/dashboard/numberOfQuestionsAsked?userId=${userId}`,
-        {
-          headers: {
-            Authorization: `${accessToken}`,
-          },
-        }
-      )
+      .get(`${baseUrl}api/dashboard/numberOfQuestionsAsked?userId=${userId}`, {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      })
       .then((res: any) => {
         let formattedData: any = {};
         res?.data?.result?.forEach((item: any) => {
@@ -109,14 +101,11 @@ const Dashboard = ({ data }: any) => {
 
   const getTalkRatioData = () => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/dashboard/getTalkRatioData?userId=${userId}`,
-        {
-          headers: {
-            Authorization: `${accessToken}`,
-          },
-        }
-      )
+      .get(`${baseUrl}api/dashboard/getTalkRatioData?userId=${userId}`, {
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      })
       .then((res: any) => {
         // let formattedData: any = {};
         // res?.data?.result?.forEach((item: any) => {
@@ -129,7 +118,7 @@ const Dashboard = ({ data }: any) => {
 
   const getNoOfInterruptions = () => {
     axios
-      .get(`https://sales365.trainright.fit/api/dashboard/countInterruptions`, {
+      .get(`${baseUrl}api/dashboard/countInterruptions`, {
         headers: {
           Authorization: accessToken,
         },
@@ -146,7 +135,7 @@ const Dashboard = ({ data }: any) => {
 
   const getNoOfSwitches = () => {
     axios
-      .get(`https://sales365.trainright.fit/api/dashboard/numberOfSwiteches`, {
+      .get(`${baseUrl}api/dashboard/numberOfSwiteches`, {
         headers: {
           Authorization: accessToken,
         },
@@ -163,14 +152,11 @@ const Dashboard = ({ data }: any) => {
 
   const getCallSentiment = () => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/dashboard/sentimentAnalysis?userId=${userId}`,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      )
+      .get(`${baseUrl}api/dashboard/sentimentAnalysis?userId=${userId}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((res: any) => {
         // let formattedData: any = {};
         // res?.data?.result?.forEach((item: any) => {
@@ -246,11 +232,9 @@ const Dashboard = ({ data }: any) => {
       },
     };
     axios
-      .post(
-        "https://sales365.trainright.fit/api/pitch-analysis/find-one",
-        finalPayload,
-        { headers: { Authorization: accessToken } }
-      )
+      .post(`${baseUrl}api/pitch-analysis/find-one`, finalPayload, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setPitchData(res.data.result);
       })
@@ -267,11 +251,9 @@ const Dashboard = ({ data }: any) => {
       },
     };
     axios
-      .post(
-        "https://sales365.trainright.fit/api/selling-analysis/find-one",
-        finalPayload,
-        { headers: { Authorization: accessToken } }
-      )
+      .post(`${baseUrl}api/selling-analysis/find-one`, finalPayload, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setSellingData(res.data.result);
       })
@@ -288,11 +270,9 @@ const Dashboard = ({ data }: any) => {
       },
     };
     axios
-      .post(
-        "https://sales365.trainright.fit/api/script-analysis/find-one",
-        finalPayload,
-        { headers: { Authorization: accessToken } }
-      )
+      .post(`${baseUrl}api/script-analysis/find-one`, finalPayload, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setScriptBuilderData(res.data.result);
       })

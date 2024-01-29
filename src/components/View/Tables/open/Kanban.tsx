@@ -5,6 +5,7 @@ import { getBasicIcon } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import KanbanItem from "./KanbanItems";
+import { baseUrl } from "@/utils/baseUrl";
 
 const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
   const [items, setItems]: any = useState([]);
@@ -19,7 +20,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
 
   //   const getallItems = atotalRecordssync (current: any) => {
   //     const res = await axios.get(
-  //       `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
+  //       `${baseUrl}api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open"`
   //     );
   //     const data = res.data.result;
   //     return data;
@@ -30,7 +31,7 @@ const KanbanTable = ({ totalRecords, search, queryStr }: any) => {
       setLoading(true);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open&${queryStr}`,
+          `${baseUrl}api/leads/find-all?leadStatus=Open&${queryStr}`,
           {
             headers: {
               Authorization: accessToken,

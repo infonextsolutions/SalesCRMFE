@@ -1,6 +1,7 @@
 import { setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 import SimpleButton from "@/utils/Button/SimpleButton";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -92,7 +93,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
 
           const res = await axios
             .post(
-              `https://sales365.trainright.fit/api/call-script/create?activeCallId=${id}`,
+              `${baseUrl}api/call-script/create?activeCallId=${id}`,
               formData,
               { headers: { Authorization: accessToken } }
             )
@@ -107,8 +108,7 @@ const Uploads = ({ cancel, leadId, id, owners, refresh }) => {
               cancel();
             });
         }
-      } catch (error) {
-      }
+      } catch (error) {}
     }
   };
 

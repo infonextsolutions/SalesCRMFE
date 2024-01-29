@@ -1,4 +1,5 @@
 import SimpleButton from "@/utils/Button/SimpleButton";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -55,11 +56,11 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: any }) => {
   const makecall = async (e: any) => {
     try {
       const res = await axios.post(
-        "https://sales365.trainright.fit/api/calling/make-call",
+        `${baseUrl}api/calling/make-call`,
         {
           callTo: e,
           leadId: data.leadId._id,
-          id: data._id
+          id: data._id,
         },
         { headers: { Authorization: accessToken } }
       );
@@ -70,7 +71,7 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: any }) => {
   };
   // const makecall = async (e: any) => {
   //   // const res = await axios.post(
-  //   //   "https://sales365.trainright.fit/api/calling/make-call",
+  //   //   `${baseUrl}api/calling/make-call`,
   //   //   {
   //   //     callTo: e,
   //   //     leadId:data._id
@@ -94,7 +95,7 @@ const Notes = ({ cancel, data }: { cancel: () => void; data: any }) => {
             top={"10px"}
             title="Phone"
             value="8076166051"
-            change={(e: any) => { }}
+            change={(e: any) => {}}
             click={() => {
               makecall("8076166051");
             }}

@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
 import CallContainer from "@/components/calls/recorded-calls/Call/Call";
+import { baseUrl } from "@/utils/baseUrl";
 const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
@@ -33,7 +34,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${0}${queryStr}`,
+          `${baseUrl}api/recording/find-all?limit=${limit}&page=${0}${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -54,7 +55,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const getallItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${current}${queryStr}"`,
+        `${baseUrl}api/recording/find-all?limit=${limit}&page=${current}${queryStr}"`,
         {
           headers: {
             Authorization: accessToken,
@@ -88,7 +89,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
         if (pageNumber >= count && pageCount != 0) setpageNumber(0);
         const getItems = async () => {
           const res = await axios.get(
-            `https://sales365.trainright.fit/api/recording/find-all?${queryStr}`,
+            `${baseUrl}api/recording/find-all?${queryStr}`,
             {
               headers: {
                 Authorization: accessToken,
@@ -138,7 +139,7 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/recording/find-all?limit=${limit}&page=${current}${queryStr}`,
+        `${baseUrl}api/recording/find-all?limit=${limit}&page=${current}${queryStr}`,
         {
           headers: {
             Authorization: accessToken,

@@ -6,6 +6,7 @@ import axios from "axios";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 import Notes from "./notesRecordt";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Comment = ({ user, content, time, reply, last, replied }: any) => {
   const [repVis, setRepVis] = useState(false);
@@ -211,15 +212,13 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
     }
   }
 
-
   const UpdateCalls = () => {
     setTimeout(() => {
-      const urri = `https://sales365.trainright.fit/api/calling/find-by-id?id=${data?._id}`;
+      const urri = `${baseUrl}api/calling/find-by-id?id=${data?._id}`;
       axios
         .get(urri, { headers: { Authorization: accessToken } })
-        .then((e) => {
-        })
-        .catch((e) => { });
+        .then((e) => {})
+        .catch((e) => {});
     }, 1000);
   };
 
@@ -316,7 +315,7 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
               // setList([...list, letsSee]);
               axios
                 .post(
-                  "https://sales365.trainright.fit/api/recording/addAndUpdateComments",
+                  `${baseUrl}api/recording/addAndUpdateComments`,
                   {
                     callId: data._id,
                     comments: [...list, letsSee],
@@ -369,7 +368,7 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
                   finalList[i].reply.push(e);
                   axios
                     .post(
-                      "https://sales365.trainright.fit/api/recording/addAndUpdateComments",
+                      `${baseUrl}api/recording/addAndUpdateComments`,
                       {
                         callId: data._id,
                         comments: finalList,
@@ -385,7 +384,9 @@ const CommentsAndNotes = ({ data, notesData, refresh }: any) => {
                         })
                       );
                       if (refresh) {
-                        console.log('-------------- reply added successfully ------------');
+                        console.log(
+                          "-------------- reply added successfully ------------"
+                        );
                         refresh();
                       }
                     })

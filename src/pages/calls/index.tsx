@@ -16,6 +16,7 @@ import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import ButtonDropDown from "@/utils/Button/Button";
+import { baseUrl } from "@/utils/baseUrl";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -49,7 +50,7 @@ const CallsPage = () => {
   const [data, setData] = useState<any>([{}, {}]);
   useEffect(() => {
     axios
-      .get("https://sales365.trainright.fit/api/active-call/find-all", {
+      .get(`${baseUrl}api/active-call/find-all`, {
         headers: { Authorization: accessToken },
       })
       .then((res: any) => {
@@ -586,20 +587,20 @@ const CallsPage = () => {
     let endpoint = "";
     const newQuery = getQuery();
     if (subType === "feedback_requested_call_reviews") {
-      endpoint = `https://sales365.trainright.fit/api/qa/findRequestFeedBack?page=${page}&limit=${limit}&${newQuery}`;
+      endpoint = `${baseUrl}api/qa/findRequestFeedBack?page=${page}&limit=${limit}&${newQuery}`;
     } else {
       switch (currTab) {
         case 0:
-          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}&${newQuery}`;
+          endpoint = `${baseUrl}api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}&${newQuery}`;
           break;
         case 1:
-          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=allocated&page=${page}&limit=${limit}&${newQuery}`;
+          endpoint = `${baseUrl}api/qam/callForReview?qaStatus=allocated&page=${page}&limit=${limit}&${newQuery}`;
           break;
         case 2:
-          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=closed&page=${page}&limit=${limit}&${newQuery}`;
+          endpoint = `${baseUrl}api/qam/callForReview?qaStatus=closed&page=${page}&limit=${limit}&${newQuery}`;
           break;
         default:
-          endpoint = `https://sales365.trainright.fit/api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}&${newQuery}`;
+          endpoint = `${baseUrl}api/qam/callForReview?qaStatus=active&page=${page}&limit=${limit}&${newQuery}`;
           break;
       }
     }
@@ -625,10 +626,9 @@ const CallsPage = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://sales365.trainright.fit/api/master-users/findAllQA_Analyst`,
-        { headers: { Authorization: accessToken } }
-      )
+      .get(`${baseUrl}api/master-users/findAllQA_Analyst`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res: any) => {
         setQaList(res?.data?.result);
       })
@@ -829,11 +829,9 @@ const CallsPage = () => {
             qamId: window !== undefined ? localStorage.getItem("user-id") : "",
             callId: selectedRow,
           };
-          return axios.post(
-            `https://sales365.trainright.fit/api/qam/allocateCallToQA`,
-            payload,
-            { headers: { Authorization: accessToken } }
-          );
+          return axios.post(`${baseUrl}api/qam/allocateCallToQA`, payload, {
+            headers: { Authorization: accessToken },
+          });
         });
         Promise.all(assigningPromise)
           .then((res: any) => {
@@ -1119,7 +1117,7 @@ const CallsPage = () => {
 
 // export async function getServerSideProps({ query, ...params }: any) {
 //     const response = await axios.get(
-//         "https://sales365.trainright.fit/api/active-call/find-all"
+//         `${baseUrl}api/active-call/find-all`
 //     );
 //     return {
 //         props: {
