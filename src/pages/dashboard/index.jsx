@@ -37,30 +37,37 @@ const DashboardPage = () => {
 
   useEffect(() => {
     try {
-      axios.post(
-        "https://sales365.trainright.fit/api/pitch-analysis/find-one",
-        date, { headers: { Authorization: accessToken } }
-      )
+      axios
+        .post(
+          "https://sales365.trainright.fit/api/pitch-analysis/find-one",
+          date,
+          { headers: { Authorization: accessToken } }
+        )
         .then((res) => {
           setData1(res.data);
-        }).catch((e) => { });
-      axios.post(
-        "https://sales365.trainright.fit/api/script-analysis/find-one",
-        date, { headers: { Authorization: accessToken } }
-      )
+        })
+        .catch((e) => {});
+      axios
+        .post(
+          "https://sales365.trainright.fit/api/script-analysis/find-one",
+          date,
+          { headers: { Authorization: accessToken } }
+        )
         .then((res) => {
           setData2(res.data);
-        }).catch((e) => { });
-      axios.post(
-        "https://sales365.trainright.fit/api/selling-analysis/find-one",
-        date, { headers: { Authorization: accessToken } }
-      )
+        })
+        .catch((e) => {});
+      axios
+        .post(
+          "https://sales365.trainright.fit/api/selling-analysis/find-one",
+          date,
+          { headers: { Authorization: accessToken } }
+        )
         .then((res) => {
           setData3(res.data);
-        }).catch((e) => { });
-    } catch (error) {
-
-    }
+        })
+        .catch((e) => {});
+    } catch (error) {}
   }, [accessToken]);
 
   React.useEffect(() => {

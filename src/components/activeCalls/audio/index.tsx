@@ -574,6 +574,7 @@ const Audio = ({ data, data1, data2 }: any) => {
       // callit();
     }
   }, []);
+  console.log("raju", data);
 
   return (
     <>
@@ -602,7 +603,9 @@ const Audio = ({ data, data1, data2 }: any) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-gray-600 text-[14px]">Participant 1: A</p>
+                <p className="text-gray-600 text-[14px]">
+                  Call owner: {data?.CallerName}
+                </p>
               </div>
               <div className="w-full gap-2 flex items-center mt-[6px]">
                 <Image
@@ -612,11 +615,13 @@ const Audio = ({ data, data1, data2 }: any) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-gray-600 text-[14px]">Participant 2: B</p>
+                <p className="text-gray-600 text-[14px]">
+                  Participant: {data?.AnsweredBy}
+                </p>
               </div>
             </div>
-            <Tracker title={"A"} list={list} color={"#4091FF"} />
-            <Tracker title={"B"} list={list} color={"#FE5143"} />
+            <Tracker title={data?.CallerName} list={list} color={"#4091FF"} />
+            <Tracker title={data?.AnsweredBy} list={list} color={"#FE5143"} />
             {/* <Tracker title={"Topics"} list={list} color={"#434343"} /> */}
           </div>
           <div className="bg-white rounded-lg pb-4">
@@ -645,7 +650,7 @@ const Audio = ({ data, data1, data2 }: any) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-[#304FFD] text-[14px]">Participant 1: A</p>
+                <p className="text-[#304FFD] text-[14px]">{data?.CallerName}</p>
               </div>
               <div className="w-full flex items-center mt-[6px]">
                 <Image
@@ -655,11 +660,11 @@ const Audio = ({ data, data1, data2 }: any) => {
                   width={10}
                   height={10}
                 />
-                <p className="text-[#FF965D] text-[14px]">Participant 2: B</p>
+                <p className="text-[#FF965D] text-[14px]">{data?.AnsweredBy}</p>
               </div>
             </div>
-            <Tracker title={"A"} list={list} color={"#304FFD"} />
-            <Tracker title={"B"} list={list} color={"#FF965D"} />
+            <Tracker title={data?.CallerName} list={list} color={"#304FFD"} />
+            <Tracker title={data?.AnsweredBy} list={list} color={"#FF965D"} />
             {/* <Tracker title={"Topics"} list={list} color={"#0090FF"} /> */}
           </div>
           <Transcript
@@ -706,4 +711,3 @@ const Audio = ({ data, data1, data2 }: any) => {
 };
 
 export default Audio;
-

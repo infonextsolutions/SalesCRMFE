@@ -64,7 +64,7 @@ const Dashboard = ({ data }: any) => {
           result: res.data.result,
         });
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   };
 
   const getAvgCallScores = () => {
@@ -84,7 +84,7 @@ const Dashboard = ({ data }: any) => {
         });
         setAvgCallScoresData(formattedData);
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   };
 
   const getNoOfQuesAsked = () => {
@@ -104,7 +104,7 @@ const Dashboard = ({ data }: any) => {
         });
         setNoOfQuesAsked(formattedData);
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   };
 
   const getTalkRatioData = () => {
@@ -124,17 +124,16 @@ const Dashboard = ({ data }: any) => {
         // });
         setTalkRatioData(res.data.result);
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   };
 
   const getNoOfInterruptions = () => {
-    axios.get(
-      `https://sales365.trainright.fit/api/dashboard/countInterruptions`, {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    )
+    axios
+      .get(`https://sales365.trainright.fit/api/dashboard/countInterruptions`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((res: any) => {
         // let formattedData: any = {};
         // res?.data?.result?.forEach((item: any) => {
@@ -142,19 +141,16 @@ const Dashboard = ({ data }: any) => {
         // });
         setNoOfInterruptions(res.data.result);
       })
-      .catch((err: any) => {
-
-      });
+      .catch((err: any) => {});
   };
 
   const getNoOfSwitches = () => {
-    axios.get(
-      `https://sales365.trainright.fit/api/dashboard/numberOfSwiteches`, {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    )
+    axios
+      .get(`https://sales365.trainright.fit/api/dashboard/numberOfSwiteches`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((res: any) => {
         let formattedData: any = {};
         res?.data?.result?.forEach((item: any) => {
@@ -162,19 +158,19 @@ const Dashboard = ({ data }: any) => {
         });
         setNoOfSwitches(formattedData);
       })
-      .catch((err: any) => {
-
-      });
+      .catch((err: any) => {});
   };
 
   const getCallSentiment = () => {
-    axios.get(
-      `https://sales365.trainright.fit/api/dashboard/sentimentAnalysis?userId=${userId}`, {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    )
+    axios
+      .get(
+        `https://sales365.trainright.fit/api/dashboard/sentimentAnalysis?userId=${userId}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
       .then((res: any) => {
         // let formattedData: any = {};
         // res?.data?.result?.forEach((item: any) => {
@@ -182,9 +178,7 @@ const Dashboard = ({ data }: any) => {
         // });
         setCallSentimentData(res?.data?.result);
       })
-      .catch((err: any) => {
-
-      });
+      .catch((err: any) => {});
   };
 
   useEffect(() => {
@@ -422,7 +416,12 @@ const Dashboard = ({ data }: any) => {
     if (role === "QA manager") {
       return <Scoring tabData={tabs[currTab]} />;
     } else {
-      return <EngagementReports tabData={tabs[currTab]} callSentimentData={callSentimentData} />;
+      return (
+        <EngagementReports
+          tabData={tabs[currTab]}
+          callSentimentData={callSentimentData}
+        />
+      );
     }
   };
 

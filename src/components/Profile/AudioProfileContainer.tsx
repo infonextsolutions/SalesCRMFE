@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrent } from "@/store/UI";
 import Coaching from "./RecordedCoaching";
 import CommentsAndNotes from "./AudioProfileDetails/Comment";
-
+import { MdOutlineTimer } from "react-icons/md";
 const AudioProfileContainer = ({
   titles,
   current,
@@ -18,7 +18,7 @@ const AudioProfileContainer = ({
   width,
   data1,
   refresh,
-  type = "CALL"
+  type = "CALL",
 }: any) => {
   const activeTitle = useSelector((state: any) => state.ui.current);
   const dispatch = useDispatch();
@@ -32,20 +32,21 @@ const AudioProfileContainer = ({
     const date = new Date(ts);
     let hours = date.getHours();
     let minutes: string | number = date.getMinutes();
-    let ampm = hours >= 12 ? 'pm' : 'am';
+    let ampm = hours >= 12 ? "pm" : "am";
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes + " " + ampm;
     return strTime;
   }
 
-  console.log('----------- Audio Profile Container -----------', data, data1);
+  console.log("----------- Audio Profile Container -----------", data, data1);
 
   return (
     <div
-      className={`w-[${width ? width : "100%"
-        }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
+      className={`w-[${
+        width ? width : "100%"
+      }]  bg-[#ffe3e170] rounded-xl p-[25px] px-[35px] pt-[30px]`}
     >
       {data1?.companyId?.company_name && (
         <div className="w-[90%] flex justify-around">
@@ -85,6 +86,19 @@ const AudioProfileContainer = ({
             />
             {getTime(data1?.createdAt)}
           </div>
+          <div className="flex gap-2 text-[black] items-center">
+            {/* <MdOutlineTimer className="w-6 h-6" fill="#3F434A" /> */}
+            <Image
+              src={getBasicIcon("Timer")}
+              style={{
+                zIndex: 10,
+              }}
+              alt=""
+              width={25}
+              height={25}
+            />
+            {data?.Duration}
+          </div>
         </div>
       )}
       <hr className="border-t-4 border-red-300 mt-4" />
@@ -100,7 +114,12 @@ const AudioProfileContainer = ({
             <CallInfo data1={data1} data={data} check={check} type={type} />
           )}
           {activeTitle === 1 && (
-            <CommentsAndNotes data={data} notesData={data} refresh={refresh} type={type} />
+            <CommentsAndNotes
+              data={data}
+              notesData={data}
+              refresh={refresh}
+              type={type}
+            />
           )}
           {activeTitle === 2 && (
             <Coaching data={data} refresh={refresh} type={type} />

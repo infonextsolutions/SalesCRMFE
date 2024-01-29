@@ -109,19 +109,19 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
           Info
         </p>
         <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium w-[50%] mr-4">Gender</p>
+          <p className="text-sm font-medium w-[40%] mr-4">Gender</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.customerId?.customer_gender}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Phone</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-4">Phone</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.customerId?.customer_contact}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Email</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-4">Email</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.customerId?.customer_email}
           </p>
@@ -129,38 +129,38 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Company Info
         </p>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Company Name</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-4">Company Name</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_name}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Company Addrsss</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-4">Company Addrsss</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_address}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Website link</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-4">Website link</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_website_url}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Industry Type</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-4">Industry Type</p>
           <p className="text-sm font-semibold text-black">
             {data?.result?.companyId?.company_product_category}
           </p>
         </div>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium"> Social Media</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[40%] mr-4"> Social Media</p>
           <p className="text-sm font-semibold text-black flex">
-            {data?.result?.companyId?.company_socialMedia1 && (
-              <a href={data?.companyId?.company_socialMedia1Url}>
+            {data?.result?.customerId?.customer_socialMedia1 && (
+              <a href={data?.result?.customerId?.customer_socialMedia1Url}>
                 <Image
                   src={getBasicIcon(
-                    data?.result?.companyId?.company_socialMedia1
+                    data?.result?.customerId?.customer_socialMedia1
                   )}
                   className={`w-[20px] svg-grey mr-2`}
                   alt=""
@@ -172,11 +172,11 @@ const ClientPocProfile = ({ data1, refresh }: any) => {
                 />
               </a>
             )}
-            {data?.result?.companyId?.company_socialMedia2 && (
-              <a href={data?.companyId?.company_socialMedia2Url}>
+            {data?.result?.customerId?.customer_socialMedia2 && (
+              <a href={data?.result?.customerId?.customer_socialMedia1Url}>
                 <Image
                   src={getBasicIcon(
-                    data?.result?.companyId?.company_socialMedia2
+                    data?.result?.customerId?.customer_socialMedia2
                   )}
                   className={`w-[20px] svg-grey mr-2`}
                   alt=""

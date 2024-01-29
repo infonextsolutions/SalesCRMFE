@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 const CallInfo = ({ check, data, data1, refresh, type }: any) => {
-  console.log('-------------- call info -------------', data, data1)
+  console.log("-------------- call info -------------", data, data1);
   const activeTitle = 0;
   // const [edit, setEdit] = useState(false);
   // const [bool, setBool] = useState(true);
@@ -51,24 +51,28 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
   return (
     <div>
       <div className="flex justify-between">
-      <h4 className="text-2xl font-semibold capitalize pl-7">
-        {type === "MEETING" ? data?.title : data?.activeCall?.call_title}
-      </h4>
-      {type === "MEETING" && <h5 className="text-xl font-semibold capitalize pl-7">{data?.location}</h5>}
+        <h4 className="text-2xl font-semibold capitalize pl-7">
+          {type === "MEETING" ? data?.title : data?.activeCall?.call_title}
+        </h4>
+        {type === "MEETING" && (
+          <h5 className="text-xl font-semibold capitalize pl-7">
+            {data?.location}
+          </h5>
+        )}
       </div>
 
       <div className="pl-[30px]">
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Call Id - {type === "MEETING" ? data?._id :data?.activeCall?.callId}
+          Call Id - {type === "MEETING" ? data?._id : data?.activeCall?.callId}
         </p>
-        <div className="text-[#8A9099] flex justify-between w-9/12  mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">LEAD ID</p>
+        <div className="text-[#8A9099] flex  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">LEAD ID</p>
           <p className="text-sm font-semibold text-black">
             {data1?.leadId || "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Lead Title</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">Lead Title</p>
           <p className="text-sm font-semibold text-black">
             {data1?.lead_title || "-"}
           </p>
@@ -76,40 +80,46 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
         <p className="border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[22px] text-[20px] font-medium">
           INFO
         </p>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium"> Company Name</p>
+        <div className="text-[#8A9099]  flex  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4"> Company Name</p>
           <p className="text-sm font-semibold text-black">
             {data1?.companyId?.company_name ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Client POC</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">Client POC</p>
           <p className="text-sm font-semibold text-black">
             {data1?.customerId?.customer_name ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Product/Service</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">Product/Service</p>
           <p className="text-sm font-semibold text-black">
             {data1?.companyId?.company_product_category}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Lead Stage</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">Lead Stage</p>
           <p className="text-sm font-semibold text-black">{data1?.leadStage}</p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Call Type</p>
-          <p className="text-sm font-semibold text-black">{type === "MEETING" ? data?.type :data?.activeCall?.call_type ?? "-"}</p>
-        </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Call Description</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">Call Type</p>
           <p className="text-sm font-semibold text-black">
-            {type === "MEETING" ? data?.description : data?.activeCall?.call_discription ?? "-"}
+            {type === "MEETING"
+              ? data?.type
+              : data?.activeCall?.call_type ?? "-"}
           </p>
         </div>
-        <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium">Call Disposition</p>
+        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">Call Description</p>
+          <p className="text-sm font-semibold text-black">
+            {type === "MEETING"
+              ? data?.description
+              : data?.activeCall?.call_discription ?? "-"}
+          </p>
+        </div>
+        <div className="text-[#8A9099] flex  mt-[7px] leading-[21px]">
+          <p className="text-sm font-medium w-[50%] mr-4">Call Disposition</p>
           <p className="text-sm font-semibold text-black">
             {data?.activeCall?.call_disposition ?? "-"}
           </p>
@@ -120,17 +130,21 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
           <p className="border-b-2 w-3/4 pb-2 border-red-400 text-[#3F434A] text-[20px] font-medium leading-[22px]">
             CALL PARTICIPANTS
           </p>
-          <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-            <p className="text-sm font-medium">Call Owner</p>
+          <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium w-[50%] mr-4">Call Owner</p>
             <p className="text-sm font-semibold text-black">
               {data1?.owners?.[0]?.name ?? "-"}
             </p>
           </div>
-          <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-            <p className="text-sm font-medium">Call Participant</p>
-            <div className="flex flex-col items-end">
-              <p className="text-sm font-semibold text-black">{data1?.customerId?.customer_name ?? "-"}</p>
-              <p className="text-sm font-semibold text-grey">{data1?.customerId?.customer_designation ?? "-"}</p>
+          <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium w-[50%] mr-4">Call Participant</p>
+            <div className="">
+              <p className="text-sm font-semibold text-black">
+                {data1?.customerId?.customer_name ?? "-"}
+              </p>
+              <p className="text-sm font-semibold text-grey">
+                {data1?.customerId?.customer_designation ?? "-"}
+              </p>
             </div>
           </div>
         </div>
@@ -146,39 +160,47 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
               <p className="border-b-2 w-3/4 pb-2 border-red-400 text-[#3F434A] text-[20px] font-medium leading-[22px]">
                 CALL METRICS
               </p>
-              <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-                <p className="text-sm font-medium">Talk/Listen Ratio</p>
+              <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+                <p className="text-sm font-medium w-[50%] mr-4">
+                  Talk/Listen Ratio
+                </p>
                 <p className="text-sm font-semibold text-black">
                   {data?.talkRatio || "-"}
                 </p>
               </div>
             </div>
-            <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium">Longest Monologue</p>
+            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+              <p className="text-sm font-medium w-[50%] mr-4">
+                Longest Monologue
+              </p>
               <p className="text-sm font-semibold text-black">
                 {data?.longestMonologue || "-"}
               </p>
             </div>
-            <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium">Filler words per minute</p>
+            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+              <p className="text-sm font-medium w-[50%] mr-4">
+                Filler words per minute
+              </p>
               <p className="text-sm font-semibold text-black">
                 {data?.fillerWords || "-"}
               </p>
             </div>
-            <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium">Interactivity</p>
+            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+              <p className="text-sm font-medium w-[50%] mr-4">Interactivity</p>
               <p className="text-sm font-semibold text-black">
                 {data?.interactivity || "-"}
               </p>
             </div>
-            <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium"> Next Steps</p>
+            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+              <p className="text-sm font-medium w-[50%] mr-4"> Next Steps</p>
               <p className="text-sm font-semibold text-black">
                 {data?.nextSteps || "-"}
               </p>
             </div>
-            <div className="text-[#8A9099] w-9/12 flex justify-between mt-[7px] leading-[21px]">
-              <p className="text-sm font-medium">Engaging questions</p>
+            <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+              <p className="text-sm font-medium w-[50%] mr-4">
+                Engaging questions
+              </p>
               <p className="text-sm font-semibold text-black">
                 {data?.engagingQuestions || "-"}
               </p>
