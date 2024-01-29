@@ -141,43 +141,48 @@ const CompanyProfile = ({ data1, refresh }: any) => {
             {data?.result?.companyId?.company_product_category}
           </p>
         </div>
-        <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
-          <p className="text-sm font-medium mr-4 w-[200px]"> Social Media</p>
-          <p className="text-sm font-semibold text-black flex">
-            {data?.result?.companyId?.company_socialMedia1 && (
-              <a href={data?.result?.companyId?.company_socialMedia1Url}>
-                <Image
-                  src={getBasicIcon(
-                    data?.result?.companyId?.company_socialMedia1
-                  )}
-                  className={`w-[20px] svg-grey mr-2`}
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              </a>
-            )}
-            {data?.result?.companyId?.company_socialMedia2 && (
-              <a href={data?.companyId?.company_socialMedia2Url}>
-                <Image
-                  src={getBasicIcon(
-                    data?.result?.companyId?.company_socialMedia2
-                  )}
-                  className={`w-[20px] svg-grey mr-2`}
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{
-                    objectFit: "contain",
-                  }}
-                />
-              </a>
-            )}
-          </p>
-        </div>
+        {data?.result?.companyId?.company_socialMedia1 ||
+        data?.result?.companyId?.company_socialMedia2 ? (
+          <div className="text-[#8A9099] flex mt-[7px] leading-[21px]">
+            <p className="text-sm font-medium mr-4 w-[200px]"> Social Media</p>
+            <p className="text-sm font-semibold text-black flex">
+              {data?.result?.companyId?.company_socialMedia1 && (
+                <a href={data?.result?.companyId?.company_socialMedia1Url}>
+                  <Image
+                    src={getBasicIcon(
+                      data?.result?.companyId?.company_socialMedia1
+                    )}
+                    className={`w-[20px] svg-grey mr-2`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+              )}
+              {data?.result?.companyId?.company_socialMedia2 && (
+                <a href={data?.companyId?.company_socialMedia2Url}>
+                  <Image
+                    src={getBasicIcon(
+                      data?.result?.companyId?.company_socialMedia2
+                    )}
+                    className={`w-[20px] svg-grey mr-2`}
+                    alt=""
+                    width={20}
+                    height={20}
+                    style={{
+                      objectFit: "contain",
+                    }}
+                  />
+                </a>
+              )}
+            </p>
+          </div>
+        ) : (
+          ""
+        )}
         <p className=" border-b-2 w-3/4 pb-2 border-red-400 mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
           Other Contact
         </p>
