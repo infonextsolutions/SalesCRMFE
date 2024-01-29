@@ -28,7 +28,9 @@ const AudioProfile = () => {
   const [audioFile, setAudioFile] = useState(null);
   const [makeCallModal, setCallModal] = useState(false);
   const [uploadModalStatus, setUploadModalStatus] = useState(false);
-  const [noToCall, setNoToCall] = useState(data?.result?.participants?.customer_contact);
+  const [noToCall, setNoToCall] = useState(
+    data?.result?.participants?.customer_contact
+  );
   const dispatch = useAppDispatch();
   const [accessToken, setAccessToken] = useState("");
   const cancelCall = () => {
@@ -56,27 +58,32 @@ const AudioProfile = () => {
 
   const getData = () => {
     try {
-      axios.get(
-        `https://sales365.trainright.fit/api/active-call/find-by-id?id=${id}`, {
-        headers: {
-          Authorization: accessToken
-        }
-      }
-      ).then((res1) => {
-        setDataa(res1.data);
-        axios.get(
-          `https://sales365.trainright.fit/api/call-script/active-call?activeCallId=${res1?.data?.result?._id}`, {
-          headers: {
-            Authorization: accessToken
+      axios
+        .get(
+          `https://sales365.trainright.fit/api/active-call/find-by-id?id=${id}`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        }
-        ).then((res2) => {
-          setScripts(res2.data);
-        });
-      }).catch((e) => { });
-    } catch (error) {
-
-    }
+        )
+        .then((res1) => {
+          setDataa(res1.data);
+          axios
+            .get(
+              `https://sales365.trainright.fit/api/call-script/active-call?activeCallId=${res1?.data?.result?._id}`,
+              {
+                headers: {
+                  Authorization: accessToken,
+                },
+              }
+            )
+            .then((res2) => {
+              setScripts(res2.data);
+            });
+        })
+        .catch((e) => {});
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -109,7 +116,9 @@ const AudioProfile = () => {
     formData.append("activeCallId", data1.result?._id);
     formData.append("file", audioFile);
     axios
-      .post("https://sales365.trainright.fit/api/recording/add-rc", formData, { headers: { Authorization: accessToken } })
+      .post("https://sales365.trainright.fit/api/recording/add-rc", formData, {
+        headers: { Authorization: accessToken },
+      })
       .then((e) => {
         setUploadModalStatus(false);
         dispatch(
@@ -134,9 +143,13 @@ const AudioProfile = () => {
       sid: callRes?.Sid,
       leadId: callRes?.leadId,
     };
-    axios.post(`https://sales365.trainright.fit/api/calling/call-status`, payload, { headers: { Authorization: accessToken } })
-      .then((res) => {
-      })
+    axios
+      .post(
+        `https://sales365.trainright.fit/api/calling/call-status`,
+        payload,
+        { headers: { Authorization: accessToken } }
+      )
+      .then((res) => {})
       .catch((err) => {
         dispatch(
           setError({
@@ -151,11 +164,12 @@ const AudioProfile = () => {
     const payload = {
       callTo: noToCall,
       id: data?.result?._id,
-      leadId: data?.result?.leadId?._id
-    }
-    axios.post(
-      `https://sales365.trainright.fit/api/calling/make-call?`, payload, { headers: { Authorization: accessToken } }
-    )
+      leadId: data?.result?.leadId?._id,
+    };
+    axios
+      .post(`https://sales365.trainright.fit/api/calling/make-call?`, payload, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         const call = res?.data?.result?.Call;
         setCallModal(false);

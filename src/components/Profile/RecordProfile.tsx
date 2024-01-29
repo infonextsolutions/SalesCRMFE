@@ -44,33 +44,33 @@ const RecordProfile = ({
   const UpdateCall = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data1?._id}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data1?._id}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       )
       .then((e) => {
         setActiveCall(e.data.result);
       })
-      .catch((e) => {
-      });
+      .catch((e) => {});
   };
 
   const UpdateData = async () => {
     const response = await axios
       .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.leadId?._id}`, {
-        headers: {
-          Authorization: accessToken
+        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.leadId?._id}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      }
       )
       .then((e) => {
         setData(e?.data?.result);
       })
-      .catch((e) => {
-      });
+      .catch((e) => {});
   };
 
   const timestamp = data1?.createdAt;
@@ -94,18 +94,19 @@ const RecordProfile = ({
     const date = new Date(ts);
     let hours = date.getHours();
     let minutes: string | number = date.getMinutes();
-    let ampm = hours >= 12 ? 'pm' : 'am';
+    let ampm = hours >= 12 ? "pm" : "am";
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes + " " + ampm;
     return strTime;
   }
 
   return (
     <div
-      className={`w-[${width ? width : "100%"
-        }]  bg-[#ffe3e170] rounded-xl p-[15px] pt-[30px]`}
+      className={`w-[${
+        width ? width : "100%"
+      }]  bg-[#ffe3e170] rounded-xl p-[15px] pt-[30px]`}
     >
       {live && (
         <div className="h-[440px] bg-[#EDEDED] flex justify-center items-center text-[#000000]">
@@ -114,7 +115,7 @@ const RecordProfile = ({
           </p>
         </div>
       )}
-            {data1?.companyId?.company_name && (
+      {data1?.companyId?.company_name && (
         <div className="w-[90%] flex justify-around">
           <div className="flex gap-2 text-[black]">
             <Image
@@ -166,7 +167,9 @@ const RecordProfile = ({
           {activeTitle === 0 && (
             <CallInfo check={check} data={data} data1={data1} info={info} />
           )}
-          {activeTitle === 1 && <Activityhistory data={data1} accessToken={accessToken} />}
+          {activeTitle === 1 && (
+            <Activityhistory data={data1} accessToken={accessToken} />
+          )}
           {activeTitle === 2 && (
             <Notes data={activeCall} refresh={UpdateCall} />
           )}

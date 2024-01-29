@@ -22,8 +22,8 @@ const AllocatedCalls = () => {
   const router = useRouter();
   const [columns, setColumns] = useState([
     {
-      width: 240,
-      left: 40,
+      width: 80,
+      left: 20,
       text: "Call ID",
       key: "call_id",
       checked: true,
@@ -442,12 +442,12 @@ const AllocatedCalls = () => {
     for (const filterKey of Object.keys(filters)) {
       const newFilter = {
         ...filters[filterKey],
-        value: typeof filters[filterKey].value === 'object' ? ["", ""] : "",
+        value: typeof filters[filterKey].value === "object" ? ["", ""] : "",
       };
       setFilters((currFIlters) => {
         return {
           ...currFIlters,
-          [filterKey]: newFilter
+          [filterKey]: newFilter,
         };
       });
     }
@@ -458,19 +458,37 @@ const AllocatedCalls = () => {
     if (search) {
       query += `search=${search}&`;
     }
-    if (filters?.productService?.value && filters?.productService?.value !== "") {
+    if (
+      filters?.productService?.value &&
+      filters?.productService?.value !== ""
+    ) {
       query += `product_service=${filters?.productService?.value}&`;
     }
-    if (filters?.allocatedOn?.value && (filters?.allocatedOn?.value[0] !== "" || filters?.allocatedOn?.value[1] !== "")) {
-      query += `call_start_and_end_date=${JSON.stringify(filters?.allocatedOn?.value)}&`;
+    if (
+      filters?.allocatedOn?.value &&
+      (filters?.allocatedOn?.value[0] !== "" ||
+        filters?.allocatedOn?.value[1] !== "")
+    ) {
+      query += `call_start_and_end_date=${JSON.stringify(
+        filters?.allocatedOn?.value
+      )}&`;
     }
-    if (filters?.reviewDueDate?.value && (filters?.reviewDueDate?.value[0] !== "" || filters?.reviewDueDate?.value[1] !== "")) {
-      query += `review_due_date=${JSON.stringify(filters?.reviewDueDate?.value)}&`;
+    if (
+      filters?.reviewDueDate?.value &&
+      (filters?.reviewDueDate?.value[0] !== "" ||
+        filters?.reviewDueDate?.value[1] !== "")
+    ) {
+      query += `review_due_date=${JSON.stringify(
+        filters?.reviewDueDate?.value
+      )}&`;
     }
     if (filters?.callType?.value && filters?.callType?.value !== "") {
       query += `call_type=${filters?.callType?.value}&`;
     }
-    if (filters?.callDisposition?.value && filters?.callDisposition?.value !== "") {
+    if (
+      filters?.callDisposition?.value &&
+      filters?.callDisposition?.value !== ""
+    ) {
       query += `call_disposition=${filters?.callDisposition?.value}&`;
     }
     if (filters?.callDuration?.value && filters?.callDuration?.value !== "") {
@@ -498,7 +516,10 @@ const AllocatedCalls = () => {
               data?.map((item, index) => {
                 let row = [
                   {
-                    text: item?._id || "-",
+                    // text: item?._id || "-",
+                    text:
+                      parseInt(item?._id.replace(/\D/g, "").substr(0, 4)) ||
+                      "-",
                     link: `/calls/recorded-calls/${item?._id}/audio-call`,
                   },
                   {
@@ -547,15 +568,19 @@ const AllocatedCalls = () => {
                     text: formatDateToCustomFormat(item?.qaAllocatedAt) || "",
                   }, // allocated on
                   { text: item?.callId || "NA" }, // review due date
-                  { text: formatDateToCustomFormat(item?.leadId?.[0]?.updatedAt) || "-" }, // last updated on
+                  {
+                    text:
+                      formatDateToCustomFormat(item?.leadId?.[0]?.updatedAt) ||
+                      "-",
+                  }, // last updated on
                 ];
                 return row;
               })
             );
           })
-          .catch((err) => { });
+          .catch((err) => {});
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -583,12 +608,17 @@ const AllocatedCalls = () => {
       if (filters[filterKey].label === filter.label) {
         const newFilter = {
           ...filters[filterKey],
-          value: idx === -1 ? val : idx === 0 ? [val, filters[filterKey].value[1]] : [filters[filterKey].value[0], val],
+          value:
+            idx === -1
+              ? val
+              : idx === 0
+              ? [val, filters[filterKey].value[1]]
+              : [filters[filterKey].value[0], val],
         };
         setFilters((currFIlters) => {
           return {
             ...currFIlters,
-            [filterKey]: newFilter
+            [filterKey]: newFilter,
           };
         });
       }
