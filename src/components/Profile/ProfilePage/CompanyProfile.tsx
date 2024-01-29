@@ -4,6 +4,7 @@ import Image from "next/image";
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
 import axios from "axios";
+import { baseUrl } from "@/utils/baseUrl";
 
 const CompanyProfile = ({ data1, refresh }: any) => {
   const [edit, setEdit] = useState(false);
@@ -37,14 +38,11 @@ const CompanyProfile = ({ data1, refresh }: any) => {
   const UpdateData = async () => {
     setTimeout(async () => {
       const response = await axios
-        .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.result?._id}`,
-          {
-            headers: {
-              Authorization: accessToken,
-            },
-          }
-        )
+        .get(`${baseUrl}api/leads/find-by-id?id=${data1?.result?._id}`, {
+          headers: {
+            Authorization: accessToken,
+          },
+        })
         .then((e) => {
           setData(e.data);
           refresh(e.data?.result?.companyId?.company_name);

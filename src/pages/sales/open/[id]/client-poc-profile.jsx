@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavbarWithButton from "@/components/app/Navbar/NavbarWithButton";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 
 const ClientProfile = () => {
   const [data, setData] = useState({});
@@ -20,7 +21,7 @@ const ClientProfile = () => {
 
   useEffect(() => {
     axios
-      .get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
+      .get(`${baseUrl}api/leads/find-by-id?id=${id}`, {
         headers: {
           Authorization: accessToken,
         },

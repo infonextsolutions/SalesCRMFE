@@ -10,6 +10,7 @@ import Questionnaire from "../View/Questionnaire/Index";
 import { data } from "../analysis/Call/Tree/data";
 import axios from "axios";
 import Navigation from "../app/Navigation";
+import { baseUrl } from "@/utils/baseUrl";
 
 const RecordProfile = ({
   titles,
@@ -43,14 +44,11 @@ const RecordProfile = ({
 
   const UpdateCall = async () => {
     const response = await axios
-      .get(
-        `https://sales365.trainright.fit/api/active-call/find-by-id?id=${data1?._id}`,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      )
+      .get(`${baseUrl}api/active-call/find-by-id?id=${data1?._id}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((e) => {
         setActiveCall(e.data.result);
       })
@@ -59,14 +57,11 @@ const RecordProfile = ({
 
   const UpdateData = async () => {
     const response = await axios
-      .get(
-        `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1?.leadId?._id}`,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      )
+      .get(`${baseUrl}api/leads/find-by-id?id=${data1?.leadId?._id}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
       .then((e) => {
         setData(e?.data?.result);
       })

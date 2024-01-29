@@ -13,6 +13,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
+import { baseUrl } from "@/utils/baseUrl";
 
 const LeadsTable = ({
   totalRecords,
@@ -41,7 +42,7 @@ const LeadsTable = ({
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/leads/leadsForAllocation?id=${qaid}&limit=${limit}&page=${pageNumber}${queryStr}`,
+          `${baseUrl}api/leads/leadsForAllocation?id=${qaid}&limit=${limit}&page=${pageNumber}${queryStr}`,
           {
             headers: { Authorization: accessToken },
           }
@@ -60,7 +61,7 @@ const LeadsTable = ({
   const getallItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/leadsForAllocation?id=${qaid}&limit=${limit}&page=${current}${queryStr}`,
+        `${baseUrl}api/leads/leadsForAllocation?id=${qaid}&limit=${limit}&page=${current}${queryStr}`,
         {
           headers: {
             Authorization: accessToken,
@@ -80,7 +81,7 @@ const LeadsTable = ({
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/leadsForAllocation?id=${qaid}${queryStr}`,
+          `${baseUrl}api/leads/leadsForAllocation?id=${qaid}${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -119,7 +120,7 @@ const LeadsTable = ({
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/leadsForAllocation?id=${qaid}&limit=${limit}&page=${current}`,
+        `${baseUrl}api/leads/leadsForAllocation?id=${qaid}&limit=${limit}&page=${current}`,
         {
           headers: {
             Authorization: accessToken,

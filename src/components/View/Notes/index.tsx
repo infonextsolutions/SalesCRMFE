@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 import { MdOutlineCancel } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
+import { baseUrl } from "@/utils/baseUrl";
 const AddText = ({ top, title, width, textarea, change }: any) => {
   return (
     <div
@@ -82,7 +83,7 @@ const Notes = ({ cancel, leadid, update }: any) => {
       title: title,
       content: content,
     };
-    const url = "https://sales365.trainright.fit/api/leads/notes";
+    const url = `${baseUrl}api/leads/notes`;
     axios
       .post(url, body, { headers: { Authorization: accessToken } })
       .then((e: any) => {

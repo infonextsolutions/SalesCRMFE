@@ -13,6 +13,7 @@ import {
 } from "@/utils/AssetsHelper";
 import axios from "axios";
 import Spinner from "@/components/loader/spinner";
+import { baseUrl } from "@/utils/baseUrl";
 
 const LeadsTable = ({ totalRecords, search, queryStr, reload }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
@@ -36,7 +37,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, reload }: any) => {
     function () {
       axios
         .get(
-          `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${0}&leadStatus=Open&${queryStr}`,
+          `${baseUrl}api/leads/find-all?limit=${limit}&page=${0}&leadStatus=Open&${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -58,7 +59,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, reload }: any) => {
   const getallItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open&${queryStr}`,
+        `${baseUrl}api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open&${queryStr}`,
         {
           headers: {
             Authorization: accessToken,
@@ -82,7 +83,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, reload }: any) => {
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open&${queryStr}`,
+          `${baseUrl}api/leads/find-all?leadStatus=Open&${queryStr}`,
           {
             headers: {
               Authorization: accessToken,
@@ -121,7 +122,7 @@ const LeadsTable = ({ totalRecords, search, queryStr, reload }: any) => {
   const fetchItems = async (current: any) => {
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open&${queryStr}`,
+        `${baseUrl}api/leads/find-all?limit=${limit}&page=${current}&leadStatus=Open&${queryStr}`,
         {
           headers: {
             Authorization: accessToken,

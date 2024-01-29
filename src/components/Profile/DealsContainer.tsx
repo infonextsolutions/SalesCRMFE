@@ -10,6 +10,7 @@ import EmailPage from "../View/Email/index";
 import Messages from "@/components/View/messages";
 import ActiveCall from "@/components/View/active-call-add";
 import axios from "axios";
+import { baseUrl } from "@/utils/baseUrl";
 
 const QuickActions = ({
   width,
@@ -199,7 +200,7 @@ const Deals = ({ data, type }: any) => {
   useEffect(() => {
     axios
       .get(
-        `https://sales365.trainright.fit/api/leads/getDeals?id=${
+        `${baseUrl}api/leads/getDeals?id=${
           type === "company"
             ? data?.result?.companyId?._id
             : data?.result?.customerId?._id

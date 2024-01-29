@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "@/components/app/Navbar/Navbar";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 
 const CompanyProfile = () => {
   const [data, setData] = useState({});
@@ -24,7 +25,7 @@ const CompanyProfile = () => {
 
   useEffect(() => {
     axios
-      .get(`https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
+      .get(`${baseUrl}api/leads/find-by-id?id=${id}`, {
         headers: {
           Authorization: accessToken,
         },

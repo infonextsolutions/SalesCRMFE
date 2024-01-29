@@ -14,6 +14,7 @@ import Link from "next/link";
 import { setError, setSuccess } from "@/store/ai";
 import { useAppDispatch } from "@/store/store";
 import AuthFooter from "@/components/utils/AuthFooter";
+import { baseUrl } from "@/utils/baseUrl";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string().email("Invalid email").required("Required"),
@@ -35,10 +36,9 @@ const ForgotPassword = () => {
       email: user.toLowerCase(),
     };
     axios
-      .post(
-        "https://sales365.trainright.fit/api/master-users/forgotPassword",
-        finalPayload, { headers: { Authorization: accessToken } }
-      )
+      .post(`${baseUrl}api/master-users/forgotPassword`, finalPayload, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         if (res?.data?.success) {
           dispatch(

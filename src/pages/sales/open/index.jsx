@@ -7,6 +7,7 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import BigSpinner from "@/components/loader/BigSpinner";
 import { ExotelKey, ExotelToken } from "@/utils/urlHelper";
 import Navbar from "@/components/app/Navbar/Navbar";
+import { baseUrl } from "@/utils/baseUrl";
 
 const SalesOpen = React.lazy(() => import("@/views/sales/open"));
 
@@ -31,33 +32,36 @@ export default function Open() {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      "https://sales365.trainright.fit/api/leads/find-all?leadStatus=Open", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setData(res.data);
-    }).catch((e) => { });
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/find-all", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setMastersData(res.data);
-    }).catch((e) => { });
-    axios.get(
-      "https://sales365.trainright.fit/api/master-users/getTeamManagerList", {
-      headers: {
-        Authorization: accessToken
-      }
-    }
-    ).then((res) => {
-      setTmData(res.data);
-    }).catch((e) => { });
+    axios
+      .get(`${baseUrl}api/leads/find-all?leadStatus=Open`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((e) => {});
+    axios
+      .get(`${baseUrl}api/master-users/find-all`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setMastersData(res.data);
+      })
+      .catch((e) => {});
+    axios
+      .get(`${baseUrl}api/master-users/getTeamManagerList`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        setTmData(res.data);
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   React.useEffect(() => {
@@ -65,7 +69,7 @@ export default function Open() {
       // const res = axios.post(
       //   `https://${ExotelKey}:${ExotelToken}@api.exotel.com/v3/accounts/westoryboard1/calls`,
       //   {
-      //     from: {  
+      //     from: {
       //       contact_uri: "+9199XXXXXXX",
       //       state_management: "true",
       //     },
@@ -113,7 +117,11 @@ export default function Open() {
           <BigSpinner />
         ) : (
           <Suspense fallback={<BigSpinner />}>
-            <SalesOpen data={data} mastersData={mastersData} teamManagersData={tmData} />
+            <SalesOpen
+              data={data}
+              mastersData={mastersData}
+              teamManagersData={tmData}
+            />
           </Suspense>
         )}
       </Suspense>

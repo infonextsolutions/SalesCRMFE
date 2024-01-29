@@ -1,3 +1,5 @@
+import { baseUrl } from "../../utils/baseUrl";
+
 export const ALLOCATED_CALL = {
   name: "Allocated Call",
   className: "klk",
@@ -11,7 +13,7 @@ export const ALLOCATED_CALL = {
         {
           type: "CUSTOMTABLE",
           actions: [],
-          api: "https://sales365.trainright.fit/api/active-call/find-all",
+          api: `${baseUrl}api/active-call/find-all`,
           tableItems: [
             {
               property: "callID",
@@ -76,8 +78,7 @@ export const ALLOCATED_CALL = {
             {
               property: "lastUpdateOn",
             },
-          ]
-          ,
+          ],
           tableHeaders: [
             {
               text: "Call ID",
@@ -153,9 +154,9 @@ export const ALLOCATED_CALL = {
               onClickApi: "API call on click",
               options: [
                 { label: "Open", value: "Open" },
-                { label: "Close", value: "Close" }
+                { label: "Close", value: "Close" },
                 // add more filter options
-              ]
+              ],
             },
             {
               type: "select",
@@ -166,9 +167,9 @@ export const ALLOCATED_CALL = {
               onClickApi: "API call on click",
               options: [
                 { label: "Product A", value: "Product A" },
-                { label: "Product B", value: "Product B" }
+                { label: "Product B", value: "Product B" },
                 // add more filter options
-              ]
+              ],
             },
             {
               type: "select",
@@ -179,9 +180,9 @@ export const ALLOCATED_CALL = {
               onClickApi: "API call on click",
               options: [
                 { label: "Follow Up", value: "Follow Up" },
-                { label: "Folllow Up 2", value: "Follow Up 2" }
+                { label: "Folllow Up 2", value: "Follow Up 2" },
                 // add more filter options
-              ]
+              ],
             },
             {
               type: "select",
@@ -192,9 +193,9 @@ export const ALLOCATED_CALL = {
               onClickApi: "API call on click",
               options: [
                 { label: "Open", value: "Open" },
-                { label: "Close", value: "Close" }
+                { label: "Close", value: "Close" },
                 // add more filter options
-              ]
+              ],
             },
             {
               type: "slider",
@@ -204,7 +205,7 @@ export const ALLOCATED_CALL = {
               className: "filer-class-1",
               onClickApi: "API call on click",
               minMaxCalue: [0, 60],
-              step: 1
+              step: 1,
             },
             {
               type: "multiDatePicker",
@@ -212,7 +213,7 @@ export const ALLOCATED_CALL = {
               name: "feedbackRequestedOn",
               label: "Feedback Requested On",
               className: "filer-class-1",
-              onClickApi: "API call on click"
+              onClickApi: "API call on click",
             },
             {
               type: "multiDatePicker",
@@ -220,8 +221,8 @@ export const ALLOCATED_CALL = {
               name: "reviewDueDate",
               label: "Review Due Date",
               className: "filer-class-1",
-              onClickApi: "API call on click"
-            }
+              onClickApi: "API call on click",
+            },
           ],
           className:
             "w-[100%] h-auwpabw  overflow-y-auto pl-[20px] pr-[30px] pt-[20px]",

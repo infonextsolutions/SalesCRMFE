@@ -5,6 +5,7 @@ import Navigation from "@/components/app/Navigation";
 // import LeadProfileContainer from "@/components/Profile/LeadProfileContainer";
 import FormEditContainer from "./FormEditContainer";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 // FormEditContainer
 
 const AddDropDown = ({ top, title, width, list, change }: any) => {
@@ -62,8 +63,23 @@ const AddText = ({ top, title, width, change }: any) => {
   );
 };
 
-const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; data: any; update: () => void; title?: any; mastersData: any }) => {
-  console.log('============================ EditLead ----------------------', data);
+const EditLead = ({
+  cancel,
+  data,
+  update,
+  title,
+  mastersData,
+}: {
+  cancel: any;
+  data: any;
+  update: () => void;
+  title?: any;
+  mastersData: any;
+}) => {
+  console.log(
+    "============================ EditLead ----------------------",
+    data
+  );
   const titles = ["LEAD INFO", "CONTACT INFO", "DEAL INFO"];
   const [content, setContent] = useState<any>({});
   const router = useRouter();
@@ -111,17 +127,20 @@ const EditLead = ({ cancel, data, update, title, mastersData }: { cancel: any; d
   //   source
   // );
   const submit = () => {
-    const url = "https://sales365.trainright.fit/api/leads/update";
+    const url = `${baseUrl}api/leads/update`;
     axios
-      .put(url, {
-        id: data._id,
-        lead_title: content.lead_title,
-        companyId: data.companyId._id,
-        customerId: data.customerId._id,
-
-      }, { headers: { Authorization: accessToken } })
-      .then((e: any) => {
-      }).catch((e: any) => { });
+      .put(
+        url,
+        {
+          id: data._id,
+          lead_title: content.lead_title,
+          companyId: data.companyId._id,
+          customerId: data.customerId._id,
+        },
+        { headers: { Authorization: accessToken } }
+      )
+      .then((e: any) => {})
+      .catch((e: any) => {});
   };
 
   return (

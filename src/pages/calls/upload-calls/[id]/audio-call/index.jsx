@@ -12,6 +12,7 @@ import { useAppDispatch } from "@/store/store";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useRouter } from "next/router";
 import { setLoggedInStatus, setUser1 } from "@/store/auth";
+import { baseUrl } from "@/utils/baseUrl";
 //Manya will make this page
 
 const CallProfile = () => {
@@ -35,17 +36,18 @@ const CallProfile = () => {
 
   useEffect(() => {
     try {
-      axios.post(
-        `https://sales365.trainright.fit/api/recording/getManualRecording`,
-        {
-          transId: id,
-        }, { headers: { Authorization: accessToken } }
-      ).then((res) => {
-        setData(res.data);
-      });
-    } catch (error) {
-
-    }
+      axios
+        .post(
+          `${baseUrl}api/recording/getManualRecording`,
+          {
+            transId: id,
+          },
+          { headers: { Authorization: accessToken } }
+        )
+        .then((res) => {
+          setData(res.data);
+        });
+    } catch (error) {}
   }, [accessToken]);
 
   const showFull = () => {
@@ -183,7 +185,7 @@ export default CallProfile;
 
 // export async function getServerSideProps({ query, params }: any) {
 //   const response = await axios.post(
-//     `https://sales365.trainright.fit/api/recording/getManualRecording`,
+//     `${baseUrl}api/recording/getManualRecording`,
 //     {
 //       transId: params.id,
 //     }

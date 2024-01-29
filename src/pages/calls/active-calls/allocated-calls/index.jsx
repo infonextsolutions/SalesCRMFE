@@ -13,6 +13,7 @@ import * as XLSX from "xlsx";
 import Backdrop from "@/components/View/Backdrop";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import BigSpinner from "@/components/loader/BigSpinner";
+import { baseUrl } from "@/utils/baseUrl";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -504,7 +505,7 @@ const AllocatedCalls = () => {
         const userId = localStorage.getItem("user-id");
         axios
           .get(
-            `https://sales365.trainright.fit/api/qa/callForReview?qaStatus=allocated&qaId=${userId}&page=${page}&limit=${limit}&${newQuery}`,
+            `${baseUrl}api/qa/callForReview?qaStatus=allocated&qaId=${userId}&page=${page}&limit=${limit}&${newQuery}`,
             { headers: { Authorization: accessToken } }
           )
           .then((res) => {
@@ -761,7 +762,7 @@ const AllocatedCalls = () => {
 
 // export async function getServerSideProps({ query, ...params }: any) {
 //     const response = await axios.get(
-//         "https://sales365.trainright.fit/api/active-call/find-all"
+//         `${baseUrl}api/active-call/find-all`
 //     );
 //     return {
 //         props: {

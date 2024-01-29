@@ -6,6 +6,7 @@ import Notesd from "./notedummy";
 import axios from "axios";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Note = ({ title, content, date }: any) => {
   return (
@@ -55,14 +56,18 @@ const Notes = ({ data, refresh }: any) => {
   const cancelNotes = (e: any) => {
     if (e) {
       // setList([...list, e]);
-      const url = "https://sales365.trainright.fit/api/calling/notes";
+      const url = `${baseUrl}api/calling/notes`;
       const { title, content } = e;
       axios
-        .post(url, {
-          title: title,
-          content: content,
-          callId: data?._id,
-        }, { headers: { Authorization: accessToken } })
+        .post(
+          url,
+          {
+            title: title,
+            content: content,
+            callId: data?._id,
+          },
+          { headers: { Authorization: accessToken } }
+        )
         .then((e) => {
           if (containerRef.current) {
             containerRef.current.scrollTop = 0; // Set scrollTop to 0 to scroll to the top

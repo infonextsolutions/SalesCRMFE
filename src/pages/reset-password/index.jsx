@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
 import AuthFooter from "@/components/utils/AuthFooter";
+import { baseUrl } from "@/utils/baseUrl";
 
 const SignupSchema = Yup.object().shape({
   user: Yup.string().email("Invalid email").required("Required"),
@@ -54,10 +55,9 @@ const ResetPassword = () => {
       token: token,
     };
     axios
-      .post(
-        "https://sales365.trainright.fit/api/master-users/reset_password",
-        finalPayload, { headers: { Authorization: accessToken } }
-      )
+      .post(`${baseUrl}api/master-users/reset_password`, finalPayload, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         if (res?.data?.success) {
           appDispatch(

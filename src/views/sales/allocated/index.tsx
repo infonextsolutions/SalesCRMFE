@@ -17,6 +17,7 @@ import DropDown3 from "@/utils/Button/DropDown3";
 import { getBasicIcon } from "@/utils/AssetsHelper";
 import { useAppDispatch } from "@/store/store";
 import { setError, setSuccess } from "@/store/ai";
+import { baseUrl } from "@/utils/baseUrl";
 
 const dummyItem = {
   companyName: "ABC Corp",
@@ -181,7 +182,7 @@ const SalesOpen = ({
   const makecall = async () => {
     try {
       const res = await axios.post(
-        "https://sales365.trainright.fit/api/calling/make-call",
+        `${baseUrl}api/calling/make-call`,
         {
           callTo: "7669481778",
         },
@@ -224,11 +225,9 @@ const SalesOpen = ({
             owner: newOwnerId,
           };
           axios
-            .post(
-              `https://sales365.trainright.fit/api/leads/allocateLeadToOwner`,
-              payload,
-              { headers: { Authorization: accessToken } }
-            )
+            .post(`${baseUrl}api/leads/allocateLeadToOwner`, payload, {
+              headers: { Authorization: accessToken },
+            })
             .then((res: any) => {
               dispatch(
                 setSuccess({

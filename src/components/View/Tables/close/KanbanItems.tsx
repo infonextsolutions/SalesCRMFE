@@ -10,6 +10,7 @@ import Notes1 from "../../NotesSalesView";
 import Messages from "../../messages";
 import axios from "axios";
 import ActiveCall from "@/components/View/active-call-add";
+import { baseUrl } from "@/utils/baseUrl";
 
 const KanbanItem = ({ item, i, Item }: any) => {
   const { pathname, replace, push } = useRouter();
@@ -188,13 +189,11 @@ const KanbanItem = ({ item, i, Item }: any) => {
   const update = async () => {
     setTimeout(async () => {
       const response = await axios
-        .get(
-          `https://sales365.trainright.fit/api/leads/find-by-id?id=${Item?._id}`, {
+        .get(`${baseUrl}api/leads/find-by-id?id=${Item?._id}`, {
           headers: {
-            Authorization: accessToken
-          }
-        }
-        )
+            Authorization: accessToken,
+          },
+        })
         .then((e) => {
           const history = e.data.result.activityId.history;
           let calls = 0;
@@ -217,8 +216,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
             email: emails,
           });
         })
-        .catch((e) => {
-        });
+        .catch((e) => {});
     });
   };
 
@@ -246,7 +244,7 @@ const KanbanItem = ({ item, i, Item }: any) => {
               companyId();
             }}
           >
-            {Item.companyId.company_name} |{" "}{Item?.companyId.company_location}
+            {Item.companyId.company_name} | {Item?.companyId.company_location}
           </p>
           <p
             className="text-black/60 cursor-pointer"
@@ -263,16 +261,16 @@ const KanbanItem = ({ item, i, Item }: any) => {
             <p className="text-black/[.75]">
               {activity
                 ? activity.history.length > 0 &&
-                (activity.history[activity.history.length - 1].type === "note"
-                  ? "Note added"
-                  : "Email Sent")
+                  (activity.history[activity.history.length - 1].type === "note"
+                    ? "Note added"
+                    : "Email Sent")
                 : ""}{" "}
               {activity ? "|" : "-"}{" "}
               {activity
                 ? activity.history.length > 0 &&
-                convertToFormattedDate(
-                  activity.history[activity.history.length - 1].createdAt
-                )
+                  convertToFormattedDate(
+                    activity.history[activity.history.length - 1].createdAt
+                  )
                 : ""}
             </p>
           </div>
@@ -440,7 +438,11 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {events && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Events cancel={cancelEvents} companyName={Item?.companyId?.company_name} data={Item} />
+          <Events
+            cancel={cancelEvents}
+            companyName={Item?.companyId?.company_name}
+            data={Item}
+          />
         </Backdrop>
       )}
       {emails && (
@@ -461,7 +463,11 @@ const KanbanItem = ({ item, i, Item }: any) => {
       )}
       {messages && (
         <Backdrop bool={bool} pad={"50px 0"}>
-          <Messages cancel={cancelMessages} companyName={Item?.companyId?.company_name} data={Item} />
+          <Messages
+            cancel={cancelMessages}
+            companyName={Item?.companyId?.company_name}
+            data={Item}
+          />
         </Backdrop>
       )}
       {call && (

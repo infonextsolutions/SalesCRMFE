@@ -1,6 +1,7 @@
 import Backdrop from "@/components/View/Backdrop/Center";
 import EditLead from "@/components/View/EditLead";
 import { getBasicIcon } from "@/utils/AssetsHelper";
+import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -28,7 +29,7 @@ const CallInfo = ({ check, data, data1, refresh, type }: any) => {
   // const UpdateData = async () => {
   //   const response = await axios
   //     .get(
-  //       `https://sales365.trainright.fit/api/leads/find-by-id?id=${data1._id}`
+  // `${baseUrl}api/leads/find-by-id?id=${data1._id}`
   //     )
   //     .then((e) => {
   //       setData(e.data);

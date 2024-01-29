@@ -12,6 +12,7 @@ import {
   RightArrow,
 } from "@/utils/AssetsHelper";
 import axios from "axios";
+import { baseUrl } from "@/utils/baseUrl";
 const PerformenceTable = ({ totalRecords, filter }: any) => {
   const [pageCount, setpageCount]: any = useState(0);
   const [pageNumber, setpageNumber]: any = useState(0);
@@ -32,10 +33,10 @@ const PerformenceTable = ({ totalRecords, filter }: any) => {
       if (pageNumber >= count && pageCount != 0) setpageNumber(0);
       const getItems = async () => {
         // const res = await fetch(
-        //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${pageNumber}`
+        //   `${baseUrl}api/leads/find-all?limit=${limit}&page=${pageNumber}`
         // );
         const res = await axios.get(
-          `https://sales365.trainright.fit/api/lead-report/find-all?limit=${limit}&page=${pageNumber}`,
+          `${baseUrl}api/lead-report/find-all?limit=${limit}&page=${pageNumber}`,
           {
             headers: {
               Authorization: accessToken,
@@ -55,11 +56,11 @@ const PerformenceTable = ({ totalRecords, filter }: any) => {
 
   const fetchItems = async (current: any) => {
     // const res = await fetch(
-    //   `https://sales365.trainright.fit/api/leads/find-all?limit=${limit}&page=${current}`
+    //   `${baseUrl}api/leads/find-all?limit=${limit}&page=${current}`
     // );
     try {
       const res = await axios.get(
-        `https://sales365.trainright.fit/api/lead-report/find-all?limit=${limit}&page=${current}`,
+        `${baseUrl}api/lead-report/find-all?limit=${limit}&page=${current}`,
         {
           headers: {
             Authorization: accessToken,

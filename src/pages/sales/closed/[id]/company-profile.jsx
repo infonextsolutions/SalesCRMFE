@@ -5,13 +5,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "@/components/app/Navbar/Navbar";
 import { useRouter } from "next/router";
+import { baseUrl } from "@/utils/baseUrl";
 
 const CompanyProfile = () => {
   const [data, setData] = useState({});
   const [accessToken, setAccessToken] = useState("");
   const router = useRouter();
   const { id } = router.query;
-  const [title, setTitle] = React.useState(data?.result?.companyId?.company_name);
+  const [title, setTitle] = React.useState(
+    data?.result?.companyId?.company_name
+  );
 
   useEffect(() => {
     if (window !== undefined) {
@@ -20,15 +23,15 @@ const CompanyProfile = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(
-      `https://sales365.trainright.fit/api/leads/find-by-id?id=${id}`, {
-      headers: { Authorization: accessToken }
-    }
-    )
+    axios
+      .get(`${baseUrl}api/leads/find-by-id?id=${id}`, {
+        headers: { Authorization: accessToken },
+      })
       .then((res) => {
         setData(res.data);
-        setTitle(res?.data?.result?.companyId?.company_name)
-      }).catch((e) => { });
+        setTitle(res?.data?.result?.companyId?.company_name);
+      })
+      .catch((e) => {});
   }, [accessToken]);
 
   return (

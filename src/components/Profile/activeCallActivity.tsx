@@ -4,9 +4,12 @@ import Navigator from "@/utils/customNavigator";
 import Image from "next/image";
 import { Card } from "@mui/material";
 import axios from "axios";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Activityhistory = ({ data, accessToken }: any) => {
-  const history = data?.leadId?.activityId?.history ? data?.leadId?.activityId?.history : [];
+  const history = data?.leadId?.activityId?.history
+    ? data?.leadId?.activityId?.history
+    : [];
   const notes = history.filter((item: any) => item.type == "note");
   const [callParticipantData, setCallParticipantData] = useState<any>({});
 
@@ -60,30 +63,31 @@ const Activityhistory = ({ data, accessToken }: any) => {
     if (history.length > 0) {
       history.forEach((historyItem: any, index: number) => {
         if (historyItem.callId) {
-          axios.get(
-            `https://sales365.trainright.fit/api/customer/find-by-id?id=${historyItem?.participants}`,
-            { headers: { Authorization: accessToken } }
-          ).then((res: any) => {
-            setCallParticipantData((curr: any) => {
-              return { ...curr, [`participant${index}`]: res?.data?.result };
-            });
-          }).catch((err: any) => {
-
-          });
+          axios
+            .get(
+              `${baseUrl}api/customer/find-by-id?id=${historyItem?.participants}`,
+              { headers: { Authorization: accessToken } }
+            )
+            .then((res: any) => {
+              setCallParticipantData((curr: any) => {
+                return { ...curr, [`participant${index}`]: res?.data?.result };
+              });
+            })
+            .catch((err: any) => {});
         }
       });
     }
   };
 
   const getOutcome = (item: any, idx: number) => {
-    if (item?.type?.toLowerCase() == 'email') {
+    if (item?.type?.toLowerCase() == "email") {
       return "Email sent";
     } else if (item?.type?.toLowerCase() == "sms") {
       return "SMS sent";
-    }  else if (item?.type?.toLowerCase() == "note") {
+    } else if (item?.type?.toLowerCase() == "note") {
       return "Note sent";
     } else {
-      return 'NA';
+      return "NA";
     }
   };
 
@@ -133,10 +137,10 @@ const Activityhistory = ({ data, accessToken }: any) => {
                             item.type === "email"
                               ? getBasicIcon("Mail")
                               : item.type === "note"
-                                ? getBasicIcon("Tasks")
-                                : item.call_title
-                                  ? getBasicIcon("Phone")
-                                  : getBasicIcon("activity-1")
+                              ? getBasicIcon("Tasks")
+                              : item.call_title
+                              ? getBasicIcon("Phone")
+                              : getBasicIcon("activity-1")
                           }
                           className={`
                     `}
@@ -150,7 +154,11 @@ const Activityhistory = ({ data, accessToken }: any) => {
                         />
                       </div>
                       <div className="w-[21%]">
-                        <p>{callParticipantData?.[`participant${i}` as keyof typeof callParticipantData]?.customer_name || "NA"}</p>
+                        <p>
+                          {callParticipantData?.[
+                            `participant${i}` as keyof typeof callParticipantData
+                          ]?.customer_name || "NA"}
+                        </p>
                       </div>
                       <div className="w-[19%]">
                         <p>{getOutcome(item, i)}</p>

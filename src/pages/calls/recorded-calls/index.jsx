@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Navbar from "@/components/app/Navbar/Navbar";
 import CallsRecordingContainer from "@/components/calls/recorded-calls/Container/CallsRecordingContainer";
 import MeetingRecordingContainer from "@/components/calls/recorded-calls/Container/MeetingRecordingContainer";
+import { baseUrl } from "@/utils/baseUrl";
 
 const Calls = () => {
   const [recodedCalls, setRecordedCalls] = useState(true);
@@ -23,8 +24,8 @@ const Calls = () => {
 
   const getData = () => {
     const apiEndpoint = recodedCalls
-      ? "https://sales365.trainright.fit/api/recording/find-all"
-      : "https://sales365.trainright.fit/api/event/findAllRecordedMeetings";
+      ? `${baseUrl}api/recording/find-all`
+      : `${baseUrl}api/event/findAllRecordedMeetings`;
     try {
       axios
         .get(apiEndpoint, {
