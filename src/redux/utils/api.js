@@ -1,9 +1,14 @@
 import _ from "lodash";
 import { baseUrl } from "../../utils/baseUrl";
 
-// const API_DOMAIN = "https://bfservices.onrender.com/api/";
+// Use environment variable for API domain, with fallback
+const API_DOMAIN = 
+  process.env.NEXT_PUBLIC_API_BASE_URL 
+    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/`
+    : "http://82.25.86.78:8102/api/";
+
 // const CHAT_API_DOMAIN = "https://itsolutionshub.com/chat";
-const API_DOMAIN = "http://82.25.86.78:8102/api/";
+const CHAT_API_DOMAIN = process.env.NEXT_PUBLIC_CHAT_API_URL || "https://itsolutionshub.com/chat";
 
 export const getApiName = (api) => {
   if (api) {

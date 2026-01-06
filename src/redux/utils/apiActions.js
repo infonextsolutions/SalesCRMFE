@@ -5,9 +5,25 @@ import toast from "react-hot-toast";
 export const callApi = createAsyncThunk(
   "api/callApi",
   async (options, thunkAPI) => {
-    const response = await axios(options).catch((e) => {
-      toast.error(e.data.message)
-    });
-    return response.data;
+    try {
+      const response = await axios(options);
+      return response.data;
+    } catch (error) {
+      // Log error for debugging
+      console.error("API Error:", {
+        url: options.url,
+        method: options.method,
+        error: error.message,
+        response: error.response?.data,
+        status: error.response?.status
+      });
+      
+      // Show user-friendly error message
+      const errorMessage = error.response?.data?.message || error.message || "An error occurred";
+      toast.error(errorMessage);
+      
+      // Re-throw to let Redux Toolkit handle it properly
+      throw error;
+    }
   }
 );

@@ -18,6 +18,9 @@ COPY . .
 ENV SKIP_PREFLIGHT_CHECK=true
 ENV NODE_ENV=production
 ENV GENERATE_SOURCEMAP=false
+# API base URL - can be overridden at runtime via docker-compose or docker run
+ARG NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
 
 # Build Next.js application
 RUN npm run build
