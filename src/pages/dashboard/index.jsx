@@ -5,7 +5,7 @@ import { setLoggedInStatus, setUser1 } from "@/store/auth";
 import { baseUrl } from "@/utils/baseUrl";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, startTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = React.lazy(() => import("@/views/Dashboard/index"));
@@ -17,6 +17,7 @@ const DashboardPage = () => {
   const [data2, setData2] = useState({});
   const [data3, setData3] = useState({});
   const [accessToken, setAccessToken] = useState("");
+  const [isClient, setIsClient] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -31,45 +32,34 @@ const DashboardPage = () => {
   };
 
   useEffect(() => {
-    if (window !== undefined) {
-      setAccessToken(localStorage.getItem("access-token"));
+    setIsClient(true);
+    if (typeof window !== "undefined") {
+      setAccessToken(localStorage.getItem("access-token") || "");
     }
   }, []);
 
   useEffect(() => {
-    try {
-      axios
-        .post(`${baseUrl}api/pitch-analysis/find-one`, date, {
-          headers: { Authorization: accessToken },
-        })
-        .then((res) => {
-          setData1(res.data);
-        })
-        .catch((e) => {});
-      axios
-        .post(`${baseUrl}api/script-analysis/find-one`, date, {
-          headers: { Authorization: accessToken },
-        })
-        .then((res) => {
-          setData2(res.data);
-        })
-        .catch((e) => {});
-      axios
-        .post(`${baseUrl}api/selling-analysis/find-one`, date, {
-          headers: { Authorization: accessToken },
-        })
-        .then((res) => {
-          setData3(res.data);
-        })
-        .catch((e) => {});
-    } catch (error) {}
-  }, [accessToken]);
+    if (!isClient) return;
+    
+    const token = localStorage.getItem("access-token");
+    console.log('Token from localStorage:', token);
+    
+    if (token && token !== "null" && token !== "undefined") {
+      setAccessToken(token);
+    } else {
+      console.log('No valid token found, redirecting to login');
+      router.push("/login");
+    }
+  }, [isClient, router]);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!isClient) return;
+
     if (!state.isLoggedIn) {
       if (logged === "loading" || logged === "loggedIn") {
         if (id === null || name === null || role === null) {
           router.push("/login");
+          return;
         }
         if (id && name && role) {
           if (
@@ -77,69 +67,42 @@ const DashboardPage = () => {
             name !== "not-loaded" &&
             role !== "not-loaded"
           ) {
-            dispatch(setLoggedInStatus(true));
-            dispatch(setUser1({ _id: id, User: name, Role: role }));
+            startTransition(() => {
+              dispatch(setLoggedInStatus(true));
+              dispatch(setUser1({ _id: id, User: name, Role: role }));
+            });
           }
         }
       } else if (logged === null) {
         router.push("/login");
       }
     }
-  }, [id, name, role, logged]);
+  }, [id, name, role, logged, isClient, state.isLoggedIn, dispatch, router]);
 
-  React.useEffect(() => {
-    if (!state.isLoggedIn) {
-      if (logged === null) {
-        router.push("/login");
-      }
-    } else {
-      if (logged === null) {
-        router.push("/login");
-      }
+  useEffect(() => {
+    if (!isClient) return;
+
+    if (!state.isLoggedIn || logged === null) {
+      router.push("/login");
     }
-  }, [state.isLoggedIn, logged]);
+  }, [state.isLoggedIn, logged, isClient, router]);
+
+  if (!isClient) {
+    return <BigSpinner />;
+  }
 
   return (
     <>
       <Navbar mainTitle="Dashboard" src="Grid" />
-      <Suspense fallback={<BigSpinner />}>
-        {!state.isLoggedIn || logged === null || logged !== "loggedIn" ? (
-          <BigSpinner />
-        ) : (
-          <Suspense fallback={<BigSpinner />}>
-            <Dashboard data={{ first: data1, second: data2, third: data3 }} />
-          </Suspense>
-        )}
-      </Suspense>
+      {!state.isLoggedIn || logged === null || logged !== "loggedIn" ? (
+        <BigSpinner />
+      ) : (
+        <Suspense fallback={<BigSpinner />}>
+          <Dashboard data={{ first: data1, second: data2, third: data3 }} />
+        </Suspense>
+      )}
     </>
   );
 };
 
 export default DashboardPage;
-
-// https://sales365.trainright.fit/api/pitch-analysis/find-one
-
-// export async function getServerSideProps({ query, ...params }: any) {
-
-//   const response1 = await axios.post(
-//     "https://sales365.trainright.fit/api/pitch-analysis/find-one",
-//     date
-//   );
-//   const response2 = await axios.post(
-//     "https://sales365.trainright.fit/api/script-analysis/find-one",
-//     date
-//   );
-//   const response3 = await axios.post(
-//     "https://sales365.trainright.fit/api/selling-analysis/find-one",
-//     date
-//   );
-
-//   return {
-//     props: {
-//       // TODO: Can do better error handling here by passing another property error in the component
-//       data1: response1.data || {},
-//       data2: response2.data || {},
-//       data3: response3.data || {},
-//     }, // will be passed to the page component as props
-//   };
-// }

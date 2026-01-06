@@ -240,7 +240,7 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
                       title: "CSV",
                       Icon: "CSV",
                       wrapper: (
-                        <CSVLink data={data.result} className="" ref={ref}>
+                        <CSVLink data={data?.result || []} className="" ref={ref}>
                           CSV
                         </CSVLink>
                       ),
@@ -255,13 +255,13 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
+                value={companyName}
                 className="text-red-500"
                 id="company"
               >
-                <option selected={companyName === ""} value=""></option>
+                <option value=""></option>
                 {companyOps?.map((opItem: any, idx: number) => (
                   <option
-                    selected={callType === opItem?.company_name}
                     value={opItem?.company_name}
                     key={opItem?.company_name}
                     className="text-center"
@@ -275,69 +275,37 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
+                value={product}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected={product === ""} value=""></option>
-                <option selected={product === "P1"} value="P1">
-                  P1
-                </option>
-                <option selected={product === "P2"} value="P2">
-                  P2
-                </option>
-                <option selected={product === "P3"} value="P3">
-                  P3
-                </option>
-                <option selected={product === "Product A"} value="Product A">
-                  Product A
-                </option>
-                <option selected={product === "Product B"} value="Product B">
-                  Product B
-                </option>
-                <option selected={product === "Product C"} value="Product C">
-                  Product C
-                </option>
-                <option selected={product === "Product D"} value="Product D">
-                  Product D
-                </option>
-                <option selected={product === "Technology"} value="Technology">
-                  Technology
-                </option>
-                <option selected={product === "Healthcare"} value="Healthcare">
-                  Healthcare
-                </option>
-                <option selected={product === "Finance"} value="Finance">
-                  Finance
-                </option>
-                <option selected={product === "Education"} value="Education">
-                  Education
-                </option>
-                <option
-                  selected={product === "Hospitality"}
-                  value="Hospitality"
-                >
-                  Hospitality
-                </option>
-                <option
-                  selected={product === "Real Estate"}
-                  value=" Real Estate"
-                >
-                  {" "}
-                  Real Estate
-                </option>
+                <option value=""></option>
+                <option value="P1">P1</option>
+                <option value="P2">P2</option>
+                <option value="P3">P3</option>
+                <option value="Product A">Product A</option>
+                <option value="Product B">Product B</option>
+                <option value="Product C">Product C</option>
+                <option value="Product D">Product D</option>
+                <option value="Technology">Technology</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Finance">Finance</option>
+                <option value="Education">Education</option>
+                <option value="Hospitality">Hospitality</option>
+                <option value=" Real Estate">Real Estate</option>
               </select>
             </div>
             <div className="flex items-center w-56 justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Meeting Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
+                value={callOwner}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected={callOwner === ""} value=""></option>
+                <option value=""></option>
                 {ownerOps?.map((opItem: any, idx: number) => (
                   <option
-                    selected={callType === opItem?._id}
                     value={opItem?._id}
                     key={opItem?._id}
                   >
@@ -350,13 +318,13 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Meeting Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
+                value={callType}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected={callType === ""} value=""></option>
+                <option value=""></option>
                 {callTypeOps?.map((opItem: any, idx: number) => (
                   <option
-                    selected={callType === opItem?.val}
                     value={opItem?.val}
                     key={idx}
                   >
@@ -369,19 +337,13 @@ const ScheduleMeetingContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Location</h2>
               <select
                 onChange={(e) => setLocation(e.target.value)}
+                value={location}
                 className="text-red-500"
                 id="location"
               >
-                <option selected={location === ""} value=""></option>
-                <option selected={location === "Zoom"} value="Zoom">
-                  Zoom
-                </option>
-                <option
-                  selected={location === "Google Meet"}
-                  value="Google Meet"
-                >
-                  Google Meet
-                </option>
+                <option value=""></option>
+                <option value="Zoom">Zoom</option>
+                <option value="Google Meet">Google Meet</option>
               </select>
             </div>
             <DatePicker
