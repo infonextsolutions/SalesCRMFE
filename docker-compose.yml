@@ -1,7 +1,9 @@
 services:
-  padal_fe:
+  crm_frontend:
     build: ./
-    container_name: padal_fe_container
+    container_name: crm_frontend_container
     ports:
-      - "8101:80"
+      - "8101:8103"
     restart: always
+    environment:
+      - NODE_ENV=production

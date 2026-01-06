@@ -1,40 +1,53 @@
 # Build stage
 FROM node:20-alpine AS build
 WORKDIR /app
+
+# Install dependencies needed for native modules
+RUN apk add --no-cache python3 make g++
+
+# Copy package files
 COPY package*.json ./
-RUN apk add --no-cache python3 make g++ \
-    && npm install --legacy-peer-deps \
-    && npm cache clean --force
+
+# Install dependencies
+RUN npm install --legacy-peer-deps && npm cache clean --force
+
+# Copy source code
 COPY . .
-# Skip preflight checks and set environment variables
+
+# Set environment variables
 ENV SKIP_PREFLIGHT_CHECK=true
 ENV NODE_ENV=production
 ENV GENERATE_SOURCEMAP=false
+
+# Build Next.js application
 RUN npm run build
 
 # Production stage
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
+FROM node:20-alpine AS runner
+WORKDIR /app
 
-# Create nginx config directly in the Dockerfile
-RUN echo 'server { \
-    listen 80; \
-    root /usr/share/nginx/html; \
-    index index.html; \
-    gzip on; \
-    gzip_min_length 1000; \
-    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript; \
-    location / { \
-        try_files $uri $uri/ /index.html; \
-    } \
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ { \
-        expires 30d; \
-        add_header Cache-Control "public, no-transform"; \
-    } \
-    add_header X-Frame-Options "SAMEORIGIN"; \
-    add_header X-XSS-Protection "1; mode=block"; \
-    add_header X-Content-Type-Options "nosniff"; \
-}' > /etc/nginx/conf.d/default.conf
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy necessary files from build stage
+# Copy public folder
+COPY --from=build --chown=nextjs:nodejs /app/public ./public
+
+# Copy standalone build output
+COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Switch to non-root user
+USER nextjs
+
+EXPOSE 8103
+
+ENV PORT=8103
+ENV HOSTNAME="0.0.0.0"
+
+# Start Next.js server
+CMD ["node", "server.js"]
