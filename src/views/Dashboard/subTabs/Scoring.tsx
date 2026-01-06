@@ -71,12 +71,11 @@ const Scoring = ({ tabData }: { tabData?: any }) => {
               <h2 className="font-medium">Team Manager</h2>
               <select
                 onChange={(e) => setManager(e.target.value)}
+                value={manager}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected value="john">
-                  John C
-                </option>
+                <option value="john">John C</option>
                 <option value="dev">Dev</option>
               </select>
             </div>
@@ -84,27 +83,23 @@ const Scoring = ({ tabData }: { tabData?: any }) => {
               <h2 className="font-medium">Sales Rep</h2>
               <select
                 onChange={(e) => setSales(e.target.value)}
+                value={sales}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected={sales === ""} value="BDM">
-                  BDM
-                </option>
-                <option selected={sales === "SDM"} value="SDM">
-                  SDM
-                </option>
+                <option value="BDM">BDM</option>
+                <option value="SDM">SDM</option>
               </select>
             </div>
             <div className="flex items-center w-52 justify-between bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Call Review Type</h2>
               <select
                 onChange={(e) => setCallReview(e.target.value)}
+                value={callReview}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected={callReview === ""} value="Allocated">
-                  Allocated
-                </option>
+                <option value="Allocated">Allocated</option>
                 <option value=""></option>
               </select>
             </div>
@@ -112,12 +107,11 @@ const Scoring = ({ tabData }: { tabData?: any }) => {
               <h2 className="font-medium">Call Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
+                value={callType}
                 className="text-red-500"
                 id="countries"
               >
-                <option selected={callType === ""} value="Product Demo">
-                  Product Demo
-                </option>
+                <option value="Product Demo">Product Demo</option>
               </select>
             </div>
           </div>
@@ -126,13 +120,11 @@ const Scoring = ({ tabData }: { tabData?: any }) => {
           <h2 className="font-medium">Call Disposition</h2>
           <select
             onChange={(e) => setCallDisposition(e.target.value)}
+            value={callDisposition}
             className="text-red-500"
             id="countries"
           >
-            <option
-              selected={callDisposition === ""}
-              value="Follow - up Required"
-            >
+            <option value="Follow - up Required">
               Follow - up Required
             </option>
           </select>

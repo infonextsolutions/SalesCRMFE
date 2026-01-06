@@ -227,7 +227,7 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
                       title: "CSV",
                       Icon: "CSV",
                       wrapper: (
-                        <CSVLink data={data.result} className="" ref={ref}>
+                        <CSVLink data={data?.result || []} className="" ref={ref}>
                           CSV
                         </CSVLink>
                       ),
@@ -242,13 +242,13 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Company Name</h2>
               <select
                 onChange={(e) => setCompanyName(e.target.value)}
+                value={companyName}
                 className="text-red-500"
                 id="company"
               >
-                <option selected={companyName === ""} value=""></option>
+                <option value=""></option>
                 {companyOps?.map((opItem: any, idx: number) => (
                   <option
-                    selected={callType === opItem?.company_name}
                     value={opItem?.company_name}
                     key={opItem?.company_name}
                     className="text-center"
@@ -262,31 +262,18 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
+                value={product}
                 className="text-red-500"
                 id="product"
               >
-                <option selected={product === ""} value=""></option>
-                <option selected={product === "P1"} value="P1">
-                  P1
-                </option>
-                <option selected={product === "P2"} value="P2">
-                  P2
-                </option>
-                <option selected={product === "P3"} value="P3">
-                  P3
-                </option>
-                <option selected={product === "Product A"} value="Product A">
-                  Product A
-                </option>
-                <option selected={product === "Product B"} value="Product B">
-                  Product B
-                </option>
-                <option selected={product === "Product C"} value="Product C">
-                  Product C
-                </option>
-                <option selected={product === "Product D"} value="Product D">
-                  Product D
-                </option>
+                <option value=""></option>
+                <option value="P1">P1</option>
+                <option value="P2">P2</option>
+                <option value="P3">P3</option>
+                <option value="Product A">Product A</option>
+                <option value="Product B">Product B</option>
+                <option value="Product C">Product C</option>
+                <option value="Product D">Product D</option>
                 {/* <option selected={product === "Technology"} value="Technology">
                   Technology
                 </option>
@@ -318,13 +305,13 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Call Owner</h2>
               <select
                 onChange={(e) => setCallOwner(e.target.value)}
+                value={callOwner}
                 className="text-red-500"
                 id="callOwner"
               >
-                <option selected={callOwner === ""} value=""></option>
+                <option value=""></option>
                 {ownerOps?.map((opItem: any, idx: number) => (
                   <option
-                    selected={callType === opItem?._id}
                     value={opItem?._id}
                     key={opItem?._id}
                   >
@@ -337,13 +324,13 @@ const ScheduleCallsContainer = ({ dummy1, data }: any) => {
               <h2 className="font-medium">Call Type</h2>
               <select
                 onChange={(e) => setCallType(e.target.value)}
+                value={callType}
                 className="text-red-500"
                 id="callType"
               >
-                <option selected={callType === ""} value=""></option>
+                <option value=""></option>
                 {callTypeOps?.map((opItem: any, idx: number) => (
                   <option
-                    selected={callType === opItem?.val}
                     value={opItem?.val}
                     key={idx}
                   >

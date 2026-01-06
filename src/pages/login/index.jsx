@@ -92,9 +92,7 @@ const Login = () => {
       password: pass,
     };
     axios
-      .post(`${baseUrl}api/master-users/signin`, finalPayload, {
-        headers: { Authorization: accessToken },
-      })
+      .post(`${baseUrl}api/master-users/signin`, finalPayload)
       .then((res) => {
         dispatch(
           setUser1({

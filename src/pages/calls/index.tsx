@@ -998,7 +998,7 @@ const CallsPage = () => {
                       title: "CSV",
                       Icon: "CSV",
                       wrapper: (
-                        <CSVLink data={data} className="" ref={ref}>
+                        <CSVLink data={data || []} className="" ref={ref}>
                           CSV
                         </CSVLink>
                       ),

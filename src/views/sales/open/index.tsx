@@ -214,7 +214,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
                   title: "CSV",
                   Icon: "CSV",
                   wrapper: (
-                    <CSVLink data={data?.result} className="" ref={ref}>
+                    <CSVLink data={data?.result || []} className="" ref={ref}>
                       CSV
                     </CSVLink>
                   ),
@@ -316,7 +316,7 @@ const SalesOpen = ({ data, mastersData, teamManagersData }: any) => {
                 title: "CSV",
                 Icon: "CSV",
                 wrapper: (
-                  <CSVLink data={data?.result} className="" ref={ref}>
+                  <CSVLink data={data?.result || []} className="" ref={ref}>
                     CSV
                   </CSVLink>
                 ),

@@ -38,6 +38,7 @@ const LeadsContainer = ({ view, records, list, reload }: any) => {
   };
   const state = useSelector((state: any) => state.auth);
   const [accessToken, setAccessToken] = useState<any>("");
+  console.log(accessToken, "accessToken");
 
   useEffect(() => {
     if (window !== undefined) {
@@ -80,12 +81,7 @@ const LeadsContainer = ({ view, records, list, reload }: any) => {
     };
     try {
       const response = await axios.get(
-        `${baseUrl}api/leads/find-all?leadStatus=Open${getQueryStr()}`,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
+        `${baseUrl}api/leads/find-all?leadStatus=Open${getQueryStr()}`
       );
       setVisibleRecords({ ...response.data });
     } catch (error) {}
@@ -114,10 +110,11 @@ const LeadsContainer = ({ view, records, list, reload }: any) => {
                     `/sales/${e.target.value === "open" ? "open" : "closed"}`
                   );
                 }}
+                value={status}
                 className="text-red-500 px-4"
                 id="countries"
               >
-                <option selected value="open" className="">
+                <option value="open" className="">
                   Open
                 </option>
                 <option value="close">Close</option>
@@ -127,17 +124,18 @@ const LeadsContainer = ({ view, records, list, reload }: any) => {
               <h2 className="font-medium">Stage</h2>
               <select
                 onChange={(e) => setStage(e.target.value)}
+                value={stage}
                 className="text-red-500 px-4"
                 id="countries"
               >
-                <option selected={stage === ""} value=""></option>
-                <option selected={stage === "Enquiry"} value="Enquiry">
+                <option value=""></option>
+                <option value="Enquiry">
                   Enquiry
                 </option>
-                <option selected={stage === "Interaction"} value="Interaction">
+                <option value="Interaction">
                   Interaction
                 </option>
-                <option selected={stage === "Proposal"} value="Proposal">
+                <option value="Proposal">
                   Proposal
                 </option>
               </select>
@@ -146,86 +144,38 @@ const LeadsContainer = ({ view, records, list, reload }: any) => {
               <h2 className="font-medium">Product/Service</h2>
               <select
                 onChange={(e) => setProduct(e.target.value)}
+                value={product}
                 className="text-red-500 px-4"
                 id="countries"
               >
-                <option selected={product === ""} value=""></option>
-                <option selected={product === "P1"} value="P1">
-                  P1
-                </option>
-                <option selected={product === "P2"} value="P2">
-                  P2
-                </option>
-                <option selected={product === "P3"} value="P3">
-                  P3
-                </option>
-                <option selected={product === "Product A"} value="Product A">
-                  Product A
-                </option>
-                <option selected={product === "Product B"} value="Product B">
-                  Product B
-                </option>
-                <option selected={product === "Product C"} value="Product C">
-                  Product C
-                </option>
-                <option selected={product === "Product D"} value="Product D">
-                  Product D
-                </option>
+                <option value=""></option>
+                <option value="P1">P1</option>
+                <option value="P2">P2</option>
+                <option value="P3">P3</option>
+                <option value="Product A">Product A</option>
+                <option value="Product B">Product B</option>
+                <option value="Product C">Product C</option>
+                <option value="Product D">Product D</option>
               </select>
             </div>
             <div className="flex items-center w-fit justify-between bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <h2 className="font-medium">Lead Source</h2>
               <select
                 onChange={(e) => setLeadSource(e.target.value)}
+                value={leadSource}
                 className="text-red-500 px-4"
                 id="countries"
               >
-                <option selected={leadSource === ""} value=""></option>
-                <option selected={leadSource === "Website"} value="Website">
-                  Website
-                </option>
-                <option selected={leadSource === "Referrals"} value="Referrals">
-                  Referrals
-                </option>
-                <option
-                  selected={leadSource === "Social Media"}
-                  value="Social Media"
-                >
-                  Social Media
-                </option>
-                <option
-                  selected={leadSource === "Email Marketing"}
-                  value="Email Marketing"
-                >
-                  Email Marketing
-                </option>
-                <option
-                  selected={leadSource === "Paid Advertising"}
-                  value="Paid Advertising"
-                >
-                  Paid Advertising
-                </option>
-                <option selected={leadSource === "Events"} value="Events">
-                  Events
-                </option>
-                <option
-                  selected={leadSource === "Offline Channels"}
-                  value="Offline Channels"
-                >
-                  Offline Channels
-                </option>
-                <option
-                  selected={leadSource === "Content Marketing"}
-                  value="Content Marketing"
-                >
-                  Content Marketing
-                </option>
-                <option
-                  selected={leadSource === "Partnerships"}
-                  value="Partnerships"
-                >
-                  Partnerships
-                </option>
+                <option value=""></option>
+                <option value="Website">Website</option>
+                <option value="Referrals">Referrals</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Email Marketing">Email Marketing</option>
+                <option value="Paid Advertising">Paid Advertising</option>
+                <option value="Events">Events</option>
+                <option value="Offline Channels">Offline Channels</option>
+                <option value="Content Marketing">Content Marketing</option>
+                <option value="Partnerships">Partnerships</option>
               </select>
             </div>
             <DatePicker
