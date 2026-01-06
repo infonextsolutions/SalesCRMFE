@@ -7,6 +7,7 @@ import Spinner from "@/components/loader/spinner";
 import ApiErrorPrompt from "@/utils/ApiPrompt";
 import ApiSuccess from "@/utils/ApiSuccess";
 import type { AppProps } from "next/app";
+import "@/utils/axiosConfig"; // Import axios interceptor
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

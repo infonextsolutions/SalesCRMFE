@@ -90,7 +90,7 @@ const Navbar = ({ mainTitle, title, src }: any) => {
         <div>
           <Search
             placeHolder="Search Here..."
-            change={({ e }: any) => setSearch(e.target.value)}
+            change={({ e }: any) => setSearch(e?.target?.value)}
             view={view}
           />
         </div>

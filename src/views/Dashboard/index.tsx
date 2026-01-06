@@ -293,10 +293,10 @@ const Dashboard = ({ data }: any) => {
 
   const exportXLSX = () => {
     const worksheet = XLSX.utils.json_to_sheet([
-      data.first.result,
-      data.second.result,
-      data.third.result,
-    ]);
+      data?.first?.result || {},
+      data?.second?.result || {},
+      data?.third?.result || {},
+    ].filter(item => item && Object.keys(item).length > 0));
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, "DataSheet.xlsx");
@@ -312,7 +312,11 @@ const Dashboard = ({ data }: any) => {
         },
         {
           text: JSON.stringify(
-            [data.first.result, data.second.result, data.third.result],
+            [
+              data?.first?.result || {},
+              data?.second?.result || {},
+              data?.third?.result || {},
+            ].filter(item => item && Object.keys(item).length > 0),
             null,
             4
           ),
@@ -441,10 +445,10 @@ const Dashboard = ({ data }: any) => {
                   wrapper: (
                     <CSVLink
                       data={[
-                        data?.first?.result,
-                        data?.second?.result,
-                        data?.third?.result,
-                      ]}
+                        data?.first?.result || {},
+                        data?.second?.result || {},
+                        data?.third?.result || {},
+                      ].filter(item => item && Object.keys(item).length > 0)}
                       className=""
                       ref={ref}
                     >

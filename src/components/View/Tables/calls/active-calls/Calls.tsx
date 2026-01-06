@@ -331,16 +331,12 @@ const LeadsTable = ({ totalRecords, search, queryStr }: any) => {
           <div className="flex items-center">
             <select
               onChange={handleChange}
+              value={limit}
               name="limit"
               id="limit"
               className="bg-[#fff] border border-[#8A9099] rounded-[10px] text-black p-[5px] px-[8px]"
             >
-              <option value="10" selected>
-                10
-              </option>
-              {/* <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option> */}
+              <option value="10">10</option>
             </select>
             <p className="ml-[12px] text-norm text-[14px] font-medium tracking-wider">
               {`Showing ${totalLeads === 0 ? 0 : pageNumber * limit + 1}-${

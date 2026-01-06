@@ -546,7 +546,7 @@ const SalesOpen = ({
                 title: "CSV",
                 Icon: "CSV",
                 wrapper: (
-                  <CSVLink data={data.result} className="" ref={ref}>
+                  <CSVLink data={data?.result || []} className="" ref={ref}>
                     CSV
                   </CSVLink>
                 ),
