@@ -2,10 +2,14 @@ import _ from "lodash";
 import { baseUrl } from "../../utils/baseUrl";
 
 // Use environment variable for API domain, with fallback
-const API_DOMAIN = 
-  process.env.NEXT_PUBLIC_API_BASE_URL 
-    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/`
-    : "http://82.25.86.78:8102/api/";
+// Ensure proper URL formatting (handle trailing slashes)
+const getApiDomain = () => {
+  const base = process.env.NEXT_PUBLIC_API_BASE_URL || "http://82.25.86.78:8102";
+  const baseWithSlash = base.endsWith('/') ? base : base + '/';
+  return baseWithSlash + 'api/';
+};
+
+const API_DOMAIN = getApiDomain();
 
 // const CHAT_API_DOMAIN = "https://itsolutionshub.com/chat";
 const CHAT_API_DOMAIN = process.env.NEXT_PUBLIC_CHAT_API_URL || "https://itsolutionshub.com/chat";
