@@ -1,5 +1,5 @@
 ///////////// ///////////// dev ///////////// /////////////
-export const baseUrl = "http://localhost:4000/";
+export const baseUrl = "http://82.25.86.78:8102";
 
 /////////// /////////// production /////////////  ///////////
 // export const baseUrl = "https://salesb2c.trainright.fit/";

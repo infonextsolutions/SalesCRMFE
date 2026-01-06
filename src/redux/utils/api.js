@@ -3,7 +3,7 @@ import { baseUrl } from "../../utils/baseUrl";
 
 // const API_DOMAIN = "https://bfservices.onrender.com/api/";
 // const CHAT_API_DOMAIN = "https://itsolutionshub.com/chat";
-const API_DOMAIN = "http://localhost:4000/api/";
+const API_DOMAIN = "http://82.25.86.78:8102/api/";
 
 export const getApiName = (api) => {
   if (api) {
