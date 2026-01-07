@@ -35,20 +35,60 @@ const CallProfile = () => {
   }, []);
 
   useEffect(() => {
-    try {
-      axios
-        .post(
+    if (!accessToken || !id) return;
+
+    let intervalId = null;
+    let timeoutId = null;
+
+    const fetchRecording = async () => {
+      try {
+        const res = await axios.post(
           `${baseUrl}api/recording/getManualRecording`,
           {
             transId: id,
           },
           { headers: { Authorization: accessToken } }
-        )
-        .then((res) => {
-          setData(res.data);
-        });
-    } catch (error) {}
-  }, [accessToken]);
+        );
+        setData(res.data);
+        
+        const status = res.data?.data?.status;
+        
+        // If status is still queued or processing, continue polling
+        if (status === 'queued' || status === 'processing') {
+          // Clear existing timeout
+          if (timeoutId) clearTimeout(timeoutId);
+          
+          // Poll again after 5 seconds
+          timeoutId = setTimeout(() => {
+            fetchRecording();
+          }, 5000);
+        } else {
+          // If completed or error, stop polling
+          if (intervalId) clearInterval(intervalId);
+          if (timeoutId) clearTimeout(timeoutId);
+        }
+      } catch (error) {
+        console.error('Error fetching recording:', error);
+        // Stop polling on error
+        if (intervalId) clearInterval(intervalId);
+        if (timeoutId) clearTimeout(timeoutId);
+      }
+    };
+
+    // Initial fetch
+    fetchRecording();
+
+    // Set up polling interval as backup (every 10 seconds)
+    intervalId = setInterval(() => {
+      fetchRecording();
+    }, 10000);
+
+    // Cleanup
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [accessToken, id]);
 
   const showFull = () => {
     setFullCall(true);
@@ -164,10 +204,10 @@ const CallProfile = () => {
       />
       <div className="w-[100%] flex gap-[25px] mb-[100px] ">
         <div className="w-[50%] min-h-[50vh] bg-white rounded-xl">
-          <Audio data={data} />
+          <Audio data={data?.data || data?.result || data} />
         </div>
         <AudioProfileContainer
-          data={data}
+          data={data?.data || data?.result || data}
           width={"50%"}
           titles={titles}
           check={true}

@@ -9,15 +9,36 @@ const CallInfo = ({ check, info, data }: any) => {
   const activeTitle = 0;
 
   function convertDatetimeToCustomFormat(dateStr: any) {
-    // Convert the string to a Date object
-    const dt: any = new Date(dateStr);
+    // Check if dateStr is valid
+    if (!dateStr) return "-";
+    
+    try {
+      // Convert the string to a Date object
+      const dt: any = new Date(dateStr);
 
-    // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
-    const referenceDate: any = new Date("1400-01-01T00:00:00Z");
-    const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+      // Check if date is valid
+      if (isNaN(dt.getTime())) return "-";
 
-    return secondsDifference;
+      // Calculate the number of seconds since January 1, 1400 (Iranian calendar)
+      const referenceDate: any = new Date("1400-01-01T00:00:00Z");
+      const secondsDifference = Math.floor((dt - referenceDate) / 1000);
+
+      return secondsDifference > 0 ? secondsDifference : "-";
+    } catch (error) {
+      return "-";
+    }
   }
+
+  // Get record ID - prefer _id, then transId, then converted updatedAt
+  const getRecordId = () => {
+    if (data?._id) return data._id;
+    if (data?.transId) return data.transId;
+    if (data?.updatedAt) {
+      const converted = convertDatetimeToCustomFormat(data.updatedAt);
+      return converted !== "-" ? converted : "-";
+    }
+    return "-";
+  };
 
   return (
     <div>
@@ -40,7 +61,7 @@ const CallInfo = ({ check, info, data }: any) => {
       </div> */}
       <div className="pl-[30px]">
         <p className="mt-[20px] text-[#3F434A] leading-[30px] text-[20px] font-medium">
-          Record Id- {convertDatetimeToCustomFormat(data?.updatedAt)}
+          Record Id- {getRecordId()}
         </p>
         <div className="text-[#8A9099] mt-[7px] leading-[21px]">
           <p>{data?.callTitle? (data?.callTitle.length===0?"-":data?.callTitle):"-"}</p>

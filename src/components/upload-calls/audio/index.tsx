@@ -535,6 +535,12 @@ const list = [
 const Audio = ({ data }: any) => {
   const [check, setCheck] = useState(true);
 
+  // Handle different data structures
+  const audioUrl = data?.audio_url || data?.RecordingUrl || "";
+  const utterances = data?.utterances || [];
+  const transcriptText = data?.text || "";
+  const audioDuration = data?.audio_duration || null;
+
   return (
     <>
       {/* <div className="w-full relative p-[20px] ">
@@ -547,7 +553,7 @@ const Audio = ({ data }: any) => {
       </div> */}
       {/* <CallPlayer /> */}
 
-      <AudioPlayer check={false} src={data.audio_url} />
+      {audioUrl && <AudioPlayer check={false} src={audioUrl} />}
       <div className="w-full mt-[30px] mb-[30px] px-[38px] ">
         <h1 className="text-[16px] font-medium text-black uppercase mb-[10px]">
           call data
@@ -577,10 +583,10 @@ const Audio = ({ data }: any) => {
       <Tracker title={"Shraddha"} list={list} color={"#FF965D"} />
       <Tracker title={"Topics"} list={list} color={"#0090FF"} />
       <Transcript
-        src={data.audio_url}
+        src={audioUrl}
         data={data}
-        utterances={data.utterances}
-        text={data.text}
+        utterances={utterances}
+        text={transcriptText}
       />
     </>
   );
