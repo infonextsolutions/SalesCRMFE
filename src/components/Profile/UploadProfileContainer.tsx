@@ -45,7 +45,7 @@ const AudioProfileContainer = ({
           )}
           {activeTitle === 1 && <Comments data={data} />}
           {activeTitle === 2 && <Notes data={data} />}
-          {activeTitle === 3 && <Coaching data={data?._id} />}
+          {activeTitle === 3 && <Coaching data={data} refresh={() => {}} />}
         </div>
       </div>
     </div>

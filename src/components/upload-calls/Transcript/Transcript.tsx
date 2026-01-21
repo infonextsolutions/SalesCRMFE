@@ -60,42 +60,30 @@ const Transcript = ({
 
   const [superArr, setSuperArr] = useState<any>([]);
   const [Arrr, setArr] = useState<any>([]);
-  const [input, setInput] = useState("");
 
-  // Initialize transcript from utterances
   const initializeArrr = () => {
-    if (utterances && utterances.length > 0) {
-      const transcriptData = utterances.map((uttrItem: any) => {
-        return {
-          title: uttrItem.speaker === "A" ? "A" : "B",
-          message: uttrItem.text || "",
-          start: uttrItem.start || 0,
-          end: uttrItem.end || 0,
-        };
-      });
-      setArr(transcriptData);
-      setSuperArr(transcriptData);
-    } else if (text) {
-      // Fallback: if no utterances but we have text, show as single entry
-      const transcriptData = [{
-        title: "Speaker",
-        message: text,
-        start: 0,
-        end: 0,
-      }];
-      setArr(transcriptData);
-      setSuperArr(transcriptData);
-    } else {
-      // No transcript data available
-      setArr([]);
-      setSuperArr([]);
-    }
+    const py = utterances?.map((uttrItem: any) => {
+      return {
+        title: uttrItem.speaker === "A" ? "A" : "B",
+        message: uttrItem.text,
+        start: uttrItem.start,
+        end: uttrItem.end,
+      };
+    });
+    setArr(py);
+    setSuperArr(py);
   };
 
-  // Update transcript when utterances or text changes
   useEffect(() => {
     initializeArrr();
-  }, [utterances, text]);
+  }, [src, data, text, utterances]);
+
+  useEffect(() => {
+    Arrr;
+    // console.log('=========== Arrr ============', Arrr)
+  }, [Arrr]);
+
+  const [input, setInput] = useState("");
 
   // const transcriptUpdate = async () => {
   //   const res = await axios.post(
@@ -164,42 +152,29 @@ const Transcript = ({
       />
       <div className="w-full px-[22px] mt-[30px] bg-[#ccc] min-h-[30vh]">
         <div className="w-[100%] h-[400px] hide-scrollbar bg-white px-[30px] py-[26px] overflow-y-auto">
-          {Arrr && Arrr.length > 0 ? (
-            Arrr.map((item: any, i: any) => {
-              return (
-                <React.Fragment key={i}>
-                  <div className="flex  my-[8px] ">
-                    <p
-                      className="text-[#304FFD] shrink-0 w-[100px] font-medium text-[15px] mr-[30px] tracking-wide"
-                      style={{
-                        color: item.title === "A" ? "#304FFD" : "#FF965D",
-                      }}
-                      dangerouslySetInnerHTML={{
-                        __html: `${convertMilliseconds(item.start)} ${
-                          item.title
-                        }:`,
-                      }}
-                    ></p>
-                    <p
-                      className=" text-black tracking-wide font-medium text-[15px]"
-                      dangerouslySetInnerHTML={{ __html: item.message }}
-                    ></p>
-                  </div>
-                </React.Fragment>
-              );
-            })
-          ) : (
-            <div className="flex items-center justify-center h-full text-[#8A9099]">
-              <p>
-                {text ? "No utterances available. Full transcript:" : "No transcript available yet. Please wait for transcription to complete."}
-              </p>
-              {text && !utterances && (
-                <div className="mt-4">
-                  <p className="text-black">{text}</p>
+          {Arrr?.map((item: any, i: any) => {
+            return (
+              <React.Fragment key={i}>
+                <div className="flex  my-[8px] ">
+                  <p
+                    className="text-[#304FFD] shrink-0 w-[100px] font-medium text-[15px] mr-[30px] tracking-wide"
+                    style={{
+                      color: item.title === "A" ? "#304FFD" : "#FF965D",
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: `${convertMilliseconds(item.start)} ${
+                        item.title
+                      }:`,
+                    }}
+                  ></p>
+                  <p
+                    className=" text-black tracking-wide font-medium text-[15px]"
+                    dangerouslySetInnerHTML={{ __html: item.message }}
+                  ></p>
                 </div>
-              )}
-            </div>
-          )}
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -162,6 +162,9 @@ const Loader = () => {
 };
 
 const Coaching = ({ data, refresh }: any) => {
+  // Handle both object and ID - if data is just an ID, we'll need to fetch it
+  const recordingId = typeof data === 'string' ? data : data?._id || data?.transId;
+  
   const [userId, setUserId] = useState(
     window !== undefined ? localStorage.getItem("user-id") : ""
   );
@@ -360,22 +363,85 @@ const Coaching = ({ data, refresh }: any) => {
 
   useEffect(() => {
     try {
-      if (checked) {
-        axios
-          .get(`${baseUrl}api/indicator/getIndicatorValues?userId=${userId}`, {
-            headers: {
-              Authorization: accessToken,
-            },
-          })
-          .then((e) => {
-            setData(e.data);
-            setLoading(false);
-          })
-          .catch((e) => {});
+      if (checked && accessToken) {
+        // Handle different data structures - data could be the full object or just an ID
+        let transcriptId = null;
+        
+        if (typeof data === 'string') {
+          transcriptId = data;
+        } else if (data && typeof data === 'object') {
+          // Try multiple possible paths for transId
+          transcriptId = data?.transId || data?.data?.transId || data?._id || data?.data?._id;
+        }
+        
+        console.log('Fetching analysis for transcriptId:', transcriptId, 'Data:', data);
+        
+        if (transcriptId) {
+          // Fetch analysis for specific recording
+          axios
+            .get(`${baseUrl}api/indicator/getIndicatorValues?transcriptId=${transcriptId}`, {
+              headers: {
+                Authorization: accessToken,
+              },
+            })
+            .then((e) => {
+              console.log('Analysis response:', e.data);
+              // If we get scriptBuilding, sellingSkills, emotion directly, use them
+              if (e.data.scriptBuilding || e.data.sellingSkills || e.data.emotion) {
+                setData({
+                  scriptBuilding: e.data.scriptBuilding || data1.scriptBuilding,
+                  sellingSkills: e.data.sellingSkills || data1.sellingSkills,
+                  emotion: e.data.emotion || data1.emotion,
+                });
+              } else {
+                // Fallback to aggregated data
+                setData(e.data);
+              }
+              setLoading(false);
+            })
+            .catch((e) => {
+              console.error('Error fetching analysis:', e);
+              // If specific call analysis fails, try aggregated data
+              axios
+                .get(`${baseUrl}api/indicator/getIndicatorValues?userId=${userId}`, {
+                  headers: {
+                    Authorization: accessToken,
+                  },
+                })
+                .then((e2) => {
+                  setData(e2.data);
+                  setLoading(false);
+                })
+                .catch((e2) => {
+                  console.error('Error fetching aggregated data:', e2);
+                  setLoading(false);
+                });
+            });
+        } else {
+          console.log('No transcriptId found, using aggregated data');
+          // Fallback to aggregated data if no transcriptId
+          axios
+            .get(`${baseUrl}api/indicator/getIndicatorValues?userId=${userId}`, {
+              headers: {
+                Authorization: accessToken,
+              },
+            })
+            .then((e) => {
+              setData(e.data);
+              setLoading(false);
+            })
+            .catch((e) => {
+              console.error('Error fetching aggregated data:', e);
+              setLoading(false);
+            });
+        }
         setChecked(false);
       }
-    } catch (error) {}
-  }, [accessToken]);
+    } catch (error) {
+      console.error('Error in useEffect:', error);
+      setLoading(false);
+    }
+  }, [accessToken, data]);
 
   const handleCallback = (payload: any) => {
     setTab(payload);
